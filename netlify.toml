@@ -1,0 +1,5 @@
+HUGO_VERSION = "0.57.0"
+
+[build]
+publish = "public"
+command = "hugo -D"
