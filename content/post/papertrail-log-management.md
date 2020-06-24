@@ -7,51 +7,50 @@ tags: ["logging", "papertrail", "coding", "ubuntu", "php", "laravel"]
 image: "papertrail.jpg"
 
 ---
+
 ### Managing Logs has never been so easy
 
 PaperTrail lets you track changes to your models' data. It's good for auditing or versioning. You can see how a model looked at any stage in its lifecycle, revert it to any version, and even undelete it after it's been destroyed.
 
-
 #### Steps to Activate Papertrail For your project
 
-  * Signup an  account credentials with [papertrail website][papertrailsite].
+-   Signup an account credentials with [papertrail website][papertrailsite].
 
-  * Next you will be directed to you profile page where you will find an option stating you to Add your First System.
-Enable it and you will be redirect you to next page.
+-   Next you will be directed to you profile page where you will find an option stating you to Add your First System.
+    Enable it and you will be redirect you to next page.
 
-  * Once you are redirected to this page papertrail will give you an individual port to view you Logs which will be similar to this.
+-   Once you are redirected to this page papertrail will give you an individual port to view you Logs which will be similar to this.
 
     Your systems will log to
-    {% codeblock %}
+    ```
     logs2.papertrailapp.com:port_number
-    {% endcodeblock %}
+    ```
 
-  * By default check the Logger your system has by executing this syntax
-    {% codeblock lang:bash %}
-    ls -d /etc/*syslog*
-    {% endcodeblock %}
+-   By default check the Logger your system has by executing this syntax
+    ```bash
+    ls -d /etc/_syslog_
+    ```
 
-  * In terminal run:
-    {% codeblock lang:bash %}
+-   In terminal run:
+    ```bash
     vi /etc/rsyslog.conf
-    {% endcodeblock %}
+    ```
     Add the line:
-    {% codeblock %}
+    ```
     logs2.papertrailapp.com:port_number
-    {% endcodeblock %}
+    ```
 
-  * Restart you syslog using:
-    {% codeblock lang:bash %}
+-   Restart you syslog using:
+    ```bash
     sudo service rsyslog restart
-    {% endcodeblock %}
+    ```
 
-  * Once the syslog is rebooted your logs can be seen at
-    {% codeblock %}
+-   Once the syslog is rebooted your logs can be seen at
+    ```
     logs2.papertrailapp.com:port_number
-    {% endcodeblock %}
+    ```
 
-  * Visit your Events from paper trail account to view all the logs.
-
+-   Visit your Events from paper trail account to view all the logs.
 
 Now, it logs all the logs that your system is logging.
 
@@ -63,16 +62,16 @@ For setting up Laravel logs, you can one of many services to transfer the larave
 
 #### Steps to setup laravel logs in papertrail:
 
-  + Install Monolog using composer:
-{% codeblock %}
-composer require monolog/monolog
-{% endcodeblock %}
+-   Install Monolog using composer:
+    ```
+    composer require monolog/monolog
+    ```
 
-  + Replace the code in app/start/global.php :
-{% codeblock %}
-$monolog = Log::getMonolog();
-$monolog->pushHandler(new Monolog\Handler\SyslogHandler('keyword'));
-{% endcodeblock %}
+-   Replace the code in app/start/global.php :
+    ```
+    $monolog = Log::getMonolog();
+    $monolog->pushHandler(new Monolog\Handler\SyslogHandler('keyword'));
+    ```
 
 Keyword can be set to whatever we want. And in the papertrail log system it will show up as a program of such name.
 
@@ -96,17 +95,9 @@ Ta da! A full setup of papertrail is now complete.
 
 ---
 
-
 You can do plenty more with papertrail.. Keep digging.. Happy Coding!! :)
 
 For further reading, you can go through the [official documentation][doc].
-
-
-
-
-
-
-
 
 [papertrailsite]: https://papertrailapp.com/
 [doc]: http://help.papertrailapp.com/

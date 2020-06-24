@@ -7,6 +7,7 @@ tags: ["design", "material", "theme", "lite", "angular", "react", "paper"]
 image: "material-design.jpg"
 
 ---
+
 ### Introduction
 
 Material Design was first introduced in [Google I/O 2014][google_io]. However, it took roughly a year to spread across platforms and other boundaries. Now, if we look into the google apps like GMail, YouTube, Google Drive, Google Keep etc., we will be finding nothing but material design. It's interesting though how a simple elevation in a structure can create the sense of it's nearness or how the ripple effect on clicking, can bring the sense of realtime interaction to an object to life.
@@ -34,8 +35,6 @@ The easiest way to get started with material design would be to start with [mate
 So, if you like design methodology and exploring around different design standards, this is good place to play around.
 
 Feel free to explore and revert back with any doubts/queries that you might face.
-
-
 
 [google_io]: https://www.google.com/events/io/io14videos/79edef8b-96d4-e311-b297-00155d5066d7
 [material_theme]: https://developer.android.com/design/material/index.html
