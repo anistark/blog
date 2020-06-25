@@ -40,9 +40,9 @@ Feel free to explore and revert back with any doubts/queries that you might face
 [material_theme]: https://developer.android.com/design/material/index.html
 [material_kit]: https://github.com/nghialv/MaterialKit
 [polymer_project]: https://www.polymer-project.org/1.0/
-[materializecss]: http://materializecss.com/
+[materializecss]: https://materializecss.com/
 [angular_material]: https://material.angularjs.org/latest/#/
-[react_polymer]: http://material-ui.com/#/
-[react]: http://facebook.github.io/react/
-[md_lite]: http://www.getmdl.io/
-[lite_css_theme]: http://www.getmdl.io/customize/index.html
+[react_polymer]: https://material-ui.com/#/
+[react]: https://facebook.github.io/react/
+[md_lite]: https://www.getmdl.io/
+[lite_css_theme]: https://www.getmdl.io/customize/index.html

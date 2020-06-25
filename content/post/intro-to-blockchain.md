@@ -75,13 +75,13 @@ Needless to say what the future holds for blockchain and the huge potential bloc
 We get not just to witness a revolution, but also be a part of it.
 
 [1]: https://bitcoin.org/bitcoin.pdf
-[2]: http://www.metzdowd.com/mailman/listinfo/cryptography
+[2]: https://www.metzdowd.com/mailman/listinfo/cryptography
 [3]: https://www.weforum.org
 [4]: https://www.ethereum.org
 [5]: https://bitcoinmagazine.com
 [6]: https://en.wikipedia.org/wiki/Vitalik_Buterin
-[7]: http://dontapscott.com
-[8]: http://blockchain-revolution.com
-[9]: http://www.nasdaq.com
-[10]: http://ir.nasdaq.com/releasedetail.cfm?releaseid=948326
+[7]: https://dontapscott.com
+[8]: https://blockchain-revolution.com
+[9]: https://www.nasdaq.com
+[10]: https://ir.nasdaq.com/releasedetail.cfm?releaseid=948326
 [11]: https://www.ascribe.io

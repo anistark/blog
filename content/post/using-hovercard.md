@@ -43,10 +43,10 @@ The JS part:
 ```js
 var aboutMe = {
 name: "Kumar Anirudha",
-link: "http://anistark.github.io/blog/",
+link: "https://blog.anirudha.dev/",
 bio: "Kumar Anirudha is a freelance Web-developer and blogger. This is only for demo purpose only. You are free to Fork it and use and your own risk.",
-image: "http://www.gravatar.com/avatar/956e7358fe55faf73f6a8864745334e2.png",
-website: "http://anistark.github.io/",
+image: "https://www.gravatar.com/avatar/956e7358fe55faf73f6a8864745334e2.png",
+website: "https://anirudha.dev/",
 email: "anirudhastark@yahoo.com"
 };
 
@@ -68,4 +68,4 @@ Here is the full code:
 You will however need to add jquery file since it is a jquery based application. :) In case of any problem, please comment below.
 
 [hovercardjs]: https://raw.githubusercontent.com/anistark/demo/master/hovercard/jquery.hovercard.min.js
-[demohovercard]: http://anistark.github.io/demo/hovercard/
+[demohovercard]: https://anistark.github.io/demo/hovercard/

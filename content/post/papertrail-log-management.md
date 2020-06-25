@@ -100,4 +100,4 @@ You can do plenty more with papertrail.. Keep digging.. Happy Coding!! :)
 For further reading, you can go through the [official documentation][doc].
 
 [papertrailsite]: https://papertrailapp.com/
-[doc]: http://help.papertrailapp.com/
+[doc]: https://help.papertrailapp.com/

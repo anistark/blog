@@ -8,7 +8,7 @@ image: "python-intro.jpg"
 
 ---
 
-![Intro to Python](http://i.imgur.com/lcwFbRx.png "Intro to Python")
+![Intro to Python](https://i.imgur.com/lcwFbRx.png "Intro to Python")
 Python is a widely used general-purpose, high-level programming language. Its design philosophy emphasizes code readability, and its syntax allows programmers to express concepts in fewer lines of code than would be possible in languages such as C. The language provides constructs intended to enable clear programs on both a small and large scale. Python supports multiple programming paradigms, including object-oriented, imperative and functional programming or procedural styles. It features a dynamic type system and automatic memory management and has a large and comprehensive standard library.
 
 Lets start by viewing a small program in python console for swapping two numbers:
@@ -79,12 +79,12 @@ Happy Coding!! :)
 [codes]: https://wiki.python.org/moin/BeginnersGuide/Examples
 [books]: https://wiki.python.org/moin/IntroductoryBooks
 [pypi]: https://pypi.python.org/pypi?%3Aaction=index
-[bytes]: http://www.swaroopch.com/notes/python/
-[hardway]: http://learnpythonthehardway.org/book/
+[bytes]: https://www.swaroopch.com/notes/python/
+[hardway]: https://learnpythonthehardway.org/book/
 [coursera]: https://www.coursera.org/
 [edx]: https://www.edx.org/
-[mitintro]: http://tinyurl.com/7tlsnjb
-[michigan]: http://tinyurl.com/kcx22w6
+[mitintro]: https://tinyurl.com/7tlsnjb
+[michigan]: https://tinyurl.com/kcx22w6
 [pydev]: https://www.python.org/dev/
 [pyfaq]: https://docs.python.org/3/faq/
 [fbpy]: https://www.facebook.com/groups/pythonears/
