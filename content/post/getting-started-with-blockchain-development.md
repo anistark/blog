@@ -27,6 +27,7 @@ So, where to get started from? Well, that largely depends on your area of intere
 ## Smart Contract Development
 
 If you’re a programmer, this is one of the easiest to get started with. Smart Contracts are just pieces of codes that run on the blockchain. In that way, we can classify a Hello World program also as smart contract. Of course, it’s neither smart not a contract in this case.
+
 > “A smart contract is a set of promises, specified in digital form, including protocols within which the parties perform on these promises.”
 — Nick Szabo
 
@@ -100,6 +101,7 @@ Ideally, we use smart contracts to write conditional statements which might help
 ## Consensus Algorithm
 
 So, once you know how to input and output data to blockchain, the next thing is to get the data transaction approved on chain.
+
 > A consensus mechanism is a fault-tolerant mechanism that is used in computer and blockchain systems to achieve the necessary agreement on a single data value or a single state of the network among distributed processes or multi-agent systems.
 
 Consensus is important to maintain the decentralised nature of the network. Before data can be written to the distributed database, a given number of nodes/entities has to agree over the validity of the transaction. If majority agrees, the data is recorded, otherwise discarded.
