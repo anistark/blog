@@ -2,11 +2,11 @@
 title: "Getting Started With Blockchain Development"
 description: "Get started with blockchain development"
 date: 2020-07-07T12:57:21+05:30
-draft: true
+draft: false
 author: "Ani"
 categories: ["blockchain", "development"]
 tags: ["blockchain", "development", "getting-started"]
-image: "blockchain-intro.png"
+image: "blockchain-banner.jpg"
 ---
 
 ![Getting Started With Blockchain Development](https://miro.medium.com/max/1400/1*LvSeIS6S6_MR5b9ARjiGTA@2x.png "Getting Started With Blockchain Development")
@@ -455,6 +455,7 @@ All you would need for this is some frontend development knowledge, with framewo
 
 Just integrate web3.js library to connect directly with blockchain via [MetaMask](https://metamask.io/) chrome plugin or [Infura](https://infura.io/) apis. You might also would like to explore to connect via an external [Blockchain Oracle service provider, such as Sentinel](https://sentinel.acycliclabs.com/).
 
+
 _This is obviously an ever growing field so do not get overwhelmed if tomorrow you hear something entirely new in blockchain technology to work on._
 
-Originally posted on [Blockchained India Medium Blog](https://medium.com/blockchainedindia/getting-started-with-blockchain-development-5664aa3f2cf9).
+<sub><sup>Originally posted on [Blockchained India Medium Blog](https://medium.com/blockchainedindia/getting-started-with-blockchain-development-5664aa3f2cf9).</sup></sub>
