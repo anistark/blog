@@ -1,6 +1,6 @@
 ---
 title: Intro To Blockchain
-subtitle: Everything you need to about blockchain to get started
+description: Everything you need to about blockchain to get started
 date:   2017-04-16
 categories: ["blockchain", "intro"]
 tags: ["blockchain", "intro", "bitcoin"]

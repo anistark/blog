@@ -1,6 +1,6 @@
 ---
 title:  "Using Hovercard!"
-subtitle: "A small demo on hovercard"
+description: "A small demo on hovercard"
 date:   2014-09-05
 categories: ["coding", "demo"]
 tags: ["js", "hovercard", "hover", "demo"]

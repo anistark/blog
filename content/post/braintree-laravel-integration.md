@@ -1,6 +1,6 @@
 ---
 title:  "Braintree Integration on Laravel"
-subtitle: "A payment gateway now made even simpler to use"
+description: "A payment gateway now made even simpler to use"
 date:   2014-12-22
 categories: ["coding", "php", "laravel", "payment gateway"]
 tags: ["payment", "braintree", "laravel", "php", "gateway"]

@@ -1,6 +1,6 @@
 ---
 title:  "The Papertrail App"
-subtitle: "Managing Logs has never been so easy"
+description: "Managing Logs has never been so easy"
 date:   2014-12-17
 categories: ["coding", "logging", "laravel"]
 tags: ["logging", "papertrail", "coding", "ubuntu", "php", "laravel"]

@@ -1,6 +1,6 @@
 ---
 title: "Consensus Decision Making"
-subtitle: "Decision Making at its best"
+description: "Decision Making at its best"
 date: 2017-02-18 21:23:16
 categories:
  - organisation

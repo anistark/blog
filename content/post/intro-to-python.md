@@ -1,6 +1,6 @@
 ---
 title:  "Intro to Python!"
-subtitle: "The Zen of Python"
+description: "The Zen of Python"
 date:   2014-08-29
 categories: ["coding", "python", "intro"]
 tags: ["python", "intro", "zen"]
