@@ -1,4 +1,4 @@
-# [Solitary Pursuits - Blog](https://blog.anirudha.dev/)
+# [Ani Writes - Blog](https://blog.anirudha.dev/)
 
 Run locally: `hugo server -D`
 

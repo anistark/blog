@@ -1,6 +1,8 @@
 baseURL = "/"
 languageCode = "en-us"
-title = "Solitary Pursuits"
+title = "Ani Writes"
+subtitle = "Tech Scribblings"
+description = "Anirudha's Personal blog"
 theme = "hugo-swift-theme"
 author = "Ani"
 
