@@ -1,12 +1,10 @@
 baseURL = "/"
 languageCode = "en-us"
 title = "Ani Writes"
-subtitle = "Tech Scribblings"
-description = "Anirudha's Personal blog"
 theme = "hugo-swift-theme"
 author = "Ani"
 
-copyright = "Copyright © 2020, Kumar Anirudha; all rights reserved."
+copyright = "Kumar Anirudha"
 canonifyurls = true
 paginate = 6
 # Enable syntax highlighting
@@ -15,6 +13,8 @@ pygmentsCodefences = true
 pygmentsCodefencesGuessSyntax = true
 
 [params]
+  subtitle = "Tech Scribblings"
+  description = "Anirudha's Personal blog"
   # ga_analytics = "" # google analytics ID e.g UA-116386578-1
 
   # ga_verify = "" # google verification code e.g 5jb-rxeBfITeJQKOuUss3ud6FPGTxXkCho-ZN5qlrZg
