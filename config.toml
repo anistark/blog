@@ -13,8 +13,8 @@ pygmentsCodefences = true
 pygmentsCodefencesGuessSyntax = true
 
 [params]
-  subtitle = "Tech Scribblings"
-  description = "Anirudha's Personal blog"
+  subtitle = "Through my mussings and Scribbles"
+  description = "Food for your mind"
   # ga_analytics = "" # google analytics ID e.g UA-116386578-1
 
   # ga_verify = "" # google verification code e.g 5jb-rxeBfITeJQKOuUss3ud6FPGTxXkCho-ZN5qlrZg
