@@ -2,7 +2,6 @@
 title: "Ghost Editor"
 description: "Creating a web editor"
 date: 2014-08-05T19:07:42+05:30
-draft: true
 author: "Ani"
 tags: ["editor", "ghost", "online", "node.js", "mongodb", "ace editor"]
 categories: ["project"]

@@ -2,7 +2,6 @@
 title: "Getting Started With Blockchain Development"
 description: "Get started with blockchain development"
 date: 2020-07-07T12:57:21+05:30
-draft: false
 author: "Ani"
 categories: ["blockchain", "development"]
 tags: ["blockchain", "development", "getting-started"]
