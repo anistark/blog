@@ -12,6 +12,8 @@ paginate = 6
 pygmentsCodefences = true
 pygmentsCodefencesGuessSyntax = true
 
+disqusShortname = "blog-anirudha"
+
 [params]
   subtitle = "Solitary pursuits of a curious geek"
   description = "Tech Scribblings and Tinkerings"
