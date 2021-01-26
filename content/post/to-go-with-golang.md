@@ -17,6 +17,17 @@ I'm supposed to build a small web service accepting http connection and storing 
 
 First of all, why I opted for golang anyway? The service I'm supposed to write needs a highly concurrent persistent api service. It needs to be fast and also easily scalable. We could have gone with python fastapi, but at this stage I just wanted to learn golang.
 
+
+### Setting up Golang
+If you've finally decided to go ahead with this, let's do this.
+Easiest way probably is to just [download from the official website](https://golang.org/doc/install) and get going.
+[Here](https://medium.com/golang-learn/quick-go-setup-guide-on-mac-os-x-956b327222b8)'s another article which very nicely explains the setup process. This is ideally for mac OS. In case you're looking for other OSes, please follow respective guides.
+
+Be sure to setup your GOPATH very properly as this will remain as your common ground for any defined packages installed in your system.
+
+Once done, make sure your console recognises the GOPATH.
+`echo $GOPATH`
+
 ### HTTP Service
 I went with [fasthttp](https://github.com/valyala/fasthttp), which provides high performance, zero memory allocations in hot paths and Up to 10x faster than net/http for a large throughput service. Go provides out of the box http support but for a beginner, it felt much easier to go with a framework, thereby ended up using fiber.
 
