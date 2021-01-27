@@ -100,7 +100,7 @@ app.Use(requestid.New())
 Now, each route visited will come up on your console.
 
 ### Hot Reloading
-Goilang is a compiled language, which means unlike python or nodejs which are interpretted languages, we need to build it everytime we would want to run it.
+Golang is a compiled language, which means unlike Python or NodeJS which are interpreted languages, we need to build it everytime we would want to run it.
 Ideally we build the project as such: `go build .`
 And then we run it like: `./app-name`.
 
