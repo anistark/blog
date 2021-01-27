@@ -1,7 +1,7 @@
 ---
 title: "To Go with Golang"
 description: "Introduction to Golang. Getting Started on a new journey."
-date: 2021-01-26T21:12:11+05:30
+date: 2021-01-26T21:12:11
 author: "Ani"
 tags: ["golang", "webdev", "intro", "development", "programming"]
 categories: ["intro", "golang"]
