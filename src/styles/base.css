@@ -57,10 +57,12 @@ h4 {
 
 a {
   @apply font-bold;
+  transition: transform 0.2s ease;
+  display: inline-block;
 }
 
 a:hover {
-  @apply underline;
+  transform: scale(1.05);
 }
 
 p {
@@ -229,6 +231,7 @@ hr {
 
 .post-item h2 > a:hover {
   text-decoration: none;
+  transform: none;
 }
 
 /* Ensure tags remain clickable above the stretched link */
@@ -253,4 +256,15 @@ hr {
   .post-cover-image {
     height: 250px;
   }
+}
+
+/* Sticky header and footer styling */
+header {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+footer {
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.3);
 }
