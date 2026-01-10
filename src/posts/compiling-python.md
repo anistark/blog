@@ -4,7 +4,7 @@ title: Compiling Python
 excerpt: CPython is the **official and most widely used implementation of Python**, written in **C**. When people talk about "Python," they are usually referring to CPython.
 date: 2025-04-04
 updatedDate: 2025-04-04
-featuredImage: /blog/images/posts/ba13c6dd-7c14-4cfa-87a3-967361a61093.png
+featuredImage: /images/posts/ba13c6dd-7c14-4cfa-87a3-967361a61093.png
 tags:
   - post
   - python

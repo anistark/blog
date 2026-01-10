@@ -4,7 +4,7 @@ title: "Chakra: A Wasm Runtime"
 excerpt: The modern software landscape is shifting rapidly towards **portability**, **performance**, and **sandboxed execution**. At the heart of this transformation is **WebAssembly (Wasm)**.
 date: 2025-05-25
 updatedDate: 2025-05-25
-featuredImage: /blog/images/posts/48b5678c-eca0-46b1-a2d5-27e5dc395e41.png
+featuredImage: /images/posts/48b5678c-eca0-46b1-a2d5-27e5dc395e41.png
 tags:
   - post
   - go

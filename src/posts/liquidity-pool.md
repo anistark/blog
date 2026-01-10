@@ -4,7 +4,7 @@ title: Understanding Liquidity Pools in Web3
 excerpt: Liquidity pools in the context of traditional finance evolved over centuries, rooted in mechanisms designed to ensure that buyers and sellers can transact with minimal price volatility and at the right time. These mechanisms laid the foundation for the more modern, decentralized liquidity pools found in today’s digital finance (DeFi).
 date: 2025-01-10
 updatedDate: 2025-01-10
-featuredImage: /blog/images/posts/cab27586-ec8e-4e7e-a5e5-2c82d955076c.png
+featuredImage: /images/posts/cab27586-ec8e-4e7e-a5e5-2c82d955076c.png
 tags:
   - post
   - cryptocurrency
@@ -21,7 +21,7 @@ During the 1960s to 1980s, institutional investors such as mutual funds, pension
 
 In the 1980s and beyond, derivatives markets like **futures**, **options**, and **swaps** created sophisticated ways to hedge risks and add liquidity to underlying assets. These markets allowed traders to take positions on assets without directly buying or selling the asset itself, increasing liquidity and providing more ways to trade. The **Chicago Mercantile Exchange (CME)** became a major hub for the trading of derivatives, offering futures contracts on commodities, financial instruments, and even stock indexes, which provided added liquidity and price discovery. The 2008 global financial crisis highlighted the importance of liquidity in maintaining financial stability. Central banks stepped in to provide liquidity to the banking system through **quantitative easing (QE)** and other monetary policy tools. By buying assets such as government bonds, central banks created "liquidity pools" to stabilize financial markets and prevent a collapse of the banking system. The **U.S. Federal Reserve** implemented **QE** to inject liquidity into the economy by purchasing U.S. Treasury bonds and mortgage-backed securities (MBS). This action helped stabilize the financial system and provided banks with more liquidity to operate.
 
-![](/blog/images/posts/858bf72f-3446-48b2-b53d-7353f5795a3e.png)
+![](/images/posts/858bf72f-3446-48b2-b53d-7353f5795a3e.png)
 
 A liquidity pool in Web3 refers to a collection of funds locked into a smart contract to facilitate decentralized trading, lending, and other financial activities on blockchain networks. It’s a foundational concept in decentralized finance (DeFi), enabling platforms to function without relying on traditional intermediaries like banks or centralized exchanges.
 
@@ -38,7 +38,7 @@ Liquidity pools enable 24/7 trading without the constraints of traditional marke
 
 Anyone with internet access and compatible assets can participate in liquidity pools, whether as a trader, liquidity provider, or investor. This inclusivity empowers individuals in regions with limited access to traditional financial systems, fostering global financial inclusion. Liquidity pools provide access to global markets for individuals who may lack bank accounts but have access to cryptocurrency. They allow seamless trading and liquidity provisioning across borders without additional fees or delays.
 
-![](/blog/images/posts/aadb8770-fa8b-4f6c-a34a-3e7f03eee902.png)
+![](/images/posts/aadb8770-fa8b-4f6c-a34a-3e7f03eee902.png)
 
 Traditional exchanges rely on order books where buyers and sellers must match their orders. This process can lead to delays, especially for low-volume assets. Liquidity pools eliminate this dependency by enabling instant trades based on the pool’s available liquidity and AMM pricing model. Even obscure tokens with limited trading activity can find liquidity through pools, fostering a more vibrant and diverse market.
 
@@ -285,11 +285,11 @@ Governance of liquidity pools is crucial for maintaining the integrity, function
 
 **Balancer**: Balancer’s governance allows LPs to vote on pool parameters, incentivization strategies, and protocol improvements. Known for its innovative approach to managing multi-asset pools.
 
-![](/blog/images/posts/91031d3f-e6fa-49b7-99b2-671bc4d52063.jpeg)
+![](/images/posts/91031d3f-e6fa-49b7-99b2-671bc4d52063.jpeg)
 
 **SushiSwap**: SushiSwap's governance is notable for its community-driven decision-making and frequent use of governance tokens to shape the protocol's future.
 
-![](/blog/images/posts/4c8f7a59-b477-47b0-b951-6e4fdd539701.png)
+![](/images/posts/4c8f7a59-b477-47b0-b951-6e4fdd539701.png)
 
 ## Regulations and Legalities
 
@@ -374,6 +374,6 @@ Liquidity pools have evolved beyond the basic structures used in early decentral
 
 The variations of liquidity pools highlight the rapid innovation in the DeFi space. From simple single-asset pools to complex hybrid and concentrated pools, these structures cater to diverse use cases, offering tailored solutions for trading, lending, yield generation, and more. Real-world examples like Uniswap v3, Curve, Bancor, and Balancer demonstrate the growing utility of liquidity pools, while research-driven innovations promise even greater efficiency and functionality in the future. As DeFi evolves, liquidity pools will remain central to its success, driving financial inclusion and innovation.
 
-![](/blog/images/posts/42769dde-8aa8-41ea-893b-068c79ccc82b.png)
+![](/images/posts/42769dde-8aa8-41ea-893b-068c79ccc82b.png)
 
 Liquidity pools are a cornerstone of DeFi, driving decentralization and innovation in the financial world. While they offer lucrative opportunities, it’s crucial to understand the associated risks and navigate the evolving regulatory landscape carefully. By doing so, users can leverage this revolutionary technology to unlock the full potential of decentralized finance.

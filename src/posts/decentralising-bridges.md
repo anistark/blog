@@ -4,7 +4,7 @@ title: Decentralising Bridges
 excerpt: In simple terms, bridges are tools that allow the transfer of assets, data, or even smart contract instructions between different blockchain networks. Think of them as the highways connecting isolated blockchain cities.
 date: 2025-01-07
 updatedDate: 2025-01-07
-featuredImage: /blog/images/posts/b3a78eaa-97d4-4795-8250-67a345a421bf.png
+featuredImage: /images/posts/b3a78eaa-97d4-4795-8250-67a345a421bf.png
 tags:
   - post
   - abstraction
@@ -50,7 +50,7 @@ In general, centralized applications offer simplicity, speed, and easier regulat
 
 *There are 70+ bridges available today, distributed across various chains as per they support respectively.*
 
-![](/blog/images/posts/81a87548-88a0-46f7-a18d-9c98ac94aace.png)
+![](/images/posts/81a87548-88a0-46f7-a18d-9c98ac94aace.png)
 
 Let’s explore some interesting projects amongst them to understand how they work further.
 
@@ -100,7 +100,7 @@ Wormhole is a decentralized bridge designed to connect high-performance blockcha
 4. On the target chain, the Wormhole protocol mints a wrapped version of the locked asset for the user.
     
 
-![](/blog/images/posts/213f7dcb-7f61-4e35-885c-af6989bbe323.png)
+![](/images/posts/213f7dcb-7f61-4e35-885c-af6989bbe323.png)
 
 ## Connext
 

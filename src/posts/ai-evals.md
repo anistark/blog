@@ -4,7 +4,7 @@ title: Unit Tests for Intelligence
 excerpt: A few months ago, as I was exploring machine learning while working on a project, one of my models kept behaving in a weird way. I had built a classifier to detect cats in images.
 date: 2025-10-26
 updatedDate: 2025-10-26
-featuredImage: /blog/images/posts/28f76d96-e3cc-41ed-af26-1244003d2caf.png
+featuredImage: /images/posts/28f76d96-e3cc-41ed-af26-1244003d2caf.png
 tags:
   - post
   - ai
@@ -55,7 +55,7 @@ They’re not just about performance. They’re about *understanding intelligenc
 
 Let’s picture an eval as a mini experiment:
 
-![](/blog/images/posts/009f4b9f-3997-4405-b55b-7267dc5e73d3.png)
+![](/images/posts/009f4b9f-3997-4405-b55b-7267dc5e73d3.png)
 
 * **Input:** what you feed the model (prompt, image, etc.)
     

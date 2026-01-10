@@ -4,7 +4,7 @@ title: Designing The Perfect Incentivised System - Part 1
 excerpt: Incentive systems are frameworks designed to motivate individuals or groups to achieve specific goals by offering rewards, recognition, or penalties. These systems can be implemented in various contexts, from businesses to governments, and are essential for driving behavior that aligns with desired outcomes.
 date: 2024-10-22
 updatedDate: 2024-10-22
-featuredImage: /blog/images/posts/e85307a5-25d6-4b85-a30c-ce938524e6f2.webp
+featuredImage: /images/posts/e85307a5-25d6-4b85-a30c-ce938524e6f2.webp
 tags:
   - post
   - research

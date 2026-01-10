@@ -4,7 +4,7 @@ title: Synthetic Asset Tokens
 excerpt: Imagine having access to the value of an asset, say, Tesla stock, without ever owning it. That's essentially what synthetic asset tokens (or just "synthetics") do.
 date: 2024-12-20
 updatedDate: 2024-12-20
-featuredImage: /blog/images/posts/8f184652-af8c-4317-86ca-fbd5ef972c54.png
+featuredImage: /images/posts/8f184652-af8c-4317-86ca-fbd5ef972c54.png
 tags:
   - post
   - cryptocurrency

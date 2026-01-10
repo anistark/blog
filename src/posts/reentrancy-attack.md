@@ -4,7 +4,7 @@ title: Reentrancy Attack
 excerpt: This can lead to various issues such as fund loss, unauthorized access, or even complete contract failure.
 date: 2024-07-22
 updatedDate: 2024-07-22
-featuredImage: /blog/images/posts/76e1bbbc-b48e-4a3a-b467-15df1db488f9.webp
+featuredImage: /images/posts/76e1bbbc-b48e-4a3a-b467-15df1db488f9.webp
 tags:
   - post
   - security

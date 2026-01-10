@@ -4,7 +4,7 @@ title: At the mercy of AI
 excerpt: It’s the 2020s, and we’re all living in a world where the phrase *"just ask the AI"* has replaced *"let me Google that".* From product design to poetry, from diagnosing diseases to picking your next Netflix binge, AI is no longer a tool we occasionally refer to. It’s the invisible co-pilot running the plane, the ship, and sometimes the planet.
 date: 2025-08-18
 updatedDate: 2025-08-18
-featuredImage: /blog/images/posts/fb4adc7c-b7c1-4207-8a58-76d8c062aaa5.png
+featuredImage: /images/posts/fb4adc7c-b7c1-4207-8a58-76d8c062aaa5.png
 tags:
   - post
   - ai
@@ -26,7 +26,7 @@ Want a new marketing campaign? Tell the AI: “Make it sound like Steve Jobs mee
 
 It’s fast, powerful, and let’s admit it, super addictive. But there’s a quiet shift happening: the people who know *what* to ask and *how* to ask it hold the real power. This is the age of *prompt engineering*, and it’s shaping the products, culture, and even the politics of tomorrow. Once what was fun and games, has now turned into a harsh reality. I tried vibe coding too last year using some popular tools like lovable and v0. Incredible results! It generated entire websites with sections that I had not even mentioned or thought of up until that point. It was too good to be true at first glance. I tried a few more options and all were crazy smooth. I heard a gear shift in my head and went full blown into it. The results are great sometimes. Most times, it does small errors. At one point, I was only fixing bugs that my AI generated and onto next prompt. It would have actually been faster if I wrote it myself though. But I was already hooked. And then it hit me.
 
-![](/blog/images/posts/9b149691-014c-4954-a6be-87df1ae06e4e.jpeg)
+![](/images/posts/9b149691-014c-4954-a6be-87df1ae06e4e.jpeg)
 
 This quote is true on so many levels as well and we're hooked. In a world hooked already on AI tools, all other tools have lost it's charm. We rarely open Google now, we go to chatgpt or perplexity. We don't open any normal IDE now, it has to be Claude powered. And why won't you? Everyone else is doing it. If you don't, you’re just falling behind. We're so blindly going at it, that we've stopped questioning things. Soon, we might not know what a cat actually looks like and rely on whatever our AI tells us. It's not all bad of course. A lot of task handling stuff have gotten really good too. Vibe coding has a good side as well, makes you faster and better documented. *Nobody like docs like AI does!*
 
@@ -46,7 +46,7 @@ And slowly, almost imperceptibly, the edges of human originality blur away. Ever
 
 The worst part? We stop noticing. We stop *wanting* to notice. Because the AI makes life frictionless and friction is exhausting. The mental muscles that make us question, imagine, and create quietly wither away. We’re comfortable. We’re entertained. We’re efficient. And we become empty.
 
-![](/blog/images/posts/bb15defa-1fae-48e0-bb32-d3619e11d74b.jpeg)
+![](/images/posts/bb15defa-1fae-48e0-bb32-d3619e11d74b.jpeg)
 
 ### **The Renaissance 2.0**
 
@@ -64,7 +64,7 @@ And the thing that makes this future special isn’t the technology, it’s the 
 
 This is a world that feels alive, unpredictable, and brimming with wonder. A place where AI hasn’t replaced the human spark, but fanned it into a wildfire.
 
-![](/blog/images/posts/7725c2c5-0a1b-46d3-9bf1-2dca4fb52f79.jpeg)
+![](/images/posts/7725c2c5-0a1b-46d3-9bf1-2dca4fb52f79.jpeg)
 
 The road to the better future isn’t just paved with fancy algorithms, it’s built through choices, habits, and the willingness to stay awake at the wheel while AI drives alongside us. The easiest trap is to assume, “Well, the machines are smarter now, so we can relax.” That’s the same logic sailors used when GPS became a thing, until ships started running aground because nobody remembered how to read a map.
 
@@ -103,6 +103,6 @@ We *are* at the mercy of AI, in the same way humanity has always been at the mer
 > The question isn’t whether AI will change our world. It already has.  
 > The real question is: **Will we still recognize ourselves in the world it creates?**
 
-![](/blog/images/posts/f6588827-8004-499d-baa3-54ef5b2ab307.jpeg)
+![](/images/posts/f6588827-8004-499d-baa3-54ef5b2ab307.jpeg)
 
 *A silent revolution is upon us! Are you ready?*

@@ -4,7 +4,7 @@ title: "Imagination: The Final Interface"
 excerpt: In an era where technological advances continue to break the boundaries of what once seemed like science fiction, we stand at a crossroads between the physical and the digital. The interface has always been the bridge between humans and machines—beginning with the simple command-line, evolving through graphical user interfaces (GUIs), and now, the immersive experiences of augmented reality (AR) and virtual reality (VR).
 date: 2024-10-27
 updatedDate: 2024-10-27
-featuredImage: /blog/images/posts/7806bc9e-e123-43bf-8751-9ea78ee16bab.jpeg
+featuredImage: /images/posts/7806bc9e-e123-43bf-8751-9ea78ee16bab.jpeg
 tags:
   - post
   - interactive

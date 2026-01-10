@@ -4,7 +4,7 @@ title: Data Currency and Technology
 excerpt: Three words that is in everything and everywhere. The very essence of an object, be it physical or digital is encompassed within the realms of these 3 words.
 date: 2018-04-22
 updatedDate: 2018-04-22
-featuredImage: /blog/images/posts/_RWJTCy2r.jpeg
+featuredImage: /images/posts/_RWJTCy2r.jpeg
 tags:
   - post
   - data

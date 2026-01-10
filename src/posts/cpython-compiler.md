@@ -4,7 +4,7 @@ title: Understanding the CPython Compiler
 excerpt: CPython is the reference implementation of Python written in C. When you run a `.py` file, it goes through several internal steps before your code is actually executed.
 date: 2025-04-28
 updatedDate: 2025-04-28
-featuredImage: /blog/images/posts/0552a276-1dfa-4f0b-88b3-07a2ed5ea302.png
+featuredImage: /images/posts/0552a276-1dfa-4f0b-88b3-07a2ed5ea302.png
 tags:
   - post
   - python
@@ -89,7 +89,7 @@ This tree shows an assignment of the constant `42` to variable `x`.
 
 Here’s a visual of another tree for a simple function of `x = y + 3`:
 
-![](/blog/images/posts/63b3d188-ae93-480a-ac9a-e7bb03259a4c.webp)
+![](/images/posts/63b3d188-ae93-480a-ac9a-e7bb03259a4c.webp)
 
 ## AST to Bytecode Compilation
 

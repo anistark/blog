@@ -4,7 +4,7 @@ title: Feluda
 excerpt: Imagine you’re deep into building something exciting. A groundbreaking app, a sleek dev tool, or even just a weekend side project that scratches a creative itch.
 date: 2025-02-26
 updatedDate: 2025-02-26
-featuredImage: /blog/images/posts/1db4d619-341b-4e26-878c-235755eba025.png
+featuredImage: /images/posts/1db4d619-341b-4e26-878c-235755eba025.png
 tags:
   - post
   - go
@@ -32,7 +32,7 @@ Most of us don’t read licenses in detail. Who has the time? But ignoring them 
 
 That’s why we created [**Feluda**](https://github.com/anistark/feluda), your personal detective for project dependencies.
 
-![](/blog/images/posts/f0c146aa-e85f-4486-a596-23c6a5003646.png)
+![](/images/posts/f0c146aa-e85f-4486-a596-23c6a5003646.png)
 
 Feluda is a command-line tool that scans your project's dependencies, analyzes their licenses, and flags any restrictive or risky ones before they become a problem. Instead of spending hours manually digging through legal jargon, Feluda does the detective work for you.
 

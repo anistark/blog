@@ -4,7 +4,7 @@ title: The Perfect Flaw
 excerpt: In a world increasingly drawn to the pursuit of perfection, the notion of embracing flaws may seem counterintuitive. Yet, these so-called "flaws" might just be what make us remarkable.
 date: 2024-11-02
 updatedDate: 2024-11-02
-featuredImage: /blog/images/posts/6341b78d-3d5a-439e-93b0-104a24c5bc87.jpeg
+featuredImage: /images/posts/6341b78d-3d5a-439e-93b0-104a24c5bc87.jpeg
 tags:
   - post
   - life

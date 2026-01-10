@@ -4,7 +4,7 @@ title: The Power of Example
 excerpt: In the labyrinth of modern life, where individuality is often celebrated above all else, the idea of leading by example remains an esoteric yet vital concept. For the modern individual—a seeker of authenticity and a curator of their experiences—the power of example is not merely about imitation.
 date: 2024-11-21
 updatedDate: 2024-11-21
-featuredImage: /blog/images/posts/e174182b-f347-4e76-9d74-1133fb4ef2a5.webp
+featuredImage: /images/posts/e174182b-f347-4e76-9d74-1133fb4ef2a5.webp
 tags:
   - post
   - life

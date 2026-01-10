@@ -4,7 +4,7 @@ title: Skills, Agents, and the Missing Middle
 excerpt: If you’ve been building with LLMs for a while, you’ve probably built an agent at some point.
 date: 2026-01-09
 updatedDate: 2026-01-09
-featuredImage: /blog/images/posts/152bc5f6-6d2f-4d4d-8ac7-52666c09b559.png
+featuredImage: /images/posts/152bc5f6-6d2f-4d4d-8ac7-52666c09b559.png
 tags:
   - post
   - ai

@@ -4,7 +4,7 @@ title: How does Chain Abstraction work?
 excerpt: "Technically speaking, chain abstraction means abstracting away the differences between blockchain networks to provide a seamless experience. The goal is to:."
 date: 2024-12-17
 updatedDate: 2024-12-17
-featuredImage: /blog/images/posts/e93e4550-0c33-4622-ad9b-e25935218439.jpeg
+featuredImage: /images/posts/e93e4550-0c33-4622-ad9b-e25935218439.jpeg
 tags:
   - post
   - rust

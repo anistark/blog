@@ -4,7 +4,7 @@ title: Chain Abstraction
 excerpt: Say you want to make an online payment, and instead of just clicking a button, you have to figure out whether the store accepts Visa, Mastercard, or PayPal. Now multiply that headache by 100x, and you’ve got the current state of blockchains.
 date: 2024-12-09
 updatedDate: 2024-12-09
-featuredImage: /blog/images/posts/6a6919a9-5d97-4bb3-af29-7035b6d90431.jpeg
+featuredImage: /images/posts/6a6919a9-5d97-4bb3-af29-7035b6d90431.jpeg
 tags:
   - post
   - user-experience

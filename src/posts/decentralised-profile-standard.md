@@ -4,7 +4,7 @@ title: The Future of Digital Profiles and Avatars
 excerpt: The way we represent ourselves online is undergoing a fundamental transformation. Traditional user profiles, tied to centralised platforms, restrict true ownership, portability, and privacy.
 date: 2025-02-18
 updatedDate: 2025-02-18
-featuredImage: /blog/images/posts/29abc776-3c28-4e56-b04e-32b1621a6d44.png
+featuredImage: /images/posts/29abc776-3c28-4e56-b04e-32b1621a6d44.png
 tags:
   - post
   - sbt

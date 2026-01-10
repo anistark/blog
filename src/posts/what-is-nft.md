@@ -4,7 +4,7 @@ title: What is NFT?
 excerpt: NFT or Non-Fungible Token, is the latest in the long line of jargon that you might be hearing a lot about recently. So, why should you care and what is it even.
 date: 2021-09-27
 updatedDate: 2021-09-27
-featuredImage: /blog/images/posts/Am7ywONCJa.png
+featuredImage: /images/posts/Am7ywONCJa.png
 tags:
   - post
   - introduction
@@ -20,7 +20,7 @@ A digital token is just another piece of a smart contract code that’s running 
 
 One of the most sought after use-cases was ERC-721 or deeds or as more commonly known as Non-Fungible Tokens.
 NFTs can represent ownership over digital or physical assets. It’s obviously not a new concept. It’s been around since 2014.
-![NFT_Icon.png](/blog/images/posts/6WOxWB5eG.png)
+![NFT_Icon.png](/images/posts/6WOxWB5eG.png)
 
 - Physical property — houses, unique artwork
 - Virtual collectables — unique pictures of kittens, collectable cards
@@ -30,7 +30,7 @@ In general, all houses are distinct and no two kittens are alike. NFTs are disti
 This by itself doesn’t really mean much but when you really think about it, we already have an extremely large scale demand for such unique items. From collectible cards, items, and luxury antiques, our lives revolve around uniqueness. The more unique an item, the more valuable it becomes. It’s the very core of how our economics work and how every valuable item is identified. Now, with ERC-721, we got a way to represent it online and have a very simple way to buy and sell such assets.
 Of course, it comes with its own set of problems like enormous gas fees which one has to pay for networks like Ethereum. Makes it almost impossible to acquire one or more of these very special NFTs for normal people. The NFT market value tripled in 2020, reaching more than $250 million. During the first quarter of 2021, NFT sales exceeded $2 billion. Plagiarism is another big concern where a true digital identity solution can very well fix it. We’ll take all the issues and possible solutions in perhaps a separate post of its own. I feel it deserves a more in-depth analysis.
 
-![Banner_NFT-marketplace.png](/blog/images/posts/QQ8otuHyl.png)
+![Banner_NFT-marketplace.png](/images/posts/QQ8otuHyl.png)
 ## Marketplaces
 #### [OpenSea](https://opensea.io/)
 As one of the most commonly referred NFT marketplaces, OpenSea has established it’s dominance in the space. You can practically buy or sell any type of NFT here. The process is as simplified as it can be. 

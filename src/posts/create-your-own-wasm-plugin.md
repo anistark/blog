@@ -4,7 +4,7 @@ title: Create your own wasm plugin
 excerpt: Creating wasm plugins, is not limited to wasmrun plugins alone, they can be quite useful in distributing as independent modules as well. What’s currently lacking today is an open ecosystem, which is surprising given all the developement is quite open.
 date: 2025-09-10
 updatedDate: 2025-09-10
-featuredImage: /blog/images/posts/24381ddc-6564-485c-8ef6-df48c93e8362.png
+featuredImage: /images/posts/24381ddc-6564-485c-8ef6-df48c93e8362.png
 tags:
   - post
   - webassembly
@@ -586,6 +586,6 @@ pub extern "C" fn cleanup_string(ptr: *mut c_char) {
 
 Now, you know how to create your very own wasm plugin. Would love to have more community plugins. 🙌
 
-![](/blog/images/posts/6e8fe806-2f4f-4316-aba5-884d0390fe83.png)
+![](/images/posts/6e8fe806-2f4f-4316-aba5-884d0390fe83.png)
 
 Even if you’re not building one, if you’ve an idea that you’d like to use, feel free to open an [issue](https://github.com/anistark/wasmrun/issues) and let us know about it. 🚀

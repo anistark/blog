@@ -4,7 +4,7 @@ title: Building a Cross-Chain Bridge
 excerpt: "So, how about we learn how to build a **cross-chain bridge** that allows NFTs to move between two **EVM-compatible chains** (e.g., Ethereum & Base, Arbitrum, Optimism & Polygon). Unlike traditional bridges, which use an **off-chain relayer**, we will implement an **on-chain gateway** using [LayerZero](https://layerzero.network/), making the process **fully decentralised and trustless**."
 date: 2025-02-09
 updatedDate: 2025-02-09
-featuredImage: /blog/images/posts/7f6301ee-1c9c-437f-96a7-fa3c94ffcd78.png
+featuredImage: /images/posts/7f6301ee-1c9c-437f-96a7-fa3c94ffcd78.png
 tags:
   - post
   - abstraction
@@ -216,4 +216,4 @@ Decentralised Autonomous Organisations (DAOs) can play a crucial role in managin
 
 > Note that this was for learning purposes only. The real contracts will have to consider several security issues and vulnerabilities which we’ve assumed here, as part of the happy path. But it’s a start and would love to see at least some of you try it out and build more decentralised bridges. The bridges ecosystem is both quickly evolving and stagnant at the same time. Cross-chain messaging protocols have certainly pulled in a pin off the race for building decent decentralised bridges, but we’ve quite a few improvement yet to be made to achieve true trustless systems.
 
-![](/blog/images/posts/4478b09b-d6bd-41b6-bb44-eb8c84b82d53.jpeg)
+![](/images/posts/4478b09b-d6bd-41b6-bb44-eb8c84b82d53.jpeg)

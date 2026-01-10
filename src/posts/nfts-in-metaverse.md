@@ -4,7 +4,7 @@ title: NFTs in Metaverse
 excerpt: We love NFTs. It’s pretty cool.
 date: 2022-04-17
 updatedDate: 2022-04-17
-featuredImage: /blog/images/posts/Riy59HGoo.jpeg
+featuredImage: /images/posts/Riy59HGoo.jpeg
 tags:
   - post
   - technology

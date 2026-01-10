@@ -4,7 +4,7 @@ title: The WebAssembly Odyssey
 excerpt: In 2017, WebAssembly (WASM) arrived as a new low-level bytecode format. Safe, compact, and fast.
 date: 2025-04-23
 updatedDate: 2025-04-23
-featuredImage: /blog/images/posts/9cb3f82d-a70e-434a-9c8b-e5dec84b8da4.png
+featuredImage: /images/posts/9cb3f82d-a70e-434a-9c8b-e5dec84b8da4.png
 tags:
   - post
   - webassembly

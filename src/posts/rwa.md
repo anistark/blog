@@ -4,7 +4,7 @@ title: Real World Assets
 excerpt: ​Real-World Assets (RWAs) refer to tangible or intangible items from the traditional economy such as real estate, commodities, bonds, and intellectual property, that are represented digitally on blockchain platforms. Integrating RWAs into the Web3 ecosystem aims to democratize access to these assets, enhance liquidity, and introduce innovative financial products.​.
 date: 2025-03-25
 updatedDate: 2025-03-25
-featuredImage: /blog/images/posts/7d44c74e-a400-4d6c-b70b-915982a3a947.png
+featuredImage: /images/posts/7d44c74e-a400-4d6c-b70b-915982a3a947.png
 tags:
   - post
   - tokenization
@@ -38,7 +38,7 @@ RWAs expand the scope of digital assets by bringing real-world value on-chain wh
 
 Traditional finance (TradFi) and Web3 are merging through tokenization. **Tokenized Real Estate** allows investors to buy property shares without requiring full ownership. **Tokenized Bonds and Equities** introduce institutional-grade financial instruments to DeFi. **Real-World Collateral in DeFi** enables users to borrow against RWAs, such as tokenized invoices, supply chain assets, and luxury goods. By integrating RWAs into the digital asset space, Web3 is paving the way for a more inclusive, efficient, and transparent financial ecosystem.
 
-![](/blog/images/posts/81e75b3e-2008-4b16-ba40-22ddd5a036bc.png)
+![](/images/posts/81e75b3e-2008-4b16-ba40-22ddd5a036bc.png)
 
 **Types of RWAs in Web3**
 
@@ -98,7 +98,7 @@ Since RWAs involve tangible assets and legal frameworks, security is critical to
 * **Oracles & Valuation Checks**: Secure oracles (e.g., Chainlink) provide real-time price feeds and asset valuation to prevent price manipulation.
     
 
-![](/blog/images/posts/2ca8f232-42c0-4e32-ad06-8c77dd4967fb.jpeg)
+![](/images/posts/2ca8f232-42c0-4e32-ad06-8c77dd4967fb.jpeg)
 
 The tokenization of real-world assets (RWAs) is transforming financial markets, but it also brings regulatory challenges. Governments and financial authorities worldwide are working to establish frameworks that ensure compliance, security, and consumer protection while fostering innovation.
 
@@ -159,7 +159,7 @@ The security of buying and trading **real-world assets (RWAs)** depends on facto
 5. **Centralized Points of Failure** – If an RWA marketplace is centralized or lacks proper decentralization measures, assets could be frozen or mismanaged.
     
 
-![](/blog/images/posts/091672db-03a2-41ce-9b4f-2963eb236784.png)
+![](/images/posts/091672db-03a2-41ce-9b4f-2963eb236784.png)
 
 Current RWA market is valued at **about $50 Billion. $16 Trillion Market by 2030** is what experts predict RWAs as a **huge part of the financial system** soon. Real estate, stocks, and commodities will likely move **on-chain** in the next decade. RWAs are set to change the game in finance, real estate, supply chains, and even digital ownership. As web3 tech gets better, RWAs will make buying, selling, and investing in real-world stuff easier, faster, and more accessible to everyone.
 

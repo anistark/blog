@@ -4,7 +4,7 @@ title: WebAssembly and Python Ecosystem
 excerpt: WebAssembly (WASM) is transforming how we run code in lightweight, secure, and cross-platform environments. Initially designed for browsers, WASM has now expanded into **serverless computing** and **sandboxed environments**.
 date: 2025-02-05
 updatedDate: 2025-02-05
-featuredImage: /blog/images/posts/854fd482-c023-4089-9108-d1226cb12f40.png
+featuredImage: /images/posts/854fd482-c023-4089-9108-d1226cb12f40.png
 tags:
   - post
   - python

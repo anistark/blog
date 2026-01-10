@@ -4,7 +4,7 @@ title: Typed, Transpiled, Compiled
 excerpt: If you've ever coded for the web, chances are you've touched **JavaScript**. But as apps get more complex, you might run into its quirks.
 date: 2025-05-14
 updatedDate: 2025-05-14
-featuredImage: /blog/images/posts/6a85697e-d0bd-4a2d-bd0e-9c2fc988f5db.png
+featuredImage: /images/posts/6a85697e-d0bd-4a2d-bd0e-9c2fc988f5db.png
 tags:
   - post
   - javascript
@@ -19,7 +19,7 @@ If you've ever coded for the web, chances are you've touched **JavaScript**. But
 
 It all began in the wild early days of the internet, back in **1995**, when web pages were mostly just static documents. Plain text, maybe some images, and a lot of reloading. Netscape, one of the first web browsers, wanted to make the web more dynamic, so they asked a guy named **Brendan Eich** to come up with a scripting language for browsers.
 
-![](/blog/images/posts/cccb751a-e5c6-4d96-adb5-b1d041e3c8c6.jpeg)
+![](/images/posts/cccb751a-e5c6-4d96-adb5-b1d041e3c8c6.jpeg)
 
 Brendan, in what now sounds like a myth, wrote the first version of **JavaScript** in just **10 days**. It was a scrappy little language, originally called *Mocha*, then *LiveScript*, and finally *JavaScript*. Not because it had much to do with Java, but because marketing thought the name sounded cool and can probably piggy back the popularity of Java. Brendan later founded **Mozilla** and now **Brave** browser.
 

@@ -4,7 +4,7 @@ title: Designing The Perfect Incentivised System - Part 2
 excerpt: A lot of the recent rise in isekai anime also suggests a favorable wind towards perfecting our system.
 date: 2024-10-24
 updatedDate: 2024-10-24
-featuredImage: /blog/images/posts/0604dc82-1287-4bc8-b752-0fdb797d9921.webp
+featuredImage: /images/posts/0604dc82-1287-4bc8-b752-0fdb797d9921.webp
 tags:
   - post
   - designing

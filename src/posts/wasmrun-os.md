@@ -4,7 +4,7 @@ title: Run your code anywhere
 excerpt: Let me tell you about Vani. She's a web development instructor teaching Node.js to a class of 30 students.
 date: 2025-10-12
 updatedDate: 2025-10-12
-featuredImage: /blog/images/posts/1afcb9a1-c0ff-4033-87b8-2b06da5cf977.png
+featuredImage: /images/posts/1afcb9a1-c0ff-4033-87b8-2b06da5cf977.png
 tags:
   - post
   - python
@@ -29,7 +29,7 @@ These aren't edge cases. These are everyday problems that developers face. We've
 
 A simple solution came up in the form of containers. Docker is almost a household tool found in every other project and sometimes too often as recommended way to develop. Various orchestration have come up in the recent years and the entire devops heavy infra became a norm, of which we’re part of today. I’m not saying dockers of this world are a pain, but I can tell you no dev, while building wants to run heavy containers just to keep checking if it’s compatible in various machines.
 
-[![](/blog/images/posts/84868000-d973-4d4d-8807-0b0ca47289b8.png)](https://x.com/solomonstre/status/1111004913222324225)
+[![](/images/posts/84868000-d973-4d4d-8807-0b0ca47289b8.png)](https://x.com/solomonstre/status/1111004913222324225)
 
 ## What if Code Could Just Run?
 
@@ -129,7 +129,7 @@ With wasmrun OS mode:
 
 Think of it like Russian nesting dolls, but for code execution environments. Best part, you don’t even need to think about any of it.
 
-![](/blog/images/posts/06ffc418-e559-4686-a7a9-ccc7427aaa0d.png)
+![](/images/posts/06ffc418-e559-4686-a7a9-ccc7427aaa0d.png)
 
 The kernel is the brain. It manages:
 
@@ -226,7 +226,7 @@ It works. You can run a project, see it execute, browse files, and interact with
 
 wasmrun is open source. The entire OS mode implementation is on GitHub. You can read every line of code. You can see exactly how it works.
 
-![](/blog/images/posts/238cb9a0-5344-49f2-b1be-4c4a4f2a2ea2.png)
+![](/images/posts/238cb9a0-5344-49f2-b1be-4c4a4f2a2ea2.png)
 
 This matters because:
 
@@ -316,4 +316,4 @@ We're building an operating system for code. An operating system that runs anywh
 
 Come help us build it.
 
-![](/blog/images/posts/c111c36b-0eb9-4328-af52-9496f3a7756f.png)
+![](/images/posts/c111c36b-0eb9-4328-af52-9496f3a7756f.png)
