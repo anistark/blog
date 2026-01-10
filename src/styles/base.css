@@ -8,11 +8,35 @@
 	white-space: pre;
 }
 
+:root {
+  --bg-primary: #000000;
+  --bg-secondary: rgba(31, 41, 55, 0.4);
+  --bg-glass: rgba(17, 24, 39, 0.7);
+  --text-primary: #e5e7eb;
+  --text-secondary: #9ca3af;
+  --text-heading: #ffffff;
+  --border-color: rgba(255, 255, 255, 0.1);
+  --border-color-hover: rgba(255, 255, 255, 0.18);
+}
+
+[data-theme="light"] {
+  --bg-primary: #ffffff;
+  --bg-secondary: rgba(243, 244, 246, 0.8);
+  --bg-glass: rgba(255, 255, 255, 0.8);
+  --text-primary: #374151;
+  --text-secondary: #6b7280;
+  --text-heading: #111827;
+  --border-color: rgba(0, 0, 0, 0.1);
+  --border-color-hover: rgba(0, 0, 0, 0.18);
+}
+
 html,
 body {
-  @apply antialiased text-gray-300;
-  background-color: #000000;
+  @apply antialiased;
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
   font-family: 'Open Sans', sans-serif;
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 h1,
@@ -37,7 +61,7 @@ h4 > a,
 h5 > a,
 h6 > a,
 a {
-  @apply text-white;
+  color: var(--text-heading);
 }
 
 h1 {
@@ -193,19 +217,27 @@ hr {
   position: relative;
   cursor: pointer;
   transition: transform 0.2s ease, box-shadow 0.2s ease;
-  background: rgba(31, 41, 55, 0.4);
+  background: var(--bg-secondary);
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  border: 1px solid var(--border-color);
   border-radius: 12px;
   padding: 1.5rem;
   box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
 }
 
+[data-theme="light"] .post-item {
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
 .post-item:hover {
   transform: translateY(-4px);
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
-  border-color: rgba(255, 255, 255, 0.18);
+  border-color: var(--border-color-hover);
+}
+
+[data-theme="light"] .post-item:hover {
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
 }
 
 .post-item.has-background {
@@ -228,6 +260,10 @@ hr {
   -webkit-backdrop-filter: blur(8px);
   z-index: 1;
   border-radius: 12px;
+}
+
+[data-theme="light"] .post-item.has-background::before {
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(255, 255, 255, 0.85) 100%);
 }
 
 .post-item .post-content {
@@ -278,27 +314,39 @@ hr {
 
 /* Glassmorphic header and footer styling */
 .glass-header {
-  background: rgba(17, 24, 39, 0.7);
+  background: var(--bg-glass);
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.18);
+  border-bottom: 1px solid var(--border-color-hover);
   box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
 }
 
+[data-theme="light"] .glass-header {
+  box-shadow: 0 2px 8px 0 rgba(0, 0, 0, 0.1);
+}
+
 .glass-footer {
-  background: rgba(17, 24, 39, 0.7);
+  background: var(--bg-glass);
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
-  border-top: 1px solid rgba(255, 255, 255, 0.18);
+  border-top: 1px solid var(--border-color-hover);
   box-shadow: 0 -8px 32px 0 rgba(0, 0, 0, 0.37);
 }
 
+[data-theme="light"] .glass-footer {
+  box-shadow: 0 -2px 8px 0 rgba(0, 0, 0, 0.1);
+}
+
 .glass-privacy-notice {
-  background: rgba(31, 41, 55, 0.7);
+  background: var(--bg-secondary);
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
-  border-top: 1px solid rgba(255, 255, 255, 0.18);
+  border-top: 1px solid var(--border-color-hover);
   box-shadow: 0 -4px 16px 0 rgba(0, 0, 0, 0.3);
+}
+
+[data-theme="light"] .glass-privacy-notice {
+  box-shadow: 0 -2px 8px 0 rgba(0, 0, 0, 0.1);
 }
 
 /* End of article separator */
@@ -309,13 +357,13 @@ hr {
   gap: 1rem;
   margin: 3rem 0 2rem 0;
   padding: 2rem 0;
-  border-top: 1px solid rgba(255, 255, 255, 0.1);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  border-top: 1px solid var(--border-color);
+  border-bottom: 1px solid var(--border-color);
 }
 
 .article-end span {
   font-size: 1.2rem;
-  color: rgba(255, 255, 255, 0.5);
+  color: var(--text-secondary);
   animation: twinkle 2s ease-in-out infinite;
 }
 
@@ -366,25 +414,29 @@ hr {
   align-items: center;
   gap: 1rem;
   padding: 1.5rem;
-  background: rgba(31, 41, 55, 0.4);
+  background: var(--bg-secondary);
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  border: 1px solid var(--border-color);
   border-radius: 12px;
   transition: all 0.3s ease;
   text-decoration: none;
 }
 
 .post-nav-item a:hover {
-  background: rgba(31, 41, 55, 0.6);
-  border-color: rgba(255, 255, 255, 0.2);
+  background: var(--bg-secondary);
+  border-color: var(--border-color-hover);
   transform: translateY(-2px);
   box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
 }
 
+[data-theme="light"] .post-nav-item a:hover {
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}
+
 .post-nav-item .nav-arrow {
   font-size: 2rem;
-  color: rgba(255, 255, 255, 0.7);
+  color: var(--text-secondary);
   transition: transform 0.3s ease;
 }
 
@@ -404,14 +456,14 @@ hr {
   font-size: 0.75rem;
   text-transform: uppercase;
   letter-spacing: 0.05em;
-  color: rgba(255, 255, 255, 0.6);
+  color: var(--text-secondary);
   margin-bottom: 0.25rem;
 }
 
 .post-nav-item .nav-title {
   font-size: 1rem;
   font-weight: bold;
-  color: #fff;
+  color: var(--text-heading);
   margin: 0;
 }
 
@@ -428,4 +480,69 @@ hr {
   .post-nav-next {
     margin-left: 0;
   }
+}
+
+/* Theme toggle button */
+.theme-toggle {
+  position: relative;
+  width: 40px;
+  height: 40px;
+  border-radius: 8px;
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-color);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+}
+
+.theme-toggle:hover {
+  background: rgba(31, 41, 55, 0.6);
+  border-color: var(--border-color-hover);
+  transform: scale(1.05);
+}
+
+[data-theme="light"] .theme-toggle:hover {
+  background: rgba(243, 244, 246, 1);
+}
+
+.theme-toggle .sun-icon,
+.theme-toggle .moon-icon {
+  position: absolute;
+  transition: all 0.3s ease;
+}
+
+.theme-toggle .sun-icon {
+  opacity: 0;
+  transform: rotate(-90deg) scale(0);
+}
+
+.theme-toggle .moon-icon {
+  opacity: 1;
+  transform: rotate(0deg) scale(1);
+}
+
+[data-theme="light"] .theme-toggle .sun-icon {
+  opacity: 1;
+  transform: rotate(0deg) scale(1);
+}
+
+[data-theme="light"] .theme-toggle .moon-icon {
+  opacity: 0;
+  transform: rotate(90deg) scale(0);
+}
+
+/* Footer icon styling */
+.footer-icon {
+  color: var(--text-heading);
+  transition: color 0.3s ease, transform 0.2s ease;
+}
+
+.footer-icon:hover {
+  color: var(--text-secondary);
+}
+
+.footer-icon svg {
+  transition: transform 0.2s ease;
 }

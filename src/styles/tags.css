@@ -7,6 +7,14 @@
   }
 }
 
+@keyframes tag-hover-light {
+  100% {
+    border: 1px solid rgba(0, 0, 0, 0.3);
+    background-color: rgba(0, 0, 0, 0.05);
+    transform: scale(1.05);
+  }
+}
+
 .tag {
   @apply inline-block px-4 py-2 mr-2 mb-2 text-xs font-bold rounded lowercase text-white;
   border: 1px solid rgba(255, 255, 255, 0.2);
@@ -20,55 +28,70 @@
   animation: tag-hover 500ms both;
 }
 
+[data-theme='light'] .tag {
+  color: #111827;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+}
+
+[data-theme='light'] .tag:hover {
+  animation: tag-hover-light 500ms both;
+}
+
 .tag:before {
-  content: "#";
-}
-
-.tag.cats {
-  background: rgba(239, 68, 68, 0.6);
-}
-
-.tag.enchiladas {
-  background: rgba(251, 191, 36, 0.6);
-}
-
-.tag.beer {
-  background: rgba(59, 130, 246, 0.6);
-}
-
-.tag.spirituality {
-  background: rgba(99, 102, 241, 0.6);
-}
-
-.tag.orcas {
-  background: rgba(168, 85, 247, 0.6);
-}
-
-.tag.stoicism {
-  background: rgba(236, 72, 153, 0.6);
-}
-
-/* New tag colors with glassmorphic backgrounds */
-.tag.ai {
-  background: rgba(139, 92, 246, 0.6);
+  content: '#';
 }
 
 .tag.web3 {
+  background: rgba(139, 92, 246, 0.6);
+}
+
+.tag.wasm {
   background: rgba(59, 130, 246, 0.6);
 }
 
-.tag.webassembly {
+.tag.ai {
   background: rgba(16, 185, 129, 0.6);
 }
 
-.tag.python {
-  background: rgba(251, 191, 36, 0.6);
+.tag.thought {
+  background: rgba(255, 136, 0, 0.6);
 }
 
-.tag.blockchain {
+.tag.cyberspace {
   background: rgba(239, 68, 68, 0.6);
 }
 
 .tag.build {
-  background: rgba(236, 72, 153, 0.6);
+  background: rgba(211, 72, 236, 0.6);
+}
+
+/* Light mode tag colors - more vibrant */
+[data-theme='light'] .tag.web3 {
+  background: rgba(139, 92, 246, 0.8);
+  color: #ffffff;
+}
+
+[data-theme='light'] .tag.wasm {
+  background: rgba(59, 130, 246, 0.8);
+  color: #ffffff;
+}
+
+[data-theme='light'] .tag.ai {
+  background: rgba(16, 185, 129, 0.8);
+  color: #ffffff;
+}
+
+[data-theme='light'] .tag.thought {
+  background: rgba(119, 61, 0, 0.9);
+  color: #ffffff;
+}
+
+[data-theme='light'] .tag.cyberspace {
+  background: rgba(239, 68, 68, 0.8);
+  color: #ffffff;
+}
+
+[data-theme='light'] .tag.build {
+  background: rgba(236, 72, 153, 0.8);
+  color: #ffffff;
 }
