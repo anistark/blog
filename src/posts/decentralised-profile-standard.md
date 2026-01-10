@@ -4,7 +4,7 @@ title: The Future of Digital Profiles and Avatars
 excerpt: The way we represent ourselves online is undergoing a fundamental transformation. Traditional user profiles, tied to centralised platforms, restrict true ownership, portability, and privacy.
 date: 2025-02-18
 updatedDate: 2025-02-18
-featuredImage: https://cdn.hashnode.com/res/hashnode/image/upload/v1739299470019/29abc776-3c28-4e56-b04e-32b1621a6d44.png
+featuredImage: /blog/images/posts/29abc776-3c28-4e56-b04e-32b1621a6d44.png
 tags:
   - post
   - sbt
@@ -24,7 +24,7 @@ There is **no single source of truth** for your identity today. Someone might re
 
 The centralised identity systems of today are broken, fragmented, insecure, and controlled by corporations with misaligned incentives. What you need is more than a linktree. A decentralised, blockchain-based identity would give users true ownership, privacy, and control, allowing them to manage their digital presence across the internet without relying on third parties. With self-sovereign profiles and interoperable avatars, users can seamlessly interact across dApps, metaverses, and Web2 platforms while ensuring security, censorship resistance, and portability. The future of digital identity is decentralised, user-owned, and truly interoperable, putting individuals back in control of their online presence. So, a general flow towards decentralised identity would look something like this:
 
-![](https://img.etimg.com/photo/msid-103886888,imgsize-100901/Moody's.jpg align="center")
+![](https://img.etimg.com/photo/msid-103886888,imgsize-100901/Moody's.jpg)
 
 But we’re here to propose a new form of profile management.
 
@@ -57,7 +57,7 @@ This model enabled **seamless profile picture portability** across multiple plat
 * **Limited to Web2 applications, making it unusable in decentralised environments**
     
 
-![](https://blog.gravatar.com/wp-content/uploads/2024/12/image-4.png align="center")
+![](https://blog.gravatar.com/wp-content/uploads/2024/12/image-4.png)
 
 So, imagine a **decentralised profile system, that** allows users to maintain a **single identity** that works **across all platforms, chains, and applications**, ensuring **ownership, security, and interoperability**. Instead of being tied to a single company, these profiles live on the blockchain, controlled by the user’s private key.
 
@@ -157,6 +157,6 @@ This ensures that, just like Gravatar in Web2, users only **set up their avatar 
 
 A **decentralised profile system** isn't just about convenience. It’s about **user autonomy, security, and ownership** in an increasingly digital world. By moving away from **platform-dependent identities** to a self-sovereign system, users gain **true control over their digital selves**, one profile, usable everywhere.
 
-![](https://cybersoul.netlify.app/images/landing/avatars.png align="center")
+![](https://cybersoul.netlify.app/images/landing/avatars.png)
 
 With the right architecture, **Web3 can finally have a standard, chain-agnostic identity layer**, paving the way for an open, decentralised, and user-first internet. 🌐 Come support this new standard and let’s step forward into decentralised profiles. 🙌

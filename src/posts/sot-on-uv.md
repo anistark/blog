@@ -4,7 +4,7 @@ title: Why I'm Switching SOT to uv
 excerpt: "I've migrated the [SOT](https://github.com/anistark/sot/) (System Observation Tool) project from traditional pip/venv workflows to [uv](https://github.com/astral-sh/uv), Astral's blazing-fast Python package manager. This is gonna be a game-changer for both contributors and users."
 date: 2025-08-24
 updatedDate: 2025-08-24
-featuredImage: https://cdn.hashnode.com/res/hashnode/image/upload/v1756036594525/9723d4d1-24b4-4ee6-a6f7-d48005ccf754.png
+featuredImage: /blog/images/posts/9723d4d1-24b4-4ee6-a6f7-d48005ccf754.png
 tags:
   - post
   - python
@@ -35,7 +35,7 @@ Lockfile generation performance:
 * `uv lock`: ~800ms
     
 
-![](https://cdn.hashnode.com/res/hashnode/image/upload/v1756034735819/83b37323-c78a-4cf7-b2cf-b2c7b74f04f0.jpeg align="center")
+![](/blog/images/posts/83b37323-c78a-4cf7-b2cf-b2c7b74f04f0.jpeg)
 
 This isn't just benchmark flaunting, these improvements compound during development, CI/CD, and Docker builds. In addition to an actually reliable dependency resolution.
 

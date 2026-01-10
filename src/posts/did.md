@@ -4,7 +4,7 @@ title: Decentralised Identity
 excerpt: As the digital world transitions to Web3, decentralisation promises to redefine how we interact online securely, privately, and without intermediaries. At the heart of this revolution lies **Decentralised Identity (DID)**, a technology aimed at giving users complete control over their identity and interactions in the decentralised ecosystem.
 date: 2025-01-19
 updatedDate: 2025-01-19
-featuredImage: https://cdn.hashnode.com/res/hashnode/image/upload/v1736591707531/62593f5c-4e4c-4d60-98fb-c6840ba30a54.png
+featuredImage: /blog/images/posts/62593f5c-4e4c-4d60-98fb-c6840ba30a54.png
 tags:
   - post
   - identity
@@ -30,7 +30,7 @@ This fragmented and insecure approach calls for a shift toward a decentralised a
 
 DID is a self-sovereign identity system that allows users to create and control their identity without relying on centralised entities. A DID is a unique identifier tied to a cryptographic key, resolving to a DID Document stored on decentralised networks.
 
-![](https://www.w3.org/TR/did-core/diagrams/parts-of-a-did.svg align="center")
+![](https://www.w3.org/TR/did-core/diagrams/parts-of-a-did.svg)
 
 For example:
 
@@ -39,7 +39,7 @@ For example:
 * It is portable, privacy-preserving, and interoperable across platforms and chains.
     
 
-![](https://cdn.hashnode.com/res/hashnode/image/upload/v1737287959526/1adfb744-0c51-4627-8344-af0edcaad35b.webp align="center")
+![](/blog/images/posts/1adfb744-0c51-4627-8344-af0edcaad35b.webp)
 
 DIDs significantly improve user experience by addressing critical pain points.
 
@@ -54,7 +54,7 @@ DIDs significantly improve user experience by addressing critical pain points.
 5. **Gasless Transactions:** Relayers linked to a DID can abstract gas fees, improving accessibility.
     
 
-![](https://cdn.hashnode.com/res/hashnode/image/upload/v1737288060083/15389678-f607-4b53-b129-42af53ee15a7.webp align="center")
+![](/blog/images/posts/15389678-f607-4b53-b129-42af53ee15a7.webp)
 
 # Creating and Using a DID
 
@@ -120,7 +120,7 @@ In a gaming app, a DID enables:
 * A unified user profile across both chains.
     
 
-![](https://www.w3.org/TR/did-core/diagrams/did_detailed_architecture_overview.svg align="center")
+![](https://www.w3.org/TR/did-core/diagrams/did_detailed_architecture_overview.svg)
 
 Account abstraction turns wallets into programmable entities. When paired with a DID, users gain access to features like:
 
@@ -149,7 +149,7 @@ Several active works going on in the field of DIDs:
 2. **Standardisation:** Consistent DID implementation across platforms and chains is essential.
     
 
-![](https://cdn.hashnode.com/res/hashnode/image/upload/v1737288624817/75899c94-d88d-4b11-b37b-77c66aff285f.webp align="center")
+![](/blog/images/posts/75899c94-d88d-4b11-b37b-77c66aff285f.webp)
 
 As Web3 evolves, DIDs will play a pivotal role in bridging the gap between user experience and decentralisation. By abstracting away the complexities of blockchain interactions, DIDs empower users with control over their identities, assets, and data while enabling cross-platform interoperability.
 

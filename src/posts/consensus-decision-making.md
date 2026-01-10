@@ -4,7 +4,7 @@ title: Consensus Decision Making
 excerpt: In psychology, decision-making is regarded as the cognitive process resulting in the selection of a belief or a course of action among several alternative possibilities.
 date: 2017-02-18
 updatedDate: 2017-02-18
-featuredImage: https://cdn.hashnode.com/res/hashnode/image/upload/v1622191032654/QECkW3EyO.jpeg
+featuredImage: /blog/images/posts/QECkW3EyO.jpeg
 tags:
   - post
 ---

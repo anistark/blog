@@ -4,7 +4,7 @@ title: How does Chain Abstraction work?
 excerpt: "Technically speaking, chain abstraction means abstracting away the differences between blockchain networks to provide a seamless experience. The goal is to:."
 date: 2024-12-17
 updatedDate: 2024-12-17
-featuredImage: https://cdn.hashnode.com/res/hashnode/image/upload/v1733993124718/e93e4550-0c33-4622-ad9b-e25935218439.jpeg
+featuredImage: /blog/images/posts/e93e4550-0c33-4622-ad9b-e25935218439.jpeg
 tags:
   - post
   - rust
@@ -73,7 +73,7 @@ Tools like [Particle Network](https://particle.network/) enable universal accoun
 
 Remote Procedure Call (RPC) endpoints are gateways to blockchains. Aggregators like Alchemy and Infura provide a unified interface to interact with multiple blockchains, abstracting away the need to set up individual endpoints.
 
-![](https://blog.particle.network/content/images/2024/06/image1-5.png align="center")
+![](https://blog.particle.network/content/images/2024/06/image1-5.png)
 
 Chain abstraction is the backbone of many user-friendly crypto applications. Lets see a few examples:
 

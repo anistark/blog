@@ -4,7 +4,7 @@ title: Network Interfaces
 excerpt: TCP/IP, or Transmission Control Protocol/Internet Protocol, is a framework that organizes the communication protocols used on the internet and similar networks. TCP/IP network interfaces are the backbone of modern digital communication, enabling devices to connect and exchange data seamlessly across various network types.
 date: 2024-11-23
 updatedDate: 2024-11-23
-featuredImage: https://cdn.hashnode.com/res/hashnode/image/upload/v1732238019662/cf3b0e4a-3c73-42f9-8c2a-d7928ce672d6.jpeg
+featuredImage: /blog/images/posts/cf3b0e4a-3c73-42f9-8c2a-d7928ce672d6.jpeg
 tags:
   - post
   - network

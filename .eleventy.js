@@ -1,4 +1,4 @@
-module.exports = config => {
+module.exports = (config) => {
   const markdownIt = new require('markdown-it')({
     typographer: true,
     linkify: true,
@@ -10,12 +10,12 @@ module.exports = config => {
   config.setLibrary('md', markdownIt);
 
   config.addPlugin(require('eleventy-plugin-nesting-toc'), {
-    tags: ['h3', 'h4', 'h5'],
-    ul: false
+    tags: ['h2', 'h3'],
+    ul: false,
   });
 
   config.addPlugin(require('@11ty/eleventy-plugin-syntaxhighlight'));
-  config.addPlugin(require("@11ty/eleventy-plugin-rss"));
+  config.addPlugin(require('@11ty/eleventy-plugin-rss'));
 
   config.addFilter('dateDisplay', require('./filters/date-display.js'));
 

@@ -4,7 +4,7 @@ title: Decentralising Bridges
 excerpt: In simple terms, bridges are tools that allow the transfer of assets, data, or even smart contract instructions between different blockchain networks. Think of them as the highways connecting isolated blockchain cities.
 date: 2025-01-07
 updatedDate: 2025-01-07
-featuredImage: https://cdn.hashnode.com/res/hashnode/image/upload/v1735716868871/b3a78eaa-97d4-4795-8250-67a345a421bf.png
+featuredImage: /blog/images/posts/b3a78eaa-97d4-4795-8250-67a345a421bf.png
 tags:
   - post
   - abstraction
@@ -50,7 +50,7 @@ In general, centralized applications offer simplicity, speed, and easier regulat
 
 *There are 70+ bridges available today, distributed across various chains as per they support respectively.*
 
-![](https://cdn.hashnode.com/res/hashnode/image/upload/v1735806914325/81a87548-88a0-46f7-a18d-9c98ac94aace.png align="center")
+![](/blog/images/posts/81a87548-88a0-46f7-a18d-9c98ac94aace.png)
 
 Let’s explore some interesting projects amongst them to understand how they work further.
 
@@ -77,7 +77,7 @@ Axelar is a decentralized interoperability network designed to facilitate secure
 4. On Blockchain B, the gateway contract mints or unlocks the equivalent asset, completing the transaction.
     
 
-![](https://cdn.prod.website-files.com/65f28017eaba8cd1f912fa9f/661ae6d901628457de4c5f5c_DevelopCrossChainApp_GmpDiagram-1.png align="center")
+![](https://cdn.prod.website-files.com/65f28017eaba8cd1f912fa9f/661ae6d901628457de4c5f5c_DevelopCrossChainApp_GmpDiagram-1.png)
 
 ## Wormhole
 
@@ -100,7 +100,7 @@ Wormhole is a decentralized bridge designed to connect high-performance blockcha
 4. On the target chain, the Wormhole protocol mints a wrapped version of the locked asset for the user.
     
 
-![](https://cdn.hashnode.com/res/hashnode/image/upload/v1735808622989/213f7dcb-7f61-4e35-885c-af6989bbe323.png align="center")
+![](/blog/images/posts/213f7dcb-7f61-4e35-885c-af6989bbe323.png)
 
 ## Connext
 
@@ -135,7 +135,7 @@ Wormhole is a decentralized bridge designed to connect high-performance blockcha
     * On the destination chain (Polygon), the router unlocks equivalent liquidity and sends it to the recipient’s wallet. This process is verified by the network, ensuring security and integrity.
         
 
-![](https://images.ctfassets.net/gjyjx7gst9lo/920020418/3575f3ea8c4992520e2e95031e48cffd/UnderTheHood.png align="center")
+![](https://images.ctfassets.net/gjyjx7gst9lo/920020418/3575f3ea8c4992520e2e95031e48cffd/UnderTheHood.png)
 
 ## Bridges and the Future of Digital Assets
 

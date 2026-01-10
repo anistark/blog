@@ -4,7 +4,7 @@ title: Designing The Perfect Incentivised System - Part 2
 excerpt: A lot of the recent rise in isekai anime also suggests a favorable wind towards perfecting our system.
 date: 2024-10-24
 updatedDate: 2024-10-24
-featuredImage: https://cdn.hashnode.com/res/hashnode/image/upload/v1729787338466/0604dc82-1287-4bc8-b752-0fdb797d9921.webp
+featuredImage: /blog/images/posts/0604dc82-1287-4bc8-b752-0fdb797d9921.webp
 tags:
   - post
   - designing
@@ -23,7 +23,7 @@ A lot of the recent rise in isekai anime also suggests a favorable wind towards 
 
 In the anime *Hunter x Hunter*, the incentive system plays a crucial role in driving the narrative and character development, particularly in the context of the Hunter Exam and various arcs throughout the series.
 
-![](https://storage.googleapis.com/papyrus_images/e86642535ce1826c72f6dfce2ebc8bc4.webp align="left")
+![](https://storage.googleapis.com/papyrus_images/e86642535ce1826c72f6dfce2ebc8bc4.webp)
 
 # **The Hunter Exam**
 
@@ -33,7 +33,7 @@ The most prominent example of an incentive system in *Hunter x Hunter* is the Hu
 
 * **Status and Prestige**: Becoming a Hunter is a prestigious achievement that grants access to exclusive resources, knowledge, and opportunities. The allure of becoming a Hunter motivates numerous characters to enter the exam, despite its dangers.
     
-    ![](https://storage.googleapis.com/papyrus_images/39807beb644d9f047eb27a3519dfed8a.gif align="left")
+    ![](https://storage.googleapis.com/papyrus_images/39807beb644d9f047eb27a3519dfed8a.gif)
     
 * **Diverse Challenges**: The exam comprises multiple stages, each presenting unique challenges that test candidates' physical and mental abilities. The variety of tasks incentivizes different skill sets and encourages teamwork and strategy.
     
@@ -75,7 +75,7 @@ The series also highlights the consequences of the incentive systems in place, p
 
 Another significant incentive system is the auction and underworld dealings that occur later in the series, particularly during the Greed Island and Chimera Ant arcs.
 
-![](https://storage.googleapis.com/papyrus_images/4bd570283a05392dc715b1489c4c0080.webp align="left")
+![](https://storage.googleapis.com/papyrus_images/4bd570283a05392dc715b1489c4c0080.webp)
 
 #### Features:
 
@@ -88,7 +88,7 @@ Another significant incentive system is the auction and underworld dealings that
 
 # Tower of God
 
-![](https://storage.googleapis.com/papyrus_images/4255d41e189d4a71c5019525b6fe3aff.webp align="left")
+![](https://storage.googleapis.com/papyrus_images/4255d41e189d4a71c5019525b6fe3aff.webp)
 
 In the anime *Tower of God*, we see the incentive system is intricately woven into the narrative and serves as a crucial mechanism for driving character motivations, conflicts, and the overall plot. The Tower itself functions as a multi-layered arena where characters face various challenges, each governed by its own set of incentives and rules.
 
@@ -98,7 +98,7 @@ At the core of *Tower of God* is the overarching goal of climbing the Tower, whi
 
 * **Desire for Power and Fulfillment**: Each character has their own motivations for climbing, ranging from personal ambition to the desire to reunite with loved ones. For example, Bam’s journey is driven by his desire to find Rachel, while other characters seek glory or revenge.
     
-    ![](https://storage.googleapis.com/papyrus_images/34633b38f5c5ffa4f9502e2e94f3ce3f.avif align="left")
+    ![](https://storage.googleapis.com/papyrus_images/34633b38f5c5ffa4f9502e2e94f3ce3f.avif)
     
 * **Challenges and Trials**: The Tower is divided into multiple floors, each presenting unique tests and challenges. Successfully overcoming these trials serves as an incentive for characters to prove their strength and skill.
     
@@ -112,7 +112,7 @@ Within the Tower, there are two main categories of climbers: regulars and ranker
 * **Rewards and Responsibilities**: Rankers often receive special privileges and responsibilities, which can incentivize them to assist or manipulate regulars in their ascent. The relationships between rankers and regulars can create complex social dynamics based on competition and cooperation.
     
 
-![](https://storage.googleapis.com/papyrus_images/2e20731f1a03c04ebfb82b25fdb12707.webp align="left")
+![](https://storage.googleapis.com/papyrus_images/2e20731f1a03c04ebfb82b25fdb12707.webp)
 
 ### **The Test and Competition Structure**
 
@@ -123,13 +123,13 @@ The various tests within the Tower are structured to foster competition among re
 * **Elimination and Advancement**: The competitive nature of the tests means that failure results in elimination from the Tower, which serves as a powerful motivator. The threat of elimination encourages characters to push their limits and take risks.
     
 
-![](https://storage.googleapis.com/papyrus_images/d67baa30dfeb7fc08fc6902a379adaa6.avif align="left")
+![](https://storage.googleapis.com/papyrus_images/d67baa30dfeb7fc08fc6902a379adaa6.avif)
 
 > In *Tower of God*, the incentive system is multifaceted, shaping the motivations and actions of characters as they navigate the challenges of the Tower. The interplay between personal desires, competition, and the hierarchical structure of regulars and rankers creates a rich narrative landscape. The series delves into the complexities of ambition, sacrifice, and the human experience, making the incentive system an integral part of its storytelling.
 
 # Solo Levelling
 
-![](https://storage.googleapis.com/papyrus_images/5f1adb41dd6c0f8fbb953384332a7b81.jpg align="left")
+![](https://storage.googleapis.com/papyrus_images/5f1adb41dd6c0f8fbb953384332a7b81.jpg)
 
 *One of my personal favorites.* In the anime ***Solo Leveling***, the ranking and incentive system is central to the story's premise and character development. The world is divided into Hunters—individuals who possess supernatural abilities and engage in battles against monsters from dungeons. The ranking system not only categorizes Hunters but also serves as a key incentive mechanism, motivating characters to grow stronger and face increasingly formidable challenges. Here’s a detailed exploration of the ranking and incentive system in *Solo Leveling*:
 
@@ -150,7 +150,7 @@ The ranking system in *Solo Leveling* categorizes Hunters based on their strengt
 * **S-Rank**: The elite class of Hunters, known for their exceptional strength and prowess.
     
 
-![](https://storage.googleapis.com/papyrus_images/5fc97165457cd818bd4bce7d0d2a3753.avif align="left")
+![](https://storage.googleapis.com/papyrus_images/5fc97165457cd818bd4bce7d0d2a3753.avif)
 
 This ranking system not only establishes a hierarchy among Hunters but also influences their status, opportunities, and how they are treated in society.
 
@@ -180,7 +180,7 @@ Dungeons are critical to the ranking system, as they serve as the primary battle
 
 The story follows Sung Jin-Woo, an E-Rank Hunter who starts at the bottom of the ranking system. After a near-fatal encounter in a double dungeon, he gains a unique ability that allows him to "level up" in a video game-like manner.
 
-![](https://storage.googleapis.com/papyrus_images/1ab7a083948427e701858462b6413a0f.jpg align="left")
+![](https://storage.googleapis.com/papyrus_images/1ab7a083948427e701858462b6413a0f.jpg)
 
 * **Unique Incentive Mechanism**: Jin-Woo’s ability to level up independently of the traditional ranking system sets him apart. This mechanic serves as a powerful incentive for his growth, as he can train and gain strength rapidly compared to his peers.
     
@@ -205,12 +205,12 @@ The ranking and incentive system in *Solo Leveling* also has its darker aspects,
 * **Mental Strain**: The constant pressure to rank up and improve can lead to mental strain and burnout, as Hunters push themselves to their limits.
     
 
-![](https://storage.googleapis.com/papyrus_images/9cfdcb65ce98c49be2f8c4477dbe6665.avif align="left")
+![](https://storage.googleapis.com/papyrus_images/9cfdcb65ce98c49be2f8c4477dbe6665.avif)
 
 > The ranking and incentive system in *Solo Leveling* serves as a vital framework for character motivations, societal dynamics, and the overarching plot. By establishing clear tiers of strength and associated rewards, the system encourages characters to grow and adapt, creating a compelling narrative of struggle and triumph. The series effectively explores themes of ambition, competition, and the costs associated with the pursuit of power, making the ranking system an integral aspect of its storytelling.
 
 Similar scoring systems are used in multiple real life scenarios as is in anime. The limits of a limitless system is the most crucial point for the existence of any perpetual system. If we know what's supposed to be the peak and what's the rock bottom, we have our range to work with. But often, in society and life, the strongest keeps changing and so does our knowledge of the weakest.
 
-![](https://storage.googleapis.com/papyrus_images/b0e07abd6772555fc5b6d5062ddc4b85.jpg align="left")
+![](https://storage.googleapis.com/papyrus_images/b0e07abd6772555fc5b6d5062ddc4b85.jpg)
 
 ...to be continued.

@@ -4,7 +4,7 @@ title: Reentrancy Attack
 excerpt: This can lead to various issues such as fund loss, unauthorized access, or even complete contract failure.
 date: 2024-07-22
 updatedDate: 2024-07-22
-featuredImage: https://cdn.hashnode.com/res/hashnode/image/upload/v1721683621376/76e1bbbc-b48e-4a3a-b467-15df1db488f9.webp
+featuredImage: /blog/images/posts/76e1bbbc-b48e-4a3a-b467-15df1db488f9.webp
 tags:
   - post
   - security
@@ -18,7 +18,7 @@ tags:
 *When a contract A calls a function in contract B, contract B can call back into contract A while it is still running. If contract A has not finished executing and is still holding state, contract B can potentially manipulate that state to gain an unfair advantage.*  
 This can lead to various issues such as fund loss, unauthorized access, or even complete contract failure.
 
-![](https://media.geeksforgeeks.org/wp-content/uploads/20230130125653/Redesign-blockchain-1.png align="center")
+![](https://media.geeksforgeeks.org/wp-content/uploads/20230130125653/Redesign-blockchain-1.png)
 
 > The most famous reentrancy attack occurred in 2016, resulting in the loss of 3.6 million Ether and leading to the Ethereum hard fork, creating Ethereum (ETH) and Ethereum Classic (ETC) also known as, **The DAO Hack**.
 

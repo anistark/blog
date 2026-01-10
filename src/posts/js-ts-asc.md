@@ -4,7 +4,7 @@ title: Typed, Transpiled, Compiled
 excerpt: If you've ever coded for the web, chances are you've touched **JavaScript**. But as apps get more complex, you might run into its quirks.
 date: 2025-05-14
 updatedDate: 2025-05-14
-featuredImage: https://cdn.hashnode.com/res/hashnode/image/upload/v1747072597639/6a85697e-d0bd-4a2d-bd0e-9c2fc988f5db.png
+featuredImage: /blog/images/posts/6a85697e-d0bd-4a2d-bd0e-9c2fc988f5db.png
 tags:
   - post
   - javascript
@@ -19,7 +19,7 @@ If you've ever coded for the web, chances are you've touched **JavaScript**. But
 
 It all began in the wild early days of the internet, back in **1995**, when web pages were mostly just static documents. Plain text, maybe some images, and a lot of reloading. Netscape, one of the first web browsers, wanted to make the web more dynamic, so they asked a guy named **Brendan Eich** to come up with a scripting language for browsers.
 
-![](https://cdn.hashnode.com/res/hashnode/image/upload/v1747073243964/cccb751a-e5c6-4d96-adb5-b1d041e3c8c6.jpeg align="center")
+![](/blog/images/posts/cccb751a-e5c6-4d96-adb5-b1d041e3c8c6.jpeg)
 
 Brendan, in what now sounds like a myth, wrote the first version of **JavaScript** in just **10 days**. It was a scrappy little language, originally called *Mocha*, then *LiveScript*, and finally *JavaScript*. Not because it had much to do with Java, but because marketing thought the name sounded cool and can probably piggy back the popularity of Java. Brendan later founded **Mozilla** and now **Brave** browser.
 
@@ -50,7 +50,7 @@ So now, in 2025, we live in a world where:
 * **AssemblyScript** is the performance geek’s sidekick: fast, focused, and built for the WebAssembly era.
     
 
-![](https://www.tutorialrepublic.com/lib/images/javascript-illustration.png align="center")
+![](https://www.tutorialrepublic.com/lib/images/javascript-illustration.png)
 
 **JavaScript (JS)** is a **dynamic**, **loosely-typed** scripting language. It’s the backbone of most front-end (and even some back-end) apps. It runs everywhere (browsers, Node.js, Bun, Deno, etc. It’s super easy to learn. Has a huge ecosystem. It’s flexible and forgiving. However, it lacks type safety, has more runtime bugs than any other project. Large projects can get messy and extremely hard to debug due to lack of structure.
 
@@ -117,7 +117,7 @@ JavaScript has the richest tooling because it's been around forever.
 * You want **maximum browser compatibility**
     
 
-![](https://www.orientsoftware.com/Themes/Content/Images/blog/2023-11-13/typescript-introduction.jpg align="center")
+![](https://www.orientsoftware.com/Themes/Content/Images/blog/2023-11-13/typescript-introduction.jpg)
 
 **TypeScript (TS)** is a **typed superset** of JavaScript. It adds **static typing**, interfaces, enums, and more. All compiled down to JavaScript.
 
@@ -189,7 +189,7 @@ TypeScript is super popular in modern frontend and backend development.
 * You love **autocomplete and IDE help**
     
 
-![](https://gitlab.com/uploads/-/system/project/avatar/37766828/assemblyscript-logo.png align="center")
+![](https://gitlab.com/uploads/-/system/project/avatar/37766828/assemblyscript-logo.png)
 
 **AssemblyScript (AS)** looks like TypeScript but compiles to **WebAssembly (WASM)**, which runs at near-native speed in the browser or other WASM environments. It’s **super fast** performance for CPU-heavy tasks. Easy to learn for JS/TS devs. Compiles to `.wasm` easily. However, it’s not a full TS/JS replacement (limited standard lib). No DOM access (must be called from JS) and has some tooling quirks.
 
@@ -334,7 +334,7 @@ So, there’s a time to type, transpile and compile afterall.
 
 As we look into the future of web development, one thing is becoming crystal clear: **WebAssembly isn’t just a cool experiment anymore, it’s a movement.** And it’s reshaping how we think about building applications for the browser, desktop, and beyond.
 
-![](https://uno-website-assets.s3.amazonaws.com/wp-content/uploads/2019/10/01091008/webassembly-pic.png align="center")
+![](https://uno-website-assets.s3.amazonaws.com/wp-content/uploads/2019/10/01091008/webassembly-pic.png)
 
 ### WebAssembly: The Portable Runtime of the Future
 
@@ -351,7 +351,7 @@ Originally designed to make **browser-based games and apps faster**, WebAssembly
 
 The dream? **Code that runs *anywhere*, securely and fast, no matter the host system.** And AssemblyScript is well-positioned to be the “JavaScript dev’s entry point” into that world.
 
-![](https://sapphireventures.com/wp-content/uploads/2022/10/Final5_WebAssemblyMarketMap.Oct_.2022.png align="center")
+![](https://sapphireventures.com/wp-content/uploads/2022/10/Final5_WebAssemblyMarketMap.Oct_.2022.png)
 
 WebAssembly is becoming:
 

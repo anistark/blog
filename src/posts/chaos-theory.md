@@ -4,7 +4,7 @@ title: Chaos Theory
 excerpt: Let’s talk about chaos. Not the "forgot your wallet, keys, and phone" kind of chaos, but the deep, philosophical, scientific kind.
 date: 2024-11-26
 updatedDate: 2024-11-26
-featuredImage: https://cdn.hashnode.com/res/hashnode/image/upload/v1732619207668/02e1bb78-b7ee-4fae-891b-96d8bc288279.webp
+featuredImage: /blog/images/posts/02e1bb78-b7ee-4fae-891b-96d8bc288279.webp
 tags:
   - post
   - digital
@@ -21,7 +21,7 @@ Living in Bengaluru itself sometimes feels like total chaos. You might start wit
 
 But here's the twist: chaos doesn’t mean total randomness. It’s like a toddler on a sugar high. Erratic, yes, but following its own strange logic. Chaos theory finds patterns in the madness, revealing that seemingly random events often have an underlying order. Some of us tend to understand it on a level unexplained by science. Call it intuition, gut feeling, experience or sixth sense. *Spidy sense if you’re spiderman.*
 
-![](https://cdn.hashnode.com/res/hashnode/image/upload/v1732619825383/e1bb2499-4ef1-4a3b-8d5b-1c37befa2a4a.png align="center")
+![](/blog/images/posts/e1bb2499-4ef1-4a3b-8d5b-1c37befa2a4a.png)
 
 You encounter chaos every day, whether you realize it or not. Ever tried cooking dinner while on a video call, only to accidentally salt your tea and drink your soup? Or how about commuting in Bengaluru traffic? It’s a living, breathing example of a chaotic system where every honk feels like it could alter the entire timeline. You never which way the auto driver will turn. Keep you guessing and on your feet.
 
@@ -37,7 +37,7 @@ Social media today is the new ground for chaos. A single tweet can spark revolut
 
 There has been attempts to define this chaos in the past. Some have even come up with mathematical proofs and equations. Read more about the work from the greats from **Henri Poincare (1889)** and **Cartwight and Littlewood (1945)** to modern theories from **Feigenbaum (1978)** who studied modern day calculator and focused on the bifurcation cascade of the logistic map. Particularly, the way that bifurcations piled on top of bifurcations in a forking structure that showed increasing detail at increasingly fine scales.
 
-![](https://cdn.hashnode.com/res/hashnode/image/upload/v1732620541086/d98c9670-db59-451c-a24d-d50511701f7a.webp align="center")
+![](/blog/images/posts/d98c9670-db59-451c-a24d-d50511701f7a.webp)
 
 Chaos theory, at its core, is about unpredictability in complex systems. It’s not inherently a bad thing, but when left unchecked, its implications can “consume” us. Specially in the modern context of interconnected digital lives.
 
@@ -65,7 +65,7 @@ Centralized systems are like that one Jenga piece holding the tower together—t
 
 As we dive into Web3 and AI-driven worlds, ethical guidelines need to be as robust as the code itself. Because the last thing we need is chaotic systems learning bad behavior from us. Clearer the guidelines, the more cases it handles, the more monitored it becomes. It’s like raising a kid I suppose.
 
-![](https://cdn.hashnode.com/res/hashnode/image/upload/v1732620983834/aff82376-4d59-43b0-99d7-2fb6e784b88d.jpeg align="center")
+![](/blog/images/posts/aff82376-4d59-43b0-99d7-2fb6e784b88d.jpeg)
 
 Chaos is here to stay, both in the real world and the digital one. And while we can’t predict or control everything, we can create systems that are resilient, transparent, and ethical. Think of it as learning to dance with the butterfly rather than swatting it away. So, whether it’s a misplaced decimal in a line of code or a viral meme that shifts global consciousness, chaos is both the problem and the solution. Let’s embrace it, adapt to it, and maybe, just maybe, turn it into a force for good in our shiny new digital frontier.
 

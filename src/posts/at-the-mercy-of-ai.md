@@ -4,7 +4,7 @@ title: At the mercy of AI
 excerpt: It’s the 2020s, and we’re all living in a world where the phrase *"just ask the AI"* has replaced *"let me Google that".* From product design to poetry, from diagnosing diseases to picking your next Netflix binge, AI is no longer a tool we occasionally refer to. It’s the invisible co-pilot running the plane, the ship, and sometimes the planet.
 date: 2025-08-18
 updatedDate: 2025-08-18
-featuredImage: https://cdn.hashnode.com/res/hashnode/image/upload/v1755359355217/fb4adc7c-b7c1-4207-8a58-76d8c062aaa5.png
+featuredImage: /blog/images/posts/fb4adc7c-b7c1-4207-8a58-76d8c062aaa5.png
 tags:
   - post
   - ai
@@ -26,7 +26,7 @@ Want a new marketing campaign? Tell the AI: “Make it sound like Steve Jobs mee
 
 It’s fast, powerful, and let’s admit it, super addictive. But there’s a quiet shift happening: the people who know *what* to ask and *how* to ask it hold the real power. This is the age of *prompt engineering*, and it’s shaping the products, culture, and even the politics of tomorrow. Once what was fun and games, has now turned into a harsh reality. I tried vibe coding too last year using some popular tools like lovable and v0. Incredible results! It generated entire websites with sections that I had not even mentioned or thought of up until that point. It was too good to be true at first glance. I tried a few more options and all were crazy smooth. I heard a gear shift in my head and went full blown into it. The results are great sometimes. Most times, it does small errors. At one point, I was only fixing bugs that my AI generated and onto next prompt. It would have actually been faster if I wrote it myself though. But I was already hooked. And then it hit me.
 
-![](https://cdn.hashnode.com/res/hashnode/image/upload/v1754989782609/9b149691-014c-4954-a6be-87df1ae06e4e.jpeg align="center")
+![](/blog/images/posts/9b149691-014c-4954-a6be-87df1ae06e4e.jpeg)
 
 This quote is true on so many levels as well and we're hooked. In a world hooked already on AI tools, all other tools have lost it's charm. We rarely open Google now, we go to chatgpt or perplexity. We don't open any normal IDE now, it has to be Claude powered. And why won't you? Everyone else is doing it. If you don't, you’re just falling behind. We're so blindly going at it, that we've stopped questioning things. Soon, we might not know what a cat actually looks like and rely on whatever our AI tells us. It's not all bad of course. A lot of task handling stuff have gotten really good too. Vibe coding has a good side as well, makes you faster and better documented. *Nobody like docs like AI does!*
 
@@ -46,7 +46,7 @@ And slowly, almost imperceptibly, the edges of human originality blur away. Ever
 
 The worst part? We stop noticing. We stop *wanting* to notice. Because the AI makes life frictionless and friction is exhausting. The mental muscles that make us question, imagine, and create quietly wither away. We’re comfortable. We’re entertained. We’re efficient. And we become empty.
 
-![](https://cdn.hashnode.com/res/hashnode/image/upload/v1755358135378/bb15defa-1fae-48e0-bb32-d3619e11d74b.jpeg align="center")
+![](/blog/images/posts/bb15defa-1fae-48e0-bb32-d3619e11d74b.jpeg)
 
 ### **The Renaissance 2.0**
 
@@ -64,7 +64,7 @@ And the thing that makes this future special isn’t the technology, it’s the 
 
 This is a world that feels alive, unpredictable, and brimming with wonder. A place where AI hasn’t replaced the human spark, but fanned it into a wildfire.
 
-![](https://cdn.hashnode.com/res/hashnode/image/upload/v1755358034513/7725c2c5-0a1b-46d3-9bf1-2dca4fb52f79.jpeg align="center")
+![](/blog/images/posts/7725c2c5-0a1b-46d3-9bf1-2dca4fb52f79.jpeg)
 
 The road to the better future isn’t just paved with fancy algorithms, it’s built through choices, habits, and the willingness to stay awake at the wheel while AI drives alongside us. The easiest trap is to assume, “Well, the machines are smarter now, so we can relax.” That’s the same logic sailors used when GPS became a thing, until ships started running aground because nobody remembered how to read a map.
 
@@ -78,7 +78,7 @@ And finally, **we must celebrate human originality**. Fiercely! The temptation w
 
 If we can hold onto these principles, we’re not just “using” AI, we’re shaping the world it will help create.
 
-![](https://www.worldhistory.org/img/c/p/1600x900/13067.jpg align="center")
+![](https://www.worldhistory.org/img/c/p/1600x900/13067.jpg)
 
 It’s easy to think what’s happening now is unprecedented, but humanity has been here before, staring at a new invention with equal parts awe and terror. Perhaps the closest parallel to AI’s disruption is the invention of the **printing press** in the mid-1400s.
 
@@ -96,13 +96,13 @@ And here’s the twist: the printing press didn’t guarantee a utopia. It gave 
 
 AI is our modern printing press, capable of multiplying not just words, but *thoughts*, *images*, *ideas*, and *decisions*. The question is not whether it will change us, it already has. The real question is whether we can steer that change toward a Renaissance, or whether we’ll repeat the mistakes of history at a speed that makes them irreversible.
 
-![](https://images-prod.dazeddigital.com/355/azure/dazed-prod/1240/9/1249323.jpg align="center")
+![](https://images-prod.dazeddigital.com/355/azure/dazed-prod/1240/9/1249323.jpg)
 
 We *are* at the mercy of AI, in the same way humanity has always been at the mercy of its greatest inventions. But mercy isn’t submission, it’s stewardship. If we remain passive, we drift toward the dumpster fire. If we stay engaged, curious, and critical, we could be steering toward the most creative and connected era in history.
 
 > The question isn’t whether AI will change our world. It already has.  
 > The real question is: **Will we still recognize ourselves in the world it creates?**
 
-![](https://cdn.hashnode.com/res/hashnode/image/upload/v1755359603306/f6588827-8004-499d-baa3-54ef5b2ab307.jpeg align="center")
+![](/blog/images/posts/f6588827-8004-499d-baa3-54ef5b2ab307.jpeg)
 
 *A silent revolution is upon us! Are you ready?*

@@ -4,7 +4,7 @@ title: Token Sale Models
 excerpt: "Launching a crypto project comes with one big question: **How do you sell your tokens?** Token sales are the lifeblood of most blockchain projects, fueling development, building communities, and driving adoption. But picking the right sales model isn't just about raising funds."
 date: 2025-01-03
 updatedDate: 2025-01-03
-featuredImage: https://cdn.hashnode.com/res/hashnode/image/upload/v1735389759697/8e77d541-ff2e-4d7f-a9bb-a64f1e3ef88d.png
+featuredImage: /blog/images/posts/8e77d541-ff2e-4d7f-a9bb-a64f1e3ef88d.png
 tags:
   - post
   - algorithms

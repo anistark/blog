@@ -4,7 +4,7 @@ title: Decentralising the Web
 excerpt: The web, in its earliest form, was envisioned as a decentralized platform—a space where anyone could share information without gatekeepers. Over time, however, the internet has become centralized.
 date: 2024-11-17
 updatedDate: 2024-11-17
-featuredImage: https://cdn.hashnode.com/res/hashnode/image/upload/v1731866508234/2af9bc24-2e77-41b9-b56c-2b0ebeef5260.webp
+featuredImage: /blog/images/posts/2af9bc24-2e77-41b9-b56c-2b0ebeef5260.webp
 tags:
   - post
   - web3

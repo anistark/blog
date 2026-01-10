@@ -4,7 +4,7 @@ title: Minimising Dependencies
 excerpt: In today’s world, technology is often seen as a tool for efficiency, but in reality, it has become a structure of control. Operating systems dictate how we interact with software, app stores determine what we can access, and centralised networks govern our digital presence.
 date: 2025-02-01
 updatedDate: 2025-02-01
-featuredImage: https://cdn.hashnode.com/res/hashnode/image/upload/v1738445355201/823f07bb-9128-452f-b063-b80bbb2b0803.png
+featuredImage: /blog/images/posts/823f07bb-9128-452f-b063-b80bbb2b0803.png
 tags:
   - post
   - web3
@@ -24,7 +24,7 @@ Beyond operating systems, cloud services and centralised application marketplace
 
 Remeber [Tor](https://www.torproject.org/)? “The Onion Router”, an open-source privacy network designed to enable anonymous web browsing. It employs a technique called onion routing, which encrypts user data and bounces it through a series of volunteer-operated servers, or nodes, making it difficult to trace the origin of the traffic. It’s quite popular amongst tech audience but not so much known in the newer generation and is slowly fading away yet still. Why? It’s an incredible network and project.
 
-![](https://cdn.hashnode.com/res/hashnode/image/upload/v1738445879265/a444845f-a92f-465e-9af2-ada7b82d5084.webp align="center")
+![](/blog/images/posts/a444845f-a92f-465e-9af2-ada7b82d5084.webp)
 
 Because, it several challenges for regular users, primarily related to access, security, performance, and user experience. Many websites block traffic from Tor exit nodes, leading to difficulties accessing certain sites and frequent CAPTCHA prompts. Additionally, users face security risks from potentially malicious exit nodes that could intercept unencrypted traffic. Performance can also be an issue, as Tor often results in slower internet speeds and connection problems due to its complex routing process. Furthermore, the setup of Tor can be complicated for less tech-savvy individuals, which may discourage them from using the network effectively. The association of Tor with illegal activities can also create negative perceptions, impacting users’ willingness to utilise it for legitimate purposes. Overall, while Tor offers enhanced privacy, these challenges can significantly affect the user experience.
 
@@ -69,7 +69,7 @@ In this world:
 * The operating system itself is **not an installable product** but an evolving, trustless environment that runs across the blockchain.
     
 
-![](https://cdn.hashnode.com/res/hashnode/image/upload/v1738446165831/e95fe58b-83ec-4cb6-9b90-0632fc15ce69.jpeg align="center")
+![](/blog/images/posts/e95fe58b-83ec-4cb6-9b90-0632fc15ce69.jpeg)
 
 ### **The Future is Protocol-Based, Not Platform-Based**
 

@@ -4,7 +4,7 @@ title: Building a Cross-Chain Bridge to Cosmos
 excerpt: "In [**Part 1**](https://blog.anirudha.dev/building-a-cross-chain-bridge), we built a **LayerZero-powered bridge** for moving NFTs between **two EVM chains**. But what if we want to **bridge an NFT from Ethereum to Cosmos** (e.g., [Osmosis](https://osmosis.zone/), [Juno](https://junonetwork.io/), or [Stargaze](https://www.stargaze.zone/))?"
 date: 2025-02-13
 updatedDate: 2025-02-13
-featuredImage: https://cdn.hashnode.com/res/hashnode/image/upload/v1739252480639/f2a8b867-b63b-471f-a173-e294fd9adb49.png
+featuredImage: /blog/images/posts/f2a8b867-b63b-471f-a173-e294fd9adb49.png
 tags:
   - post
   - abstraction
@@ -214,7 +214,7 @@ A bigger problem in cosmos ecosystem is that each project uses their custom deve
 * Support multiple **Cosmos chains** by using **ICS-721 (NFT standard for Cosmos IBC)**.
     
 
-![](https://cdn.hashnode.com/res/hashnode/image/upload/v1739251200570/26f8ca87-06af-47d8-8cbc-a6d68fd02a6f.webp align="center")
+![](/blog/images/posts/26f8ca87-06af-47d8-8cbc-a6d68fd02a6f.webp)
 
 There’s a few token bridges that operate today. Haven’t tested them all myself but they seem reliable.
 

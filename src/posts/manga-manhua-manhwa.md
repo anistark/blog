@@ -4,7 +4,7 @@ title: Manga, Manhua and Manhwa
 excerpt: "If you've ever stumbled into the world of Asian graphic novels, you've probably come across the big three: **Manga** (Japanese graphic novels), **Manhua** (Chinese graphic novels), and **Manhwa** (Korean graphic novels). At first glance, they might all look like stylish black-and-white panels filled with expressive characters."
 date: 2024-12-15
 updatedDate: 2024-12-15
-featuredImage: https://cdn.hashnode.com/res/hashnode/image/upload/v1733748579430/f0940aff-10be-4a72-868c-5aefa8545dde.png
+featuredImage: /blog/images/posts/f0940aff-10be-4a72-868c-5aefa8545dde.png
 tags:
   - post
   - comic
@@ -65,7 +65,7 @@ If you’re getting started, here’s my top recommendations:
 
 *There’s plenty more but these would be good starting points.*
 
-![](https://cdn.hashnode.com/res/hashnode/image/upload/v1733750473964/47415c57-5fc6-4367-af2b-0ca40884318f.webp align="center")
+![](/blog/images/posts/47415c57-5fc6-4367-af2b-0ca40884318f.webp)
 
 ### **Manhua: The Chinese Renaissance of Comics**
 
@@ -106,7 +106,7 @@ If you’re getting started, here’s my top recommendations:
 * **Ultimate of All Ages :** *Man from the ancient past, who awakens in a world thousands of years into the future*.
     
 
-![](https://cdn.hashnode.com/res/hashnode/image/upload/v1733750495739/bac9cc84-7a82-4b72-ab77-a3c54e2f3a19.avif align="center")
+![](/blog/images/posts/bac9cc84-7a82-4b72-ab77-a3c54e2f3a19.avif)
 
 > My friend Sreeram maintains [this list](https://kitsu.app/users/1460649/library?media=manga) that you can also follow for more recommendations.
 
@@ -153,7 +153,7 @@ If you’re getting started, here’s my top recommendations:
 * **Academy’s Underground Professor :** *Former Assassin becomes professor and becomes entangled in the academy’s hidden secrets, political conspiracies, and mysterious powers.*
     
 
-![](https://cdn.hashnode.com/res/hashnode/image/upload/v1733750515160/150eee81-2d70-4121-9b18-e6cf76fb2b18.png align="center")
+![](/blog/images/posts/150eee81-2d70-4121-9b18-e6cf76fb2b18.png)
 
 *I’m slightly partial to action packed series but there’s plenty of popular titles in various genres available as well.*
 
@@ -171,7 +171,7 @@ If you’re getting started, here’s my top recommendations:
 > 
 > Apart from these, there are some one-shots which comes up such as my fav donghua web series Link Click. So many art forms out there telling amazing stories. :)
 
-![](https://cdn.hashnode.com/res/hashnode/image/upload/v1733750540823/1b2b2afd-a563-4220-a712-a4bc8ecec366.avif align="center")
+![](/blog/images/posts/1b2b2afd-a563-4220-a712-a4bc8ecec366.avif)
 
 Don’t be hating in any of them. Love and enjoy each 😉 story and their unique experience.
 

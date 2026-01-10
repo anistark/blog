@@ -4,7 +4,7 @@ title: Intro To Blockchain
 excerpt: The first time I heard of blockchain was by being the distributed ledger that bitcoin uses. And I’m sure so have many of you, maybe still you believe the same.
 date: 2017-04-16
 updatedDate: 2017-04-16
-featuredImage: https://cdn.hashnode.com/res/hashnode/image/upload/v1622191333965/d2-ea-Es9.png
+featuredImage: /blog/images/posts/d2-ea-Es9.png
 tags:
   - post
   - introduction

@@ -4,7 +4,7 @@ title: Building a New World
 excerpt: When we think about building anything, the first thought is about the past builders, whichever industry, domain, or land you're coming from. From the Roman Colosseum, Great Wall of China, and Taj Mahal of India to building Wikipedia, Reddit, and Google of today, we look up to the past great builders and wonder what it'd take to even come close to what they've accomplished.
 date: 2022-06-05
 updatedDate: 2022-06-05
-featuredImage: https://cdn.hashnode.com/res/hashnode/image/upload/v1654349319435/TYZanZENe.png
+featuredImage: /blog/images/posts/TYZanZENe.png
 tags:
   - post
   - build

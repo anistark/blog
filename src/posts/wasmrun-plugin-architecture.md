@@ -4,7 +4,7 @@ title: Wasmrun Plugin Architecture
 excerpt: "In the [last article](https://blog.anirudha.dev/rust-plugin-system), I covered all different types of rust plugin architecture and approaches we could have done. Now, lets dive into the plugin architecture used in [wasmrun](https://github.com/anistark/wasmrun), an open-source WebAssembly runtime that supports multiple programming languages through a hybrid plugin system."
 date: 2025-09-05
 updatedDate: 2025-09-05
-featuredImage: https://cdn.hashnode.com/res/hashnode/image/upload/v1756732651687/6fee9dc3-7f7b-4afd-abec-65415a69b829.png
+featuredImage: /blog/images/posts/6fee9dc3-7f7b-4afd-abec-65415a69b829.png
 tags:
   - post
   - development
@@ -649,7 +649,7 @@ wasmrun plugin enable wasmrust # Optional
 
 This architecture has proven robust and extensible, allowing the wasmrun ecosystem to grow organically while maintaining excellent performance and reliability.
 
-![](https://cdn.hashnode.com/res/hashnode/image/upload/v1756733081359/69dd0e7d-110c-4b58-9fe7-3b91d1b12eed.png align="center")
+![](/blog/images/posts/69dd0e7d-110c-4b58-9fe7-3b91d1b12eed.png)
 
 > So, if you want to make your version of rust plugin and use it with wasmrun, you can. For instance, there can be various tools for compiling rust project through wasm target, and you’ve a special plugin which fits your use-case.
 

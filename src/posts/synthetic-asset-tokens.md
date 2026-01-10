@@ -4,7 +4,7 @@ title: Synthetic Asset Tokens
 excerpt: Imagine having access to the value of an asset, say, Tesla stock, without ever owning it. That's essentially what synthetic asset tokens (or just "synthetics") do.
 date: 2024-12-20
 updatedDate: 2024-12-20
-featuredImage: https://cdn.hashnode.com/res/hashnode/image/upload/v1734271234312/8f184652-af8c-4317-86ca-fbd5ef972c54.png
+featuredImage: /blog/images/posts/8f184652-af8c-4317-86ca-fbd5ef972c54.png
 tags:
   - post
   - cryptocurrency
@@ -23,7 +23,7 @@ Derivatives exist in web3 as well already. However, there’s still lot of scept
 
 Crypto derivatives have gained significant traction, especially in speculative trading. Futures and perpetual swaps on exchanges like Binance, Bybit, and dYdX dominate trading volumes. They offer high liquidity and enable speculation on crypto prices. Traders and institutions use derivatives to manage risk, especially in highly volatile markets. Many jurisdictions have banned or restricted derivatives trading due to concerns over high leverage and investor risk (e.g., Binance halting derivatives in several countries). The extreme price swings in crypto make derivatives riskier than their traditional counterparts, leading to liquidations for unprepared traders.
 
-![](https://academy.synfutures.com/content/images/size/w1000/2021/12/1-5-derivatives-1.png align="center")
+![](https://academy.synfutures.com/content/images/size/w1000/2021/12/1-5-derivatives-1.png)
 
 Traditional finance views synthetics as tools for hedging and speculation. Want to protect yourself from the wild price swings of oil without owning physical barrels? A synthetic derivative could be your best friend. Similarly, traders use them to speculate on price movements, essentially making money out of thin air, if they play their cards right.
 
@@ -173,7 +173,7 @@ Users lock ETH as collateral, and the contract mints synthetic tokens (`SAT`) fo
 
 > Please note that this smart contract is for understanding need only and not to be used in real production use-case. It needs to have further price oracles, liquidation and governance models included for that, not to mention security.
 
-![](https://story.madfish.solutions/wp-content/uploads/2021/09/Synthetics_benefits-1024x576.jpg align="center")
+![](https://story.madfish.solutions/wp-content/uploads/2021/09/Synthetics_benefits-1024x576.jpg)
 
 As exciting as synthetic asset tokens are, they come with significant security concerns. Since these tokens are entirely reliant on blockchain technology and smart contracts, their safety depends on the robustness of the underlying code and ecosystem.
 
@@ -229,7 +229,7 @@ In decentralized synthetic asset markets, reputation will be a key differentiato
 
 As the synthetic asset ecosystem grows, we will be introducing decentralized reputation scoring systems in NFTy, think "on-chain LinkedIn for fund managers". Reputation could become a tradable asset in itself, shaping the future of decentralized markets just as much as the assets being tokenized. We can cover more on building reputation later.
 
-![](https://academy-public.coinmarketcap.com/optimized-uploads/33d76d0d4aab45b9b02ebab17820373f.png align="center")
+![](https://academy-public.coinmarketcap.com/optimized-uploads/33d76d0d4aab45b9b02ebab17820373f.png)
 
 Synthetic asset tokens are still in their early days, and the use cases we’re seeing are just the tip of the iceberg. What could the future hold?
 

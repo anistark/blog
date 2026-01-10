@@ -4,7 +4,7 @@ title: Teaching AI to Grade Other AI
 excerpt: If you’ve been following the world of AI development, you might’ve heard the phrase **“LLM-as-Judge.”**.
 date: 2025-11-09
 updatedDate: 2025-11-09
-featuredImage: https://cdn.hashnode.com/res/hashnode/image/upload/v1761820313687/0e7631b1-76b7-476a-b9b4-bdda2a5e486b.png
+featuredImage: /blog/images/posts/0e7631b1-76b7-476a-b9b4-bdda2a5e486b.png
 tags:
   - post
   - ai
@@ -30,7 +30,7 @@ Turns out, yes, quite effectively.
 
 The idea is simple:
 
-![](https://cdn.hashnode.com/res/hashnode/image/upload/v1761819113112/c3e4e7fe-d2c5-466a-8e2b-f8e06345d1f6.png align="center")
+![](/blog/images/posts/c3e4e7fe-d2c5-466a-8e2b-f8e06345d1f6.png)
 
 It’s like using one AI to peer-review another. Evaluation is the backbone of AI progress. Without it, we wouldn’t know if newer models are actually *better*, or just different. Human evaluation doesn’t scale. Imagine evaluating thousands of answers for correctness, reasoning, and tone across 10+ benchmarks.  
 That’s days of work for humans, but minutes for an LLM.
@@ -75,7 +75,7 @@ Judge LLM → "Model B’s answer is clearer and more accurate for a child audie
 Score: Model B wins
 ```
 
-![](https://cdn.hashnode.com/res/hashnode/image/upload/v1761819314037/5d8b9564-feff-4363-a5c2-6442ed3e0833.png align="center")
+![](/blog/images/posts/5d8b9564-feff-4363-a5c2-6442ed3e0833.png)
 
 Before your LLM judge can reliably evaluate your system, it must first **align with your ground truth** (human expert judgments). A misaligned judge is like a compass pointing the wrong way—every improvement based on its guidance moves you further from your goal. Ragas provides a powerful, production-ready framework for implementing LLM-as-Judge evaluation.
 
@@ -410,7 +410,7 @@ LLM judges are **not perfect**. They inherit biases from their own training. For
 
 Hence, follow the best practices and keep iterating to improve your judge.
 
-![](https://cdn.prod.website-files.com/660ef16a9e0687d9cc27474a/66db3980c17b8cda52071c1d_00_llm_judge_tutorial-min.png align="center")
+![](https://cdn.prod.website-files.com/660ef16a9e0687d9cc27474a/66db3980c17b8cda52071c1d_00_llm_judge_tutorial-min.png)
 
 The next wave of evaluation focuses on **meta-judging**, evaluating the evaluators themselves.
 
@@ -448,7 +448,7 @@ As models grow in complexity, human evaluation alone can’t keep up. Using LLMs
 
 Here’s a simple diagram showing how **LLM-as-Judge** fits into the AI evaluation loop:
 
-![](https://cdn.hashnode.com/res/hashnode/image/upload/v1761819942023/e8d06811-fa5f-47f0-9806-4ddbb72cc138.png align="center")
+![](/blog/images/posts/e8d06811-fa5f-47f0-9806-4ddbb72cc138.png)
 
 1. A user or testbench sends an **input or question**.
     

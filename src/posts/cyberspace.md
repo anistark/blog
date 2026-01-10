@@ -4,7 +4,7 @@ title: CyberSpace
 excerpt: Another awoken.
 date: 2023-12-31
 updatedDate: 2023-12-31
-featuredImage: https://cdn.hashnode.com/res/hashnode/image/upload/v1703498597592/41b42b36-736c-4797-8067-d26f25a73373.jpeg
+featuredImage: /blog/images/posts/41b42b36-736c-4797-8067-d26f25a73373.jpeg
 tags:
   - post
   - build
@@ -29,7 +29,7 @@ Freedom doesn't just have a physical form, but also a mental form. It’s increa
 
 Ownership is of course important. But more than that, the creator within you is crying. Crying for not being able to build, do, go what, how and where you want to. Imagine a future version of the world, without any and all mundane tasks around. You just do the most needed work only. Everything else is done by something, someone, somewhere. You don't care the how, what, or where, till your tasks are been taken care of. So, let's imagine a future version of the web, that satisfies the above and more, and we call it The CyberSpace.
 
-![](https://cdn.hashnode.com/res/hashnode/image/upload/v1703502376461/020e4091-9071-4746-b9c5-48f866372c86.png align="center")
+![](/blog/images/posts/020e4091-9071-4746-b9c5-48f866372c86.png)
 
 CyberSpace is a trans-digital world built, governed, and maintained by the collective intelligence of its residents. It's a space where everything is based on the rules you set. Loosely based on optimistic theory, CyberSpace is what you make of it. It's not a new world or a virtual world like MetaVerse. CyberSpace is a space where your creations can take shape, form, and act according to how they are programmed.
 

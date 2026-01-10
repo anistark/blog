@@ -1,37 +1,33 @@
-<div>
-    <div class="md:flex justify-evenly mb-6">
-        <div class="flex justify-between mx-auto w-full">
-            {% if pagination.href.previous %}
-                <div class="mx-auto mb-4">
-                    <a class="previous-page" href="{{ pagination.href.previous | url }}">Next Page</a>
-                </div>
-            {% endif %}
-
-            {% if pagination.href.next %}
-                <div class="mx-auto mb-4">
-                    <a class="next-page md:mb-2" href="{{ pagination.href.next | url }}">Previous Page</a>
-                </div>
-            {% endif %}
+<div class="pagination-container">
+    {% if pagination.href.next %}
+        {% set loadedCount = (pagination.pageNumber + 1) * pagination.size %}
+        {% set totalCount = collections.postsWithoutDrafts.length %}
+        <div class="text-center mb-10">
+            <button
+                id="load-more-btn"
+                class="load-more-button px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white rounded-lg transition-colors duration-200"
+                data-next-page="{{ pagination.href.next | url }}"
+                data-current-page="{{ pagination.pageNumber + 1 }}"
+                data-total-pages="{{ pagination.pages.length }}"
+                data-page-size="{{ pagination.size }}"
+                data-loaded-count="{{ loadedCount }}"
+                data-total-count="{{ totalCount }}">
+                Load More Posts
+            </button>
+            <p id="article-counter" class="text-sm italic mt-3 text-gray-600">
+                Loaded {{ loadedCount }} of {{ totalCount }} articles
+            </p>
+            <div id="loading-indicator" class="hidden mt-4">
+                <div class="inline-block animate-spin rounded-full h-8 w-8 border-b-2 border-gray-900"></div>
+                <p class="text-sm mt-2">Loading more posts...</p>
+            </div>
         </div>
-
-        <div class="flex justify-between mx-auto w-full">
-            {% if page.url !== pagination.href.first %}
-                <div class="mx-auto mb-4">
-                    <a class="first-page md:mb-2" href="{{ pagination.href.first | url }}">First Page</a>
-                </div>
-
-            {% endif %}
-
-            {% if page.url !== pagination.href.last %}
-                <div class="mx-auto">
-                    <a class="last-page" href="{{ pagination.href.last | url }}">Last Page</a>
-                </div>
-            {% endif %}
+    {% else %}
+        {% set totalCount = collections.postsWithoutDrafts.length %}
+        <div class="text-center mb-10">
+            <p class="text-sm italic text-gray-600">
+                You've reached the end! ({{ totalCount }} articles total)
+            </p>
         </div>
-    </div>
-
-    <p class="text-center text-sm italic mb-10">(On page
-        {{ pagination.pageNumber + 1 }}
-        of
-        {{ pagination.pages.length }}.)</p>
+    {% endif %}
 </div>

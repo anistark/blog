@@ -4,7 +4,7 @@ title: Skills, Agents, and the Missing Middle
 excerpt: If you’ve been building with LLMs for a while, you’ve probably built an agent at some point.
 date: 2026-01-09
 updatedDate: 2026-01-09
-featuredImage: https://cdn.hashnode.com/res/hashnode/image/upload/v1767020247826/152bc5f6-6d2f-4d4d-8ac7-52666c09b559.png
+featuredImage: /blog/images/posts/152bc5f6-6d2f-4d4d-8ac7-52666c09b559.png
 tags:
   - post
   - ai
@@ -35,9 +35,9 @@ If a skill is unreliable, the agent will be unreliable. If a skill improves, the
 
 That suggests something important. If we want better agent systems, we need to take skills seriously as first-class artifacts. We need to be able to define them clearly, run them independently, measure how they behave, improve them over time, and reuse them across agents.
 
-That’s still surprisingly rare.
+That's still surprisingly rare.
 
-%[https://www.anthropic.com/engineering/equipping-agents-for-the-real-world-with-agent-skills] 
+[Read more: Equipping Agents for the Real World with Agent Skills](https://www.anthropic.com/engineering/equipping-agents-for-the-real-world-with-agent-skills)
 
 One of the more promising directions here is the work around **Agent Skills**, particularly the way Anthropic has framed them. Treating skills as explicit, discoverable units instead of implicit prompt logic is a big step forward. It gives us a shared vocabulary and a starting point for interoperability.
 
@@ -51,7 +51,7 @@ Without that boundary, iteration becomes guesswork.
 
 ## Introducing Sutras
 
-%[https://github.com/anistark/sutras] 
+[View Sutras on GitHub](https://github.com/anistark/sutras)
 
 This is the gap **Sutras** is trying to fill.
 

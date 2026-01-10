@@ -4,7 +4,7 @@ title: On-Chain Shared State
 excerpt: Communication is a key in any ecosystem. Now with more cross-chain communication getting sorted using bridges, it's high time to sort on-chain communications as well.
 date: 2024-04-26
 updatedDate: 2024-04-26
-featuredImage: https://cdn.hashnode.com/res/hashnode/image/upload/v1714048311457/1675e0ae-ec2d-4c2f-a0b3-2b9a5684d7cb.webp
+featuredImage: /blog/images/posts/1675e0ae-ec2d-4c2f-a0b3-2b9a5684d7cb.webp
 tags:
   - post
   - nft
@@ -127,17 +127,17 @@ contract RentContract {
 
 So, what's happening here is overloading (*not really since we're using a different name for the function. But from a standard perspective, let's assume it's the same*) which means we've defined a second function and mapping to do the exact same thing which is already been done in previous contract where it's been imported from. This obviously is a waste of memory on-chain but let's leave that concern for later. So, now, we've a second contract, `RentContract` which has temporary ownership function which we can use. However, what about the client apps which is already pointed to the old contract? The token ownership does not show any changes regardless to whoever else it's rented out via the `RentContract` .
 
-![](https://cdn.hashnode.com/res/hashnode/image/upload/v1714087291472/a3be6cb7-aa15-476d-8a38-ae3f0221cc0b.png align="center")
+![](/blog/images/posts/a3be6cb7-aa15-476d-8a38-ae3f0221cc0b.png)
 
 # Shared State
 
 Here's where the concept of Shared State comes in. Here's to proposing a shared state system which allows to update the state of original contract if the same state is being dealt with on an extended contract.
 
-![](https://cdn.hashnode.com/res/hashnode/image/upload/v1714087525142/bffb53f4-4995-4805-8594-7ba7ef188782.png align="center")
+![](/blog/images/posts/bffb53f4-4995-4805-8594-7ba7ef188782.png)
 
 So, once this new system is in place, we should be able to reflect the updated state back to our original state thereby retaining backwards compatibility as well as history.
 
-![](https://cdn.hashnode.com/res/hashnode/image/upload/v1714087607230/ed02d225-3be2-4736-8cf2-03d45f839c88.png align="center")
+![](/blog/images/posts/ed02d225-3be2-4736-8cf2-03d45f839c88.png)
 
 This is the next evolution in smart contract standards which will help with better backwards compatible DApps and protocols.
 

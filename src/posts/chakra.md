@@ -4,7 +4,7 @@ title: "Chakra: A Wasm Runtime"
 excerpt: The modern software landscape is shifting rapidly towards **portability**, **performance**, and **sandboxed execution**. At the heart of this transformation is **WebAssembly (Wasm)**.
 date: 2025-05-25
 updatedDate: 2025-05-25
-featuredImage: https://cdn.hashnode.com/res/hashnode/image/upload/v1747927904256/48b5678c-eca0-46b1-a2d5-27e5dc395e41.png
+featuredImage: /blog/images/posts/48b5678c-eca0-46b1-a2d5-27e5dc395e41.png
 tags:
   - post
   - go
@@ -177,7 +177,7 @@ And most importantly...
 
 > Chakra aims to become the **go-to name for Wasm runtime and development**. The project is community-driven and open to **any feature request or feedback**.
 
-![](https://raw.githubusercontent.com/anistark/chakra/main/assets/loader.svg align="center")
+![](https://raw.githubusercontent.com/anistark/chakra/main/assets/loader.svg)
 
 ## 🤝 Join the Movement
 

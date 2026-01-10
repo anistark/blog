@@ -4,7 +4,7 @@ title: To Go with Golang
 excerpt: At least that's how the website describes itself.
 date: 2021-01-26
 updatedDate: 2021-01-26
-featuredImage: https://cdn.hashnode.com/res/hashnode/image/upload/v1622190483000/VC5kdoK_s.jpeg
+featuredImage: /blog/images/posts/VC5kdoK_s.jpeg
 tags:
   - post
   - introduction

@@ -4,7 +4,7 @@ title: WebAssembly and Python Ecosystem
 excerpt: WebAssembly (WASM) is transforming how we run code in lightweight, secure, and cross-platform environments. Initially designed for browsers, WASM has now expanded into **serverless computing** and **sandboxed environments**.
 date: 2025-02-05
 updatedDate: 2025-02-05
-featuredImage: https://cdn.hashnode.com/res/hashnode/image/upload/v1738593028301/854fd482-c023-4089-9108-d1226cb12f40.png
+featuredImage: /blog/images/posts/854fd482-c023-4089-9108-d1226cb12f40.png
 tags:
   - post
   - python
@@ -33,7 +33,7 @@ WebAssembly (WASM) is transforming how we run code in lightweight, secure, and c
 
 Despite these advantages, running Python efficiently in WASM poses unique challenges. So, let’s explore a few nuances and the current ecosystem looks like. We will then explore how we can work towards improving the current situation taking learnings from rust and go ecosystems.
 
-![](https://hacks.mozilla.org/wp-content/uploads/2019/08/04-01-star-diagram.png align="center")
+![](https://hacks.mozilla.org/wp-content/uploads/2019/08/04-01-star-diagram.png)
 
 ## **Running Python in WebAssembly**
 
@@ -105,7 +105,7 @@ fn main() {
 }
 ```
 
-![](https://wasmlabs.dev/static/images/opt/wG1A9IWdyv-757.webp align="center")
+![](https://wasmlabs.dev/static/images/opt/wG1A9IWdyv-757.webp)
 
 Run using WASI runtime:
 
@@ -146,7 +146,7 @@ await run_wasm()
 
 ## **Performance Benchmark: WASM vs. Traditional Containers vs. Rust/Go WASM**
 
-![](https://kodekloud.com/blog/content/images/2023/03/Screenshot-2023-03-16-at-23.46.54.png align="center")
+![](https://kodekloud.com/blog/content/images/2023/03/Screenshot-2023-03-16-at-23.46.54.png)
 
 We benchmark **FastAPI deployed in:**
 
@@ -193,6 +193,6 @@ WebAssembly is an exciting technology for **serverless Python computing**, offer
 ✅ **Enhanced security**  
 ✅ **Improved portability**
 
-![](https://www.docker.com/wp-content/uploads/2024/04/2400x1260_wasm-vs-docker_diagram-01.png align="center")
+![](https://www.docker.com/wp-content/uploads/2024/04/2400x1260_wasm-vs-docker_diagram-01.png)
 
 However, for high-performance applications, **Rust and Go WASM implementations** significantly outperform Python-based approaches. Python WASM is improving rapidly, and as tools like **Pyodide, PyScript, and RustPython** advance, Python’s role in **serverless WASM environments** will continue to expand. 🚀

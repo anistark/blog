@@ -4,7 +4,7 @@ title: Designing The Perfect Incentivised System - Part 1
 excerpt: Incentive systems are frameworks designed to motivate individuals or groups to achieve specific goals by offering rewards, recognition, or penalties. These systems can be implemented in various contexts, from businesses to governments, and are essential for driving behavior that aligns with desired outcomes.
 date: 2024-10-22
 updatedDate: 2024-10-22
-featuredImage: https://cdn.hashnode.com/res/hashnode/image/upload/v1729607417962/e85307a5-25d6-4b85-a30c-ce938524e6f2.webp
+featuredImage: /blog/images/posts/e85307a5-25d6-4b85-a30c-ce938524e6f2.webp
 tags:
   - post
   - research
@@ -47,7 +47,7 @@ Today, incentive systems have evolved further, especially in the digital age. Co
 
 ## Nosedive
 
-![](https://storage.googleapis.com/papyrus_images/ddecc14cccf3977aaec25377b29a0c5a.jpg align="left")
+![](https://storage.googleapis.com/papyrus_images/ddecc14cccf3977aaec25377b29a0c5a.jpg)
 
 In the *Black Mirror* episode "Nosedive" (Season 3, Episode 1), the entire society operates on a highly sophisticated **incentive system** based on a personal rating system that impacts nearly every aspect of people's lives. This episode provides a dystopian commentary on how a culture driven by social ratings and approval can create incentives that influence behavior in troubling ways.
 
@@ -108,7 +108,7 @@ In the end, the incentive system in *Nosedive* proves unsustainable. Lacie’s o
 
 # Game Theory
 
-![](https://storage.googleapis.com/papyrus_images/d4e6e283facf03e0a937ce8da978cbec.png align="left")
+![](https://storage.googleapis.com/papyrus_images/d4e6e283facf03e0a937ce8da978cbec.png)
 
 Game theory is the study of strategic interactions between individuals or groups where the outcome for each participant depends not only on their own actions but also on the actions of others. Developed in the mid-20th century by mathematician John von Neumann and economist Oskar Morgenstern, game theory has since become a crucial tool in economics, politics, psychology, and even biology.
 
@@ -154,4 +154,4 @@ Designers can use game-theoretic principles to create incentives that align shor
 
 ...to be continued.
 
-![](https://storage.googleapis.com/papyrus_images/52a5874988206403bfe3dd25a8e184b9.jpg align="left")
+![](https://storage.googleapis.com/papyrus_images/52a5874988206403bfe3dd25a8e184b9.jpg)

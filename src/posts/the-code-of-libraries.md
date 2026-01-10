@@ -4,7 +4,7 @@ title: The Code of Libraries
 excerpt: How many times have you found yourself in the middle of your project, had to stop and switch to a different library, all because it didn't support a simple feature. How many of those times you wondered if you knew which library to use to get going.
 date: 2020-08-04
 updatedDate: 2020-08-04
-featuredImage: https://cdn.hashnode.com/res/hashnode/image/upload/v1622191632091/tgk2nf_Y6.jpeg
+featuredImage: /blog/images/posts/tgk2nf_Y6.jpeg
 tags:
   - post
   - guide

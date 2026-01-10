@@ -4,7 +4,7 @@ title: Unit Tests for Intelligence
 excerpt: A few months ago, as I was exploring machine learning while working on a project, one of my models kept behaving in a weird way. I had built a classifier to detect cats in images.
 date: 2025-10-26
 updatedDate: 2025-10-26
-featuredImage: https://cdn.hashnode.com/res/hashnode/image/upload/v1761219462850/28f76d96-e3cc-41ed-af26-1244003d2caf.png
+featuredImage: /blog/images/posts/28f76d96-e3cc-41ed-af26-1244003d2caf.png
 tags:
   - post
   - ai
@@ -55,7 +55,7 @@ They’re not just about performance. They’re about *understanding intelligenc
 
 Let’s picture an eval as a mini experiment:
 
-![](https://cdn.hashnode.com/res/hashnode/image/upload/v1761218812323/009f4b9f-3997-4405-b55b-7267dc5e73d3.png align="center")
+![](/blog/images/posts/009f4b9f-3997-4405-b55b-7267dc5e73d3.png)
 
 * **Input:** what you feed the model (prompt, image, etc.)
     
@@ -192,6 +192,6 @@ In other words, evals are **unit tests for intelligence**.
 
 And if the future of AI is about aligning machines with human values, then evals are how we write those values, in code.
 
-[![](https://hamel.dev/blog/posts/evals/images/diagram-cover.png align="center")](https://hamel.dev/blog/posts/evals/)
+[![](https://hamel.dev/blog/posts/evals/images/diagram-cover.png)](https://hamel.dev/blog/posts/evals/)
 
 Let me know how you’re exploring evals and how you see them as. 👋

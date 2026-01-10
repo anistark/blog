@@ -1,4 +1,4 @@
-<div>
+<div id="posts-container">
     {% for post in posts %}
         {% if not post.data.draft %}
             <div class="post-item mb-8 {% if post.data.featuredImage %}has-background{% endif %}" {% if post.data.featuredImage %}style="background-image: url('{{ post.data.featuredImage }}');"{% endif %}>

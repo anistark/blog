@@ -4,7 +4,7 @@ title: Building a Rust Plugin System
 excerpt: Plugin systems are one of those architectural decisions that seem straightforward until you start implementing them. In the Rust ecosystem, plugin architectures present unique challenges compared to interpreted languages where you can dynamically load and execute code relatively easily.
 date: 2025-08-31
 updatedDate: 2025-08-31
-featuredImage: https://cdn.hashnode.com/res/hashnode/image/upload/v1756380955059/48bfbcee-4024-44d6-8149-afb60d0db3a9.png
+featuredImage: /blog/images/posts/48bfbcee-4024-44d6-8149-afb60d0db3a9.png
 tags:
   - post
   - plugins
@@ -329,7 +329,7 @@ Currently, most plugin systems have isolated plugins. But what if plugins could 
 
 **Question**: How complex should plugin systems be? Is composition worth the added complexity?
 
-![](https://nullderef.com/img/CoM36VEtZL-600.jpeg align="center")
+![](https://nullderef.com/img/CoM36VEtZL-600.jpeg)
 
 > Here’s also a nice [series](https://nullderef.com/series/rust-plugins/) you can follow.
 

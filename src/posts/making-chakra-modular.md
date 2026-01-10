@@ -4,7 +4,7 @@ title: Making Chakra Modular
 excerpt: "For the past few weeks since the first public release of [Chakra](https://github.com/anistark/chakra), I've been really thinking about what the next right step for it is. I felt like driving myself into an overthinking well of right and wrong directions, I eneded up doing random stuff and going back and forth on updates."
 date: 2025-06-22
 updatedDate: 2025-06-22
-featuredImage: https://cdn.hashnode.com/res/hashnode/image/upload/v1749738001013/4efa716c-5bf6-48e2-b380-0d83f403bd2c.png
+featuredImage: /blog/images/posts/4efa716c-5bf6-48e2-b380-0d83f403bd2c.png
 tags:
   - post
   - webassembly

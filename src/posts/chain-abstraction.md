@@ -4,7 +4,7 @@ title: Chain Abstraction
 excerpt: Say you want to make an online payment, and instead of just clicking a button, you have to figure out whether the store accepts Visa, Mastercard, or PayPal. Now multiply that headache by 100x, and you’ve got the current state of blockchains.
 date: 2024-12-09
 updatedDate: 2024-12-09
-featuredImage: https://cdn.hashnode.com/res/hashnode/image/upload/v1733742095962/6a6919a9-5d97-4bb3-af29-7035b6d90431.jpeg
+featuredImage: /blog/images/posts/6a6919a9-5d97-4bb3-af29-7035b6d90431.jpeg
 tags:
   - post
   - user-experience
@@ -67,7 +67,7 @@ Several blockchain superheroes are already working on this:
 
 **Superfluid**: Abstracts token standards for seamless asset streaming across different chains.
 
-![](https://cdn.prod.website-files.com/63996d8b3c061af402fa0609/65df4d995d272413da344412_Chain%20Abstraction.png align="center")
+![](https://cdn.prod.website-files.com/63996d8b3c061af402fa0609/65df4d995d272413da344412_Chain%20Abstraction.png)
 
 ## **How Does It Work?**
 

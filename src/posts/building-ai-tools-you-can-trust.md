@@ -4,7 +4,7 @@ title: Building AI Tools You Can Trust
 excerpt: You want to build an AI application. Something useful.
 date: 2025-11-16
 updatedDate: 2025-11-16
-featuredImage: https://cdn.hashnode.com/res/hashnode/image/upload/v1763226740052/d7855b08-4daf-4278-abe2-3bacd8dd8b54.png
+featuredImage: /blog/images/posts/d7855b08-4daf-4278-abe2-3bacd8dd8b54.png
 tags:
   - post
   - ai
@@ -50,7 +50,7 @@ If you want to follow along, here the [repo](https://github.com/anistark/ai-summ
 
 **No installation. No setup. Just click and start:**
 
-[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg align="left")](https://colab.research.google.com/github/anistark/ai-summarisation/blob/main/summarisation_demo.ipynb)
+[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/anistark/ai-summarisation/blob/main/summarisation_demo.ipynb)
 
 **Quick start:**
 
@@ -334,7 +334,7 @@ Here's what just happened:
 
 This is the difference between guessing and knowing.
 
-![](https://cdn.hashnode.com/res/hashnode/image/upload/v1763180014055/bb430dbe-f047-43f7-aa5e-9eeb8e5e9502.png align="center")
+![](/blog/images/posts/bb430dbe-f047-43f7-aa5e-9eeb8e5e9502.png)
 
 Here, we got a good score on faithfulness. However summary score says it’s got lots of room for improvement.
 
@@ -461,7 +461,7 @@ This is **empirical optimization**. You're not guessing which approach is best, 
 
 Here's what we've built so far:
 
-![](https://cdn.hashnode.com/res/hashnode/image/upload/v1763181287082/27330fa0-b0eb-4c70-ab9e-9a11d55e1bfc.png align="center")
+![](/blog/images/posts/27330fa0-b0eb-4c70-ab9e-9a11d55e1bfc.png)
 
 This workflow is powerful because:
 

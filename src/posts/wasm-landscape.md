@@ -4,7 +4,7 @@ title: The WebAssembly Odyssey
 excerpt: In 2017, WebAssembly (WASM) arrived as a new low-level bytecode format. Safe, compact, and fast.
 date: 2025-04-23
 updatedDate: 2025-04-23
-featuredImage: https://cdn.hashnode.com/res/hashnode/image/upload/v1745414209316/9cb3f82d-a70e-434a-9c8b-e5dec84b8da4.png
+featuredImage: /blog/images/posts/9cb3f82d-a70e-434a-9c8b-e5dec84b8da4.png
 tags:
   - post
   - webassembly
@@ -180,9 +180,9 @@ WebAssembly is at the cusp of becoming the **universal bytecode for the web and 
 
 Whether you're building browser tools, serverless apps, or decentralized networks, WASM is likely to be in your stack sooner than you think.
 
-![](https://www.cncf.io/wp-content/uploads/2023/09/image-21-6.jpg align="center")
+![](https://www.cncf.io/wp-content/uploads/2023/09/image-21-6.jpg)
 
-![](https://cdn.ttgtmedia.com/rms/onlineimages/webassembly_landscape-f.png align="center")
+![](https://cdn.ttgtmedia.com/rms/onlineimages/webassembly_landscape-f.png)
 
 ## What's Next?
 
