@@ -1,8 +1,8 @@
 {
   "name": "AniLog",
   "description": "Kumar Anirudha's personal blog",
-  "url": "https://anistark.github.io",
-  "baseUrl": "/blog/",
+  "url": "https://blog.anirudha.dev",
+  "baseUrl": "/",
   "author": {
     "handle": "@kranirudha",
     "name": "Kumar Anirudha"
@@ -14,11 +14,11 @@
   "feed": {
     "filename": "feed.xml",
     "path": "/feed/feed.xml",
-    "id": "https://anistark.github.io/blog/"
+    "id": "https://blog.anirudha.dev/"
   },
   "jsonfeed": {
     "filename": "feed.json",
     "path": "/feed/feed.json",
-    "url": "https://anistark.github.io/blog/feed/feed.json"
+    "url": "https://blog.anirudha.dev/feed/feed.json"
   }
 }
