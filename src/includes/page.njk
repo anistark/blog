@@ -42,6 +42,17 @@
       })();
     </script>
 
+    {% if site.googleAnalyticsId %}
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id={{ site.googleAnalyticsId }}"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', '{{ site.googleAnalyticsId }}');
+    </script>
+    {% endif %}
+
     {% block head %}{% endblock %}
   </head>
   <body class="flex flex-col min-h-screen">

@@ -20,5 +20,6 @@
     "filename": "feed.json",
     "path": "/feed/feed.json",
     "url": "https://blog.anirudha.dev/feed/feed.json"
-  }
+  },
+  "googleAnalyticsId": "G-YGZHVY9TD7"
 }
