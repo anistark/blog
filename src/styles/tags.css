@@ -1,27 +1,76 @@
 @keyframes tag-hover {
   100% {
-    border: 1px solid rgba(255, 255, 255, 0.5);
-    background-color: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.6);
+    background-color: rgba(255, 255, 255, 0.15);
     color: #fff;
-    transform: scale(1.05);
+    transform: translateY(-2px) scale(1.05);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3), 0 0 0 1px rgba(255, 255, 255, 0.1) inset;
   }
 }
 
 @keyframes tag-hover-light {
   100% {
-    border: 1px solid rgba(0, 0, 0, 0.3);
-    background-color: rgba(0, 0, 0, 0.05);
-    transform: scale(1.05);
+    border: 1px solid rgba(93, 64, 55, 0.5);
+    background-color: rgba(255, 255, 255, 0.4);
+    transform: translateY(-2px) scale(1.05);
+    box-shadow: 0 8px 24px rgba(93, 64, 55, 0.2), 0 0 0 1px rgba(255, 255, 255, 0.6) inset;
   }
 }
 
 .tag {
-  @apply inline-block px-4 py-2 mr-2 mb-2 text-xs font-bold rounded lowercase text-white;
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
-  transition: all 0.3s ease;
+  @apply inline-block px-4 py-2 mr-2 mb-2 text-xs font-bold rounded-full lowercase text-white;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25), 0 0 0 1px rgba(255, 255, 255, 0.05) inset;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  overflow: hidden;
+}
+
+.tag::before {
+  content: '#';
+  margin-right: 2px;
+  position: relative;
+  z-index: 2;
+}
+
+.tag::after {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0) 0%,
+    rgba(255, 255, 255, 0.1) 45%,
+    rgba(255, 255, 255, 0.3) 50%,
+    rgba(255, 255, 255, 0.1) 55%,
+    rgba(255, 255, 255, 0) 100%
+  );
+  transform: rotate(45deg);
+  animation: subtle-shine 8s ease-in-out infinite;
+  pointer-events: none;
+  z-index: 1;
+}
+
+@keyframes subtle-shine {
+  0%, 100% {
+    transform: translateX(-100%) translateY(-100%) rotate(45deg);
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+  }
+  20%, 80% {
+    transform: translateX(100%) translateY(100%) rotate(45deg);
+    opacity: 0.7;
+  }
+  90% {
+    opacity: 1;
+  }
 }
 
 .tag:hover {
@@ -29,69 +78,113 @@
 }
 
 [data-theme='light'] .tag {
-  color: #111827;
-  border: 1px solid rgba(0, 0, 0, 0.2);
+  color: #1b0f0a;
+  border: 1px solid rgba(93, 64, 55, 0.3);
+  box-shadow: 0 4px 12px rgba(93, 64, 55, 0.15), 0 0 0 1px rgba(255, 255, 255, 0.4) inset;
+}
+
+[data-theme='light'] .tag::after {
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0) 0%,
+    rgba(255, 255, 255, 0.3) 45%,
+    rgba(255, 255, 255, 0.6) 50%,
+    rgba(255, 255, 255, 0.3) 55%,
+    rgba(255, 255, 255, 0) 100%
+  );
 }
 
 [data-theme='light'] .tag:hover {
   animation: tag-hover-light 500ms both;
 }
 
-.tag:before {
-  content: '#';
-}
 
+/* Modern glassmorphic tag colors */
 .tag.web3 {
-  background: rgba(139, 92, 246, 0.6);
+  background: linear-gradient(135deg, rgba(124, 58, 237, 0.6), rgba(139, 92, 246, 0.5));
+  border-color: rgba(139, 92, 246, 0.4);
 }
 
 .tag.wasm {
-  background: rgba(59, 130, 246, 0.6);
+  background: linear-gradient(135deg, rgba(37, 99, 235, 0.6), rgba(59, 130, 246, 0.5));
+  border-color: rgba(59, 130, 246, 0.4);
 }
 
 .tag.ai {
-  background: rgba(16, 185, 129, 0.6);
+  background: linear-gradient(135deg, rgba(5, 150, 105, 0.6), rgba(16, 185, 129, 0.5));
+  border-color: rgba(16, 185, 129, 0.4);
 }
 
 .tag.thought {
-  background: rgba(255, 136, 0, 0.6);
+  background: linear-gradient(135deg, rgba(234, 88, 12, 0.6), rgba(251, 146, 60, 0.5));
+  border-color: rgba(251, 146, 60, 0.4);
 }
 
 .tag.cyberspace {
-  background: rgba(239, 68, 68, 0.6);
+  background: linear-gradient(135deg, rgba(220, 38, 38, 0.6), rgba(239, 68, 68, 0.5));
+  border-color: rgba(239, 68, 68, 0.4);
 }
 
 .tag.build {
-  background: rgba(211, 72, 236, 0.6);
+  background: linear-gradient(135deg, rgba(219, 39, 119, 0.6), rgba(236, 72, 153, 0.5));
+  border-color: rgba(236, 72, 153, 0.4);
 }
 
-/* Light mode tag colors - more vibrant */
+.tag.llm {
+  background: linear-gradient(135deg, rgba(99, 102, 241, 0.6), rgba(129, 140, 248, 0.5));
+  border-color: rgba(129, 140, 248, 0.4);
+}
+
+.tag.post {
+  background: linear-gradient(135deg, rgba(100, 116, 139, 0.6), rgba(148, 163, 184, 0.5));
+  border-color: rgba(148, 163, 184, 0.4);
+}
+
+/* Light mode tag colors - vibrant with coffee-toned backgrounds */
 [data-theme='light'] .tag.web3 {
-  background: rgba(139, 92, 246, 0.8);
+  background: linear-gradient(135deg, rgba(124, 58, 237, 0.85), rgba(139, 92, 246, 0.75));
+  border-color: rgba(124, 58, 237, 0.5);
   color: #ffffff;
 }
 
 [data-theme='light'] .tag.wasm {
-  background: rgba(59, 130, 246, 0.8);
+  background: linear-gradient(135deg, rgba(37, 99, 235, 0.85), rgba(59, 130, 246, 0.75));
+  border-color: rgba(37, 99, 235, 0.5);
   color: #ffffff;
 }
 
 [data-theme='light'] .tag.ai {
-  background: rgba(16, 185, 129, 0.8);
+  background: linear-gradient(135deg, rgba(5, 150, 105, 0.85), rgba(16, 185, 129, 0.75));
+  border-color: rgba(5, 150, 105, 0.5);
   color: #ffffff;
 }
 
 [data-theme='light'] .tag.thought {
-  background: rgba(119, 61, 0, 0.9);
+  background: linear-gradient(135deg, rgba(154, 52, 18, 0.9), rgba(194, 65, 12, 0.85));
+  border-color: rgba(154, 52, 18, 0.6);
   color: #ffffff;
 }
 
 [data-theme='light'] .tag.cyberspace {
-  background: rgba(239, 68, 68, 0.8);
+  background: linear-gradient(135deg, rgba(220, 38, 38, 0.85), rgba(239, 68, 68, 0.75));
+  border-color: rgba(220, 38, 38, 0.5);
   color: #ffffff;
 }
 
 [data-theme='light'] .tag.build {
-  background: rgba(236, 72, 153, 0.8);
+  background: linear-gradient(135deg, rgba(219, 39, 119, 0.85), rgba(236, 72, 153, 0.75));
+  border-color: rgba(219, 39, 119, 0.5);
+  color: #ffffff;
+}
+
+[data-theme='light'] .tag.llm {
+  background: linear-gradient(135deg, rgba(99, 102, 241, 0.85), rgba(129, 140, 248, 0.75));
+  border-color: rgba(99, 102, 241, 0.5);
+  color: #ffffff;
+}
+
+[data-theme='light'] .tag.post {
+  background: linear-gradient(135deg, rgba(100, 116, 139, 0.85), rgba(148, 163, 184, 0.75));
+  border-color: rgba(100, 116, 139, 0.5);
   color: #ffffff;
 }

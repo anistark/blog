@@ -6,7 +6,172 @@ permalink: /404.html
 {% extends 'page.njk' %}
 
 {% block body %}
-  <h2 class="mb-2">{{ title }}</h2>
-  <p class="mb-2">The page you've requested can't be found.</p>
-  <a href="{{ site.baseUrl }}">Go back to the homepage.</a>
+
+<style>
+  @keyframes glitch {
+    0%, 100% {
+      transform: translate(0);
+      text-shadow:
+        2px 2px 0 var(--accent-primary),
+        -2px -2px 0 var(--accent-secondary);
+    }
+    20% {
+      transform: translate(-3px, 2px);
+      text-shadow:
+        3px 0 0 var(--accent-primary),
+        -3px 0 0 var(--accent-secondary);
+    }
+    40% {
+      transform: translate(3px, -2px);
+      text-shadow:
+        0 3px 0 var(--accent-primary),
+        0 -3px 0 var(--accent-secondary);
+    }
+    60% {
+      transform: translate(-2px, -3px);
+      text-shadow:
+        -2px 2px 0 var(--accent-primary),
+        2px -2px 0 var(--accent-secondary);
+    }
+    80% {
+      transform: translate(2px, 3px);
+      text-shadow:
+        2px -2px 0 var(--accent-primary),
+        -2px 2px 0 var(--accent-secondary);
+    }
+  }
+
+  @keyframes digit-pulse {
+    0%, 100% {
+      opacity: 0.6;
+      transform: scale(1);
+    }
+    50% {
+      opacity: 1;
+      transform: scale(1.05);
+    }
+  }
+
+  .glitch-container {
+    display: inline-block;
+    animation: glitch 3s ease-in-out infinite;
+  }
+
+  .glitch-text {
+    font-family: 'Courier New', monospace;
+    color: var(--text-heading);
+    line-height: 1.2;
+    display: block;
+  }
+
+  .digit-1 {
+    animation: digit-pulse 2s ease-in-out infinite;
+  }
+
+  .digit-2 {
+    animation: digit-pulse 2s ease-in-out infinite 0.3s;
+  }
+
+  .digit-3 {
+    animation: digit-pulse 2s ease-in-out infinite 0.6s;
+  }
+
+  .home-button {
+    display: inline-block;
+    padding: 1rem 2rem;
+    background: var(--bg-secondary);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    color: var(--text-heading);
+    font-weight: bold;
+    font-size: 1.125rem;
+    text-decoration: none;
+    transition: all 0.3s ease;
+  }
+
+  .home-button:hover {
+    background: var(--bg-glass);
+    border-color: var(--border-color-hover);
+    transform: translateY(-2px) scale(1.05);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
+  }
+
+  [data-theme='light'] .home-button:hover {
+    box-shadow: 0 4px 16px rgba(93, 64, 55, 0.2);
+  }
+
+  .github-button {
+    display: inline-block;
+    padding: 0.5rem 1rem;
+    background: var(--bg-secondary);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    color: var(--text-heading);
+    font-weight: 600;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    font-size: 0.875rem;
+  }
+
+  .github-button:hover {
+    background: var(--bg-glass);
+    border-color: var(--border-color-hover);
+    transform: translateY(-1px) scale(1.05);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+  }
+
+  [data-theme='light'] .github-button:hover {
+    box-shadow: 0 2px 8px rgba(93, 64, 55, 0.15);
+  }
+</style>
+
+<div class="text-center">
+
+  <!-- ASCII Art Section -->
+  <div class="mb-8 md:mb-12">
+    <pre class="glitch-container text-2xl md:text-4xl font-bold m-0" aria-label="404 Error"><code class="glitch-text"><span class="digit-1">██   ██ </span> <span class="digit-2"> ██████ </span> <span class="digit-3">██   ██</span>
+<span class="digit-1">██   ██ </span> <span class="digit-2">██    ██</span> <span class="digit-3">██   ██</span>
+<span class="digit-1">███████ </span> <span class="digit-2">██    ██</span> <span class="digit-3">███████</span>
+<span class="digit-1">     ██ </span> <span class="digit-2">██    ██</span> <span class="digit-3">     ██</span>
+<span class="digit-1">     ██ </span> <span class="digit-2"> ██████ </span> <span class="digit-3">     ██</span>
+</code></pre>
+  </div>
+
+  <!-- Message Section -->
+  <div class="mb-8 md:mb-12 max-w-2xl mx-auto px-4">
+    <h2 class="text-3xl md:text-4xl mb-4 font-bold" style="color: var(--text-heading);">Page Not Found</h2>
+    <p class="text-lg md:text-xl mb-2" style="color: var(--text-secondary);">
+      Looks like you've wandered into the void.
+    </p>
+    <p class="text-base md:text-lg" style="color: var(--text-secondary);">
+      The page you're looking for doesn't exist or has been moved.
+    </p>
+  </div>
+
+  <!-- Action Button -->
+  <div class="mb-8 md:mb-12">
+    <a href="{{ site.baseUrl }}" class="home-button">
+      ← Checkout all Posts
+    </a>
+  </div>
+
+  <!-- Issue Reporting Section -->
+  <div class="max-w-xl mx-auto px-4">
+    <p class="text-sm md:text-base" style="color: var(--text-secondary);">
+      If you think this is a broken link, please 
+      <a href="https://github.com/anistark/blog/issues"
+         target="_blank"
+         rel="noopener noreferrer"
+         class="github-button ml-2">
+        report it on GitHub
+      </a>.
+    </p>
+  </div>
+
+</div>
+
 {% endblock %}

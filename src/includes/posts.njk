@@ -3,21 +3,25 @@
         {% if not post.data.draft %}
             <div class="post-item mb-8 {% if post.data.featuredImage %}has-background{% endif %}" {% if post.data.featuredImage %}style="background-image: url('{{ post.data.featuredImage }}');"{% endif %}>
                 <div class="post-content">
-                    <h2>
+                    <h2 class="mb-4 md:mb-8">
                         <a class="block" href="{{ post.url | url }}">{{ post.data.title }}</a>
                     </h2>
 
-                    <p class="excerpt">{{ post.data.excerpt }}</p>
+                    <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+                        <div class="flex flex-wrap items-center">
+                            {% set tagCount = 0 %}
+                            {% for tag in post.data.tags %}
+                                {%- if tag !== "post" and tagCount < 5 -%}
+                                    <a class="tag {{ tag | replace('.', '') }}" href="{{ site.baseUrl }}tag/{{ tag }}">{{ tag }}</a>
+                                    {% set tagCount = tagCount + 1 %}
+                                {%- endif -%}
+                            {% endfor %}
+                        </div>
 
-                    {% for tag in post.data.tags %}
-                        {%- if tag !== "post" -%}
-                            <a class="tag {{ tag | replace('.', '') }}" href="{{ site.baseUrl }}tag/{{ tag }}">{{ tag }}</a>
-                        {%- endif -%}
-                    {% endfor %}
-
-                    <span class="block md:inline md:float-right md:pt-4 pt-2 created-date" datetime="{{ post.data.date }}">
-                        {{ post.data.date | dateDisplay }}
-                    </span>
+                        <span class="created-date text-sm md:text-base whitespace-nowrap" datetime="{{ post.data.date }}">
+                            {{ post.data.date | dateDisplay }}
+                        </span>
+                    </div>
                 </div>
             </div>
         {% endif %}

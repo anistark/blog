@@ -1,5 +1,5 @@
 ---
-permalink: "{% if path %}{{ path | slug }}{% else %}{{'/post/'}}{{ title | slug }}{% endif %}/index.html"
+permalink: "{% if path %}{{ path | slug }}{% else %}{{ page.fileSlug }}{% endif %}/index.html"
 ---
 
 {% extends 'page.njk' %}

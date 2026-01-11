@@ -24,6 +24,16 @@ module.exports = (config) => {
   config.setBrowserSyncConfig({
     files: ['dist/**/*'],
     open: true,
+    callbacks: {
+      ready: function(err, bs) {
+        bs.addMiddleware("*", (req, res) => {
+          const content_404 = require('fs').readFileSync('dist/404.html');
+          res.writeHead(404, { "Content-Type": "text/html; charset=UTF-8" });
+          res.write(content_404);
+          res.end();
+        });
+      }
+    }
   });
 
   config.setDataDeepMerge(true);
