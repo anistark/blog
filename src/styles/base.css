@@ -560,3 +560,34 @@ hr {
 .footer-icon svg {
   transition: transform 0.2s ease;
 }
+
+/* Draft badge */
+.draft-badge {
+  display: inline-block;
+  margin: 1rem 0;
+  padding: 0.75rem 1.5rem;
+  background: rgba(255, 193, 7, 0.15);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 2px solid rgba(255, 193, 7, 0.5);
+  border-radius: 12px;
+  box-shadow: 0 4px 16px rgba(255, 193, 7, 0.2);
+}
+
+.draft-badge span {
+  font-size: 0.875rem;
+  font-weight: bold;
+  color: #ffc107;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+[data-theme='light'] .draft-badge {
+  background: rgba(255, 152, 0, 0.1);
+  border-color: rgba(255, 152, 0, 0.4);
+  box-shadow: 0 2px 8px rgba(255, 152, 0, 0.15);
+}
+
+[data-theme='light'] .draft-badge span {
+  color: #f57c00;
+}

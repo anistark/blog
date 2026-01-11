@@ -14,6 +14,12 @@ permalink: "{% if path %}{{ path | slug }}{% else %}{{ page.fileSlug }}{% endif 
     <div>
         <h2>{{ title }}</h2>
 
+        {% if draft %}
+            <div class="draft-badge">
+                <span>⚠️ DRAFT</span>
+            </div>
+        {% endif %}
+
         {% if excerpt %}
             <p class="excerpt">{{ excerpt }}</p>
         {% endif %}
