@@ -1,4 +1,4 @@
-# AniLog
+# [AniLog](https://blog.anirudha.dev/)
 
 Kumar Anirudha's personal blog built with [Eleventy](https://www.11ty.dev).
 
@@ -8,15 +8,17 @@ Customized from the [11r](https://github.com/reeseschultz/11r) theme.
 
 ```sh
 pnpm install
-pnpm run dev    # Start dev server
+pnpm dev        # Start dev server
 pnpm run build  # Build for production
 ```
 
-## Deploy
+### Create new post
 
 ```sh
-./deploy.sh  # Deploy to GitHub Pages
+pnpm run new-post "New Post Title"
 ```
+
+Create a new post page in draft mode.
 
 ## License
 
