@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    
+    <meta itemprop="name" content="Unit Tests for Intelligence | AniLog">
+    <meta itemprop="description" content="A few months ago, as I was exploring machine learning while working on a project, one of my models kept behaving in a weird way. I had built a classifier to detect cats in images.">
+
+    
+    <meta name="twitter:title" content="Unit Tests for Intelligence | AniLog">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:description" content="A few months ago, as I was exploring machine learning while working on a project, one of my models kept behaving in a weird way. I had built a classifier to detect cats in images.">
+    <meta name="twitter:site" content="@kranirudha">
+    <meta name="twitter:creator" content="@kranirudha">
+    <meta name="twitter:image:src" content="https://blog.anirudha.dev/twitter.png">
+
+    
+    <meta name="og:title" content="Unit Tests for Intelligence | AniLog">
+    <meta name="og:description" content="A few months ago, as I was exploring machine learning while working on a project, one of my models kept behaving in a weird way. I had built a classifier to detect cats in images.">
+    <meta name="og:image" content="https://blog.anirudha.dev/og.png">
+    <meta name="og:url" content="https://blog.anirudha.dev/">
+    <meta name="og:site_name" content="AniLog">
+    <meta name="og:locale" content="en_GB">
+    <meta name="og:type" content="website">
+
+    <link rel="icon" type="image/png" href="/me.png" />
+
+    <title>Unit Tests for Intelligence | AniLog</title>
+
+    <link rel="stylesheet" href="/assets/main.bundle.css">
+
+    <script>
+      // Set theme before page renders to prevent flash
+      (function() {
+        const savedTheme = localStorage.getItem('theme') || 'dark';
+        if (savedTheme === 'light') {
+          document.documentElement.setAttribute('data-theme', 'light');
+        }
+      })();
+    </script>
+
+    
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-YGZHVY9TD7"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-YGZHVY9TD7');
+    </script>
+    
+
+    
+  </head>
+  <body class="flex flex-col min-h-screen">
+    <header class="sticky top-0 z-50 glass-header">
+  <nav class="container mx-auto max-w-5xl px-8 py-3 flex flex-wrap items-center justify-between">
+    <div class="flex items-center gap-3">
+      <a href="/" class="flex items-center gap-3">
+        <img src="/ani.png" alt="AniLog logo" class="w-10 h-10 object-cover">
+        <h1 class="text-2xl leading-none m-0">AniLog</h1>
+      </a>
+    </div>
+
+    <div class="flex items-center gap-6">
+      <button id="theme-toggle" class="theme-toggle" aria-label="Toggle theme">
+        <svg class="sun-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="12" r="5"></circle>
+          <line x1="12" y1="1" x2="12" y2="3"></line>
+          <line x1="12" y1="21" x2="12" y2="23"></line>
+          <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+          <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+          <line x1="1" y1="12" x2="3" y2="12"></line>
+          <line x1="21" y1="12" x2="23" y2="12"></line>
+          <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+          <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+        </svg>
+        <svg class="moon-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+        </svg>
+      </button>
+    </div>
+  </nav>
+</header>
+    <main class="container mx-auto max-w-5xl p-8 grow">
+      
+    <p></p>
+
+    
+        <div class="post-cover-image" style="background-image: url('/images/posts/28f76d96-e3cc-41ed-af26-1244003d2caf.png');"></div>
+    
+
+    <div>
+        <h2>Unit Tests for Intelligence</h2>
+
+        
+
+        
+            <p class="excerpt">A few months ago, as I was exploring machine learning while working on a project, one of my models kept behaving in a weird way. I had built a classifier to detect cats in images.</p>
+        
+
+        
+            <div class="mb-2">
+                <a class="tag ai" href="/tag/ai">ai</a><a class="tag llm" href="/tag/llm">llm</a><a class="tag ragas" href="/tag/ragas">ragas</a><a class="tag evals" href="/tag/evals">evals</a>
+            </div>
+        
+
+        
+            
+                <p class="text-sm italic">Created on
+                    <span datetime="Sun Oct 26 2025 00:00:00 GMT+0000 (Coordinated Universal Time)">October 26, 2025</span>.</p>
+            
+        
+
+        <div class="content post">
+            
+                <hr />
+
+                <h3>Table of Contents</h3>
+
+                <nav class="toc">
+                <ol>
+                    
+                    <li><a href="#what-are-%E2%80%9Cevals%E2%80%9D%3F">What Are “Evals”?</a>
+            		</li>
+
+                    <li><a href="#why-evals-matter">Why Evals Matter</a>
+            		</li>
+
+                    <li><a href="#visualizing-the-flow">Visualizing the Flow</a>
+            		</li>
+
+                    <li><a href="#a-tiny-example%3A-logic-eval">A Tiny Example: Logic Eval</a>
+            		</li>
+
+                    <li><a href="#behavioral-evals">Behavioral Evals</a>
+            		</li>
+
+                    <li><a href="#the-evals-mindset">The Evals Mindset</a>
+            		</li>
+
+                    <li><a href="#building-your-own-evals">Building Your Own Evals</a>
+            		</li>
+
+                    <li><a href="#frameworks-to-explore">Frameworks to Explore</a>
+            		</li>
+
+                    <li><a href="#the-big-picture">The Big Picture</a>
+            		</li>
+                </ol>
+            </nav>
+
+                <hr />
+            
+
+            <p>A few months ago, as I was exploring machine learning while working on a project, one of my models kept behaving in a weird way. I had built a classifier to detect cats in images. During training, accuracy was awesome, near 99%. But in production, it failed miserably. The reason? Some of my “cat” photos had the same watermark on the corner. The model wasn’t learning cats, it was learning the watermark.</p>
+<p>It hit me then: We had <strong>no proper way to test <em>what</em> the model had learned</strong>. We were measuring <em>accuracy</em>, but not <em>intelligence</em>.</p>
+<p>And that’s where the concept of <strong>AI Evals</strong> comes in, the <strong>unit tests for intelligence</strong>.</p>
+<h3 id="what-are-%E2%80%9Cevals%E2%80%9D%3F" tabindex="-1">What Are “Evals”?</h3>
+<p>Evals (short for <em>evaluations</em>) are structured tests designed to measure how well an AI model performs on specific kinds of reasoning, understanding, or behavior.</p>
+<p>Just like unit tests verify your functions do what you expect, <strong>evals verify your model thinks how you expect</strong>.</p>
+<table>
+<thead>
+<tr>
+<th>Analogy</th>
+<th>Traditional Software</th>
+<th>AI Systems</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Input</td>
+<td>Function arguments</td>
+<td>Prompt / Input text</td>
+</tr>
+<tr>
+<td>Logic</td>
+<td>Deterministic code</td>
+<td>Model reasoning (latent)</td>
+</tr>
+<tr>
+<td>Output</td>
+<td>Return value</td>
+<td>Generated response</td>
+</tr>
+<tr>
+<td>Test</td>
+<td>Assert conditions</td>
+<td>Evaluate metrics / compare ideal outputs</td>
+</tr>
+</tbody>
+</table>
+<p>You wouldn’t ship code without tests. So why ship a model without evals?</p>
+<h3 id="why-evals-matter" tabindex="-1">Why Evals Matter</h3>
+<p>AI models, especially large language models (LLMs), aren’t deterministic. You can’t just run them once and say “it works.” They need to be <strong>probed</strong>, <strong>benchmarked</strong>, and <strong>stress-tested</strong> like any intelligent system.</p>
+<p>Evals help you:</p>
+<ul>
+<li>
+<p>Detect regressions between model versions</p>
+</li>
+<li>
+<p>Understand reasoning strengths and blind spots</p>
+</li>
+<li>
+<p>Quantify subjective traits (helpfulness, creativity, bias, etc.)</p>
+</li>
+<li>
+<p>Track improvements as you fine-tune or change prompts</p>
+</li>
+</ul>
+<p>They’re not just about performance. They’re about <em>understanding intelligence behaviorally</em>.</p>
+<h3 id="visualizing-the-flow" tabindex="-1">Visualizing the Flow</h3>
+<p>Let’s picture an eval as a mini experiment:</p>
+<p><img src="/images/posts/009f4b9f-3997-4405-b55b-7267dc5e73d3.png" alt=""></p>
+<ul>
+<li>
+<p><strong>Input:</strong> what you feed the model (prompt, image, etc.)</p>
+</li>
+<li>
+<p><strong>Reasoning:</strong> the model’s internal “thought” (hidden weights, attention)</p>
+</li>
+<li>
+<p><strong>Output Check:</strong> compare the output to an expected or reference result</p>
+</li>
+</ul>
+<p>You can think of it like <code>assert output == expected</code>, but smarter. Because “expected” might not be a single string, it could be a semantic similarity, a rubric score, or a human judgment.</p>
+<h3 id="a-tiny-example%3A-logic-eval" tabindex="-1">A Tiny Example: Logic Eval</h3>
+<p>Let’s take a toy case.</p>
+<pre class="language-python"><code class="language-python"><span class="token keyword">from</span> openai <span class="token keyword">import</span> OpenAI<br>client <span class="token operator">=</span> OpenAI<span class="token punctuation">(</span><span class="token punctuation">)</span><br><br><span class="token keyword">def</span> <span class="token function">logic_eval</span><span class="token punctuation">(</span>question<span class="token punctuation">,</span> expected_answer<span class="token punctuation">)</span><span class="token punctuation">:</span><br>    response <span class="token operator">=</span> client<span class="token punctuation">.</span>responses<span class="token punctuation">.</span>create<span class="token punctuation">(</span><br>        model<span class="token operator">=</span><span class="token string">"gpt-4.1-mini"</span><span class="token punctuation">,</span><br>        <span class="token builtin">input</span><span class="token operator">=</span>question<br>    <span class="token punctuation">)</span><br>    answer <span class="token operator">=</span> response<span class="token punctuation">.</span>output_text<span class="token punctuation">.</span>strip<span class="token punctuation">(</span><span class="token punctuation">)</span><br>    passed <span class="token operator">=</span> <span class="token punctuation">(</span>answer<span class="token punctuation">.</span>lower<span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">==</span> expected_answer<span class="token punctuation">.</span>lower<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><br>    <span class="token keyword">return</span> <span class="token punctuation">{</span><span class="token string">"question"</span><span class="token punctuation">:</span> question<span class="token punctuation">,</span> <span class="token string">"model_answer"</span><span class="token punctuation">:</span> answer<span class="token punctuation">,</span> <span class="token string">"passed"</span><span class="token punctuation">:</span> passed<span class="token punctuation">}</span><br><br>tests <span class="token operator">=</span> <span class="token punctuation">[</span><br>    <span class="token punctuation">(</span><span class="token string">"If all cats are animals and some animals are not cats, are all animals cats?"</span><span class="token punctuation">,</span> <span class="token string">"No"</span><span class="token punctuation">)</span><span class="token punctuation">,</span><br>    <span class="token punctuation">(</span><span class="token string">"If A implies B and A is true, what about B?"</span><span class="token punctuation">,</span> <span class="token string">"True"</span><span class="token punctuation">)</span><span class="token punctuation">,</span><br><span class="token punctuation">]</span><br><br><span class="token keyword">for</span> t <span class="token keyword">in</span> tests<span class="token punctuation">:</span><br>    <span class="token keyword">print</span><span class="token punctuation">(</span>logic_eval<span class="token punctuation">(</span><span class="token operator">*</span>t<span class="token punctuation">)</span><span class="token punctuation">)</span></code></pre>
+<p>Output:</p>
+<pre class="language-bash"><code class="language-bash"><span class="token punctuation">{</span><span class="token string">'question'</span><span class="token builtin class-name">:</span> <span class="token string">'If all cats...'</span>, <span class="token string">'model_answer'</span><span class="token builtin class-name">:</span> <span class="token string">'No'</span>, <span class="token string">'passed'</span><span class="token builtin class-name">:</span> True<span class="token punctuation">}</span><br><span class="token punctuation">{</span><span class="token string">'question'</span><span class="token builtin class-name">:</span> <span class="token string">'If A implies B...'</span>, <span class="token string">'model_answer'</span><span class="token builtin class-name">:</span> <span class="token string">'True'</span>, <span class="token string">'passed'</span><span class="token builtin class-name">:</span> True<span class="token punctuation">}</span></code></pre>
+<p>That’s a <strong>simple eval</strong>, a “unit test” for reasoning logic. But unlike code tests, this checks <em>semantic understanding</em>, not strict syntax.</p>
+<p>Lets go a bit deeper…</p>
+<h3 id="behavioral-evals" tabindex="-1">Behavioral Evals</h3>
+<p>Modern evals go beyond right/wrong answers. They measure <strong>how</strong> and <strong>why</strong> a model responds.</p>
+<p>For example:</p>
+<ul>
+<li>
+<p><strong>Safety evals:</strong> “Does the model refuse unsafe instructions?”</p>
+</li>
+<li>
+<p><strong>Helpfulness evals:</strong> “Does it give contextually useful advice?”</p>
+</li>
+<li>
+<p><strong>Bias evals:</strong> “Does it favor certain groups or ideas?”</p>
+</li>
+<li>
+<p><strong>Creativity evals:</strong> “Can it reimagine a concept in a novel way?”</p>
+</li>
+</ul>
+<p>You might score them with:</p>
+<ul>
+<li>
+<p>Direct comparison to a reference answer (string match)</p>
+</li>
+<li>
+<p>LLM-as-a-judge scoring (“rate from 1–5”)</p>
+</li>
+<li>
+<p>Rule-based scripts</p>
+</li>
+<li>
+<p>Embedding similarity metrics</p>
+</li>
+</ul>
+<p>So instead of just “assert true”, you now have <em>graded</em> intelligence.</p>
+<h3 id="the-evals-mindset" tabindex="-1">The Evals Mindset</h3>
+<p>When you start thinking in evals, you stop asking <em>“<strong><strong>Is my model smart?</strong></strong>”</em> and start asking <em>“<strong><strong>How is my model smart and where does it fail?</strong></strong>”</em></p>
+<p>That shift is huge. It turns AI development from a black box into a scientific process.</p>
+<h3 id="building-your-own-evals" tabindex="-1">Building Your Own Evals</h3>
+<p>You can start simple:</p>
+<ol>
+<li>
+<p><strong>Define what to test.</strong> (reasoning, math, factual accuracy, tone)</p>
+</li>
+<li>
+<p><strong>Create a testset.</strong> (small JSON or CSV of prompt → expected)</p>
+</li>
+<li>
+<p><strong>Automate evaluation.</strong> (script or framework)</p>
+</li>
+<li>
+<p><strong>Track performance.</strong> (store metrics per model/version)</p>
+</li>
+</ol>
+<p>Example JSON testset:</p>
+<pre class="language-json"><code class="language-json"><span class="token punctuation">[</span><br>  <span class="token punctuation">{</span><br>    <span class="token property">"id"</span><span class="token operator">:</span> <span class="token string">"logic_001"</span><span class="token punctuation">,</span><br>    <span class="token property">"input"</span><span class="token operator">:</span> <span class="token string">"If X > Y and Y > Z, is X > Z?"</span><span class="token punctuation">,</span><br>    <span class="token property">"expected"</span><span class="token operator">:</span> <span class="token string">"Yes"</span><br>  <span class="token punctuation">}</span><span class="token punctuation">,</span><br>  <span class="token punctuation">{</span><br>    <span class="token property">"id"</span><span class="token operator">:</span> <span class="token string">"math_002"</span><span class="token punctuation">,</span><br>    <span class="token property">"input"</span><span class="token operator">:</span> <span class="token string">"What’s 12 * 8?"</span><span class="token punctuation">,</span><br>    <span class="token property">"expected"</span><span class="token operator">:</span> <span class="token string">"96"</span><br>  <span class="token punctuation">}</span><br><span class="token punctuation">]</span></code></pre>
+<p>Then, a script that runs through each item and logs results. You can even compare models side by side, just like <code>pytest</code> results.</p>
+<h3 id="frameworks-to-explore" tabindex="-1">Frameworks to Explore</h3>
+<p>Some great open-source tools already exist:</p>
+<ul>
+<li>
+<p><a href="https://ragas.io/">Ragas</a> - one of the leading evals today and wide range of llm options, integrations and metrics available. (Don’t just take my word for it cause I’m working on it. Really, give it a try!)</p>
+</li>
+<li>
+<p><strong>OpenAI Evals</strong> – the eval harness used to test GPT models</p>
+</li>
+<li>
+<p><strong>HELM</strong> (by Stanford CRFM) – holistic evaluation across domains</p>
+</li>
+<li>
+<p><strong>LangSmith / TruLens</strong> – track evals with visual dashboards</p>
+</li>
+</ul>
+<p>But you don’t need fancy infrastructure to start. A CSV and a few lines of Python are enough to make your first evals suite.</p>
+<h3 id="the-big-picture" tabindex="-1">The Big Picture</h3>
+<p>Evals are how we <strong>bring engineering discipline to AI</strong>. They don’t just tell us if a model is “good”. They tell us <em>how</em> it behaves, <em>where</em> it fails, and <em>why</em> it improves.</p>
+<p>In other words, evals are <strong>unit tests for intelligence</strong>.</p>
+<p>And if the future of AI is about aligning machines with human values, then evals are how we write those values, in code.</p>
+<p><a href="https://hamel.dev/blog/posts/evals/"><img src="https://hamel.dev/blog/posts/evals/images/diagram-cover.png" alt=""></a></p>
+<p>Let me know how you’re exploring evals and how you see them as. 👋</p>
+
+        </div>
+
+        <div class="article-end">
+            <span>✦</span>
+            <span>✦</span>
+            <span>✦</span>
+        </div>
+
+        <div class="post-navigation">
+            <div class="post-nav-item post-nav-previous">
+                    <a href="/wasmrun-os/">
+                        <span class="nav-arrow">←</span>
+                        <div class="nav-content">
+                            <p class="nav-label">Previous</p>
+                            <p class="nav-title">Run your code anywhere</p>
+                        </div>
+                    </a>
+                
+            </div>
+
+            <div class="post-nav-item post-nav-next">
+                    <a href="/llm-as-judge/">
+                        <div class="nav-content">
+                            <p class="nav-label">Next</p>
+                            <p class="nav-title">Teaching AI to Grade Other AI</p>
+                        </div>
+                        <span class="nav-arrow">→</span>
+                    </a>
+                
+            </div>
+        </div>
+    </div>
+
+    </main>
+    <footer class="sticky bottom-0 z-50 glass-footer py-4">
+  <div class="container mx-auto max-w-5xl px-8 flex items-center justify-between">
+    <div class="text-sm">
+      Blog by Ani
+    </div>
+
+    <div class="flex items-center">
+      <a href="https://anirudha.dev" target="_blank" rel="noopener noreferrer" class="footer-icon" aria-label="Home">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
+        </svg>
+      </a>
+    </div>
+
+    <div class="flex items-center gap-4">
+      <a href="https://github.com/anistark" target="_blank" rel="noopener noreferrer" class="footer-icon" aria-label="GitHub">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="currentColor" viewBox="0 0 24 24">
+          <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+        </svg>
+      </a>
+      <a href="https://x.com/kranirudha" target="_blank" rel="noopener noreferrer" class="footer-icon" aria-label="X (Twitter)">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="currentColor" viewBox="0 0 24 24">
+          <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+        </svg>
+      </a>
+      <a href="https://linkedin.com/in/kranirudha" target="_blank" rel="noopener noreferrer" class="footer-icon" aria-label="LinkedIn">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="currentColor" viewBox="0 0 24 24">
+          <path d="M4.98 3.5c0 1.381-1.11 2.5-2.48 2.5s-2.48-1.119-2.48-2.5c0-1.38 1.11-2.5 2.48-2.5s2.48 1.12 2.48 2.5zm.02 4.5h-5v16h5v-16zm7.982 0h-4.968v16h4.969v-8.399c0-4.67 6.029-5.052 6.029 0v8.399h4.988v-10.131c0-7.88-8.922-7.593-11.018-3.714v-2.155z"/>
+        </svg>
+      </a>
+    </div>
+  </div>
+</footer>
+    
+    <script src="https://unpkg.com/clipboard@2/dist/clipboard.min.js"></script>
+    <script src="/assets/main.bundle.js"></script>
+  </body>
+</html>

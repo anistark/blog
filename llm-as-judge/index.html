@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    
+    <meta itemprop="name" content="Teaching AI to Grade Other AI | AniLog">
+    <meta itemprop="description" content="If you’ve been following the world of AI development, you might’ve heard the phrase **“LLM-as-Judge.”**.">
+
+    
+    <meta name="twitter:title" content="Teaching AI to Grade Other AI | AniLog">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:description" content="If you’ve been following the world of AI development, you might’ve heard the phrase **“LLM-as-Judge.”**.">
+    <meta name="twitter:site" content="@kranirudha">
+    <meta name="twitter:creator" content="@kranirudha">
+    <meta name="twitter:image:src" content="https://blog.anirudha.dev/twitter.png">
+
+    
+    <meta name="og:title" content="Teaching AI to Grade Other AI | AniLog">
+    <meta name="og:description" content="If you’ve been following the world of AI development, you might’ve heard the phrase **“LLM-as-Judge.”**.">
+    <meta name="og:image" content="https://blog.anirudha.dev/og.png">
+    <meta name="og:url" content="https://blog.anirudha.dev/">
+    <meta name="og:site_name" content="AniLog">
+    <meta name="og:locale" content="en_GB">
+    <meta name="og:type" content="website">
+
+    <link rel="icon" type="image/png" href="/me.png" />
+
+    <title>Teaching AI to Grade Other AI | AniLog</title>
+
+    <link rel="stylesheet" href="/assets/main.bundle.css">
+
+    <script>
+      // Set theme before page renders to prevent flash
+      (function() {
+        const savedTheme = localStorage.getItem('theme') || 'dark';
+        if (savedTheme === 'light') {
+          document.documentElement.setAttribute('data-theme', 'light');
+        }
+      })();
+    </script>
+
+    
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-YGZHVY9TD7"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-YGZHVY9TD7');
+    </script>
+    
+
+    
+  </head>
+  <body class="flex flex-col min-h-screen">
+    <header class="sticky top-0 z-50 glass-header">
+  <nav class="container mx-auto max-w-5xl px-8 py-3 flex flex-wrap items-center justify-between">
+    <div class="flex items-center gap-3">
+      <a href="/" class="flex items-center gap-3">
+        <img src="/ani.png" alt="AniLog logo" class="w-10 h-10 object-cover">
+        <h1 class="text-2xl leading-none m-0">AniLog</h1>
+      </a>
+    </div>
+
+    <div class="flex items-center gap-6">
+      <button id="theme-toggle" class="theme-toggle" aria-label="Toggle theme">
+        <svg class="sun-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="12" r="5"></circle>
+          <line x1="12" y1="1" x2="12" y2="3"></line>
+          <line x1="12" y1="21" x2="12" y2="23"></line>
+          <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+          <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+          <line x1="1" y1="12" x2="3" y2="12"></line>
+          <line x1="21" y1="12" x2="23" y2="12"></line>
+          <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+          <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+        </svg>
+        <svg class="moon-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+        </svg>
+      </button>
+    </div>
+  </nav>
+</header>
+    <main class="container mx-auto max-w-5xl p-8 grow">
+      
+    <p></p>
+
+    
+        <div class="post-cover-image" style="background-image: url('/images/posts/0e7631b1-76b7-476a-b9b4-bdda2a5e486b.png');"></div>
+    
+
+    <div>
+        <h2>Teaching AI to Grade Other AI</h2>
+
+        
+
+        
+            <p class="excerpt">If you’ve been following the world of AI development, you might’ve heard the phrase **“LLM-as-Judge.”**.</p>
+        
+
+        
+            <div class="mb-2">
+                <a class="tag ai" href="/tag/ai">ai</a><a class="tag openai" href="/tag/openai">openai</a><a class="tag llm" href="/tag/llm">llm</a><a class="tag anthropic" href="/tag/anthropic">anthropic</a><a class="tag ragas" href="/tag/ragas">ragas</a><a class="tag rag" href="/tag/rag">rag</a><a class="tag model-context-protocol" href="/tag/model-context-protocol">model-context-protocol</a><a class="tag llm-as-judge" href="/tag/llm-as-judge">llm-as-judge</a>
+            </div>
+        
+
+        
+            
+                <p class="text-sm italic">Created on
+                    <span datetime="Sun Nov 09 2025 00:00:00 GMT+0000 (Coordinated Universal Time)">November 9, 2025</span>.</p>
+            
+        
+
+        <div class="content post">
+            
+                <hr />
+
+                <h3>Table of Contents</h3>
+
+                <nav class="toc">
+                <ol>
+                    
+                    <li><a href="#define-your-evaluation-criteria">Define Your Evaluation Criteria</a>
+            		</li>
+
+                    <li><a href="#create-a-baseline-judge">Create a Baseline Judge</a>
+            		</li>
+
+                    <li><a href="#prepare-ground-truth-data">Prepare Ground Truth Data</a>
+            		</li>
+
+                    <li><a href="#create-alignment-metric">Create Alignment Metric</a>
+            		</li>
+
+                    <li><a href="#define-experiment-function">Define Experiment Function</a>
+            		</li>
+
+                    <li><a href="#run-baseline-evaluation">Run Baseline Evaluation</a>
+            		</li>
+
+                    <li><a href="#analyze-errors">Analyze Errors</a>
+            		</li>
+
+                    <li><a href="#improve-judge-prompt">Improve Judge Prompt</a>
+            		</li>
+
+                    <li><a href="#re-run-with-improved-judge">Re-run with Improved Judge</a>
+            		</li>
+
+                    <li><a href="#best-practices">Best Practices</a>
+            		</li>
+
+                    <li><a href="#%F0%9F%93%9A-references-%26-further-reading">📚 References & Further Reading</a>
+            		</li>
+                </ol>
+            </nav>
+
+                <hr />
+            
+
+            <p>If you’ve been following the world of AI development, you might’ve heard the phrase <strong>“LLM-as-Judge.”</strong><br>
+It sounds dramatic, like some sci-fi overlord where one AI passes judgment on another. But it’s actually one of the most important evolutions in evaluating large language models (LLMs).</p>
+<blockquote>
+<p><strong>LLM-as-Judge</strong> means using a <strong>language model itself to evaluate</strong> the quality of another model’s responses.</p>
+</blockquote>
+<p>Traditionally, human annotators graded model outputs. Checking if an answer was factual, polite, relevant, or well-reasoned. But as models got more capable and outputs more nuanced, this manual process became slow, expensive, and inconsistent.</p>
+<p>So, researchers began asking, <em>Can we train (or prompt) a model to act like a human evaluator?</em></p>
+<p>Turns out, yes, quite effectively.</p>
+<p>The idea is simple:</p>
+<p><img src="/images/posts/c3e4e7fe-d2c5-466a-8e2b-f8e06345d1f6.png" alt=""></p>
+<p>It’s like using one AI to peer-review another. Evaluation is the backbone of AI progress. Without it, we wouldn’t know if newer models are actually <em>better</em>, or just different. Human evaluation doesn’t scale. Imagine evaluating thousands of answers for correctness, reasoning, and tone across 10+ benchmarks.<br>
+That’s days of work for humans, but minutes for an LLM.</p>
+<p>You now suddenly have the super power to run thousands of comparisons in minutes. Reduce human bias, enable rapid iteration and explore subjective criteria like “creativity” or “helpfulness” where metrics alone fall short.</p>
+<p>LLM-based judging has already become a norm in multiple domains:</p>
+<table>
+<thead>
+<tr>
+<th>Use Case</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Model benchmarking</strong></td>
+<td>Frameworks like <a href="https://lmsys.org/blog/2024-04-19-arena-hard/">Arena Hard</a> and <a href="https://arxiv.org/abs/2306.05685">MT-Bench</a> use GPT-4 as the judge to rank models.</td>
+</tr>
+<tr>
+<td><strong>Eval pipelines</strong></td>
+<td>Tools like <a href="https://github.com/explodinggradients/ragas">Ragas</a> and <a href="https://www.trulens.org/">TruLens</a> integrate LLM-judging to score faithfulness, coherence, and relevance.</td>
+</tr>
+<tr>
+<td><strong>Fine-tuning and alignment</strong></td>
+<td>Reinforcement Learning from AI Feedback (RLAIF) replaces human feedback with LLM judgments to train new models.</td>
+</tr>
+<tr>
+<td><strong>Automated grading systems</strong></td>
+<td>Education and coding platforms use LLMs to grade free-text answers or code explanations.</td>
+</tr>
+</tbody>
+</table>
+<p>LLM-as-Judge solves for critical limitations with traditional evaluation metrics:</p>
+<ul>
+<li>
+<p><strong>Captures nuance</strong>: Evaluates semantic quality, not just string overlap</p>
+</li>
+<li>
+<p><strong>Scales human judgment</strong>: Automates what would otherwise require manual review</p>
+</li>
+<li>
+<p><strong>Flexible criteria</strong>: Define any custom evaluation criteria</p>
+</li>
+<li>
+<p><strong>Domain-aware</strong>: Adapts to specific use cases (medical, legal, finance, etc.)</p>
+</li>
+<li>
+<p><strong>Interpretable</strong>: Provides reasoning for verdicts, not just scores</p>
+</li>
+</ul>
+<p>Without scalable evaluation, progress slows down. Model quality becomes subjective. Everyone claims their model is “better,” but without consistent evals, it’s marketing, not science. Human fatigue and cost make it impossible to iterate fast. Bias creeps in. Different annotators interpret “good” differently. An LLM judge can apply consistent criteria across thousands of examples.</p>
+<p>In short, without a judge, the AI ecosystem risks <strong>flying blind.</strong></p>
+<p>Think of the evaluation as a <strong>comparison pipeline:</strong></p>
+<pre class="language-bash"><code class="language-bash">Question: <span class="token string">"Explain quantum computing to a 5-year-old."</span><br><br>Model A → <span class="token string">"It’s like magic computers that can do many things at once."</span><br>Model B → <span class="token string">"It’s a special computer that can try all possibilities at once."</span><br><br>Judge LLM → <span class="token string">"Model B’s answer is clearer and more accurate for a child audience."</span><br>Score: Model B wins</code></pre>
+<p><img src="/images/posts/5d8b9564-feff-4363-a5c2-6442ed3e0833.png" alt=""></p>
+<p>Before your LLM judge can reliably evaluate your system, it must first <strong>align with your ground truth</strong> (human expert judgments). A misaligned judge is like a compass pointing the wrong way—every improvement based on its guidance moves you further from your goal. Ragas provides a powerful, production-ready framework for implementing LLM-as-Judge evaluation.</p>
+<p>Let’s talk about the alignment process. First, you start by creating a baseline judge using a straightforward prompt. Then, you evaluate it against human-labeled ground truth to see how it measures up. Next, you look for patterns where the judge disagrees with the human experts. Based on these patterns, you tweak and improve the judge’s prompt. After that, you re-evaluate to see if there’s any improvement. You keep repeating this process until the alignment either levels off or reaches the standard you’re aiming for.</p>
+<p>The <code>strictness</code> parameter controls consistency by running multiple evaluations with majority voting:</p>
+<ul>
+<li>
+<p><strong>Value</strong>: Number of independent LLM evaluations</p>
+</li>
+<li>
+<p><strong>Mechanism</strong>: Majority voting combines results</p>
+</li>
+<li>
+<p><strong>Auto-adjustment</strong>: Automatically converts to odd numbers (1, 3, 5, 7…)</p>
+</li>
+</ul>
+<p>Use 2-4 for production, balancing cost and consistency.</p>
+<p>Think of DiscreteMetric as the Swiss Army knife of LLM-based evaluation. Need to evaluate responses as “excellent,” “good,” “mediocre,” or “poor”? DiscreteMetric handles it. Want to categorize code reviews as “passes linting,” “needs minor fixes,” or “major refactoring required”? You’ve got it. The key insight is that DiscreteMetric lets you define both the evaluation prompt AND the allowed output values, making it incredibly flexible for nuanced evaluations that don’t fit neatly into binary or numeric scoring.</p>
+<p>What makes DiscreteMetric particularly powerful is that you don’t need to subclass anything or write complex metric implementations. You just provide a prompt template (with variables you define), specify what categorical values the LLM can return, and you’re done. The LLM does the actual evaluation work using your custom prompt, and returns one of your predefined categories. This is perfect for domain-specific evaluation criteria where you need more granularity than binary but want to avoid the complexity of numeric scores.</p>
+<p>For example, if you’re evaluating financial advice, you might want categories like “financially sound,” “incomplete,” “contains risk,” or “dangerous advice” — each with different implications for your system. Or for content moderation, you might use “safe,” “borderline,” “needs review,” and “block.” DiscreteMetric adapts to whatever categorical scheme your business needs.</p>
+<pre class="language-python"><code class="language-python"><span class="token keyword">import</span> asyncio<br><span class="token keyword">from</span> openai <span class="token keyword">import</span> AsyncOpenAI<br><span class="token keyword">from</span> ragas<span class="token punctuation">.</span>llms <span class="token keyword">import</span> llm_factory<br><span class="token keyword">from</span> ragas<span class="token punctuation">.</span>metrics <span class="token keyword">import</span> DiscreteMetric<br><span class="token keyword">import</span> os<br><br><span class="token keyword">async</span> <span class="token keyword">def</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span><br>    <span class="token comment"># Setup</span><br>    client <span class="token operator">=</span> AsyncOpenAI<span class="token punctuation">(</span>api_key<span class="token operator">=</span>os<span class="token punctuation">.</span>environ<span class="token punctuation">.</span>get<span class="token punctuation">(</span><span class="token string">"OPENAI_API_KEY"</span><span class="token punctuation">)</span><span class="token punctuation">)</span><br>    llm <span class="token operator">=</span> llm_factory<span class="token punctuation">(</span><span class="token string">"gpt-4o-mini"</span><span class="token punctuation">,</span> client<span class="token operator">=</span>client<span class="token punctuation">)</span><br><br>    <span class="token comment"># Define metric</span><br>    accuracy_metric <span class="token operator">=</span> DiscreteMetric<span class="token punctuation">(</span><br>        name<span class="token operator">=</span><span class="token string">"accuracy"</span><span class="token punctuation">,</span><br>        prompt<span class="token operator">=</span>"Check <span class="token keyword">if</span> the response contains points <span class="token keyword">from</span> the grading<br>notes<span class="token punctuation">.</span>\n\nResponse<span class="token punctuation">:</span> <span class="token punctuation">{</span>response<span class="token punctuation">}</span>\nGrading Notes<span class="token punctuation">:</span> <span class="token punctuation">{</span>grading_notes<span class="token punctuation">}</span>"<span class="token punctuation">,</span><br>        allowed_values<span class="token operator">=</span><span class="token punctuation">[</span><span class="token string">"pass"</span><span class="token punctuation">,</span> <span class="token string">"fail"</span><span class="token punctuation">]</span><span class="token punctuation">,</span><br>        llm<span class="token operator">=</span>llm<br>    <span class="token punctuation">)</span><br><br>    <span class="token comment"># Evaluate</span><br>    result <span class="token operator">=</span> <span class="token keyword">await</span> accuracy_metric<span class="token punctuation">.</span>ascore<span class="token punctuation">(</span><br>        response<span class="token operator">=</span>"The model discussion covers DCF<span class="token punctuation">,</span> comparable analysis<span class="token punctuation">,</span> <span class="token keyword">and</span> VC<br>methods"<span class="token punctuation">,</span><br>        grading_notes<span class="token operator">=</span>"Must cover<span class="token punctuation">:</span> DCF method<span class="token punctuation">,</span> comparable analysis<span class="token punctuation">,</span> VC method<span class="token punctuation">,</span><br>founder impact"<br>    <span class="token punctuation">)</span><br><br>    <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string-interpolation"><span class="token string">f"Verdict: </span><span class="token interpolation"><span class="token punctuation">{</span>result<span class="token punctuation">.</span>value<span class="token punctuation">}</span></span><span class="token string">"</span></span><span class="token punctuation">)</span>  <span class="token comment"># "pass" or "fail"</span><br>    <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string-interpolation"><span class="token string">f"Reason: </span><span class="token interpolation"><span class="token punctuation">{</span>result<span class="token punctuation">.</span>reason<span class="token punctuation">}</span></span><span class="token string">"</span></span><span class="token punctuation">)</span><br><br><span class="token comment"># Run</span><br>asyncio<span class="token punctuation">.</span>run<span class="token punctuation">(</span>main<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span></code></pre>
+<p>Now that we understand <code>DiscreteMetric</code>, let’s build a complete judge evaluation pipeline from scratch.</p>
+<h3 id="define-your-evaluation-criteria" tabindex="-1">Define Your Evaluation Criteria</h3>
+<p>Start by clearly defining what “good” means for your use case.</p>
+<pre class="language-python"><code class="language-python"><span class="token comment"># Example: Evaluating financial advice quality</span><br>judge_definition <span class="token operator">=</span> <span class="token triple-quoted-string string">"""<br>Evaluate if the response provides sound financial advice that covers:<br>1. Clear explanation of key concepts<br>2. Relevant metrics and calculations<br>3. Risk considerations<br>4. Tax implications where applicable<br>5. Practical actionable steps<br><br>Return 'pass' if all major points are covered, 'fail' if critical topics are missing.<br>"""</span></code></pre>
+<h3 id="create-a-baseline-judge" tabindex="-1">Create a Baseline Judge</h3>
+<p>Start with a simple baseline judge helps you understand the problem.</p>
+<pre class="language-python"><code class="language-python"><span class="token keyword">from</span> ragas<span class="token punctuation">.</span>metrics <span class="token keyword">import</span> DiscreteMetric<br><span class="token keyword">from</span> openai <span class="token keyword">import</span> AsyncOpenAI<br><span class="token keyword">from</span> ragas<span class="token punctuation">.</span>llms <span class="token keyword">import</span> llm_factory<br><br><span class="token comment"># Initialize LLM</span><br>client <span class="token operator">=</span> AsyncOpenAI<span class="token punctuation">(</span>api_key<span class="token operator">=</span><span class="token string">"sk-..."</span><span class="token punctuation">)</span><br>llm <span class="token operator">=</span> llm_factory<span class="token punctuation">(</span><span class="token string">"gpt-4o-mini"</span><span class="token punctuation">,</span> client<span class="token operator">=</span>client<span class="token punctuation">)</span><br><br><span class="token comment"># Create baseline judge</span><br>baseline_judge <span class="token operator">=</span> DiscreteMetric<span class="token punctuation">(</span><br>    name<span class="token operator">=</span><span class="token string">"financial_advice_quality"</span><span class="token punctuation">,</span><br>    prompt<span class="token operator">=</span><span class="token string">"Does the response provide sound financial advice? Check for key concepts, calculations, risks, and actionable steps.\n\nResponse: {response}"</span><span class="token punctuation">,</span><br>    allowed_values<span class="token operator">=</span><span class="token punctuation">[</span><span class="token string">"pass"</span><span class="token punctuation">,</span> <span class="token string">"fail"</span><span class="token punctuation">]</span><br><span class="token punctuation">)</span></code></pre>
+<h3 id="prepare-ground-truth-data" tabindex="-1">Prepare Ground Truth Data</h3>
+<p>You need human-labeled examples to measure alignment.</p>
+<pre class="language-python"><code class="language-python"><span class="token keyword">import</span> pandas <span class="token keyword">as</span> pd<br><span class="token keyword">from</span> ragas <span class="token keyword">import</span> Dataset<br><br><span class="token comment"># Load your annotated data</span><br>df <span class="token operator">=</span> pd<span class="token punctuation">.</span>read_csv<span class="token punctuation">(</span><span class="token string">"expert_labels.csv"</span><span class="token punctuation">)</span><br><span class="token comment"># Expected columns: question, response, expert_judgment</span><br><br>dataset <span class="token operator">=</span> Dataset<span class="token punctuation">(</span>name<span class="token operator">=</span><span class="token string">"judge_alignment"</span><span class="token punctuation">,</span> backend<span class="token operator">=</span><span class="token string">"local/csv"</span><span class="token punctuation">)</span><br><span class="token keyword">for</span> _<span class="token punctuation">,</span> row <span class="token keyword">in</span> df<span class="token punctuation">.</span>iterrows<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span><br>    dataset<span class="token punctuation">.</span>append<span class="token punctuation">(</span><span class="token punctuation">{</span><br>        <span class="token string">"question"</span><span class="token punctuation">:</span> row<span class="token punctuation">[</span><span class="token string">"question"</span><span class="token punctuation">]</span><span class="token punctuation">,</span><br>        <span class="token string">"response"</span><span class="token punctuation">:</span> row<span class="token punctuation">[</span><span class="token string">"response"</span><span class="token punctuation">]</span><span class="token punctuation">,</span><br>        <span class="token string">"target"</span><span class="token punctuation">:</span> row<span class="token punctuation">[</span><span class="token string">"expert_judgment"</span><span class="token punctuation">]</span><br>    <span class="token punctuation">}</span><span class="token punctuation">)</span></code></pre>
+<h3 id="create-alignment-metric" tabindex="-1">Create Alignment Metric</h3>
+<p>Define how you measure judge alignment.</p>
+<pre class="language-python"><code class="language-python"><span class="token keyword">from</span> ragas<span class="token punctuation">.</span>metrics<span class="token punctuation">.</span>discrete <span class="token keyword">import</span> discrete_metric<br><span class="token keyword">from</span> ragas<span class="token punctuation">.</span>metrics<span class="token punctuation">.</span>result <span class="token keyword">import</span> MetricResult<br><br><span class="token decorator annotation punctuation">@discrete_metric</span><span class="token punctuation">(</span>name<span class="token operator">=</span><span class="token string">"judge_alignment"</span><span class="token punctuation">,</span> allowed_values<span class="token operator">=</span><span class="token punctuation">[</span><span class="token string">"pass"</span><span class="token punctuation">,</span> <span class="token string">"fail"</span><span class="token punctuation">]</span><span class="token punctuation">)</span><br><span class="token keyword">def</span> <span class="token function">judge_alignment</span><span class="token punctuation">(</span>judge_label<span class="token punctuation">:</span> <span class="token builtin">str</span><span class="token punctuation">,</span> human_label<span class="token punctuation">:</span> <span class="token builtin">str</span><span class="token punctuation">)</span> <span class="token operator">-</span><span class="token operator">></span> MetricResult<span class="token punctuation">:</span><br>    <span class="token triple-quoted-string string">"""Compare judge decision with human label."""</span><br>    judge <span class="token operator">=</span> judge_label<span class="token punctuation">.</span>strip<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span>lower<span class="token punctuation">(</span><span class="token punctuation">)</span><br>    human <span class="token operator">=</span> human_label<span class="token punctuation">.</span>strip<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span>lower<span class="token punctuation">(</span><span class="token punctuation">)</span><br><br>    <span class="token keyword">if</span> judge <span class="token operator">==</span> human<span class="token punctuation">:</span><br>        <span class="token keyword">return</span> MetricResult<span class="token punctuation">(</span><br>            value<span class="token operator">=</span><span class="token string">"pass"</span><span class="token punctuation">,</span><br>            reason<span class="token operator">=</span><span class="token string-interpolation"><span class="token string">f"Judge=</span><span class="token interpolation"><span class="token punctuation">{</span>judge<span class="token punctuation">}</span></span><span class="token string">; Human=</span><span class="token interpolation"><span class="token punctuation">{</span>human<span class="token punctuation">}</span></span><span class="token string">"</span></span><br>        <span class="token punctuation">)</span><br><br>    <span class="token keyword">return</span> MetricResult<span class="token punctuation">(</span><br>        value<span class="token operator">=</span><span class="token string">"fail"</span><span class="token punctuation">,</span><br>        reason<span class="token operator">=</span><span class="token string-interpolation"><span class="token string">f"Judge=</span><span class="token interpolation"><span class="token punctuation">{</span>judge<span class="token punctuation">}</span></span><span class="token string">; Human=</span><span class="token interpolation"><span class="token punctuation">{</span>human<span class="token punctuation">}</span></span><span class="token string">"</span></span><br>    <span class="token punctuation">)</span></code></pre>
+<h3 id="define-experiment-function" tabindex="-1">Define Experiment Function</h3>
+<p>Orchestrate the evaluation pipeline.</p>
+<pre class="language-python"><code class="language-python"><span class="token keyword">from</span> ragas <span class="token keyword">import</span> experiment<br><span class="token keyword">from</span> typing <span class="token keyword">import</span> Dict<span class="token punctuation">,</span> Any<br><br><span class="token decorator annotation punctuation">@experiment</span><span class="token punctuation">(</span><span class="token punctuation">)</span><br><span class="token keyword">async</span> <span class="token keyword">def</span> <span class="token function">judge_experiment</span><span class="token punctuation">(</span><br>    row<span class="token punctuation">:</span> Dict<span class="token punctuation">[</span><span class="token builtin">str</span><span class="token punctuation">,</span> Any<span class="token punctuation">]</span><span class="token punctuation">,</span><br>    judge_metric<span class="token punctuation">:</span> DiscreteMetric<span class="token punctuation">,</span><br>    llm<span class="token punctuation">,</span><br><span class="token punctuation">)</span><span class="token punctuation">:</span><br>    <span class="token triple-quoted-string string">"""Run complete evaluation: Judge → Compare with human."""</span><br><br>    judge_score <span class="token operator">=</span> <span class="token keyword">await</span> judge_metric<span class="token punctuation">.</span>ascore<span class="token punctuation">(</span><br>        question<span class="token operator">=</span>row<span class="token punctuation">[</span><span class="token string">"question"</span><span class="token punctuation">]</span><span class="token punctuation">,</span><br>        response<span class="token operator">=</span>row<span class="token punctuation">[</span><span class="token string">"response"</span><span class="token punctuation">]</span><span class="token punctuation">,</span><br>        llm<span class="token operator">=</span>llm<br>    <span class="token punctuation">)</span><br><br>    alignment <span class="token operator">=</span> judge_alignment<span class="token punctuation">.</span>score<span class="token punctuation">(</span><br>        judge_label<span class="token operator">=</span>judge_score<span class="token punctuation">.</span>value<span class="token punctuation">,</span><br>        human_label<span class="token operator">=</span>row<span class="token punctuation">[</span><span class="token string">"target"</span><span class="token punctuation">]</span><br>    <span class="token punctuation">)</span><br><br>    <span class="token keyword">return</span> <span class="token punctuation">{</span><br>        <span class="token operator">**</span>row<span class="token punctuation">,</span><br>        <span class="token string">"judge_label"</span><span class="token punctuation">:</span> judge_score<span class="token punctuation">.</span>value<span class="token punctuation">,</span><br>        <span class="token string">"judge_reason"</span><span class="token punctuation">:</span> judge_score<span class="token punctuation">.</span>reason<span class="token punctuation">,</span><br>        <span class="token string">"alignment"</span><span class="token punctuation">:</span> alignment<span class="token punctuation">.</span>value<br>    <span class="token punctuation">}</span></code></pre>
+<h3 id="run-baseline-evaluation" tabindex="-1">Run Baseline Evaluation</h3>
+<p>Execute the evaluation pipeline.</p>
+<pre class="language-python"><code class="language-python"><span class="token keyword">import</span> asyncio<br><span class="token keyword">import</span> os<br><br><span class="token keyword">async</span> <span class="token keyword">def</span> <span class="token function">run_baseline</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span><br>    <span class="token comment"># Load dataset</span><br>    dataset <span class="token operator">=</span> load_dataset<span class="token punctuation">(</span><span class="token punctuation">)</span><br>    <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string-interpolation"><span class="token string">f"Loaded </span><span class="token interpolation"><span class="token punctuation">{</span><span class="token builtin">len</span><span class="token punctuation">(</span>dataset<span class="token punctuation">)</span><span class="token punctuation">}</span></span><span class="token string"> samples"</span></span><span class="token punctuation">)</span><br><br>    <span class="token comment"># Initialize LLM</span><br>    client <span class="token operator">=</span> AsyncOpenAI<span class="token punctuation">(</span>api_key<span class="token operator">=</span>os<span class="token punctuation">.</span>environ<span class="token punctuation">.</span>get<span class="token punctuation">(</span><span class="token string">"OPENAI_API_KEY"</span><span class="token punctuation">)</span><span class="token punctuation">)</span><br>    llm <span class="token operator">=</span> llm_factory<span class="token punctuation">(</span><span class="token string">"gpt-4o-mini"</span><span class="token punctuation">,</span> client<span class="token operator">=</span>client<span class="token punctuation">)</span><br><br>    <span class="token comment"># Run experiment</span><br>    results <span class="token operator">=</span> <span class="token keyword">await</span> judge_experiment<span class="token punctuation">.</span>arun<span class="token punctuation">(</span><br>        dataset<span class="token punctuation">,</span><br>        name<span class="token operator">=</span><span class="token string">"judge_baseline_v1"</span><span class="token punctuation">,</span><br>        judge_metric<span class="token operator">=</span>baseline_judge<span class="token punctuation">,</span><br>        llm<span class="token operator">=</span>llm<br>    <span class="token punctuation">)</span><br><br>    <span class="token comment"># Calculate alignment</span><br>    passed <span class="token operator">=</span> <span class="token builtin">sum</span><span class="token punctuation">(</span><span class="token number">1</span> <span class="token keyword">for</span> r <span class="token keyword">in</span> results <span class="token keyword">if</span> r<span class="token punctuation">[</span><span class="token string">"alignment"</span><span class="token punctuation">]</span> <span class="token operator">==</span> <span class="token string">"pass"</span><span class="token punctuation">)</span><br>    total <span class="token operator">=</span> <span class="token builtin">len</span><span class="token punctuation">(</span>results<span class="token punctuation">)</span><br>    <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string-interpolation"><span class="token string">f"Alignment: </span><span class="token interpolation"><span class="token punctuation">{</span>passed<span class="token punctuation">}</span></span><span class="token string">/</span><span class="token interpolation"><span class="token punctuation">{</span>total<span class="token punctuation">}</span></span><span class="token string"> (</span><span class="token interpolation"><span class="token punctuation">{</span>passed<span class="token operator">/</span>total<span class="token punctuation">:</span><span class="token format-spec">.1%</span><span class="token punctuation">}</span></span><span class="token string">)"</span></span><span class="token punctuation">)</span><br><br>    <span class="token keyword">return</span> results<br><br><span class="token comment"># Execute</span><br>results <span class="token operator">=</span> asyncio<span class="token punctuation">.</span>run<span class="token punctuation">(</span>run_baseline<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span></code></pre>
+<h3 id="analyze-errors" tabindex="-1">Analyze Errors</h3>
+<p>Identify patterns in judge errors.</p>
+<pre class="language-python"><code class="language-python"><span class="token keyword">import</span> pandas <span class="token keyword">as</span> pd<br><br><span class="token comment"># Load results</span><br>df <span class="token operator">=</span> pd<span class="token punctuation">.</span>read_csv<span class="token punctuation">(</span><span class="token string">"judge_baseline_v1.csv"</span><span class="token punctuation">)</span><br><br><span class="token comment"># Analyze misalignments</span><br>false_positives <span class="token operator">=</span> <span class="token builtin">len</span><span class="token punctuation">(</span>df<span class="token punctuation">[</span><br>    <span class="token punctuation">(</span>df<span class="token punctuation">[</span><span class="token string">'judge_label'</span><span class="token punctuation">]</span> <span class="token operator">==</span> <span class="token string">'pass'</span><span class="token punctuation">)</span> <span class="token operator">&amp;</span> <span class="token punctuation">(</span>df<span class="token punctuation">[</span><span class="token string">'target'</span><span class="token punctuation">]</span> <span class="token operator">==</span> <span class="token string">'fail'</span><span class="token punctuation">)</span><br><span class="token punctuation">]</span><span class="token punctuation">)</span><br>false_negatives <span class="token operator">=</span> <span class="token builtin">len</span><span class="token punctuation">(</span>df<span class="token punctuation">[</span><br>    <span class="token punctuation">(</span>df<span class="token punctuation">[</span><span class="token string">'judge_label'</span><span class="token punctuation">]</span> <span class="token operator">==</span> <span class="token string">'fail'</span><span class="token punctuation">)</span> <span class="token operator">&amp;</span> <span class="token punctuation">(</span>df<span class="token punctuation">[</span><span class="token string">'target'</span><span class="token punctuation">]</span> <span class="token operator">==</span> <span class="token string">'pass'</span><span class="token punctuation">)</span><br><span class="token punctuation">]</span><span class="token punctuation">)</span><br><br><span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string-interpolation"><span class="token string">f"False positives (too lenient): </span><span class="token interpolation"><span class="token punctuation">{</span>false_positives<span class="token punctuation">}</span></span><span class="token string">"</span></span><span class="token punctuation">)</span><br><span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string-interpolation"><span class="token string">f"False negatives (too strict): </span><span class="token interpolation"><span class="token punctuation">{</span>false_negatives<span class="token punctuation">}</span></span><span class="token string">"</span></span><span class="token punctuation">)</span><br><br><span class="token comment"># Look at specific error examples</span><br>errors <span class="token operator">=</span> df<span class="token punctuation">[</span>df<span class="token punctuation">[</span><span class="token string">'alignment'</span><span class="token punctuation">]</span> <span class="token operator">==</span> <span class="token string">'fail'</span><span class="token punctuation">]</span><br><span class="token keyword">for</span> idx<span class="token punctuation">,</span> row <span class="token keyword">in</span> errors<span class="token punctuation">.</span>head<span class="token punctuation">(</span><span class="token number">5</span><span class="token punctuation">)</span><span class="token punctuation">.</span>iterrows<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span><br>    <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string-interpolation"><span class="token string">f"\nQuestion: </span><span class="token interpolation"><span class="token punctuation">{</span>row<span class="token punctuation">[</span><span class="token string">'question'</span><span class="token punctuation">]</span><span class="token punctuation">}</span></span><span class="token string">"</span></span><span class="token punctuation">)</span><br>    <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string-interpolation"><span class="token string">f"Judge: </span><span class="token interpolation"><span class="token punctuation">{</span>row<span class="token punctuation">[</span><span class="token string">'judge_label'</span><span class="token punctuation">]</span><span class="token punctuation">}</span></span><span class="token string">, Human: </span><span class="token interpolation"><span class="token punctuation">{</span>row<span class="token punctuation">[</span><span class="token string">'target'</span><span class="token punctuation">]</span><span class="token punctuation">}</span></span><span class="token string">"</span></span><span class="token punctuation">)</span><br>    <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string-interpolation"><span class="token string">f"Reason: </span><span class="token interpolation"><span class="token punctuation">{</span>row<span class="token punctuation">[</span><span class="token string">'judge_reason'</span><span class="token punctuation">]</span><span class="token punctuation">}</span></span><span class="token string">"</span></span><span class="token punctuation">)</span></code></pre>
+<h3 id="improve-judge-prompt" tabindex="-1">Improve Judge Prompt</h3>
+<p>Based on error patterns, create an improved judge.</p>
+<pre class="language-python"><code class="language-python"><span class="token comment"># Improved prompt addressing identified issues</span><br>improved_judge <span class="token operator">=</span> DiscreteMetric<span class="token punctuation">(</span><br>    name<span class="token operator">=</span><span class="token string">"financial_advice_quality_v2"</span><span class="token punctuation">,</span><br>    prompt<span class="token operator">=</span><span class="token triple-quoted-string string">"""Evaluate if the response provides comprehensive financial advice.<br><br>CRITERIA:<br>1. ✓ Must clearly explain key financial concepts<br>2. ✓ Must include relevant calculations or metrics<br>3. ✓ Must discuss risks and tax implications<br>4. ✓ Must provide actionable next steps<br>5. ✓ Must avoid generic advice without specifics<br><br>IMPORTANT:<br>- Require ALL 5 criteria to be present<br>- Do NOT accept vague or general statements<br>- Accept paraphrased concepts (different wording is OK)<br>- If even one criterion is missing or vague, return 'fail'<br><br>Response: {response}<br><br>Are all 5 criteria clearly met in the response? Answer 'pass' or 'fail'."""</span><span class="token punctuation">,</span><br>    allowed_values<span class="token operator">=</span><span class="token punctuation">[</span><span class="token string">"pass"</span><span class="token punctuation">,</span> <span class="token string">"fail"</span><span class="token punctuation">]</span><br><span class="token punctuation">)</span></code></pre>
+<h3 id="re-run-with-improved-judge" tabindex="-1">Re-run with Improved Judge</h3>
+<p>Execute with the improved version.</p>
+<pre class="language-python"><code class="language-python"><span class="token keyword">async</span> <span class="token keyword">def</span> <span class="token function">run_improved</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span><br>    dataset <span class="token operator">=</span> load_dataset<span class="token punctuation">(</span><span class="token punctuation">)</span><br>    client <span class="token operator">=</span> AsyncOpenAI<span class="token punctuation">(</span>api_key<span class="token operator">=</span>os<span class="token punctuation">.</span>environ<span class="token punctuation">.</span>get<span class="token punctuation">(</span><span class="token string">"OPENAI_API_KEY"</span><span class="token punctuation">)</span><span class="token punctuation">)</span><br>    llm <span class="token operator">=</span> llm_factory<span class="token punctuation">(</span><span class="token string">"gpt-4o-mini"</span><span class="token punctuation">,</span> client<span class="token operator">=</span>client<span class="token punctuation">)</span><br><br>    <span class="token comment"># Use improved judge</span><br>    results <span class="token operator">=</span> <span class="token keyword">await</span> judge_experiment<span class="token punctuation">.</span>arun<span class="token punctuation">(</span><br>        dataset<span class="token punctuation">,</span><br>        name<span class="token operator">=</span><span class="token string">"judge_improved_v2"</span><span class="token punctuation">,</span><br>        judge_metric<span class="token operator">=</span>improved_judge<span class="token punctuation">,</span><br>        llm<span class="token operator">=</span>llm<br>    <span class="token punctuation">)</span><br><br>    passed <span class="token operator">=</span> <span class="token builtin">sum</span><span class="token punctuation">(</span><span class="token number">1</span> <span class="token keyword">for</span> r <span class="token keyword">in</span> results <span class="token keyword">if</span> r<span class="token punctuation">[</span><span class="token string">"alignment"</span><span class="token punctuation">]</span> <span class="token operator">==</span> <span class="token string">"pass"</span><span class="token punctuation">)</span><br>    total <span class="token operator">=</span> <span class="token builtin">len</span><span class="token punctuation">(</span>results<span class="token punctuation">)</span><br>    <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string-interpolation"><span class="token string">f"Improved alignment: </span><span class="token interpolation"><span class="token punctuation">{</span>passed<span class="token punctuation">}</span></span><span class="token string">/</span><span class="token interpolation"><span class="token punctuation">{</span>total<span class="token punctuation">}</span></span><span class="token string"> (</span><span class="token interpolation"><span class="token punctuation">{</span>passed<span class="token operator">/</span>total<span class="token punctuation">:</span><span class="token format-spec">.1%</span><span class="token punctuation">}</span></span><span class="token string">)"</span></span><span class="token punctuation">)</span><br><br>    <span class="token keyword">return</span> results<br><br>results <span class="token operator">=</span> asyncio<span class="token punctuation">.</span>run<span class="token punctuation">(</span>run_improved<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span></code></pre>
+<p>It’s of course not a simple single step process. You gotta at least do it a few times. Keep iterating till you find that sweet spot.</p>
+<p>You can also run multiple judges and combine results, evaluate the entire conversation flow or create your metric implementation. I’ll leave that to you to figure out. A super tip that helped me learn faster was to include examples in prompts to improve judge accuracy. Make it as verbose as you can. Avoid jargons or explain any jargons that you’re using. For example, LLM might not know what <em>ARR</em> means.</p>
+<h2 id="best-practices" tabindex="-1">Best Practices</h2>
+<ol>
+<li>
+<p>Start with Domain Experts - Ground truth quality is critical</p>
+</li>
+<li>
+<p>Document Evaluation Criteria - Clear criteria prevents ambiguity</p>
+</li>
+<li>
+<p>Measure Inter-Rater Reliability - Use multiple annotators to validate ground truth</p>
+</li>
+<li>
+<p>Analyze Judge Performance by Category - Break down alignment by different data types</p>
+</li>
+<li>
+<p>Version Control Judge Prompts - Track prompt changes for reproducibility</p>
+</li>
+</ol>
+<p>If you’ve more good practices to follow, add below in comments. Would love to learn more.</p>
+<p>But Wait, Can We Trust the Judge?<br>
+LLM judges are <strong>not perfect</strong>. They inherit biases from their own training. For example:</p>
+<ul>
+<li>
+<p>A GPT-4 judge might favor GPT-style phrasing over open-source models.</p>
+</li>
+<li>
+<p>Judges can be “prompt-sensitive”. Small wording changes may affect verdicts.</p>
+</li>
+<li>
+<p>They might hallucinate reasoning for why one answer is better.</p>
+</li>
+</ul>
+<p>Hence, follow the best practices and keep iterating to improve your judge.</p>
+<p><img src="https://cdn.prod.website-files.com/660ef16a9e0687d9cc27474a/66db3980c17b8cda52071c1d_00_llm_judge_tutorial-min.png" alt=""></p>
+<p>The next wave of evaluation focuses on <strong>meta-judging</strong>, evaluating the evaluators themselves.</p>
+<p>Some emerging ideas:</p>
+<ul>
+<li>
+<p><strong>Multi-LLM consensus</strong>: Multiple judges vote or debate before giving a verdict.</p>
+</li>
+<li>
+<p><strong>Grounded evals</strong>: Judges verify outputs against real data or APIs.</p>
+</li>
+<li>
+<p><strong>Human-AI hybrid evaluation</strong>: Humans handle edge cases; LLMs handle scale.</p>
+</li>
+</ul>
+<p>As open-source models get stronger, expect to see <strong>judge models fine-tuned for fairness and domain expertise</strong>, like “MedJudge” for medical LLMs or “CodeJudge” for programming tasks.</p>
+<h2 id="%F0%9F%93%9A-references-%26-further-reading" tabindex="-1">📚 References &amp; Further Reading</h2>
+<ul>
+<li>
+<p><a href="https://arxiv.org/abs/2306.05685">MT-Bench: Multi-turn Benchmark for LLMs</a></p>
+</li>
+<li>
+<p><a href="https://docs.ragas.io/en/stable/howtos/applications/align-llm-as-judge/"><strong>Judge Alignment Guide</strong></a></p>
+</li>
+<li>
+<p><a href="https://lmsys.org/blog/2024-04-19-arena-hard/">Arena Hard Benchmark</a></p>
+</li>
+<li>
+<p><a href="https://github.com/explodinggradients/ragas">Ragas- Evaluation Framework for RAG Pipelines</a></p>
+</li>
+<li>
+<p><a href="https://www.trulens.org/">TruLens- Evaluating LLM Apps</a></p>
+</li>
+<li>
+<p><a href="https://arxiv.org/abs/2309.00267">Anthropic: RLAIF Paper</a></p>
+</li>
+</ul>
+<p>The LLM-as-Judge approach is not about replacing humans. It’s about <strong>accelerating truth-finding.</strong><br>
+As models grow in complexity, human evaluation alone can’t keep up. Using LLMs as judges gives us a powerful mirror, one that helps us see how far we’ve come, and how much further we can go.</p>
+<blockquote>
+<p>“To build better intelligence, we need better ways to measure it.”<br>
+— That’s exactly what LLM-as-Judge brings to the table.</p>
+</blockquote>
+<p>Here’s a simple diagram showing how <strong>LLM-as-Judge</strong> fits into the AI evaluation loop:</p>
+<p><img src="/images/posts/e8d06811-fa5f-47f0-9806-4ddbb72cc138.png" alt=""></p>
+<ol>
+<li>
+<p>A user or testbench sends an <strong>input or question</strong>.</p>
+</li>
+<li>
+<p>One or more <strong>models</strong> generate responses.</p>
+</li>
+<li>
+<p>A <strong>judge LLM</strong> compares or evaluates these responses.</p>
+</li>
+<li>
+<p>The <strong>verdict or score</strong> is recorded for metrics or training.</p>
+</li>
+<li>
+<p>Feedback loops back to improve the model, thus closing the evaluation cycle.</p>
+</li>
+</ol>
+<blockquote>
+<p>The key to success is treating judge alignment as a first-class problem: invest time in understanding your data, clarifying evaluation criteria with domain experts, and systematically improving your judge prompts based on actual error patterns.</p>
+</blockquote>
+<p>With an aligned judge as your foundation, you can confidently scale evaluation of RAG systems, agents, and any LLM application, knowing that improvements in metrics translate to real improvements in quality.</p>
+
+        </div>
+
+        <div class="article-end">
+            <span>✦</span>
+            <span>✦</span>
+            <span>✦</span>
+        </div>
+
+        <div class="post-navigation">
+            <div class="post-nav-item post-nav-previous">
+                    <a href="/ai-evals/">
+                        <span class="nav-arrow">←</span>
+                        <div class="nav-content">
+                            <p class="nav-label">Previous</p>
+                            <p class="nav-title">Unit Tests for Intelligence</p>
+                        </div>
+                    </a>
+                
+            </div>
+
+            <div class="post-nav-item post-nav-next">
+                    <a href="/building-ai-tools-you-can-trust/">
+                        <div class="nav-content">
+                            <p class="nav-label">Next</p>
+                            <p class="nav-title">Building AI Tools You Can Trust</p>
+                        </div>
+                        <span class="nav-arrow">→</span>
+                    </a>
+                
+            </div>
+        </div>
+    </div>
+
+    </main>
+    <footer class="sticky bottom-0 z-50 glass-footer py-4">
+  <div class="container mx-auto max-w-5xl px-8 flex items-center justify-between">
+    <div class="text-sm">
+      Blog by Ani
+    </div>
+
+    <div class="flex items-center">
+      <a href="https://anirudha.dev" target="_blank" rel="noopener noreferrer" class="footer-icon" aria-label="Home">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
+        </svg>
+      </a>
+    </div>
+
+    <div class="flex items-center gap-4">
+      <a href="https://github.com/anistark" target="_blank" rel="noopener noreferrer" class="footer-icon" aria-label="GitHub">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="currentColor" viewBox="0 0 24 24">
+          <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+        </svg>
+      </a>
+      <a href="https://x.com/kranirudha" target="_blank" rel="noopener noreferrer" class="footer-icon" aria-label="X (Twitter)">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="currentColor" viewBox="0 0 24 24">
+          <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+        </svg>
+      </a>
+      <a href="https://linkedin.com/in/kranirudha" target="_blank" rel="noopener noreferrer" class="footer-icon" aria-label="LinkedIn">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="currentColor" viewBox="0 0 24 24">
+          <path d="M4.98 3.5c0 1.381-1.11 2.5-2.48 2.5s-2.48-1.119-2.48-2.5c0-1.38 1.11-2.5 2.48-2.5s2.48 1.12 2.48 2.5zm.02 4.5h-5v16h5v-16zm7.982 0h-4.968v16h4.969v-8.399c0-4.67 6.029-5.052 6.029 0v8.399h4.988v-10.131c0-7.88-8.922-7.593-11.018-3.714v-2.155z"/>
+        </svg>
+      </a>
+    </div>
+  </div>
+</footer>
+    
+    <script src="https://unpkg.com/clipboard@2/dist/clipboard.min.js"></script>
+    <script src="/assets/main.bundle.js"></script>
+  </body>
+</html>

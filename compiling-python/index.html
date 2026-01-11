@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    
+    <meta itemprop="name" content="Compiling Python | AniLog">
+    <meta itemprop="description" content="CPython is the **official and most widely used implementation of Python**, written in **C**. When people talk about &quot;Python,&quot; they are usually referring to CPython.">
+
+    
+    <meta name="twitter:title" content="Compiling Python | AniLog">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:description" content="CPython is the **official and most widely used implementation of Python**, written in **C**. When people talk about &quot;Python,&quot; they are usually referring to CPython.">
+    <meta name="twitter:site" content="@kranirudha">
+    <meta name="twitter:creator" content="@kranirudha">
+    <meta name="twitter:image:src" content="https://blog.anirudha.dev/twitter.png">
+
+    
+    <meta name="og:title" content="Compiling Python | AniLog">
+    <meta name="og:description" content="CPython is the **official and most widely used implementation of Python**, written in **C**. When people talk about &quot;Python,&quot; they are usually referring to CPython.">
+    <meta name="og:image" content="https://blog.anirudha.dev/og.png">
+    <meta name="og:url" content="https://blog.anirudha.dev/">
+    <meta name="og:site_name" content="AniLog">
+    <meta name="og:locale" content="en_GB">
+    <meta name="og:type" content="website">
+
+    <link rel="icon" type="image/png" href="/me.png" />
+
+    <title>Compiling Python | AniLog</title>
+
+    <link rel="stylesheet" href="/assets/main.bundle.css">
+
+    <script>
+      // Set theme before page renders to prevent flash
+      (function() {
+        const savedTheme = localStorage.getItem('theme') || 'dark';
+        if (savedTheme === 'light') {
+          document.documentElement.setAttribute('data-theme', 'light');
+        }
+      })();
+    </script>
+
+    
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-YGZHVY9TD7"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-YGZHVY9TD7');
+    </script>
+    
+
+    
+  </head>
+  <body class="flex flex-col min-h-screen">
+    <header class="sticky top-0 z-50 glass-header">
+  <nav class="container mx-auto max-w-5xl px-8 py-3 flex flex-wrap items-center justify-between">
+    <div class="flex items-center gap-3">
+      <a href="/" class="flex items-center gap-3">
+        <img src="/ani.png" alt="AniLog logo" class="w-10 h-10 object-cover">
+        <h1 class="text-2xl leading-none m-0">AniLog</h1>
+      </a>
+    </div>
+
+    <div class="flex items-center gap-6">
+      <button id="theme-toggle" class="theme-toggle" aria-label="Toggle theme">
+        <svg class="sun-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="12" r="5"></circle>
+          <line x1="12" y1="1" x2="12" y2="3"></line>
+          <line x1="12" y1="21" x2="12" y2="23"></line>
+          <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+          <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+          <line x1="1" y1="12" x2="3" y2="12"></line>
+          <line x1="21" y1="12" x2="23" y2="12"></line>
+          <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+          <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+        </svg>
+        <svg class="moon-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+        </svg>
+      </button>
+    </div>
+  </nav>
+</header>
+    <main class="container mx-auto max-w-5xl p-8 grow">
+      
+    <p></p>
+
+    
+        <div class="post-cover-image" style="background-image: url('/images/posts/ba13c6dd-7c14-4cfa-87a3-967361a61093.png');"></div>
+    
+
+    <div>
+        <h2>Compiling Python</h2>
+
+        
+
+        
+            <p class="excerpt">CPython is the **official and most widely used implementation of Python**, written in **C**. When people talk about &quot;Python,&quot; they are usually referring to CPython.</p>
+        
+
+        
+            <div class="mb-2">
+                <a class="tag python" href="/tag/python">python</a><a class="tag python3" href="/tag/python3">python3</a><a class="tag cpython" href="/tag/cpython">cpython</a><a class="tag build-from-source" href="/tag/build-from-source">build-from-source</a>
+            </div>
+        
+
+        
+            
+                <p class="text-sm italic">Created on
+                    <span datetime="Fri Apr 04 2025 00:00:00 GMT+0000 (Coordinated Universal Time)">April 4, 2025</span>.</p>
+            
+        
+
+        <div class="content post">
+            
+                <hr />
+
+                <h3>Table of Contents</h3>
+
+                <nav class="toc">
+                <ol>
+                    
+                    <li><a href="#cloning-the-cpython-source-code">Cloning the CPython Source Code</a>
+            		</li>
+
+                    <li><a href="#setting-up-dependencies">Setting Up Dependencies</a>
+            
+                <ol>
+                    
+                    <li><a href="#on-ubuntu%2Fdebian">On Ubuntu/Debian</a>
+            		</li>
+
+                    <li><a href="#on-macos">On macOS</a>
+            		</li>
+                </ol>
+            		</li>
+
+                    <li><a href="#compiling-cpython">Compiling CPython</a>
+            		</li>
+
+                    <li><a href="#modifying-cpython%3A-a-simple-example">Modifying CPython: A Simple Example</a>
+            
+                <ol>
+                    
+                    <li><a href="#step-1%3A-locate-the-prompt-code">Step 1: Locate the Prompt Code</a>
+            		</li>
+
+                    <li><a href="#step-2%3A-recompile-cpython">Step 2: Recompile CPython</a>
+            		</li>
+                </ol>
+            		</li>
+                </ol>
+            </nav>
+
+                <hr />
+            
+
+            <p><a href="https://www.python.org/">Python</a> is one of the most widely used programming languages, but have you ever wondered how it works under the hood? CPython is the official implementation of Python written in C, and modifying it allows you to change Python’s behavior.</p>
+<p>CPython is the <strong>official and most widely used implementation of Python</strong>, written in <strong>C</strong>. When people talk about “Python,” they are usually referring to CPython. It is the reference implementation maintained by the Python Software Foundation (PSF) and serves as the <strong>gold standard</strong> for how Python should behave.</p>
+<p>The name <strong>CPython</strong> came about because it is implemented in the <strong>C programming language</strong>. It is different from other implementations of Python, such as:</p>
+<ul>
+<li>
+<p><strong>PyPy</strong> → A Python implementation written in Python, optimized with Just-In-Time (JIT) compilation.</p>
+</li>
+<li>
+<p><strong>Jython</strong> → A Python implementation for the Java Virtual Machine (JVM).</p>
+</li>
+<li>
+<p><strong>IronPython</strong> → A Python implementation for the .NET framework.</p>
+</li>
+</ul>
+<p>CPython is the <strong>most widely used</strong> and the <strong>official</strong> Python interpreter.</p>
+<p>When you run a Python script using CPython, the execution happens in several steps:</p>
+<ol>
+<li>
+<p><strong>Parsing &amp; Compilation:</strong></p>
+<ul>
+<li>
+<p>CPython first <strong>parses</strong> the Python code into an Abstract Syntax Tree (AST).</p>
+</li>
+<li>
+<p>It then <strong>compiles</strong> the AST into <strong>bytecode</strong> (<code>.pyc</code> files in <code>__pycache__</code>).</p>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>Interpreting Bytecode:</strong></p>
+<ul>
+<li>
+<p>The <strong>CPython Virtual Machine (VM)</strong> executes the bytecode line by line.</p>
+</li>
+<li>
+<p>This is why Python is often called an <strong>interpreted language</strong>, even though it has a compilation step.</p>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>Memory Management &amp; C Extensions:</strong></p>
+<ul>
+<li>
+<p>CPython manages memory using <strong>reference counting</strong> and <strong>garbage collection</strong>.</p>
+</li>
+<li>
+<p>It supports C extensions, allowing Python to call C libraries (e.g., <code>numpy</code>, <code>pandas</code>).</p>
+</li>
+</ul>
+</li>
+</ol>
+<p>If you want to truly <strong>understand Python internals</strong>, modifying CPython is one of the best ways to do it! 🚀</p>
+<h2 id="cloning-the-cpython-source-code" tabindex="-1"><strong>Cloning the CPython Source Code</strong></h2>
+<p>First, clone the official CPython repository:</p>
+<pre class="language-bash"><code class="language-bash"><span class="token function">git</span> clone https://github.com/python/cpython.git<br><span class="token builtin class-name">cd</span> cpython</code></pre>
+<p>You can check out a specific version of Python by using:</p>
+<pre class="language-bash"><code class="language-bash"><span class="token function">git</span> checkout tags/v3.12.0 <span class="token parameter variable">-b</span> my-python</code></pre>
+<p>This creates a new branch (<code>my-python</code>) based on Python 3.12.</p>
+<p>Stable versions of Python are maintained in <code>3.x</code> branches, where <code>x</code> represents the minor version. For example:</p>
+<ul>
+<li>
+<p><code>3.13</code> (Latest stable release branch)</p>
+</li>
+<li>
+<p><code>3.12</code> (Older stable release)</p>
+</li>
+<li>
+<p><code>3.11</code> (Older LTS release)</p>
+</li>
+</ul>
+<p>To check out a specific stable branch:</p>
+<pre class="language-bash"><code class="language-bash"><span class="token function">git</span> checkout <span class="token number">3.13</span></code></pre>
+<p><a href="https://devguide.python.org/versions/#versions">Checkout all the versions and latest updates</a>. If you want to experiment with <strong>upcoming features</strong>, use <code>main</code>.</p>
+<h2 id="setting-up-dependencies" tabindex="-1"><strong>Setting Up Dependencies</strong></h2>
+<p>Before compiling, install the required dependencies:</p>
+<h3 id="on-ubuntu%2Fdebian" tabindex="-1"><strong>On Ubuntu/Debian</strong></h3>
+<pre class="language-bash"><code class="language-bash"><span class="token function">sudo</span> <span class="token function">apt</span> update<br><span class="token function">sudo</span> <span class="token function">apt</span> <span class="token function">install</span> <span class="token parameter variable">-y</span> build-essential libffi-dev libssl-dev zlib1g-dev <span class="token punctuation">\</span><br>    libncurses5-dev libncursesw5-dev libreadline-dev libsqlite3-dev <span class="token punctuation">\</span><br>    libgdbm-dev libdb5.3-dev libbz2-dev libexpat1-dev liblzma-dev tk-dev</code></pre>
+<h3 id="on-macos" tabindex="-1"><strong>On macOS</strong></h3>
+<pre class="language-bash"><code class="language-bash">brew <span class="token function">install</span> pkg-config openssl readline sqlite3 xz zlib tcl-tk autoconf automake libtool autoconf-archive</code></pre>
+<blockquote>
+<p>Not all these packages might be relevant for you. Or maybe your system needs more so.</p>
+<p>Make sure to have openssl 1.1.1 or above.</p>
+</blockquote>
+<p>For Windows, it’s recommended to use <strong>Windows Subsystem for Linux (WSL)</strong> or <strong>MSYS2</strong>.</p>
+<h2 id="compiling-cpython" tabindex="-1"><strong>Compiling CPython</strong></h2>
+<p>Now, configure the build:</p>
+<pre class="language-bash"><code class="language-bash">./configure <span class="token parameter variable">--prefix</span><span class="token operator">=</span><span class="token environment constant">$HOME</span>/python-build</code></pre>
+<blockquote>
+<p>Most Linux/macOS distributions come with a pre-installed version of Python. Installing your custom build in <code>/usr/local</code> or <code>/usr/bin</code> could break system utilities that depend on the default Python version.</p>
+<p>By using <code>--prefix=$HOME/python-build</code>, you install Python in your home directory, ensuring that it doesn’t interfere with the system Python.</p>
+<p>Keeping your custom Python in <code>~/python-build</code> allows you to easily test your modifications without affecting anything else. If something goes wrong, you can just delete the directory:</p>
+<pre class="language-bash"><code class="language-bash"><span class="token function">rm</span> <span class="token parameter variable">-rf</span> ~/python-build</code></pre>
+<p>and start fresh.</p>
+</blockquote>
+<p>Then, compile CPython:</p>
+<pre class="language-bash"><code class="language-bash"><span class="token function">make</span> -j<span class="token variable"><span class="token variable">$(</span>nproc<span class="token variable">)</span></span></code></pre>
+<p>Finally, install it:</p>
+<pre class="language-bash"><code class="language-bash"><span class="token function">make</span> <span class="token function">install</span></code></pre>
+<p>This installs your custom Python build in <code>~/python-build/bin/python3</code>.</p>
+<p>Check the Python version:</p>
+<pre class="language-bash"><code class="language-bash">~/python-build/bin/python3 <span class="token parameter variable">--version</span></code></pre>
+<h2 id="modifying-cpython%3A-a-simple-example" tabindex="-1"><strong>Modifying CPython: A Simple Example</strong></h2>
+<p>Let’s modify CPython to change the default Python prompt (<code>&gt;&gt;&gt;</code>).</p>
+<h3 id="step-1%3A-locate-the-prompt-code" tabindex="-1"><strong>Step 1: Locate the Prompt Code</strong></h3>
+<p>Open the <code>Python/prompt.c</code> file in the CPython source directory.</p>
+<p>Find this section (in <code>prompt.c</code>):</p>
+<pre class="language-bash"><code class="language-bash">const char *Py_GetPrompt<span class="token punctuation">(</span>void<span class="token punctuation">)</span> <span class="token punctuation">{</span><br>    <span class="token builtin class-name">return</span> <span class="token string">">>> "</span><span class="token punctuation">;</span><br><span class="token punctuation">}</span></code></pre>
+<p>Change it to:</p>
+<pre class="language-bash"><code class="language-bash">const char *Py_GetPrompt<span class="token punctuation">(</span>void<span class="token punctuation">)</span> <span class="token punctuation">{</span><br>    <span class="token builtin class-name">return</span> <span class="token string">"python-vibe> "</span><span class="token punctuation">;</span><br><span class="token punctuation">}</span></code></pre>
+<h3 id="step-2%3A-recompile-cpython" tabindex="-1"><strong>Step 2: Recompile CPython</strong></h3>
+<p>Rebuild the source:</p>
+<pre class="language-bash"><code class="language-bash"><span class="token function">make</span> -j<span class="token variable"><span class="token variable">$(</span>nproc<span class="token variable">)</span></span><br><span class="token function">make</span> <span class="token function">install</span></code></pre>
+<p>Now, when you run your custom Python:</p>
+<pre class="language-bash"><code class="language-bash">~/python-build/bin/python3</code></pre>
+<p>You’ll see:</p>
+<pre class="language-bash"><code class="language-bash">python-vibe<span class="token operator">></span></code></pre>
+<p>instead of:</p>
+<pre class="language-python"><code class="language-python"><span class="token operator">>></span><span class="token operator">></span></code></pre>
+<blockquote>
+<p>Imagination is your limit!</p>
+</blockquote>
+<p>If you make further changes, you can run Python’s built-in test suite:</p>
+<pre class="language-bash"><code class="language-bash"><span class="token function">make</span> <span class="token builtin class-name">test</span></code></pre>
+<p>For debugging, use <code>gdb</code>:</p>
+<pre class="language-bash"><code class="language-bash">gdb <span class="token parameter variable">--args</span> ~/python-build/bin/python3</code></pre>
+<p>Or enable debug symbols:</p>
+<pre class="language-bash"><code class="language-bash">./configure --with-pydebug<br><span class="token function">make</span> -j<span class="token variable"><span class="token variable">$(</span>nproc<span class="token variable">)</span></span></code></pre>
+<p>It’s exciting, isn’t it? So, what all can we do with this? Maybe build a custom Python runtime? Optimize Python for a specific use case? Experiment with new language features before they’re even proposed?</p>
+<p>The source code is open, and the only limit is our imagination. What will you modify next? 🤔🔥</p>
+
+        </div>
+
+        <div class="article-end">
+            <span>✦</span>
+            <span>✦</span>
+            <span>✦</span>
+        </div>
+
+        <div class="post-navigation">
+            <div class="post-nav-item post-nav-previous">
+                    <a href="/rwa/">
+                        <span class="nav-arrow">←</span>
+                        <div class="nav-content">
+                            <p class="nav-label">Previous</p>
+                            <p class="nav-title">Real World Assets</p>
+                        </div>
+                    </a>
+                
+            </div>
+
+            <div class="post-nav-item post-nav-next">
+                    <a href="/wasm-landscape/">
+                        <div class="nav-content">
+                            <p class="nav-label">Next</p>
+                            <p class="nav-title">The WebAssembly Odyssey</p>
+                        </div>
+                        <span class="nav-arrow">→</span>
+                    </a>
+                
+            </div>
+        </div>
+    </div>
+
+    </main>
+    <footer class="sticky bottom-0 z-50 glass-footer py-4">
+  <div class="container mx-auto max-w-5xl px-8 flex items-center justify-between">
+    <div class="text-sm">
+      Blog by Ani
+    </div>
+
+    <div class="flex items-center">
+      <a href="https://anirudha.dev" target="_blank" rel="noopener noreferrer" class="footer-icon" aria-label="Home">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
+        </svg>
+      </a>
+    </div>
+
+    <div class="flex items-center gap-4">
+      <a href="https://github.com/anistark" target="_blank" rel="noopener noreferrer" class="footer-icon" aria-label="GitHub">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="currentColor" viewBox="0 0 24 24">
+          <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+        </svg>
+      </a>
+      <a href="https://x.com/kranirudha" target="_blank" rel="noopener noreferrer" class="footer-icon" aria-label="X (Twitter)">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="currentColor" viewBox="0 0 24 24">
+          <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+        </svg>
+      </a>
+      <a href="https://linkedin.com/in/kranirudha" target="_blank" rel="noopener noreferrer" class="footer-icon" aria-label="LinkedIn">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="currentColor" viewBox="0 0 24 24">
+          <path d="M4.98 3.5c0 1.381-1.11 2.5-2.48 2.5s-2.48-1.119-2.48-2.5c0-1.38 1.11-2.5 2.48-2.5s2.48 1.12 2.48 2.5zm.02 4.5h-5v16h5v-16zm7.982 0h-4.968v16h4.969v-8.399c0-4.67 6.029-5.052 6.029 0v8.399h4.988v-10.131c0-7.88-8.922-7.593-11.018-3.714v-2.155z"/>
+        </svg>
+      </a>
+    </div>
+  </div>
+</footer>
+    
+    <script src="https://unpkg.com/clipboard@2/dist/clipboard.min.js"></script>
+    <script src="/assets/main.bundle.js"></script>
+  </body>
+</html>

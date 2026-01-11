@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    
+    <meta itemprop="name" content="Chakra: A Wasm Runtime | AniLog">
+    <meta itemprop="description" content="The modern software landscape is shifting rapidly towards **portability**, **performance**, and **sandboxed execution**. At the heart of this transformation is **WebAssembly (Wasm)**.">
+
+    
+    <meta name="twitter:title" content="Chakra: A Wasm Runtime | AniLog">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:description" content="The modern software landscape is shifting rapidly towards **portability**, **performance**, and **sandboxed execution**. At the heart of this transformation is **WebAssembly (Wasm)**.">
+    <meta name="twitter:site" content="@kranirudha">
+    <meta name="twitter:creator" content="@kranirudha">
+    <meta name="twitter:image:src" content="https://blog.anirudha.dev/twitter.png">
+
+    
+    <meta name="og:title" content="Chakra: A Wasm Runtime | AniLog">
+    <meta name="og:description" content="The modern software landscape is shifting rapidly towards **portability**, **performance**, and **sandboxed execution**. At the heart of this transformation is **WebAssembly (Wasm)**.">
+    <meta name="og:image" content="https://blog.anirudha.dev/og.png">
+    <meta name="og:url" content="https://blog.anirudha.dev/">
+    <meta name="og:site_name" content="AniLog">
+    <meta name="og:locale" content="en_GB">
+    <meta name="og:type" content="website">
+
+    <link rel="icon" type="image/png" href="/me.png" />
+
+    <title>Chakra: A Wasm Runtime | AniLog</title>
+
+    <link rel="stylesheet" href="/assets/main.bundle.css">
+
+    <script>
+      // Set theme before page renders to prevent flash
+      (function() {
+        const savedTheme = localStorage.getItem('theme') || 'dark';
+        if (savedTheme === 'light') {
+          document.documentElement.setAttribute('data-theme', 'light');
+        }
+      })();
+    </script>
+
+    
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-YGZHVY9TD7"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-YGZHVY9TD7');
+    </script>
+    
+
+    
+  </head>
+  <body class="flex flex-col min-h-screen">
+    <header class="sticky top-0 z-50 glass-header">
+  <nav class="container mx-auto max-w-5xl px-8 py-3 flex flex-wrap items-center justify-between">
+    <div class="flex items-center gap-3">
+      <a href="/" class="flex items-center gap-3">
+        <img src="/ani.png" alt="AniLog logo" class="w-10 h-10 object-cover">
+        <h1 class="text-2xl leading-none m-0">AniLog</h1>
+      </a>
+    </div>
+
+    <div class="flex items-center gap-6">
+      <button id="theme-toggle" class="theme-toggle" aria-label="Toggle theme">
+        <svg class="sun-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="12" r="5"></circle>
+          <line x1="12" y1="1" x2="12" y2="3"></line>
+          <line x1="12" y1="21" x2="12" y2="23"></line>
+          <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+          <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+          <line x1="1" y1="12" x2="3" y2="12"></line>
+          <line x1="21" y1="12" x2="23" y2="12"></line>
+          <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+          <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+        </svg>
+        <svg class="moon-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+        </svg>
+      </button>
+    </div>
+  </nav>
+</header>
+    <main class="container mx-auto max-w-5xl p-8 grow">
+      
+    <p></p>
+
+    
+        <div class="post-cover-image" style="background-image: url('/images/posts/48b5678c-eca0-46b1-a2d5-27e5dc395e41.png');"></div>
+    
+
+    <div>
+        <h2>Chakra: A Wasm Runtime</h2>
+
+        
+
+        
+            <p class="excerpt">The modern software landscape is shifting rapidly towards **portability**, **performance**, and **sandboxed execution**. At the heart of this transformation is **WebAssembly (Wasm)**.</p>
+        
+
+        
+            <div class="mb-2">
+                <a class="tag go" href="/tag/go">go</a><a class="tag server" href="/tag/server">server</a><a class="tag opensource" href="/tag/opensource">opensource</a><a class="tag webassembly" href="/tag/webassembly">webassembly</a><a class="tag cli" href="/tag/cli">cli</a><a class="tag rust" href="/tag/rust">rust</a><a class="tag wasm" href="/tag/wasm">wasm</a><a class="tag foss" href="/tag/foss">foss</a><a class="tag serverless" href="/tag/serverless">serverless</a><a class="tag oss" href="/tag/oss">oss</a><a class="tag assembly" href="/tag/assembly">assembly</a><a class="tag runtime" href="/tag/runtime">runtime</a>
+            </div>
+        
+
+        
+            
+                <p class="text-sm italic">Created on
+                    <span datetime="Sun May 25 2025 00:00:00 GMT+0000 (Coordinated Universal Time)">May 25, 2025</span>.</p>
+            
+        
+
+        <div class="content post">
+            
+                <hr />
+
+                <h3>Table of Contents</h3>
+
+                <nav class="toc">
+                <ol>
+                    
+                    <li><a href="#wasm-today">Wasm Today</a>
+            
+                <ol>
+                    
+                    <li><a href="#%F0%9F%A6%80-rust">🦀 Rust</a>
+            		</li>
+
+                    <li><a href="#%F0%9F%90%B9-go-(and-tinygo)">🐹 Go (and TinyGo)</a>
+            		</li>
+
+                    <li><a href="#%F0%9F%A7%B1-assemblyscript">🧱 AssemblyScript</a>
+            		</li>
+
+                    <li><a href="#%E2%9A%99%EF%B8%8F-c-and-c%2B%2B">⚙️ C and C++</a>
+            		</li>
+
+                    <li><a href="#wasm-runtimes-and-where-they-fit">Wasm Runtimes and Where They Fit</a>
+            		</li>
+                </ol>
+            		</li>
+
+                    <li><a href="#meet-chakra-%F0%9F%94%A5-one-runtime-to-run-%E2%80%98em-all">Meet Chakra 🔥 One Runtime to Run ‘em all</a>
+            		</li>
+
+                    <li><a href="#%F0%9F%A6%80-chakra-can-already-run-rust-web-projects">🦀 Chakra Can Already Run Rust Web Projects</a>
+            		</li>
+
+                    <li><a href="#%F0%9F%8C%8D-one-runtime%2C-many-languages">🌍 One Runtime, Many Languages</a>
+            		</li>
+
+                    <li><a href="#%F0%9F%9A%80-what%E2%80%99s-next-for-chakra%3F">🚀 What’s Next for Chakra?</a>
+            		</li>
+
+                    <li><a href="#%F0%9F%A4%9D-join-the-movement">🤝 Join the Movement</a>
+            		</li>
+                </ol>
+            </nav>
+
+                <hr />
+            
+
+            <p>The modern software landscape is shifting rapidly towards <strong>portability</strong>, <strong>performance</strong>, and <strong>sandboxed execution</strong>. At the heart of this transformation is <strong>WebAssembly (Wasm)</strong>. <em>A low-level binary instruction format that allows code written in multiple languages to run safely and efficiently across environments.</em></p>
+<p>Initially built for the browser, Wasm is now powering:</p>
+<ul>
+<li>
+<p>🔌 Plugin systems</p>
+</li>
+<li>
+<p>🧠 AI agents and edge runtimes</p>
+</li>
+<li>
+<p>🖥️ Serverless functions</p>
+</li>
+<li>
+<p>🎮 Cross-platform games</p>
+</li>
+<li>
+<p>📱 Portable desktop/mobile apps</p>
+</li>
+</ul>
+<p>As covered in <a href="https://blog.anirudha.dev/wasm-landscape">The WebAssembly Odyssey</a>, Wasm is becoming the standard for execution in the age of decentralization, polyglot development, and composable software.</p>
+<h2 id="wasm-today" tabindex="-1">Wasm Today</h2>
+<p>Wasm’s language-agnostic nature makes it accessible from many ecosystems:</p>
+<ul>
+<li>
+<p><strong>Rust</strong>: Via <code>wasm-bindgen</code>, <code>wasmer</code>, <code>wasmtime</code>, and <code>cargo build --target wasm32-unknown-unknown</code></p>
+</li>
+<li>
+<p><strong>Go</strong>: Via <code>tinygo</code> and official support for <code>wasip1</code></p>
+</li>
+<li>
+<p><strong>C/C++</strong>: Via <code>Emscripten</code> and Clang toolchains</p>
+</li>
+<li>
+<p><strong>AssemblyScript</strong>: A TypeScript-like language targeting Wasm directly</p>
+</li>
+</ul>
+<p>But developing, testing, and running Wasm modules still involves a mix of fragmented tools, runtimes, and platforms.</p>
+<h3 id="%F0%9F%A6%80-rust" tabindex="-1">🦀 Rust</h3>
+<p>Rust is hands-down one of the most mature and performance-friendly options for compiling to Wasm. The tooling specially <code>wasm-bindgen</code>, <code>wasm-pack</code>, and <code>cargo</code> integration makes it relatively easy to write code that compiles cleanly to <code>.wasm</code> binaries. It’s the go-to choice for developers building serious performance-critical apps in the browser or on the edge. Plus, the safety guarantees of Rust carry over nicely into the Wasm sandbox. That said, dealing with bindings specially JavaScript interop can still be fiddly, and debugging Wasm modules from Rust isn’t always seamless. Afterall who wants to deal with a whole suite of outputs when all you need is a simple <code>.wasm</code> file.</p>
+<h3 id="%F0%9F%90%B9-go-(and-tinygo)" tabindex="-1">🐹 Go (and TinyGo)</h3>
+<p>Go has official Wasm support through <code>GOARCH=wasm</code>, but the real star for WebAssembly is <a href="https://tinygo.org/"><strong>TinyGo</strong></a>. It’s a stripped-down Go compiler built specifically for embedded systems and Wasm, and it produces much smaller binaries than the standard Go toolchain. TinyGo shines in lightweight environments specially when building Wasm for microcontrollers or edge runtimes with tight constraints. The downside? You lose some language features like full reflection, and TinyGo’s support for newer Go features tends to lag behind the mainline compiler. Also, working with system-level capabilities in Wasm through Go is still evolving, specially in WASI contexts.</p>
+<h3 id="%F0%9F%A7%B1-assemblyscript" tabindex="-1">🧱 AssemblyScript</h3>
+<p>If you’re coming from a TypeScript background, AssemblyScript feels like a friendly on-ramp to Wasm. It’s essentially a subset of TypeScript that compiles to WebAssembly with minimal fuss. You can write near-Wasm-level code without jumping into Rust or C++. This makes AssemblyScript great for writing plugins or extensions in JavaScript-heavy ecosystems. But the tooling is less mature, debugging support is basic, and because it’s not the full TypeScript spec, you might hit limitations or surprises if you’re expecting all JS/TS behavior to carry over. Of course not all dynamic functionalities of js/ts are still supported and you’d need to use external js/ts still for those features. Still, for rapid prototyping and smaller modules, AssemblyScript hits a nice sweet spot.</p>
+<h3 id="%E2%9A%99%EF%B8%8F-c-and-c%2B%2B" tabindex="-1">⚙️ C and C++</h3>
+<p>The OGs of systems programming have been compiling to Wasm for a while now, mostly via <a href="https://emscripten.org/"><strong>Emscripten</strong></a>, a powerful but somewhat heavyweight toolchain that turns C/C++ code into <code>.wasm</code> along with glue code. You’ll see this in action in big efforts like porting game engines (think Doom or Unreal) or emulators to run in the browser. C/C++ to Wasm is fast, but the learning curve around toolchains, memory management, and glue code can be steep. And without careful tuning, you might end up with massive Wasm binaries full of unused system libraries. Emscripten is great when you <em>need</em> that level of control, but it’s not exactly plug-and-play, specially if you’re not on a linux machine. I had to install 4 different packages to just get it to run.</p>
+<h3 id="wasm-runtimes-and-where-they-fit" tabindex="-1">Wasm Runtimes and Where They Fit</h3>
+<p>Compiling to Wasm is just the first half of the journey. The other half is figuring out <strong>how to run it</strong>. That’s where runtimes come in.</p>
+<p>Today, we have a handful of mature and battle-tested runtimes like <a href="https://github.com/bytecodealliance/wasmtime"><strong>Wasmtime</strong></a>, <a href="https://wasmer.io/"><strong>Wasmer</strong></a>, <a href="https://github.com/tetratelabs/wazero"><strong>Wazero</strong></a>, and <a href="https://v8.dev/"><strong>V8</strong></a>. Each of them targets different goals. Some are optimized for embedding, some for server-side, and others for full sandboxed environments. But none of them are perfect, and each comes with trade-offs that show up fast when you’re trying to build real-world systems.</p>
+<h4 id="wasmtime" tabindex="-1">Wasmtime</h4>
+<p>Wasmtime is one of the most respected Wasm runtimes out there, maintained by the Bytecode Alliance (the same people behind <a href="https://wasi.dev/">WASI</a>). It’s written in Rust, super fast, and very WASI-compliant. It excels in scenarios where performance and standards compliance matter, like cloud-native environments or sandboxed serverless functions. It also has solid support for features like component model and interface types.</p>
+<p><strong>Where it falls short</strong> is accessibility and extensibility. If you’re building something experimental or need to integrate Wasm into a non-standard context (like a desktop sandbox or local-first P2P system), Wasmtime can feel overengineered. The API is powerful but dense. The project is heavily geared toward large-scale production deployments and tends to move slowly on more community-driven, experimental ideas. It’s not the friendliest tool if you’re just trying to embed a runtime into a minimal app or CLI tool.</p>
+<h4 id="wasmer" tabindex="-1">Wasmer</h4>
+<p>Wasmer also comes from the Rust world, but it has a different vibe. Wasmer is built with embedding in mind and comes with bindings for a bunch of languages like Python, Ruby, PHP, JavaScript, etc. It aims to be the “Docker of Wasm”. You can distribute and run Wasm modules using <code>wasmer run</code> just like Docker containers. This is great for plugin architectures, lightweight apps, and scripting environments.</p>
+<p>But Wasmer has <strong>its own complexity tax</strong>. The tooling is inconsistent, the documentation has gaps, and its performance can vary depending on which backend you choose (Cranelift, LLVM, Singlepass). Features like WASIX (Wasmer’s extended WASI for more POSIX-like behavior) are powerful but fragmented and not part of the core Wasm spec. You would also need a separate docker for <a href="https://nuitka.net/">nuitka</a> to compile python to wasm using py2wasm. Personal experience with <a href="https://github.com/wasmerio/py2wasm">py2wasm</a> wasn’t so great but the team is dedicately working towards it and it’s currently the best tool out there hands-down. Debugging issues inside Wasmer can feel opaque, and versioning across plugins and toolchains isn’t always smooth. For all its ambition, Wasmer sometimes bites off more than it can chew.</p>
+<h4 id="wazero" tabindex="-1">Wazero</h4>
+<p>Wazero is a standout because it’s the only major Wasm runtime <strong>written entirely in Go</strong>. That makes it ideal for Go-native applications that want to run Wasm without introducing foreign dependencies or FFI boundaries. It’s small, easy to embed, and has a clean API that fits nicely into idiomatic Go programs. It’s one of the best written runtimes I’ve seen.</p>
+<p>However, being Go-native is a double-edged sword. Wazero’s performance is good <em>for what it is</em>, but it can’t compete with native runtimes like Wasmtime or Wasmer in terms of raw speed or compilation efficiency. And because it’s written in Go, it’s not always the right fit for systems built in Rust, C++, or other environments where bringing in a Go runtime would be awkward. WASI support is solid but not complete, and because it’s a relatively young project, some edge cases or advanced features (like multi-module linking or advanced debugging) may be limited.</p>
+<h4 id="v8-(via-node.js-or-chrome)" tabindex="-1">V8 (via Node.js or Chrome)</h4>
+<p>V8 is the JavaScript engine that powers Chrome and Node.js which also includes a mature WebAssembly engine. If you’re already in a JavaScript/TypeScript environment, running <code>.wasm</code> inside V8 is the path of least resistance. The performance is excellent, and you get seamless interop with JavaScript, which is ideal for browser-based games, UI frameworks, or web-native compute modules.</p>
+<p>But V8 is <strong>not a general-purpose Wasm runtime</strong>. It’s deeply tied to the JS ecosystem. You can’t use it easily outside of browser or Node contexts, and you don’t get any of the benefits of WASI. No filesystem, no networking, no standalone system features. You’re locked into the JS execution environment, which limits its usefulness for non-browser, non-serverless use cases. Embedding V8 is also no joke. It’s massive, memory-hungry, and incredibly hard to integrate into minimal or embedded applications.</p>
+<p>So where does that leave developers building Wasm-native applications, CLI tools, or experimental systems?</p>
+<p>Most existing runtimes are either:</p>
+<ul>
+<li>
+<p>Too heavyweight and complex (Wasmtime, V8)</p>
+</li>
+<li>
+<p>Fragmented or unstable (Wasmer)</p>
+</li>
+<li>
+<p>Tied to one language ecosystem (Wazero)</p>
+</li>
+</ul>
+<p>What’s missing is a <strong>lightweight, understandable, and extensible</strong> runtime that developers can pick up, hack on, and make their own.</p>
+<p>That’s where Chakra enters the story.</p>
+<h2 id="meet-chakra-%F0%9F%94%A5-one-runtime-to-run-%E2%80%98em-all" tabindex="-1">Meet Chakra 🔥 One Runtime to Run ‘em all</h2>
+<p><a href="https://wazero.io/"><strong>Chakra</strong></a> is an open-source <strong>WebAssembly runtime</strong> designed to unify and simplify the Wasm development and execution experience.</p>
+<p>Whether you’re a systems developer, an app builder, or just exploring Wasm for the first time, Chakra offers:</p>
+<ul>
+<li>
+<p>🧩 <strong>Lightweight &amp; modular</strong> runtime for embedding and experimentation</p>
+</li>
+<li>
+<p>🦀 <strong>Built in Rust</strong> with performance and safety at its core</p>
+</li>
+<li>
+<p>🔐 <strong>Secure sandboxing</strong> to isolate execution</p>
+</li>
+<li>
+<p>🖥️ <strong>CLI-first</strong> for quick Wasm testing and automation</p>
+</li>
+<li>
+<p>📦 <strong>WASI support (in progress)</strong> for file, network, and system access</p>
+</li>
+<li>
+<p>🔄 <strong>Multi-language support</strong>: One tool to run modules compiled from <strong>Rust, Go, AssemblyScript, and C/C++</strong></p>
+</li>
+</ul>
+<p>Chakra isn’t just about running Wasm, it’s about making Wasm <strong>developer-friendly and extensible</strong>. Basically, your go-to tool to get started with wasm, build something and finally deploy it. Chakra aims to cover the entire WASM Dev Tooling ecosystem. Quite ambitious, and of course will need lot of support from the community, as I want to build it with everyone.</p>
+<h2 id="%F0%9F%A6%80-chakra-can-already-run-rust-web-projects" tabindex="-1">🦀 Chakra Can Already Run Rust Web Projects</h2>
+<p>Rust has emerged as one of the leading languages for building high-performance Wasm modules specially for web UIs using tools like <code>yew</code>, <code>leptos</code>, and <code>dioxus</code>. Arguably can work as a potential replacement to JavaScript/TypeScript ecosystem entirely in the near future, and that’s saying something.</p>
+<p><strong>With Chakra, you can already compile and run Rust-based Wasm projects with ease.</strong> If your project is a rust web project, chakra will identify it and run it as a web app. This means Chakra can be integrated into your development workflow to <strong>test, debug, or embed</strong> Rust logic, without setting up complex runtimes or containers.</p>
+<h2 id="%F0%9F%8C%8D-one-runtime%2C-many-languages" tabindex="-1">🌍 One Runtime, Many Languages</h2>
+<p>Unlike runtimes tied to a specific language or platform, Chakra is designed to be <strong>language-agnostic</strong>.</p>
+<p>If you can compile it to Wasm, Chakra can run it. Currently supports four languages and python is in next step.</p>
+<ul>
+<li>
+<p>🦀 Rust</p>
+</li>
+<li>
+<p>🐹 Go (via TinyGo)</p>
+</li>
+<li>
+<p>🧱 AssemblyScript</p>
+</li>
+<li>
+<p>🛠️ C/C++</p>
+</li>
+</ul>
+<p>It aims to be the <strong>“one tool to run them all”</strong>, streamlining execution across your entire stack, whether you’re building microservices, CLI tools, or local-first apps.</p>
+<h2 id="%F0%9F%9A%80-what%E2%80%99s-next-for-chakra%3F" tabindex="-1">🚀 What’s Next for Chakra?</h2>
+<p>Chakra is just getting started. The future includes:</p>
+<ul>
+<li>
+<p>🧱 Full WASI support</p>
+</li>
+<li>
+<p>📡 Dynamic loading and linking</p>
+</li>
+<li>
+<p>🖥️ Web playground + desktop runner</p>
+</li>
+<li>
+<p>🔁 Live reload for rapid dev workflows</p>
+</li>
+<li>
+<p>📊 Better diagnostics and logging</p>
+</li>
+</ul>
+<p>And most importantly…</p>
+<blockquote>
+<p>Chakra aims to become the <strong>go-to name for Wasm runtime and development</strong>. The project is community-driven and open to <strong>any feature request or feedback</strong>.</p>
+</blockquote>
+<p><img src="https://raw.githubusercontent.com/anistark/chakra/main/assets/loader.svg" alt=""></p>
+<h2 id="%F0%9F%A4%9D-join-the-movement" tabindex="-1">🤝 Join the Movement</h2>
+<p>If you’re passionate about WebAssembly, runtime design, developer tools, or just want to contribute to the open-source future of portable software:</p>
+<ul>
+<li>
+<p>⭐ <a href="https://github.com/anistark/chakra">Star Chakra on GitHub</a></p>
+</li>
+<li>
+<p>🧑‍💻 Try it out locally and run your first <code>.wasm</code> file</p>
+</li>
+<li>
+<p>🗣️ Open an issue with suggestions or bugs</p>
+</li>
+<li>
+<p>📢 Spread the word and help grow the ecosystem</p>
+</li>
+</ul>
+<blockquote>
+<p>WebAssembly is the execution format of the modular web.<br>
+<strong>Chakra</strong> is your runtime for that future.</p>
+</blockquote>
+<p>Let’s build it together. 💙</p>
+
+        </div>
+
+        <div class="article-end">
+            <span>✦</span>
+            <span>✦</span>
+            <span>✦</span>
+        </div>
+
+        <div class="post-navigation">
+            <div class="post-nav-item post-nav-previous">
+                    <a href="/js-ts-asc/">
+                        <span class="nav-arrow">←</span>
+                        <div class="nav-content">
+                            <p class="nav-label">Previous</p>
+                            <p class="nav-title">Typed, Transpiled, Compiled</p>
+                        </div>
+                    </a>
+                
+            </div>
+
+            <div class="post-nav-item post-nav-next">
+                    <a href="/making-chakra-modular/">
+                        <div class="nav-content">
+                            <p class="nav-label">Next</p>
+                            <p class="nav-title">Making Chakra Modular</p>
+                        </div>
+                        <span class="nav-arrow">→</span>
+                    </a>
+                
+            </div>
+        </div>
+    </div>
+
+    </main>
+    <footer class="sticky bottom-0 z-50 glass-footer py-4">
+  <div class="container mx-auto max-w-5xl px-8 flex items-center justify-between">
+    <div class="text-sm">
+      Blog by Ani
+    </div>
+
+    <div class="flex items-center">
+      <a href="https://anirudha.dev" target="_blank" rel="noopener noreferrer" class="footer-icon" aria-label="Home">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
+        </svg>
+      </a>
+    </div>
+
+    <div class="flex items-center gap-4">
+      <a href="https://github.com/anistark" target="_blank" rel="noopener noreferrer" class="footer-icon" aria-label="GitHub">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="currentColor" viewBox="0 0 24 24">
+          <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+        </svg>
+      </a>
+      <a href="https://x.com/kranirudha" target="_blank" rel="noopener noreferrer" class="footer-icon" aria-label="X (Twitter)">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="currentColor" viewBox="0 0 24 24">
+          <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+        </svg>
+      </a>
+      <a href="https://linkedin.com/in/kranirudha" target="_blank" rel="noopener noreferrer" class="footer-icon" aria-label="LinkedIn">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="currentColor" viewBox="0 0 24 24">
+          <path d="M4.98 3.5c0 1.381-1.11 2.5-2.48 2.5s-2.48-1.119-2.48-2.5c0-1.38 1.11-2.5 2.48-2.5s2.48 1.12 2.48 2.5zm.02 4.5h-5v16h5v-16zm7.982 0h-4.968v16h4.969v-8.399c0-4.67 6.029-5.052 6.029 0v8.399h4.988v-10.131c0-7.88-8.922-7.593-11.018-3.714v-2.155z"/>
+        </svg>
+      </a>
+    </div>
+  </div>
+</footer>
+    
+    <script src="https://unpkg.com/clipboard@2/dist/clipboard.min.js"></script>
+    <script src="/assets/main.bundle.js"></script>
+  </body>
+</html>

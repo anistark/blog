@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    
+    <meta itemprop="name" content="Why I&#39;m Switching SOT to uv | AniLog">
+    <meta itemprop="description" content="I&#39;ve migrated the [SOT](https://github.com/anistark/sot/) (System Observation Tool) project from traditional pip/venv workflows to [uv](https://github.com/astral-sh/uv), Astral&#39;s blazing-fast Python package manager. This is gonna be a game-changer for both contributors and users.">
+
+    
+    <meta name="twitter:title" content="Why I&#39;m Switching SOT to uv | AniLog">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:description" content="I&#39;ve migrated the [SOT](https://github.com/anistark/sot/) (System Observation Tool) project from traditional pip/venv workflows to [uv](https://github.com/astral-sh/uv), Astral&#39;s blazing-fast Python package manager. This is gonna be a game-changer for both contributors and users.">
+    <meta name="twitter:site" content="@kranirudha">
+    <meta name="twitter:creator" content="@kranirudha">
+    <meta name="twitter:image:src" content="https://blog.anirudha.dev/twitter.png">
+
+    
+    <meta name="og:title" content="Why I&#39;m Switching SOT to uv | AniLog">
+    <meta name="og:description" content="I&#39;ve migrated the [SOT](https://github.com/anistark/sot/) (System Observation Tool) project from traditional pip/venv workflows to [uv](https://github.com/astral-sh/uv), Astral&#39;s blazing-fast Python package manager. This is gonna be a game-changer for both contributors and users.">
+    <meta name="og:image" content="https://blog.anirudha.dev/og.png">
+    <meta name="og:url" content="https://blog.anirudha.dev/">
+    <meta name="og:site_name" content="AniLog">
+    <meta name="og:locale" content="en_GB">
+    <meta name="og:type" content="website">
+
+    <link rel="icon" type="image/png" href="/me.png" />
+
+    <title>Why I&#39;m Switching SOT to uv | AniLog</title>
+
+    <link rel="stylesheet" href="/assets/main.bundle.css">
+
+    <script>
+      // Set theme before page renders to prevent flash
+      (function() {
+        const savedTheme = localStorage.getItem('theme') || 'dark';
+        if (savedTheme === 'light') {
+          document.documentElement.setAttribute('data-theme', 'light');
+        }
+      })();
+    </script>
+
+    
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-YGZHVY9TD7"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-YGZHVY9TD7');
+    </script>
+    
+
+    
+  </head>
+  <body class="flex flex-col min-h-screen">
+    <header class="sticky top-0 z-50 glass-header">
+  <nav class="container mx-auto max-w-5xl px-8 py-3 flex flex-wrap items-center justify-between">
+    <div class="flex items-center gap-3">
+      <a href="/" class="flex items-center gap-3">
+        <img src="/ani.png" alt="AniLog logo" class="w-10 h-10 object-cover">
+        <h1 class="text-2xl leading-none m-0">AniLog</h1>
+      </a>
+    </div>
+
+    <div class="flex items-center gap-6">
+      <button id="theme-toggle" class="theme-toggle" aria-label="Toggle theme">
+        <svg class="sun-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="12" r="5"></circle>
+          <line x1="12" y1="1" x2="12" y2="3"></line>
+          <line x1="12" y1="21" x2="12" y2="23"></line>
+          <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+          <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+          <line x1="1" y1="12" x2="3" y2="12"></line>
+          <line x1="21" y1="12" x2="23" y2="12"></line>
+          <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+          <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+        </svg>
+        <svg class="moon-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+        </svg>
+      </button>
+    </div>
+  </nav>
+</header>
+    <main class="container mx-auto max-w-5xl p-8 grow">
+      
+    <p></p>
+
+    
+        <div class="post-cover-image" style="background-image: url('/images/posts/9723d4d1-24b4-4ee6-a6f7-d48005ccf754.png');"></div>
+    
+
+    <div>
+        <h2>Why I&#39;m Switching SOT to uv</h2>
+
+        
+
+        
+            <p class="excerpt">I&#39;ve migrated the [SOT](https://github.com/anistark/sot/) (System Observation Tool) project from traditional pip/venv workflows to [uv](https://github.com/astral-sh/uv), Astral&#39;s blazing-fast Python package manager. This is gonna be a game-changer for both contributors and users.</p>
+        
+
+        
+            <div class="mb-2">
+                <a class="tag python" href="/tag/python">python</a><a class="tag devtools" href="/tag/devtools">devtools</a><a class="tag python3" href="/tag/python3">python3</a><a class="tag cli" href="/tag/cli">cli</a><a class="tag uv" href="/tag/uv">uv</a><a class="tag system-observation-tool" href="/tag/system-observation-tool">system-observation-tool</a>
+            </div>
+        
+
+        
+            
+                <p class="text-sm italic">Created on
+                    <span datetime="Sun Aug 24 2025 00:00:00 GMT+0000 (Coordinated Universal Time)">August 24, 2025</span>.</p>
+            
+        
+
+        <div class="content post">
+            
+                <hr />
+
+                <h3>Table of Contents</h3>
+
+                <nav class="toc">
+                <ol>
+                    
+                    <li><a href="#technical-architecture-benefits">Technical Architecture Benefits</a>
+            		</li>
+
+                    <li><a href="#project-specific-improvements">Project-Specific Improvements</a>
+            		</li>
+
+                    <li><a href="#for-contributors">For Contributors</a>
+            		</li>
+
+                    <li><a href="#getting-started">Getting Started</a>
+            		</li>
+                </ol>
+            </nav>
+
+                <hr />
+            
+
+            <p>I’ve migrated the <a href="https://github.com/anistark/sot/">SOT</a> (System Observation Tool) project from traditional pip/venv workflows to <a href="https://github.com/astral-sh/uv">uv</a>, Astral’s blazing-fast Python package manager. This is gonna be a game-changer for both contributors and users.</p>
+<blockquote>
+<p>Maybe I was just finding an excuse to use something from F1 movie fever. But speed is about performance as much as it’s about being quick.</p>
+</blockquote>
+<p>10-100x faster dependency resolution and installation</p>
+<ul>
+<li>
+<p><code>pip install</code> for our dev dependencies: <strong>~45</strong> seconds</p>
+</li>
+<li>
+<p><code>uv sync</code> --dev: <strong>~3</strong> seconds</p>
+</li>
+<li>
+<p>Cold cache package installation improved by 15x on average</p>
+</li>
+</ul>
+<p>Lockfile generation performance:</p>
+<ul>
+<li>
+<p><code>pip-tools pip-compile</code>: ~12 seconds</p>
+</li>
+<li>
+<p><code>uv lock</code>: ~800ms</p>
+</li>
+</ul>
+<p><img src="/images/posts/83b37323-c78a-4cf7-b2cf-b2c7b74f04f0.jpeg" alt=""></p>
+<p>This isn’t just benchmark flaunting, these improvements compound during development, CI/CD, and Docker builds. In addition to an actually reliable dependency resolution.</p>
+<p>Which then brings us to an universal resolution across platforms. <code>uv</code> resolves dependencies for all target platforms simultaneously. No more <em>“works on my Linux but breaks on macOS”</em> surprises Single <code>uv.lock</code> replaces platform-specific requirements files. Most importantly, better conflict detection. Someone told me once fail loudly always. I kinda took it to heart, and so did <code>uv</code>. All for improving developer experience. A single command covers most of them,which we handled via justfile earlier.</p>
+<pre class="language-bash"><code class="language-bash">uv <span class="token function">sync</span> <span class="token parameter variable">--dev</span></code></pre>
+<p>Workspace management without the pain:</p>
+<ul>
+<li>
+<p>No more source venv/bin/activate dance</p>
+</li>
+<li>
+<p><code>uv run python script.py</code> works from any directory</p>
+</li>
+<li>
+<p>Built-in tool isolation: <code>uv tool install sot</code></p>
+</li>
+</ul>
+<h3 id="technical-architecture-benefits" tabindex="-1">Technical Architecture Benefits</h3>
+<p>This tool is <strong>Rust-native</strong>.<br>
+It’s written in Rust, not Python, which means there’s no Python bootstrap overhead. Installs and downloads run in parallel, and dependency resolution is memory-efficient.</p>
+<p>It’s also <strong>pip/PyPI compatible</strong>.<br>
+So it’s a drop-in replacement for pip workflows. It uses the existing PyPI infrastructure and supports all pip-compatible packages. No ecosystem fragmentation.</p>
+<p>Finally, it has <strong>advanced caching</strong>.<br>
+There’s a global package cache with deduplication, network-aware caching strategies, incremental lockfile updates, and cross-project dependency sharing.</p>
+<h3 id="project-specific-improvements" tabindex="-1">Project-Specific Improvements</h3>
+<p><strong>CI/CD is simpler.</strong><br>
+Before: multiple cache keys, complex setup with <code>actions/setup-python</code> and <code>actions/cache</code>.<br>
+After: one command <code>uv sync --dev</code> handles caching and installs automatically.</p>
+<p><strong>Development is smoother.</strong></p>
+<ul>
+<li>
+<p><code>uv add package</code> for instant dependency addition</p>
+</li>
+<li>
+<p><code>uv tree</code> for dependency visualization</p>
+</li>
+<li>
+<p><code>uv lock --upgrade</code> for controlled updates</p>
+</li>
+<li>
+<p>Hot-swappable dev dependencies</p>
+</li>
+</ul>
+<h3 id="for-contributors" tabindex="-1">For Contributors</h3>
+<ul>
+<li>
+<p><strong>Faster feedback loops</strong>: quicker setup, faster CI, smoother PR iterations</p>
+</li>
+<li>
+<p><strong>Fewer environment issues</strong>: deterministic builds, no dependency hell, consistent tool versions</p>
+</li>
+<li>
+<p><strong>Better dependency management</strong>: clear upgrades, easy dev testing, safe removals</p>
+</li>
+</ul>
+<h2 id="getting-started" tabindex="-1">Getting Started</h2>
+<p>For end users:</p>
+<pre class="language-bash"><code class="language-bash">uv tool <span class="token function">install</span> sot</code></pre>
+<p>For contributors:</p>
+<pre class="language-bash"><code class="language-bash"><span class="token function">git</span> clone https://github.com/anistark/sot.git<br><span class="token builtin class-name">cd</span> sot<br>uv <span class="token function">sync</span> <span class="token parameter variable">--dev</span><br><span class="token comment"># You're ready to code</span></code></pre>
+<p>The migration maintains full backward compatibility. Existing <code>pip</code> workflows still work, but <code>uv</code> offers a superior developer experience with tangible performance benefits.</p>
+<blockquote>
+<p><code>uv</code> isn’t just faster. It’s fundamentally more reliable, making our development process more predictable and our contributors more productive.</p>
+</blockquote>
+<p>Migration completed in <a href="https://github.com/anistark/sot/pull/18">[PR #18]</a> and available on <a href="https://pypi.org/project/sot/4.4.0/">sot v4.4.0</a> onwards. Questions or issues? Open an <a href="https://github.com/anistark/sot/issues">issue</a> or <a href="https://github.com/anistark/sot/discussions">discussion</a>.</p>
+
+        </div>
+
+        <div class="article-end">
+            <span>✦</span>
+            <span>✦</span>
+            <span>✦</span>
+        </div>
+
+        <div class="post-navigation">
+            <div class="post-nav-item post-nav-previous">
+                    <a href="/at-the-mercy-of-ai/">
+                        <span class="nav-arrow">←</span>
+                        <div class="nav-content">
+                            <p class="nav-label">Previous</p>
+                            <p class="nav-title">At the mercy of AI</p>
+                        </div>
+                    </a>
+                
+            </div>
+
+            <div class="post-nav-item post-nav-next">
+                    <a href="/rust-plugin-system/">
+                        <div class="nav-content">
+                            <p class="nav-label">Next</p>
+                            <p class="nav-title">Building a Rust Plugin System</p>
+                        </div>
+                        <span class="nav-arrow">→</span>
+                    </a>
+                
+            </div>
+        </div>
+    </div>
+
+    </main>
+    <footer class="sticky bottom-0 z-50 glass-footer py-4">
+  <div class="container mx-auto max-w-5xl px-8 flex items-center justify-between">
+    <div class="text-sm">
+      Blog by Ani
+    </div>
+
+    <div class="flex items-center">
+      <a href="https://anirudha.dev" target="_blank" rel="noopener noreferrer" class="footer-icon" aria-label="Home">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
+        </svg>
+      </a>
+    </div>
+
+    <div class="flex items-center gap-4">
+      <a href="https://github.com/anistark" target="_blank" rel="noopener noreferrer" class="footer-icon" aria-label="GitHub">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="currentColor" viewBox="0 0 24 24">
+          <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+        </svg>
+      </a>
+      <a href="https://x.com/kranirudha" target="_blank" rel="noopener noreferrer" class="footer-icon" aria-label="X (Twitter)">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="currentColor" viewBox="0 0 24 24">
+          <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+        </svg>
+      </a>
+      <a href="https://linkedin.com/in/kranirudha" target="_blank" rel="noopener noreferrer" class="footer-icon" aria-label="LinkedIn">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="currentColor" viewBox="0 0 24 24">
+          <path d="M4.98 3.5c0 1.381-1.11 2.5-2.48 2.5s-2.48-1.119-2.48-2.5c0-1.38 1.11-2.5 2.48-2.5s2.48 1.12 2.48 2.5zm.02 4.5h-5v16h5v-16zm7.982 0h-4.968v16h4.969v-8.399c0-4.67 6.029-5.052 6.029 0v8.399h4.988v-10.131c0-7.88-8.922-7.593-11.018-3.714v-2.155z"/>
+        </svg>
+      </a>
+    </div>
+  </div>
+</footer>
+    
+    <script src="https://unpkg.com/clipboard@2/dist/clipboard.min.js"></script>
+    <script src="/assets/main.bundle.js"></script>
+  </body>
+</html>

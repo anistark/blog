@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    
+    <meta itemprop="name" content="On-Chain Shared State | AniLog">
+    <meta itemprop="description" content="Communication is a key in any ecosystem. Now with more cross-chain communication getting sorted using bridges, it&#39;s high time to sort on-chain communications as well.">
+
+    
+    <meta name="twitter:title" content="On-Chain Shared State | AniLog">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:description" content="Communication is a key in any ecosystem. Now with more cross-chain communication getting sorted using bridges, it&#39;s high time to sort on-chain communications as well.">
+    <meta name="twitter:site" content="@kranirudha">
+    <meta name="twitter:creator" content="@kranirudha">
+    <meta name="twitter:image:src" content="https://blog.anirudha.dev/twitter.png">
+
+    
+    <meta name="og:title" content="On-Chain Shared State | AniLog">
+    <meta name="og:description" content="Communication is a key in any ecosystem. Now with more cross-chain communication getting sorted using bridges, it&#39;s high time to sort on-chain communications as well.">
+    <meta name="og:image" content="https://blog.anirudha.dev/og.png">
+    <meta name="og:url" content="https://blog.anirudha.dev/">
+    <meta name="og:site_name" content="AniLog">
+    <meta name="og:locale" content="en_GB">
+    <meta name="og:type" content="website">
+
+    <link rel="icon" type="image/png" href="/me.png" />
+
+    <title>On-Chain Shared State | AniLog</title>
+
+    <link rel="stylesheet" href="/assets/main.bundle.css">
+
+    <script>
+      // Set theme before page renders to prevent flash
+      (function() {
+        const savedTheme = localStorage.getItem('theme') || 'dark';
+        if (savedTheme === 'light') {
+          document.documentElement.setAttribute('data-theme', 'light');
+        }
+      })();
+    </script>
+
+    
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-YGZHVY9TD7"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-YGZHVY9TD7');
+    </script>
+    
+
+    
+  </head>
+  <body class="flex flex-col min-h-screen">
+    <header class="sticky top-0 z-50 glass-header">
+  <nav class="container mx-auto max-w-5xl px-8 py-3 flex flex-wrap items-center justify-between">
+    <div class="flex items-center gap-3">
+      <a href="/" class="flex items-center gap-3">
+        <img src="/ani.png" alt="AniLog logo" class="w-10 h-10 object-cover">
+        <h1 class="text-2xl leading-none m-0">AniLog</h1>
+      </a>
+    </div>
+
+    <div class="flex items-center gap-6">
+      <button id="theme-toggle" class="theme-toggle" aria-label="Toggle theme">
+        <svg class="sun-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="12" r="5"></circle>
+          <line x1="12" y1="1" x2="12" y2="3"></line>
+          <line x1="12" y1="21" x2="12" y2="23"></line>
+          <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+          <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+          <line x1="1" y1="12" x2="3" y2="12"></line>
+          <line x1="21" y1="12" x2="23" y2="12"></line>
+          <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+          <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+        </svg>
+        <svg class="moon-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+        </svg>
+      </button>
+    </div>
+  </nav>
+</header>
+    <main class="container mx-auto max-w-5xl p-8 grow">
+      
+    <p></p>
+
+    
+        <div class="post-cover-image" style="background-image: url('/images/posts/1675e0ae-ec2d-4c2f-a0b3-2b9a5684d7cb.webp');"></div>
+    
+
+    <div>
+        <h2>On-Chain Shared State</h2>
+
+        
+
+        
+            <p class="excerpt">Communication is a key in any ecosystem. Now with more cross-chain communication getting sorted using bridges, it&#39;s high time to sort on-chain communications as well.</p>
+        
+
+        
+            <div class="mb-2">
+                <a class="tag nft" href="/tag/nft">nft</a><a class="tag protocols" href="/tag/protocols">protocols</a><a class="tag eip" href="/tag/eip">eip</a><a class="tag dripverse" href="/tag/dripverse">dripverse</a>
+            </div>
+        
+
+        
+            
+                <p class="text-sm italic">Created on
+                    <span datetime="Fri Apr 26 2024 00:00:00 GMT+0000 (Coordinated Universal Time)">April 26, 2024</span>.</p>
+            
+        
+
+        <div class="content post">
+            
+                <hr />
+
+                <h3>Table of Contents</h3>
+
+                <nav class="toc">
+                <ol>
+                    
+                    <li><a href="#overriden">Overriden</a>
+            		</li>
+                </ol>
+            </nav>
+
+                <hr />
+            
+
+            <p>Communication is a key in any ecosystem. Now with more cross-chain communication getting sorted using bridges, it’s high time to sort on-chain communications as well. Particularly, referencing of composable smart contract functionalities within the same chain.</p>
+<h1 id="on-chain-immutability" tabindex="-1">On-Chain Immutability</h1>
+<p>Blockchains in general are isolated networks. Smart contracts are even further isolated in the network given that they record data that are immutable. Any update to their state records a new transaction cumulatively records the updated state. This is known and also creates a historical trail for later review and audit. There’s no problem is this process expect it’s not possible to update the smart contract code itself.</p>
+<p><em>I’ve always believe learning by example is best.</em> Let’s take a look at the usage of <code>ownerOf</code> from <code>IERC721</code> interface and how it’s used to check token ownership for any NFT.</p>
+<p>First we import via openzepplin package or you can write your own packaged contract <code>import &quot;@openzeppelin/contracts/token/ERC721/ERC721.sol&quot;</code> . Or if you really want to write your own <code>ERC721</code> contract, start with importing the interface <code>IERC721</code> to your contract: <code>import &quot;./IERC721.sol&quot;</code> .</p>
+<p>The <code>IERC721.sol</code> contains the function definition:</p>
+<pre class="language-solidity"><code class="language-solidity"><span class="token keyword">function</span> <span class="token function">ownerOf</span><span class="token punctuation">(</span><span class="token builtin">uint256</span> tokenId<span class="token punctuation">)</span> <span class="token keyword">external</span> <span class="token keyword">view</span> <span class="token keyword">returns</span> <span class="token punctuation">(</span><span class="token builtin">address</span> owner<span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre>
+<p>And in <code>ERC721.sol</code> you can find the first override for it as such:</p>
+<pre class="language-solidity"><code class="language-solidity"><span class="token keyword">function</span> <span class="token function">ownerOf</span><span class="token punctuation">(</span><span class="token builtin">uint256</span> tokenId<span class="token punctuation">)</span> <span class="token keyword">public</span> <span class="token keyword">view</span> virtual override <span class="token keyword">returns</span> <span class="token punctuation">(</span><span class="token builtin">address</span><span class="token punctuation">)</span> <span class="token punctuation">{</span><br>        <span class="token builtin">address</span> owner <span class="token operator">=</span> <span class="token function">_ownerOf</span><span class="token punctuation">(</span>tokenId<span class="token punctuation">)</span><span class="token punctuation">;</span><br>        <span class="token keyword">require</span><span class="token punctuation">(</span>owner <span class="token operator">!=</span> <span class="token builtin">address</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token string">"ERC721: invalid token ID"</span><span class="token punctuation">)</span><span class="token punctuation">;</span><br>        <span class="token keyword">return</span> owner<span class="token punctuation">;</span><br><span class="token punctuation">}</span></code></pre>
+<p>The function in itself is pretty straightforward. It takes <code>tokenId</code> as input and returns the owner address.</p>
+<p>To understand this further, it’s all stored in a mapping:</p>
+<pre class="language-solidity"><code class="language-solidity"><span class="token keyword">mapping</span><span class="token punctuation">(</span><span class="token builtin">uint256</span> <span class="token operator">=></span> <span class="token builtin">address</span><span class="token punctuation">)</span> <span class="token keyword">private</span> _owners<span class="token punctuation">;</span></code></pre>
+<p>Anyway, regardless of the implementation, this is industry standard at the moment. If in case you’d want to add some conditions or enhance this function in your own contract, you’d need to override this further.</p>
+<h2 id="overriden" tabindex="-1">Overriden</h2>
+<p>Say we want to check for temporary ownership, like a rental ownership, which is time bound. We can not edit the original mapping of course. There’s 2 ways:</p>
+<ol>
+<li>
+<p>We add a separate mapping only for the mapping of <code>tokenId</code> and <code>owner</code> to a <code>timestamp</code>.</p>
+</li>
+<li>
+<p>We ignore <code>_owners</code> mapping and write our own mapping replacing it. We’ll go with this option cause adding and reading from multiple memory storages will be costlier than having a rogue mapping lying around.</p>
+</li>
+</ol>
+<p>Let’s call our new mapping as <code>_ownership</code>:</p>
+<pre class="language-solidity"><code class="language-solidity"><span class="token keyword">struct</span> <span class="token class-name">Owner</span> <span class="token punctuation">{</span> <br>   <span class="token builtin">address</span> account<span class="token punctuation">;</span><br>   <span class="token builtin">uint256</span> expiry<span class="token punctuation">;</span><br><span class="token punctuation">}</span><br><span class="token keyword">mapping</span><span class="token punctuation">(</span><span class="token builtin">uint256</span> <span class="token operator">=></span> Owner<span class="token punctuation">)</span> <span class="token keyword">private</span> _ownership<span class="token punctuation">;</span></code></pre>
+<p>Now, we can map the ownership in this accordingly. But we also need to override our <code>ownerOf</code> function:</p>
+<pre class="language-solidity"><code class="language-solidity"><span class="token keyword">function</span> <span class="token function">ownerOf</span><span class="token punctuation">(</span><span class="token builtin">uint256</span> tokenId<span class="token punctuation">)</span> <span class="token keyword">public</span> <span class="token keyword">view</span> virtual override <span class="token keyword">returns</span> <span class="token punctuation">(</span><span class="token builtin">address</span><span class="token punctuation">,</span> expiry<span class="token punctuation">)</span> <span class="token punctuation">{</span><br>        Owner _owner <span class="token operator">=</span> <span class="token function">_ownership</span><span class="token punctuation">(</span>tokenId<span class="token punctuation">)</span><span class="token punctuation">;</span><br>        <span class="token keyword">require</span><span class="token punctuation">(</span>_owner<span class="token punctuation">.</span>account <span class="token operator">!=</span> <span class="token builtin">address</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token string">"ERC721: invalid token ID"</span><span class="token punctuation">)</span><span class="token punctuation">;</span><br>        <span class="token keyword">require</span><span class="token punctuation">(</span>_owner<span class="token punctuation">.</span>expiry <span class="token operator">></span> block<span class="token punctuation">.</span>timestamp<span class="token punctuation">,</span> <span class="token string">"Ownership Expired. No current owner found."</span><span class="token punctuation">)</span><span class="token punctuation">;</span><br>        <span class="token keyword">return</span> _owner<span class="token punctuation">.</span>account<span class="token punctuation">;</span><br><span class="token punctuation">}</span></code></pre>
+<p>Here, we’re doing a few things. First, we’re checking if the owner account exists and expiry is anytime beyond current block timestamp.</p>
+<p>Great, now our existing function <code>ownerOf</code> can serve as the modified version of the existing owner check. So, all the clients can now call this new function of contract and get timestamp enabled ownership check.</p>
+<p>However, here’s where things get interesting…</p>
+<h1 id="imported-smart-contracts" tabindex="-1">Imported Smart Contracts</h1>
+<p>The problem in above way is that we would need to burn all tokens from old smart contract and re-mint in new one in order for them to enable <code>expiry</code> in ownership. Which would lead to losing all history of the said tokens. So, how do we deal with this?</p>
+<p>Solidity supports importing another smart contract and referring to the functions of it as we established above. We usually use it to extend functionality. For example, we want to add a function to our previous contract which checks <code>ownerOf</code> and rewards a certain amount to them. So, we first need to define it:</p>
+<pre class="language-solidity"><code class="language-solidity"><span class="token keyword">import</span> <span class="token string">"@openzeppelin/contracts/token/ERC20/IERC20.sol"</span><span class="token punctuation">;</span><br><br><span class="token comment">// other code bits</span><br><br>IERC20 token<span class="token punctuation">;</span><br><br><span class="token comment">// ...</span><br><br>token <span class="token operator">=</span> <span class="token function">IERC20</span><span class="token punctuation">(</span>token_address<span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre>
+<p>Now, in above, <code>token</code> represents our token from previous contract which is imported based on <code>token_address</code>. So, we should be able to do something like <code>token.ownerOf(tokenId)</code> to get the owner of <code>tokenId</code> as shown above. Once we get it, let’s say we want to do something like <code>owner_address.send(value)</code> where value is in base token of the chain. This is the most commonly used way to use an external contract. But what would happen if you’re to extend an existing function of original contract?</p>
+<p>Let’s take our previous example. We want to add <code>expiry</code> to <code>ownerOf</code>. So, we write a new smart contract and a new function to check ownership. Cause we can’t override a function of a different contract. We’ve a new function which can have same name even. But for the sake of sanity, let’s use a different name, <code>newOwner()</code> and it looks something like:</p>
+<pre class="language-solidity"><code class="language-solidity"><br><br><span class="token keyword">contract</span> <span class="token class-name">RentContract</span> <span class="token punctuation">{</span><br>    <span class="token keyword">struct</span> <span class="token class-name">Owner</span> <span class="token punctuation">{</span> <br>       <span class="token builtin">address</span> account<span class="token punctuation">;</span><br>       <span class="token builtin">uint256</span> expiry<span class="token punctuation">;</span><br>    <span class="token punctuation">}</span><br>    <span class="token keyword">mapping</span><span class="token punctuation">(</span><span class="token builtin">uint256</span> <span class="token operator">=></span> Owner<span class="token punctuation">)</span> <span class="token keyword">private</span> _ownership<span class="token punctuation">;</span><br>    <br>    <span class="token keyword">function</span> <span class="token function">newOwner</span><span class="token punctuation">(</span><span class="token builtin">uint256</span> tokenId<span class="token punctuation">,</span> <span class="token builtin">address</span> _to<span class="token punctuation">,</span> <span class="token builtin">uint256</span> _expiry<span class="token punctuation">)</span> <span class="token keyword">external</span> virtual <span class="token punctuation">{</span><br>        _ownership<span class="token punctuation">[</span>tokenId<span class="token punctuation">]</span><span class="token punctuation">.</span>account <span class="token operator">=</span> _to<span class="token punctuation">;</span><br>        _ownership<span class="token punctuation">[</span>tokenId<span class="token punctuation">]</span><span class="token punctuation">.</span>expiry <span class="token operator">=</span> _expiry<span class="token punctuation">;</span><br>    <span class="token punctuation">}</span><br>    <span class="token comment">// ...</span><br><span class="token punctuation">}</span></code></pre>
+<p>So, what’s happening here is overloading (<em>not really since we’re using a different name for the function. But from a standard perspective, let’s assume it’s the same</em>) which means we’ve defined a second function and mapping to do the exact same thing which is already been done in previous contract where it’s been imported from. This obviously is a waste of memory on-chain but let’s leave that concern for later. So, now, we’ve a second contract, <code>RentContract</code> which has temporary ownership function which we can use. However, what about the client apps which is already pointed to the old contract? The token ownership does not show any changes regardless to whoever else it’s rented out via the <code>RentContract</code> .</p>
+<p><img src="/images/posts/a3be6cb7-aa15-476d-8a38-ae3f0221cc0b.png" alt=""></p>
+<h1 id="shared-state" tabindex="-1">Shared State</h1>
+<p>Here’s where the concept of Shared State comes in. Here’s to proposing a shared state system which allows to update the state of original contract if the same state is being dealt with on an extended contract.</p>
+<p><img src="/images/posts/bffb53f4-4995-4805-8594-7ba7ef188782.png" alt=""></p>
+<p>So, once this new system is in place, we should be able to reflect the updated state back to our original state thereby retaining backwards compatibility as well as history.</p>
+<p><img src="/images/posts/ed02d225-3be2-4736-8cf2-03d45f839c88.png" alt=""></p>
+<p>This is the next evolution in smart contract standards which will help with better backwards compatible DApps and protocols.</p>
+<p><em>LFG</em></p>
+
+        </div>
+
+        <div class="article-end">
+            <span>✦</span>
+            <span>✦</span>
+            <span>✦</span>
+        </div>
+
+        <div class="post-navigation">
+            <div class="post-nav-item post-nav-previous">
+                    <a href="/cyberspace/">
+                        <span class="nav-arrow">←</span>
+                        <div class="nav-content">
+                            <p class="nav-label">Previous</p>
+                            <p class="nav-title">CyberSpace</p>
+                        </div>
+                    </a>
+                
+            </div>
+
+            <div class="post-nav-item post-nav-next">
+                    <a href="/reentrancy-attack/">
+                        <div class="nav-content">
+                            <p class="nav-label">Next</p>
+                            <p class="nav-title">Reentrancy Attack</p>
+                        </div>
+                        <span class="nav-arrow">→</span>
+                    </a>
+                
+            </div>
+        </div>
+    </div>
+
+    </main>
+    <footer class="sticky bottom-0 z-50 glass-footer py-4">
+  <div class="container mx-auto max-w-5xl px-8 flex items-center justify-between">
+    <div class="text-sm">
+      Blog by Ani
+    </div>
+
+    <div class="flex items-center">
+      <a href="https://anirudha.dev" target="_blank" rel="noopener noreferrer" class="footer-icon" aria-label="Home">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
+        </svg>
+      </a>
+    </div>
+
+    <div class="flex items-center gap-4">
+      <a href="https://github.com/anistark" target="_blank" rel="noopener noreferrer" class="footer-icon" aria-label="GitHub">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="currentColor" viewBox="0 0 24 24">
+          <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+        </svg>
+      </a>
+      <a href="https://x.com/kranirudha" target="_blank" rel="noopener noreferrer" class="footer-icon" aria-label="X (Twitter)">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="currentColor" viewBox="0 0 24 24">
+          <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+        </svg>
+      </a>
+      <a href="https://linkedin.com/in/kranirudha" target="_blank" rel="noopener noreferrer" class="footer-icon" aria-label="LinkedIn">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="currentColor" viewBox="0 0 24 24">
+          <path d="M4.98 3.5c0 1.381-1.11 2.5-2.48 2.5s-2.48-1.119-2.48-2.5c0-1.38 1.11-2.5 2.48-2.5s2.48 1.12 2.48 2.5zm.02 4.5h-5v16h5v-16zm7.982 0h-4.968v16h4.969v-8.399c0-4.67 6.029-5.052 6.029 0v8.399h4.988v-10.131c0-7.88-8.922-7.593-11.018-3.714v-2.155z"/>
+        </svg>
+      </a>
+    </div>
+  </div>
+</footer>
+    
+    <script src="https://unpkg.com/clipboard@2/dist/clipboard.min.js"></script>
+    <script src="/assets/main.bundle.js"></script>
+  </body>
+</html>

@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    
+    <meta itemprop="name" content="How does Chain Abstraction work? | AniLog">
+    <meta itemprop="description" content="Technically speaking, chain abstraction means abstracting away the differences between blockchain networks to provide a seamless experience. The goal is to:.">
+
+    
+    <meta name="twitter:title" content="How does Chain Abstraction work? | AniLog">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:description" content="Technically speaking, chain abstraction means abstracting away the differences between blockchain networks to provide a seamless experience. The goal is to:.">
+    <meta name="twitter:site" content="@kranirudha">
+    <meta name="twitter:creator" content="@kranirudha">
+    <meta name="twitter:image:src" content="https://blog.anirudha.dev/twitter.png">
+
+    
+    <meta name="og:title" content="How does Chain Abstraction work? | AniLog">
+    <meta name="og:description" content="Technically speaking, chain abstraction means abstracting away the differences between blockchain networks to provide a seamless experience. The goal is to:.">
+    <meta name="og:image" content="https://blog.anirudha.dev/og.png">
+    <meta name="og:url" content="https://blog.anirudha.dev/">
+    <meta name="og:site_name" content="AniLog">
+    <meta name="og:locale" content="en_GB">
+    <meta name="og:type" content="website">
+
+    <link rel="icon" type="image/png" href="/me.png" />
+
+    <title>How does Chain Abstraction work? | AniLog</title>
+
+    <link rel="stylesheet" href="/assets/main.bundle.css">
+
+    <script>
+      // Set theme before page renders to prevent flash
+      (function() {
+        const savedTheme = localStorage.getItem('theme') || 'dark';
+        if (savedTheme === 'light') {
+          document.documentElement.setAttribute('data-theme', 'light');
+        }
+      })();
+    </script>
+
+    
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-YGZHVY9TD7"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-YGZHVY9TD7');
+    </script>
+    
+
+    
+  </head>
+  <body class="flex flex-col min-h-screen">
+    <header class="sticky top-0 z-50 glass-header">
+  <nav class="container mx-auto max-w-5xl px-8 py-3 flex flex-wrap items-center justify-between">
+    <div class="flex items-center gap-3">
+      <a href="/" class="flex items-center gap-3">
+        <img src="/ani.png" alt="AniLog logo" class="w-10 h-10 object-cover">
+        <h1 class="text-2xl leading-none m-0">AniLog</h1>
+      </a>
+    </div>
+
+    <div class="flex items-center gap-6">
+      <button id="theme-toggle" class="theme-toggle" aria-label="Toggle theme">
+        <svg class="sun-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="12" r="5"></circle>
+          <line x1="12" y1="1" x2="12" y2="3"></line>
+          <line x1="12" y1="21" x2="12" y2="23"></line>
+          <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+          <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+          <line x1="1" y1="12" x2="3" y2="12"></line>
+          <line x1="21" y1="12" x2="23" y2="12"></line>
+          <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+          <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+        </svg>
+        <svg class="moon-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+        </svg>
+      </button>
+    </div>
+  </nav>
+</header>
+    <main class="container mx-auto max-w-5xl p-8 grow">
+      
+    <p></p>
+
+    
+        <div class="post-cover-image" style="background-image: url('/images/posts/e93e4550-0c33-4622-ad9b-e25935218439.jpeg');"></div>
+    
+
+    <div>
+        <h2>How does Chain Abstraction work?</h2>
+
+        
+
+        
+            <p class="excerpt">Technically speaking, chain abstraction means abstracting away the differences between blockchain networks to provide a seamless experience. The goal is to:.</p>
+        
+
+        
+            <div class="mb-2">
+                <a class="tag rust" href="/tag/rust">rust</a><a class="tag token" href="/tag/token">token</a><a class="tag interoperability" href="/tag/interoperability">interoperability</a><a class="tag solidity" href="/tag/solidity">solidity</a><a class="tag web3" href="/tag/web3">web3</a><a class="tag cross-chain" href="/tag/cross-chain">cross-chain</a><a class="tag nft" href="/tag/nft">nft</a><a class="tag cosmwasm" href="/tag/cosmwasm">cosmwasm</a><a class="tag chain-abstraction" href="/tag/chain-abstraction">chain-abstraction</a>
+            </div>
+        
+
+        
+            
+                <p class="text-sm italic">Created on
+                    <span datetime="Tue Dec 17 2024 00:00:00 GMT+0000 (Coordinated Universal Time)">December 17, 2024</span>.</p>
+            
+        
+
+        <div class="content post">
+            
+                <hr />
+
+                <h3>Table of Contents</h3>
+
+                <nav class="toc">
+                <ol>
+                    
+                    <li><a href="#cross-chain-bridges">Cross-Chain Bridges</a>
+            		</li>
+
+                    <li><a href="#swaps-and-liquidity-protocols">Swaps and Liquidity Protocols</a>
+            		</li>
+
+                    <li><a href="#interoperability-protocols">Interoperability Protocols</a>
+            		</li>
+
+                    <li><a href="#universal-wallets">Universal Wallets</a>
+            		</li>
+
+                    <li><a href="#rpc-aggregators">RPC Aggregators</a>
+            		</li>
+                </ol>
+            </nav>
+
+                <hr />
+            
+
+            <blockquote>
+<p>If you’re looking to learn about the basics about Chain Abstraction, then read <a href="https://blog.anirudha.dev/chain-abstraction">this article</a> instead.</p>
+</blockquote>
+<p>Technically speaking, chain abstraction means abstracting away the differences between blockchain networks to provide a seamless experience. The goal is to:</p>
+<ol>
+<li>
+<p><strong>Simplify User Interaction:</strong> Make it easy for users to interact with apps without worrying about which chain they’re on.</p>
+</li>
+<li>
+<p><strong>Enable Interoperability:</strong> Allow assets, data, and actions to move freely between chains.</p>
+</li>
+<li>
+<p><strong>Reduce Complexity for Developers:</strong> Provide unified tools and APIs to build cross-chain applications.</p>
+</li>
+</ol>
+<p>To achieve chain abstraction, several tools and mechanisms come into play.</p>
+<h2 id="cross-chain-bridges" tabindex="-1"><strong>Cross-Chain Bridges</strong></h2>
+<p>Bridges connect different blockchains, enabling the transfer of assets and data between them. Think of them as digital highways. For example, if you want to move your tokens from Ethereum to Binance Smart Chain, a bridge handles the heavy lifting.</p>
+<ul>
+<li>
+<p>You lock your tokens on the source chain (e.g., Ethereum).</p>
+</li>
+<li>
+<p>The bridge mints an equivalent amount of tokens on the destination chain (e.g., Binance Smart Chain).</p>
+</li>
+<li>
+<p>When you want to reverse the process, the tokens on the destination chain are burned, and the original tokens are unlocked.</p>
+</li>
+</ul>
+<h2 id="swaps-and-liquidity-protocols" tabindex="-1"><strong>Swaps and Liquidity Protocols</strong></h2>
+<p>Swapping tokens across chains often requires decentralized exchanges (DEXs) or protocols like <a href="https://app.uniswap.org/">Uniswap</a> and <a href="https://www.sushi.com/ethereum/swap">SushiSwap</a>. Some advanced protocols like <a href="https://thorchain.org/">Thorchain</a> take it a step further by supporting native cross-chain swaps without wrapping tokens.</p>
+<ul>
+<li>
+<p>Liquidity pools on different chains allow you to trade one token for another.</p>
+</li>
+<li>
+<p>Cross-chain swap protocols use bridges under the hood to move assets while maintaining a smooth experience.</p>
+</li>
+</ul>
+<h2 id="interoperability-protocols" tabindex="-1"><strong>Interoperability Protocols</strong></h2>
+<p>Protocols like <a href="https://polkadot.com/">Polkadot</a> and <a href="https://cosmos.network/">Cosmos</a> focus on making blockchains inherently interoperable. They create ecosystems where chains can share data and assets natively.</p>
+<ul>
+<li>
+<p><strong>Relay Chains:</strong> Central hubs that coordinate communication between connected blockchains.</p>
+</li>
+<li>
+<p><strong>IBC (Inter-Blockchain Communication):</strong> A protocol standard used in Cosmos to let chains talk to each other securely. All contracts follow the <a href="https://github.com/cosmos/ibc">Interchain Standards (ICS)</a> for the Cosmos network &amp; interchain ecosystem.</p>
+</li>
+</ul>
+<h2 id="universal-wallets" tabindex="-1"><strong>Universal Wallets</strong></h2>
+<p>Tools like <a href="https://particle.network/">Particle Network</a> enable universal account wallets that work across multiple chains. Instead of manually switching between networks, these wallets auto-detect and handle transactions on the right chain.</p>
+<ul>
+<li>
+<p>Chain detection and configuration happen automatically.</p>
+</li>
+<li>
+<p>Transactions are routed to the correct blockchain without user intervention.</p>
+</li>
+</ul>
+<h2 id="rpc-aggregators" tabindex="-1"><strong>RPC Aggregators</strong></h2>
+<p>Remote Procedure Call (RPC) endpoints are gateways to blockchains. Aggregators like Alchemy and Infura provide a unified interface to interact with multiple blockchains, abstracting away the need to set up individual endpoints.</p>
+<p><img src="https://blog.particle.network/content/images/2024/06/image1-5.png" alt=""></p>
+<p>Chain abstraction is the backbone of many user-friendly crypto applications. Lets see a few examples:</p>
+<p>Imagine you’re using a decentralized finance app to swap Ethereum (ETH) for Binance Coin (BNB). Here’s what it looks like from your perspective:</p>
+<ol>
+<li>
+<p>You open the app and select <code>ETH</code> as the token to swap.</p>
+</li>
+<li>
+<p>You choose <code>BNB</code> as the token to receive.</p>
+</li>
+<li>
+<p>You click “Swap” and confirm the transaction.</p>
+</li>
+</ol>
+<p>From your perspective, it’s a one-click process. Behind the scenes, multiple tools work together to make it seamless.</p>
+<ol>
+<li>
+<p>The app detects that ETH is on Ethereum and BNB is on Binance Smart Chain.</p>
+</li>
+<li>
+<p>A cross-chain bridge locks your ETH on Ethereum and creates a wrapped version on Binance Smart Chain.</p>
+</li>
+<li>
+<p>The app uses a liquidity pool to exchange the wrapped ETH for BNB.</p>
+</li>
+<li>
+<p>Finally, the app transfers BNB to your wallet on Binance Smart Chain.</p>
+</li>
+</ol>
+<p>Here’s a simple Solidity contract for locking tokens on Ethereum and emitting an event to notify a bridge:</p>
+<pre class="language-solidity"><code class="language-solidity"><span class="token comment">// SPDX-License-Identifier: MIT</span><br><span class="token keyword">pragma</span> <span class="token keyword">solidity</span> <span class="token operator">^</span><span class="token version number">0.8.0</span><span class="token punctuation">;</span><br><br><span class="token keyword">contract</span> <span class="token class-name">TokenLock</span> <span class="token punctuation">{</span><br>    <span class="token keyword">event</span> <span class="token function">TokenLocked</span><span class="token punctuation">(</span><span class="token builtin">address</span> <span class="token keyword">indexed</span> user<span class="token punctuation">,</span> <span class="token builtin">uint256</span> amount<span class="token punctuation">,</span> <span class="token builtin">string</span> destinationChain<span class="token punctuation">)</span><span class="token punctuation">;</span><br><br>    <span class="token keyword">mapping</span><span class="token punctuation">(</span><span class="token builtin">address</span> <span class="token operator">=></span> <span class="token builtin">uint256</span><span class="token punctuation">)</span> <span class="token keyword">public</span> lockedBalances<span class="token punctuation">;</span><br><br>    <span class="token keyword">function</span> <span class="token function">lockTokens</span><span class="token punctuation">(</span><span class="token builtin">uint256</span> amount<span class="token punctuation">,</span> <span class="token builtin">string</span> <span class="token keyword">memory</span> destinationChain<span class="token punctuation">)</span> <span class="token keyword">external</span> <span class="token punctuation">{</span><br>        <span class="token keyword">require</span><span class="token punctuation">(</span>amount <span class="token operator">></span> <span class="token number">0</span><span class="token punctuation">,</span> <span class="token string">"Amount must be greater than 0"</span><span class="token punctuation">)</span><span class="token punctuation">;</span><br><br>        <span class="token comment">// Simulate token lock (e.g., ERC20 transfer to contract)</span><br>        lockedBalances<span class="token punctuation">[</span>msg<span class="token punctuation">.</span>sender<span class="token punctuation">]</span> <span class="token operator">+=</span> amount<span class="token punctuation">;</span><br><br>        <span class="token comment">// Emit event for bridge to pick up</span><br>        <span class="token keyword">emit</span> <span class="token function">TokenLocked</span><span class="token punctuation">(</span>msg<span class="token punctuation">.</span>sender<span class="token punctuation">,</span> amount<span class="token punctuation">,</span> destinationChain<span class="token punctuation">)</span><span class="token punctuation">;</span><br>    <span class="token punctuation">}</span><br><span class="token punctuation">}</span></code></pre>
+<p>This contract locks tokens on Ethereum and emits an event. A bridge service listens to the event and handles minting on the destination chain.</p>
+<p>Lets take another example. Imagine you own an NFT on Ethereum but want to sell it on a Solana-based marketplace. Chain abstraction allows this by bridging the NFT to Solana while ensuring its metadata and ownership history remain intact.</p>
+<ol>
+<li>
+<p>The NFT is locked on Ethereum, and a wrapped version is created on Solana.</p>
+</li>
+<li>
+<p>The marketplace interacts with the Solana version, displaying it as if it were native to Solana.</p>
+</li>
+<li>
+<p>When the NFT is sold, the buyer can choose to keep it on Solana or transfer it back to Ethereum.</p>
+</li>
+</ol>
+<pre class="language-solidity"><code class="language-solidity"><span class="token comment">// SPDX-License-Identifier: MIT</span><br><span class="token keyword">pragma</span> <span class="token keyword">solidity</span> <span class="token operator">^</span><span class="token version number">0.8.0</span><span class="token punctuation">;</span><br><br><span class="token keyword">import</span> <span class="token string">"@openzeppelin/contracts/token/ERC721/IERC721.sol"</span><span class="token punctuation">;</span><br><br><span class="token keyword">contract</span> <span class="token class-name">NFTBridge</span> <span class="token punctuation">{</span><br>    <span class="token keyword">event</span> <span class="token function">NFTLocked</span><span class="token punctuation">(</span><span class="token builtin">address</span> <span class="token keyword">indexed</span> user<span class="token punctuation">,</span> <span class="token builtin">uint256</span> tokenId<span class="token punctuation">,</span> <span class="token builtin">string</span> destinationChain<span class="token punctuation">)</span><span class="token punctuation">;</span><br><br>    IERC721 <span class="token keyword">public</span> nftContract<span class="token punctuation">;</span><br><br>    <span class="token keyword">constructor</span><span class="token punctuation">(</span><span class="token builtin">address</span> _nftContract<span class="token punctuation">)</span> <span class="token punctuation">{</span><br>        nftContract <span class="token operator">=</span> <span class="token function">IERC721</span><span class="token punctuation">(</span>_nftContract<span class="token punctuation">)</span><span class="token punctuation">;</span><br>    <span class="token punctuation">}</span><br><br>    <span class="token keyword">function</span> <span class="token function">lockNFT</span><span class="token punctuation">(</span><span class="token builtin">uint256</span> tokenId<span class="token punctuation">,</span> <span class="token builtin">string</span> <span class="token keyword">memory</span> destinationChain<span class="token punctuation">)</span> <span class="token keyword">external</span> <span class="token punctuation">{</span><br>        <span class="token keyword">require</span><span class="token punctuation">(</span>nftContract<span class="token punctuation">.</span><span class="token function">ownerOf</span><span class="token punctuation">(</span>tokenId<span class="token punctuation">)</span> <span class="token operator">==</span> msg<span class="token punctuation">.</span>sender<span class="token punctuation">,</span> <span class="token string">"Not the owner"</span><span class="token punctuation">)</span><span class="token punctuation">;</span><br><br>        <span class="token comment">// Transfer the NFT to the bridge contract</span><br>        nftContract<span class="token punctuation">.</span><span class="token function">transferFrom</span><span class="token punctuation">(</span>msg<span class="token punctuation">.</span>sender<span class="token punctuation">,</span> <span class="token builtin">address</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">)</span><span class="token punctuation">,</span> tokenId<span class="token punctuation">)</span><span class="token punctuation">;</span><br><br>        <span class="token comment">// Emit event for bridge service</span><br>        <span class="token keyword">emit</span> <span class="token function">NFTLocked</span><span class="token punctuation">(</span>msg<span class="token punctuation">.</span>sender<span class="token punctuation">,</span> tokenId<span class="token punctuation">,</span> destinationChain<span class="token punctuation">)</span><span class="token punctuation">;</span><br>    <span class="token punctuation">}</span><br><span class="token punctuation">}</span></code></pre>
+<p>In this example, the contract locks an NFT and emits an event. The bridge then handles minting the wrapped NFT on the target chain.</p>
+<p>How about EVM to Cosmos perhaps?</p>
+<p>Here’s an example illustrating how a smart contract on Ethereum can interact with a Cosmos chain using IBC:</p>
+<pre class="language-solidity"><code class="language-solidity"><span class="token comment">// SPDX-License-Identifier: MIT</span><br><span class="token keyword">pragma</span> <span class="token keyword">solidity</span> <span class="token operator">^</span><span class="token version number">0.8.0</span><span class="token punctuation">;</span><br><br><span class="token keyword">contract</span> <span class="token class-name">EVMToCosmosBridge</span> <span class="token punctuation">{</span><br>    <span class="token keyword">event</span> <span class="token function">TokenSentToCosmos</span><span class="token punctuation">(</span><span class="token builtin">address</span> <span class="token keyword">indexed</span> sender<span class="token punctuation">,</span> <span class="token builtin">uint256</span> amount<span class="token punctuation">,</span> <span class="token builtin">string</span> cosmosAddress<span class="token punctuation">)</span><span class="token punctuation">;</span><br><br>    <span class="token keyword">mapping</span><span class="token punctuation">(</span><span class="token builtin">address</span> <span class="token operator">=></span> <span class="token builtin">uint256</span><span class="token punctuation">)</span> <span class="token keyword">public</span> balances<span class="token punctuation">;</span><br><br>    <span class="token keyword">function</span> <span class="token function">sendToCosmos</span><span class="token punctuation">(</span><span class="token builtin">uint256</span> amount<span class="token punctuation">,</span> <span class="token builtin">string</span> <span class="token keyword">memory</span> cosmosAddress<span class="token punctuation">)</span> <span class="token keyword">external</span> <span class="token punctuation">{</span><br>        <span class="token keyword">require</span><span class="token punctuation">(</span>amount <span class="token operator">></span> <span class="token number">0</span><span class="token punctuation">,</span> <span class="token string">"Amount must be greater than 0"</span><span class="token punctuation">)</span><span class="token punctuation">;</span><br><br>        <span class="token comment">// Simulate token lock (e.g., ERC20 transfer to contract)</span><br>        balances<span class="token punctuation">[</span>msg<span class="token punctuation">.</span>sender<span class="token punctuation">]</span> <span class="token operator">+=</span> amount<span class="token punctuation">;</span><br><br>        <span class="token comment">// Emit event for Cosmos chain to pick up</span><br>        <span class="token keyword">emit</span> <span class="token function">TokenSentToCosmos</span><span class="token punctuation">(</span>msg<span class="token punctuation">.</span>sender<span class="token punctuation">,</span> amount<span class="token punctuation">,</span> cosmosAddress<span class="token punctuation">)</span><span class="token punctuation">;</span><br>    <span class="token punctuation">}</span><br><span class="token punctuation">}</span></code></pre>
+<p>This contract locks tokens on Ethereum and emits an event for an IBC-compatible relayer to transfer the equivalent tokens to a Cosmos chain.</p>
+<p>On the Cosmos side, a module listens for IBC events and handles incoming tokens:</p>
+<pre class="language-rust"><code class="language-rust">package tokenbridge<br><br><span class="token function">import</span> <span class="token punctuation">(</span><br>    <span class="token string">"github.com/cosmos/cosmos-sdk/types"</span><br>    <span class="token string">"github.com/cosmos/ibc-go/modules/core/04-channel/types"</span><br><span class="token punctuation">)</span><br><br>func <span class="token class-name">HandleTokenTransfer</span><span class="token punctuation">(</span>ctx sdk<span class="token punctuation">.</span><span class="token class-name">Context</span><span class="token punctuation">,</span> msg types<span class="token punctuation">.</span><span class="token class-name">MsgRecvPacket</span><span class="token punctuation">)</span> error <span class="token punctuation">{</span><br>    <span class="token comment">// Decode the packet</span><br>    var data <span class="token class-name">TokenTransferPacketData</span><br>    <span class="token keyword">if</span> err <span class="token punctuation">:</span><span class="token operator">=</span> json<span class="token punctuation">.</span><span class="token class-name">Unmarshal</span><span class="token punctuation">(</span>msg<span class="token punctuation">.</span><span class="token class-name">Packet</span><span class="token punctuation">.</span><span class="token class-name">Data</span><span class="token punctuation">,</span> <span class="token operator">&amp;</span>data<span class="token punctuation">)</span><span class="token punctuation">;</span> err <span class="token operator">!=</span> nil <span class="token punctuation">{</span><br>        <span class="token keyword">return</span> err<br>    <span class="token punctuation">}</span><br><br>    <span class="token comment">// Mint the tokens for the recipient</span><br>    recipient <span class="token punctuation">:</span><span class="token operator">=</span> sdk<span class="token punctuation">.</span><span class="token class-name">AccAddress</span><span class="token punctuation">(</span>data<span class="token punctuation">.</span><span class="token class-name">Recipient</span><span class="token punctuation">)</span><br>    amount <span class="token punctuation">:</span><span class="token operator">=</span> sdk<span class="token punctuation">.</span><span class="token class-name">NewCoin</span><span class="token punctuation">(</span>data<span class="token punctuation">.</span><span class="token class-name">Denom</span><span class="token punctuation">,</span> sdk<span class="token punctuation">.</span><span class="token class-name">NewInt</span><span class="token punctuation">(</span>data<span class="token punctuation">.</span><span class="token class-name">Amount</span><span class="token punctuation">)</span><span class="token punctuation">)</span><br><br>    <span class="token keyword">if</span> err <span class="token punctuation">:</span><span class="token operator">=</span> <span class="token class-name">MintTokens</span><span class="token punctuation">(</span>ctx<span class="token punctuation">,</span> recipient<span class="token punctuation">,</span> amount<span class="token punctuation">)</span><span class="token punctuation">;</span> err <span class="token operator">!=</span> nil <span class="token punctuation">{</span><br>        <span class="token keyword">return</span> err<br>    <span class="token punctuation">}</span><br><br>    <span class="token keyword">return</span> nil<br><span class="token punctuation">}</span><br><br>func <span class="token class-name">MintTokens</span><span class="token punctuation">(</span>ctx sdk<span class="token punctuation">.</span><span class="token class-name">Context</span><span class="token punctuation">,</span> recipient sdk<span class="token punctuation">.</span><span class="token class-name">AccAddress</span><span class="token punctuation">,</span> amount sdk<span class="token punctuation">.</span><span class="token class-name">Coin</span><span class="token punctuation">)</span> error <span class="token punctuation">{</span><br>    <span class="token comment">// Use the bank module to mint and send tokens</span><br>    bankKeeper <span class="token punctuation">:</span><span class="token operator">=</span> <span class="token class-name">GetBankKeeper</span><span class="token punctuation">(</span><span class="token punctuation">)</span><br>    <span class="token keyword">return</span> bankKeeper<span class="token punctuation">.</span><span class="token class-name">MintCoins</span><span class="token punctuation">(</span>ctx<span class="token punctuation">,</span> <span class="token class-name">ModuleName</span><span class="token punctuation">,</span> sdk<span class="token punctuation">.</span><span class="token class-name">NewCoins</span><span class="token punctuation">(</span>amount<span class="token punctuation">)</span><span class="token punctuation">)</span><br><span class="token punctuation">}</span></code></pre>
+<p>This Cosmos module listens for incoming IBC packets, decodes the token transfer details, and mints tokens to the recipient’s address. It complements the Ethereum-side contract to complete the abstraction.</p>
+<p>Now, since blockchains are inherently siloed networks, they ideally wouldn’t know to even listen each other. That’s where the bridges and other tools come in. Even with bridges, potential limitations still exists. If the cross-chain bridge experiences congestion, your transaction might be delayed. Additionally, if there’s insufficient liquidity in the liquidity pool for the target token, you might get unfavorable rates or the swap could fail entirely. Lastly, any issues with the smart contracts underlying the bridge or pool could result in transaction errors or delays.<br>
+Despite these risks, robust protocols and fallback mechanisms are constantly evolving to mitigate such problems. Scalability can also become a bottleneck as the number of connected chains increases, requiring more resources to maintain performance. Security is another concern, as cross-chain communication introduces additional attack surfaces, such as vulnerabilities in the relay chains or the Inter-Blockchain Communication (IBC) protocol. Addressing these issues is critical for achieving robust and secure interoperability.</p>
+<p><em>There’s a long way to go to achieve true chain abstraction, but we’re on the way already…</em></p>
+
+        </div>
+
+        <div class="article-end">
+            <span>✦</span>
+            <span>✦</span>
+            <span>✦</span>
+        </div>
+
+        <div class="post-navigation">
+            <div class="post-nav-item post-nav-previous">
+                    <a href="/manga-manhua-manhwa/">
+                        <span class="nav-arrow">←</span>
+                        <div class="nav-content">
+                            <p class="nav-label">Previous</p>
+                            <p class="nav-title">Manga, Manhua and Manhwa</p>
+                        </div>
+                    </a>
+                
+            </div>
+
+            <div class="post-nav-item post-nav-next">
+                    <a href="/synthetic-asset-tokens/">
+                        <div class="nav-content">
+                            <p class="nav-label">Next</p>
+                            <p class="nav-title">Synthetic Asset Tokens</p>
+                        </div>
+                        <span class="nav-arrow">→</span>
+                    </a>
+                
+            </div>
+        </div>
+    </div>
+
+    </main>
+    <footer class="sticky bottom-0 z-50 glass-footer py-4">
+  <div class="container mx-auto max-w-5xl px-8 flex items-center justify-between">
+    <div class="text-sm">
+      Blog by Ani
+    </div>
+
+    <div class="flex items-center">
+      <a href="https://anirudha.dev" target="_blank" rel="noopener noreferrer" class="footer-icon" aria-label="Home">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
+        </svg>
+      </a>
+    </div>
+
+    <div class="flex items-center gap-4">
+      <a href="https://github.com/anistark" target="_blank" rel="noopener noreferrer" class="footer-icon" aria-label="GitHub">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="currentColor" viewBox="0 0 24 24">
+          <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+        </svg>
+      </a>
+      <a href="https://x.com/kranirudha" target="_blank" rel="noopener noreferrer" class="footer-icon" aria-label="X (Twitter)">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="currentColor" viewBox="0 0 24 24">
+          <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+        </svg>
+      </a>
+      <a href="https://linkedin.com/in/kranirudha" target="_blank" rel="noopener noreferrer" class="footer-icon" aria-label="LinkedIn">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="currentColor" viewBox="0 0 24 24">
+          <path d="M4.98 3.5c0 1.381-1.11 2.5-2.48 2.5s-2.48-1.119-2.48-2.5c0-1.38 1.11-2.5 2.48-2.5s2.48 1.12 2.48 2.5zm.02 4.5h-5v16h5v-16zm7.982 0h-4.968v16h4.969v-8.399c0-4.67 6.029-5.052 6.029 0v8.399h4.988v-10.131c0-7.88-8.922-7.593-11.018-3.714v-2.155z"/>
+        </svg>
+      </a>
+    </div>
+  </div>
+</footer>
+    
+    <script src="https://unpkg.com/clipboard@2/dist/clipboard.min.js"></script>
+    <script src="/assets/main.bundle.js"></script>
+  </body>
+</html>

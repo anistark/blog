@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    
+    <meta itemprop="name" content="The WebAssembly Odyssey | AniLog">
+    <meta itemprop="description" content="In 2017, WebAssembly (WASM) arrived as a new low-level bytecode format. Safe, compact, and fast.">
+
+    
+    <meta name="twitter:title" content="The WebAssembly Odyssey | AniLog">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:description" content="In 2017, WebAssembly (WASM) arrived as a new low-level bytecode format. Safe, compact, and fast.">
+    <meta name="twitter:site" content="@kranirudha">
+    <meta name="twitter:creator" content="@kranirudha">
+    <meta name="twitter:image:src" content="https://blog.anirudha.dev/twitter.png">
+
+    
+    <meta name="og:title" content="The WebAssembly Odyssey | AniLog">
+    <meta name="og:description" content="In 2017, WebAssembly (WASM) arrived as a new low-level bytecode format. Safe, compact, and fast.">
+    <meta name="og:image" content="https://blog.anirudha.dev/og.png">
+    <meta name="og:url" content="https://blog.anirudha.dev/">
+    <meta name="og:site_name" content="AniLog">
+    <meta name="og:locale" content="en_GB">
+    <meta name="og:type" content="website">
+
+    <link rel="icon" type="image/png" href="/me.png" />
+
+    <title>The WebAssembly Odyssey | AniLog</title>
+
+    <link rel="stylesheet" href="/assets/main.bundle.css">
+
+    <script>
+      // Set theme before page renders to prevent flash
+      (function() {
+        const savedTheme = localStorage.getItem('theme') || 'dark';
+        if (savedTheme === 'light') {
+          document.documentElement.setAttribute('data-theme', 'light');
+        }
+      })();
+    </script>
+
+    
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-YGZHVY9TD7"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-YGZHVY9TD7');
+    </script>
+    
+
+    
+  </head>
+  <body class="flex flex-col min-h-screen">
+    <header class="sticky top-0 z-50 glass-header">
+  <nav class="container mx-auto max-w-5xl px-8 py-3 flex flex-wrap items-center justify-between">
+    <div class="flex items-center gap-3">
+      <a href="/" class="flex items-center gap-3">
+        <img src="/ani.png" alt="AniLog logo" class="w-10 h-10 object-cover">
+        <h1 class="text-2xl leading-none m-0">AniLog</h1>
+      </a>
+    </div>
+
+    <div class="flex items-center gap-6">
+      <button id="theme-toggle" class="theme-toggle" aria-label="Toggle theme">
+        <svg class="sun-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="12" r="5"></circle>
+          <line x1="12" y1="1" x2="12" y2="3"></line>
+          <line x1="12" y1="21" x2="12" y2="23"></line>
+          <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+          <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+          <line x1="1" y1="12" x2="3" y2="12"></line>
+          <line x1="21" y1="12" x2="23" y2="12"></line>
+          <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+          <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+        </svg>
+        <svg class="moon-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+        </svg>
+      </button>
+    </div>
+  </nav>
+</header>
+    <main class="container mx-auto max-w-5xl p-8 grow">
+      
+    <p></p>
+
+    
+        <div class="post-cover-image" style="background-image: url('/images/posts/9cb3f82d-a70e-434a-9c8b-e5dec84b8da4.png');"></div>
+    
+
+    <div>
+        <h2>The WebAssembly Odyssey</h2>
+
+        
+
+        
+            <p class="excerpt">In 2017, WebAssembly (WASM) arrived as a new low-level bytecode format. Safe, compact, and fast.</p>
+        
+
+        
+            <div class="mb-2">
+                <a class="tag webassembly" href="/tag/webassembly">webassembly</a><a class="tag ecosystem" href="/tag/ecosystem">ecosystem</a><a class="tag wasm" href="/tag/wasm">wasm</a><a class="tag landscape" href="/tag/landscape">landscape</a>
+            </div>
+        
+
+        
+            
+                <p class="text-sm italic">Created on
+                    <span datetime="Wed Apr 23 2025 00:00:00 GMT+0000 (Coordinated Universal Time)">April 23, 2025</span>.</p>
+            
+        
+
+        <div class="content post">
+            
+                <hr />
+
+                <h3>Table of Contents</h3>
+
+                <nav class="toc">
+                <ol>
+                    
+                    <li><a href="#a-bytecode-born-for-browsers">A Bytecode Born for Browsers</a>
+            		</li>
+
+                    <li><a href="#wasi---giving-wasm-a-real-world">WASI - Giving WASM a Real World</a>
+            		</li>
+
+                    <li><a href="#tooling-%26-runtimes-evolve">Tooling & Runtimes Evolve</a>
+            
+                <ol>
+                    
+                    <li><a href="#%F0%9F%9B%A0%EF%B8%8F-popular-toolchains%3A">🛠️ Popular Toolchains:</a>
+            		</li>
+
+                    <li><a href="#%E2%9A%A1-key-runtimes%3A">⚡ Key Runtimes:</a>
+            		</li>
+                </ol>
+            		</li>
+
+                    <li><a href="#wasm-escapes-the-browser">WASM Escapes the Browser</a>
+            
+                <ol>
+                    
+                    <li><a href="#browsers%3F-still-relevant.">Browsers? Still relevant.</a>
+            		</li>
+
+                    <li><a href="#the-edge%3F-wasm%E2%80%99s-new-playground.">The Edge? WASM’s new playground.</a>
+            		</li>
+
+                    <li><a href="#smart-contracts%3F-wasm-native-chains-like-cosmos%2C-polkadot%2C-near%2C-solana-and-internet-computer-are-rewriting-the-rulebook.-no-more-custom-vms%2C-just-webassembly-all-the-way-down.">Smart Contracts? WASM-native chains like Cosmos, Polkadot, NEAR, Solana and Internet Computer are rewriting the rulebook. No more custom VMs, just WebAssembly all the way down.</a>
+            		</li>
+                </ol>
+            		</li>
+
+                    <li><a href="#wasm-goes-everywhere">WASM Goes Everywhere</a>
+            
+                <ol>
+                    
+                    <li><a href="#%F0%9F%9A%80-serverless-%26-edge">🚀 Serverless & Edge</a>
+            		</li>
+                </ol>
+            		</li>
+
+                    <li><a href="#active-development-in-wasm">Active development in WASM</a>
+            		</li>
+
+                    <li><a href="#what%E2%80%99s-next%3F">What’s Next?</a>
+            		</li>
+                </ol>
+            </nav>
+
+                <hr />
+            
+
+            <blockquote>
+<p><em>From browser booster to universal runtime, the journey of WebAssembly in 2025.</em></p>
+</blockquote>
+<h2 id="a-bytecode-born-for-browsers" tabindex="-1">A Bytecode Born for Browsers</h2>
+<p>In 2017, WebAssembly (WASM) arrived as a new low-level bytecode format. Safe, compact, and fast. It was meant to make games, 3D apps, and video editors perform better inside browsers.</p>
+<p>But developers had a bigger question:</p>
+<blockquote>
+<p>“What if this thing could run <em>anywhere</em>?”</p>
+</blockquote>
+<h2 id="wasi---giving-wasm-a-real-world" tabindex="-1">WASI - Giving WASM a Real World</h2>
+<p><strong>WASI</strong> (WebAssembly System Interface) changed the game by giving WASM access to filesystems, networking, and other OS-level capabilities in a secure way.</p>
+<p>🧪 <em>WASI Hello World (Rust)</em></p>
+<pre class="language-rust"><code class="language-rust"><span class="token keyword">fn</span> <span class="token function-definition function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span><br>    <span class="token macro property">println!</span><span class="token punctuation">(</span><span class="token string">"Hello from WASI!"</span><span class="token punctuation">)</span><span class="token punctuation">;</span><br><span class="token punctuation">}</span></code></pre>
+<p>To compile for WASI:</p>
+<pre class="language-bash"><code class="language-bash">rustup target <span class="token function">add</span> wasm32-wasi<br><span class="token function">cargo</span> build <span class="token parameter variable">--target</span> wasm32-wasi</code></pre>
+<p>You can now run this <code>.wasm</code> file in a WASI runtime like Wasmtime.</p>
+<h2 id="tooling-%26-runtimes-evolve" tabindex="-1">Tooling &amp; Runtimes Evolve</h2>
+<p>WASM’s power lies in its growing ecosystem.</p>
+<h3 id="%F0%9F%9B%A0%EF%B8%8F-popular-toolchains%3A" tabindex="-1">🛠️ Popular Toolchains:</h3>
+<ul>
+<li>
+<p><strong>Rust</strong> with <code>wasm-bindgen</code> and <code>wasm-pack</code></p>
+</li>
+<li>
+<p><strong>C/C++</strong> with Emscripten</p>
+</li>
+<li>
+<p><strong>TinyGo</strong> for small footprint WASM builds</p>
+</li>
+<li>
+<p><strong>AssemblyScript</strong> for JS-style development</p>
+</li>
+</ul>
+<h3 id="%E2%9A%A1-key-runtimes%3A" tabindex="-1">⚡ Key Runtimes:</h3>
+<ul>
+<li>
+<p><code>wasmtime</code> – fast and WASI-compliant</p>
+</li>
+<li>
+<p><code>wasmer</code> – embeddable with multi-language support</p>
+</li>
+<li>
+<p><code>wasmedge</code> – optimized for edge workloads</p>
+</li>
+</ul>
+<p>🧪 <em>Hello from Wasmtime</em></p>
+<pre class="language-bash"><code class="language-bash">wasmtime hello.wasm</code></pre>
+<p>Output:</p>
+<pre class="language-python"><code class="language-python">Hello <span class="token keyword">from</span> WASI!</code></pre>
+<h2 id="wasm-escapes-the-browser" tabindex="-1">WASM Escapes the Browser</h2>
+<p>WASM’s breakout moment didn’t come from the server — it came from everywhere else.</p>
+<h3 id="browsers%3F-still-relevant." tabindex="-1">Browsers? Still relevant.</h3>
+<ul>
+<li>
+<p>Pyodide runs Python notebooks entirely in-browser.</p>
+</li>
+<li>
+<p>AutoCAD, Figma, and even parts of Photoshop now use WASM for performance-critical code.</p>
+</li>
+<li>
+<p>Replit and StackBlitz built full IDEs that boot instantly in the browser.</p>
+</li>
+</ul>
+<h3 id="the-edge%3F-wasm%E2%80%99s-new-playground." tabindex="-1">The Edge? WASM’s new playground.</h3>
+<ul>
+<li>
+<p>Fast cold starts.</p>
+</li>
+<li>
+<p>Small binaries.</p>
+</li>
+<li>
+<p>Secure sandboxing. Perfect for <strong>IoT nodes</strong>, <strong>AI inference</strong>, and <strong>low-latency data processing</strong>.</p>
+</li>
+</ul>
+<h3 id="smart-contracts%3F-wasm-native-chains-like-cosmos%2C-polkadot%2C-near%2C-solana-and-internet-computer-are-rewriting-the-rulebook.-no-more-custom-vms%2C-just-webassembly-all-the-way-down." tabindex="-1">Smart Contracts? WASM-native chains like Cosmos, <strong>Polkadot</strong>, <strong>NEAR</strong>, Solana and <strong>Internet Computer</strong> are rewriting the rulebook. No more custom VMs, just WebAssembly all the way down.</h3>
+<p>🧪 <em>Using WASM in the Browser (JS + WASM Binary)</em></p>
+<pre class="language-html"><code class="language-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>script</span><span class="token punctuation">></span></span><span class="token script"><span class="token language-javascript"><br>  WebAssembly<span class="token punctuation">.</span><span class="token function">instantiateStreaming</span><span class="token punctuation">(</span><span class="token function">fetch</span><span class="token punctuation">(</span><span class="token string">"simple.wasm"</span><span class="token punctuation">)</span><span class="token punctuation">)</span><br>    <span class="token punctuation">.</span><span class="token function">then</span><span class="token punctuation">(</span><span class="token parameter">obj</span> <span class="token operator">=></span> <span class="token punctuation">{</span><br>      obj<span class="token punctuation">.</span>instance<span class="token punctuation">.</span>exports<span class="token punctuation">.</span><span class="token function">say_hello</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span><br>    <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span><br></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>script</span><span class="token punctuation">></span></span></code></pre>
+<p>With a Rust-compiled function like:</p>
+<pre class="language-rust"><code class="language-rust"><span class="token attribute attr-name">#[no_mangle]</span><br><span class="token keyword">pub</span> <span class="token keyword">extern</span> <span class="token string">"C"</span> <span class="token keyword">fn</span> <span class="token function-definition function">say_hello</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span><br>    <span class="token macro property">println!</span><span class="token punctuation">(</span><span class="token string">"Hello from the browser-side WASM!"</span><span class="token punctuation">)</span><span class="token punctuation">;</span><br><span class="token punctuation">}</span></code></pre>
+<h2 id="wasm-goes-everywhere" tabindex="-1">WASM Goes Everywhere</h2>
+<h3 id="%F0%9F%9A%80-serverless-%26-edge" tabindex="-1">🚀 Serverless &amp; Edge</h3>
+<p>Platforms like <strong>Cloudflare Workers</strong>, <strong>Fermyon Spin</strong>, and <strong>Fastly Compute Edge</strong> run WASM-based microservices with blazing cold-starts and secure isolation.</p>
+<p>🧪 <em>Fermyon Spin App (TOML + Rust)</em></p>
+<pre class="language-toml"><code class="language-toml"><span class="token key property">spin_manifest_version</span> <span class="token punctuation">=</span> <span class="token string">"1"</span><br><span class="token punctuation">[</span><span class="token table class-name">application</span><span class="token punctuation">]</span><br><span class="token key property">name</span> <span class="token punctuation">=</span> <span class="token string">"hello-spin"</span><br><span class="token key property">version</span> <span class="token punctuation">=</span> <span class="token string">"0.1.0"</span><br><br><span class="token punctuation">[</span><span class="token punctuation">[</span><span class="token table class-name">component</span><span class="token punctuation">]</span><span class="token punctuation">]</span><br><span class="token key property">source</span> <span class="token punctuation">=</span> <span class="token string">"target/wasm32-wasi/release/hello_spin.wasm"</span><br><span class="token key property">route</span> <span class="token punctuation">=</span> <span class="token string">"/hello"</span></code></pre>
+<pre class="language-rust"><code class="language-rust"><span class="token keyword">use</span> <span class="token namespace">spin_sdk<span class="token punctuation">::</span>http<span class="token punctuation">::</span></span><span class="token punctuation">{</span><span class="token class-name">Request</span><span class="token punctuation">,</span> <span class="token class-name">Response</span><span class="token punctuation">}</span><span class="token punctuation">;</span><br><br><span class="token attribute attr-name">#[http_component]</span><br><span class="token keyword">fn</span> <span class="token function-definition function">hello</span><span class="token punctuation">(</span>_req<span class="token punctuation">:</span> <span class="token class-name">Request</span><span class="token punctuation">)</span> <span class="token punctuation">-></span> <span class="token class-name">Response</span> <span class="token punctuation">{</span><br>    <span class="token class-name">Response</span><span class="token punctuation">::</span><span class="token function">builder</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">status</span><span class="token punctuation">(</span><span class="token number">200</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">body</span><span class="token punctuation">(</span><span class="token string">"Hello from Spin!"</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">build</span><span class="token punctuation">(</span><span class="token punctuation">)</span><br><span class="token punctuation">}</span></code></pre>
+<h2 id="active-development-in-wasm" tabindex="-1">Active development in WASM</h2>
+<p>WASM hasn’t stopped evolving.</p>
+<ul>
+<li>
+<p>🧩 <strong>Component Model</strong>: Mix and match WASM modules written in different languages.</p>
+</li>
+<li>
+<p>🧠 <strong>WASM GC</strong>: Brings modern memory-managed languages like Swift and Kotlin into the WASM family.</p>
+</li>
+<li>
+<p>📡 <strong>WASI Sockets</strong>: Full networking support in progress.</p>
+</li>
+<li>
+<p>🔁 <strong>Persistent Storage</strong>: SQLite in WASM with real file persistence.</p>
+</li>
+</ul>
+<p>🧪 <em>SQLite in WASM (using sql.js)</em></p>
+<pre class="language-js"><code class="language-js"><span class="token keyword">const</span> <span class="token constant">SQL</span> <span class="token operator">=</span> <span class="token keyword">await</span> <span class="token function">initSqlJs</span><span class="token punctuation">(</span><span class="token punctuation">{</span> <span class="token function-variable function">locateFile</span><span class="token operator">:</span> <span class="token parameter">f</span> <span class="token operator">=></span> <span class="token template-string"><span class="token template-punctuation string">`</span><span class="token string">https://sql.js.org/dist/</span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span>f<span class="token interpolation-punctuation punctuation">}</span></span><span class="token template-punctuation string">`</span></span> <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span><br><span class="token keyword">const</span> db <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">SQL<span class="token punctuation">.</span>Database</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span><br>db<span class="token punctuation">.</span><span class="token function">run</span><span class="token punctuation">(</span><span class="token string">"CREATE TABLE hello (message TEXT);"</span><span class="token punctuation">)</span><span class="token punctuation">;</span><br>db<span class="token punctuation">.</span><span class="token function">run</span><span class="token punctuation">(</span><span class="token string">"INSERT INTO hello VALUES ('Hello from SQLite in WASM!');"</span><span class="token punctuation">)</span><span class="token punctuation">;</span><br><br>console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>db<span class="token punctuation">.</span><span class="token function">exec</span><span class="token punctuation">(</span><span class="token string">"SELECT * FROM hello"</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre>
+<p>WebAssembly is at the cusp of becoming the <strong>universal bytecode for the web and beyond</strong>. With a strong standard foundation, rising adoption in cloud and edge platforms, and growing support from language ecosystems, WASM is transforming from a niche browser tech into the <strong>next big compute platform</strong>.</p>
+<p>Whether you’re building browser tools, serverless apps, or decentralized networks, WASM is likely to be in your stack sooner than you think.</p>
+<p><img src="https://www.cncf.io/wp-content/uploads/2023/09/image-21-6.jpg" alt=""></p>
+<p><img src="https://cdn.ttgtmedia.com/rms/onlineimages/webassembly_landscape-f.png" alt=""></p>
+<h2 id="what%E2%80%99s-next%3F" tabindex="-1">What’s Next?</h2>
+<ul>
+<li>
+<p><strong>WAPM + jco</strong>: Standardized package management for WASM.</p>
+</li>
+<li>
+<p><strong>Electron Replacement</strong>: WASM + WASIX running full apps in-browser with no install.</p>
+</li>
+<li>
+<p><strong>More languages</strong>: Kotlin, Swift, Zig, Dart, even Java.</p>
+</li>
+<li>
+<p><strong>Native-feeling sandboxed desktops</strong>: Think <em>VS Code</em> running entirely in WASM, no local install.</p>
+</li>
+</ul>
+<blockquote>
+<p>It’s sandboxed, portable, fast and it’s <em>just getting started</em>.</p>
+</blockquote>
+
+        </div>
+
+        <div class="article-end">
+            <span>✦</span>
+            <span>✦</span>
+            <span>✦</span>
+        </div>
+
+        <div class="post-navigation">
+            <div class="post-nav-item post-nav-previous">
+                    <a href="/compiling-python/">
+                        <span class="nav-arrow">←</span>
+                        <div class="nav-content">
+                            <p class="nav-label">Previous</p>
+                            <p class="nav-title">Compiling Python</p>
+                        </div>
+                    </a>
+                
+            </div>
+
+            <div class="post-nav-item post-nav-next">
+                    <a href="/cpython-compiler/">
+                        <div class="nav-content">
+                            <p class="nav-label">Next</p>
+                            <p class="nav-title">Understanding the CPython Compiler</p>
+                        </div>
+                        <span class="nav-arrow">→</span>
+                    </a>
+                
+            </div>
+        </div>
+    </div>
+
+    </main>
+    <footer class="sticky bottom-0 z-50 glass-footer py-4">
+  <div class="container mx-auto max-w-5xl px-8 flex items-center justify-between">
+    <div class="text-sm">
+      Blog by Ani
+    </div>
+
+    <div class="flex items-center">
+      <a href="https://anirudha.dev" target="_blank" rel="noopener noreferrer" class="footer-icon" aria-label="Home">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
+        </svg>
+      </a>
+    </div>
+
+    <div class="flex items-center gap-4">
+      <a href="https://github.com/anistark" target="_blank" rel="noopener noreferrer" class="footer-icon" aria-label="GitHub">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="currentColor" viewBox="0 0 24 24">
+          <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+        </svg>
+      </a>
+      <a href="https://x.com/kranirudha" target="_blank" rel="noopener noreferrer" class="footer-icon" aria-label="X (Twitter)">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="currentColor" viewBox="0 0 24 24">
+          <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+        </svg>
+      </a>
+      <a href="https://linkedin.com/in/kranirudha" target="_blank" rel="noopener noreferrer" class="footer-icon" aria-label="LinkedIn">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="currentColor" viewBox="0 0 24 24">
+          <path d="M4.98 3.5c0 1.381-1.11 2.5-2.48 2.5s-2.48-1.119-2.48-2.5c0-1.38 1.11-2.5 2.48-2.5s2.48 1.12 2.48 2.5zm.02 4.5h-5v16h5v-16zm7.982 0h-4.968v16h4.969v-8.399c0-4.67 6.029-5.052 6.029 0v8.399h4.988v-10.131c0-7.88-8.922-7.593-11.018-3.714v-2.155z"/>
+        </svg>
+      </a>
+    </div>
+  </div>
+</footer>
+    
+    <script src="https://unpkg.com/clipboard@2/dist/clipboard.min.js"></script>
+    <script src="/assets/main.bundle.js"></script>
+  </body>
+</html>

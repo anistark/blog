@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    
+    <meta itemprop="name" content="Building a Cross-Chain Bridge | AniLog">
+    <meta itemprop="description" content="So, how about we learn how to build a **cross-chain bridge** that allows NFTs to move between two **EVM-compatible chains** (e.g., Ethereum &amp; Base, Arbitrum, Optimism &amp; Polygon). Unlike traditional bridges, which use an **off-chain relayer**, we will implement an **on-chain gateway** using [LayerZero](https://layerzero.network/), making the process **fully decentralised and trustless**.">
+
+    
+    <meta name="twitter:title" content="Building a Cross-Chain Bridge | AniLog">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:description" content="So, how about we learn how to build a **cross-chain bridge** that allows NFTs to move between two **EVM-compatible chains** (e.g., Ethereum &amp; Base, Arbitrum, Optimism &amp; Polygon). Unlike traditional bridges, which use an **off-chain relayer**, we will implement an **on-chain gateway** using [LayerZero](https://layerzero.network/), making the process **fully decentralised and trustless**.">
+    <meta name="twitter:site" content="@kranirudha">
+    <meta name="twitter:creator" content="@kranirudha">
+    <meta name="twitter:image:src" content="https://blog.anirudha.dev/twitter.png">
+
+    
+    <meta name="og:title" content="Building a Cross-Chain Bridge | AniLog">
+    <meta name="og:description" content="So, how about we learn how to build a **cross-chain bridge** that allows NFTs to move between two **EVM-compatible chains** (e.g., Ethereum &amp; Base, Arbitrum, Optimism &amp; Polygon). Unlike traditional bridges, which use an **off-chain relayer**, we will implement an **on-chain gateway** using [LayerZero](https://layerzero.network/), making the process **fully decentralised and trustless**.">
+    <meta name="og:image" content="https://blog.anirudha.dev/og.png">
+    <meta name="og:url" content="https://blog.anirudha.dev/">
+    <meta name="og:site_name" content="AniLog">
+    <meta name="og:locale" content="en_GB">
+    <meta name="og:type" content="website">
+
+    <link rel="icon" type="image/png" href="/me.png" />
+
+    <title>Building a Cross-Chain Bridge | AniLog</title>
+
+    <link rel="stylesheet" href="/assets/main.bundle.css">
+
+    <script>
+      // Set theme before page renders to prevent flash
+      (function() {
+        const savedTheme = localStorage.getItem('theme') || 'dark';
+        if (savedTheme === 'light') {
+          document.documentElement.setAttribute('data-theme', 'light');
+        }
+      })();
+    </script>
+
+    
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-YGZHVY9TD7"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-YGZHVY9TD7');
+    </script>
+    
+
+    
+  </head>
+  <body class="flex flex-col min-h-screen">
+    <header class="sticky top-0 z-50 glass-header">
+  <nav class="container mx-auto max-w-5xl px-8 py-3 flex flex-wrap items-center justify-between">
+    <div class="flex items-center gap-3">
+      <a href="/" class="flex items-center gap-3">
+        <img src="/ani.png" alt="AniLog logo" class="w-10 h-10 object-cover">
+        <h1 class="text-2xl leading-none m-0">AniLog</h1>
+      </a>
+    </div>
+
+    <div class="flex items-center gap-6">
+      <button id="theme-toggle" class="theme-toggle" aria-label="Toggle theme">
+        <svg class="sun-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="12" r="5"></circle>
+          <line x1="12" y1="1" x2="12" y2="3"></line>
+          <line x1="12" y1="21" x2="12" y2="23"></line>
+          <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+          <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+          <line x1="1" y1="12" x2="3" y2="12"></line>
+          <line x1="21" y1="12" x2="23" y2="12"></line>
+          <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+          <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+        </svg>
+        <svg class="moon-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+        </svg>
+      </button>
+    </div>
+  </nav>
+</header>
+    <main class="container mx-auto max-w-5xl p-8 grow">
+      
+    <p></p>
+
+    
+        <div class="post-cover-image" style="background-image: url('/images/posts/7f6301ee-1c9c-437f-96a7-fa3c94ffcd78.png');"></div>
+    
+
+    <div>
+        <h2>Building a Cross-Chain Bridge</h2>
+
+        
+
+        
+            <p class="excerpt">So, how about we learn how to build a **cross-chain bridge** that allows NFTs to move between two **EVM-compatible chains** (e.g., Ethereum &amp; Base, Arbitrum, Optimism &amp; Polygon). Unlike traditional bridges, which use an **off-chain relayer**, we will implement an **on-chain gateway** using [LayerZero](https://layerzero.network/), making the process **fully decentralised and trustless**.</p>
+        
+
+        
+            <div class="mb-2">
+                <a class="tag abstraction" href="/tag/abstraction">abstraction</a><a class="tag interoperability" href="/tag/interoperability">interoperability</a><a class="tag web3" href="/tag/web3">web3</a><a class="tag cross-chain" href="/tag/cross-chain">cross-chain</a><a class="tag nft" href="/tag/nft">nft</a><a class="tag bridge" href="/tag/bridge">bridge</a>
+            </div>
+        
+
+        
+            
+                <p class="text-sm italic">Created on
+                    <span datetime="Sun Feb 09 2025 00:00:00 GMT+0000 (Coordinated Universal Time)">February 9, 2025</span>.</p>
+            
+        
+
+        <div class="content post">
+            
+                <hr />
+
+                <h3>Table of Contents</h3>
+
+                <nav class="toc">
+                <ol>
+                    
+                    <li><a href="#how-it-works">How It Works</a>
+            
+                <ol>
+                    
+                    <li><a href="#%F0%9F%8F%9B-on-chain-relayer-(our-approach)">🏛 On-Chain Relayer (Our Approach)</a>
+            		</li>
+
+                    <li><a href="#%E2%9A%A1-off-chain-relayer">⚡ Off-Chain Relayer</a>
+            		</li>
+
+                    <li><a href="#nft-contract">NFT Contract</a>
+            		</li>
+
+                    <li><a href="#bridge-contract-(chain-a)-%E2%80%93-lock-nft-%26-send-message">Bridge Contract (Chain A) – Lock NFT & Send Message</a>
+            		</li>
+
+                    <li><a href="#bridge-contract-(chain-b)-%E2%80%93-receive-%26-mint-wrapped-nft">Bridge Contract (Chain B) – Receive & Mint Wrapped NFT</a>
+            		</li>
+
+                    <li><a href="#unlocking-nfts-(return-to-chain-a)">Unlocking NFTs (Return to Chain A)</a>
+            		</li>
+                </ol>
+            		</li>
+
+                    <li><a href="#let%E2%80%99s-test-our-bridge%3A">Let’s test our Bridge:</a>
+            		</li>
+
+                    <li><a href="#future-improvements-that-can-be-made%3A">Future Improvements that can be made:</a>
+            
+                <ol>
+                    
+                    <li><a href="#multi-chain-support">Multi-Chain Support</a>
+            		</li>
+
+                    <li><a href="#cross-chain-fees">Cross-Chain Fees</a>
+            		</li>
+
+                    <li><a href="#decentralised-governance">Decentralised Governance</a>
+            		</li>
+                </ol>
+            		</li>
+                </ol>
+            </nav>
+
+                <hr />
+            
+
+            <blockquote>
+<p>A <strong>cross-chain bridge</strong> is a protocol that allows assets, data, or smart contract states to be transferred between two or more decentralised networks. It enables interoperability between different blockchains, ensuring seamless movement of tokens, NFTs, and other digital assets across ecosystems.</p>
+</blockquote>
+<p>So, how about we learn how to build a <strong>cross-chain bridge</strong> that allows NFTs to move between two <strong>EVM-compatible chains</strong> (e.g., Ethereum &amp; Base, Arbitrum, Optimism &amp; Polygon). Unlike traditional bridges, which use an <strong>off-chain relayer</strong>, we will implement an <strong>on-chain gateway</strong> using <a href="https://layerzero.network/">LayerZero</a>, making the process <strong>fully decentralised and trustless</strong>.</p>
+<p><a href="https://blog.anirudha.dev/decentralising-bridges"><em>If you want to read more about decentralised bridges, check out my previously posted article.</em></a></p>
+<p>NFTs and assets are often confined to their originating blockchain, limiting their interoperability and liquidity. A <strong>cross-chain bridge</strong> enables users to transfer NFTs between different chains, enhancing:</p>
+<ul>
+<li>
+<p><strong>Liquidity</strong> – NFTs can be traded across multiple ecosystems.</p>
+</li>
+<li>
+<p><strong>Utility</strong> – Users can access different dApps on multiple chains.</p>
+</li>
+<li>
+<p><strong>Scalability</strong> – Avoid congestion on expensive chains like Ethereum.</p>
+</li>
+</ul>
+<p>The base chain, where an NFT collection originates, plays a crucial role in determining the overall value and functionality of the NFTs.</p>
+<ol>
+<li>
+<p><strong>Security and Trust</strong>: The base chain provides the foundational security for the NFT collection. A well-established chain like Ethereum offers robust security features, which can enhance the trustworthiness of the NFTs. While an L2 like Base can offer lower gas fee. There’s several factors that you can think of while deciding the base chain for your NFT collection.</p>
+</li>
+<li>
+<p><strong>Network Effects</strong>: The popularity and user base of the base chain can significantly impact the visibility and adoption of the NFT collection. A chain with a large community can drive more engagement and transactions.</p>
+</li>
+<li>
+<p><strong>Ecosystem and Tools</strong>: The base chain often dictates the available development tools and ecosystem support. A rich ecosystem with various dApps and services can add more utility to the NFTs, allowing them to be used in diverse applications.</p>
+</li>
+<li>
+<p><strong>Transaction Costs</strong>: The cost of transactions on the base chain can affect the affordability and frequency of NFT trades. Chains with lower fees can encourage more trading activity, while high fees might deter users.</p>
+</li>
+<li>
+<p><strong>Interoperability</strong>: The base chain’s compatibility with other chains can determine how easily NFTs can be transferred across different networks. A chain that supports cross-chain protocols can enhance the liquidity and utility of the NFTs. It’s very important that you do not choose a chain which doesn’t allow access to outside network at all.</p>
+</li>
+<li>
+<p><strong>Innovation and Upgrades</strong>: The pace of innovation and the ability to implement upgrades on the base chain can influence the long-term viability and features of the NFT collection. Chains that are actively developed and improved can offer more advanced capabilities over time. Never go for a chain, which has stangant development or takes too long to iterate.</p>
+</li>
+</ol>
+<p>However, we can not expect all the users to remain on any single network. So, we need to prepare for the seemless moving around of assets cross-chain, thereby improving interoperability.</p>
+<p>And of course, there are several approaches to achieve bridging, depending on how you structure your product. Let’s go ahead with a classic approach this time.</p>
+<p><img src="https://cdn.prod.website-files.com/5f75fe1dce99248be5a892db/65675d979a0831972f6df33a_65525236ec04b0422258c81d_6537cb2e61b41e734eb82148_What-Are-Cross-Chain-NFTs__2-V1.png" alt=""></p>
+<h2 id="how-it-works" tabindex="-1">How It Works</h2>
+<ol>
+<li>
+<p><strong>Lock the NFT</strong> on <strong>Chain A</strong> (BridgeA contract).</p>
+</li>
+<li>
+<p><strong>Send a cross-chain message</strong> using LayerZero to <strong>Chain B</strong>.</p>
+</li>
+<li>
+<p><strong>BridgeB contract receives the message</strong> and <strong>mints a wrapped NFT</strong> on Chain B.</p>
+</li>
+<li>
+<p>To <strong>return the NFT</strong>, the wrapped NFT is <strong>burned</strong> on Chain B, and a <strong>message is sent back</strong> to unlock the original NFT.</p>
+</li>
+</ol>
+<h3 id="%F0%9F%8F%9B-on-chain-relayer-(our-approach)" tabindex="-1">🏛 On-Chain Relayer (Our Approach)</h3>
+<p>✅ Fully decentralised, no external trust required.<br>
+✅ All logic is enforced via smart contracts.<br>
+✅ Works with protocols like LayerZero or Axelar.</p>
+<h3 id="%E2%9A%A1-off-chain-relayer" tabindex="-1">⚡ Off-Chain Relayer</h3>
+<p>❌ Requires external nodes/validators to confirm transactions.<br>
+❌ Can introduce centralisation and trust assumptions.<br>
+❌ Relayers may become a point of failure.</p>
+<p>Our <strong>on-chain approach</strong> ensures security and trustlessness by leveraging smart contracts for message passing. We’re using EVM chains for this example so the contracts preferrably written in solidity.</p>
+<h3 id="nft-contract" tabindex="-1">NFT Contract</h3>
+<p>First, deploy an <strong>ERC-721 NFT</strong> contract on <strong>both chains</strong>:</p>
+<pre class="language-solidity"><code class="language-solidity"><span class="token comment">// SPDX-License-Identifier: MIT</span><br><span class="token keyword">pragma</span> <span class="token keyword">solidity</span> <span class="token operator">^</span><span class="token version number">0.8.19</span><span class="token punctuation">;</span><br><br><span class="token keyword">import</span> <span class="token string">"@openzeppelin/contracts/token/ERC721/extensions/ERC721URIStorage.sol"</span><span class="token punctuation">;</span><br><span class="token keyword">import</span> <span class="token string">"@openzeppelin/contracts/access/Ownable.sol"</span><span class="token punctuation">;</span><br><br><span class="token keyword">contract</span> <span class="token class-name">MyNFT</span> <span class="token keyword">is</span> ERC721URIStorage<span class="token punctuation">,</span> Ownable <span class="token punctuation">{</span><br>    <span class="token builtin">uint256</span> <span class="token keyword">public</span> nextTokenId<span class="token punctuation">;</span><br>    <br>    <span class="token keyword">constructor</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token function">ERC721</span><span class="token punctuation">(</span><span class="token string">"MyNFT"</span><span class="token punctuation">,</span> <span class="token string">"MNFT"</span><span class="token punctuation">)</span> <span class="token punctuation">{</span><span class="token punctuation">}</span><br>    <br>    <span class="token keyword">function</span> <span class="token function">mint</span><span class="token punctuation">(</span><span class="token builtin">string</span> <span class="token keyword">memory</span> tokenURI<span class="token punctuation">)</span> <span class="token keyword">external</span> onlyOwner <span class="token punctuation">{</span><br>        <span class="token function">_safeMint</span><span class="token punctuation">(</span>msg<span class="token punctuation">.</span>sender<span class="token punctuation">,</span> nextTokenId<span class="token punctuation">)</span><span class="token punctuation">;</span><br>        <span class="token function">_setTokenURI</span><span class="token punctuation">(</span>nextTokenId<span class="token punctuation">,</span> tokenURI<span class="token punctuation">)</span><span class="token punctuation">;</span><br>        nextTokenId<span class="token operator">++</span><span class="token punctuation">;</span><br>    <span class="token punctuation">}</span><br><span class="token punctuation">}</span></code></pre>
+<h3 id="bridge-contract-(chain-a)-%E2%80%93-lock-nft-%26-send-message" tabindex="-1">Bridge Contract (Chain A) – <strong>Lock NFT &amp; Send Message</strong></h3>
+<p>Create <code>BridgeA.sol</code> on <strong>Chain A</strong>:</p>
+<pre class="language-solidity"><code class="language-solidity"><span class="token comment">// SPDX-License-Identifier: MIT</span><br><span class="token keyword">pragma</span> <span class="token keyword">solidity</span> <span class="token operator">^</span><span class="token version number">0.8.19</span><span class="token punctuation">;</span><br><br><span class="token keyword">import</span> <span class="token string">"@openzeppelin/contracts/token/ERC721/ERC721.sol"</span><span class="token punctuation">;</span><br><span class="token keyword">import</span> <span class="token string">"@layerzerolabs/solidity-examples/contracts/lzApp/NonblockingLzApp.sol"</span><span class="token punctuation">;</span><br><br><span class="token keyword">contract</span> <span class="token class-name">BridgeA</span> <span class="token keyword">is</span> NonblockingLzApp <span class="token punctuation">{</span><br>    ERC721 <span class="token keyword">public</span> nft<span class="token punctuation">;</span><br>    <span class="token builtin">address</span> <span class="token keyword">public</span> admin<span class="token punctuation">;</span><br><br>    <span class="token keyword">event</span> <span class="token function">NFTLocked</span><span class="token punctuation">(</span><span class="token builtin">address</span> <span class="token keyword">indexed</span> user<span class="token punctuation">,</span> <span class="token builtin">uint256</span> tokenId<span class="token punctuation">)</span><span class="token punctuation">;</span><br><br>    <span class="token keyword">constructor</span><span class="token punctuation">(</span><span class="token builtin">address</span> _nft<span class="token punctuation">,</span> <span class="token builtin">address</span> _lzEndpoint<span class="token punctuation">)</span> <span class="token function">NonblockingLzApp</span><span class="token punctuation">(</span>_lzEndpoint<span class="token punctuation">)</span> <span class="token punctuation">{</span><br>        admin <span class="token operator">=</span> msg<span class="token punctuation">.</span>sender<span class="token punctuation">;</span><br>        nft <span class="token operator">=</span> <span class="token function">ERC721</span><span class="token punctuation">(</span>_nft<span class="token punctuation">)</span><span class="token punctuation">;</span><br>    <span class="token punctuation">}</span><br><br>    <span class="token keyword">function</span> <span class="token function">lockNFT</span><span class="token punctuation">(</span><span class="token builtin">uint256</span> tokenId<span class="token punctuation">,</span> <span class="token builtin">uint16</span> destChainId<span class="token punctuation">,</span> <span class="token builtin">bytes</span> <span class="token keyword">memory</span> receiver<span class="token punctuation">)</span> <span class="token keyword">external</span> <span class="token keyword">payable</span> <span class="token punctuation">{</span><br>        <span class="token keyword">require</span><span class="token punctuation">(</span>nft<span class="token punctuation">.</span><span class="token function">ownerOf</span><span class="token punctuation">(</span>tokenId<span class="token punctuation">)</span> <span class="token operator">==</span> msg<span class="token punctuation">.</span>sender<span class="token punctuation">,</span> <span class="token string">"Not NFT owner"</span><span class="token punctuation">)</span><span class="token punctuation">;</span><br>        nft<span class="token punctuation">.</span><span class="token function">transferFrom</span><span class="token punctuation">(</span>msg<span class="token punctuation">.</span>sender<span class="token punctuation">,</span> <span class="token builtin">address</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">)</span><span class="token punctuation">,</span> tokenId<span class="token punctuation">)</span><span class="token punctuation">;</span><br>        <span class="token builtin">bytes</span> <span class="token keyword">memory</span> payload <span class="token operator">=</span> abi<span class="token punctuation">.</span><span class="token function">encode</span><span class="token punctuation">(</span>msg<span class="token punctuation">.</span>sender<span class="token punctuation">,</span> tokenId<span class="token punctuation">)</span><span class="token punctuation">;</span><br>        <span class="token function">_lzSend</span><span class="token punctuation">(</span>destChainId<span class="token punctuation">,</span> payload<span class="token punctuation">,</span> <span class="token keyword">payable</span><span class="token punctuation">(</span>msg<span class="token punctuation">.</span>sender<span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token builtin">address</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token builtin">bytes</span><span class="token punctuation">(</span><span class="token string">""</span><span class="token punctuation">)</span><span class="token punctuation">,</span> msg<span class="token punctuation">.</span>value<span class="token punctuation">)</span><span class="token punctuation">;</span><br>        <span class="token keyword">emit</span> <span class="token function">NFTLocked</span><span class="token punctuation">(</span>msg<span class="token punctuation">.</span>sender<span class="token punctuation">,</span> tokenId<span class="token punctuation">)</span><span class="token punctuation">;</span><br>    <span class="token punctuation">}</span><br><br>    <span class="token keyword">function</span> <span class="token function">_nonblockingLzReceive</span><span class="token punctuation">(</span><span class="token builtin">uint16</span><span class="token punctuation">,</span> <span class="token builtin">bytes</span> <span class="token keyword">memory</span><span class="token punctuation">,</span> <span class="token builtin">uint64</span><span class="token punctuation">,</span> <span class="token builtin">bytes</span> <span class="token keyword">memory</span> payload<span class="token punctuation">)</span> <span class="token keyword">internal</span> override <span class="token punctuation">{</span><span class="token punctuation">}</span><br><span class="token punctuation">}</span></code></pre>
+<h3 id="bridge-contract-(chain-b)-%E2%80%93-receive-%26-mint-wrapped-nft" tabindex="-1">Bridge Contract (Chain B) – <strong>Receive &amp; Mint Wrapped NFT</strong></h3>
+<p>Create <code>BridgeB.sol</code> on <strong>Chain B</strong>:</p>
+<pre class="language-solidity"><code class="language-solidity"><span class="token comment">// SPDX-License-Identifier: MIT</span><br><span class="token keyword">pragma</span> <span class="token keyword">solidity</span> <span class="token operator">^</span><span class="token version number">0.8.19</span><span class="token punctuation">;</span><br><br><span class="token keyword">import</span> <span class="token string">"@openzeppelin/contracts/token/ERC721/extensions/ERC721URIStorage.sol"</span><span class="token punctuation">;</span><br><span class="token keyword">import</span> <span class="token string">"@layerzerolabs/solidity-examples/contracts/lzApp/NonblockingLzApp.sol"</span><span class="token punctuation">;</span><br><br><span class="token keyword">contract</span> <span class="token class-name">BridgeB</span> <span class="token keyword">is</span> ERC721URIStorage<span class="token punctuation">,</span> NonblockingLzApp <span class="token punctuation">{</span><br>    <span class="token builtin">address</span> <span class="token keyword">public</span> admin<span class="token punctuation">;</span><br>    <span class="token builtin">uint256</span> <span class="token keyword">public</span> nextTokenId<span class="token punctuation">;</span><br><br>    <span class="token keyword">event</span> <span class="token function">NFTMinted</span><span class="token punctuation">(</span><span class="token builtin">address</span> <span class="token keyword">indexed</span> user<span class="token punctuation">,</span> <span class="token builtin">uint256</span> tokenId<span class="token punctuation">)</span><span class="token punctuation">;</span><br><br>    <span class="token keyword">constructor</span><span class="token punctuation">(</span><span class="token builtin">address</span> _lzEndpoint<span class="token punctuation">)</span> <span class="token function">ERC721</span><span class="token punctuation">(</span><span class="token string">"WrappedNFT"</span><span class="token punctuation">,</span> <span class="token string">"WNFT"</span><span class="token punctuation">)</span> <span class="token function">NonblockingLzApp</span><span class="token punctuation">(</span>_lzEndpoint<span class="token punctuation">)</span> <span class="token punctuation">{</span><br>        admin <span class="token operator">=</span> msg<span class="token punctuation">.</span>sender<span class="token punctuation">;</span><br>    <span class="token punctuation">}</span><br><br>    <span class="token keyword">function</span> <span class="token function">_nonblockingLzReceive</span><span class="token punctuation">(</span><span class="token builtin">uint16</span><span class="token punctuation">,</span> <span class="token builtin">bytes</span> <span class="token keyword">memory</span><span class="token punctuation">,</span> <span class="token builtin">uint64</span><span class="token punctuation">,</span> <span class="token builtin">bytes</span> <span class="token keyword">memory</span> payload<span class="token punctuation">)</span> <span class="token keyword">internal</span> override <span class="token punctuation">{</span><br>        <span class="token punctuation">(</span><span class="token builtin">address</span> user<span class="token punctuation">,</span> <span class="token builtin">uint256</span> tokenId<span class="token punctuation">)</span> <span class="token operator">=</span> abi<span class="token punctuation">.</span><span class="token function">decode</span><span class="token punctuation">(</span>payload<span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token builtin">address</span><span class="token punctuation">,</span> <span class="token builtin">uint256</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span><br>        <span class="token function">_safeMint</span><span class="token punctuation">(</span>user<span class="token punctuation">,</span> nextTokenId<span class="token punctuation">)</span><span class="token punctuation">;</span><br>        <span class="token function">_setTokenURI</span><span class="token punctuation">(</span>nextTokenId<span class="token punctuation">,</span> <span class="token string">"https://metadata-url"</span><span class="token punctuation">)</span><span class="token punctuation">;</span><br>        <span class="token keyword">emit</span> <span class="token function">NFTMinted</span><span class="token punctuation">(</span>user<span class="token punctuation">,</span> nextTokenId<span class="token punctuation">)</span><span class="token punctuation">;</span><br>        nextTokenId<span class="token operator">++</span><span class="token punctuation">;</span><br>    <span class="token punctuation">}</span><br><span class="token punctuation">}</span></code></pre>
+<h3 id="unlocking-nfts-(return-to-chain-a)" tabindex="-1">Unlocking NFTs (Return to Chain A)</h3>
+<p>Modify <code>BridgeB.sol</code> to <strong>burn the wrapped NFT and send it back</strong>:</p>
+<pre class="language-solidity"><code class="language-solidity"><span class="token keyword">function</span> <span class="token function">burnNFT</span><span class="token punctuation">(</span><span class="token builtin">uint256</span> tokenId<span class="token punctuation">,</span> <span class="token builtin">uint16</span> destChainId<span class="token punctuation">)</span> <span class="token keyword">external</span> <span class="token keyword">payable</span> <span class="token punctuation">{</span><br>    <span class="token keyword">require</span><span class="token punctuation">(</span><span class="token function">ownerOf</span><span class="token punctuation">(</span>tokenId<span class="token punctuation">)</span> <span class="token operator">==</span> msg<span class="token punctuation">.</span>sender<span class="token punctuation">,</span> <span class="token string">"Not NFT owner"</span><span class="token punctuation">)</span><span class="token punctuation">;</span><br>    <span class="token function">_burn</span><span class="token punctuation">(</span>tokenId<span class="token punctuation">)</span><span class="token punctuation">;</span><br>    <span class="token builtin">bytes</span> <span class="token keyword">memory</span> payload <span class="token operator">=</span> abi<span class="token punctuation">.</span><span class="token function">encode</span><span class="token punctuation">(</span>msg<span class="token punctuation">.</span>sender<span class="token punctuation">,</span> tokenId<span class="token punctuation">)</span><span class="token punctuation">;</span><br>    <span class="token function">_lzSend</span><span class="token punctuation">(</span>destChainId<span class="token punctuation">,</span> payload<span class="token punctuation">,</span> <span class="token keyword">payable</span><span class="token punctuation">(</span>msg<span class="token punctuation">.</span>sender<span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token builtin">address</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token builtin">bytes</span><span class="token punctuation">(</span><span class="token string">""</span><span class="token punctuation">)</span><span class="token punctuation">,</span> msg<span class="token punctuation">.</span>value<span class="token punctuation">)</span><span class="token punctuation">;</span><br><span class="token punctuation">}</span></code></pre>
+<p>Modify <code>BridgeA.sol</code> to <strong>release the original NFT</strong>:</p>
+<pre class="language-solidity"><code class="language-solidity"><span class="token keyword">function</span> <span class="token function">_nonblockingLzReceive</span><span class="token punctuation">(</span><span class="token builtin">uint16</span><span class="token punctuation">,</span> <span class="token builtin">bytes</span> <span class="token keyword">memory</span><span class="token punctuation">,</span> <span class="token builtin">uint64</span><span class="token punctuation">,</span> <span class="token builtin">bytes</span> <span class="token keyword">memory</span> payload<span class="token punctuation">)</span> <span class="token keyword">internal</span> override <span class="token punctuation">{</span><br>    <span class="token punctuation">(</span><span class="token builtin">address</span> user<span class="token punctuation">,</span> <span class="token builtin">uint256</span> tokenId<span class="token punctuation">)</span> <span class="token operator">=</span> abi<span class="token punctuation">.</span><span class="token function">decode</span><span class="token punctuation">(</span>payload<span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token builtin">address</span><span class="token punctuation">,</span> <span class="token builtin">uint256</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span><br>    nft<span class="token punctuation">.</span><span class="token function">transferFrom</span><span class="token punctuation">(</span><span class="token builtin">address</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">)</span><span class="token punctuation">,</span> user<span class="token punctuation">,</span> tokenId<span class="token punctuation">)</span><span class="token punctuation">;</span><br><span class="token punctuation">}</span></code></pre>
+<h2 id="let%E2%80%99s-test-our-bridge%3A" tabindex="-1">Let’s test our Bridge:</h2>
+<ol>
+<li>
+<p><strong>Deploy contracts</strong> on two testnets (say, Base Sepolia &amp; Polygon Amoy).</p>
+</li>
+<li>
+<p><strong>Mint an NFT</strong> on Chain A.</p>
+</li>
+<li>
+<p><strong>Lock &amp; transfer the NFT</strong> using the bridge.</p>
+</li>
+<li>
+<p><strong>Verify minting of wrapped NFT</strong> on Chain B.</p>
+</li>
+<li>
+<p><strong>Burn wrapped NFT</strong> to return to Chain A.</p>
+</li>
+</ol>
+<h2 id="future-improvements-that-can-be-made%3A" tabindex="-1">Future Improvements that can be made:</h2>
+<h3 id="multi-chain-support" tabindex="-1"><strong>Multi-Chain Support</strong></h3>
+<p>To enhance the functionality and reach of our bridge, we can consider adding support for additional EVM-compatible chains. This would involve integrating with popular networks like Binance Smart Chain, Avalanche, and Fantom, which would allow users to transfer NFTs across a wider range of platforms. Furthermore, expanding beyond EVM-compatible chains to include other blockchain ecosystems, such as Solana, Cosmos, and Polkadot, could significantly broaden the bridge’s capabilities. This expansion would require developing interoperability solutions to handle the unique characteristics and consensus mechanisms of these different blockchains. By doing so, we would enable seamless NFT transfers across a diverse array of blockchain networks, providing users with greater flexibility and access to a wider audience. This strategic enhancement could position our bridge as a leading solution in the rapidly evolving multi-chain NFT landscape.</p>
+<h3 id="cross-chain-fees" tabindex="-1"><strong>Cross-Chain Fees</strong></h3>
+<p>Implementing gas abstraction can significantly enhance the user experience by making transactions more seamless and user-friendly. Gas abstraction involves creating a system where users do not need to worry about paying gas fees directly in cryptocurrency. Instead, the system can handle these fees on behalf of the users, possibly by integrating a third-party service or using a relayer network. This approach can simplify the transaction process, especially for users who are not familiar with blockchain technology or do not hold the native cryptocurrency required for gas fees. By abstracting gas fees, developers can create a more intuitive and accessible platform, encouraging broader adoption and reducing barriers for entry into the blockchain ecosystem. Additionally, this can be particularly beneficial in scenarios involving cross-chain interactions, where users might otherwise need to manage multiple cryptocurrencies for gas fees on different chains.</p>
+<h3 id="decentralised-governance" tabindex="-1"><strong>Decentralised Governance</strong></h3>
+<p>Decentralised Autonomous Organisations (DAOs) can play a crucial role in managing and governing bridge policies. By introducing DAO-controlled bridge policies, we can ensure that the decision-making process is transparent, democratic, and community-driven. This means that all stakeholders, including developers, users, and investors, can participate in proposing, discussing, and voting on changes to the bridge’s operational rules and guidelines. Such a system can enhance trust and accountability, as decisions are made collectively rather than by a centralised authority. Additionally, DAO governance can adapt more quickly to the evolving needs of the community and the market, allowing for more responsive and flexible policy adjustments. By leveraging the power of DAOs, we can create a more resilient and adaptable bridge infrastructure that aligns with the interests and values of its users.</p>
+<blockquote>
+<p>Note that this was for learning purposes only. The real contracts will have to consider several security issues and vulnerabilities which we’ve assumed here, as part of the happy path. But it’s a start and would love to see at least some of you try it out and build more decentralised bridges. The bridges ecosystem is both quickly evolving and stagnant at the same time. Cross-chain messaging protocols have certainly pulled in a pin off the race for building decent decentralised bridges, but we’ve quite a few improvement yet to be made to achieve true trustless systems.</p>
+</blockquote>
+<p><img src="/images/posts/4478b09b-d6bd-41b6-bb44-eb8c84b82d53.jpeg" alt=""></p>
+
+        </div>
+
+        <div class="article-end">
+            <span>✦</span>
+            <span>✦</span>
+            <span>✦</span>
+        </div>
+
+        <div class="post-navigation">
+            <div class="post-nav-item post-nav-previous">
+                    <a href="/wasm-py-ecosystem/">
+                        <span class="nav-arrow">←</span>
+                        <div class="nav-content">
+                            <p class="nav-label">Previous</p>
+                            <p class="nav-title">WebAssembly and Python Ecosystem</p>
+                        </div>
+                    </a>
+                
+            </div>
+
+            <div class="post-nav-item post-nav-next">
+                    <a href="/building-a-cross-chain-bridge-to-cosmos/">
+                        <div class="nav-content">
+                            <p class="nav-label">Next</p>
+                            <p class="nav-title">Building a Cross-Chain Bridge to Cosmos</p>
+                        </div>
+                        <span class="nav-arrow">→</span>
+                    </a>
+                
+            </div>
+        </div>
+    </div>
+
+    </main>
+    <footer class="sticky bottom-0 z-50 glass-footer py-4">
+  <div class="container mx-auto max-w-5xl px-8 flex items-center justify-between">
+    <div class="text-sm">
+      Blog by Ani
+    </div>
+
+    <div class="flex items-center">
+      <a href="https://anirudha.dev" target="_blank" rel="noopener noreferrer" class="footer-icon" aria-label="Home">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
+        </svg>
+      </a>
+    </div>
+
+    <div class="flex items-center gap-4">
+      <a href="https://github.com/anistark" target="_blank" rel="noopener noreferrer" class="footer-icon" aria-label="GitHub">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="currentColor" viewBox="0 0 24 24">
+          <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+        </svg>
+      </a>
+      <a href="https://x.com/kranirudha" target="_blank" rel="noopener noreferrer" class="footer-icon" aria-label="X (Twitter)">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="currentColor" viewBox="0 0 24 24">
+          <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+        </svg>
+      </a>
+      <a href="https://linkedin.com/in/kranirudha" target="_blank" rel="noopener noreferrer" class="footer-icon" aria-label="LinkedIn">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="currentColor" viewBox="0 0 24 24">
+          <path d="M4.98 3.5c0 1.381-1.11 2.5-2.48 2.5s-2.48-1.119-2.48-2.5c0-1.38 1.11-2.5 2.48-2.5s2.48 1.12 2.48 2.5zm.02 4.5h-5v16h5v-16zm7.982 0h-4.968v16h4.969v-8.399c0-4.67 6.029-5.052 6.029 0v8.399h4.988v-10.131c0-7.88-8.922-7.593-11.018-3.714v-2.155z"/>
+        </svg>
+      </a>
+    </div>
+  </div>
+</footer>
+    
+    <script src="https://unpkg.com/clipboard@2/dist/clipboard.min.js"></script>
+    <script src="/assets/main.bundle.js"></script>
+  </body>
+</html>

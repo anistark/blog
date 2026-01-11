@@ -1,0 +1,541 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    
+    <meta itemprop="name" content="Run your code anywhere | AniLog">
+    <meta itemprop="description" content="Let me tell you about Vani. She&#39;s a web development instructor teaching Node.js to a class of 30 students.">
+
+    
+    <meta name="twitter:title" content="Run your code anywhere | AniLog">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:description" content="Let me tell you about Vani. She&#39;s a web development instructor teaching Node.js to a class of 30 students.">
+    <meta name="twitter:site" content="@kranirudha">
+    <meta name="twitter:creator" content="@kranirudha">
+    <meta name="twitter:image:src" content="https://blog.anirudha.dev/twitter.png">
+
+    
+    <meta name="og:title" content="Run your code anywhere | AniLog">
+    <meta name="og:description" content="Let me tell you about Vani. She&#39;s a web development instructor teaching Node.js to a class of 30 students.">
+    <meta name="og:image" content="https://blog.anirudha.dev/og.png">
+    <meta name="og:url" content="https://blog.anirudha.dev/">
+    <meta name="og:site_name" content="AniLog">
+    <meta name="og:locale" content="en_GB">
+    <meta name="og:type" content="website">
+
+    <link rel="icon" type="image/png" href="/me.png" />
+
+    <title>Run your code anywhere | AniLog</title>
+
+    <link rel="stylesheet" href="/assets/main.bundle.css">
+
+    <script>
+      // Set theme before page renders to prevent flash
+      (function() {
+        const savedTheme = localStorage.getItem('theme') || 'dark';
+        if (savedTheme === 'light') {
+          document.documentElement.setAttribute('data-theme', 'light');
+        }
+      })();
+    </script>
+
+    
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-YGZHVY9TD7"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-YGZHVY9TD7');
+    </script>
+    
+
+    
+  </head>
+  <body class="flex flex-col min-h-screen">
+    <header class="sticky top-0 z-50 glass-header">
+  <nav class="container mx-auto max-w-5xl px-8 py-3 flex flex-wrap items-center justify-between">
+    <div class="flex items-center gap-3">
+      <a href="/" class="flex items-center gap-3">
+        <img src="/ani.png" alt="AniLog logo" class="w-10 h-10 object-cover">
+        <h1 class="text-2xl leading-none m-0">AniLog</h1>
+      </a>
+    </div>
+
+    <div class="flex items-center gap-6">
+      <button id="theme-toggle" class="theme-toggle" aria-label="Toggle theme">
+        <svg class="sun-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="12" r="5"></circle>
+          <line x1="12" y1="1" x2="12" y2="3"></line>
+          <line x1="12" y1="21" x2="12" y2="23"></line>
+          <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+          <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+          <line x1="1" y1="12" x2="3" y2="12"></line>
+          <line x1="21" y1="12" x2="23" y2="12"></line>
+          <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+          <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+        </svg>
+        <svg class="moon-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+        </svg>
+      </button>
+    </div>
+  </nav>
+</header>
+    <main class="container mx-auto max-w-5xl p-8 grow">
+      
+    <p></p>
+
+    
+        <div class="post-cover-image" style="background-image: url('/images/posts/1afcb9a1-c0ff-4033-87b8-2b06da5cf977.png');"></div>
+    
+
+    <div>
+        <h2>Run your code anywhere</h2>
+
+        
+
+        
+            <p class="excerpt">Let me tell you about Vani. She&#39;s a web development instructor teaching Node.js to a class of 30 students.</p>
+        
+
+        
+            <div class="mb-2">
+                <a class="tag python" href="/tag/python">python</a><a class="tag nodejs" href="/tag/nodejs">nodejs</a><a class="tag webassembly" href="/tag/webassembly">webassembly</a><a class="tag devtools" href="/tag/devtools">devtools</a><a class="tag rust" href="/tag/rust">rust</a><a class="tag wasm" href="/tag/wasm">wasm</a><a class="tag runtime" href="/tag/runtime">runtime</a><a class="tag wasmrun" href="/tag/wasmrun">wasmrun</a>
+            </div>
+        
+
+        
+            
+                <p class="text-sm italic">Created on
+                    <span datetime="Sun Oct 12 2025 00:00:00 GMT+0000 (Coordinated Universal Time)">October 12, 2025</span>.</p>
+            
+        
+
+        <div class="content post">
+            
+                <hr />
+
+                <h3>Table of Contents</h3>
+
+                <nav class="toc">
+                <ol>
+                    
+                    <li><a href="#what-if-code-could-just-run%3F">What if Code Could Just Run?</a>
+            
+                <ol>
+                    
+                    <li><a href="#the-teacher%E2%80%99s-dream">The Teacher’s Dream</a>
+            		</li>
+
+                    <li><a href="#the-developer%E2%80%99s-sanity">The Developer’s Sanity</a>
+            		</li>
+
+                    <li><a href="#play-around-with-code-more">Play around with code more</a>
+            		</li>
+
+                    <li><a href="#the-student-learning-to-code">The Student Learning to Code</a>
+            		</li>
+
+                    <li><a href="#the-company-running-code-safely">The Company Running Code Safely</a>
+            		</li>
+
+                    <li><a href="#the-conference-workshop">The Conference Workshop</a>
+            		</li>
+
+                    <li><a href="#the-offline-developer">The Offline Developer</a>
+            		</li>
+
+                    <li><a href="#the-traditional-way">The Traditional Way</a>
+            		</li>
+
+                    <li><a href="#the-wasmrun-way">The wasmrun Way</a>
+            		</li>
+
+                    <li><a href="#version-management">Version Management</a>
+            		</li>
+
+                    <li><a href="#the-file-system">The File System</a>
+            		</li>
+
+                    <li><a href="#the-security-model">The Security Model</a>
+            		</li>
+                </ol>
+            		</li>
+
+                    <li><a href="#the-current-state%3A-experimental-and-evolving">The Current State: Experimental and Evolving</a>
+            
+                <ol>
+                    
+                    <li><a href="#what-works-today">What Works Today</a>
+            		</li>
+                </ol>
+            		</li>
+
+                    <li><a href="#why-open-source-matters">Why Open Source Matters</a>
+            
+                <ol>
+                    
+                    <li><a href="#if-you%E2%80%99re-a-developer">If You’re a Developer</a>
+            		</li>
+
+                    <li><a href="#if-you%E2%80%99re-a-tech-writer">If You’re a Tech Writer</a>
+            		</li>
+
+                    <li><a href="#if-you%E2%80%99re-a-designer">If You’re a Designer</a>
+            		</li>
+
+                    <li><a href="#if-you%E2%80%99re-an-educator">If You’re an Educator</a>
+            		</li>
+
+                    <li><a href="#if-you%E2%80%99re-a-user">If You’re a User</a>
+            		</li>
+                </ol>
+            		</li>
+
+                    <li><a href="#the-vision-forward">The Vision Forward</a>
+            		</li>
+                </ol>
+            </nav>
+
+                <hr />
+            
+
+            <p>Let me tell you about Vani. She’s a web development instructor teaching Node.js to a class of 30 students. Every semester, she spends the first two weeks just getting everyone’s environment set up. Some students have Windows, others have Mac, and a few brave souls are on Linux. Half of them struggle with npm permissions, a quarter get stuck with PATH issues, and there’s always that one student whose antivirus blocks Node.js installation entirely.</p>
+<p>By the time everyone can run <code>npm install</code> successfully, Vani has lost two weeks of actual teaching time. And that’s just for one language. If she wants to teach Python next semester, the whole circus starts again.</p>
+<p>Or consider Jiwan, a senior developer at a startup. He works on three different projects: a legacy app on Node.js v12, the current production app on v20, and a new experimental project on v24. He’s constantly switching between them using nvm, but sometimes he forgets to switch, and suddenly his v18 app breaks because he’s running it on v14. He’s tried Docker, but the overhead is annoying, and his M1 Mac makes Docker even slower.</p>
+<p>Then there’s the open-source maintainer who wants to add a “Try it now” button to their project’s README. They want people to click and immediately play with the code, no installation required. But setting up a server to run user code safely is expensive and complicated. How do you sandbox untrusted code? How do you prevent someone from mining Bitcoin on your servers? How do you prevent some hidden script to steal all your passwords and if you’ve wallet linked, all your hard earned money? How do you scale when your project goes viral on Hacker News?</p>
+<p>These aren’t edge cases. These are everyday problems that developers face. We’ve been solving them the same way for decades: install runtimes locally, manage versions manually, hope nothing conflicts, and pray that “works on my machine” actually works on theirs too.</p>
+<p>A simple solution came up in the form of containers. Docker is almost a household tool found in every other project and sometimes too often as recommended way to develop. Various orchestration have come up in the recent years and the entire devops heavy infra became a norm, of which we’re part of today. I’m not saying dockers of this world are a pain, but I can tell you no dev, while building wants to run heavy containers just to keep checking if it’s compatible in various machines.</p>
+<p><a href="https://x.com/solomonstre/status/1111004913222324225"><img src="/images/posts/84868000-d973-4d4d-8807-0b0ca47289b8.png" alt=""></a></p>
+<h2 id="what-if-code-could-just-run%3F" tabindex="-1">What if Code Could Just Run?</h2>
+<p>Imagine opening a browser and running any project without installing anything. No Node.js download, no Python virtual environments, no Go toolchain, no dependency hell. Just open a URL and start coding.</p>
+<p>Sounds like science fiction? It’s not. StackBlitz already does this with their <a href="https://webcontainers.io/">WebContainers</a>. You can run full Node.js applications entirely in your browser. The server just serves static files. Everything executes client-side in WebAssembly.</p>
+<p>But WebContainers are proprietary and focused on their IDE. What if we could have this capability as a standalone tool? What if it worked for any language, not just JavaScript? What if it was open source and you could either build or request the community for features specific to your needs?</p>
+<p>That’s why we’re building <a href="https://github.com/anistark/wasmrun">wasmrun OS</a>.</p>
+<h3 id="the-teacher%E2%80%99s-dream" tabindex="-1">The Teacher’s Dream</h3>
+<p>Remember Vani? With wasmrun OS mode, she could teach Python next semester by just changing one parameter. The same environment, the same interface, different language. Her students could focus on learning programming, not fighting with their computers.</p>
+<p>One student doesn’t have a laptop? They can use the library computer. Another student’s computer is locked down by corporate IT? Doesn’t matter - it runs in the browser. The playing field is level.</p>
+<h3 id="the-developer%E2%80%99s-sanity" tabindex="-1">The Developer’s Sanity</h3>
+<p>Jiwan’s life gets simpler too. Each project specifies its Node.js version in <code>package.json</code>. wasmrun OS mode reads it and loads exactly that version - v14, v18, v20, whatever. No more nvm, no more “which version am I on again?”, no more conflicts.</p>
+<p>He opens his legacy project, it runs on v14. He switches to production, it automatically loads v18. He experiments with the new features, v20 is there. Different projects, different versions, zero mental overhead.</p>
+<p>Better yet, everything runs in isolation. If his experimental project crashes spectacularly, it doesn’t affect anything else. No stray processes, no port conflicts, no leftover node_modules pollution. Clean slate every time.</p>
+<h3 id="play-around-with-code-more" tabindex="-1">Play around with code more</h3>
+<p>First-time contributor wants to fix a bug in an open source project? Run it with wasmrun, see the code running, make their changes, verify the fix works, submit a PR. They never installed anything. The barrier to contribution just dropped to almost zero.</p>
+<h3 id="the-student-learning-to-code" tabindex="-1">The Student Learning to Code</h3>
+<p>Ankita is learning web development. She’s 16 and uses her school’s Chromebook. She can’t install anything. The device is locked down. But she can open a browser.</p>
+<p>Her online course uses wasmrun OS. She’s building a REST API in Node.js. She’s never touched Node.js before. She doesn’t know what npm is. She doesn’t need to. The environment handles it. She can focus on learning Express routes, not fighting with npm or bun or pnpm or yarn debate.</p>
+<p>Next week, she’s learning Python and Flask. Same environment, same interface, different language. No cognitive load from different tools. Just learning.</p>
+<h3 id="the-company-running-code-safely" tabindex="-1">The Company Running Code Safely</h3>
+<p>A startup builds a platform where users submit data processing scripts. These scripts need to run, but they’re untrusted code. What if someone writes an infinite loop? What if they try to access the file system? What if they attempt to make network requests to exfiltrate data?</p>
+<p>Traditional solution: spin up Docker containers, set strict resource limits, monitor everything, deal with cold starts, pay for idle containers, hope your sandboxing is bulletproof.</p>
+<p>With wasmrun OS: user submits code, it runs in a WebAssembly sandbox in their own browser. It has zero access to the host system. It can’t make network requests unless explicitly allowed. It can’t access real files. When it’s done, it’s gone. No servers strained, no security nightmares, no infrastructure costs for running user code.</p>
+<p>The startup’s servers? They just coordinate and store results. The heavy lifting happens client-side.</p>
+<h3 id="the-conference-workshop" tabindex="-1">The Conference Workshop</h3>
+<p>Arko is running a workshop at a developer conference. He’s teaching 200 people how to build microservices with Go. In the past, he’d spend the first 30 minutes helping people install Go, set GOPATH, troubleshoot compiler errors on Windows.</p>
+<p>Now? “Everyone run with wasmrun.” That’s it. Two minutes later, everyone has an identical Go development environment. Different laptops, different operating systems, same environment.</p>
+<p>Halfway through, he realizes he should have used a different Go version. He updates one configuration file, tells everyone to refresh. Done. Everything rebuilds as per the new specs now.</p>
+<h3 id="the-offline-developer" tabindex="-1">The Offline Developer</h3>
+<p>Puja is an adventure junkie programmer. She’s currently in a cabin in rural Vietnam with spotty internet. She’s gonna go for a deep dive the next morning. She loaded wasmrun OS mode yesterday when she had good wifi in the city. The browser cached the Node.js v20 runtime - all 50MB of it.</p>
+<p>Now she’s offline, but she’s still coding. The runtime is cached, her project files are in the browser, and everything works. She’s building a REST API, running tests, seeing live results. No internet required.</p>
+<p>When she gets back to civilization, she’ll push her code to GitHub. But for now, she’s productive in the middle of nowhere.</p>
+<p><em>So, how does wasmrun OS actually work?</em></p>
+<h3 id="the-traditional-way" tabindex="-1">The Traditional Way</h3>
+<p>Normally, when you run Node.js code:</p>
+<ol>
+<li>
+<p>You install Node.js on your operating system</p>
+</li>
+<li>
+<p>Your code runs as a process managed by your OS</p>
+</li>
+<li>
+<p>It accesses your real file system</p>
+</li>
+<li>
+<p>It makes real network requests</p>
+</li>
+<li>
+<p>It can do anything your user account can do</p>
+</li>
+</ol>
+<p>This works, but it’s heavy and risky. Heavy because you need the full runtime installed. Risky because the code has real access to your system.</p>
+<h3 id="the-wasmrun-way" tabindex="-1">The wasmrun Way</h3>
+<p>With wasmrun OS mode:</p>
+<ol>
+<li>
+<p>The browser downloads a tiny kernel (2-3MB of WebAssembly)</p>
+</li>
+<li>
+<p>This kernel is like a mini operating system running in your browser</p>
+</li>
+<li>
+<p>When you run a Node.js project, the kernel downloads the Node.js runtime (50MB, but cached)</p>
+</li>
+<li>
+<p>Your code runs inside this Node.js runtime, which runs inside the kernel, which runs in WebAssembly, which runs in your browser. (No, I wasn’t thinking of inception, you were!)</p>
+</li>
+<li>
+<p>It’s sandboxed at every level</p>
+</li>
+</ol>
+<p>Think of it like Russian nesting dolls, but for code execution environments. Best part, you don’t even need to think about any of it.</p>
+<p><img src="/images/posts/06ffc418-e559-4686-a7a9-ccc7427aaa0d.png" alt=""></p>
+<p>The kernel is the brain. It manages:</p>
+<ul>
+<li>
+<p><strong>Processes</strong>: Each project you run gets a unique process ID, just like in a real OS</p>
+</li>
+<li>
+<p><strong>File system</strong>: A virtual file system that exists only in browser memory</p>
+</li>
+<li>
+<p><strong>Scheduling</strong>: If you run multiple projects, it schedules CPU time between them</p>
+</li>
+<li>
+<p><strong>Syscalls</strong>: When your code wants to read a file or make a network request, the kernel handles it</p>
+</li>
+</ul>
+<p>It’s written in Rust and compiled to WebAssembly. It’s tiny, fast, and secure. All development is in public built as open source project.</p>
+<p>The kernel doesn’t run your JavaScript or Python directly. It loads language-specific runtimes:</p>
+<p><strong>Node.js runtime</strong>: A full Node.js environment compiled to WebAssembly. It includes V8 (the JavaScript engine), the Node.js APIs (fs, http, etc.), and npm support. When it needs to read a file, it asks the kernel. When it needs to make a network request, the kernel intercepts it and uses browser’s APIs like capability APIs.</p>
+<p><strong>Python runtime</strong>: CPython compiled to WebAssembly, with pip support. Same idea - it talks to the kernel for system operations. Kinda similar to how <a href="https://pyodide.org/en/stable/">pyodide</a> works, but we’re running inside a controlled container, so the runtime approach is quite different and configurable with a range of language plugins.</p>
+<p><strong>Go runtime</strong>: Go programs (<a href="https://tinygo.org/">tinygo</a>) can already compile to WebAssembly, so this one’s simpler. The Go code compiles directly, and the kernel provides the syscall interface.</p>
+<h3 id="version-management" tabindex="-1">Version Management</h3>
+<p>Here’s the clever part: your <code>package.json</code> might say:</p>
+<pre class="language-json"><code class="language-json"><span class="token punctuation">{</span><br>  <span class="token property">"engines"</span><span class="token operator">:</span> <span class="token punctuation">{</span><br>    <span class="token property">"node"</span><span class="token operator">:</span> <span class="token string">">=18.0.0"</span><br>  <span class="token punctuation">}</span><br><span class="token punctuation">}</span></code></pre>
+<p>wasmrun OS mode reads this. It checks what Node.js versions are available. It picks v20 (the latest LTS that satisfies &gt;=18). It checks if v20 is cached in your browser. If yes, loads it instantly. If no, downloads it once and caches it forever. Of course you can clear the cache anytime you want. <em>I’d not want to keep nodejs v8 till today myself.</em></p>
+<p>Next time you run any project that needs v20, it’s instant - already cached.</p>
+<p>If you run a project that needs v18, it downloads and caches v18 separately. Now you have both cached. Switching between projects with different versions? Instant. No nvm, no version management, it just works.</p>
+<h3 id="the-file-system" tabindex="-1">The File System</h3>
+<p>Your project has files. Your code reads and writes them. But there’s no real file system in a browser.</p>
+<p>wasmrun OS mode creates a virtual file system that connects with your original files using a variation of <a href="https://github.com/WebAssembly/wasi-filesystem">wasi filesystem</a>. It’s just data structures in memory. When you mount your project, it loads all your files into this virtual FS. When your code does <code>fs.readFile('package.json')</code>, the kernel intercepts it and reads from virtual memory.</p>
+<p>You can edit files in the browser UI, and your code sees the changes immediately. Anytime the code is edited, it hooks to the original code and updates that immediately as well.</p>
+<p>For persistence, it can sync to IndexedDB. Close the browser, come back tomorrow, your files are still there.</p>
+<p>If you don’t like browser UI, edit with neovim or vs code or cursor. If you edit the original code directly, the hot-loading will immediately serve the new build. wasmrun is currenty based on <strong>AOT</strong>(<strong>Ahead-of-Time)</strong> compiler. However, some interest in JIT compilers is under discussion and consideration.</p>
+<h3 id="the-security-model" tabindex="-1">The Security Model</h3>
+<p>Everything runs in WebAssembly. WebAssembly is sandboxed by design - it can’t escape the browser. Your code can’t:</p>
+<ul>
+<li>
+<p>Access your real file system</p>
+</li>
+<li>
+<p>Make arbitrary network requests (unless the kernel allows it)</p>
+</li>
+<li>
+<p>Run system commands</p>
+</li>
+<li>
+<p>Access your webcam or microphone</p>
+</li>
+<li>
+<p>Steal your cookies</p>
+</li>
+</ul>
+<p>It’s as secure as running code can be. Even if you run malicious code, it’s trapped in the WebAssembly sandbox. When you close the tab, it’s gone.</p>
+<h2 id="the-current-state%3A-experimental-and-evolving" tabindex="-1">The Current State: Experimental and Evolving</h2>
+<p>Let’s be honest: this is ambitious. We’re essentially building an operating system in WebAssembly. We’re not done yet.</p>
+<h3 id="what-works-today" tabindex="-1">What Works Today</h3>
+<p>If you try wasmrun OS mode right now with latest <a href="https://crates.io/crates/wasmrun/0.13.0"><strong>wasmrun v0.13.0</strong></a>, you’ll get:</p>
+<ul>
+<li>
+<p>A working micro-kernel with process management</p>
+</li>
+<li>
+<p>A virtual WASI file system you can browse</p>
+</li>
+<li>
+<p>Project auto-detection (Node.js, Python, Go, Rust)</p>
+</li>
+<li>
+<p>A development server that starts for your project</p>
+</li>
+<li>
+<p>A browser UI with file explorer and kernel dashboard</p>
+</li>
+<li>
+<p>HTTP proxying to your running application</p>
+</li>
+</ul>
+<p>It works. You can run a project, see it execute, browse files, and interact with it.</p>
+<h2 id="why-open-source-matters" tabindex="-1">Why Open Source Matters</h2>
+<p>wasmrun is open source. The entire OS mode implementation is on GitHub. You can read every line of code. You can see exactly how it works.</p>
+<p><img src="/images/posts/238cb9a0-5344-49f2-b1be-4c4a4f2a2ea2.png" alt=""></p>
+<p>This matters because:</p>
+<p><strong>Trust</strong>: You’re running code in your browser. You should be able to verify it’s safe.</p>
+<p><strong>Collaboration</strong>: This is a big project. We need help. Maybe you’re good at WebAssembly. Maybe you know how Node.js internals work. Maybe you’re amazing at documentation. There’s a place for you.</p>
+<p><strong>Innovation</strong>: The best ideas come from diverse perspectives. We’ve designed it one way, but maybe you see a better approach. Open source means you can propose it, implement it, and improve it for everyone.</p>
+<p><strong>Longevity</strong>: Companies pivot. Projects get abandoned. Open source means wasmrun will live as long as people find it useful.</p>
+<p>We’re actively developing this, and we’d love your help.</p>
+<h3 id="if-you%E2%80%99re-a-developer" tabindex="-1">If You’re a Developer</h3>
+<ul>
+<li>
+<p><strong>Contribute code</strong>: Check the GitHub issues. There’s lots to build.</p>
+</li>
+<li>
+<p><strong>Review architecture</strong>: Read the code and tell us where we can improve.</p>
+</li>
+<li>
+<p><strong>Test it</strong>: Try breaking it. Find bugs. Report them.</p>
+</li>
+<li>
+<p><strong>Integrate runtimes</strong>: Know how to get Node.js running in WASM? We need that expertise.</p>
+</li>
+<li>
+<p><strong>Optimize performance</strong>: Make it faster. Every millisecond counts.</p>
+</li>
+</ul>
+<h3 id="if-you%E2%80%99re-a-tech-writer" tabindex="-1">If You’re a Tech Writer</h3>
+<ul>
+<li>
+<p><strong>Documentation</strong>: We need clear guides for users and contributors.</p>
+</li>
+<li>
+<p><strong>Tutorials</strong>: “Build a REST API with wasmrun OS mode” - someone needs to write this.</p>
+</li>
+<li>
+<p><strong>Architecture docs</strong>: Explain the system in ways people can understand.</p>
+</li>
+</ul>
+<h3 id="if-you%E2%80%99re-a-designer" tabindex="-1">If You’re a Designer</h3>
+<ul>
+<li>
+<p><strong>UI/UX improvements</strong>: The browser interface works, but it could be beautiful.</p>
+</li>
+<li>
+<p><strong>Branding</strong>: Help us look professional.</p>
+</li>
+<li>
+<p><strong>Accessibility</strong>: Make sure everyone can use it.</p>
+</li>
+</ul>
+<h3 id="if-you%E2%80%99re-an-educator" tabindex="-1">If You’re an Educator</h3>
+<ul>
+<li>
+<p><strong>Try it in your class</strong>: Give us feedback on what works and what doesn’t.</p>
+</li>
+<li>
+<p><strong>Create courses</strong>: Build educational content using wasmrun OS mode.</p>
+</li>
+<li>
+<p><strong>Spread the word</strong>: Tell other teachers about it.</p>
+</li>
+</ul>
+<h3 id="if-you%E2%80%99re-a-user" tabindex="-1">If You’re a User</h3>
+<ul>
+<li>
+<p><strong>Star the repo</strong>: GitHub stars help with visibility.</p>
+</li>
+<li>
+<p><strong>Share your story</strong>: How would wasmrun OS mode help you?</p>
+</li>
+<li>
+<p><strong>Report issues</strong>: Found a bug? Tell us.</p>
+</li>
+<li>
+<p><strong>Feature requests</strong>: What do you need that we haven’t built yet?</p>
+</li>
+</ul>
+<h2 id="the-vision-forward" tabindex="-1">The Vision Forward</h2>
+<p>Imagine a world where:</p>
+<ul>
+<li>
+<p>“Install Node.js” is no longer step one of every tutorial</p>
+</li>
+<li>
+<p>Code examples in documentation are runnable with one click</p>
+</li>
+<li>
+<p>Students learn programming without fighting their environment</p>
+</li>
+<li>
+<p>Developers switch between projects and versions effortlessly</p>
+</li>
+<li>
+<p>Running untrusted code is safe by default</p>
+</li>
+<li>
+<p>Every computer with a browser is a full development environment</p>
+</li>
+</ul>
+<p>This isn’t fantasy. The technology exists. WebAssembly is here. Browsers are powerful. We just need to wire it all together.</p>
+<p><strong>wasmrun</strong> is our attempt to build this future. It’s experimental, it’s ambitious, and it’s not done. But it’s real, it’s happening, and you can be part of it.</p>
+<p>We’re building an operating system for code. An operating system that runs anywhere a browser runs. An operating system that makes programming accessible to everyone.</p>
+<p>Come help us build it.</p>
+<p><img src="/images/posts/c111c36b-0eb9-4328-af52-9496f3a7756f.png" alt=""></p>
+
+        </div>
+
+        <div class="article-end">
+            <span>✦</span>
+            <span>✦</span>
+            <span>✦</span>
+        </div>
+
+        <div class="post-navigation">
+            <div class="post-nav-item post-nav-previous">
+                    <a href="/create-your-own-wasm-plugin/">
+                        <span class="nav-arrow">←</span>
+                        <div class="nav-content">
+                            <p class="nav-label">Previous</p>
+                            <p class="nav-title">Create your own wasm plugin</p>
+                        </div>
+                    </a>
+                
+            </div>
+
+            <div class="post-nav-item post-nav-next">
+                    <a href="/ai-evals/">
+                        <div class="nav-content">
+                            <p class="nav-label">Next</p>
+                            <p class="nav-title">Unit Tests for Intelligence</p>
+                        </div>
+                        <span class="nav-arrow">→</span>
+                    </a>
+                
+            </div>
+        </div>
+    </div>
+
+    </main>
+    <footer class="sticky bottom-0 z-50 glass-footer py-4">
+  <div class="container mx-auto max-w-5xl px-8 flex items-center justify-between">
+    <div class="text-sm">
+      Blog by Ani
+    </div>
+
+    <div class="flex items-center">
+      <a href="https://anirudha.dev" target="_blank" rel="noopener noreferrer" class="footer-icon" aria-label="Home">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
+        </svg>
+      </a>
+    </div>
+
+    <div class="flex items-center gap-4">
+      <a href="https://github.com/anistark" target="_blank" rel="noopener noreferrer" class="footer-icon" aria-label="GitHub">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="currentColor" viewBox="0 0 24 24">
+          <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+        </svg>
+      </a>
+      <a href="https://x.com/kranirudha" target="_blank" rel="noopener noreferrer" class="footer-icon" aria-label="X (Twitter)">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="currentColor" viewBox="0 0 24 24">
+          <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+        </svg>
+      </a>
+      <a href="https://linkedin.com/in/kranirudha" target="_blank" rel="noopener noreferrer" class="footer-icon" aria-label="LinkedIn">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="currentColor" viewBox="0 0 24 24">
+          <path d="M4.98 3.5c0 1.381-1.11 2.5-2.48 2.5s-2.48-1.119-2.48-2.5c0-1.38 1.11-2.5 2.48-2.5s2.48 1.12 2.48 2.5zm.02 4.5h-5v16h5v-16zm7.982 0h-4.968v16h4.969v-8.399c0-4.67 6.029-5.052 6.029 0v8.399h4.988v-10.131c0-7.88-8.922-7.593-11.018-3.714v-2.155z"/>
+        </svg>
+      </a>
+    </div>
+  </div>
+</footer>
+    
+    <script src="https://unpkg.com/clipboard@2/dist/clipboard.min.js"></script>
+    <script src="/assets/main.bundle.js"></script>
+  </body>
+</html>
