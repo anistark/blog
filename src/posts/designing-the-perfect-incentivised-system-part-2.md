@@ -17,6 +17,7 @@ tags:
   - jinwoo
   - hunterxhunter
   - towerofgod
+  - cyberspace
 ---
 
 A lot of the recent rise in isekai anime also suggests a favorable wind towards perfecting our system.

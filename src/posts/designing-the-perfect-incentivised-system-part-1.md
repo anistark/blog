@@ -17,6 +17,7 @@ tags:
   - incentivised
   - nosedive
   - social-score
+  - cyberspace
 ---
 
 > *As I started writing this, it became apparent as to how deep the rabbit hole really is...* 🐰  

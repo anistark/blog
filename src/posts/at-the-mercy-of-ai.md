@@ -12,6 +12,7 @@ tags:
   - thought
   - llm
   - prompt-engineering
+  - cyberspace
 ---
 
 It’s the 2020s, and we’re all living in a world where the phrase *"just ask the AI"* has replaced *"let me Google that".* From product design to poetry, from diagnosing diseases to picking your next Netflix binge, AI is no longer a tool we occasionally refer to. It’s the invisible co-pilot running the plane, the ship, and sometimes the planet.

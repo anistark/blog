@@ -11,6 +11,7 @@ tags:
   - consensus
   - metaverse
   - collective-thinking
+  - cyberspace
 ---
 
 When we think about building anything, the first thought is about the past builders, whichever industry, domain, or land you're coming from. From the Roman Colosseum, Great Wall of China, and Taj Mahal of India to building Wikipedia, Reddit, and Google of today, we look up to the past great builders and wonder what it'd take to even come close to what they've accomplished. Thinking about building a new World altogether sounds even more daunting. Specially, if you think about who, how, what, and so on the million other questions. In this article, we'll start by trying to figure out what and why and the how. Of course, it's not going to be completely covered in one article alone. But, it can be a start.

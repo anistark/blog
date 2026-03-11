@@ -120,3 +120,5 @@ dist
 # MacOS files
 .DS_Store
 Thumbs.db
+.claude
+.pi

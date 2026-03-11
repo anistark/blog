@@ -11,6 +11,7 @@ tags:
   - decentralization
   - web30
   - web2
+  - cyberspace
 ---
 
 The web, in its earliest form, was envisioned as a decentralized platform—a space where anyone could share information without gatekeepers. Over time, however, the internet has become centralized. A handful of corporations now control vast amounts of online data, dictating how we interact, transact, and communicate. This centralization has led to issues like censorship, data privacy violations, and monopolistic practices. Sorry, didn't mean to go full Mr Robot here. This is more on technical advancement and why you should care about it.

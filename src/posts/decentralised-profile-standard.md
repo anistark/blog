@@ -14,6 +14,7 @@ tags:
   - ERC
   - cybersoul
   - 7866
+  - cyberspace
 ---
 
 The way we represent ourselves online is undergoing a fundamental transformation. Traditional user profiles, tied to centralised platforms, restrict true ownership, portability, and privacy. But what if identities could be **self-sovereign, interoperable, and decentralised**, seamlessly working across all apps, chains, and ecosystems?

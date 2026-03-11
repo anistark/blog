@@ -13,6 +13,7 @@ tags:
   - dreams
   - bci
   - imagination
+  - cyberspace
 ---
 
 In an era where technological advances continue to break the boundaries of what once seemed like science fiction, we stand at a crossroads between the physical and the digital. The interface has always been the bridge between humans and machines—beginning with the simple command-line, evolving through graphical user interfaces (GUIs), and now, the immersive experiences of augmented reality (AR) and virtual reality (VR). Yet, despite these advancements, the ultimate interface, one that requires no intermediary hardware or software, remains within us: our imagination.
