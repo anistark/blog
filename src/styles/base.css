@@ -169,6 +169,15 @@ hr {
   @apply pt-3;
 }
 
+/* Extra spacing above headers in article content */
+.content > h2,
+.content > h3,
+.content > h4,
+.content > h5,
+.content > h6 {
+  margin-top: 2.5rem;
+}
+
 /* Table styling */
 .content > table {
   width: 100%;
