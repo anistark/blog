@@ -7,6 +7,16 @@ module.exports = (config) => {
   const markdownItAnchor = require('markdown-it-anchor');
   markdownIt.use(markdownItAnchor);
 
+  // Render mermaid code blocks as <pre class="mermaid"> for client-side rendering
+  const defaultFence = markdownIt.renderer.rules.fence;
+  markdownIt.renderer.rules.fence = function (tokens, idx, options, env, self) {
+    const token = tokens[idx];
+    if (token.info.trim() === 'mermaid') {
+      return `<pre class="mermaid">${token.content}</pre>`;
+    }
+    return defaultFence(tokens, idx, options, env, self);
+  };
+
   config.setLibrary('md', markdownIt);
 
   config.addPlugin(require('eleventy-plugin-nesting-toc'), {

@@ -159,6 +159,56 @@ hr {
   @apply pt-3;
 }
 
+/* Table styling */
+.content > table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 1.5rem 0;
+  background: var(--bg-secondary);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.content > table thead {
+  background: rgba(100, 181, 246, 0.1);
+  border-bottom: 2px solid var(--border-color-hover);
+}
+
+[data-theme='light'] .content > table thead {
+  background: rgba(141, 110, 99, 0.1);
+}
+
+.content > table th {
+  @apply text-sm font-bold;
+  padding: 0.75rem 1rem;
+  text-align: left;
+  color: var(--text-heading);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.content > table td {
+  @apply text-sm;
+  padding: 0.75rem 1rem;
+  color: var(--text-primary);
+  border-top: 1px solid var(--border-color);
+}
+
+.content > table tbody tr {
+  transition: background 0.2s ease;
+}
+
+.content > table tbody tr:hover {
+  background: rgba(100, 181, 246, 0.05);
+}
+
+[data-theme='light'] .content > table tbody tr:hover {
+  background: rgba(141, 110, 99, 0.05);
+}
+
 .excerpt {
   @apply my-3;
 }
@@ -590,4 +640,13 @@ hr {
 
 [data-theme='light'] .draft-badge span {
   color: #f57c00;
+}
+
+/* Mermaid diagrams */
+pre.mermaid {
+  background: transparent !important;
+  border: none !important;
+  text-align: center;
+  margin: 1.5rem 0;
+  padding: 1rem 0;
 }
