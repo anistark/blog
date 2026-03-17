@@ -18,9 +18,15 @@
                             {% endfor %}
                         </div>
 
-                        <span class="created-date text-sm md:text-base whitespace-nowrap" datetime="{{ post.data.date }}">
-                            {{ post.data.date | dateDisplay }}
-                        </span>
+                        <div class="flex items-center gap-3">
+                            <span class="reading-time text-sm md:text-base whitespace-nowrap">
+                                {{ post.templateContent | readingTime }}
+                            </span>
+                            <span class="text-sm md:text-base opacity-40">·</span>
+                            <span class="created-date text-sm md:text-base whitespace-nowrap" datetime="{{ post.data.date }}">
+                                {{ post.data.date | dateDisplay }}
+                            </span>
+                        </div>
                     </div>
                 </div>
             </div>

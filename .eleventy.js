@@ -28,6 +28,7 @@ module.exports = (config) => {
   config.addPlugin(require('@11ty/eleventy-plugin-rss'));
 
   config.addFilter('dateDisplay', require('./filters/date-display.js'));
+  config.addFilter('readingTime', require('./filters/reading-time.js'));
 
   config.addPassthroughCopy({ public: './' });
 
