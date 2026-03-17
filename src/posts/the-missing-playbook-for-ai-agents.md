@@ -222,7 +222,7 @@ That's not engineering. That's a demo.
 | Prompt injection tests | Security testing | Adversarial manipulation |
 | Eval datasets with scoring | Regression testing | Quality degradation over time |
 
-I've written about [evals](/posts/ai-evals/) and [building trustworthy AI tools](/posts/building-ai-tools-you-can-trust/) before, and everything in those posts applies here. But agents add a new dimension: you're not just evaluating a single output, you're evaluating a **trajectory**, the sequence of decisions the agent made to get there.
+I've written about [evals](/ai-evals/) and [building trustworthy AI tools](/building-ai-tools-you-can-trust/) before, and everything in those posts applies here. But agents add a new dimension: you're not just evaluating a single output, you're evaluating a **trajectory**, the sequence of decisions the agent made to get there.
 
 ### Evaluating Trajectories, Not Just Outputs
 
@@ -429,7 +429,7 @@ Apps distribute through well-understood channels: App Store, web, desktop. Agent
 - **CLI agents**: For developer tools and power users. [Claude Code](https://docs.anthropic.com/en/docs/claude-code/overview) is a good example, a full agent that lives in the terminal.
 - **Embedded agents**: Inside existing products, triggered by user actions. Not a standalone "AI feature" but intelligence woven into the product flow.
 
-And then there's composability. With protocols like [Model Context Protocol (MCP)](https://modelcontextprotocol.io/), agents can discover and use tools dynamically. This shifts distribution from "ship a complete agent" to "ship capabilities that any agent can use." I've been [building skills as composable units](/posts/skills-agents-and-sutras/) for exactly this reason. The future isn't monolithic agents, it's an ecosystem of interoperable capabilities.
+And then there's composability. With protocols like [Model Context Protocol (MCP)](https://modelcontextprotocol.io/), agents can discover and use tools dynamically. This shifts distribution from "ship a complete agent" to "ship capabilities that any agent can use." I've been [building skills as composable units](/skills-agents-and-sutras/) for exactly this reason. The future isn't monolithic agents, it's an ecosystem of interoperable capabilities.
 
 > The best agent doesn't win. The most **accessible** agent does.
 
@@ -479,7 +479,7 @@ If you take one thing from this post, let it be this: **agents are not a new par
 
 - Design agents like systems, not like prompts
 - Most agent failures are design failures, not model failures
-- Testing and evals are the biggest missing piece. [Invest in them early](/posts/ai-evals/).
+- Testing and evals are the biggest missing piece. [Invest in them early](/ai-evals/).
 - Start simple: 1 model, 2-3 tools, no memory. Expand with evidence.
 - Observability isn't optional. You need to know what your agent did and why.
 - Distribution and accessibility will decide winners, not raw capability
