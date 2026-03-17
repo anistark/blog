@@ -87,12 +87,22 @@ h4 {
 
 a {
   @apply font-bold;
-  transition: transform 0.2s ease;
+  color: #a8e6cf;
+  transition: transform 0.2s ease, color 0.2s ease;
   display: inline-block;
 }
 
 a:hover {
+  color: #c4f0dc;
   transform: scale(1.05);
+}
+
+[data-theme='light'] a {
+  color: #2e7d52;
+}
+
+[data-theme='light'] a:hover {
+  color: #1b5e3b;
 }
 
 p {

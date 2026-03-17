@@ -80,23 +80,13 @@ Start with 2-3 tools. Add more only when you can demonstrate the agent needs the
 
 In a traditional app:
 
-```sh
-User → API → Business Logic → Database → Response
-```
+![Traditional App Architecture](/images/posts/app-architecture.png)
 
 You control every step. The flow is deterministic. If something breaks, you can trace exactly where.
 
 In an agent system:
 
-```sh
-User → LLM (decides what to do)
-         ↓
-    Tool Call → Result → LLM (decides what to do next)
-         ↓
-    ... (repeat until done)
-         ↓
-    Final Output
-```
+![Agent Architecture](/images/posts/agent-architecture.png)
 
 The key shift you'd notice by now is that in apps, you control the flow. In agents, you design the **boundaries** of control. You decide which tools exist, what they can do, how much context the LLM sees, and when to stop. The LLM decides everything else within those boundaries.
 
@@ -186,6 +176,20 @@ Start with:
 - No memory
 
 Get that working reliably. Then add complexity one piece at a time, measuring the impact of each addition. This is the same advice we give for microservices: start with a monolith, extract services when you have a reason to.
+
+### Skills: The Building Blocks
+
+As your agent grows beyond a few tools, you'll notice something. The interesting behavior isn't in the agent loop itself, it's in the capabilities the agent calls. Searching, summarizing, classifying, extracting, judging. These are **skills**, the smallest units of intelligence that actually produce outcomes.
+
+Most teams embed skills directly into prompts or tool wrappers, tightly coupled to a specific agent. That works early on, but it doesn't scale. When a skill is buried inside a prompt, you can't test it in isolation, you can't reuse it across agents, and you can't improve it without risking regressions elsewhere.
+
+The better approach is to treat skills as first-class artifacts. A skill has a clear interface, it can run independently, and its behavior can be measured. Think of it like the difference between inline code and a well-defined function with a contract. The agent decides *what* to do. The skill defines *how* it gets done.
+
+This separation pays off quickly. Agents become simpler because they're just orchestration. Debugging gets easier because you can isolate which skill misbehaved. And reuse becomes real, not just theoretical. A summarization skill that works for your research agent can plug into your customer support agent without rewriting anything.
+
+[Anthropic's agent skills framework](https://www.anthropic.com/engineering/equipping-agents-for-the-real-world-with-agent-skills) formalizes this idea, treating skills as discoverable, composable units rather than implicit prompt logic. I've been building on this with [Sutras](/posts/skills-agents-and-sutras/), a CLI that handles the lifecycle around skills: authoring, validation, evaluation, versioning, and distribution. Because having a spec for what a skill is doesn't help much if you can't test it, version it, or share it.
+
+If you're building agents that need to do more than one or two things well, start thinking in skills early. It'll save you from the "giant prompt that does everything" trap.
 
 ### Frameworks and When to Use Them
 
@@ -400,13 +404,17 @@ Context is the single most important resource an agent has. Every decision the L
 
 This matters more for agents than for simple chat applications. In a chatbot, a bad context window means a slightly off response. In an agent, it means the wrong tool gets called, the wrong arguments get passed, and the entire trajectory goes sideways. The LLM's ability to plan and reason degrades as context fills up with irrelevant information.
 
-**Sliding window**: Keep only the last N messages or tokens. Simple and predictable, but you lose early context that might still be relevant. Works well for short-lived agents where early steps don't inform later ones.
+#### Sliding window
+Keep only the last N messages or tokens. Simple and predictable, but you lose early context that might still be relevant. Works well for short-lived agents where early steps don't inform later ones.
 
-**Summarization**: Periodically compress older messages into a summary and replace them. The agent retains the gist without carrying the full weight. This is the most common pattern for long-running agents. The tradeoff is that summarization itself costs tokens and can lose nuance.
+#### Summarization
+Periodically compress older messages into a summary and replace them. The agent retains the gist without carrying the full weight. This is the most common pattern for long-running agents. The tradeoff is that summarization itself costs tokens and can lose nuance.
 
-**Selective injection**: Don't carry everything forward. Instead, store tool results and past reasoning externally, then use RAG to pull in only what's relevant for the current step. This is the most scalable approach but adds retrieval latency and complexity.
+#### Selective injection
+Don't carry everything forward. Instead, store tool results and past reasoning externally, then use RAG to pull in only what's relevant for the current step. This is the most scalable approach but adds retrieval latency and complexity.
 
-**Structured context**: Instead of dumping raw tool outputs into the conversation, format them into concise structured summaries before adding them to context. A 500-line API response becomes a 10-line summary of the fields that matter. This is cheap to implement and often the highest-impact optimization.
+#### Structured context
+Instead of dumping raw tool outputs into the conversation, format them into concise structured summaries before adding them to context. A 500-line API response becomes a 10-line summary of the fields that matter. This is cheap to implement and often the highest-impact optimization.
 
 As your agent handles longer tasks or serves more users concurrently, context management becomes a scaling bottleneck. Each agent run holds its own context in memory. Longer contexts mean more tokens per API call, which means higher cost and latency. At scale, the practical strategies are: keep individual agent runs short and focused, break complex tasks into sub-agents with their own scoped context, and invest in good summarization so context stays lean. The agents that scale well aren't the ones with the biggest context windows, they're the ones that are smartest about what goes into the window in the first place.
 
