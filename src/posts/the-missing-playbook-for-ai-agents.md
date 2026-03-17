@@ -187,7 +187,7 @@ The better approach is to treat skills as first-class artifacts. A skill has a c
 
 This separation pays off quickly. Agents become simpler because they're just orchestration. Debugging gets easier because you can isolate which skill misbehaved. And reuse becomes real, not just theoretical. A summarization skill that works for your research agent can plug into your customer support agent without rewriting anything.
 
-[Anthropic's agent skills framework](https://www.anthropic.com/engineering/equipping-agents-for-the-real-world-with-agent-skills) formalizes this idea, treating skills as discoverable, composable units rather than implicit prompt logic. I've been building on this with [Sutras](/skills-agents-and-sutras/), a CLI that handles the lifecycle around skills: authoring, validation, evaluation, versioning, and distribution. Because having a spec for what a skill is doesn't help much if you can't test it, version it, or share it.
+[Anthropic's agent skills framework](https://www.anthropic.com/engineering/equipping-agents-for-the-real-world-with-agent-skills) formalizes this idea, treating skills as discoverable, composable units rather than implicit prompt logic. I've been building on this with [Sutras](https://github.com/anistark/sutras), a CLI that handles the lifecycle around skills: authoring, validation, evaluation, versioning, and distribution. Because having a spec for what a skill is doesn't help much if you can't test it, version it, or share it. [Here's](/skills-agents-and-sutras/) a detailed article on Skills and Sutras.
 
 If you're building agents that need to do more than one or two things well, start thinking in skills early. It'll save you from the "giant prompt that does everything" trap.
 
