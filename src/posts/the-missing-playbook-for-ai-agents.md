@@ -3,9 +3,9 @@ layout: post
 title: The Missing Playbook for AI Agents
 excerpt: Most people are building agents the way they wrote their first prompts. But we already know how to build complex systems. We just need to map "how we build apps" to "how we build agents."
 date: 2026-03-17
-updatedDate: 2026-03-17
+updatedDate: 2026-03-19
 featuredImage: /images/posts/agent-playbook.png
-draft: true
+draft: false
 tags:
   - post
   - ai
