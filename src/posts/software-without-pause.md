@@ -3,9 +3,9 @@ layout: post
 title: Software Without Pause
 excerpt: Unreal, unprecedented speed of releases and updates
 date: 2026-03-28
-updatedDate: 2026-03-28
+updatedDate: 2026-03-29
 featuredImage: /images/posts/software-without-pause.png
-draft: true
+draft: false
 tags:
   - post
   - ai
