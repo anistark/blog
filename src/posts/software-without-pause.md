@@ -28,6 +28,10 @@ This isn't a cautionary tale. It's the new normal. And the uncomfortable truth i
 
 A new model every few months. Then every few weeks. Then every few days. New startups, new products, new announcements every other day. The ground beneath every company, whether you're building with AI or just building *near* AI, is shifting faster than anyone's planning cycle can keep up with.
 
+Just checkout [this article](https://www.productcompass.pm/p/claude-shipping-calendar) about everything claude team shipped in 52 days.
+
+![Claude Shippig](/images/posts/claude-shipping.png)
+
 So here's the question worth sitting with: if the old rules are dead, what replaces them?
 
 ## The Rulebook That Got Us Here
