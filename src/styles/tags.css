@@ -77,13 +77,15 @@
   animation: tag-hover 500ms both;
 }
 
-[data-theme='light'] .tag {
+[data-theme='reading'] .tag,
+[data-theme='beach'] .tag {
   color: #1b0f0a;
   border: 1px solid rgba(93, 64, 55, 0.3);
   box-shadow: 0 4px 12px rgba(93, 64, 55, 0.15), 0 0 0 1px rgba(255, 255, 255, 0.4) inset;
 }
 
-[data-theme='light'] .tag::after {
+[data-theme='reading'] .tag::after,
+[data-theme='beach'] .tag::after {
   background: linear-gradient(
     135deg,
     rgba(255, 255, 255, 0) 0%,
@@ -94,7 +96,8 @@
   );
 }
 
-[data-theme='light'] .tag:hover {
+[data-theme='reading'] .tag:hover,
+[data-theme='beach'] .tag:hover {
   animation: tag-hover-light 500ms both;
 }
 
@@ -141,49 +144,57 @@
 }
 
 /* Light mode tag colors - vibrant with coffee-toned backgrounds */
-[data-theme='light'] .tag.web3 {
+[data-theme='reading'] .tag.web3,
+[data-theme='beach'] .tag.web3 {
   background: linear-gradient(135deg, rgba(124, 58, 237, 0.85), rgba(139, 92, 246, 0.75));
   border-color: rgba(124, 58, 237, 0.5);
   color: #ffffff;
 }
 
-[data-theme='light'] .tag.wasm {
+[data-theme='reading'] .tag.wasm,
+[data-theme='beach'] .tag.wasm {
   background: linear-gradient(135deg, rgba(37, 99, 235, 0.85), rgba(59, 130, 246, 0.75));
   border-color: rgba(37, 99, 235, 0.5);
   color: #ffffff;
 }
 
-[data-theme='light'] .tag.ai {
+[data-theme='reading'] .tag.ai,
+[data-theme='beach'] .tag.ai {
   background: linear-gradient(135deg, rgba(5, 150, 105, 0.85), rgba(16, 185, 129, 0.75));
   border-color: rgba(5, 150, 105, 0.5);
   color: #ffffff;
 }
 
-[data-theme='light'] .tag.thought {
+[data-theme='reading'] .tag.thought,
+[data-theme='beach'] .tag.thought {
   background: linear-gradient(135deg, rgba(154, 52, 18, 0.9), rgba(194, 65, 12, 0.85));
   border-color: rgba(154, 52, 18, 0.6);
   color: #ffffff;
 }
 
-[data-theme='light'] .tag.cyberspace {
+[data-theme='reading'] .tag.cyberspace,
+[data-theme='beach'] .tag.cyberspace {
   background: linear-gradient(135deg, rgba(220, 38, 38, 0.85), rgba(239, 68, 68, 0.75));
   border-color: rgba(220, 38, 38, 0.5);
   color: #ffffff;
 }
 
-[data-theme='light'] .tag.build {
+[data-theme='reading'] .tag.build,
+[data-theme='beach'] .tag.build {
   background: linear-gradient(135deg, rgba(219, 39, 119, 0.85), rgba(236, 72, 153, 0.75));
   border-color: rgba(219, 39, 119, 0.5);
   color: #ffffff;
 }
 
-[data-theme='light'] .tag.llm {
+[data-theme='reading'] .tag.llm,
+[data-theme='beach'] .tag.llm {
   background: linear-gradient(135deg, rgba(99, 102, 241, 0.85), rgba(129, 140, 248, 0.75));
   border-color: rgba(99, 102, 241, 0.5);
   color: #ffffff;
 }
 
-[data-theme='light'] .tag.post {
+[data-theme='reading'] .tag.post,
+[data-theme='beach'] .tag.post {
   background: linear-gradient(135deg, rgba(100, 116, 139, 0.85), rgba(148, 163, 184, 0.75));
   border-color: rgba(100, 116, 139, 0.5);
   color: #ffffff;

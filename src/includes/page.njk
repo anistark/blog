@@ -35,9 +35,9 @@
     <script>
       // Set theme before page renders to prevent flash
       (function() {
-        const savedTheme = localStorage.getItem('theme') || 'dark';
-        if (savedTheme === 'light') {
-          document.documentElement.setAttribute('data-theme', 'light');
+        const theme = localStorage.getItem('theme') || 'night';
+        if (theme !== 'night') {
+          document.documentElement.setAttribute('data-theme', theme);
         }
       })();
     </script>
@@ -56,7 +56,7 @@
     {% block head %}{% endblock %}
   </head>
   <body class="flex flex-col min-h-screen">
-    <canvas id="space-particles"></canvas>
+    <canvas id="ambience-canvas"></canvas>
     {% include 'header.njk' %}
     <main class="container mx-auto max-w-5xl p-8 grow">
       {% block body %}{% endblock %}
@@ -69,7 +69,7 @@
       import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs';
       mermaid.initialize({
         startOnLoad: true,
-        theme: document.documentElement.getAttribute('data-theme') === 'light' ? 'default' : 'dark',
+        theme: ['reading', 'beach'].includes(document.documentElement.getAttribute('data-theme')) ? 'default' : 'dark',
         themeVariables: {
           fontSize: '14px',
         }
