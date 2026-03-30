@@ -17,7 +17,9 @@ export function initAmbience() {
   const night = (() => {
     const STAR_COUNT = 120;
     const GALAXY_COUNT = 3;
-    let stars, galaxies, meteors, asteroids, nextMeteorTime, nextAsteroidTime;
+    const DISTANT_GALAXY_COUNT = 12;
+    const CLOSE_GALAXY_COUNT = 2;
+    let stars, galaxies, distantGalaxies, closeGalaxies, meteors, asteroids, nextMeteorTime, nextAsteroidTime;
 
     function createStar() {
       const brightness = Math.random();
@@ -48,16 +50,227 @@ export function initAmbience() {
       };
     }
 
+    function createCloseGalaxy() {
+      const hue = Math.random() > 0.5 ? 210 + Math.random() * 30 : 270 + Math.random() * 40;
+      const armCount = Math.random() > 0.3 ? 2 : 3;
+      // scatter star-like dots embedded in the galaxy
+      const embeddedStars = [];
+      const rx = 140 + Math.random() * 100;
+      for (let i = 0; i < 40 + Math.floor(Math.random() * 30); i++) {
+        const dist = Math.random();
+        const angle = Math.random() * Math.PI * 2;
+        embeddedStars.push({
+          dist, angle,
+          size: 0.3 + Math.random() * 1.2,
+          alpha: 0.2 + Math.random() * 0.5,
+          pulseSpeed: 0.005 + Math.random() * 0.008,
+          pulseOffset: Math.random() * Math.PI * 2,
+        });
+      }
+      return {
+        x: Math.random() * width * 0.8 + width * 0.1,
+        y: Math.random() * height * 0.7 + height * 0.05,
+        radiusX: rx,
+        radiusY: rx * (0.3 + Math.random() * 0.25),
+        rotation: Math.random() * Math.PI,
+        rotSpeed: (Math.random() - 0.5) * 0.00006,
+        driftX: (Math.random() - 0.5) * 0.008,
+        driftY: (Math.random() - 0.5) * 0.006,
+        alpha: 0.025 + Math.random() * 0.025,
+        hue,
+        armCount,
+        armTightness: 2.5 + Math.random() * 1.5,
+        embeddedStars,
+        pulseSpeed: 0.0015 + Math.random() * 0.002,
+        pulseOffset: Math.random() * Math.PI * 2,
+      };
+    }
+
+    function createDistantGalaxy() {
+      const roll = Math.random();
+      let hue, sat;
+      if (roll < 0.3) { hue = 220 + Math.random() * 40; sat = 40 + Math.random() * 20; }       // blue-purple
+      else if (roll < 0.55) { hue = 280 + Math.random() * 30; sat = 30 + Math.random() * 25; }  // violet
+      else if (roll < 0.75) { hue = 30 + Math.random() * 25; sat = 35 + Math.random() * 20; }   // warm gold
+      else { hue = 190 + Math.random() * 30; sat = 25 + Math.random() * 20; }                   // teal
+
+      const isSpiral = Math.random() > 0.4;
+      return {
+        x: Math.random() * width, y: Math.random() * height,
+        radiusX: 8 + Math.random() * 18,
+        radiusY: 4 + Math.random() * 10,
+        rotation: Math.random() * Math.PI,
+        rotSpeed: (Math.random() - 0.5) * 0.00002,
+        alpha: 0.015 + Math.random() * 0.035,
+        hue, sat,
+        pulseSpeed: 0.002 + Math.random() * 0.003,
+        pulseOffset: Math.random() * Math.PI * 2,
+        isSpiral,
+        armCount: isSpiral ? (Math.random() > 0.5 ? 2 : 3) : 0,
+      };
+    }
+
     return {
       init() {
         stars = Array.from({ length: STAR_COUNT }, createStar);
         galaxies = Array.from({ length: GALAXY_COUNT }, createGalaxy);
+        distantGalaxies = Array.from({ length: DISTANT_GALAXY_COUNT }, createDistantGalaxy);
+        closeGalaxies = Array.from({ length: CLOSE_GALAXY_COUNT }, createCloseGalaxy);
         meteors = []; asteroids = [];
         nextMeteorTime = 0;
         nextAsteroidTime = 15000 + Math.random() * 15000;
       },
 
       draw(time, ts) {
+        // close galaxies (drawn first, largest and furthest back)
+        for (const cg of closeGalaxies) {
+          cg.x += cg.driftX; cg.y += cg.driftY; cg.rotation += cg.rotSpeed;
+          if (cg.x < -cg.radiusX * 2) cg.x = width + cg.radiusX;
+          if (cg.x > width + cg.radiusX * 2) cg.x = -cg.radiusX;
+          if (cg.y < -cg.radiusY * 2) cg.y = height + cg.radiusY;
+          if (cg.y > height + cg.radiusY * 2) cg.y = -cg.radiusY;
+
+          const pulse = 0.85 + 0.15 * Math.sin(time * cg.pulseSpeed + cg.pulseOffset);
+          const a = cg.alpha * pulse;
+
+          ctx.save();
+          ctx.translate(cg.x, cg.y);
+          ctx.rotate(cg.rotation);
+          ctx.scale(1, cg.radiusY / cg.radiusX);
+
+          // outer halo
+          const haloGr = ctx.createRadialGradient(0, 0, 0, 0, 0, cg.radiusX * 1.3);
+          haloGr.addColorStop(0, `hsla(${cg.hue},40%,60%,${a * 0.4})`);
+          haloGr.addColorStop(0.3, `hsla(${cg.hue + 10},35%,50%,${a * 0.25})`);
+          haloGr.addColorStop(0.6, `hsla(${cg.hue + 15},25%,40%,${a * 0.08})`);
+          haloGr.addColorStop(1, 'transparent');
+          ctx.beginPath();
+          ctx.arc(0, 0, cg.radiusX * 1.3, 0, Math.PI * 2);
+          ctx.fillStyle = haloGr;
+          ctx.fill();
+
+          // bright nucleus
+          const nucleusGr = ctx.createRadialGradient(0, 0, 0, 0, 0, cg.radiusX * 0.15);
+          nucleusGr.addColorStop(0, `hsla(${cg.hue - 10},50%,85%,${a * 3})`);
+          nucleusGr.addColorStop(0.4, `hsla(${cg.hue},45%,70%,${a * 2})`);
+          nucleusGr.addColorStop(1, 'transparent');
+          ctx.beginPath();
+          ctx.arc(0, 0, cg.radiusX * 0.15, 0, Math.PI * 2);
+          ctx.fillStyle = nucleusGr;
+          ctx.fill();
+
+          // spiral arms
+          for (let arm = 0; arm < cg.armCount; arm++) {
+            const armAngle = (arm / cg.armCount) * Math.PI * 2;
+            // main arm
+            ctx.beginPath();
+            for (let t = 0.05; t < 1; t += 0.01) {
+              const angle = armAngle + t * Math.PI * cg.armTightness;
+              const r = t * cg.radiusX;
+              const px = Math.cos(angle) * r;
+              const py = Math.sin(angle) * r;
+              if (t <= 0.06) ctx.moveTo(px, py);
+              else ctx.lineTo(px, py);
+            }
+            const armAlpha = a * 0.7 * (1 - 0.3 * Math.sin(time * 0.001 + arm));
+            ctx.strokeStyle = `hsla(${cg.hue + 5},45%,65%,${armAlpha})`;
+            ctx.lineWidth = 3 + cg.radiusX * 0.04;
+            ctx.lineCap = 'round';
+            ctx.stroke();
+
+            // secondary glow along arm
+            ctx.beginPath();
+            for (let t = 0.05; t < 1; t += 0.01) {
+              const angle = armAngle + t * Math.PI * cg.armTightness;
+              const r = t * cg.radiusX;
+              const px = Math.cos(angle) * r;
+              const py = Math.sin(angle) * r;
+              if (t <= 0.06) ctx.moveTo(px, py);
+              else ctx.lineTo(px, py);
+            }
+            ctx.strokeStyle = `hsla(${cg.hue + 20},35%,55%,${armAlpha * 0.3})`;
+            ctx.lineWidth = 8 + cg.radiusX * 0.08;
+            ctx.stroke();
+
+            // dust lane (darker inner edge)
+            ctx.beginPath();
+            for (let t = 0.1; t < 0.9; t += 0.015) {
+              const angle = armAngle + t * Math.PI * cg.armTightness + 0.15;
+              const r = t * cg.radiusX * 0.95;
+              const px = Math.cos(angle) * r;
+              const py = Math.sin(angle) * r;
+              if (t <= 0.115) ctx.moveTo(px, py);
+              else ctx.lineTo(px, py);
+            }
+            ctx.strokeStyle = `hsla(${cg.hue + 30},20%,15%,${a * 0.4})`;
+            ctx.lineWidth = 1.5 + cg.radiusX * 0.015;
+            ctx.stroke();
+          }
+
+          // embedded stars
+          for (const es of cg.embeddedStars) {
+            const sPulse = 0.5 + 0.5 * Math.sin(time * es.pulseSpeed + es.pulseOffset);
+            const r = es.dist * cg.radiusX;
+            const px = Math.cos(es.angle) * r;
+            const py = Math.sin(es.angle) * r;
+            const sa = es.alpha * a * sPulse * 4;
+            ctx.beginPath();
+            ctx.arc(px, py, es.size, 0, Math.PI * 2);
+            ctx.fillStyle = `hsla(${cg.hue - 20 + Math.random() * 40},30%,90%,${sa})`;
+            ctx.fill();
+          }
+
+          ctx.restore();
+        }
+
+        // distant galaxies (drawn behind stars but in front of close galaxies)
+        for (const dg of distantGalaxies) {
+          dg.rotation += dg.rotSpeed;
+          const pulse = 0.8 + 0.2 * Math.sin(time * dg.pulseSpeed + dg.pulseOffset);
+          const a = dg.alpha * pulse;
+
+          ctx.save();
+          ctx.translate(dg.x, dg.y);
+          ctx.rotate(dg.rotation);
+          ctx.scale(1, dg.radiusY / dg.radiusX);
+
+          // core glow
+          const coreGr = ctx.createRadialGradient(0, 0, 0, 0, 0, dg.radiusX);
+          coreGr.addColorStop(0, `hsla(${dg.hue},${dg.sat + 10}%,75%,${a * 1.8})`);
+          coreGr.addColorStop(0.15, `hsla(${dg.hue},${dg.sat}%,65%,${a * 1.2})`);
+          coreGr.addColorStop(0.4, `hsla(${dg.hue + 10},${dg.sat - 5}%,50%,${a * 0.5})`);
+          coreGr.addColorStop(0.7, `hsla(${dg.hue + 15},${dg.sat - 10}%,40%,${a * 0.15})`);
+          coreGr.addColorStop(1, 'transparent');
+          ctx.beginPath();
+          ctx.arc(0, 0, dg.radiusX, 0, Math.PI * 2);
+          ctx.fillStyle = coreGr;
+          ctx.fill();
+
+          // spiral arms for spiral galaxies
+          if (dg.isSpiral) {
+            ctx.globalAlpha = a * 0.6;
+            for (let arm = 0; arm < dg.armCount; arm++) {
+              const armAngle = (arm / dg.armCount) * Math.PI * 2;
+              ctx.beginPath();
+              for (let t = 0; t < 1; t += 0.02) {
+                const angle = armAngle + t * Math.PI * 2.5;
+                const r = t * dg.radiusX * 0.9;
+                const px = Math.cos(angle) * r;
+                const py = Math.sin(angle) * r;
+                if (t === 0) ctx.moveTo(px, py);
+                else ctx.lineTo(px, py);
+              }
+              ctx.strokeStyle = `hsla(${dg.hue},${dg.sat + 5}%,70%,${a * 0.4})`;
+              ctx.lineWidth = 1 + dg.radiusX * 0.06;
+              ctx.lineCap = 'round';
+              ctx.stroke();
+            }
+            ctx.globalAlpha = 1;
+          }
+
+          ctx.restore();
+        }
+
         // galaxies
         for (const g of galaxies) {
           g.x += g.driftX; g.y += g.driftY; g.rotation += g.rotSpeed;
