@@ -20,6 +20,17 @@ pnpm run new-post "New Post Title"
 
 Create a new post page in draft mode.
 
-## License
+### [MIT License ](./LICENSE)
 
-[MIT](./LICENSE)
+## Credits/References:
+
+### Background Images
+
+- **Forest theme** — [Photo by Luca Bravo](https://unsplash.com/photos/landscape-photography-of-forest-LAKQ3i-xn84) on Unsplash
+- **Beach theme** — [Photo by Cristofer Maximilian](https://unsplash.com/photos/coconut-tree-near-shore-within-mountain-range-RN6ts8IZ4_0) on Unsplash
+
+### Icons
+
+- **[Lucide](https://lucide.dev/)** — UI icons (theme switcher: moon, book-open, tree-pine, palmtree)
+- **[Simple Icons](https://simpleicons.org/)** — Brand icons (GitHub, X, Mastodon)
+- LinkedIn icon uses a standard inline SVG (not available in Simple Icons)
