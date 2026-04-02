@@ -4,6 +4,7 @@ import { handleCodeCopying } from './copy.js';
 import { handleThemeToggle } from './theme.js';
 import { handleInfiniteScroll } from './infinite-scroll.js';
 import { initAmbience } from './ambience.js';
+import './github-card.js';
 
 if (DEV_MODE) console.log('Dev mode is currently enabled.');
 

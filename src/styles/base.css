@@ -812,6 +812,95 @@ hr {
   color: #f57c00;
 }
 
+/* GitHub repo card */
+.github-card {
+  display: block;
+  padding: 1.25rem 1.5rem;
+  margin: 1.5rem 0;
+  background: var(--bg-secondary);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  text-decoration: none;
+  color: var(--text-primary);
+  transition: all 0.3s ease;
+}
+
+.github-card:hover {
+  border-color: var(--border-color-hover);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
+  text-decoration: none;
+}
+
+[data-theme='reading'] .github-card:hover,
+[data-theme='beach'] .github-card:hover {
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}
+
+.github-card.loading,
+.github-card.error {
+  color: var(--text-secondary);
+  font-size: 0.875rem;
+}
+
+.github-card-header {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.github-card-icon {
+  color: var(--text-secondary);
+  flex-shrink: 0;
+}
+
+.github-card-name {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--accent-primary);
+}
+
+.github-card-desc {
+  font-size: 0.875rem;
+  color: var(--text-secondary);
+  margin: 0.25rem 0 0.75rem;
+  line-height: 1.5;
+}
+
+.github-card-meta {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+}
+
+.github-card-lang {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+.github-card-lang-dot {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+}
+
+.github-card-stat {
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+}
+
+.github-card-stat svg {
+  color: var(--text-secondary);
+}
+
 /* Mermaid diagrams */
 pre.mermaid {
   background: transparent !important;

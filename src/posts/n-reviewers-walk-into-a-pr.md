@@ -4,7 +4,7 @@ title: N Reviewers Walk Into a PR...
 excerpt: How many people should review this PR? I built a GitHub Action that answers that question automatically. No more guessing, no more guilt-assigning three reviewers on a Friday.
 date: 2026-04-02
 updatedDate: 2026-04-02
-featuredImage:
+featuredImage: /images/posts/n-reviewers-walk-into-a-pr-2.png
 draft: true
 tags:
   - post
@@ -192,7 +192,7 @@ The endgame: don't just _suggest_ reviewers. _Assign_ them. Pick from a configur
 
 All of these are tracked as [open issues on GitHub](https://github.com/anistark/pr-reviewer-labeler/issues).
 
-## This Is Where You Come In
+![This is where you come in](/images/posts/erwin-this-is-where-you-come-in.png)
 
 I built this to scratch my own itch, but I know every team's review culture is different. Maybe you need reviewer recommendations based on commit count, not line count. Maybe you want Slack notifications when a PR needs 3+ reviewers. Maybe you have an idea I haven't thought of yet.
 
@@ -203,6 +203,6 @@ I'd love to hear it.
 - **Send a PR**: the codebase is small, TypeScript, well-tested, and MIT licensed. Jump in
 - **Star the repo**: if you think this should exist, let me know with a star. It helps others find it too
 
-The source lives at [github.com/anistark/pr-reviewer-labeler](https://github.com/anistark/pr-reviewer-labeler).
+<github-card repo="anistark/pr-reviewer-labeler"></github-card>
 
 Because no PR should go under-reviewed just because someone didn't want to bother a third person on a Friday.
