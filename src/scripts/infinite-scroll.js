@@ -39,13 +39,24 @@ export function handleInfiniteScroll() {
       const newPostsContainer = doc.getElementById('posts-container');
       let newPostsCount = 0;
 
+      // Append new posts into the magazine grid on the current page
+      let gridContainer = postsContainer.querySelector('#magazine-grid');
+      if (!gridContainer) {
+        // Create grid container if it doesn't exist yet
+        gridContainer = document.createElement('div');
+        gridContainer.id = 'magazine-grid';
+        gridContainer.className = 'magazine-grid grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6';
+        postsContainer.appendChild(gridContainer);
+      }
+
       if (newPostsContainer) {
-        const newPosts = newPostsContainer.querySelectorAll('.post-item');
+        // Grab only grid card items from fetched page
+        const newPosts = newPostsContainer.querySelectorAll('.post-grid-card');
         newPostsCount = newPosts.length;
 
-        // Append each post to the current page
+        // Append each post into the grid
         newPosts.forEach(post => {
-          postsContainer.appendChild(post.cloneNode(true));
+          gridContainer.appendChild(post.cloneNode(true));
         });
       }
 

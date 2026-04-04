@@ -901,6 +901,69 @@ hr {
   color: var(--text-secondary);
 }
 
+/* Magazine layout */
+.post-featured {
+  min-height: 420px;
+  display: flex;
+  align-items: flex-end;
+}
+
+.post-featured .post-content {
+  width: 100%;
+}
+
+.featured-label {
+  display: inline-block;
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--accent-primary);
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-color);
+  padding: 0.25rem 0.75rem;
+  border-radius: 6px;
+  margin-bottom: 0.75rem;
+}
+
+.post-excerpt {
+  color: var(--text-secondary);
+  line-height: 1.6;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.post-sidebar {
+  min-height: auto;
+}
+
+.post-sidebar.has-background {
+  min-height: auto;
+}
+
+.post-grid-card {
+  display: flex;
+  flex-direction: column;
+}
+
+.post-grid-card .post-content {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.post-grid-card .post-excerpt {
+  -webkit-line-clamp: 2;
+}
+
+@media (max-width: 1023px) {
+  .post-featured {
+    min-height: 250px;
+  }
+}
+
 /* Mermaid diagrams */
 pre.mermaid {
   background: transparent !important;

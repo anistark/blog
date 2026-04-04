@@ -1,35 +1,144 @@
 <div id="posts-container">
+    {% set visiblePosts = [] %}
     {% for post in posts %}
         {% if not post.data.draft %}
-            <div class="post-item mb-8 {% if post.data.featuredImage %}has-background{% endif %}" {% if post.data.featuredImage %}style="background-image: url('{{ post.data.featuredImage }}');"{% endif %}>
-                <div class="post-content">
-                    <h2 class="mb-4 md:mb-8">
-                        <a class="block" href="{{ post.url | url }}">{{ post.data.title }}</a>
-                    </h2>
+            {% set visiblePosts = (visiblePosts.push(post), visiblePosts) %}
+        {% endif %}
+    {% endfor %}
 
-                    <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
-                        <div class="flex flex-wrap items-center">
-                            {% set tagCount = 0 %}
-                            {% for tag in post.data.tags %}
-                                {%- if tag !== "post" and tagCount < 5 -%}
-                                    <a class="tag {{ tag | replace('.', '') }}" href="{{ site.baseUrl }}tag/{{ tag }}">{{ tag }}</a>
-                                    {% set tagCount = tagCount + 1 %}
-                                {%- endif -%}
-                            {% endfor %}
-                        </div>
-
-                        <div class="flex items-center gap-3">
-                            <span class="reading-time text-sm md:text-base whitespace-nowrap">
-                                {{ post.templateContent | readingTime }}
-                            </span>
-                            <span class="text-sm md:text-base opacity-40">·</span>
-                            <span class="created-date text-sm md:text-base whitespace-nowrap" datetime="{{ post.data.date }}">
-                                {{ post.data.date | dateDisplay }}
-                            </span>
+    {% if visiblePosts.length > 0 %}
+        {% if pagination.pageNumber == 0 %}
+            {# Page 1: Featured + Sidebar #}
+            <div class="magazine-top mb-8 grid grid-cols-1 lg:grid-cols-3 gap-6">
+                {# Featured (large) post - takes 2/3 #}
+                {% set featured = visiblePosts[0] %}
+                <div class="post-item post-featured lg:col-span-2 {% if featured.data.featuredImage %}has-background{% endif %}" {% if featured.data.featuredImage %}style="background-image: url('{{ featured.data.featuredImage }}');"{% endif %}>
+                    <div class="post-content">
+                        <div class="featured-label">Latest</div>
+                        <h2 class="mb-4 text-2xl md:text-4xl">
+                            <a class="block" href="{{ featured.url | url }}">{{ featured.data.title }}</a>
+                        </h2>
+                        <p class="post-excerpt">{{ featured.data.excerpt }}</p>
+                        <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4 mt-4">
+                            <div class="flex flex-wrap items-center">
+                                {% set tagCount = 0 %}
+                                {% for tag in featured.data.tags %}
+                                    {%- if tag !== "post" and tagCount < 5 -%}
+                                        <a class="tag {{ tag | replace('.', '') }}" href="{{ site.baseUrl }}tag/{{ tag }}">{{ tag }}</a>
+                                        {% set tagCount = tagCount + 1 %}
+                                    {%- endif -%}
+                                {% endfor %}
+                            </div>
+                            <div class="flex items-center gap-3">
+                                <span class="reading-time text-sm md:text-base whitespace-nowrap">
+                                    {{ featured.templateContent | readingTime }}
+                                </span>
+                                <span class="text-sm md:text-base opacity-40">·</span>
+                                <span class="created-date text-sm md:text-base whitespace-nowrap" datetime="{{ featured.data.date }}">
+                                    {{ featured.data.date | dateDisplay }}
+                                </span>
+                            </div>
                         </div>
                     </div>
                 </div>
+
+                {# Sidebar - 2nd and 3rd posts #}
+                <div class="magazine-sidebar flex flex-col gap-6">
+                    {% for post in visiblePosts %}
+                        {% if loop.index0 >= 1 and loop.index0 <= 2 %}
+                            <div class="post-item post-sidebar flex-1 {% if post.data.featuredImage %}has-background{% endif %}" {% if post.data.featuredImage %}style="background-image: url('{{ post.data.featuredImage }}');"{% endif %}>
+                                <div class="post-content">
+                                    <h2 class="mb-2 text-lg md:text-xl">
+                                        <a class="block" href="{{ post.url | url }}">{{ post.data.title }}</a>
+                                    </h2>
+                                    <div class="flex flex-wrap items-center gap-2">
+                                        <span class="created-date text-sm whitespace-nowrap" datetime="{{ post.data.date }}">
+                                            {{ post.data.date | dateDisplay }}
+                                        </span>
+                                        <span class="text-sm opacity-40">·</span>
+                                        <span class="reading-time text-sm whitespace-nowrap">
+                                            {{ post.templateContent | readingTime }}
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        {% endif %}
+                    {% endfor %}
+                </div>
+            </div>
+
+            {# Remaining posts (4th onward) in grid #}
+            {% if visiblePosts.length > 3 %}
+                <div id="magazine-grid" class="magazine-grid grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    {% for post in visiblePosts %}
+                        {% if loop.index0 >= 3 %}
+                            <div class="post-item post-grid-card {% if post.data.featuredImage %}has-background{% endif %}" {% if post.data.featuredImage %}style="background-image: url('{{ post.data.featuredImage }}');"{% endif %}>
+                                <div class="post-content">
+                                    <h2 class="mb-2 text-lg md:text-xl">
+                                        <a class="block" href="{{ post.url | url }}">{{ post.data.title }}</a>
+                                    </h2>
+                                    <p class="post-excerpt text-sm">{{ post.data.excerpt | truncate(100) }}</p>
+                                    <div class="flex flex-col gap-2 mt-3">
+                                        <div class="flex flex-wrap items-center">
+                                            {% set tagCount = 0 %}
+                                            {% for tag in post.data.tags %}
+                                                {%- if tag !== "post" and tagCount < 3 -%}
+                                                    <a class="tag {{ tag | replace('.', '') }}" href="{{ site.baseUrl }}tag/{{ tag }}">{{ tag }}</a>
+                                                    {% set tagCount = tagCount + 1 %}
+                                                {%- endif -%}
+                                            {% endfor %}
+                                        </div>
+                                        <div class="flex items-center gap-2">
+                                            <span class="created-date text-sm whitespace-nowrap" datetime="{{ post.data.date }}">
+                                                {{ post.data.date | dateDisplay }}
+                                            </span>
+                                            <span class="text-sm opacity-40">·</span>
+                                            <span class="reading-time text-sm whitespace-nowrap">
+                                                {{ post.templateContent | readingTime }}
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        {% endif %}
+                    {% endfor %}
+                </div>
+            {% endif %}
+
+        {% else %}
+            {# Page 2+: Grid-only layout (used by infinite scroll) #}
+            <div id="magazine-grid" class="magazine-grid grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                {% for post in visiblePosts %}
+                    <div class="post-item post-grid-card {% if post.data.featuredImage %}has-background{% endif %}" {% if post.data.featuredImage %}style="background-image: url('{{ post.data.featuredImage }}');"{% endif %}>
+                        <div class="post-content">
+                            <h2 class="mb-2 text-lg md:text-xl">
+                                <a class="block" href="{{ post.url | url }}">{{ post.data.title }}</a>
+                            </h2>
+                            <p class="post-excerpt text-sm">{{ post.data.excerpt | truncate(100) }}</p>
+                            <div class="flex flex-col gap-2 mt-3">
+                                <div class="flex flex-wrap items-center">
+                                    {% set tagCount = 0 %}
+                                    {% for tag in post.data.tags %}
+                                        {%- if tag !== "post" and tagCount < 3 -%}
+                                            <a class="tag {{ tag | replace('.', '') }}" href="{{ site.baseUrl }}tag/{{ tag }}">{{ tag }}</a>
+                                            {% set tagCount = tagCount + 1 %}
+                                        {%- endif -%}
+                                    {% endfor %}
+                                </div>
+                                <div class="flex items-center gap-2">
+                                    <span class="created-date text-sm whitespace-nowrap" datetime="{{ post.data.date }}">
+                                        {{ post.data.date | dateDisplay }}
+                                    </span>
+                                    <span class="text-sm opacity-40">·</span>
+                                    <span class="reading-time text-sm whitespace-nowrap">
+                                        {{ post.templateContent | readingTime }}
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
             </div>
         {% endif %}
-    {% endfor %}
+    {% endif %}
 </div>
