@@ -3,9 +3,9 @@ layout: post
 title: N Reviewers Walk Into a PR...
 excerpt: How many people should review this PR? I built a GitHub Action that answers that question automatically. No more guessing, no more guilt-assigning three reviewers on a Friday.
 date: 2026-04-02
-updatedDate: 2026-04-02
+updatedDate: 2026-04-04
 featuredImage: /images/posts/n-reviewers-walk-into-a-pr-2.png
-draft: true
+draft: false
 tags:
   - post
   - github
