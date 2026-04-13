@@ -901,6 +901,23 @@ hr {
   color: var(--text-secondary);
 }
 
+.load-more-button {
+  padding: 0.625rem 1.5rem;
+  background: transparent;
+  border: 1px solid var(--border-color);
+  color: var(--text-secondary);
+  border-radius: 8px;
+  font-size: 0.875rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.load-more-button:hover {
+  border-color: var(--border-color-hover);
+  color: var(--text-primary);
+  background: var(--bg-secondary);
+}
+
 /* Magazine layout */
 .post-featured {
   min-height: 420px;

@@ -37,11 +37,11 @@ permalink: "{% if path %}{{ path | slug }}{% else %}{{ page.fileSlug }}{% endif 
         {% if date %}
             {% if updatedDate and (date|string) !== (updatedDate|string) %}
               <p class="text-sm italic">Last updated on
-                    <span datetime="{{ date }}">{{ updatedDate | dateDisplay }}</span>. Created on
+                    <span datetime="{{ date }}">{{ updatedDate | dateDisplay }}</span>. Published on
                     <span datetime="{{ date }}">{{ date | dateDisplay }}</span>.
                     <span class="reading-time"> · {{ content | readingTime }}</span></p>
             {% else %}
-                <p class="text-sm italic">Created on
+                <p class="text-sm italic">Published on
                     <span datetime="{{ date }}">{{ date | dateDisplay }}</span>.
                     <span class="reading-time"> · {{ content | readingTime }}</span></p>
             {% endif %}
