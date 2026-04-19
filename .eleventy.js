@@ -8,14 +8,26 @@ module.exports = (config) => {
   const markdownItAnchor = require('markdown-it-anchor');
   markdownIt.use(markdownItAnchor);
 
-  // Render mermaid code blocks as <pre class="mermaid"> for client-side rendering
+  // Render mermaid code blocks as <pre class="mermaid"> for client-side rendering.
+  // Render shell-like code blocks (sh, bash, zsh, shell, console) as <terminal-block>.
+  const shellLangs = new Set(['sh', 'bash', 'zsh', 'shell', 'console']);
+  const shellVariants = new Set(['tree']);
   const defaultFence = markdownIt.renderer.rules.fence;
   markdownIt.renderer.rules.fence = function (tokens, idx, options, env, self) {
     const token = tokens[idx];
-    if (token.info.trim() === 'mermaid') {
+    const info = token.info.trim();
+    if (info === 'mermaid') {
       return `<pre class="mermaid">${token.content}</pre>`;
     }
-    return defaultFence(tokens, idx, options, env, self);
+    const [baseLang, variant] = info.split('=');
+    if (shellLangs.has(baseLang)) {
+      const escaped = markdownIt.utils.escapeHtml(token.content.replace(/\n+$/, ''));
+      const modeAttr = variant && shellVariants.has(variant) ? ` mode="${variant}"` : '';
+      return `<terminal-block${modeAttr}>${escaped}</terminal-block>`;
+    }
+    const rendered = defaultFence(tokens, idx, options, env, self);
+    const lang = markdownIt.utils.escapeHtml(info.split(/\s+/)[0] || 'text');
+    return `<code-block lang="${lang}">${rendered}</code-block>`;
   };
 
   config.setLibrary('md', markdownIt);
