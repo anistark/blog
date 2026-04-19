@@ -4,8 +4,8 @@ title: Writing Your Own Claude Plugin and Shipping it to the World
 excerpt: Claude Code has a plugin system now. Build a plugin, push it to GitHub, list it on AgentHub, and watch a stranger install it in two commands.
 date: 2026-04-20
 updatedDate: 2026-04-20
-featuredImage:
-draft: true
+featuredImage: /images/posts/claude-plugin-getting-started.png
+draft: false
 tags:
   - post
   - ai
@@ -25,7 +25,9 @@ This post walks through the whole round trip: **build a Claude plugin, publish i
 
 Once you've everything set, you can install your plugin like:
 
-<terminal-block cmd="/plugin install your-plugin@agenthub"></terminal-block>
+```sh
+/plugin install your-plugin@agenthub
+```
 
 ## What even is a Claude plugin?
 
