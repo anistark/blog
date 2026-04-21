@@ -27,6 +27,7 @@
     <meta name="og:type" content="website">
 
     <link rel="icon" type="image/png" href="{{ site.baseUrl }}me.png" />
+    <link rel="alternate" type="application/atom+xml" title="{{ site.name }}" href="{{ site.url }}{{ site.feed.path }}" />
 
     <title>{% if metaTitle %}{{ metaTitle }}{% else %}{{ title }}{% endif %}{% if metaTitle or title %} | {% endif %}{{ site.name }}</title>
 
@@ -58,7 +59,7 @@
   <body class="flex flex-col min-h-screen">
     <canvas id="ambience-canvas"></canvas>
     {% include 'header.njk' %}
-    <main class="container mx-auto max-w-8xl p-8 grow">
+    <main class="container mx-auto {% block mainMaxWidth %}max-w-7xl{% endblock %} p-8 grow">
       {% block body %}{% endblock %}
     </main>
     {% include 'footer.njk' %}

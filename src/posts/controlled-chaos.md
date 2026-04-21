@@ -38,9 +38,13 @@ Think about it. The most iconic *rule-breakers* in any field were rule-masters f
 
 And yet, every motivational poster, every coach's pep talk, every anime protagonist's signature move tells us the opposite. *Go beyond your limits. Break the ceiling. Surpass yourself.*
 
-> *"Don't believe in the you that believes in me. Don't believe in the me that believes in you. Believe in the you that believes in yourself."*
+> *"There is nothing impossible to him who will try."*
 >
-> \-- Kamina, *<a href="https://en.wikipedia.org/wiki/Gurren_Lagann" target="_blank" rel="noopener noreferrer">Gurren Lagann</a>*
+> \-- <a href="https://en.wikipedia.org/wiki/Alexander_the_Great" target="_blank" rel="noopener noreferrer">Alexander the Great</a>
+
+> *"The only way to discover the limits of the possible is to go beyond them into the impossible."*
+>
+> \-- <a href="https://en.wikipedia.org/wiki/Arthur_C._Clarke" target="_blank" rel="noopener noreferrer">Arthur C. Clarke</a>
 
 > *"Plus Ultra."*
 >

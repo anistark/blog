@@ -6,7 +6,13 @@ module.exports = (config) => {
   });
 
   const markdownItAnchor = require('markdown-it-anchor');
-  markdownIt.use(markdownItAnchor);
+  markdownIt.use(markdownItAnchor, {
+    permalink: markdownItAnchor.permalink.ariaHidden({
+      placement: 'after',
+      symbol: '#',
+      class: 'header-anchor',
+    }),
+  });
 
   // Render mermaid code blocks as <pre class="mermaid"> for client-side rendering.
   // Render shell-like code blocks (sh, bash, zsh, shell, console) as <terminal-block>.

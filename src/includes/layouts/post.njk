@@ -4,6 +4,8 @@ permalink: "{% if path %}{{ path | slug }}{% else %}{{ page.fileSlug }}{% endif 
 
 {% extends 'page.njk' %}
 
+{% block mainMaxWidth %}max-w-6xl{% endblock %}
+
 {% block body %}
     <p>{{url}}</p>
 
@@ -12,20 +14,17 @@ permalink: "{% if path %}{{ path | slug }}{% else %}{{ page.fileSlug }}{% endif 
     {% endif %}
 
     <div>
-        <h2>{{ title }}</h2>
-
-        {% if draft %}
-            <div class="draft-badge">
-                <span>⚠️ DRAFT</span>
-            </div>
-        {% endif %}
-
-        {% if excerpt %}
-            <p class="excerpt">{{ excerpt }}</p>
-        {% endif %}
+        <div class="post-title-row">
+            <h2>{{ title }}</h2>
+            {% if draft %}
+                <div class="draft-badge">
+                    <span>⚠️ DRAFT</span>
+                </div>
+            {% endif %}
+        </div>
 
         {% if tags %}
-            <div class="mb-2">
+            <div class="mt-4 mb-2">
                 {% for tag in tags %}
                     {%- if tag !== "post" -%}
                         <a class="tag {{ tag | replace('.', '') }}" href="{{ site.baseUrl }}tag/{{ tag }}">{{ tag }}</a>
@@ -48,16 +47,6 @@ permalink: "{% if path %}{{ path | slug }}{% else %}{{ page.fileSlug }}{% endif 
         {% endif %}
 
         <div class="content post">
-            {% if content | toc %}
-                <hr />
-
-                <h3>Table of Contents</h3>
-
-                {{ content | toc | safe }}
-
-                <hr />
-            {% endif %}
-
             {{ content | safe }}
         </div>
 

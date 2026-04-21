@@ -264,6 +264,7 @@ hr {
 
 .content > p {
   @apply pt-3;
+  font-size: 1.25rem;
 }
 
 /* Extra spacing above headers in article content */
@@ -273,6 +274,24 @@ hr {
 .content > h5,
 .content > h6 {
   margin-top: 2.5rem;
+  scroll-margin-top: 5rem;
+}
+
+.content .header-anchor {
+  margin-left: 0.5rem;
+  opacity: 0;
+  text-decoration: none;
+  color: var(--text-secondary, #94a3b8);
+  transition: opacity 0.2s ease;
+}
+
+.content h2:hover .header-anchor,
+.content h3:hover .header-anchor,
+.content h4:hover .header-anchor,
+.content h5:hover .header-anchor,
+.content h6:hover .header-anchor,
+.content .header-anchor:focus {
+  opacity: 1;
 }
 
 /* Table styling */
@@ -781,10 +800,21 @@ hr {
 }
 
 /* Draft badge */
+.post-title-row {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.post-title-row h2 {
+  margin: 0;
+}
+
 .draft-badge {
   display: inline-block;
-  margin: 1rem 0;
-  padding: 0.75rem 1.5rem;
+  margin-left: auto;
+  padding: 0.35rem 0.75rem;
   background: rgba(255, 193, 7, 0.15);
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
