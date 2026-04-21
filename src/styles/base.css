@@ -1095,6 +1095,98 @@ hr {
   overflow: hidden;
 }
 
+/* Light themes: darken the Dracula syntax colors so tokens stay
+   legible on the light code-block surface. */
+[data-theme='beach'] .code-block code[class*='language-'],
+[data-theme='beach'] .code-block pre[class*='language-'],
+[data-theme='reading'] .code-block code[class*='language-'],
+[data-theme='reading'] .code-block pre[class*='language-'] {
+  color: #2b1d12;
+  text-shadow: none;
+}
+
+[data-theme='beach'] .code-block .token.comment,
+[data-theme='beach'] .code-block .token.prolog,
+[data-theme='beach'] .code-block .token.doctype,
+[data-theme='beach'] .code-block .token.cdata,
+[data-theme='reading'] .code-block .token.comment,
+[data-theme='reading'] .code-block .token.prolog,
+[data-theme='reading'] .code-block .token.doctype,
+[data-theme='reading'] .code-block .token.cdata {
+  color: #6d5b3f;
+}
+
+[data-theme='beach'] .code-block .token.punctuation,
+[data-theme='reading'] .code-block .token.punctuation {
+  color: #3e2723;
+}
+
+[data-theme='beach'] .code-block .token.property,
+[data-theme='beach'] .code-block .token.tag,
+[data-theme='beach'] .code-block .token.constant,
+[data-theme='beach'] .code-block .token.symbol,
+[data-theme='beach'] .code-block .token.deleted,
+[data-theme='beach'] .code-block .token.keyword,
+[data-theme='reading'] .code-block .token.property,
+[data-theme='reading'] .code-block .token.tag,
+[data-theme='reading'] .code-block .token.constant,
+[data-theme='reading'] .code-block .token.symbol,
+[data-theme='reading'] .code-block .token.deleted,
+[data-theme='reading'] .code-block .token.keyword {
+  color: #ad1457;
+}
+
+[data-theme='beach'] .code-block .token.boolean,
+[data-theme='beach'] .code-block .token.number,
+[data-theme='reading'] .code-block .token.boolean,
+[data-theme='reading'] .code-block .token.number {
+  color: #6a1b9a;
+}
+
+[data-theme='beach'] .code-block .token.selector,
+[data-theme='beach'] .code-block .token.attr-name,
+[data-theme='beach'] .code-block .token.string,
+[data-theme='beach'] .code-block .token.char,
+[data-theme='beach'] .code-block .token.builtin,
+[data-theme='beach'] .code-block .token.inserted,
+[data-theme='reading'] .code-block .token.selector,
+[data-theme='reading'] .code-block .token.attr-name,
+[data-theme='reading'] .code-block .token.string,
+[data-theme='reading'] .code-block .token.char,
+[data-theme='reading'] .code-block .token.builtin,
+[data-theme='reading'] .code-block .token.inserted {
+  color: #2e7d32;
+}
+
+[data-theme='beach'] .code-block .token.operator,
+[data-theme='beach'] .code-block .token.entity,
+[data-theme='beach'] .code-block .token.url,
+[data-theme='beach'] .code-block .token.variable,
+[data-theme='reading'] .code-block .token.operator,
+[data-theme='reading'] .code-block .token.entity,
+[data-theme='reading'] .code-block .token.url,
+[data-theme='reading'] .code-block .token.variable {
+  color: #3e2723;
+}
+
+[data-theme='beach'] .code-block .token.atrule,
+[data-theme='beach'] .code-block .token.attr-value,
+[data-theme='beach'] .code-block .token.function,
+[data-theme='beach'] .code-block .token.class-name,
+[data-theme='reading'] .code-block .token.atrule,
+[data-theme='reading'] .code-block .token.attr-value,
+[data-theme='reading'] .code-block .token.function,
+[data-theme='reading'] .code-block .token.class-name {
+  color: #0d47a1;
+}
+
+[data-theme='beach'] .code-block .token.regex,
+[data-theme='beach'] .code-block .token.important,
+[data-theme='reading'] .code-block .token.regex,
+[data-theme='reading'] .code-block .token.important {
+  color: #bf360c;
+}
+
 .code-block-header {
   display: flex;
   align-items: center;
