@@ -6,13 +6,15 @@
             <button
                 id="load-more-btn"
                 class="load-more-button"
+                aria-label="Load more posts"
+                title="Load more posts"
                 data-next-page="{{ pagination.href.next | url }}"
                 data-current-page="{{ pagination.pageNumber + 1 }}"
                 data-total-pages="{{ pagination.pages.length }}"
                 data-page-size="{{ pagination.size }}"
                 data-loaded-count="{{ loadedCount }}"
                 data-total-count="{{ totalCount }}">
-                Load More Posts
+                <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"></polyline></svg>
             </button>
             <p id="article-counter" class="text-sm italic mt-3 text-gray-600">
                 Showing {{ loadedCount }} of {{ totalCount }} articles
@@ -26,7 +28,7 @@
         {% set totalCount = collections.postsWithoutDrafts.length %}
         <div class="text-center mt-12 mb-10">
             <p class="text-sm italic text-gray-600">
-                You've reached the end! ({{ totalCount }} articles total)
+                🎉 All {{ totalCount }} articles loaded. Are you looking for my <a href="https://anirudhastark.wordpress.com/" target="_blank" rel="noopener noreferrer">older blog</a> or checkout my <a href="https://anirudha.dev/projects" target="_blank" rel="noopener noreferrer">projects</a>.. ✨
             </p>
         </div>
     {% endif %}

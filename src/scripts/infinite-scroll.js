@@ -86,7 +86,7 @@ export function handleInfiniteScroll() {
         loadMoreBtn.style.display = "none";
         const totalCount = loadMoreBtn.getAttribute("data-total-count");
         if (articleCounter) {
-          articleCounter.textContent = `You've reached the end! (${totalCount} articles total)`;
+          articleCounter.innerHTML = `🎉 All ${totalCount} articles loaded. Are you looking for my <a href="https://anirudhastark.wordpress.com/" target="_blank" rel="noopener noreferrer">older blog</a> or checkout my <a href="https://anirudha.dev/projects" target="_blank" rel="noopener noreferrer">projects</a>.. ✨`;
         }
       }
     } catch (error) {
