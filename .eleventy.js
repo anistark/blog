@@ -49,6 +49,10 @@ module.exports = (config) => {
   config.addFilter('dateDisplay', require('./filters/date-display.js'));
   config.addFilter('readingTime', require('./filters/reading-time.js'));
 
+  const githubCard = require('./filters/github-card.js');
+  config.addNunjucksAsyncShortcode('githubCard', githubCard);
+  config.addLiquidShortcode('githubCard', githubCard);
+
   config.addPassthroughCopy({ public: './' });
 
   config.setBrowserSyncConfig({

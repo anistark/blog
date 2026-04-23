@@ -268,7 +268,7 @@ At this point your plugin already works. Anyone can install it directly from you
 
 But asking every user to remember your GitHub handle and add your repo as a one-off marketplace is friction. We can do better.
 
-<github-card repo="anistark/claude-plugin-demo"></github-card>
+{% githubCard "anistark/claude-plugin-demo" %}
 
 ## Meet AgentHub
 
@@ -383,7 +383,7 @@ After a merge, the catalog regenerates and the site updates. Your plugin is now 
 > Like the beautiful movie goes... with a little Eddie Vedder in background strumming along...Now, it's time for a real plugin example...
 I wrote [**ani-skills**][ani-skills], a small collection of agent skills I use every day: a commit message writer, a PR description writer, and an upstream-sync helper. Of course planning on adding more such skills to it. Listed on AgentHub as: `ani-skills@agenthub`.
 
-<github-card repo="anistark/ani-skills"></github-card>
+{% githubCard "anistark/ani-skills" %}
 
 **Inside the plugin's own repo**, `.claude-plugin/plugin.json` looks roughly like this:
 

@@ -844,101 +844,261 @@ hr {
 }
 
 /* GitHub repo card */
+.github-card-wrapper {
+  margin: 1.5rem auto;
+  max-width: 600px;
+}
+
 .github-card {
   display: block;
-  padding: 1.25rem 1.5rem;
-  margin: 1.5rem auto;
-  max-width: 56rem;
+  padding: 1.5rem 1.75rem;
   background: var(--bg-secondary);
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
   border: 1px solid var(--border-color);
-  border-radius: 12px;
+  border-radius: 14px;
   text-decoration: none;
   color: var(--text-primary);
-  transition: all 0.3s ease;
+  transition: border-color 0.2s ease, background 0.2s ease, transform 0.2s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.github-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, transparent 0%, transparent 60%, var(--accent-primary) 200%);
+  opacity: 0.05;
+  pointer-events: none;
 }
 
 .github-card:hover {
   border-color: var(--border-color-hover);
-  transform: translateY(-2px);
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
   text-decoration: none;
+  transform: translateY(-2px);
 }
 
-[data-theme='reading'] .github-card:hover,
-[data-theme='beach'] .github-card:hover {
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+.github-card:hover .github-card-name {
+  text-decoration: underline;
 }
 
-.github-card.loading,
-.github-card.error {
-  color: var(--text-secondary);
-  font-size: 0.875rem;
-}
-
-.github-card-header {
+.github-card-top {
   display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  margin-bottom: 0.5rem;
+  gap: 1.25rem;
+  align-items: flex-start;
 }
 
-.github-card-icon {
+.github-card-primary {
+  flex: 1;
+  min-width: 0;
+}
+
+.github-card-heading {
+  margin: 0 0 0.75rem;
+  font-size: 1.5rem;
+  font-weight: 700;
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+  overflow-wrap: anywhere;
+}
+
+.github-card-heading .github-card-owner {
+  color: var(--text-primary);
+  font-weight: 500;
+  opacity: 0.65;
+}
+
+.github-card-heading .github-card-slash {
   color: var(--text-secondary);
+  margin: 0 0.25rem;
+  opacity: 0.5;
+  font-weight: 400;
+}
+
+.github-card-heading .github-card-name {
+  color: var(--accent-primary);
+  font-weight: 700;
+}
+
+.github-card-avatar-wrap {
   flex-shrink: 0;
+  width: 56px;
+  height: 56px;
+  border-radius: 10px;
+  overflow: hidden;
+  border: 1px solid var(--border-color);
+  background: var(--bg-primary);
 }
 
 .github-card-avatar {
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  flex-shrink: 0;
-  border: 1px solid var(--border-color);
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
 }
 
-.github-card-name {
-  font-size: 1rem;
+.github-card-pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  margin-bottom: 0.75rem;
+}
+
+.github-card-pill {
+  font-size: 0.72rem;
   font-weight: 600;
+  padding: 0.15rem 0.65rem;
+  border-radius: 6px;
+  border: 1px solid var(--border-color);
+  color: var(--text-secondary);
+  background: var(--bg-primary);
+  line-height: 1.6;
+  white-space: nowrap;
+  font-variant-numeric: tabular-nums;
+}
+
+.github-card-pill-version {
   color: var(--accent-primary);
+  border-color: currentColor;
+  background: transparent;
+}
+
+.github-card-pill-archived {
+  color: #bf8700;
+  border-color: rgba(212, 167, 44, 0.5);
+  background: rgba(255, 212, 59, 0.12);
+}
+
+[data-theme='reading'] .github-card-pill-archived,
+[data-theme='beach'] .github-card-pill-archived {
+  color: #8a5500;
+  background: rgba(212, 167, 44, 0.2);
+}
+
+.github-card-pill-template {
+  color: var(--accent-primary);
+  border-color: currentColor;
 }
 
 .github-card-desc {
-  font-size: 0.875rem;
+  font-size: 0.9rem;
   color: var(--text-secondary);
-  margin: 0.25rem 0 0.75rem;
-  line-height: 1.5;
+  margin: 0 0 0.875rem;
+  line-height: 1.55;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
 }
 
-.github-card-meta {
+.github-card-topics {
   display: flex;
-  align-items: center;
-  gap: 1rem;
-  font-size: 0.8rem;
-  color: var(--text-secondary);
-}
-
-.github-card-lang {
-  display: flex;
-  align-items: center;
+  flex-wrap: wrap;
   gap: 0.35rem;
+  margin: 0 0 0.25rem;
 }
 
-.github-card-lang-dot {
-  display: inline-block;
-  width: 10px;
-  height: 10px;
-  border-radius: 50%;
+.github-card-topic {
+  font-size: 0.72rem;
+  color: var(--accent-primary);
+  padding: 0.1rem 0.65rem;
+  border-radius: 999px;
+  border: 1px solid var(--border-color);
+  background: transparent;
+  font-weight: 500;
+  line-height: 1.6;
+}
+
+.github-card-activity {
+  margin: 1rem 0 0.25rem;
+  padding-top: 1rem;
+  border-top: 1px dashed var(--border-color);
+}
+
+.github-card-spark {
+  display: block;
+  width: 100%;
+  height: 36px;
+  fill: var(--accent-primary);
+  opacity: 0.75;
+}
+
+.github-card:hover .github-card-spark {
+  opacity: 1;
+}
+
+.github-card-spark-label {
+  display: block;
+  margin-top: 0.4rem;
+  font-size: 0.72rem;
+  color: var(--text-secondary);
+  opacity: 0.75;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+}
+
+.github-card-stats {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem 1.25rem;
+  margin-top: 1rem;
+  padding-top: 0.875rem;
+  border-top: 1px solid var(--border-color);
+  font-size: 0.85rem;
+  color: var(--text-secondary);
 }
 
 .github-card-stat {
-  display: flex;
+  display: inline-flex;
   align-items: center;
-  gap: 0.3rem;
+  gap: 0.4rem;
+  font-variant-numeric: tabular-nums;
 }
 
 .github-card-stat svg {
   color: var(--text-secondary);
+  opacity: 0.85;
+}
+
+.github-card-lang-dot {
+  display: inline-block;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  border: 1px solid rgba(0, 0, 0, 0.15);
+}
+
+.github-card-updated {
+  margin-left: auto;
+  font-size: 0.78rem;
+  color: var(--text-secondary);
+  opacity: 0.8;
+  white-space: nowrap;
+  font-variant-numeric: tabular-nums;
+}
+
+@media (max-width: 560px) {
+  .github-card {
+    padding: 1.25rem 1.25rem;
+    border-radius: 12px;
+  }
+  .github-card-heading {
+    font-size: 1.2rem;
+  }
+  .github-card-avatar-wrap {
+    width: 44px;
+    height: 44px;
+  }
+  .github-card-updated {
+    margin-left: 0;
+    width: 100%;
+  }
+  .github-card-activity {
+    margin-top: 0.75rem;
+    padding-top: 0.75rem;
+  }
 }
 
 /* Terminal block */

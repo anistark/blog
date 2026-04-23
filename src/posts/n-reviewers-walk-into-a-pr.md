@@ -203,6 +203,6 @@ I'd love to hear it.
 - **Send a PR**: the codebase is small, TypeScript, well-tested, and MIT licensed. Jump in
 - **Star the repo**: if you think this should exist, let me know with a star. It helps others find it too
 
-<github-card repo="anistark/pr-reviewer-labeler"></github-card>
+{% githubCard "anistark/pr-reviewer-labeler" %}
 
 Because no PR should go under-reviewed just because someone didn't want to bother a third person on a Friday.
