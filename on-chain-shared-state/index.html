@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    
+    <meta itemprop="name" content="On-Chain Shared State | AniLog">
+    <meta itemprop="description" content="Communication is a key in any ecosystem. Now with more cross-chain communication getting sorted using bridges, it&#39;s high time to sort on-chain communications as well.">
+
+    
+    <meta name="twitter:title" content="On-Chain Shared State | AniLog">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:description" content="Communication is a key in any ecosystem. Now with more cross-chain communication getting sorted using bridges, it&#39;s high time to sort on-chain communications as well.">
+    <meta name="twitter:site" content="@kranirudha">
+    <meta name="twitter:creator" content="@kranirudha">
+    <meta name="twitter:image:src" content="https://blog.anirudha.dev/images/posts/1675e0ae-ec2d-4c2f-a0b3-2b9a5684d7cb.webp">
+
+    
+    <meta name="og:title" content="On-Chain Shared State | AniLog">
+    <meta name="og:description" content="Communication is a key in any ecosystem. Now with more cross-chain communication getting sorted using bridges, it&#39;s high time to sort on-chain communications as well.">
+    <meta name="og:image" content="https://blog.anirudha.dev/images/posts/1675e0ae-ec2d-4c2f-a0b3-2b9a5684d7cb.webp">
+    <meta name="og:url" content="https://blog.anirudha.dev/">
+    <meta name="og:site_name" content="AniLog">
+    <meta name="og:locale" content="en_GB">
+    <meta name="og:type" content="website">
+
+    <link rel="icon" type="image/png" href="/me.png" />
+    <link rel="alternate" type="application/atom+xml" title="AniLog" href="https://blog.anirudha.dev/feed/feed.xml" />
+
+    <title>On-Chain Shared State | AniLog</title>
+
+    <link rel="stylesheet" href="/assets/main.bundle.css">
+
+    <script>
+      // Set theme before page renders to prevent flash
+      (function() {
+        const theme = localStorage.getItem('theme') || 'night';
+        if (theme !== 'night') {
+          document.documentElement.setAttribute('data-theme', theme);
+        }
+      })();
+    </script>
+
+    
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-YGZHVY9TD7"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-YGZHVY9TD7');
+    </script>
+    
+
+    
+  </head>
+  <body class="flex flex-col min-h-screen">
+    <canvas id="ambience-canvas"></canvas>
+    <header class="sticky top-0 z-50 glass-header">
+  <nav class="container mx-auto max-w-7xl px-8 py-3 flex flex-wrap items-center justify-between">
+    <div class="flex items-center gap-3">
+      <a href="/" class="flex items-center gap-3">
+        <img src="/ani.png" alt="AniLog logo" class="w-10 h-10 object-cover">
+        <h1 class="text-2xl leading-none m-0">AniLog</h1>
+      </a>
+    </div>
+
+    <div class="flex items-center gap-6">
+      <div class="theme-switcher">
+        <button id="theme-switcher-btn" class="theme-switcher-btn" aria-label="Switch theme" aria-expanded="false">
+          <span id="theme-active-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.985 12.486a9 9 0 1 1-9.473-9.472c.405-.022.617.46.402.803a6 6 0 0 0 8.268 8.268c.344-.215.825-.004.803.401"/></svg>
+          </span>
+        </button>
+        <div id="theme-dropdown" class="theme-dropdown">
+          <button class="theme-option" data-theme-value="night">
+            <span class="theme-icon"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.985 12.486a9 9 0 1 1-9.473-9.472c.405-.022.617.46.402.803a6 6 0 0 0 8.268 8.268c.344-.215.825-.004.803.401"/></svg></span>
+            <span>Night</span>
+          </button>
+          <button class="theme-option" data-theme-value="reading">
+            <span class="theme-icon"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 7v14"/><path d="M3 18a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h5a4 4 0 0 1 4 4 4 4 0 0 1 4-4h5a1 1 0 0 1 1 1v13a1 1 0 0 1-1 1h-6a3 3 0 0 0-3 3 3 3 0 0 0-3-3z"/></svg></span>
+            <span>Reading</span>
+          </button>
+          <button class="theme-option" data-theme-value="forest">
+            <span class="theme-icon"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m17 14 3 3.3a1 1 0 0 1-.7 1.7H4.7a1 1 0 0 1-.7-1.7L7 14h-.3a1 1 0 0 1-.7-1.7L9 9h-.2A1 1 0 0 1 8 7.3L12 3l4 4.3a1 1 0 0 1-.8 1.7H15l3 3.3a1 1 0 0 1-.7 1.7H17Z"/><path d="M12 22v-3"/></svg></span>
+            <span>Forest</span>
+          </button>
+          <button class="theme-option" data-theme-value="beach">
+            <span class="theme-icon"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 8c0-2.76-2.46-5-5.5-5S2 5.24 2 8h2l1-1 1 1h4"/><path d="M13 7.14A5.82 5.82 0 0 1 16.5 6c3.04 0 5.5 2.24 5.5 5h-3l-1-1-1 1h-3"/><path d="M5.89 9.71c-2.15 2.15-2.3 5.47-.35 7.43l4.24-4.25.7-.7.71-.71 2.12-2.12c-1.95-1.96-5.27-1.8-7.42.35"/><path d="M11 15.5c.5 2.5-.17 4.5-1 6.5h4c2-5.5-.5-12-1-14"/></svg></span>
+            <span>Beach</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </nav>
+</header>
+
+    <main class="container mx-auto max-w-6xl p-8 grow">
+      
+    <p></p>
+
+    
+        <div class="post-cover-image" style="background-image: url('/images/posts/1675e0ae-ec2d-4c2f-a0b3-2b9a5684d7cb.webp');"></div>
+    
+
+    <div>
+        <div class="post-title-row">
+            <h2>On-Chain Shared State</h2>
+            
+        </div>
+
+        
+            <div class="mt-4 mb-2">
+                <a class="tag nft" href="/tag/nft">nft</a><a class="tag protocols" href="/tag/protocols">protocols</a><a class="tag eip" href="/tag/eip">eip</a><a class="tag dripverse" href="/tag/dripverse">dripverse</a>
+            </div>
+        
+
+        
+            
+                <p class="text-sm italic">Published on
+                    <span datetime="Fri Apr 26 2024 00:00:00 GMT+0000 (Coordinated Universal Time)">April 26, 2024</span>.
+                    <span class="reading-time"> · 5 min read</span></p>
+            
+        
+
+        <div class="content post">
+            <p>Communication is a key in any ecosystem. Now with more cross-chain communication getting sorted using bridges, it’s high time to sort on-chain communications as well. Particularly, referencing of composable smart contract functionalities within the same chain.</p>
+<h1 id="on-chain-immutability" tabindex="-1">On-Chain Immutability <a class="header-anchor" href="#on-chain-immutability" aria-hidden="true">#</a></h1>
+<p>Blockchains in general are isolated networks. Smart contracts are even further isolated in the network given that they record data that are immutable. Any update to their state records a new transaction cumulatively records the updated state. This is known and also creates a historical trail for later review and audit. There’s no problem is this process expect it’s not possible to update the smart contract code itself.</p>
+<p><em>I’ve always believe learning by example is best.</em> Let’s take a look at the usage of <code>ownerOf</code> from <code>IERC721</code> interface and how it’s used to check token ownership for any NFT.</p>
+<p>First we import via openzepplin package or you can write your own packaged contract <code>import &quot;@openzeppelin/contracts/token/ERC721/ERC721.sol&quot;</code> . Or if you really want to write your own <code>ERC721</code> contract, start with importing the interface <code>IERC721</code> to your contract: <code>import &quot;./IERC721.sol&quot;</code> .</p>
+<p>The <code>IERC721.sol</code> contains the function definition:</p>
+<code-block lang="solidity"><pre class="language-solidity"><code class="language-solidity"><span class="token keyword">function</span> <span class="token function">ownerOf</span><span class="token punctuation">(</span><span class="token builtin">uint256</span> tokenId<span class="token punctuation">)</span> <span class="token keyword">external</span> <span class="token keyword">view</span> <span class="token keyword">returns</span> <span class="token punctuation">(</span><span class="token builtin">address</span> owner<span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre>
+</code-block><p>And in <code>ERC721.sol</code> you can find the first override for it as such:</p>
+<code-block lang="solidity"><pre class="language-solidity"><code class="language-solidity"><span class="token keyword">function</span> <span class="token function">ownerOf</span><span class="token punctuation">(</span><span class="token builtin">uint256</span> tokenId<span class="token punctuation">)</span> <span class="token keyword">public</span> <span class="token keyword">view</span> virtual override <span class="token keyword">returns</span> <span class="token punctuation">(</span><span class="token builtin">address</span><span class="token punctuation">)</span> <span class="token punctuation">{</span><br>        <span class="token builtin">address</span> owner <span class="token operator">=</span> <span class="token function">_ownerOf</span><span class="token punctuation">(</span>tokenId<span class="token punctuation">)</span><span class="token punctuation">;</span><br>        <span class="token keyword">require</span><span class="token punctuation">(</span>owner <span class="token operator">!=</span> <span class="token builtin">address</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token string">"ERC721: invalid token ID"</span><span class="token punctuation">)</span><span class="token punctuation">;</span><br>        <span class="token keyword">return</span> owner<span class="token punctuation">;</span><br><span class="token punctuation">}</span></code></pre>
+</code-block><p>The function in itself is pretty straightforward. It takes <code>tokenId</code> as input and returns the owner address.</p>
+<p>To understand this further, it’s all stored in a mapping:</p>
+<code-block lang="solidity"><pre class="language-solidity"><code class="language-solidity"><span class="token keyword">mapping</span><span class="token punctuation">(</span><span class="token builtin">uint256</span> <span class="token operator">=></span> <span class="token builtin">address</span><span class="token punctuation">)</span> <span class="token keyword">private</span> _owners<span class="token punctuation">;</span></code></pre>
+</code-block><p>Anyway, regardless of the implementation, this is industry standard at the moment. If in case you’d want to add some conditions or enhance this function in your own contract, you’d need to override this further.</p>
+<h2 id="overriden" tabindex="-1">Overriden <a class="header-anchor" href="#overriden" aria-hidden="true">#</a></h2>
+<p>Say we want to check for temporary ownership, like a rental ownership, which is time bound. We can not edit the original mapping of course. There’s 2 ways:</p>
+<ol>
+<li>
+<p>We add a separate mapping only for the mapping of <code>tokenId</code> and <code>owner</code> to a <code>timestamp</code>.</p>
+</li>
+<li>
+<p>We ignore <code>_owners</code> mapping and write our own mapping replacing it. We’ll go with this option cause adding and reading from multiple memory storages will be costlier than having a rogue mapping lying around.</p>
+</li>
+</ol>
+<p>Let’s call our new mapping as <code>_ownership</code>:</p>
+<code-block lang="solidity"><pre class="language-solidity"><code class="language-solidity"><span class="token keyword">struct</span> <span class="token class-name">Owner</span> <span class="token punctuation">{</span> <br>   <span class="token builtin">address</span> account<span class="token punctuation">;</span><br>   <span class="token builtin">uint256</span> expiry<span class="token punctuation">;</span><br><span class="token punctuation">}</span><br><span class="token keyword">mapping</span><span class="token punctuation">(</span><span class="token builtin">uint256</span> <span class="token operator">=></span> Owner<span class="token punctuation">)</span> <span class="token keyword">private</span> _ownership<span class="token punctuation">;</span></code></pre>
+</code-block><p>Now, we can map the ownership in this accordingly. But we also need to override our <code>ownerOf</code> function:</p>
+<code-block lang="solidity"><pre class="language-solidity"><code class="language-solidity"><span class="token keyword">function</span> <span class="token function">ownerOf</span><span class="token punctuation">(</span><span class="token builtin">uint256</span> tokenId<span class="token punctuation">)</span> <span class="token keyword">public</span> <span class="token keyword">view</span> virtual override <span class="token keyword">returns</span> <span class="token punctuation">(</span><span class="token builtin">address</span><span class="token punctuation">,</span> expiry<span class="token punctuation">)</span> <span class="token punctuation">{</span><br>        Owner _owner <span class="token operator">=</span> <span class="token function">_ownership</span><span class="token punctuation">(</span>tokenId<span class="token punctuation">)</span><span class="token punctuation">;</span><br>        <span class="token keyword">require</span><span class="token punctuation">(</span>_owner<span class="token punctuation">.</span>account <span class="token operator">!=</span> <span class="token builtin">address</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token string">"ERC721: invalid token ID"</span><span class="token punctuation">)</span><span class="token punctuation">;</span><br>        <span class="token keyword">require</span><span class="token punctuation">(</span>_owner<span class="token punctuation">.</span>expiry <span class="token operator">></span> block<span class="token punctuation">.</span>timestamp<span class="token punctuation">,</span> <span class="token string">"Ownership Expired. No current owner found."</span><span class="token punctuation">)</span><span class="token punctuation">;</span><br>        <span class="token keyword">return</span> _owner<span class="token punctuation">.</span>account<span class="token punctuation">;</span><br><span class="token punctuation">}</span></code></pre>
+</code-block><p>Here, we’re doing a few things. First, we’re checking if the owner account exists and expiry is anytime beyond current block timestamp.</p>
+<p>Great, now our existing function <code>ownerOf</code> can serve as the modified version of the existing owner check. So, all the clients can now call this new function of contract and get timestamp enabled ownership check.</p>
+<p>However, here’s where things get interesting…</p>
+<h1 id="imported-smart-contracts" tabindex="-1">Imported Smart Contracts <a class="header-anchor" href="#imported-smart-contracts" aria-hidden="true">#</a></h1>
+<p>The problem in above way is that we would need to burn all tokens from old smart contract and re-mint in new one in order for them to enable <code>expiry</code> in ownership. Which would lead to losing all history of the said tokens. So, how do we deal with this?</p>
+<p>Solidity supports importing another smart contract and referring to the functions of it as we established above. We usually use it to extend functionality. For example, we want to add a function to our previous contract which checks <code>ownerOf</code> and rewards a certain amount to them. So, we first need to define it:</p>
+<code-block lang="solidity"><pre class="language-solidity"><code class="language-solidity"><span class="token keyword">import</span> <span class="token string">"@openzeppelin/contracts/token/ERC20/IERC20.sol"</span><span class="token punctuation">;</span><br><br><span class="token comment">// other code bits</span><br><br>IERC20 token<span class="token punctuation">;</span><br><br><span class="token comment">// ...</span><br><br>token <span class="token operator">=</span> <span class="token function">IERC20</span><span class="token punctuation">(</span>token_address<span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre>
+</code-block><p>Now, in above, <code>token</code> represents our token from previous contract which is imported based on <code>token_address</code>. So, we should be able to do something like <code>token.ownerOf(tokenId)</code> to get the owner of <code>tokenId</code> as shown above. Once we get it, let’s say we want to do something like <code>owner_address.send(value)</code> where value is in base token of the chain. This is the most commonly used way to use an external contract. But what would happen if you’re to extend an existing function of original contract?</p>
+<p>Let’s take our previous example. We want to add <code>expiry</code> to <code>ownerOf</code>. So, we write a new smart contract and a new function to check ownership. Cause we can’t override a function of a different contract. We’ve a new function which can have same name even. But for the sake of sanity, let’s use a different name, <code>newOwner()</code> and it looks something like:</p>
+<code-block lang="solidity"><pre class="language-solidity"><code class="language-solidity"><br><br><span class="token keyword">contract</span> <span class="token class-name">RentContract</span> <span class="token punctuation">{</span><br>    <span class="token keyword">struct</span> <span class="token class-name">Owner</span> <span class="token punctuation">{</span> <br>       <span class="token builtin">address</span> account<span class="token punctuation">;</span><br>       <span class="token builtin">uint256</span> expiry<span class="token punctuation">;</span><br>    <span class="token punctuation">}</span><br>    <span class="token keyword">mapping</span><span class="token punctuation">(</span><span class="token builtin">uint256</span> <span class="token operator">=></span> Owner<span class="token punctuation">)</span> <span class="token keyword">private</span> _ownership<span class="token punctuation">;</span><br>    <br>    <span class="token keyword">function</span> <span class="token function">newOwner</span><span class="token punctuation">(</span><span class="token builtin">uint256</span> tokenId<span class="token punctuation">,</span> <span class="token builtin">address</span> _to<span class="token punctuation">,</span> <span class="token builtin">uint256</span> _expiry<span class="token punctuation">)</span> <span class="token keyword">external</span> virtual <span class="token punctuation">{</span><br>        _ownership<span class="token punctuation">[</span>tokenId<span class="token punctuation">]</span><span class="token punctuation">.</span>account <span class="token operator">=</span> _to<span class="token punctuation">;</span><br>        _ownership<span class="token punctuation">[</span>tokenId<span class="token punctuation">]</span><span class="token punctuation">.</span>expiry <span class="token operator">=</span> _expiry<span class="token punctuation">;</span><br>    <span class="token punctuation">}</span><br>    <span class="token comment">// ...</span><br><span class="token punctuation">}</span></code></pre>
+</code-block><p>So, what’s happening here is overloading (<em>not really since we’re using a different name for the function. But from a standard perspective, let’s assume it’s the same</em>) which means we’ve defined a second function and mapping to do the exact same thing which is already been done in previous contract where it’s been imported from. This obviously is a waste of memory on-chain but let’s leave that concern for later. So, now, we’ve a second contract, <code>RentContract</code> which has temporary ownership function which we can use. However, what about the client apps which is already pointed to the old contract? The token ownership does not show any changes regardless to whoever else it’s rented out via the <code>RentContract</code> .</p>
+<p><img src="/images/posts/a3be6cb7-aa15-476d-8a38-ae3f0221cc0b.png" alt=""></p>
+<h1 id="shared-state" tabindex="-1">Shared State <a class="header-anchor" href="#shared-state" aria-hidden="true">#</a></h1>
+<p>Here’s where the concept of Shared State comes in. Here’s to proposing a shared state system which allows to update the state of original contract if the same state is being dealt with on an extended contract.</p>
+<p><img src="/images/posts/bffb53f4-4995-4805-8594-7ba7ef188782.png" alt=""></p>
+<p>So, once this new system is in place, we should be able to reflect the updated state back to our original state thereby retaining backwards compatibility as well as history.</p>
+<p><img src="/images/posts/ed02d225-3be2-4736-8cf2-03d45f839c88.png" alt=""></p>
+<p>This is the next evolution in smart contract standards which will help with better backwards compatible DApps and protocols.</p>
+<p><em>LFG</em></p>
+
+        </div>
+
+        <div class="article-end">
+            <span>✦</span>
+            <span>✦</span>
+            <span>✦</span>
+        </div>
+
+        <div class="post-navigation">
+            <div class="post-nav-item post-nav-previous">
+                    <a href="/cyberspace/">
+                        <span class="nav-arrow">←</span>
+                        <div class="nav-content">
+                            <p class="nav-label">Previous</p>
+                            <p class="nav-title">CyberSpace</p>
+                        </div>
+                    </a>
+                
+            </div>
+
+            <div class="post-nav-item post-nav-next">
+                    <a href="/reentrancy-attack/">
+                        <div class="nav-content">
+                            <p class="nav-label">Next</p>
+                            <p class="nav-title">Reentrancy Attack</p>
+                        </div>
+                        <span class="nav-arrow">→</span>
+                    </a>
+                
+            </div>
+        </div>
+    </div>
+
+    </main>
+    <footer class="sticky bottom-0 z-50 glass-footer py-4">
+  <div class="container mx-auto max-w-7xl px-8 flex items-center justify-between">
+    <div class="text-base">
+      by <a href="https://anirudha.dev" target="_blank" rel="noopener noreferrer">Ani</a>
+    </div>
+
+    <div class="flex items-center gap-4">
+      <a href="https://github.com/anistark" target="_blank" rel="noopener noreferrer" class="footer-icon" aria-label="GitHub">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="currentColor" viewBox="0 0 24 24">
+          <path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/>
+        </svg>
+      </a>
+      <a href="https://x.com/kranirudha" target="_blank" rel="noopener noreferrer" class="footer-icon" aria-label="X">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="currentColor" viewBox="0 0 24 24">
+          <path d="M14.234 10.162 22.977 0h-2.072l-7.591 8.824L7.251 0H.258l9.168 13.343L.258 24H2.33l8.016-9.318L16.749 24h6.993zm-2.837 3.299-.929-1.329L3.076 1.56h3.182l5.965 8.532.929 1.329 7.754 11.09h-3.182z"/>
+        </svg>
+      </a>
+      <a href="https://fosstodon.org/@ani" target="_blank" rel="noopener noreferrer" class="footer-icon" aria-label="Mastodon">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="currentColor" viewBox="0 0 24 24">
+          <path d="M23.268 5.313c-.35-2.578-2.617-4.61-5.304-5.004C17.51.242 15.792 0 11.813 0h-.03c-3.98 0-4.835.242-5.288.309C3.882.692 1.496 2.518.917 5.127.64 6.412.61 7.837.661 9.143c.074 1.874.088 3.745.26 5.611.118 1.24.325 2.47.62 3.68.55 2.237 2.777 4.098 4.96 4.857 2.336.792 4.849.923 7.256.38.265-.061.527-.132.786-.213.585-.184 1.27-.39 1.774-.753a.057.057 0 0 0 .023-.043v-1.809a.052.052 0 0 0-.02-.041.053.053 0 0 0-.046-.01 20.282 20.282 0 0 1-4.709.545c-2.73 0-3.463-1.284-3.674-1.818a5.593 5.593 0 0 1-.319-1.433.053.053 0 0 1 .066-.054c1.517.363 3.072.546 4.632.546.376 0 .75 0 1.125-.01 1.57-.044 3.224-.124 4.768-.422.038-.008.077-.015.11-.024 2.435-.464 4.753-1.92 4.989-5.604.008-.145.03-1.52.03-1.67.002-.512.167-3.63-.024-5.545zm-3.748 9.195h-2.561V8.29c0-1.309-.55-1.976-1.67-1.976-1.23 0-1.846.79-1.846 2.35v3.403h-2.546V8.663c0-1.56-.617-2.35-1.848-2.35-1.112 0-1.668.668-1.67 1.977v6.218H4.822V8.102c0-1.31.337-2.35 1.011-3.12.696-.77 1.608-1.164 2.74-1.164 1.311 0 2.302.5 2.962 1.498l.638 1.06.638-1.06c.66-.999 1.65-1.498 2.96-1.498 1.13 0 2.043.395 2.74 1.164.675.77 1.012 1.81 1.012 3.12z"/>
+        </svg>
+      </a>
+      <a href="https://linkedin.com/in/kranirudha" target="_blank" rel="noopener noreferrer" class="footer-icon" aria-label="LinkedIn">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="currentColor" viewBox="0 0 24 24">
+          <path d="M4.98 3.5c0 1.381-1.11 2.5-2.48 2.5s-2.48-1.119-2.48-2.5c0-1.38 1.11-2.5 2.48-2.5s2.48 1.12 2.48 2.5zm.02 4.5h-5v16h5v-16zm7.982 0h-4.968v16h4.969v-8.399c0-4.67 6.029-5.052 6.029 0v8.399h4.988v-10.131c0-7.88-8.922-7.593-11.018-3.714v-2.155z"/>
+        </svg>
+      </a>
+      <a href="/feed/feed.xml" class="footer-icon" aria-label="RSS feed">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="currentColor" viewBox="0 0 24 24">
+          <path d="M6.18 15.64a2.18 2.18 0 0 1 2.18 2.18C8.36 19 7.38 20 6.18 20C5 20 4 19 4 17.82a2.18 2.18 0 0 1 2.18-2.18M4 4.44A15.56 15.56 0 0 1 19.56 20h-2.83A12.73 12.73 0 0 0 4 7.27V4.44m0 5.66a9.9 9.9 0 0 1 9.9 9.9h-2.83A7.07 7.07 0 0 0 4 12.93V10.1Z"/>
+        </svg>
+      </a>
+    </div>
+  </div>
+</footer>
+
+    
+    <script src="https://unpkg.com/clipboard@2/dist/clipboard.min.js"></script>
+    <script src="/assets/main.bundle.js"></script>
+    <script type="module">
+      import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs';
+      mermaid.initialize({
+        startOnLoad: true,
+        theme: ['reading', 'beach'].includes(document.documentElement.getAttribute('data-theme')) ? 'default' : 'dark',
+        themeVariables: {
+          fontSize: '14px',
+        }
+      });
+    </script>
+  </body>
+</html>

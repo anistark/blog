@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    
+    <meta itemprop="name" content="Writing Your Own Claude Plugin and Shipping it to the World | AniLog">
+    <meta itemprop="description" content="Claude Code has a plugin system now. Build a plugin, push it to GitHub, list it on AgentHub, and watch a stranger install it in two commands.">
+
+    
+    <meta name="twitter:title" content="Writing Your Own Claude Plugin and Shipping it to the World | AniLog">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:description" content="Claude Code has a plugin system now. Build a plugin, push it to GitHub, list it on AgentHub, and watch a stranger install it in two commands.">
+    <meta name="twitter:site" content="@kranirudha">
+    <meta name="twitter:creator" content="@kranirudha">
+    <meta name="twitter:image:src" content="https://blog.anirudha.dev/images/posts/claude-plugin-getting-started.png">
+
+    
+    <meta name="og:title" content="Writing Your Own Claude Plugin and Shipping it to the World | AniLog">
+    <meta name="og:description" content="Claude Code has a plugin system now. Build a plugin, push it to GitHub, list it on AgentHub, and watch a stranger install it in two commands.">
+    <meta name="og:image" content="https://blog.anirudha.dev/images/posts/claude-plugin-getting-started.png">
+    <meta name="og:url" content="https://blog.anirudha.dev/">
+    <meta name="og:site_name" content="AniLog">
+    <meta name="og:locale" content="en_GB">
+    <meta name="og:type" content="website">
+
+    <link rel="icon" type="image/png" href="/me.png" />
+    <link rel="alternate" type="application/atom+xml" title="AniLog" href="https://blog.anirudha.dev/feed/feed.xml" />
+
+    <title>Writing Your Own Claude Plugin and Shipping it to the World | AniLog</title>
+
+    <link rel="stylesheet" href="/assets/main.bundle.css">
+
+    <script>
+      // Set theme before page renders to prevent flash
+      (function() {
+        const theme = localStorage.getItem('theme') || 'night';
+        if (theme !== 'night') {
+          document.documentElement.setAttribute('data-theme', theme);
+        }
+      })();
+    </script>
+
+    
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-YGZHVY9TD7"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-YGZHVY9TD7');
+    </script>
+    
+
+    
+  </head>
+  <body class="flex flex-col min-h-screen">
+    <canvas id="ambience-canvas"></canvas>
+    <header class="sticky top-0 z-50 glass-header">
+  <nav class="container mx-auto max-w-7xl px-8 py-3 flex flex-wrap items-center justify-between">
+    <div class="flex items-center gap-3">
+      <a href="/" class="flex items-center gap-3">
+        <img src="/ani.png" alt="AniLog logo" class="w-10 h-10 object-cover">
+        <h1 class="text-2xl leading-none m-0">AniLog</h1>
+      </a>
+    </div>
+
+    <div class="flex items-center gap-6">
+      <div class="theme-switcher">
+        <button id="theme-switcher-btn" class="theme-switcher-btn" aria-label="Switch theme" aria-expanded="false">
+          <span id="theme-active-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.985 12.486a9 9 0 1 1-9.473-9.472c.405-.022.617.46.402.803a6 6 0 0 0 8.268 8.268c.344-.215.825-.004.803.401"/></svg>
+          </span>
+        </button>
+        <div id="theme-dropdown" class="theme-dropdown">
+          <button class="theme-option" data-theme-value="night">
+            <span class="theme-icon"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.985 12.486a9 9 0 1 1-9.473-9.472c.405-.022.617.46.402.803a6 6 0 0 0 8.268 8.268c.344-.215.825-.004.803.401"/></svg></span>
+            <span>Night</span>
+          </button>
+          <button class="theme-option" data-theme-value="reading">
+            <span class="theme-icon"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 7v14"/><path d="M3 18a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h5a4 4 0 0 1 4 4 4 4 0 0 1 4-4h5a1 1 0 0 1 1 1v13a1 1 0 0 1-1 1h-6a3 3 0 0 0-3 3 3 3 0 0 0-3-3z"/></svg></span>
+            <span>Reading</span>
+          </button>
+          <button class="theme-option" data-theme-value="forest">
+            <span class="theme-icon"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m17 14 3 3.3a1 1 0 0 1-.7 1.7H4.7a1 1 0 0 1-.7-1.7L7 14h-.3a1 1 0 0 1-.7-1.7L9 9h-.2A1 1 0 0 1 8 7.3L12 3l4 4.3a1 1 0 0 1-.8 1.7H15l3 3.3a1 1 0 0 1-.7 1.7H17Z"/><path d="M12 22v-3"/></svg></span>
+            <span>Forest</span>
+          </button>
+          <button class="theme-option" data-theme-value="beach">
+            <span class="theme-icon"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 8c0-2.76-2.46-5-5.5-5S2 5.24 2 8h2l1-1 1 1h4"/><path d="M13 7.14A5.82 5.82 0 0 1 16.5 6c3.04 0 5.5 2.24 5.5 5h-3l-1-1-1 1h-3"/><path d="M5.89 9.71c-2.15 2.15-2.3 5.47-.35 7.43l4.24-4.25.7-.7.71-.71 2.12-2.12c-1.95-1.96-5.27-1.8-7.42.35"/><path d="M11 15.5c.5 2.5-.17 4.5-1 6.5h4c2-5.5-.5-12-1-14"/></svg></span>
+            <span>Beach</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </nav>
+</header>
+
+    <main class="container mx-auto max-w-6xl p-8 grow">
+      
+    <p></p>
+
+    
+        <div class="post-cover-image" style="background-image: url('/images/posts/claude-plugin-getting-started.png');"></div>
+    
+
+    <div>
+        <div class="post-title-row">
+            <h2>Writing Your Own Claude Plugin and Shipping it to the World</h2>
+            
+        </div>
+
+        
+            <div class="mt-4 mb-2">
+                <a class="tag ai" href="/tag/ai">ai</a><a class="tag claude-code" href="/tag/claude-code">claude-code</a><a class="tag plugins" href="/tag/plugins">plugins</a><a class="tag devtools" href="/tag/devtools">devtools</a><a class="tag open-source" href="/tag/open-source">open-source</a><a class="tag tutorial" href="/tag/tutorial">tutorial</a><a class="tag agenthub" href="/tag/agenthub">agenthub</a>
+            </div>
+        
+
+        
+            
+                <p class="text-sm italic">Published on
+                    <span datetime="Mon Apr 20 2026 00:00:00 GMT+0000 (Coordinated Universal Time)">April 20, 2026</span>.
+                    <span class="reading-time"> · 19 min read</span></p>
+            
+        
+
+        <div class="content post">
+            <p>Claude Code has a plugin system now. Which means anyone, including you, can bundle up a bit of AI-assisted magic, put a pretty bow on it, and have it installed by strangers on the internet in two commands.</p>
+<p>Writing the plugin is the easy part. Getting people to actually install it is the part nobody tells you about.</p>
+<p>This post walks through the whole round trip: <strong>build a Claude plugin, publish it to GitHub, list it on <a href="https://agenthub.nullorder.org">AgentHub</a> (a community marketplace I built), and see the install from the user side</strong>. We’ll do it with a tiny demo plugin so nothing gets in the way of the shape of the thing.</p>
+<p>Once you’ve everything set, you can install your plugin like:</p>
+<terminal-block>/plugin install your-plugin@agenthub</terminal-block><h2 id="what-even-is-a-claude-plugin%3F" tabindex="-1">What even is a Claude plugin? <a class="header-anchor" href="#what-even-is-a-claude-plugin%3F" aria-hidden="true">#</a></h2>
+<p>A Claude plugin is a directory. That’s it. A directory with a manifest at <code>.claude-plugin/plugin.json</code> and some combination of:</p>
+<ul>
+<li><strong><a href="https://blog.anirudha.dev/skills-agents-and-sutras/">Skills</a></strong> — markdown files Claude invokes when the task fits</li>
+<li><strong>Commands</strong> — skills you call explicitly with <code>/plugin-name:command-name</code></li>
+<li><strong>Agents</strong> — full <a href="https://blog.anirudha.dev/the-missing-playbook-for-ai-agents/">subagent definitions</a></li>
+<li><strong>Hooks</strong> — run scripts on events like <code>PostToolUse</code></li>
+<li><strong>MCP servers</strong> — wire in external tools</li>
+<li><strong>LSP servers</strong> — language intelligence for Claude</li>
+</ul>
+<p>You can include one of these or all of them. The manifest is the glue.</p>
+<p>The official docs are excellent and you should keep them open in another tab:</p>
+<ul>
+<li><a href="https://code.claude.com/docs/en/plugins">Create plugins</a> → the main guide</li>
+<li><a href="https://code.claude.com/docs/en/plugins-reference#plugin-manifest-schema">Plugin manifest schema</a></li>
+<li><a href="https://code.claude.com/docs/en/plugin-marketplaces">Plugin marketplaces</a> — how distribution works</li>
+<li><a href="https://code.claude.com/docs/en/skills">Skills</a>, <a href="https://code.claude.com/docs/en/hooks">Hooks</a>, <a href="https://code.claude.com/docs/en/sub-agents">Subagents</a>, <a href="https://code.claude.com/docs/en/mcp">MCP</a></li>
+</ul>
+<p>Now that you’ve acquainted with the basics, let’s build…</p>
+<p>Make sure that you got these setup first:</p>
+<ul>
+<li>Claude Code installed and you’re logged in. If <code>/plugin</code> doesn’t exist in your session, update or upgrade.</li>
+<li>A GitHub account. Your plugin is going to live in a public repo.</li>
+</ul>
+<blockquote>
+<p>We’re building <code>claude-plugin-demo</code>. One skill, called <code>greet</code>. It takes a name, prints an ASCII-art banner of it via <a href="http://www.figlet.org/">figlet</a> (because the CLI doesn’t need to be boring, right?), and follows up with a warm, slightly over-enthusiastic welcome. Nothing fancy. The point is the pipeline, not the payload. Make sure you have <code>figlet</code> installed: <code>brew install figlet</code>, <code>apt install figlet</code>, or equivalent.</p>
+</blockquote>
+<p>Once you’ve got the full pipeline working with a toy plugin, swapping <code>greet</code> for something useful (a <a href="https://blog.anirudha.dev/n-reviewers-walk-into-a-pr/">PR reviewer</a>, a commit-message writer, a changelog formatter, whatever) is a mechanical exercise.</p>
+<h2 id="lets-get-started" tabindex="-1">Lets get started <a class="header-anchor" href="#lets-get-started" aria-hidden="true">#</a></h2>
+<terminal-block>mkdir claude-plugin-demo
+cd claude-plugin-demo
+mkdir -p .claude-plugin skills/greet</terminal-block><p>Your tree now looks like this:</p>
+<terminal-block mode="tree">claude-plugin-demo/
+├── .claude-plugin/
+└── skills/
+    └── greet/</terminal-block><p>One structural thing the docs call out and everyone gets wrong: <strong>only <code>plugin.json</code> goes inside <code>.claude-plugin/</code></strong>. Skills, agents, commands, and hooks all sit at the plugin root. If you nest them inside <code>.claude-plugin/</code>, Claude Code silently ignores them and you spend 40 minutes wondering why. This was my first mistake when I was writing my first publishable skill.</p>
+<h2 id="the-manifest" tabindex="-1">The Manifest <a class="header-anchor" href="#the-manifest" aria-hidden="true">#</a></h2>
+<p>If you’ve shipped anything on a package registry, you already know this shape. A Node package has <code>package.json</code>. A Rust crate has <code>Cargo.toml</code>. A Python project has <code>pyproject.toml</code>. A VS Code extension has <code>package.json</code> with a <code>contributes</code> field. A browser extension has <code>manifest.json</code>. Same idea every time: a small declarative file at a known path that tells the host <em>what this thing is, who made it, what version it’s at, and what surface it exposes</em>.</p>
+<p>A Claude plugin’s manifest plays the same role. It lives at <code>.claude-plugin/plugin.json</code>, and Claude Code reads it to figure out your plugin’s name (which becomes the skill namespace), its version (how <code>/plugin update</code> decides there’s something new), its author, and the metadata that marketplaces like AgentHub use to list you. Unlike <code>package.json</code>, it doesn’t declare dependencies or build scripts — the plugin <em>is</em> the source; there’s nothing to compile. And unlike a VS Code <code>contributes</code> block, you don’t enumerate every skill and command here. Claude Code discovers those by walking the directory. The manifest is intentionally thin: identity and metadata, nothing more.</p>
+<p>Create <code>.claude-plugin/plugin.json</code>:</p>
+<code-block lang="json"><pre class="language-json"><code class="language-json"><span class="token punctuation">{</span><br>  <span class="token property">"name"</span><span class="token operator">:</span> <span class="token string">"claude-plugin-demo"</span><span class="token punctuation">,</span><br>  <span class="token property">"description"</span><span class="token operator">:</span> <span class="token string">"A tiny demo plugin with one greeting skill. Use it as a template for your own."</span><span class="token punctuation">,</span><br>  <span class="token property">"version"</span><span class="token operator">:</span> <span class="token string">"1.0.0"</span><span class="token punctuation">,</span><br>  <span class="token property">"author"</span><span class="token operator">:</span> <span class="token punctuation">{</span><br>    <span class="token property">"name"</span><span class="token operator">:</span> <span class="token string">"Ani"</span><span class="token punctuation">,</span><br>    <span class="token property">"url"</span><span class="token operator">:</span> <span class="token string">"https://blog.anirudha.dev"</span><br>  <span class="token punctuation">}</span><span class="token punctuation">,</span><br>  <span class="token property">"homepage"</span><span class="token operator">:</span> <span class="token string">"https://github.com/anistark/claude-plugin-demo"</span><span class="token punctuation">,</span><br>  <span class="token property">"repository"</span><span class="token operator">:</span> <span class="token string">"https://github.com/anistark/claude-plugin-demo"</span><span class="token punctuation">,</span><br>  <span class="token property">"license"</span><span class="token operator">:</span> <span class="token string">"MIT"</span><span class="token punctuation">,</span><br>  <span class="token property">"keywords"</span><span class="token operator">:</span> <span class="token punctuation">[</span><span class="token string">"demo"</span><span class="token punctuation">,</span> <span class="token string">"greeting"</span><span class="token punctuation">,</span> <span class="token string">"tutorial"</span><span class="token punctuation">]</span><br><span class="token punctuation">}</span></code></pre>
+</code-block><p>Field-by-field, the ones that actually matter:</p>
+<ul>
+<li><code>name</code> — kebab-case, becomes the skill namespace. Skills get called as <code>/claude-plugin-demo:greet</code>. Pick something you won’t regret in six months.</li>
+<li><code>description</code> — shows up in plugin browsers. Write it like a product tagline, not like an NPM readme.</li>
+<li><code>version</code> — Follow <a href="https://semver.org">semver</a>. Bump it when you ship.</li>
+<li><code>author.name</code> — attribution. Optional but put it in.</li>
+</ul>
+<p>The full schema has a bunch more fields (<code>homepage</code>, <code>icon</code>, <code>settings</code>, <code>commands</code>, <code>agents</code>, <code>skills</code>, etc.). See the <a href="https://code.claude.com/docs/en/plugins-reference#plugin-manifest-schema">reference</a> when you need them.</p>
+<h2 id="the-skill" tabindex="-1">The Skill <a class="header-anchor" href="#the-skill" aria-hidden="true">#</a></h2>
+<p>Create <code>skills/greet/SKILL.md</code>:</p>
+<code-block lang="markdown"><pre class="language-markdown"><code class="language-markdown"><span class="token front-matter-block"><span class="token punctuation">---</span><br><span class="token front-matter yaml language-yaml">description: Greet a user by name with a figlet ASCII-art banner plus a warm welcome. Use when asked to say hi to someone, onboard a new person, or welcome someone to a project.</span><br><span class="token punctuation">---</span></span><br><br><span class="token title important"><span class="token punctuation">#</span> Greet</span><br><br>The user wants you to greet "$ARGUMENTS".<br><br>Run this command to print an ASCII-art banner of their name:<br><br><span class="token code"><span class="token punctuation">```</span><span class="token code-language">sh</span><br><span class="token code-block language-sh">figlet "$ARGUMENTS"</span><br><span class="token punctuation">```</span></span><br><br>If <span class="token code-snippet code keyword">`figlet`</span> is not installed, tell the user to install it (<span class="token code-snippet code keyword">`brew install figlet`</span> on macOS, <span class="token code-snippet code keyword">`apt install figlet`</span> on Debian/Ubuntu, <span class="token code-snippet code keyword">`choco install figlet`</span> on Windows) and stop.<br><br>After the banner prints, write a short (2–3 sentence) welcome message below it. Be warm. Be slightly over the top. Throw in one genuinely useful offer of help — e.g. "want me to set up your project skeleton?" or "shall I explain the codebase layout?".<br><br>Do not include emoji unless the user's name already has one.</code></pre>
+</code-block><p>A few things to notice:</p>
+<ol>
+<li>The YAML frontmatter’s <code>description</code> is what Claude reads to decide whether to auto-invoke the skill. <strong>Write it like you’re writing to a very literal coworker.</strong> Say what it does AND when to use it. Vague descriptions = skill never gets picked.</li>
+<li><code>$ARGUMENTS</code> captures everything the user types after the skill name. <code>/claude-plugin-demo:greet Priya</code> → <code>$ARGUMENTS</code> = <code>&quot;Priya&quot;</code>.</li>
+<li>The body is the instruction. Claude treats it as a system prompt for that skill. Be specific about output format.</li>
+</ol>
+<p>If you want the skill to <em>never</em> auto-invoke and only fire when the user explicitly calls it, add <code>disable-model-invocation: true</code> to the frontmatter. Worth it for commands where accidental invocation would be annoying.</p>
+<terminal-block mode="tree">.
+├── .claude-plugin
+│   └── plugin.json
+├── .gitignore
+├── LICENSE
+├── README.md
+└── skills
+    └── greet
+        └── SKILL.md</terminal-block><h2 id="testing" tabindex="-1">Testing <a class="header-anchor" href="#testing" aria-hidden="true">#</a></h2>
+<p>Don’t publish yet. Run it against Claude Code on your machine first:</p>
+<terminal-block>claude --plugin-dir ./claude-plugin-demo</terminal-block><p>Then in the session:</p>
+<terminal-block>/claude-plugin-demo:greet Priya</terminal-block><p>Claude should shell out to <code>figlet</code>, print an ASCII-art banner of <code>Priya</code>, then write a warm welcome underneath. Tweak the <code>SKILL.md</code>, run <code>/reload-plugins</code> inside the same session, try again. No restart needed.</p>
+<p>If the skill doesn’t show up at all, check:</p>
+<ul>
+<li>Your directories live at the plugin root, not inside <code>.claude-plugin/</code></li>
+<li>The manifest parses (paste it into a JSON linter; trailing commas have ended careers)</li>
+<li>The skill folder name matches what you’re typing</li>
+</ul>
+<p><img src="/images/posts/greet-ss.png" alt="Claude Code terminal showing /claude-plugin-demo:greet Ani with the response"></p>
+<h2 id="validating-skills" tabindex="-1">Validating Skills <a class="header-anchor" href="#validating-skills" aria-hidden="true">#</a></h2>
+<p>“It works on my machine” is not a shipping criterion. Before you push, run your skill through a validator so the frontmatter, metadata, and structure are all sane. I use <a href="https://github.com/anistark/sutras"><strong>sutras</strong></a> for this. A small devtool I built for the <a href="https://blog.anirudha.dev/skills-agents-and-sutras/">skill lifecycle</a>: scaffolding, validation, evaluation, and packaging.</p>
+<p>Install it:</p>
+<terminal-block>pip install sutras</terminal-block><p>Then validate the skill you just wrote:</p>
+<terminal-block>sutras validate skills/greet</terminal-block><p>You’ll get back a report on the YAML frontmatter, required fields, description length, naming, and a bunch of quality checks you’d otherwise discover the hard way in someone else’s CI. Add <code>--strict</code> to turn warnings into errors, or <code>--all</code> to sweep every skill in the repo at once. Super useful once a plugin grows beyond one skill:</p>
+<terminal-block>sutras validate --all --path skills/ --strict</terminal-block><h3 id="from-inside-claude-code-(via-pi)" tabindex="-1">From inside Claude Code (via pi) <a class="header-anchor" href="#from-inside-claude-code-(via-pi)" aria-hidden="true">#</a></h3>
+<p>If you use <a href="https://github.com/badlogic/pi">pi</a>, sutras ships an extension that exposes <code>/sutras</code> commands directly in-session — validate, list, and inspect without leaving the editor:</p>
+<terminal-block>pi install npm:sutras</terminal-block><h3 id="in-ci" tabindex="-1">In CI <a class="header-anchor" href="#in-ci" aria-hidden="true">#</a></h3>
+<p>The same check belongs on every push so a bad merge can’t sneak past. Sutras publishes a reusable GitHub Action:</p>
+<code-block lang="yaml"><pre class="language-yaml"><code class="language-yaml"><span class="token comment"># .github/workflows/validate-skills.yml</span><br><span class="token key atrule">name</span><span class="token punctuation">:</span> Validate Skills<br><span class="token key atrule">on</span><span class="token punctuation">:</span> <span class="token punctuation">[</span>push<span class="token punctuation">,</span> pull_request<span class="token punctuation">]</span><br><br><span class="token key atrule">jobs</span><span class="token punctuation">:</span><br>  <span class="token key atrule">validate</span><span class="token punctuation">:</span><br>    <span class="token key atrule">runs-on</span><span class="token punctuation">:</span> ubuntu<span class="token punctuation">-</span>latest<br>    <span class="token key atrule">steps</span><span class="token punctuation">:</span><br>      <span class="token punctuation">-</span> <span class="token key atrule">uses</span><span class="token punctuation">:</span> actions/checkout@v4<br>      <span class="token punctuation">-</span> <span class="token key atrule">uses</span><span class="token punctuation">:</span> anistark/sutras@v0<br>        <span class="token key atrule">with</span><span class="token punctuation">:</span><br>          <span class="token key atrule">path</span><span class="token punctuation">:</span> skills/<br>          <span class="token key atrule">strict</span><span class="token punctuation">:</span> <span class="token boolean important">true</span></code></pre>
+</code-block><p>Pin to a major tag (<code>@v0</code>) for automatic patch updates, or to an exact release (<code>@v0.4.5</code>) if you want full reproducibility. Either way, the validator runs on every PR and fails the build before AgentHub’s own checks ever see it.</p>
+<p>Treat validation the same way you treat linting or typechecking: cheap, local, automated, non-negotiable. If you want the longer argument for why skills deserve a proper lifecycle in the first place, I wrote about it here: <a href="https://blog.anirudha.dev/skills-agents-and-sutras/"><strong>Skills, Agents, and the Missing Middle</strong></a>. That post is the “why.” This step is the “how.”</p>
+<h2 id="ready-to-publish" tabindex="-1">Ready to publish <a class="header-anchor" href="#ready-to-publish" aria-hidden="true">#</a></h2>
+<p>Time to make this plugin real.</p>
+<terminal-block>git init
+git add .
+git commit -m &quot;chore: init claude-plugin-demo v1.0.0&quot;
+gh repo create anistark/claude-plugin-demo --public --source=. --push</terminal-block><p>Add two more files before you call it done:</p>
+<ul>
+<li><code>README.md</code> — what it does, install commands, a usage example. Don’t overthink it.</li>
+<li><code>LICENSE</code> — MIT is the default Sunday vibe. Pick whichever works for you, but pick <em>something</em>.</li>
+</ul>
+<p>Tag the release if you want clean semver history:</p>
+<terminal-block>git tag v1.0.0
+git push --tags</terminal-block><p>At this point your plugin already works. Anyone can install it directly from your repo:</p>
+<terminal-block>/plugin marketplace add anistark/claude-plugin-demo
+/plugin install claude-plugin-demo</terminal-block><p>But asking every user to remember your GitHub handle and add your repo as a one-off marketplace is friction. We can do better.</p>
+<div class="github-card-wrapper"><a href="https://github.com/anistark/claude-plugin-demo" target="_blank" rel="noopener noreferrer" class="github-card"><div class="github-card-top"><div class="github-card-primary"><h3 class="github-card-heading"><span class="github-card-owner">anistark</span><span class="github-card-slash">/</span><span class="github-card-name">claude-plugin-demo</span></h3><div class="github-card-pills"><span class="github-card-pill">MIT</span></div></div><div class="github-card-avatar-wrap"><img src="https://avatars.githubusercontent.com/u/5357586?v=4&amp;s=120" alt="anistark" class="github-card-avatar" loading="lazy" width="56" height="56"></div></div><div class="github-card-activity"><svg class="github-card-spark" viewBox="0 0 520 36" preserveAspectRatio="none" aria-hidden="true"><rect x="0.00" y="36.00" width="8.04" height="0.00" rx="0.5"></rect><rect x="10.04" y="36.00" width="8.04" height="0.00" rx="0.5"></rect><rect x="20.08" y="36.00" width="8.04" height="0.00" rx="0.5"></rect><rect x="30.12" y="36.00" width="8.04" height="0.00" rx="0.5"></rect><rect x="40.15" y="36.00" width="8.04" height="0.00" rx="0.5"></rect><rect x="50.19" y="36.00" width="8.04" height="0.00" rx="0.5"></rect><rect x="60.23" y="36.00" width="8.04" height="0.00" rx="0.5"></rect><rect x="70.27" y="36.00" width="8.04" height="0.00" rx="0.5"></rect><rect x="80.31" y="36.00" width="8.04" height="0.00" rx="0.5"></rect><rect x="90.35" y="36.00" width="8.04" height="0.00" rx="0.5"></rect><rect x="100.38" y="36.00" width="8.04" height="0.00" rx="0.5"></rect><rect x="110.42" y="36.00" width="8.04" height="0.00" rx="0.5"></rect><rect x="120.46" y="36.00" width="8.04" height="0.00" rx="0.5"></rect><rect x="130.50" y="36.00" width="8.04" height="0.00" rx="0.5"></rect><rect x="140.54" y="36.00" width="8.04" height="0.00" rx="0.5"></rect><rect x="150.58" y="36.00" width="8.04" height="0.00" rx="0.5"></rect><rect x="160.62" y="36.00" width="8.04" height="0.00" rx="0.5"></rect><rect x="170.65" y="36.00" width="8.04" height="0.00" rx="0.5"></rect><rect x="180.69" y="36.00" width="8.04" height="0.00" rx="0.5"></rect><rect x="190.73" y="36.00" width="8.04" height="0.00" rx="0.5"></rect><rect x="200.77" y="36.00" width="8.04" height="0.00" rx="0.5"></rect><rect x="210.81" y="36.00" width="8.04" height="0.00" rx="0.5"></rect><rect x="220.85" y="36.00" width="8.04" height="0.00" rx="0.5"></rect><rect x="230.88" y="36.00" width="8.04" height="0.00" rx="0.5"></rect><rect x="240.92" y="36.00" width="8.04" height="0.00" rx="0.5"></rect><rect x="250.96" y="36.00" width="8.04" height="0.00" rx="0.5"></rect><rect x="261.00" y="36.00" width="8.04" height="0.00" rx="0.5"></rect><rect x="271.04" y="36.00" width="8.04" height="0.00" rx="0.5"></rect><rect x="281.08" y="36.00" width="8.04" height="0.00" rx="0.5"></rect><rect x="291.12" y="36.00" width="8.04" height="0.00" rx="0.5"></rect><rect x="301.15" y="36.00" width="8.04" height="0.00" rx="0.5"></rect><rect x="311.19" y="36.00" width="8.04" height="0.00" rx="0.5"></rect><rect x="321.23" y="36.00" width="8.04" height="0.00" rx="0.5"></rect><rect x="331.27" y="36.00" width="8.04" height="0.00" rx="0.5"></rect><rect x="341.31" y="36.00" width="8.04" height="0.00" rx="0.5"></rect><rect x="351.35" y="36.00" width="8.04" height="0.00" rx="0.5"></rect><rect x="361.38" y="36.00" width="8.04" height="0.00" rx="0.5"></rect><rect x="371.42" y="36.00" width="8.04" height="0.00" rx="0.5"></rect><rect x="381.46" y="36.00" width="8.04" height="0.00" rx="0.5"></rect><rect x="391.50" y="36.00" width="8.04" height="0.00" rx="0.5"></rect><rect x="401.54" y="36.00" width="8.04" height="0.00" rx="0.5"></rect><rect x="411.58" y="36.00" width="8.04" height="0.00" rx="0.5"></rect><rect x="421.62" y="36.00" width="8.04" height="0.00" rx="0.5"></rect><rect x="431.65" y="36.00" width="8.04" height="0.00" rx="0.5"></rect><rect x="441.69" y="36.00" width="8.04" height="0.00" rx="0.5"></rect><rect x="451.73" y="36.00" width="8.04" height="0.00" rx="0.5"></rect><rect x="461.77" y="36.00" width="8.04" height="0.00" rx="0.5"></rect><rect x="471.81" y="36.00" width="8.04" height="0.00" rx="0.5"></rect><rect x="481.85" y="36.00" width="8.04" height="0.00" rx="0.5"></rect><rect x="491.88" y="36.00" width="8.04" height="0.00" rx="0.5"></rect><rect x="501.92" y="36.00" width="8.04" height="0.00" rx="0.5"></rect><rect x="511.96" y="0.00" width="8.04" height="36.00" rx="0.5"></rect></svg><span class="github-card-spark-label">1 commit in the last year</span></div><div class="github-card-stats"><span class="github-card-stat" aria-label="0 stars"><svg viewBox="0 0 16 16" width="14" height="14" fill="currentColor" aria-hidden="true"><path d="M8 .25a.75.75 0 0 1 .673.418l1.882 3.815 4.21.612a.75.75 0 0 1 .416 1.279l-3.046 2.97.719 4.192a.751.751 0 0 1-1.088.791L8 12.347l-3.766 1.98a.75.75 0 0 1-1.088-.79l.72-4.194L.818 6.374a.75.75 0 0 1 .416-1.28l4.21-.611L7.327.668A.75.75 0 0 1 8 .25Z"></path></svg>0</span><span class="github-card-stat" aria-label="0 forks"><svg viewBox="0 0 16 16" width="14" height="14" fill="currentColor" aria-hidden="true"><path d="M5 5.372v.878c0 .414.336.75.75.75h4.5a.75.75 0 0 0 .75-.75v-.878a2.25 2.25 0 1 1 1.5 0v.878a2.25 2.25 0 0 1-2.25 2.25h-1.5v2.128a2.251 2.251 0 1 1-1.5 0V8.5h-1.5A2.25 2.25 0 0 1 3.5 6.25v-.878a2.25 2.25 0 1 1 1.5 0ZM5 3.25a.75.75 0 1 0-1.5 0 .75.75 0 0 0 1.5 0Zm6.75.75a.75.75 0 1 0 0-1.5.75.75 0 0 0 0 1.5Zm-3 8.75a.75.75 0 1 0-1.5 0 .75.75 0 0 0 1.5 0Z"></path></svg>0</span><span class="github-card-stat" aria-label="0 open issues"><svg viewBox="0 0 16 16" width="14" height="14" fill="currentColor" aria-hidden="true"><path d="M8 9.5a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3Z"></path><path d="M8 0a8 8 0 1 1 0 16A8 8 0 0 1 8 0ZM1.5 8a6.5 6.5 0 1 0 13 0 6.5 6.5 0 0 0-13 0Z"></path></svg>0</span><span class="github-card-updated" title="Last push: 2026-04-19T18:23:11Z">Updated 5 days ago</span></div></a></div>
+<h2 id="meet-agenthub" tabindex="-1">Meet AgentHub <a class="header-anchor" href="#meet-agenthub" aria-hidden="true">#</a></h2>
+<p><a href="https://agenthub.nullorder.org">AgentHub</a> is a community-driven marketplace for Claude Code plugins. I built it because the plugin ecosystem was coming in hot and there was no central place to discover what’s out there.</p>
+<p>The design is deliberately boring: <strong>your plugin code stays in your own repo</strong>. AgentHub holds a catalog of references. You open a PR, we merge it, your plugin shows up when users run <code>/plugin</code> and hit the Discover tab. You keep ownership, you keep your CI, you keep your license. We just do matchmaking.</p>
+<p>Users install AgentHub once:</p>
+<terminal-block>/plugin marketplace add nullorder/agenthub</terminal-block><p>After that, any plugin in the catalog is one command away:</p>
+<terminal-block>/plugin install &lt;plugin-name&gt;@agenthub</terminal-block><p>Right now there are <strong>300 plugins from 73 authors</strong> and the catalog is growing fast. Your demo plugin can join that list in the next ten minutes.</p>
+<p><a href="https://agenthub.nullorder.org/"><img src="/images/posts/agenthub-homepage.png" alt="AgentHub homepage showing the plugin grid"></a></p>
+<h2 id="distribute-your-plugin" tabindex="-1">Distribute your plugin <a class="header-anchor" href="#distribute-your-plugin" aria-hidden="true">#</a></h2>
+<p>Fork <a href="https://github.com/nullorder/agenthub"><code>nullorder/agenthub</code></a> on GitHub and clone your fork.</p>
+<p>Inside the repo, every plugin is a single JSON file under <code>plugins/</code>. <strong>The filename must match the plugin name.</strong> So for our demo:</p>
+<terminal-block>touch plugins/claude-plugin-demo.json</terminal-block><p>Fill it in:</p>
+<code-block lang="json"><pre class="language-json"><code class="language-json"><span class="token punctuation">{</span><br>  <span class="token property">"name"</span><span class="token operator">:</span> <span class="token string">"claude-plugin-demo"</span><span class="token punctuation">,</span><br>  <span class="token property">"source"</span><span class="token operator">:</span> <span class="token punctuation">{</span><br>    <span class="token property">"source"</span><span class="token operator">:</span> <span class="token string">"github"</span><span class="token punctuation">,</span><br>    <span class="token property">"repo"</span><span class="token operator">:</span> <span class="token string">"anistark/claude-plugin-demo"</span><br>  <span class="token punctuation">}</span><span class="token punctuation">,</span><br>  <span class="token property">"description"</span><span class="token operator">:</span> <span class="token string">"A tiny demo plugin with one greeting skill. Great template for your own first plugin."</span><span class="token punctuation">,</span><br>  <span class="token property">"version"</span><span class="token operator">:</span> <span class="token string">"1.0.0"</span><span class="token punctuation">,</span><br>  <span class="token property">"author"</span><span class="token operator">:</span> <span class="token punctuation">{</span><br>    <span class="token property">"username"</span><span class="token operator">:</span> <span class="token string">"anistark"</span><br>  <span class="token punctuation">}</span><span class="token punctuation">,</span><br>  <span class="token property">"category"</span><span class="token operator">:</span> <span class="token string">"other"</span><span class="token punctuation">,</span><br>  <span class="token property">"license"</span><span class="token operator">:</span> <span class="token string">"MIT"</span><span class="token punctuation">,</span><br>  <span class="token property">"tags"</span><span class="token operator">:</span> <span class="token punctuation">[</span><span class="token string">"skills"</span><span class="token punctuation">,</span> <span class="token string">"tutorial"</span><span class="token punctuation">,</span> <span class="token string">"demo"</span><span class="token punctuation">]</span><br><span class="token punctuation">}</span></code></pre>
+</code-block><p>The rules, because rules have consequences:</p>
+<ul>
+<li><strong><code>name</code></strong> — kebab-case, no “claude” / “anthropic” / “official” in the name, must match the filename.</li>
+<li><strong><code>source</code></strong> — usually <code>github</code> with <code>repo: &quot;&lt;user&gt;/&lt;repo&gt;&quot;</code>. If your plugin lives on GitLab, is in a monorepo subdir, or ships via npm, there are three other source types. See <a href="https://github.com/nullorder/agenthub/blob/main/CONTRIBUTING.md">CONTRIBUTING.md</a> for those.</li>
+<li><strong><code>version</code></strong> — must match the version in your plugin’s own <code>plugin.json</code>. If the two drift, <code>/plugin update</code> lies to users and tells them they’re up to date when they aren’t. Keep them in lockstep.</li>
+<li><strong><code>category</code></strong> — one of: <code>development</code>, <code>testing</code>, <code>devops</code>, <code>security</code>, <code>documentation</code>, <code>productivity</code>, <code>data</code>, <code>design</code>, <code>other</code>. Pick honestly.</li>
+<li><strong><code>tags</code></strong> — <strong>required</strong>, and must include at least one <em>component type</em> tag so users know what they’re getting: <code>skills</code>, <code>agents</code>, <code>commands</code>, <code>hooks</code>, <code>mcp-servers</code>, <code>lsp-servers</code>, <code>integration</code>, or <code>other</code>. You can add free-form tags after that (languages, frameworks, moods).</li>
+</ul>
+<p>One thing worth underlining: <strong>don’t edit <code>.claude-plugin/marketplace.json</code> directly.</strong> That file is auto-generated from everything in <code>plugins/</code> after your PR merges. If you touch it, the next build overwrites you and everyone’s annoyed.</p>
+<h2 id="listing-on-agenthub" tabindex="-1">Listing on AgentHub <a class="header-anchor" href="#listing-on-agenthub" aria-hidden="true">#</a></h2>
+<p>AgentHub is a public repo, so contributions go through the standard GitHub fork-and-PR flow. You don’t have write access to <code>nullorder/agenthub</code> (and neither does anyone outside the maintainers). You open a PR from your own fork.</p>
+<p>If you haven’t already, fork <a href="https://github.com/nullorder/agenthub"><code>nullorder/agenthub</code></a> from the GitHub UI, then clone your fork locally:</p>
+<terminal-block>gh repo fork nullorder/agenthub --clone
+cd agenthub</terminal-block><p>Or, if you prefer the manual route: click <strong>Fork</strong> on the GitHub page, then <code>git clone git@github.com:&lt;your-username&gt;/agenthub.git</code>. Either way, add the upstream so you can pull new changes later:</p>
+<terminal-block>git remote add upstream https://github.com/nullorder/agenthub.git</terminal-block><p>Now create your manifest file (as in the previous section), then branch, commit, and push to your fork:</p>
+<terminal-block>git checkout -b add-claude-plugin-demo
+git add plugins/claude-plugin-demo.json
+git commit -m &quot;Add claude-plugin-demo&quot;
+git push origin add-claude-plugin-demo</terminal-block><p>Then open a PR against <code>nullorder/agenthub:main</code>. A good PR body looks like this:</p>
+<code-block lang="markdown"><pre class="language-markdown"><code class="language-markdown"><span class="token title important"><span class="token punctuation">###</span> Plugin: claude-plugin-demo</span><br><br>A tiny demo plugin with one greeting skill. Meant as a reference template<br>for people writing their first Claude Code plugin.<br><br><span class="token list punctuation">-</span> Repo: https://github.com/anistark/claude-plugin-demo<br><span class="token list punctuation">-</span> Version: 1.0.0<br><span class="token list punctuation">-</span> Category: other<br><span class="token list punctuation">-</span> Tags: skills, tutorial, demo<br><br>Tested locally with <span class="token code-snippet code keyword">`claude --plugin-dir ./claude-plugin-demo`</span>.</code></pre>
+</code-block><p>Keep it short. CI will run some validation (JSON schema, naming, required fields). If something’s off, the checks will tell you what. Fix, push, done.</p>
+<p>After a merge, the catalog regenerates and the site updates. Your plugin is now browsable by everyone using AgentHub.</p>
+<h2 id="into-the-wild" tabindex="-1">Into the wild <a class="header-anchor" href="#into-the-wild" aria-hidden="true">#</a></h2>
+<blockquote>
+<p>Like the beautiful movie goes… with a little Eddie Vedder in background strumming along…Now, it’s time for a real plugin example…
+I wrote <a href="https://github.com/anistark/ani-skills"><strong>ani-skills</strong></a>, a small collection of agent skills I use every day: a commit message writer, a PR description writer, and an upstream-sync helper. Of course planning on adding more such skills to it. Listed on AgentHub as: <code>ani-skills@agenthub</code>.</p>
+</blockquote>
+<div class="github-card-wrapper"><a href="https://github.com/anistark/ani-skills" target="_blank" rel="noopener noreferrer" class="github-card"><div class="github-card-top"><div class="github-card-primary"><h3 class="github-card-heading"><span class="github-card-owner">anistark</span><span class="github-card-slash">/</span><span class="github-card-name">ani-skills</span></h3><div class="github-card-pills"><span class="github-card-pill">MIT</span></div><p class="github-card-desc">A repo of my most used skills</p></div><div class="github-card-avatar-wrap"><img src="https://avatars.githubusercontent.com/u/5357586?v=4&amp;s=120" alt="anistark" class="github-card-avatar" loading="lazy" width="56" height="56"></div></div><div class="github-card-activity"><svg class="github-card-spark" viewBox="0 0 520 36" preserveAspectRatio="none" aria-hidden="true"><rect x="0.00" y="36.00" width="8.04" height="0.00" rx="0.5"></rect><rect x="10.04" y="36.00" width="8.04" height="0.00" rx="0.5"></rect><rect x="20.08" y="36.00" width="8.04" height="0.00" rx="0.5"></rect><rect x="30.12" y="36.00" width="8.04" height="0.00" rx="0.5"></rect><rect x="40.15" y="36.00" width="8.04" height="0.00" rx="0.5"></rect><rect x="50.19" y="36.00" width="8.04" height="0.00" rx="0.5"></rect><rect x="60.23" y="36.00" width="8.04" height="0.00" rx="0.5"></rect><rect x="70.27" y="36.00" width="8.04" height="0.00" rx="0.5"></rect><rect x="80.31" y="36.00" width="8.04" height="0.00" rx="0.5"></rect><rect x="90.35" y="36.00" width="8.04" height="0.00" rx="0.5"></rect><rect x="100.38" y="36.00" width="8.04" height="0.00" rx="0.5"></rect><rect x="110.42" y="36.00" width="8.04" height="0.00" rx="0.5"></rect><rect x="120.46" y="36.00" width="8.04" height="0.00" rx="0.5"></rect><rect x="130.50" y="36.00" width="8.04" height="0.00" rx="0.5"></rect><rect x="140.54" y="36.00" width="8.04" height="0.00" rx="0.5"></rect><rect x="150.58" y="36.00" width="8.04" height="0.00" rx="0.5"></rect><rect x="160.62" y="36.00" width="8.04" height="0.00" rx="0.5"></rect><rect x="170.65" y="36.00" width="8.04" height="0.00" rx="0.5"></rect><rect x="180.69" y="36.00" width="8.04" height="0.00" rx="0.5"></rect><rect x="190.73" y="36.00" width="8.04" height="0.00" rx="0.5"></rect><rect x="200.77" y="36.00" width="8.04" height="0.00" rx="0.5"></rect><rect x="210.81" y="36.00" width="8.04" height="0.00" rx="0.5"></rect><rect x="220.85" y="36.00" width="8.04" height="0.00" rx="0.5"></rect><rect x="230.88" y="36.00" width="8.04" height="0.00" rx="0.5"></rect><rect x="240.92" y="36.00" width="8.04" height="0.00" rx="0.5"></rect><rect x="250.96" y="36.00" width="8.04" height="0.00" rx="0.5"></rect><rect x="261.00" y="36.00" width="8.04" height="0.00" rx="0.5"></rect><rect x="271.04" y="36.00" width="8.04" height="0.00" rx="0.5"></rect><rect x="281.08" y="36.00" width="8.04" height="0.00" rx="0.5"></rect><rect x="291.12" y="36.00" width="8.04" height="0.00" rx="0.5"></rect><rect x="301.15" y="36.00" width="8.04" height="0.00" rx="0.5"></rect><rect x="311.19" y="36.00" width="8.04" height="0.00" rx="0.5"></rect><rect x="321.23" y="36.00" width="8.04" height="0.00" rx="0.5"></rect><rect x="331.27" y="36.00" width="8.04" height="0.00" rx="0.5"></rect><rect x="341.31" y="36.00" width="8.04" height="0.00" rx="0.5"></rect><rect x="351.35" y="36.00" width="8.04" height="0.00" rx="0.5"></rect><rect x="361.38" y="36.00" width="8.04" height="0.00" rx="0.5"></rect><rect x="371.42" y="36.00" width="8.04" height="0.00" rx="0.5"></rect><rect x="381.46" y="36.00" width="8.04" height="0.00" rx="0.5"></rect><rect x="391.50" y="36.00" width="8.04" height="0.00" rx="0.5"></rect><rect x="401.54" y="36.00" width="8.04" height="0.00" rx="0.5"></rect><rect x="411.58" y="36.00" width="8.04" height="0.00" rx="0.5"></rect><rect x="421.62" y="36.00" width="8.04" height="0.00" rx="0.5"></rect><rect x="431.65" y="36.00" width="8.04" height="0.00" rx="0.5"></rect><rect x="441.69" y="36.00" width="8.04" height="0.00" rx="0.5"></rect><rect x="451.73" y="36.00" width="8.04" height="0.00" rx="0.5"></rect><rect x="461.77" y="36.00" width="8.04" height="0.00" rx="0.5"></rect><rect x="471.81" y="36.00" width="8.04" height="0.00" rx="0.5"></rect><rect x="481.85" y="36.00" width="8.04" height="0.00" rx="0.5"></rect><rect x="491.88" y="36.00" width="8.04" height="0.00" rx="0.5"></rect><rect x="501.92" y="0.00" width="8.04" height="36.00" rx="0.5"></rect><rect x="511.96" y="36.00" width="8.04" height="0.00" rx="0.5"></rect></svg><span class="github-card-spark-label">13 commits in the last year</span></div><div class="github-card-stats"><span class="github-card-stat github-card-lang"><span class="github-card-lang-dot" style="background:#384d54"></span>Just</span><span class="github-card-stat" aria-label="0 stars"><svg viewBox="0 0 16 16" width="14" height="14" fill="currentColor" aria-hidden="true"><path d="M8 .25a.75.75 0 0 1 .673.418l1.882 3.815 4.21.612a.75.75 0 0 1 .416 1.279l-3.046 2.97.719 4.192a.751.751 0 0 1-1.088.791L8 12.347l-3.766 1.98a.75.75 0 0 1-1.088-.79l.72-4.194L.818 6.374a.75.75 0 0 1 .416-1.28l4.21-.611L7.327.668A.75.75 0 0 1 8 .25Z"></path></svg>0</span><span class="github-card-stat" aria-label="0 forks"><svg viewBox="0 0 16 16" width="14" height="14" fill="currentColor" aria-hidden="true"><path d="M5 5.372v.878c0 .414.336.75.75.75h4.5a.75.75 0 0 0 .75-.75v-.878a2.25 2.25 0 1 1 1.5 0v.878a2.25 2.25 0 0 1-2.25 2.25h-1.5v2.128a2.251 2.251 0 1 1-1.5 0V8.5h-1.5A2.25 2.25 0 0 1 3.5 6.25v-.878a2.25 2.25 0 1 1 1.5 0ZM5 3.25a.75.75 0 1 0-1.5 0 .75.75 0 0 0 1.5 0Zm6.75.75a.75.75 0 1 0 0-1.5.75.75 0 0 0 0 1.5Zm-3 8.75a.75.75 0 1 0-1.5 0 .75.75 0 0 0 1.5 0Z"></path></svg>0</span><span class="github-card-stat" aria-label="0 open issues"><svg viewBox="0 0 16 16" width="14" height="14" fill="currentColor" aria-hidden="true"><path d="M8 9.5a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3Z"></path><path d="M8 0a8 8 0 1 1 0 16A8 8 0 0 1 8 0ZM1.5 8a6.5 6.5 0 1 0 13 0 6.5 6.5 0 0 0-13 0Z"></path></svg>0</span><span class="github-card-updated" title="Last push: 2026-04-16T18:35:45Z">Updated 8 days ago</span></div></a></div>
+<p><strong>Inside the plugin’s own repo</strong>, <code>.claude-plugin/plugin.json</code> looks roughly like this:</p>
+<code-block lang="json"><pre class="language-json"><code class="language-json"><span class="token punctuation">{</span><br>  <span class="token property">"name"</span><span class="token operator">:</span> <span class="token string">"ani-skills"</span><span class="token punctuation">,</span><br>  <span class="token property">"description"</span><span class="token operator">:</span> <span class="token string">"Reusable AI agent skills for Claude Code — commit messages, PR descriptions, upstream sync."</span><span class="token punctuation">,</span><br>  <span class="token property">"version"</span><span class="token operator">:</span> <span class="token string">"0.3.0"</span><span class="token punctuation">,</span><br>  <span class="token property">"author"</span><span class="token operator">:</span> <span class="token punctuation">{</span><br>    <span class="token property">"name"</span><span class="token operator">:</span> <span class="token string">"Ani"</span><span class="token punctuation">,</span><br>    <span class="token property">"url"</span><span class="token operator">:</span> <span class="token string">"https://blog.anirudha.dev"</span><br>  <span class="token punctuation">}</span><span class="token punctuation">,</span><br>  <span class="token property">"homepage"</span><span class="token operator">:</span> <span class="token string">"https://github.com/anistark/ani-skills"</span><span class="token punctuation">,</span><br>  <span class="token property">"repository"</span><span class="token operator">:</span> <span class="token string">"https://github.com/anistark/ani-skills"</span><span class="token punctuation">,</span><br>  <span class="token property">"license"</span><span class="token operator">:</span> <span class="token string">"MIT"</span><span class="token punctuation">,</span><br>  <span class="token property">"keywords"</span><span class="token operator">:</span> <span class="token punctuation">[</span><span class="token string">"git"</span><span class="token punctuation">,</span> <span class="token string">"commit"</span><span class="token punctuation">,</span> <span class="token string">"pr"</span><span class="token punctuation">,</span> <span class="token string">"development"</span><span class="token punctuation">]</span><br><span class="token punctuation">}</span></code></pre>
+</code-block><p><strong>Inside the AgentHub marketplace</strong>, <code>plugins/ani-skills.json</code>:</p>
+<code-block lang="json"><pre class="language-json"><code class="language-json"><span class="token punctuation">{</span><br>  <span class="token property">"name"</span><span class="token operator">:</span> <span class="token string">"ani-skills"</span><span class="token punctuation">,</span><br>  <span class="token property">"source"</span><span class="token operator">:</span> <span class="token punctuation">{</span><br>    <span class="token property">"source"</span><span class="token operator">:</span> <span class="token string">"github"</span><span class="token punctuation">,</span><br>    <span class="token property">"repo"</span><span class="token operator">:</span> <span class="token string">"anistark/ani-skills"</span><br>  <span class="token punctuation">}</span><span class="token punctuation">,</span><br>  <span class="token property">"description"</span><span class="token operator">:</span> <span class="token string">"Reusable AI agent skills for Claude Code — commit messages, PR descriptions, upstream sync."</span><span class="token punctuation">,</span><br>  <span class="token property">"version"</span><span class="token operator">:</span> <span class="token string">"0.3.0"</span><span class="token punctuation">,</span><br>  <span class="token property">"author"</span><span class="token operator">:</span> <span class="token punctuation">{</span><br>    <span class="token property">"username"</span><span class="token operator">:</span> <span class="token string">"anistark"</span><br>  <span class="token punctuation">}</span><span class="token punctuation">,</span><br>  <span class="token property">"category"</span><span class="token operator">:</span> <span class="token string">"development"</span><span class="token punctuation">,</span><br>  <span class="token property">"license"</span><span class="token operator">:</span> <span class="token string">"MIT"</span><span class="token punctuation">,</span><br>  <span class="token property">"tags"</span><span class="token operator">:</span> <span class="token punctuation">[</span><span class="token string">"skills"</span><span class="token punctuation">,</span> <span class="token string">"git"</span><span class="token punctuation">,</span> <span class="token string">"development"</span><span class="token punctuation">]</span><br><span class="token punctuation">}</span></code></pre>
+</code-block><p>Same <code>name</code>, same <code>version</code>, same <code>description</code>. Two files, one source of truth. This is the version-pairing discipline I was yelling about earlier. Here it is in practice.</p>
+<p>The repo layout is the same pattern we’ve been building, just with three skills instead of one:</p>
+<terminal-block mode="tree">ani-skills/
+├── .claude-plugin/
+│   └── plugin.json
+├── skills/
+│   ├── commit-msg/
+│   │   └── SKILL.md
+│   ├── pr-msg/
+│   │   └── SKILL.md
+│   └── sync-upstream/
+│       └── SKILL.md
+├── README.md
+└── LICENSE</terminal-block><p>Because it’s installed via the plugin system, each skill is namespaced under <code>ani-skills:</code>:</p>
+<ul>
+<li><code>/ani-skills:commit-msg</code> — write a well-structured git commit message from staged changes</li>
+<li><code>/ani-skills:pr-msg</code> — draft a PR title and description from the current branch’s commits and diff</li>
+<li><code>/ani-skills:sync-upstream</code> — sync the current branch with upstream, resolving conflicts interactively</li>
+</ul>
+<p><img src="/images/posts/agenthub-ani-skills.png" alt="ani-skills listed on AgentHub"></p>
+<p><img src="/images/posts/ani-skills-plugin.png" alt="ani-skills namespaced skills in Claude Code"></p>
+<p>Want to try it right now instead of reading about it? Three commands, live:</p>
+<terminal-block>/plugin marketplace add nullorder/agenthub
+/plugin install ani-skills@agenthub
+/ani-skills:commit-msg</terminal-block><p>That’s the full round trip on a plugin that’s actually in production. Everything we’ve walked through so far (the manifest, the skill folders, the AgentHub entry, the PR) is what got that plugin on the shelf.</p>
+<h2 id="using-plugin" tabindex="-1">Using Plugin <a class="header-anchor" href="#using-plugin" aria-hidden="true">#</a></h2>
+<p>This is the payoff. Imagine someone (a friend, a stranger, your future self) wants to use your plugin.</p>
+<p>They open Claude Code. They do this once, forever:</p>
+<terminal-block>/plugin marketplace add nullorder/agenthub</terminal-block><p>Then any time they want to install something:</p>
+<terminal-block>/plugin</terminal-block><p>That opens the plugin browser. They tap Discover, find <code>claude-plugin-demo</code>, tap install. Or, if they’re terminal-pilled and know the name:</p>
+<terminal-block>/plugin install claude-plugin-demo@agenthub</terminal-block><p>Three seconds later:</p>
+<terminal-block>/claude-plugin-demo:greet Ani</terminal-block><p>Claude runs <code>figlet</code> on their box, prints a chunky ASCII banner of the name, and writes a warm welcome underneath. Your plugin, running on someone else’s machine, doing the thing you wrote. Satisfying.</p>
+<h2 id="shipping-updates" tabindex="-1">Shipping Updates <a class="header-anchor" href="#shipping-updates" aria-hidden="true">#</a></h2>
+<p>Your plugin is not a fossil. You’ll want to ship <strong>v1.1.0</strong>, <strong>v1.2.0</strong>, <strong>v2.0.0</strong>, and so on…</p>
+<p>The update flow is a two-step because AgentHub pins to versions explicitly:</p>
+<ol>
+<li><strong>Ship in your own repo.</strong> Make your changes, bump <code>version</code> in <code>.claude-plugin/plugin.json</code> (say, to <code>1.1.0</code>), commit, push, tag.</li>
+<li><strong>Open a PR to AgentHub</strong> updating the <code>version</code> field in <code>plugins/claude-plugin-demo.json</code> to match.</li>
+</ol>
+<p>Both versions must match. If your source repo says <code>1.1.0</code> but the AgentHub entry still says <code>1.0.0</code>, then <code>/plugin update claude-plugin-demo@agenthub</code> will tell users they’re on the latest version. They won’t be. They’ll be annoyed. Don’t do that.</p>
+<p>If you’re only changing metadata (description, tags, category) and not shipping new plugin behavior, no version bump needed. Just edit the file in <code>plugins/</code> and open a PR.</p>
+<p>On the user end, pulling the latest:</p>
+<terminal-block>/plugin marketplace update agenthub
+/plugin update claude-plugin-demo@agenthub
+/reload-plugins</terminal-block><p>Users can also update using by simple going in <code>/plugin</code> and browsing through installed plugins and clicking on Update like:</p>
+<p><img src="/images/posts/claude-plugin-update.png" alt="Updating a plugin from the /plugin UI in Claude Code"></p>
+<blockquote>
+<p>Do not forget to run <code>/reload-plugins</code> or reload your claude code session for the effect to take.</p>
+</blockquote>
+<h2 id="a-few-things-i-learned-the-hard-way" tabindex="-1">A few things I learned the hard way <a class="header-anchor" href="#a-few-things-i-learned-the-hard-way" aria-hidden="true">#</a></h2>
+<p><strong>Skill descriptions are a product spec.</strong> If Claude doesn’t reliably invoke your skill at the right moment, the description is almost always the culprit. Be concrete about trigger conditions. “Use when the user asks to review a PR, check code quality, or audit a diff” beats “code review skill”. The description is what Claude reads to decide whether to reach for your skill. Treat every word like it’s going on the back of a box.</p>
+<p><strong>Do not nest anything inside <code>.claude-plugin/</code>.</strong> This is the #1 bug report. Only <code>plugin.json</code> lives in <code>.claude-plugin/</code>. Everything else (<code>skills/</code>, <code>agents/</code>, <code>hooks/</code>, <code>commands/</code>, <code>.mcp.json</code>, <code>settings.json</code>) sits at the plugin root. If you put <code>skills/</code> inside <code>.claude-plugin/skills/</code>, Claude Code silently ignores it, your skill never loads, and you burn an afternoon wondering why <code>/reload-plugins</code> does nothing.</p>
+<p><strong>Version drift is the silent killer.</strong> The version in your plugin’s own <code>plugin.json</code> and the version in <code>plugins/&lt;your-plugin&gt;.json</code> on AgentHub must match. If they drift, <code>/plugin update</code> tells users they’re on the latest version when they are emphatically not. You pushed v1.2.0 to your repo, bumped your manifest, tagged it, blogged about it, but forgot to open the AgentHub PR. Nobody gets the update. Nobody tells you. You just slowly gather confused issues.</p>
+<p><strong>YAML frontmatter will humble you.</strong> The YAML block at the top of <code>SKILL.md</code> is strict. Trailing whitespace, tabs instead of spaces, unquoted colons in descriptions: any of these can make the whole skill invisible. When a skill isn’t loading, check the frontmatter parses as YAML before you suspect anything else.</p>
+<p><strong>The skill character budget is a real constraint.</strong> Claude Code injects plugin skills into the system prompt with a default cap of about 15,000 characters. On a marketplace like AgentHub with 300+ plugins, if users install aggressively, some skills get silently truncated. Users can fix it by setting <code>SLASH_COMMAND_TOOL_CHAR_BUDGET=30000</code> in their shell profile. Worth mentioning in your README if your plugin depends on long skill descriptions. Also a good argument for keeping your own skill descriptions tight.</p>
+<p><strong><code>/reload-plugins</code> is not a magic wand.</strong> It reloads skills, agents, hooks, MCP servers, and LSP servers within a session. It does not always pick up changes to <code>plugin.json</code> itself or to <code>settings.json</code>. When you’re editing the manifest, restart the session. When you’re editing skill bodies, <code>/reload-plugins</code> is fine.</p>
+<p><strong><code>$ARGUMENTS</code> is literal string substitution.</strong> It’s not parsed, not validated, not escaped. If a user passes <code>&quot;hi; rm -rf /&quot;</code>, your skill just sees that text. Which is fine for skills that only send it to Claude as context, but if your skill runs bash (via hooks or scripts) and interpolates <code>$ARGUMENTS</code> directly, that’s a shell injection waiting for a bad day. Quote aggressively. Or better, use <code>jq</code> to parse hook input on stdin rather than threading args through the shell.</p>
+<p><strong>Namespacing is your friend.</strong> <code>/claude-plugin-demo:greet</code> looks verbose the first time you see it. After your fourth plugin, when you realize three of them shipped with a <code>/hello</code>, you’ll thank the designers. Do not try to fight the namespace by naming your plugin <code>h</code> to keep invocations short. Your future self will hate you.</p>
+<p><strong>Name your plugin like you’re stuck with it.</strong> Renaming after launch is painful. Users have it installed under the old name, AgentHub’s entry is keyed to the name, your docs reference the name. And on AgentHub, the name must be unique across the whole catalog. Check <a href="https://github.com/nullorder/agenthub/tree/main/plugins">the plugins directory</a> before you commit to one. If you pick something already taken, the PR gets rejected and you start over.</p>
+<p><strong>License and README are not optional.</strong> AgentHub’s <a href="https://github.com/nullorder/agenthub/blob/main/CONTRIBUTING.md">contributing guide</a> requires both in your plugin repo. This catches people out constantly. A five-line MIT license and a README with install commands plus one usage example is the minimum. Do it before the PR, not after.</p>
+<p><strong>Don’t ship secrets.</strong> If your plugin includes MCP server configs or hooks that call external APIs, resist the urge to hardcode tokens into <code>.mcp.json</code> or hook scripts. Use environment variables and document what the user needs to set. The moment your plugin is popular, your hardcoded key is being lifted into a hundred other users’ setups.</p>
+<p><strong>Platform compatibility bites hook authors.</strong> Bash one-liners in <code>hooks.json</code> work great on your Mac. They die silently on a user’s Windows machine, or on a minimal Linux container without <code>jq</code> installed. If your plugin is going to a general audience, either write hooks in something portable (Node, Python with a shebang) or list the required binaries in your README.</p>
+<p><strong>Read one real plugin before writing yours.</strong> The <a href="https://github.com/nullorder/agenthub/tree/main/plugins">AgentHub <code>plugins/</code> directory</a> has 300 live examples. Clone a few source repos that do what you’re aiming for. Steal structure. A good reference saves more time than any doc page.</p>
+<p><strong>Add the badge.</strong> If your plugin ships on AgentHub, drop this in your README:</p>
+<code-block lang="markdown"><pre class="language-markdown"><code class="language-markdown"><span class="token url">[<span class="token content">![AgentHub</span>](<span class="token url">https://agenthub.nullorder.org/badge.svg</span>)</span>](https://agenthub.nullorder.org)</code></pre>
+</code-block><p>Helps discoverability, helps the marketplace, helps other builders find it.</p>
+<p><em>That’s it!</em></p>
+<p>Claude plugins are genuinely one of the more pleasant extension points I’ve built against in a while. The manifest is small, the local dev loop with <code>--plugin-dir</code> is fast, and the distribution story through a marketplace like AgentHub is two JSON files and a PR.</p>
+<p>The era where “build a developer tool” meant shipping an npm package, a binary, a VS Code extension, and a config schema at the same time isn’t over, but it’s contracting. Now you can ship a folder.</p>
+<p>If you end up building one, <a href="https://agenthub.nullorder.org">list it on AgentHub</a>. If you hit a wall, the AgentHub <a href="https://discord.gg/AJMEeFXxXy">Discord</a> is where the plugin authors hang out.</p>
+<p>Now go ship something.</p>
+<h3 id="references" tabindex="-1">References <a class="header-anchor" href="#references" aria-hidden="true">#</a></h3>
+<ul>
+<li><strong>Demo repo</strong> — <a href="https://github.com/anistark/claude-plugin-demo">anistark/claude-plugin-demo</a></li>
+<li><strong>Real plugin on AgentHub</strong> — <a href="https://github.com/anistark/ani-skills">anistark/ani-skills</a></li>
+<li><strong>AgentHub</strong> — <a href="https://agenthub.nullorder.org">agenthub.nullorder.org</a> · <a href="https://github.com/nullorder/agenthub">source</a> · <a href="https://github.com/nullorder/agenthub/blob/main/CONTRIBUTING.md">contributing guide</a></li>
+<li><strong>Official Claude Code plugin docs</strong> — <a href="https://code.claude.com/docs/en/plugins">Create plugins</a> · <a href="https://code.claude.com/docs/en/plugins-reference#plugin-manifest-schema">Manifest schema</a> · <a href="https://code.claude.com/docs/en/plugin-marketplaces">Marketplaces</a> · <a href="https://code.claude.com/docs/en/discover-plugins">Discover and install</a></li>
+<li><strong>Related reading</strong> — <a href="https://code.claude.com/docs/en/skills">Skills</a> · <a href="https://code.claude.com/docs/en/hooks">Hooks</a> · <a href="https://code.claude.com/docs/en/sub-agents">Subagents</a> · <a href="https://code.claude.com/docs/en/mcp">MCP</a></li>
+</ul>
+
+        </div>
+
+        <div class="article-end">
+            <span>✦</span>
+            <span>✦</span>
+            <span>✦</span>
+        </div>
+
+        <div class="post-navigation">
+            <div class="post-nav-item post-nav-previous">
+                    <a href="/n-reviewers-walk-into-a-pr/">
+                        <span class="nav-arrow">←</span>
+                        <div class="nav-content">
+                            <p class="nav-label">Previous</p>
+                            <p class="nav-title">N Reviewers Walk Into a PR...</p>
+                        </div>
+                    </a>
+                
+            </div>
+
+            <div class="post-nav-item post-nav-next">
+                    <a href="/controlled-chaos/">
+                        <div class="nav-content">
+                            <p class="nav-label">Next</p>
+                            <p class="nav-title">Controlled Chaos</p>
+                        </div>
+                        <span class="nav-arrow">→</span>
+                    </a>
+                
+            </div>
+        </div>
+    </div>
+
+    </main>
+    <footer class="sticky bottom-0 z-50 glass-footer py-4">
+  <div class="container mx-auto max-w-7xl px-8 flex items-center justify-between">
+    <div class="text-base">
+      by <a href="https://anirudha.dev" target="_blank" rel="noopener noreferrer">Ani</a>
+    </div>
+
+    <div class="flex items-center gap-4">
+      <a href="https://github.com/anistark" target="_blank" rel="noopener noreferrer" class="footer-icon" aria-label="GitHub">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="currentColor" viewBox="0 0 24 24">
+          <path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/>
+        </svg>
+      </a>
+      <a href="https://x.com/kranirudha" target="_blank" rel="noopener noreferrer" class="footer-icon" aria-label="X">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="currentColor" viewBox="0 0 24 24">
+          <path d="M14.234 10.162 22.977 0h-2.072l-7.591 8.824L7.251 0H.258l9.168 13.343L.258 24H2.33l8.016-9.318L16.749 24h6.993zm-2.837 3.299-.929-1.329L3.076 1.56h3.182l5.965 8.532.929 1.329 7.754 11.09h-3.182z"/>
+        </svg>
+      </a>
+      <a href="https://fosstodon.org/@ani" target="_blank" rel="noopener noreferrer" class="footer-icon" aria-label="Mastodon">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="currentColor" viewBox="0 0 24 24">
+          <path d="M23.268 5.313c-.35-2.578-2.617-4.61-5.304-5.004C17.51.242 15.792 0 11.813 0h-.03c-3.98 0-4.835.242-5.288.309C3.882.692 1.496 2.518.917 5.127.64 6.412.61 7.837.661 9.143c.074 1.874.088 3.745.26 5.611.118 1.24.325 2.47.62 3.68.55 2.237 2.777 4.098 4.96 4.857 2.336.792 4.849.923 7.256.38.265-.061.527-.132.786-.213.585-.184 1.27-.39 1.774-.753a.057.057 0 0 0 .023-.043v-1.809a.052.052 0 0 0-.02-.041.053.053 0 0 0-.046-.01 20.282 20.282 0 0 1-4.709.545c-2.73 0-3.463-1.284-3.674-1.818a5.593 5.593 0 0 1-.319-1.433.053.053 0 0 1 .066-.054c1.517.363 3.072.546 4.632.546.376 0 .75 0 1.125-.01 1.57-.044 3.224-.124 4.768-.422.038-.008.077-.015.11-.024 2.435-.464 4.753-1.92 4.989-5.604.008-.145.03-1.52.03-1.67.002-.512.167-3.63-.024-5.545zm-3.748 9.195h-2.561V8.29c0-1.309-.55-1.976-1.67-1.976-1.23 0-1.846.79-1.846 2.35v3.403h-2.546V8.663c0-1.56-.617-2.35-1.848-2.35-1.112 0-1.668.668-1.67 1.977v6.218H4.822V8.102c0-1.31.337-2.35 1.011-3.12.696-.77 1.608-1.164 2.74-1.164 1.311 0 2.302.5 2.962 1.498l.638 1.06.638-1.06c.66-.999 1.65-1.498 2.96-1.498 1.13 0 2.043.395 2.74 1.164.675.77 1.012 1.81 1.012 3.12z"/>
+        </svg>
+      </a>
+      <a href="https://linkedin.com/in/kranirudha" target="_blank" rel="noopener noreferrer" class="footer-icon" aria-label="LinkedIn">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="currentColor" viewBox="0 0 24 24">
+          <path d="M4.98 3.5c0 1.381-1.11 2.5-2.48 2.5s-2.48-1.119-2.48-2.5c0-1.38 1.11-2.5 2.48-2.5s2.48 1.12 2.48 2.5zm.02 4.5h-5v16h5v-16zm7.982 0h-4.968v16h4.969v-8.399c0-4.67 6.029-5.052 6.029 0v8.399h4.988v-10.131c0-7.88-8.922-7.593-11.018-3.714v-2.155z"/>
+        </svg>
+      </a>
+      <a href="/feed/feed.xml" class="footer-icon" aria-label="RSS feed">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="currentColor" viewBox="0 0 24 24">
+          <path d="M6.18 15.64a2.18 2.18 0 0 1 2.18 2.18C8.36 19 7.38 20 6.18 20C5 20 4 19 4 17.82a2.18 2.18 0 0 1 2.18-2.18M4 4.44A15.56 15.56 0 0 1 19.56 20h-2.83A12.73 12.73 0 0 0 4 7.27V4.44m0 5.66a9.9 9.9 0 0 1 9.9 9.9h-2.83A7.07 7.07 0 0 0 4 12.93V10.1Z"/>
+        </svg>
+      </a>
+    </div>
+  </div>
+</footer>
+
+    
+    <script src="https://unpkg.com/clipboard@2/dist/clipboard.min.js"></script>
+    <script src="/assets/main.bundle.js"></script>
+    <script type="module">
+      import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs';
+      mermaid.initialize({
+        startOnLoad: true,
+        theme: ['reading', 'beach'].includes(document.documentElement.getAttribute('data-theme')) ? 'default' : 'dark',
+        themeVariables: {
+          fontSize: '14px',
+        }
+      });
+    </script>
+  </body>
+</html>

@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    
+    <meta itemprop="name" content="Controlled Chaos | AniLog">
+    <meta itemprop="description" content="I&#39;ve a love hate relationship with rules. They give me a map, but they also draw the walls. This is about the thin, humming strip where structure and chaos learn to dance.">
+
+    
+    <meta name="twitter:title" content="Controlled Chaos | AniLog">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:description" content="I&#39;ve a love hate relationship with rules. They give me a map, but they also draw the walls. This is about the thin, humming strip where structure and chaos learn to dance.">
+    <meta name="twitter:site" content="@kranirudha">
+    <meta name="twitter:creator" content="@kranirudha">
+    <meta name="twitter:image:src" content="https://blog.anirudha.dev/images/posts/controlled-chaos.png">
+
+    
+    <meta name="og:title" content="Controlled Chaos | AniLog">
+    <meta name="og:description" content="I&#39;ve a love hate relationship with rules. They give me a map, but they also draw the walls. This is about the thin, humming strip where structure and chaos learn to dance.">
+    <meta name="og:image" content="https://blog.anirudha.dev/images/posts/controlled-chaos.png">
+    <meta name="og:url" content="https://blog.anirudha.dev/">
+    <meta name="og:site_name" content="AniLog">
+    <meta name="og:locale" content="en_GB">
+    <meta name="og:type" content="website">
+
+    <link rel="icon" type="image/png" href="/me.png" />
+    <link rel="alternate" type="application/atom+xml" title="AniLog" href="https://blog.anirudha.dev/feed/feed.xml" />
+
+    <title>Controlled Chaos | AniLog</title>
+
+    <link rel="stylesheet" href="/assets/main.bundle.css">
+
+    <script>
+      // Set theme before page renders to prevent flash
+      (function() {
+        const theme = localStorage.getItem('theme') || 'night';
+        if (theme !== 'night') {
+          document.documentElement.setAttribute('data-theme', theme);
+        }
+      })();
+    </script>
+
+    
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-YGZHVY9TD7"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-YGZHVY9TD7');
+    </script>
+    
+
+    
+  </head>
+  <body class="flex flex-col min-h-screen">
+    <canvas id="ambience-canvas"></canvas>
+    <header class="sticky top-0 z-50 glass-header">
+  <nav class="container mx-auto max-w-7xl px-8 py-3 flex flex-wrap items-center justify-between">
+    <div class="flex items-center gap-3">
+      <a href="/" class="flex items-center gap-3">
+        <img src="/ani.png" alt="AniLog logo" class="w-10 h-10 object-cover">
+        <h1 class="text-2xl leading-none m-0">AniLog</h1>
+      </a>
+    </div>
+
+    <div class="flex items-center gap-6">
+      <div class="theme-switcher">
+        <button id="theme-switcher-btn" class="theme-switcher-btn" aria-label="Switch theme" aria-expanded="false">
+          <span id="theme-active-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.985 12.486a9 9 0 1 1-9.473-9.472c.405-.022.617.46.402.803a6 6 0 0 0 8.268 8.268c.344-.215.825-.004.803.401"/></svg>
+          </span>
+        </button>
+        <div id="theme-dropdown" class="theme-dropdown">
+          <button class="theme-option" data-theme-value="night">
+            <span class="theme-icon"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.985 12.486a9 9 0 1 1-9.473-9.472c.405-.022.617.46.402.803a6 6 0 0 0 8.268 8.268c.344-.215.825-.004.803.401"/></svg></span>
+            <span>Night</span>
+          </button>
+          <button class="theme-option" data-theme-value="reading">
+            <span class="theme-icon"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 7v14"/><path d="M3 18a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h5a4 4 0 0 1 4 4 4 4 0 0 1 4-4h5a1 1 0 0 1 1 1v13a1 1 0 0 1-1 1h-6a3 3 0 0 0-3 3 3 3 0 0 0-3-3z"/></svg></span>
+            <span>Reading</span>
+          </button>
+          <button class="theme-option" data-theme-value="forest">
+            <span class="theme-icon"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m17 14 3 3.3a1 1 0 0 1-.7 1.7H4.7a1 1 0 0 1-.7-1.7L7 14h-.3a1 1 0 0 1-.7-1.7L9 9h-.2A1 1 0 0 1 8 7.3L12 3l4 4.3a1 1 0 0 1-.8 1.7H15l3 3.3a1 1 0 0 1-.7 1.7H17Z"/><path d="M12 22v-3"/></svg></span>
+            <span>Forest</span>
+          </button>
+          <button class="theme-option" data-theme-value="beach">
+            <span class="theme-icon"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 8c0-2.76-2.46-5-5.5-5S2 5.24 2 8h2l1-1 1 1h4"/><path d="M13 7.14A5.82 5.82 0 0 1 16.5 6c3.04 0 5.5 2.24 5.5 5h-3l-1-1-1 1h-3"/><path d="M5.89 9.71c-2.15 2.15-2.3 5.47-.35 7.43l4.24-4.25.7-.7.71-.71 2.12-2.12c-1.95-1.96-5.27-1.8-7.42.35"/><path d="M11 15.5c.5 2.5-.17 4.5-1 6.5h4c2-5.5-.5-12-1-14"/></svg></span>
+            <span>Beach</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </nav>
+</header>
+
+    <main class="container mx-auto max-w-6xl p-8 grow">
+      
+    <p></p>
+
+    
+        <div class="post-cover-image" style="background-image: url('/images/posts/controlled-chaos.png');"></div>
+    
+
+    <div>
+        <div class="post-title-row">
+            <h2>Controlled Chaos</h2>
+            
+        </div>
+
+        
+            <div class="mt-4 mb-2">
+                <a class="tag life" href="/tag/life">life</a><a class="tag theory" href="/tag/theory">theory</a><a class="tag chaos" href="/tag/chaos">chaos</a><a class="tag rules" href="/tag/rules">rules</a><a class="tag philosophy" href="/tag/philosophy">philosophy</a><a class="tag controlled-chaos" href="/tag/controlled-chaos">controlled-chaos</a>
+            </div>
+        
+
+        
+            
+                <p class="text-sm italic">Published on
+                    <span datetime="Sun Apr 26 2026 00:00:00 GMT+0000 (Coordinated Universal Time)">April 26, 2026</span>.
+                    <span class="reading-time"> · 6 min read</span></p>
+            
+        
+
+        <div class="content post">
+            <p>I’ve a love hate relationship with rules.</p>
+<p>They’re the scaffolding I trust when everything else feels unsure. The reason physics works, the reason code compiles, the reason trains arrive (<em>sometimes</em>). Rules take the infinite and give it a shape we can actually hold. They let us say <em>“if this, then that”</em> and sleep a little easier at night.</p>
+<p>But rules are also the quiet fences we stop noticing. They define what’s possible by also defining what isn’t. They tell a kid that gravity wins, that grades matter, that there’s a right way to hold a pen. And somewhere between “don’t touch the stove” and “don’t dream too big,” the fence becomes the cage.</p>
+<h3 id="the-rulebook-we-live-in" tabindex="-1">The Rulebook We Live In <a class="header-anchor" href="#the-rulebook-we-live-in" aria-hidden="true">#</a></h3>
+<p>Every field has a rulebook. Physics has laws. Society has norms. Art has forms. Even creativity has conventions, rhyme schemes, color theory, the three-act structure, the damned rule of thirds. We learn these because they’re genuinely useful. They compress a lifetime of someone else’s mistakes into a shortcut we can memorize in an afternoon.</p>
+<blockquote>
+<p><em>“Learn the rules like a pro, so you can break them like an artist.”</em></p>
+<p>– Pablo Picasso</p>
+</blockquote>
+<p>Picasso wasn’t being glib. He was pointing at a quiet truth, you can’t break what you don’t understand. A jazz musician who doesn’t know the chord changes isn’t improvising, they’re just confused. Rules are the grammar. Chaos without grammar is just noise.</p>
+<p>Think about it. The most iconic <em>rule-breakers</em> in any field were rule-masters first. Picasso painted like the old masters before he painted like Picasso. Miles Davis could play bebop in his sleep before he decided to stop playing it. Even the protagonists we cheer for, the rebels, the outcasts, the ones who “went their own way,” almost always begin by learning what everyone else already knew.</p>
+<h3 id="the-contradiction-we-celebrate" tabindex="-1">The Contradiction We Celebrate <a class="header-anchor" href="#the-contradiction-we-celebrate" aria-hidden="true">#</a></h3>
+<p>And yet, every motivational poster, every coach’s pep talk, every anime protagonist’s signature move tells us the opposite. <em>Go beyond your limits. Break the ceiling. Surpass yourself.</em></p>
+<blockquote>
+<p><em>“There is nothing impossible to him who will try.”</em></p>
+<p>– <a href="https://en.wikipedia.org/wiki/Alexander_the_Great" target="_blank" rel="noopener noreferrer">Alexander the Great</a></p>
+</blockquote>
+<blockquote>
+<p><em>“The only way to discover the limits of the possible is to go beyond them into the impossible.”</em></p>
+<p>– <a href="https://en.wikipedia.org/wiki/Arthur_C._Clarke" target="_blank" rel="noopener noreferrer">Arthur C. Clarke</a></p>
+</blockquote>
+<blockquote>
+<p><em>“Plus Ultra.”</em></p>
+<p>– All Might, <em><a href="https://en.wikipedia.org/wiki/My_Hero_Academia" target="_blank" rel="noopener noreferrer">My Hero Academia</a></em></p>
+</blockquote>
+<blockquote>
+<p><em>“One must still have chaos in oneself to be able to give birth to a dancing star.”</em></p>
+<p>– Friedrich Nietzsche</p>
+</blockquote>
+<p>There’s a strange cultural consensus here. We teach rules, then applaud the ones who transcend them. We build the box, then sell posters of people standing on top of it. <em>We love a rebel, but only after they’ve proved they knew the rules they were breaking.</em></p>
+<p>Maybe that’s the deal we’ve always had with ourselves. The rules exist so that breaking them means something. A boundary you don’t see isn’t a boundary you can cross. We need the fence to experience the leap.</p>
+<h3 id="chaos-as-the-impossible" tabindex="-1">Chaos as the Impossible <a class="header-anchor" href="#chaos-as-the-impossible" aria-hidden="true">#</a></h3>
+<p>If you define reality entirely through rules, chaos becomes the thing outside the map. The place where predictions fail, where equations diverge, where the next step can’t be computed from the last one. It’s as close to infinity as anything we can point at. Boundless, unbounded, a space of every path we didn’t take.</p>
+<p>In that framing, chaos feels impossible. Not impossible as in <em>won’t happen</em>, chaos happens all the time. Impossible as in <em>can’t be held</em>. You can’t parameterize the un-parameterizable. You can’t build a rule that contains every exception to itself.</p>
+<p>So for the rule-bound mind, chaos is the void. Something to be avoided, minimized, or at best, insured against. A wild horse you never really ride, just occasionally survive.</p>
+<h3 id="but-the-loop-has-to-close" tabindex="-1">But the Loop Has to Close <a class="header-anchor" href="#but-the-loop-has-to-close" aria-hidden="true">#</a></h3>
+<p>Here’s where I go slightly mathematical on you, so bear with me.</p>
+<p>In <a href="https://en.wikipedia.org/wiki/Ring_theory" target="_blank" rel="noopener noreferrer">ring theory</a>, you have a structure where operations loop back on themselves. Add enough, multiply enough, and you eventually land back where you started. The system is closed. The universe of possibilities is vast, but it’s not <em>endless</em>. It folds back into itself. Even infinity, in the right kind of ring, has a shape.</p>
+<p>I think the same is true of chaos. It <em>feels</em> unbounded, but it isn’t. It has <a href="https://en.wikipedia.org/wiki/Attractor" target="_blank" rel="noopener noreferrer">attractors</a>, <a href="https://en.wikipedia.org/wiki/Fractal_dimension" target="_blank" rel="noopener noreferrer">fractal dimensions</a>, <a href="https://en.wikipedia.org/wiki/Strange_loop" target="_blank" rel="noopener noreferrer">strange loops</a>. The <a href="https://en.wikipedia.org/wiki/Lorenz_system" target="_blank" rel="noopener noreferrer">Lorenz attractor</a> doesn’t fly off into nothing. It wanders forever inside a shape that fits on a page. Chaos is wild, but it’s not lawless. It’s just following a deeper kind of rule we haven’t finished writing down yet.</p>
+<p>Which means chaos isn’t impossible. It’s just <em>under-described</em>. It’s a system whose rules we haven’t articulated yet, not a system without rules at all.</p>
+<blockquote>
+<p><em>“In the midst of chaos, there is also opportunity.”</em></p>
+<p>– Sun Tzu</p>
+</blockquote>
+<p>This reframing changes everything. If chaos has shape, then entering it isn’t a leap into nothing. It’s a matter of how you enter.</p>
+<h3 id="the-right-pace.-the-right-angle." tabindex="-1">The Right Pace. The Right Angle. <a class="header-anchor" href="#the-right-pace.-the-right-angle." aria-hidden="true">#</a></h3>
+<p>Think of a skater entering a curve. A surfer dropping in on a wave. A climber reading a route before committing to it. None of them fight the physics. They find the line.</p>
+<p>The right pace is the one that doesn’t exhaust you before the system teaches you anything. Too slow and the chaos passes you by. Too fast and it eats you. The right angle is the one where the rule and the deviation meet. Where you’re structured enough to stay alive and loose enough to learn something the rulebook didn’t know.</p>
+<blockquote>
+<p><em>“Empty your mind. Be formless, shapeless, like water. Water can flow, or it can crash. Be water, my friend.”</em></p>
+<p>– Bruce Lee</p>
+</blockquote>
+<p><em>This is the bit I keep relearning.</em> Every time I’ve tried to force a creative project on pure discipline, it’s come out sterile. Every time I’ve let it run on pure intuition, it’s fallen apart before the finish. The work that actually moves has always come from the narrow band between. A skeleton rigid enough to stand, a skin loose enough to breathe.</p>
+<h3 id="controlled-chaos" tabindex="-1">Controlled Chaos <a class="header-anchor" href="#controlled-chaos" aria-hidden="true">#</a></h3>
+<p>So that’s the place I want to live. Not order. Not chaos. The thin, humming strip where the two negotiate.</p>
+<p>Controlled chaos isn’t a compromise. It isn’t chaos with training wheels. It’s chaos with <em>consent</em>. A system that knows its rules well enough to choose which ones to bend, and knows itself well enough to catch the fall.</p>
+<p>It’s the jazz soloist who knows the key. The scientist who knows when to trust the outlier. The engineer who ships the messy version on purpose because the clean version would ship too late. The writer who knows grammar cold and then ends a sentence with a preposition just because it sounds better that way.</p>
+<blockquote>
+<p><em>“Out of clutter, find simplicity. From discord, find harmony. In the middle of difficulty lies opportunity.”</em></p>
+<p>– Albert Einstein</p>
+</blockquote>
+<p>Rules alone give you a cathedral that never gets built because the drawings are still being revised. Chaos alone gives you a bonfire that warms nobody because nobody knows where to stand. Controlled chaos is the workshop. Loud, half-finished, occasionally on fire, but <em>making things</em>.</p>
+<p>The best teams I’ve worked on live here. Enough process to not lose the plot, enough slack to notice when the plot needed changing. The best code I’ve written lives here too. Patterns held close enough to trust, broken sharply enough to matter.</p>
+<p>I still have my love-hate relationship with rules. But I think I’ve made peace with the hate part. Rules are the spine. Chaos is the stretch. And the life I’m trying to live sits somewhere between a theorem and a dare.</p>
+<p><em>Find the pace. Find the angle. Break the rule on purpose, not by accident.</em></p>
+
+        </div>
+
+        <div class="article-end">
+            <span>✦</span>
+            <span>✦</span>
+            <span>✦</span>
+        </div>
+
+        <div class="post-navigation">
+            <div class="post-nav-item post-nav-previous">
+                    <a href="/claude-plugin-getting-started/">
+                        <span class="nav-arrow">←</span>
+                        <div class="nav-content">
+                            <p class="nav-label">Previous</p>
+                            <p class="nav-title">Writing Your Own Claude Plugin and Shipping it to the World</p>
+                        </div>
+                    </a>
+                
+            </div>
+
+            <div class="post-nav-item post-nav-next">
+            </div>
+        </div>
+    </div>
+
+    </main>
+    <footer class="sticky bottom-0 z-50 glass-footer py-4">
+  <div class="container mx-auto max-w-7xl px-8 flex items-center justify-between">
+    <div class="text-base">
+      by <a href="https://anirudha.dev" target="_blank" rel="noopener noreferrer">Ani</a>
+    </div>
+
+    <div class="flex items-center gap-4">
+      <a href="https://github.com/anistark" target="_blank" rel="noopener noreferrer" class="footer-icon" aria-label="GitHub">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="currentColor" viewBox="0 0 24 24">
+          <path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/>
+        </svg>
+      </a>
+      <a href="https://x.com/kranirudha" target="_blank" rel="noopener noreferrer" class="footer-icon" aria-label="X">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="currentColor" viewBox="0 0 24 24">
+          <path d="M14.234 10.162 22.977 0h-2.072l-7.591 8.824L7.251 0H.258l9.168 13.343L.258 24H2.33l8.016-9.318L16.749 24h6.993zm-2.837 3.299-.929-1.329L3.076 1.56h3.182l5.965 8.532.929 1.329 7.754 11.09h-3.182z"/>
+        </svg>
+      </a>
+      <a href="https://fosstodon.org/@ani" target="_blank" rel="noopener noreferrer" class="footer-icon" aria-label="Mastodon">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="currentColor" viewBox="0 0 24 24">
+          <path d="M23.268 5.313c-.35-2.578-2.617-4.61-5.304-5.004C17.51.242 15.792 0 11.813 0h-.03c-3.98 0-4.835.242-5.288.309C3.882.692 1.496 2.518.917 5.127.64 6.412.61 7.837.661 9.143c.074 1.874.088 3.745.26 5.611.118 1.24.325 2.47.62 3.68.55 2.237 2.777 4.098 4.96 4.857 2.336.792 4.849.923 7.256.38.265-.061.527-.132.786-.213.585-.184 1.27-.39 1.774-.753a.057.057 0 0 0 .023-.043v-1.809a.052.052 0 0 0-.02-.041.053.053 0 0 0-.046-.01 20.282 20.282 0 0 1-4.709.545c-2.73 0-3.463-1.284-3.674-1.818a5.593 5.593 0 0 1-.319-1.433.053.053 0 0 1 .066-.054c1.517.363 3.072.546 4.632.546.376 0 .75 0 1.125-.01 1.57-.044 3.224-.124 4.768-.422.038-.008.077-.015.11-.024 2.435-.464 4.753-1.92 4.989-5.604.008-.145.03-1.52.03-1.67.002-.512.167-3.63-.024-5.545zm-3.748 9.195h-2.561V8.29c0-1.309-.55-1.976-1.67-1.976-1.23 0-1.846.79-1.846 2.35v3.403h-2.546V8.663c0-1.56-.617-2.35-1.848-2.35-1.112 0-1.668.668-1.67 1.977v6.218H4.822V8.102c0-1.31.337-2.35 1.011-3.12.696-.77 1.608-1.164 2.74-1.164 1.311 0 2.302.5 2.962 1.498l.638 1.06.638-1.06c.66-.999 1.65-1.498 2.96-1.498 1.13 0 2.043.395 2.74 1.164.675.77 1.012 1.81 1.012 3.12z"/>
+        </svg>
+      </a>
+      <a href="https://linkedin.com/in/kranirudha" target="_blank" rel="noopener noreferrer" class="footer-icon" aria-label="LinkedIn">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="currentColor" viewBox="0 0 24 24">
+          <path d="M4.98 3.5c0 1.381-1.11 2.5-2.48 2.5s-2.48-1.119-2.48-2.5c0-1.38 1.11-2.5 2.48-2.5s2.48 1.12 2.48 2.5zm.02 4.5h-5v16h5v-16zm7.982 0h-4.968v16h4.969v-8.399c0-4.67 6.029-5.052 6.029 0v8.399h4.988v-10.131c0-7.88-8.922-7.593-11.018-3.714v-2.155z"/>
+        </svg>
+      </a>
+      <a href="/feed/feed.xml" class="footer-icon" aria-label="RSS feed">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="currentColor" viewBox="0 0 24 24">
+          <path d="M6.18 15.64a2.18 2.18 0 0 1 2.18 2.18C8.36 19 7.38 20 6.18 20C5 20 4 19 4 17.82a2.18 2.18 0 0 1 2.18-2.18M4 4.44A15.56 15.56 0 0 1 19.56 20h-2.83A12.73 12.73 0 0 0 4 7.27V4.44m0 5.66a9.9 9.9 0 0 1 9.9 9.9h-2.83A7.07 7.07 0 0 0 4 12.93V10.1Z"/>
+        </svg>
+      </a>
+    </div>
+  </div>
+</footer>
+
+    
+    <script src="https://unpkg.com/clipboard@2/dist/clipboard.min.js"></script>
+    <script src="/assets/main.bundle.js"></script>
+    <script type="module">
+      import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs';
+      mermaid.initialize({
+        startOnLoad: true,
+        theme: ['reading', 'beach'].includes(document.documentElement.getAttribute('data-theme')) ? 'default' : 'dark',
+        themeVariables: {
+          fontSize: '14px',
+        }
+      });
+    </script>
+  </body>
+</html>

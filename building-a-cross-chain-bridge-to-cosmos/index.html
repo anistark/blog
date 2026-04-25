@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    
+    <meta itemprop="name" content="Building a Cross-Chain Bridge to Cosmos | AniLog">
+    <meta itemprop="description" content="In [**Part 1**](https://blog.anirudha.dev/building-a-cross-chain-bridge), we built a **LayerZero-powered bridge** for moving NFTs between **two EVM chains**. But what if we want to **bridge an NFT from Ethereum to Cosmos** (e.g., [Osmosis](https://osmosis.zone/), [Juno](https://junonetwork.io/), or [Stargaze](https://www.stargaze.zone/))?">
+
+    
+    <meta name="twitter:title" content="Building a Cross-Chain Bridge to Cosmos | AniLog">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:description" content="In [**Part 1**](https://blog.anirudha.dev/building-a-cross-chain-bridge), we built a **LayerZero-powered bridge** for moving NFTs between **two EVM chains**. But what if we want to **bridge an NFT from Ethereum to Cosmos** (e.g., [Osmosis](https://osmosis.zone/), [Juno](https://junonetwork.io/), or [Stargaze](https://www.stargaze.zone/))?">
+    <meta name="twitter:site" content="@kranirudha">
+    <meta name="twitter:creator" content="@kranirudha">
+    <meta name="twitter:image:src" content="https://blog.anirudha.dev/images/posts/f2a8b867-b63b-471f-a173-e294fd9adb49.png">
+
+    
+    <meta name="og:title" content="Building a Cross-Chain Bridge to Cosmos | AniLog">
+    <meta name="og:description" content="In [**Part 1**](https://blog.anirudha.dev/building-a-cross-chain-bridge), we built a **LayerZero-powered bridge** for moving NFTs between **two EVM chains**. But what if we want to **bridge an NFT from Ethereum to Cosmos** (e.g., [Osmosis](https://osmosis.zone/), [Juno](https://junonetwork.io/), or [Stargaze](https://www.stargaze.zone/))?">
+    <meta name="og:image" content="https://blog.anirudha.dev/images/posts/f2a8b867-b63b-471f-a173-e294fd9adb49.png">
+    <meta name="og:url" content="https://blog.anirudha.dev/">
+    <meta name="og:site_name" content="AniLog">
+    <meta name="og:locale" content="en_GB">
+    <meta name="og:type" content="website">
+
+    <link rel="icon" type="image/png" href="/me.png" />
+    <link rel="alternate" type="application/atom+xml" title="AniLog" href="https://blog.anirudha.dev/feed/feed.xml" />
+
+    <title>Building a Cross-Chain Bridge to Cosmos | AniLog</title>
+
+    <link rel="stylesheet" href="/assets/main.bundle.css">
+
+    <script>
+      // Set theme before page renders to prevent flash
+      (function() {
+        const theme = localStorage.getItem('theme') || 'night';
+        if (theme !== 'night') {
+          document.documentElement.setAttribute('data-theme', theme);
+        }
+      })();
+    </script>
+
+    
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-YGZHVY9TD7"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-YGZHVY9TD7');
+    </script>
+    
+
+    
+  </head>
+  <body class="flex flex-col min-h-screen">
+    <canvas id="ambience-canvas"></canvas>
+    <header class="sticky top-0 z-50 glass-header">
+  <nav class="container mx-auto max-w-7xl px-8 py-3 flex flex-wrap items-center justify-between">
+    <div class="flex items-center gap-3">
+      <a href="/" class="flex items-center gap-3">
+        <img src="/ani.png" alt="AniLog logo" class="w-10 h-10 object-cover">
+        <h1 class="text-2xl leading-none m-0">AniLog</h1>
+      </a>
+    </div>
+
+    <div class="flex items-center gap-6">
+      <div class="theme-switcher">
+        <button id="theme-switcher-btn" class="theme-switcher-btn" aria-label="Switch theme" aria-expanded="false">
+          <span id="theme-active-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.985 12.486a9 9 0 1 1-9.473-9.472c.405-.022.617.46.402.803a6 6 0 0 0 8.268 8.268c.344-.215.825-.004.803.401"/></svg>
+          </span>
+        </button>
+        <div id="theme-dropdown" class="theme-dropdown">
+          <button class="theme-option" data-theme-value="night">
+            <span class="theme-icon"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.985 12.486a9 9 0 1 1-9.473-9.472c.405-.022.617.46.402.803a6 6 0 0 0 8.268 8.268c.344-.215.825-.004.803.401"/></svg></span>
+            <span>Night</span>
+          </button>
+          <button class="theme-option" data-theme-value="reading">
+            <span class="theme-icon"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 7v14"/><path d="M3 18a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h5a4 4 0 0 1 4 4 4 4 0 0 1 4-4h5a1 1 0 0 1 1 1v13a1 1 0 0 1-1 1h-6a3 3 0 0 0-3 3 3 3 0 0 0-3-3z"/></svg></span>
+            <span>Reading</span>
+          </button>
+          <button class="theme-option" data-theme-value="forest">
+            <span class="theme-icon"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m17 14 3 3.3a1 1 0 0 1-.7 1.7H4.7a1 1 0 0 1-.7-1.7L7 14h-.3a1 1 0 0 1-.7-1.7L9 9h-.2A1 1 0 0 1 8 7.3L12 3l4 4.3a1 1 0 0 1-.8 1.7H15l3 3.3a1 1 0 0 1-.7 1.7H17Z"/><path d="M12 22v-3"/></svg></span>
+            <span>Forest</span>
+          </button>
+          <button class="theme-option" data-theme-value="beach">
+            <span class="theme-icon"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 8c0-2.76-2.46-5-5.5-5S2 5.24 2 8h2l1-1 1 1h4"/><path d="M13 7.14A5.82 5.82 0 0 1 16.5 6c3.04 0 5.5 2.24 5.5 5h-3l-1-1-1 1h-3"/><path d="M5.89 9.71c-2.15 2.15-2.3 5.47-.35 7.43l4.24-4.25.7-.7.71-.71 2.12-2.12c-1.95-1.96-5.27-1.8-7.42.35"/><path d="M11 15.5c.5 2.5-.17 4.5-1 6.5h4c2-5.5-.5-12-1-14"/></svg></span>
+            <span>Beach</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </nav>
+</header>
+
+    <main class="container mx-auto max-w-6xl p-8 grow">
+      
+    <p></p>
+
+    
+        <div class="post-cover-image" style="background-image: url('/images/posts/f2a8b867-b63b-471f-a173-e294fd9adb49.png');"></div>
+    
+
+    <div>
+        <div class="post-title-row">
+            <h2>Building a Cross-Chain Bridge to Cosmos</h2>
+            
+        </div>
+
+        
+            <div class="mt-4 mb-2">
+                <a class="tag abstraction" href="/tag/abstraction">abstraction</a><a class="tag interoperability" href="/tag/interoperability">interoperability</a><a class="tag web3" href="/tag/web3">web3</a><a class="tag cross-chain" href="/tag/cross-chain">cross-chain</a><a class="tag evm" href="/tag/evm">evm</a><a class="tag nft" href="/tag/nft">nft</a><a class="tag cosmos" href="/tag/cosmos">cosmos</a><a class="tag bridge" href="/tag/bridge">bridge</a>
+            </div>
+        
+
+        
+            
+                <p class="text-sm italic">Published on
+                    <span datetime="Thu Feb 13 2025 00:00:00 GMT+0000 (Coordinated Universal Time)">February 13, 2025</span>.
+                    <span class="reading-time"> · 7 min read</span></p>
+            
+        
+
+        <div class="content post">
+            <p>In <a href="https://blog.anirudha.dev/building-a-cross-chain-bridge"><strong>Part 1</strong></a>, we built a <strong>LayerZero-powered bridge</strong> for moving NFTs between <strong>two EVM chains</strong>. But what if we want to <strong>bridge an NFT from Ethereum to Cosmos</strong> (e.g., <a href="https://osmosis.zone/">Osmosis</a>, <a href="https://junonetwork.io/">Juno</a>, or <a href="https://www.stargaze.zone/">Stargaze</a>)?</p>
+<p>For this, let’s go with the setup:</p>
+<ul>
+<li>
+<p><strong>LayerZero on the EVM side</strong> (Ethereum, Base, Polygon, etc.)</p>
+</li>
+<li>
+<p><strong>IBC (Inter-Blockchain Communication)</strong> on the Cosmos side</p>
+</li>
+</ul>
+<h3 id="so%2C-what-are-we-doing%3F" tabindex="-1"><strong>So, what are we doing?</strong> <a class="header-anchor" href="#so%2C-what-are-we-doing%3F" aria-hidden="true">#</a></h3>
+<ol>
+<li>
+<p><strong>EVM Side (Solidity)</strong></p>
+<ul>
+<li>
+<p>Locks the NFT in a Solidity contract</p>
+</li>
+<li>
+<p>Sends a message to the Cosmos chain using LayerZero</p>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>Cosmos Side (Rust-CosmWasm)</strong></p>
+<ul>
+<li>
+<p>Receives the message via an IBC contract</p>
+</li>
+<li>
+<p>Mints a wrapped NFT on the Cosmos chain</p>
+</li>
+</ul>
+</li>
+</ol>
+<p>Similarly, when transferring back:</p>
+<ol>
+<li>
+<p><strong>Burn wrapped NFT on Cosmos</strong></p>
+</li>
+<li>
+<p><strong>Send an IBC message to Ethereum</strong></p>
+</li>
+<li>
+<p><strong>Unlock the original NFT on Ethereum</strong></p>
+</li>
+</ol>
+<p>We’ll extend our previous <code>BridgeA.sol</code> to support <strong>sending messages to Cosmos</strong> via <strong>LayerZero</strong>.</p>
+<code-block lang="solidity"><pre class="language-solidity"><code class="language-solidity"><span class="token comment">// SPDX-License-Identifier: MIT</span><br><span class="token keyword">pragma</span> <span class="token keyword">solidity</span> <span class="token operator">^</span><span class="token version number">0.8.19</span><span class="token punctuation">;</span><br><br><span class="token keyword">import</span> <span class="token string">"@openzeppelin/contracts/token/ERC721/ERC721.sol"</span><span class="token punctuation">;</span><br><span class="token keyword">import</span> <span class="token string">"@layerzerolabs/solidity-examples/contracts/lzApp/NonblockingLzApp.sol"</span><span class="token punctuation">;</span><br><br><span class="token keyword">contract</span> <span class="token class-name">EVMCosmosBridge</span> <span class="token keyword">is</span> NonblockingLzApp <span class="token punctuation">{</span><br>    ERC721 <span class="token keyword">public</span> nft<span class="token punctuation">;</span><br>    <span class="token builtin">address</span> <span class="token keyword">public</span> admin<span class="token punctuation">;</span><br><br>    <span class="token keyword">event</span> <span class="token function">NFTLocked</span><span class="token punctuation">(</span><span class="token builtin">address</span> <span class="token keyword">indexed</span> user<span class="token punctuation">,</span> <span class="token builtin">uint256</span> tokenId<span class="token punctuation">)</span><span class="token punctuation">;</span><br><br>    <span class="token keyword">constructor</span><span class="token punctuation">(</span><span class="token builtin">address</span> _nft<span class="token punctuation">,</span> <span class="token builtin">address</span> _lzEndpoint<span class="token punctuation">)</span> <span class="token function">NonblockingLzApp</span><span class="token punctuation">(</span>_lzEndpoint<span class="token punctuation">)</span> <span class="token punctuation">{</span><br>        admin <span class="token operator">=</span> msg<span class="token punctuation">.</span>sender<span class="token punctuation">;</span><br>        nft <span class="token operator">=</span> <span class="token function">ERC721</span><span class="token punctuation">(</span>_nft<span class="token punctuation">)</span><span class="token punctuation">;</span><br>    <span class="token punctuation">}</span><br><br>    <span class="token keyword">function</span> <span class="token function">lockNFT</span><span class="token punctuation">(</span><span class="token builtin">uint256</span> tokenId<span class="token punctuation">,</span> <span class="token builtin">uint16</span> destChainId<span class="token punctuation">,</span> <span class="token builtin">bytes</span> <span class="token keyword">memory</span> receiver<span class="token punctuation">)</span> <span class="token keyword">external</span> <span class="token keyword">payable</span> <span class="token punctuation">{</span><br>        <span class="token keyword">require</span><span class="token punctuation">(</span>nft<span class="token punctuation">.</span><span class="token function">ownerOf</span><span class="token punctuation">(</span>tokenId<span class="token punctuation">)</span> <span class="token operator">==</span> msg<span class="token punctuation">.</span>sender<span class="token punctuation">,</span> <span class="token string">"Not NFT owner"</span><span class="token punctuation">)</span><span class="token punctuation">;</span><br><br>        <span class="token comment">// Transfer NFT to the contract</span><br>        nft<span class="token punctuation">.</span><span class="token function">transferFrom</span><span class="token punctuation">(</span>msg<span class="token punctuation">.</span>sender<span class="token punctuation">,</span> <span class="token builtin">address</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">)</span><span class="token punctuation">,</span> tokenId<span class="token punctuation">)</span><span class="token punctuation">;</span><br><br>        <span class="token comment">// Encode user + token ID to send to Cosmos</span><br>        <span class="token builtin">bytes</span> <span class="token keyword">memory</span> payload <span class="token operator">=</span> abi<span class="token punctuation">.</span><span class="token function">encode</span><span class="token punctuation">(</span>msg<span class="token punctuation">.</span>sender<span class="token punctuation">,</span> tokenId<span class="token punctuation">)</span><span class="token punctuation">;</span><br><br>        <span class="token comment">// Send message to Cosmos via LayerZero</span><br>        <span class="token function">_lzSend</span><span class="token punctuation">(</span>destChainId<span class="token punctuation">,</span> payload<span class="token punctuation">,</span> <span class="token keyword">payable</span><span class="token punctuation">(</span>msg<span class="token punctuation">.</span>sender<span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token builtin">address</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token builtin">bytes</span><span class="token punctuation">(</span><span class="token string">""</span><span class="token punctuation">)</span><span class="token punctuation">,</span> msg<span class="token punctuation">.</span>value<span class="token punctuation">)</span><span class="token punctuation">;</span><br><br>        <span class="token keyword">emit</span> <span class="token function">NFTLocked</span><span class="token punctuation">(</span>msg<span class="token punctuation">.</span>sender<span class="token punctuation">,</span> tokenId<span class="token punctuation">)</span><span class="token punctuation">;</span><br>    <span class="token punctuation">}</span><br><br>    <span class="token keyword">function</span> <span class="token function">_nonblockingLzReceive</span><span class="token punctuation">(</span><span class="token builtin">uint16</span><span class="token punctuation">,</span> <span class="token builtin">bytes</span> <span class="token keyword">memory</span><span class="token punctuation">,</span> <span class="token builtin">uint64</span><span class="token punctuation">,</span> <span class="token builtin">bytes</span> <span class="token keyword">memory</span> payload<span class="token punctuation">)</span> <span class="token keyword">internal</span> override <span class="token punctuation">{</span><br>        <span class="token punctuation">(</span><span class="token builtin">address</span> user<span class="token punctuation">,</span> <span class="token builtin">uint256</span> tokenId<span class="token punctuation">)</span> <span class="token operator">=</span> abi<span class="token punctuation">.</span><span class="token function">decode</span><span class="token punctuation">(</span>payload<span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token builtin">address</span><span class="token punctuation">,</span> <span class="token builtin">uint256</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span><br><br>        <span class="token comment">// Unlock NFT on EVM when receiving from Cosmos</span><br>        nft<span class="token punctuation">.</span><span class="token function">transferFrom</span><span class="token punctuation">(</span><span class="token builtin">address</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">)</span><span class="token punctuation">,</span> user<span class="token punctuation">,</span> tokenId<span class="token punctuation">)</span><span class="token punctuation">;</span><br>    <span class="token punctuation">}</span><br><span class="token punctuation">}</span></code></pre>
+</code-block><p>So, what’s happening here?</p>
+<ol>
+<li>
+<p>The user initiates the process by calling the <code>lockNFT(tokenId, destChainId, receiver)</code> function. This function requires the user to specify the token ID of the NFT they want to lock, the destination chain ID where the NFT will be sent, and the receiver’s address on the destination chain.</p>
+</li>
+<li>
+<p>Once the function is called, the specified NFT is <strong>transferred to the smart contract</strong> and effectively <strong>locked</strong> within it. This means the user no longer has direct control over the NFT, as it is held securely by the contract.</p>
+</li>
+<li>
+<p>After locking the NFT, a <strong>LayerZero message</strong> is created and sent to the Cosmos contract. This message contains encoded information about the user and the token ID, allowing the Cosmos network to understand which NFT is being transferred and who it belongs to.</p>
+</li>
+<li>
+<p>Upon receiving the message, the Cosmos contract processes it and <strong>mints a wrapped NFT</strong> for the user. This wrapped NFT represents the original NFT on the Cosmos network, allowing the user to interact with it as if it were the original NFT, while the real NFT remains locked in the EVM contract.</p>
+</li>
+</ol>
+<p>Now, lets move to cosmos side. We need to receive IBC messages from Ethereum, mints a <strong>wrapped NFT, and finally</strong> burn the wrapped NFT when sending back to Ethereum.</p>
+<code-block lang="rust"><pre class="language-rust"><code class="language-rust"><span class="token keyword">use</span> <span class="token namespace">cosmwasm_std<span class="token punctuation">::</span></span><span class="token punctuation">{</span><br>    entry_point<span class="token punctuation">,</span> to_binary<span class="token punctuation">,</span> <span class="token class-name">Binary</span><span class="token punctuation">,</span> <span class="token class-name">Deps</span><span class="token punctuation">,</span> <span class="token class-name">DepsMut</span><span class="token punctuation">,</span> <span class="token class-name">Env</span><span class="token punctuation">,</span> <span class="token class-name">MessageInfo</span><span class="token punctuation">,</span> <span class="token class-name">Response</span><span class="token punctuation">,</span> <span class="token class-name">StdResult</span><span class="token punctuation">,</span> <span class="token class-name">SubMsg</span><span class="token punctuation">,</span> <span class="token class-name">WasmMsg</span><span class="token punctuation">,</span><br><span class="token punctuation">}</span><span class="token punctuation">;</span><br><span class="token keyword">use</span> <span class="token namespace">cw721<span class="token punctuation">::</span></span><span class="token punctuation">{</span><span class="token class-name">Cw721ExecuteMsg</span><span class="token punctuation">,</span> <span class="token class-name">MintMsg</span><span class="token punctuation">}</span><span class="token punctuation">;</span><br><span class="token keyword">use</span> <span class="token keyword">crate</span><span class="token module-declaration namespace"><span class="token punctuation">::</span>msg<span class="token punctuation">::</span></span><span class="token punctuation">{</span><span class="token class-name">ExecuteMsg</span><span class="token punctuation">,</span> <span class="token class-name">InstantiateMsg</span><span class="token punctuation">}</span><span class="token punctuation">;</span><br><br><span class="token comment">// NFT Bridge Contract</span><br><span class="token attribute attr-name">#[entry_point]</span><br><span class="token keyword">pub</span> <span class="token keyword">fn</span> <span class="token function-definition function">instantiate</span><span class="token punctuation">(</span><br>    deps<span class="token punctuation">:</span> <span class="token class-name">DepsMut</span><span class="token punctuation">,</span><br>    _env<span class="token punctuation">:</span> <span class="token class-name">Env</span><span class="token punctuation">,</span><br>    _info<span class="token punctuation">:</span> <span class="token class-name">MessageInfo</span><span class="token punctuation">,</span><br>    msg<span class="token punctuation">:</span> <span class="token class-name">InstantiateMsg</span><span class="token punctuation">,</span><br><span class="token punctuation">)</span> <span class="token punctuation">-></span> <span class="token class-name">StdResult</span><span class="token operator">&lt;</span><span class="token class-name">Response</span><span class="token operator">></span> <span class="token punctuation">{</span><br>    <span class="token comment">// Store NFT contract address in state</span><br>    <span class="token keyword">let</span> state <span class="token operator">=</span> <span class="token class-name">State</span> <span class="token punctuation">{</span> nft_contract<span class="token punctuation">:</span> msg<span class="token punctuation">.</span>nft_contract <span class="token punctuation">}</span><span class="token punctuation">;</span><br>    <span class="token constant">CONFIG</span><span class="token punctuation">.</span><span class="token function">save</span><span class="token punctuation">(</span>deps<span class="token punctuation">.</span>storage<span class="token punctuation">,</span> <span class="token operator">&amp;</span>state<span class="token punctuation">)</span><span class="token operator">?</span><span class="token punctuation">;</span><br><br>    <span class="token class-name">Ok</span><span class="token punctuation">(</span><span class="token class-name">Response</span><span class="token punctuation">::</span><span class="token function">new</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><br><span class="token punctuation">}</span><br><br><span class="token attribute attr-name">#[entry_point]</span><br><span class="token keyword">pub</span> <span class="token keyword">fn</span> <span class="token function-definition function">execute</span><span class="token punctuation">(</span><br>    deps<span class="token punctuation">:</span> <span class="token class-name">DepsMut</span><span class="token punctuation">,</span><br>    env<span class="token punctuation">:</span> <span class="token class-name">Env</span><span class="token punctuation">,</span><br>    info<span class="token punctuation">:</span> <span class="token class-name">MessageInfo</span><span class="token punctuation">,</span><br>    msg<span class="token punctuation">:</span> <span class="token class-name">ExecuteMsg</span><span class="token punctuation">,</span><br><span class="token punctuation">)</span> <span class="token punctuation">-></span> <span class="token class-name">StdResult</span><span class="token operator">&lt;</span><span class="token class-name">Response</span><span class="token operator">></span> <span class="token punctuation">{</span><br>    <span class="token keyword">match</span> msg <span class="token punctuation">{</span><br>        <span class="token class-name">ExecuteMsg</span><span class="token punctuation">::</span><span class="token class-name">ReceiveNFT</span> <span class="token punctuation">{</span> sender<span class="token punctuation">,</span> token_id <span class="token punctuation">}</span> <span class="token operator">=></span> <span class="token function">receive_nft</span><span class="token punctuation">(</span>deps<span class="token punctuation">,</span> env<span class="token punctuation">,</span> sender<span class="token punctuation">,</span> token_id<span class="token punctuation">)</span><span class="token punctuation">,</span><br>        <span class="token class-name">ExecuteMsg</span><span class="token punctuation">::</span><span class="token class-name">BurnAndSend</span> <span class="token punctuation">{</span> token_id<span class="token punctuation">,</span> dest_chain_id <span class="token punctuation">}</span> <span class="token operator">=></span> <span class="token function">burn_and_send</span><span class="token punctuation">(</span>deps<span class="token punctuation">,</span> env<span class="token punctuation">,</span> info<span class="token punctuation">,</span> token_id<span class="token punctuation">,</span> dest_chain_id<span class="token punctuation">)</span><span class="token punctuation">,</span><br>    <span class="token punctuation">}</span><br><span class="token punctuation">}</span><br><br><span class="token comment">// Receive NFT from Ethereum</span><br><span class="token keyword">fn</span> <span class="token function-definition function">receive_nft</span><span class="token punctuation">(</span>deps<span class="token punctuation">:</span> <span class="token class-name">DepsMut</span><span class="token punctuation">,</span> env<span class="token punctuation">:</span> <span class="token class-name">Env</span><span class="token punctuation">,</span> sender<span class="token punctuation">:</span> <span class="token class-name">String</span><span class="token punctuation">,</span> token_id<span class="token punctuation">:</span> <span class="token class-name">String</span><span class="token punctuation">)</span> <span class="token punctuation">-></span> <span class="token class-name">StdResult</span><span class="token operator">&lt;</span><span class="token class-name">Response</span><span class="token operator">></span> <span class="token punctuation">{</span><br>    <span class="token keyword">let</span> state <span class="token operator">=</span> <span class="token constant">CONFIG</span><span class="token punctuation">.</span><span class="token function">load</span><span class="token punctuation">(</span>deps<span class="token punctuation">.</span>storage<span class="token punctuation">)</span><span class="token operator">?</span><span class="token punctuation">;</span><br><br>    <span class="token keyword">let</span> mint_msg <span class="token operator">=</span> <span class="token class-name">WasmMsg</span><span class="token punctuation">::</span><span class="token class-name">Execute</span> <span class="token punctuation">{</span><br>        contract_addr<span class="token punctuation">:</span> state<span class="token punctuation">.</span>nft_contract<span class="token punctuation">.</span><span class="token function">clone</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span><br>        msg<span class="token punctuation">:</span> <span class="token function">to_binary</span><span class="token punctuation">(</span><span class="token operator">&amp;</span><span class="token class-name">Cw721ExecuteMsg</span><span class="token punctuation">::</span><span class="token class-name">Mint</span><span class="token punctuation">(</span><span class="token class-name">MintMsg</span> <span class="token punctuation">{</span><br>            token_id<span class="token punctuation">:</span> token_id<span class="token punctuation">.</span><span class="token function">clone</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span><br>            owner<span class="token punctuation">:</span> sender<span class="token punctuation">.</span><span class="token function">clone</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span><br>            token_uri<span class="token punctuation">:</span> <span class="token class-name">Some</span><span class="token punctuation">(</span><span class="token string">"https://metadata-url"</span><span class="token punctuation">)</span><span class="token punctuation">,</span><br>        <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token operator">?</span><span class="token punctuation">,</span><br>        funds<span class="token punctuation">:</span> <span class="token macro property">vec!</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">,</span><br>    <span class="token punctuation">}</span><span class="token punctuation">;</span><br><br>    <span class="token class-name">Ok</span><span class="token punctuation">(</span><span class="token class-name">Response</span><span class="token punctuation">::</span><span class="token function">new</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">add_message</span><span class="token punctuation">(</span>mint_msg<span class="token punctuation">)</span><span class="token punctuation">)</span><br><span class="token punctuation">}</span><br><br><span class="token comment">// Burn and Send Back to Ethereum</span><br><span class="token keyword">fn</span> <span class="token function-definition function">burn_and_send</span><span class="token punctuation">(</span>deps<span class="token punctuation">:</span> <span class="token class-name">DepsMut</span><span class="token punctuation">,</span> env<span class="token punctuation">:</span> <span class="token class-name">Env</span><span class="token punctuation">,</span> info<span class="token punctuation">:</span> <span class="token class-name">MessageInfo</span><span class="token punctuation">,</span> token_id<span class="token punctuation">:</span> <span class="token class-name">String</span><span class="token punctuation">,</span> dest_chain_id<span class="token punctuation">:</span> <span class="token keyword">u16</span><span class="token punctuation">)</span> <span class="token punctuation">-></span> <span class="token class-name">StdResult</span><span class="token operator">&lt;</span><span class="token class-name">Response</span><span class="token operator">></span> <span class="token punctuation">{</span><br>    <span class="token keyword">let</span> state <span class="token operator">=</span> <span class="token constant">CONFIG</span><span class="token punctuation">.</span><span class="token function">load</span><span class="token punctuation">(</span>deps<span class="token punctuation">.</span>storage<span class="token punctuation">)</span><span class="token operator">?</span><span class="token punctuation">;</span><br><br>    <span class="token keyword">let</span> burn_msg <span class="token operator">=</span> <span class="token class-name">WasmMsg</span><span class="token punctuation">::</span><span class="token class-name">Execute</span> <span class="token punctuation">{</span><br>        contract_addr<span class="token punctuation">:</span> state<span class="token punctuation">.</span>nft_contract<span class="token punctuation">.</span><span class="token function">clone</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span><br>        msg<span class="token punctuation">:</span> <span class="token function">to_binary</span><span class="token punctuation">(</span><span class="token operator">&amp;</span><span class="token class-name">Cw721ExecuteMsg</span><span class="token punctuation">::</span><span class="token class-name">Burn</span> <span class="token punctuation">{</span> token_id<span class="token punctuation">:</span> token_id<span class="token punctuation">.</span><span class="token function">clone</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token operator">?</span><span class="token punctuation">,</span><br>        funds<span class="token punctuation">:</span> <span class="token macro property">vec!</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">,</span><br>    <span class="token punctuation">}</span><span class="token punctuation">;</span><br><br>    <span class="token comment">// Send IBC message back to Ethereum</span><br>    <span class="token keyword">let</span> ibc_msg <span class="token operator">=</span> <span class="token class-name">IbcMsg</span><span class="token punctuation">::</span><span class="token class-name">SendPacket</span> <span class="token punctuation">{</span><br>        channel_id<span class="token punctuation">:</span> <span class="token string">"channel-0"</span><span class="token punctuation">.</span><span class="token function">to_string</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span><br>        data<span class="token punctuation">:</span> <span class="token function">to_binary</span><span class="token punctuation">(</span><span class="token operator">&amp;</span><span class="token class-name">CrossChainPayload</span> <span class="token punctuation">{</span> sender<span class="token punctuation">:</span> info<span class="token punctuation">.</span>sender<span class="token punctuation">.</span><span class="token function">to_string</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span> token_id <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token operator">?</span><span class="token punctuation">,</span><br>        timeout<span class="token punctuation">:</span> <span class="token class-name">IbcTimeout</span><span class="token punctuation">::</span><span class="token function">with_timestamp</span><span class="token punctuation">(</span>env<span class="token punctuation">.</span>block<span class="token punctuation">.</span>time<span class="token punctuation">.</span><span class="token function">plus_seconds</span><span class="token punctuation">(</span><span class="token number">300</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">,</span><br>    <span class="token punctuation">}</span><span class="token punctuation">;</span><br><br>    <span class="token class-name">Ok</span><span class="token punctuation">(</span><span class="token class-name">Response</span><span class="token punctuation">::</span><span class="token function">new</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">add_message</span><span class="token punctuation">(</span>burn_msg<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">add_message</span><span class="token punctuation">(</span>ibc_msg<span class="token punctuation">)</span><span class="token punctuation">)</span><br><span class="token punctuation">}</span></code></pre>
+</code-block><p>So, what’s happening here?</p>
+<ol>
+<li>
+<p><strong>Receive Message</strong> from Ethereum → This step involves receiving a message from the Ethereum blockchain, which triggers the process of creating a new wrapped NFT on the current blockchain. This NFT represents the original asset from Ethereum.</p>
+</li>
+<li>
+<p><strong>Mint Wrapped NFT</strong> → After receiving the message, the system mints a new wrapped NFT. This involves executing a minting function that creates a token with a unique ID and assigns it to the specified owner, linking it to metadata that describes the asset.</p>
+</li>
+<li>
+<p><strong>Burn Wrapped NFT</strong> when sending back → When the wrapped NFT needs to be returned to Ethereum, it is first burned. This means the token is destroyed on the current blockchain to ensure it cannot be used again, maintaining the integrity of the asset’s representation.</p>
+</li>
+<li>
+<p><strong>Send IBC Message</strong> back to Ethereum → Finally, an Inter-Blockchain Communication (IBC) message is sent back to Ethereum. This message includes details about the burned token and the intended recipient on Ethereum, ensuring the asset can be accurately reconstructed on its original chain.</p>
+</li>
+</ol>
+<p>A bigger problem in cosmos ecosystem is that each project uses their custom developed cw-standard. It’s not a problem per-say but it poses higher risks towards interoperability, vulnerability risks and so on.</p>
+<h2 id="%F0%9F%94%91-best-practices-%26-optimisations" tabindex="-1"><strong>🔑 Best Practices &amp; Optimisations</strong> <a class="header-anchor" href="#%F0%9F%94%91-best-practices-%26-optimisations" aria-hidden="true">#</a></h2>
+<p>✅ <strong>Security First:</strong></p>
+<ul>
+<li>
+<p>Add <strong>role-based access</strong> for admins.</p>
+</li>
+<li>
+<p>Ensure <strong>proper NFT ownership checks</strong> before burning/minting.</p>
+</li>
+</ul>
+<p>✅ <strong>Gas Optimisation:</strong></p>
+<ul>
+<li>
+<p>Use <strong>batch transactions</strong> for handling multiple NFTs.</p>
+</li>
+<li>
+<p>Compress payload data before sending cross-chain.</p>
+</li>
+</ul>
+<p>✅ <strong>Scalability:</strong></p>
+<ul>
+<li>Support multiple <strong>Cosmos chains</strong> by using <strong>ICS-721 (NFT standard for Cosmos IBC)</strong>.</li>
+</ul>
+<p><img src="/images/posts/26f8ca87-06af-47d8-8cbc-a6d68fd02a6f.webp" alt=""></p>
+<p>There’s a few token bridges that operate today. Haven’t tested them all myself but they seem reliable.</p>
+<ul>
+<li>
+<p><a href="https://www.axelar.network/blog/cosmos-bridge-explained">Axelar</a></p>
+</li>
+<li>
+<p><a href="https://blog.cosmos.network/gravity-is-an-essential-force-of-the-cosmos-aligning-all-planets-in-orbits-in-the-composable-b1ca17de18cc">Gravity bridge</a></p>
+</li>
+<li>
+<p><a href="https://www.squidrouter.com/squid-school/Cosmos-to-EVM-swap-guide#section-1">Squid router</a></p>
+</li>
+<li>
+<p><a href="https://docs.evmos.org/protocol">Evmos</a></p>
+</li>
+</ul>
+<p>There might be more.</p>
+<p>The future of Cosmos–EVM bridges is shaping up to be a game-changer, not just for developers but for the entire blockchain space. Right now, we see fragmented ecosystems, Ethereum, with its massive DeFi and NFT markets, and Cosmos, with its modular, interoperable chains. Bridging these two worlds is more than just about moving assets, it’s about unlocking new possibilities for seamless cross-chain interactions. Imagine a future where an NFT minted on Ethereum can be used in a Cosmos-based game, or where DeFi users on Cosmos can access Ethereum’s liquidity pools without even realising they’re using two different chains. That’s the kind of frictionless experience these bridges are working toward.</p>
+<p>One of the biggest shifts we’re likely to see is the rise of generalised cross-chain smart contracts. Right now, most bridges focus on asset transfers. Locking tokens on one side and minting wrapped versions on the other. But what if dApps could execute Solidity contracts from Cosmos-based chains or trigger CosmWasm contracts from Ethereum? That would mean truly decentralised applications that function across multiple chains, rather than being siloed into one ecosystem. We’re already seeing early versions of this with Axelar’s General Message Passing and Cosmos Interchain Accounts, but the technology is still in its early days. Once these solutions become more mature, developers will no longer have to build separate versions of their dApps for different chains. Just build once and let the bridge handle the communication.</p>
+<p>Security is another major aspect that’s bound to improve. Traditional bridges have been some of the biggest targets for hacks, often due to their reliance on trusted relayers or multi-sig setups. The future will likely bring more trustless designs, possibly using zk-SNARKs or other cryptographic proofs to validate transactions across chains without needing intermediaries. This will not only make bridges safer but also reduce centralisation risks. Additionally, optimised gas fee mechanisms could make cross-chain transactions more affordable, encouraging wider adoption.</p>
+<p>Ultimately, the future of Cosmos–EVM bridges is about making blockchain technology feel invisible. Users shouldn’t have to think about which chain they’re on, they should just be able to interact with applications, own assets, and move seamlessly across networks. The end goal isn’t just interoperability, it’s a fully decentralised, interconnected metaverse where blockchains function as one unified system rather than competing silos.</p>
+
+        </div>
+
+        <div class="article-end">
+            <span>✦</span>
+            <span>✦</span>
+            <span>✦</span>
+        </div>
+
+        <div class="post-navigation">
+            <div class="post-nav-item post-nav-previous">
+                    <a href="/building-a-cross-chain-bridge/">
+                        <span class="nav-arrow">←</span>
+                        <div class="nav-content">
+                            <p class="nav-label">Previous</p>
+                            <p class="nav-title">Building a Cross-Chain Bridge</p>
+                        </div>
+                    </a>
+                
+            </div>
+
+            <div class="post-nav-item post-nav-next">
+                    <a href="/decentralised-profile-standard/">
+                        <div class="nav-content">
+                            <p class="nav-label">Next</p>
+                            <p class="nav-title">The Future of Digital Profiles and Avatars</p>
+                        </div>
+                        <span class="nav-arrow">→</span>
+                    </a>
+                
+            </div>
+        </div>
+    </div>
+
+    </main>
+    <footer class="sticky bottom-0 z-50 glass-footer py-4">
+  <div class="container mx-auto max-w-7xl px-8 flex items-center justify-between">
+    <div class="text-base">
+      by <a href="https://anirudha.dev" target="_blank" rel="noopener noreferrer">Ani</a>
+    </div>
+
+    <div class="flex items-center gap-4">
+      <a href="https://github.com/anistark" target="_blank" rel="noopener noreferrer" class="footer-icon" aria-label="GitHub">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="currentColor" viewBox="0 0 24 24">
+          <path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/>
+        </svg>
+      </a>
+      <a href="https://x.com/kranirudha" target="_blank" rel="noopener noreferrer" class="footer-icon" aria-label="X">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="currentColor" viewBox="0 0 24 24">
+          <path d="M14.234 10.162 22.977 0h-2.072l-7.591 8.824L7.251 0H.258l9.168 13.343L.258 24H2.33l8.016-9.318L16.749 24h6.993zm-2.837 3.299-.929-1.329L3.076 1.56h3.182l5.965 8.532.929 1.329 7.754 11.09h-3.182z"/>
+        </svg>
+      </a>
+      <a href="https://fosstodon.org/@ani" target="_blank" rel="noopener noreferrer" class="footer-icon" aria-label="Mastodon">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="currentColor" viewBox="0 0 24 24">
+          <path d="M23.268 5.313c-.35-2.578-2.617-4.61-5.304-5.004C17.51.242 15.792 0 11.813 0h-.03c-3.98 0-4.835.242-5.288.309C3.882.692 1.496 2.518.917 5.127.64 6.412.61 7.837.661 9.143c.074 1.874.088 3.745.26 5.611.118 1.24.325 2.47.62 3.68.55 2.237 2.777 4.098 4.96 4.857 2.336.792 4.849.923 7.256.38.265-.061.527-.132.786-.213.585-.184 1.27-.39 1.774-.753a.057.057 0 0 0 .023-.043v-1.809a.052.052 0 0 0-.02-.041.053.053 0 0 0-.046-.01 20.282 20.282 0 0 1-4.709.545c-2.73 0-3.463-1.284-3.674-1.818a5.593 5.593 0 0 1-.319-1.433.053.053 0 0 1 .066-.054c1.517.363 3.072.546 4.632.546.376 0 .75 0 1.125-.01 1.57-.044 3.224-.124 4.768-.422.038-.008.077-.015.11-.024 2.435-.464 4.753-1.92 4.989-5.604.008-.145.03-1.52.03-1.67.002-.512.167-3.63-.024-5.545zm-3.748 9.195h-2.561V8.29c0-1.309-.55-1.976-1.67-1.976-1.23 0-1.846.79-1.846 2.35v3.403h-2.546V8.663c0-1.56-.617-2.35-1.848-2.35-1.112 0-1.668.668-1.67 1.977v6.218H4.822V8.102c0-1.31.337-2.35 1.011-3.12.696-.77 1.608-1.164 2.74-1.164 1.311 0 2.302.5 2.962 1.498l.638 1.06.638-1.06c.66-.999 1.65-1.498 2.96-1.498 1.13 0 2.043.395 2.74 1.164.675.77 1.012 1.81 1.012 3.12z"/>
+        </svg>
+      </a>
+      <a href="https://linkedin.com/in/kranirudha" target="_blank" rel="noopener noreferrer" class="footer-icon" aria-label="LinkedIn">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="currentColor" viewBox="0 0 24 24">
+          <path d="M4.98 3.5c0 1.381-1.11 2.5-2.48 2.5s-2.48-1.119-2.48-2.5c0-1.38 1.11-2.5 2.48-2.5s2.48 1.12 2.48 2.5zm.02 4.5h-5v16h5v-16zm7.982 0h-4.968v16h4.969v-8.399c0-4.67 6.029-5.052 6.029 0v8.399h4.988v-10.131c0-7.88-8.922-7.593-11.018-3.714v-2.155z"/>
+        </svg>
+      </a>
+      <a href="/feed/feed.xml" class="footer-icon" aria-label="RSS feed">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="currentColor" viewBox="0 0 24 24">
+          <path d="M6.18 15.64a2.18 2.18 0 0 1 2.18 2.18C8.36 19 7.38 20 6.18 20C5 20 4 19 4 17.82a2.18 2.18 0 0 1 2.18-2.18M4 4.44A15.56 15.56 0 0 1 19.56 20h-2.83A12.73 12.73 0 0 0 4 7.27V4.44m0 5.66a9.9 9.9 0 0 1 9.9 9.9h-2.83A7.07 7.07 0 0 0 4 12.93V10.1Z"/>
+        </svg>
+      </a>
+    </div>
+  </div>
+</footer>
+
+    
+    <script src="https://unpkg.com/clipboard@2/dist/clipboard.min.js"></script>
+    <script src="/assets/main.bundle.js"></script>
+    <script type="module">
+      import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs';
+      mermaid.initialize({
+        startOnLoad: true,
+        theme: ['reading', 'beach'].includes(document.documentElement.getAttribute('data-theme')) ? 'default' : 'dark',
+        themeVariables: {
+          fontSize: '14px',
+        }
+      });
+    </script>
+  </body>
+</html>

@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    
+    <meta itemprop="name" content="N Reviewers Walk Into a PR... | AniLog">
+    <meta itemprop="description" content="How many people should review this PR? I built a GitHub Action that answers that question automatically. No more guessing, no more guilt-assigning three reviewers on a Friday.">
+
+    
+    <meta name="twitter:title" content="N Reviewers Walk Into a PR... | AniLog">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:description" content="How many people should review this PR? I built a GitHub Action that answers that question automatically. No more guessing, no more guilt-assigning three reviewers on a Friday.">
+    <meta name="twitter:site" content="@kranirudha">
+    <meta name="twitter:creator" content="@kranirudha">
+    <meta name="twitter:image:src" content="https://blog.anirudha.dev/images/posts/n-reviewers-walk-into-a-pr-2.png">
+
+    
+    <meta name="og:title" content="N Reviewers Walk Into a PR... | AniLog">
+    <meta name="og:description" content="How many people should review this PR? I built a GitHub Action that answers that question automatically. No more guessing, no more guilt-assigning three reviewers on a Friday.">
+    <meta name="og:image" content="https://blog.anirudha.dev/images/posts/n-reviewers-walk-into-a-pr-2.png">
+    <meta name="og:url" content="https://blog.anirudha.dev/">
+    <meta name="og:site_name" content="AniLog">
+    <meta name="og:locale" content="en_GB">
+    <meta name="og:type" content="website">
+
+    <link rel="icon" type="image/png" href="/me.png" />
+    <link rel="alternate" type="application/atom+xml" title="AniLog" href="https://blog.anirudha.dev/feed/feed.xml" />
+
+    <title>N Reviewers Walk Into a PR... | AniLog</title>
+
+    <link rel="stylesheet" href="/assets/main.bundle.css">
+
+    <script>
+      // Set theme before page renders to prevent flash
+      (function() {
+        const theme = localStorage.getItem('theme') || 'night';
+        if (theme !== 'night') {
+          document.documentElement.setAttribute('data-theme', theme);
+        }
+      })();
+    </script>
+
+    
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-YGZHVY9TD7"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-YGZHVY9TD7');
+    </script>
+    
+
+    
+  </head>
+  <body class="flex flex-col min-h-screen">
+    <canvas id="ambience-canvas"></canvas>
+    <header class="sticky top-0 z-50 glass-header">
+  <nav class="container mx-auto max-w-7xl px-8 py-3 flex flex-wrap items-center justify-between">
+    <div class="flex items-center gap-3">
+      <a href="/" class="flex items-center gap-3">
+        <img src="/ani.png" alt="AniLog logo" class="w-10 h-10 object-cover">
+        <h1 class="text-2xl leading-none m-0">AniLog</h1>
+      </a>
+    </div>
+
+    <div class="flex items-center gap-6">
+      <div class="theme-switcher">
+        <button id="theme-switcher-btn" class="theme-switcher-btn" aria-label="Switch theme" aria-expanded="false">
+          <span id="theme-active-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.985 12.486a9 9 0 1 1-9.473-9.472c.405-.022.617.46.402.803a6 6 0 0 0 8.268 8.268c.344-.215.825-.004.803.401"/></svg>
+          </span>
+        </button>
+        <div id="theme-dropdown" class="theme-dropdown">
+          <button class="theme-option" data-theme-value="night">
+            <span class="theme-icon"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.985 12.486a9 9 0 1 1-9.473-9.472c.405-.022.617.46.402.803a6 6 0 0 0 8.268 8.268c.344-.215.825-.004.803.401"/></svg></span>
+            <span>Night</span>
+          </button>
+          <button class="theme-option" data-theme-value="reading">
+            <span class="theme-icon"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 7v14"/><path d="M3 18a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h5a4 4 0 0 1 4 4 4 4 0 0 1 4-4h5a1 1 0 0 1 1 1v13a1 1 0 0 1-1 1h-6a3 3 0 0 0-3 3 3 3 0 0 0-3-3z"/></svg></span>
+            <span>Reading</span>
+          </button>
+          <button class="theme-option" data-theme-value="forest">
+            <span class="theme-icon"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m17 14 3 3.3a1 1 0 0 1-.7 1.7H4.7a1 1 0 0 1-.7-1.7L7 14h-.3a1 1 0 0 1-.7-1.7L9 9h-.2A1 1 0 0 1 8 7.3L12 3l4 4.3a1 1 0 0 1-.8 1.7H15l3 3.3a1 1 0 0 1-.7 1.7H17Z"/><path d="M12 22v-3"/></svg></span>
+            <span>Forest</span>
+          </button>
+          <button class="theme-option" data-theme-value="beach">
+            <span class="theme-icon"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 8c0-2.76-2.46-5-5.5-5S2 5.24 2 8h2l1-1 1 1h4"/><path d="M13 7.14A5.82 5.82 0 0 1 16.5 6c3.04 0 5.5 2.24 5.5 5h-3l-1-1-1 1h-3"/><path d="M5.89 9.71c-2.15 2.15-2.3 5.47-.35 7.43l4.24-4.25.7-.7.71-.71 2.12-2.12c-1.95-1.96-5.27-1.8-7.42.35"/><path d="M11 15.5c.5 2.5-.17 4.5-1 6.5h4c2-5.5-.5-12-1-14"/></svg></span>
+            <span>Beach</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </nav>
+</header>
+
+    <main class="container mx-auto max-w-6xl p-8 grow">
+      
+    <p></p>
+
+    
+        <div class="post-cover-image" style="background-image: url('/images/posts/n-reviewers-walk-into-a-pr-2.png');"></div>
+    
+
+    <div>
+        <div class="post-title-row">
+            <h2>N Reviewers Walk Into a PR...</h2>
+            
+        </div>
+
+        
+            <div class="mt-4 mb-2">
+                <a class="tag github" href="/tag/github">github</a><a class="tag open-source" href="/tag/open-source">open-source</a><a class="tag devtools" href="/tag/devtools">devtools</a><a class="tag automation" href="/tag/automation">automation</a>
+            </div>
+        
+
+        
+            
+              <p class="text-sm italic">Last updated on
+                    <span datetime="Thu Apr 02 2026 00:00:00 GMT+0000 (Coordinated Universal Time)">April 4, 2026</span>. Published on
+                    <span datetime="Thu Apr 02 2026 00:00:00 GMT+0000 (Coordinated Universal Time)">April 2, 2026</span>.
+                    <span class="reading-time"> · 6 min read</span></p>
+            
+        
+
+        <div class="content post">
+            <h2 id="a-story-you%E2%80%99ve-lived" tabindex="-1">A Story You’ve Lived <a class="header-anchor" href="#a-story-you%E2%80%99ve-lived" aria-hidden="true">#</a></h2>
+<p>It’s 4:47 PM. You open a pull request. It touches 12 files across 3 directories. CI is green. You tag one reviewer (the person who happens to be online) and close your laptop.</p>
+<p>Three days later, a bug makes it to production. Your reviewer missed a subtle interaction between two of those 12 files. Not their fault. They were one human reading a diff the size of a short story. In hindsight, a second pair of eyes would’ve caught it in five minutes.</p>
+<p>Sound familiar? Yeah, me too.</p>
+<p>The question <em>“how many reviewers does this PR actually need?”</em> is one every engineering team answers by vibes. Small PR? One reviewer. Massive PR? Also one reviewer, because nobody wants to be <em>that person</em> who requests three reviews on a Friday afternoon.</p>
+<p>Here’s the thing: <strong>vibes don’t scale</strong>. Teams grow. Codebases get gnarlier. PRs stack up. And the cost of under-reviewing compounds silently… right up until it very loudly doesn’t.</p>
+<h2 id="the-tools-available-(and-why-they-fall-short)" tabindex="-1">The Tools Available (And Why They Fall Short) <a class="header-anchor" href="#the-tools-available-(and-why-they-fall-short)" aria-hidden="true">#</a></h2>
+<p>GitHub gives you a decent toolkit for review workflows:</p>
+<ul>
+<li><strong>Branch protection rules</strong>: require a minimum number of approvals. But it’s a flat number. A one-line typo fix and a 2000-line refactor both need… 2 approvals? Really?</li>
+<li><strong>CODEOWNERS</strong>: auto-assigns reviewers based on file paths. Tells you <em>who</em>, not <em>how many</em>. Great at “Alice owns the frontend” but useless at “this PR is big enough to need Alice <em>and</em> Bob.”</li>
+<li><strong><a href="https://github.com/actions/labeler">actions/labeler</a></strong>: GitHub’s official labeling action. Labels PRs by file paths and branch names (<code>frontend</code>, <code>docs</code>, <code>feature</code>). Super useful, but it has zero concept of change <em>size</em> or review <em>effort</em>.</li>
+</ul>
+<p>None of these answer the fundamental question: <em>for this specific PR, with these specific changes, how many humans should look at it?</em></p>
+<h2 id="enter%3A-pr-reviewer-labeler" tabindex="-1">Enter: PR Reviewer Labeler <a class="header-anchor" href="#enter%3A-pr-reviewer-labeler" aria-hidden="true">#</a></h2>
+<p>So I built <a href="https://github.com/anistark/pr-reviewer-labeler">pr-reviewer-labeler</a>, a GitHub Action that looks at every PR and figures out the ideal number of reviewers. Automatically. No vibes required.</p>
+<p>Here’s what it does:</p>
+<ol>
+<li>Counts total lines changed (additions + deletions)</li>
+<li>Optionally weighs different file types differently (because 100 lines of tests ≠ 100 lines of auth middleware)</li>
+<li>Maps the result against configurable thresholds</li>
+<li>Slaps a label on the PR (<code>reviewers: 2</code>) and drops a summary comment</li>
+</ol>
+<p>Think of it as a bouncer for your PR queue. “This PR is a 500-liner touching core auth? Yeah, you’re gonna need at least 3 reviewers. Next!”</p>
+<h3 id="zero-config-setup-(seriously%2C-it%E2%80%99s-this-easy)" tabindex="-1">Zero-Config Setup (Seriously, It’s This Easy) <a class="header-anchor" href="#zero-config-setup-(seriously%2C-it%E2%80%99s-this-easy)" aria-hidden="true">#</a></h3>
+<code-block lang="yml"><pre class="language-yml"><code class="language-yml"><span class="token key atrule">name</span><span class="token punctuation">:</span> Reviewer Labeler<br><span class="token key atrule">on</span><span class="token punctuation">:</span><br>  <span class="token punctuation">-</span> pull_request_target<br><br><span class="token key atrule">jobs</span><span class="token punctuation">:</span><br>  <span class="token key atrule">label</span><span class="token punctuation">:</span><br>    <span class="token key atrule">permissions</span><span class="token punctuation">:</span><br>      <span class="token key atrule">contents</span><span class="token punctuation">:</span> read<br>      <span class="token key atrule">pull-requests</span><span class="token punctuation">:</span> write<br>    <span class="token key atrule">runs-on</span><span class="token punctuation">:</span> ubuntu<span class="token punctuation">-</span>latest<br>    <span class="token key atrule">steps</span><span class="token punctuation">:</span><br>      <span class="token punctuation">-</span> <span class="token key atrule">uses</span><span class="token punctuation">:</span> anistark/pr<span class="token punctuation">-</span>reviewer<span class="token punctuation">-</span>labeler@v1</code></pre>
+</code-block><p>That’s it. Out of the box, it uses these defaults:</p>
+<table>
+<thead>
+<tr>
+<th>Lines Changed</th>
+<th>Reviewers You’ll Get</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>&lt; 50</td>
+<td>1 (quick glance)</td>
+</tr>
+<tr>
+<td>50-199</td>
+<td>1 (solid read)</td>
+</tr>
+<tr>
+<td>200-499</td>
+<td>2 (buddy system)</td>
+</tr>
+<tr>
+<td>500-999</td>
+<td>3 (bring friends)</td>
+</tr>
+<tr>
+<td>1000+</td>
+<td>4 (all hands)</td>
+</tr>
+</tbody>
+</table>
+<p>Every PR gets labeled and commented. No config files to maintain. No YAML rabbit holes. Just plug and play.</p>
+<h3 id="your-team%2C-your-rules" tabindex="-1">Your Team, Your Rules <a class="header-anchor" href="#your-team%2C-your-rules" aria-hidden="true">#</a></h3>
+<p>Of course, a team of 3 doesn’t need the same scale as a team of 20. Tune the thresholds to your taste:</p>
+<code-block lang="yml"><pre class="language-yml"><code class="language-yml"><span class="token punctuation">-</span> <span class="token key atrule">uses</span><span class="token punctuation">:</span> anistark/pr<span class="token punctuation">-</span>reviewer<span class="token punctuation">-</span>labeler@v1<br>  <span class="token key atrule">with</span><span class="token punctuation">:</span><br>    <span class="token key atrule">thresholds</span><span class="token punctuation">:</span> <span class="token punctuation">|</span><span class="token scalar string"><br>      - lines: 30<br>        reviewers: 1<br>      - lines: 150<br>        reviewers: 2<br>      - lines: 400<br>        reviewers: 3<br>      - lines: 800<br>        reviewers: 4</span></code></pre>
+</code-block><h3 id="not-all-lines-are-born-equal" tabindex="-1">Not All Lines Are Born Equal <a class="header-anchor" href="#not-all-lines-are-born-equal" aria-hidden="true">#</a></h3>
+<p>Here’s where it gets fun. A 500-line PR that’s mostly test files? Probably fine with 2 reviewers. A 500-line PR rewriting your payment processing? You might want the whole team in the room.</p>
+<p>File-type weighting lets you express this:</p>
+<code-block lang="yml"><pre class="language-yml"><code class="language-yml"><span class="token punctuation">-</span> <span class="token key atrule">uses</span><span class="token punctuation">:</span> anistark/pr<span class="token punctuation">-</span>reviewer<span class="token punctuation">-</span>labeler@v1<br>  <span class="token key atrule">with</span><span class="token punctuation">:</span><br>    <span class="token key atrule">file-weights</span><span class="token punctuation">:</span> <span class="token punctuation">|</span><span class="token scalar string"><br>      - glob: "**/*.test.*"<br>        weight: 0.5<br>      - glob: "**/*.md"<br>        weight: 0.25<br>      - glob: "src/core/**"<br>        weight: 1.5</span></code></pre>
+</code-block><p>Translation:</p>
+<ul>
+<li><strong>Tests</strong> count at half. Important, but rarely where the sneaky bugs hide</li>
+<li><strong>Docs</strong> count at quarter. A README typo doesn’t need a 3-person review committee</li>
+<li><strong>Core source</strong> counts at 1.5x. This is where you want extra eyeballs</li>
+</ul>
+<p>The action calculates both raw and weighted line counts, so you always see the full picture.</p>
+<h2 id="what-happens-under-the-hood" tabindex="-1">What Happens Under the Hood <a class="header-anchor" href="#what-happens-under-the-hood" aria-hidden="true">#</a></h2>
+<p>For the curious (I see you), here’s the flow:</p>
+<ol>
+<li><strong>Fetch changed files</strong>: hits the GitHub API to get every file in the PR with its additions and deletions</li>
+<li><strong>Weigh the lines</strong>: each file gets matched against your glob patterns. Match found? Multiply by the weight. No match? Weight of 1.0. Business as usual</li>
+<li><strong>Pick the reviewer count</strong>: walks through your thresholds (sorted lowest to highest) and finds the right tier</li>
+<li><strong>Label the PR</strong>: removes any stale reviewer labels from previous runs, applies the fresh one. Your PR always shows the current recommendation</li>
+<li><strong>Drop a comment</strong>: posts a clean summary table. If it already commented before, it updates the existing one. No spam. No duplicates</li>
+</ol>
+<p>Push more commits? The label and comment update automatically. It’s fully idempotent, a fancy way of saying “it won’t make a mess.”</p>
+<h3 id="wire-it-into-your-workflow" tabindex="-1">Wire It Into Your Workflow <a class="header-anchor" href="#wire-it-into-your-workflow" aria-hidden="true">#</a></h3>
+<p>The action exposes outputs you can chain into other steps:</p>
+<code-block lang="yml"><pre class="language-yml"><code class="language-yml"><span class="token key atrule">steps</span><span class="token punctuation">:</span><br>  <span class="token punctuation">-</span> <span class="token key atrule">id</span><span class="token punctuation">:</span> reviewers<br>    <span class="token key atrule">uses</span><span class="token punctuation">:</span> anistark/pr<span class="token punctuation">-</span>reviewer<span class="token punctuation">-</span>labeler@v1<br><br>  <span class="token punctuation">-</span> <span class="token key atrule">if</span><span class="token punctuation">:</span> steps.reviewers.outputs.reviewer<span class="token punctuation">-</span>count <span class="token punctuation">></span>= 3<br>    <span class="token key atrule">run</span><span class="token punctuation">:</span> echo "Big PR detected. Maybe consider splitting this one up."</code></pre>
+</code-block><p>Available outputs: <code>reviewer-count</code>, <code>total-lines</code>, <code>weighted-lines</code>, and <code>label</code>. Build whatever automation you want on top.</p>
+<h2 id="best-friends-with-actions%2Flabeler" tabindex="-1">Best Friends With actions/labeler <a class="header-anchor" href="#best-friends-with-actions%2Flabeler" aria-hidden="true">#</a></h2>
+<p>This isn’t a replacement for <a href="https://github.com/actions/labeler">actions/labeler</a>. It’s the other half of the story. They answer different questions:</p>
+<table>
+<thead>
+<tr>
+<th>Action</th>
+<th>Answers</th>
+<th>Example Labels</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>actions/labeler</code></td>
+<td><em>What</em> changed?</td>
+<td><code>frontend</code>, <code>docs</code>, <code>feature</code></td>
+</tr>
+<tr>
+<td><code>pr-reviewer-labeler</code></td>
+<td><em>How much</em> changed?</td>
+<td><code>reviewers: 2</code>, <code>reviewers: 3</code></td>
+</tr>
+</tbody>
+</table>
+<p>Run them together:</p>
+<code-block lang="yml"><pre class="language-yml"><code class="language-yml"><span class="token key atrule">steps</span><span class="token punctuation">:</span><br>  <span class="token comment"># What changed?</span><br>  <span class="token punctuation">-</span> <span class="token key atrule">uses</span><span class="token punctuation">:</span> actions/labeler@v6<br><br>  <span class="token comment"># How much changed?</span><br>  <span class="token punctuation">-</span> <span class="token key atrule">uses</span><span class="token punctuation">:</span> anistark/pr<span class="token punctuation">-</span>reviewer<span class="token punctuation">-</span>labeler@v1</code></pre>
+</code-block><p>Now a PR labeled <code>frontend</code> + <code>reviewers: 1</code> paints a very different picture than <code>frontend</code> + <code>reviewers: 3</code>. Context at a glance.</p>
+<h2 id="the-roadmap-(a.k.a.-%E2%80%9Ci-have-ideas%E2%80%9D)" tabindex="-1">The Roadmap (a.k.a. “I Have Ideas”) <a class="header-anchor" href="#the-roadmap-(a.k.a.-%E2%80%9Ci-have-ideas%E2%80%9D)" aria-hidden="true">#</a></h2>
+<p>This is v1. It handles the core job well: sizing PRs and recommending reviewer counts. But I’m just getting started.</p>
+<h3 id="codeowners-integration" tabindex="-1">CODEOWNERS Integration <a class="header-anchor" href="#codeowners-integration" aria-hidden="true">#</a></h3>
+<p>Right now it tells you <em>how many</em>. Next up: <em>who</em>. Imagine the action reading your <code>CODEOWNERS</code> file and suggesting “This PR needs 2 reviewers: @alice (owns <code>src/auth/</code>) and @bob (owns <code>src/api/</code>).” That’s the dream.</p>
+<h3 id="complexity-scoring" tabindex="-1">Complexity Scoring <a class="header-anchor" href="#complexity-scoring" aria-hidden="true">#</a></h3>
+<p>Line count is a solid start, but it’s not the whole story. A 200-line change in one file hits different than 200 lines scattered across 15 files in 8 directories. I want to factor in:</p>
+<ul>
+<li>How many directories the PR touches</li>
+<li>New files vs edits to existing ones</li>
+<li>Whether the change spans architectural layers (frontend + backend + infra = buckle up)</li>
+</ul>
+<h3 id="auto-request-reviewers" tabindex="-1">Auto-Request Reviewers <a class="header-anchor" href="#auto-request-reviewers" aria-hidden="true">#</a></h3>
+<p>The endgame: don’t just <em>suggest</em> reviewers. <em>Assign</em> them. Pick from a configured pool, skip the PR author, respect existing assignments. Full automation, zero friction.</p>
+<p>All of these are tracked as <a href="https://github.com/anistark/pr-reviewer-labeler/issues">open issues on GitHub</a>.</p>
+<p><img src="/images/posts/erwin-this-is-where-you-come-in.png" alt="This is where you come in"></p>
+<p>I built this to scratch my own itch, but I know every team’s review culture is different. Maybe you need reviewer recommendations based on commit count, not line count. Maybe you want Slack notifications when a PR needs 3+ reviewers. Maybe you have an idea I haven’t thought of yet.</p>
+<p>I’d love to hear it.</p>
+<ul>
+<li><strong>Try it out</strong>: install from the <a href="https://github.com/marketplace/actions/pr-reviewer-labeler">GitHub Marketplace</a> or just add <code>anistark/pr-reviewer-labeler@v1</code> to your workflow</li>
+<li><strong>Open an issue</strong>: feature requests, bug reports, wild ideas, all welcome at <a href="https://github.com/anistark/pr-reviewer-labeler/issues">github.com/anistark/pr-reviewer-labeler/issues</a></li>
+<li><strong>Send a PR</strong>: the codebase is small, TypeScript, well-tested, and MIT licensed. Jump in</li>
+<li><strong>Star the repo</strong>: if you think this should exist, let me know with a star. It helps others find it too</li>
+</ul>
+<div class="github-card-wrapper"><a href="https://github.com/anistark/pr-reviewer-labeler" target="_blank" rel="noopener noreferrer" class="github-card"><div class="github-card-top"><div class="github-card-primary"><h3 class="github-card-heading"><span class="github-card-owner">anistark</span><span class="github-card-slash">/</span><span class="github-card-name">pr-reviewer-labeler</span></h3><div class="github-card-pills"><span class="github-card-pill github-card-pill-version">v0.1.1</span><span class="github-card-pill">MIT</span></div><p class="github-card-desc">Github Action to automatically label PRs with the ideal number of reviewers based on change size and file complexity</p><div class="github-card-topics"><span class="github-card-topic">actions</span><span class="github-card-topic">github-action</span><span class="github-card-topic">label</span><span class="github-card-topic">marketplace</span><span class="github-card-topic">pull-request</span></div></div><div class="github-card-avatar-wrap"><img src="https://avatars.githubusercontent.com/u/5357586?v=4&amp;s=120" alt="anistark" class="github-card-avatar" loading="lazy" width="56" height="56"></div></div><div class="github-card-activity"><svg class="github-card-spark" viewBox="0 0 520 36" preserveAspectRatio="none" aria-hidden="true"><rect x="0.00" y="36.00" width="8.04" height="0.00" rx="0.5"></rect><rect x="10.04" y="36.00" width="8.04" height="0.00" rx="0.5"></rect><rect x="20.08" y="36.00" width="8.04" height="0.00" rx="0.5"></rect><rect x="30.12" y="36.00" width="8.04" height="0.00" rx="0.5"></rect><rect x="40.15" y="36.00" width="8.04" height="0.00" rx="0.5"></rect><rect x="50.19" y="36.00" width="8.04" height="0.00" rx="0.5"></rect><rect x="60.23" y="36.00" width="8.04" height="0.00" rx="0.5"></rect><rect x="70.27" y="36.00" width="8.04" height="0.00" rx="0.5"></rect><rect x="80.31" y="36.00" width="8.04" height="0.00" rx="0.5"></rect><rect x="90.35" y="36.00" width="8.04" height="0.00" rx="0.5"></rect><rect x="100.38" y="36.00" width="8.04" height="0.00" rx="0.5"></rect><rect x="110.42" y="36.00" width="8.04" height="0.00" rx="0.5"></rect><rect x="120.46" y="36.00" width="8.04" height="0.00" rx="0.5"></rect><rect x="130.50" y="36.00" width="8.04" height="0.00" rx="0.5"></rect><rect x="140.54" y="36.00" width="8.04" height="0.00" rx="0.5"></rect><rect x="150.58" y="36.00" width="8.04" height="0.00" rx="0.5"></rect><rect x="160.62" y="36.00" width="8.04" height="0.00" rx="0.5"></rect><rect x="170.65" y="36.00" width="8.04" height="0.00" rx="0.5"></rect><rect x="180.69" y="36.00" width="8.04" height="0.00" rx="0.5"></rect><rect x="190.73" y="36.00" width="8.04" height="0.00" rx="0.5"></rect><rect x="200.77" y="36.00" width="8.04" height="0.00" rx="0.5"></rect><rect x="210.81" y="36.00" width="8.04" height="0.00" rx="0.5"></rect><rect x="220.85" y="36.00" width="8.04" height="0.00" rx="0.5"></rect><rect x="230.88" y="36.00" width="8.04" height="0.00" rx="0.5"></rect><rect x="240.92" y="36.00" width="8.04" height="0.00" rx="0.5"></rect><rect x="250.96" y="36.00" width="8.04" height="0.00" rx="0.5"></rect><rect x="261.00" y="36.00" width="8.04" height="0.00" rx="0.5"></rect><rect x="271.04" y="36.00" width="8.04" height="0.00" rx="0.5"></rect><rect x="281.08" y="36.00" width="8.04" height="0.00" rx="0.5"></rect><rect x="291.12" y="36.00" width="8.04" height="0.00" rx="0.5"></rect><rect x="301.15" y="36.00" width="8.04" height="0.00" rx="0.5"></rect><rect x="311.19" y="36.00" width="8.04" height="0.00" rx="0.5"></rect><rect x="321.23" y="36.00" width="8.04" height="0.00" rx="0.5"></rect><rect x="331.27" y="36.00" width="8.04" height="0.00" rx="0.5"></rect><rect x="341.31" y="36.00" width="8.04" height="0.00" rx="0.5"></rect><rect x="351.35" y="36.00" width="8.04" height="0.00" rx="0.5"></rect><rect x="361.38" y="36.00" width="8.04" height="0.00" rx="0.5"></rect><rect x="371.42" y="36.00" width="8.04" height="0.00" rx="0.5"></rect><rect x="381.46" y="36.00" width="8.04" height="0.00" rx="0.5"></rect><rect x="391.50" y="36.00" width="8.04" height="0.00" rx="0.5"></rect><rect x="401.54" y="36.00" width="8.04" height="0.00" rx="0.5"></rect><rect x="411.58" y="36.00" width="8.04" height="0.00" rx="0.5"></rect><rect x="421.62" y="36.00" width="8.04" height="0.00" rx="0.5"></rect><rect x="431.65" y="36.00" width="8.04" height="0.00" rx="0.5"></rect><rect x="441.69" y="36.00" width="8.04" height="0.00" rx="0.5"></rect><rect x="451.73" y="36.00" width="8.04" height="0.00" rx="0.5"></rect><rect x="461.77" y="36.00" width="8.04" height="0.00" rx="0.5"></rect><rect x="471.81" y="36.00" width="8.04" height="0.00" rx="0.5"></rect><rect x="481.85" y="0.00" width="8.04" height="36.00" rx="0.5"></rect><rect x="491.88" y="36.00" width="8.04" height="0.00" rx="0.5"></rect><rect x="501.92" y="36.00" width="8.04" height="0.00" rx="0.5"></rect><rect x="511.96" y="36.00" width="8.04" height="0.00" rx="0.5"></rect></svg><span class="github-card-spark-label">7 commits in the last year</span></div><div class="github-card-stats"><span class="github-card-stat github-card-lang"><span class="github-card-lang-dot" style="background:#3178c6"></span>TypeScript</span><span class="github-card-stat" aria-label="0 stars"><svg viewBox="0 0 16 16" width="14" height="14" fill="currentColor" aria-hidden="true"><path d="M8 .25a.75.75 0 0 1 .673.418l1.882 3.815 4.21.612a.75.75 0 0 1 .416 1.279l-3.046 2.97.719 4.192a.751.751 0 0 1-1.088.791L8 12.347l-3.766 1.98a.75.75 0 0 1-1.088-.79l.72-4.194L.818 6.374a.75.75 0 0 1 .416-1.28l4.21-.611L7.327.668A.75.75 0 0 1 8 .25Z"></path></svg>0</span><span class="github-card-stat" aria-label="0 forks"><svg viewBox="0 0 16 16" width="14" height="14" fill="currentColor" aria-hidden="true"><path d="M5 5.372v.878c0 .414.336.75.75.75h4.5a.75.75 0 0 0 .75-.75v-.878a2.25 2.25 0 1 1 1.5 0v.878a2.25 2.25 0 0 1-2.25 2.25h-1.5v2.128a2.251 2.251 0 1 1-1.5 0V8.5h-1.5A2.25 2.25 0 0 1 3.5 6.25v-.878a2.25 2.25 0 1 1 1.5 0ZM5 3.25a.75.75 0 1 0-1.5 0 .75.75 0 0 0 1.5 0Zm6.75.75a.75.75 0 1 0 0-1.5.75.75 0 0 0 0 1.5Zm-3 8.75a.75.75 0 1 0-1.5 0 .75.75 0 0 0 1.5 0Z"></path></svg>0</span><span class="github-card-stat" aria-label="3 open issues"><svg viewBox="0 0 16 16" width="14" height="14" fill="currentColor" aria-hidden="true"><path d="M8 9.5a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3Z"></path><path d="M8 0a8 8 0 1 1 0 16A8 8 0 0 1 8 0ZM1.5 8a6.5 6.5 0 1 0 13 0 6.5 6.5 0 0 0-13 0Z"></path></svg>3</span><span class="github-card-updated" title="Last push: 2026-04-02T13:14:56Z">Updated 23 days ago</span></div></a></div>
+<p>Because no PR should go under-reviewed just because someone didn’t want to bother a third person on a Friday.</p>
+
+        </div>
+
+        <div class="article-end">
+            <span>✦</span>
+            <span>✦</span>
+            <span>✦</span>
+        </div>
+
+        <div class="post-navigation">
+            <div class="post-nav-item post-nav-previous">
+                    <a href="/software-without-pause/">
+                        <span class="nav-arrow">←</span>
+                        <div class="nav-content">
+                            <p class="nav-label">Previous</p>
+                            <p class="nav-title">Software Without Pause</p>
+                        </div>
+                    </a>
+                
+            </div>
+
+            <div class="post-nav-item post-nav-next">
+                    <a href="/claude-plugin-getting-started/">
+                        <div class="nav-content">
+                            <p class="nav-label">Next</p>
+                            <p class="nav-title">Writing Your Own Claude Plugin and Shipping it to the World</p>
+                        </div>
+                        <span class="nav-arrow">→</span>
+                    </a>
+                
+            </div>
+        </div>
+    </div>
+
+    </main>
+    <footer class="sticky bottom-0 z-50 glass-footer py-4">
+  <div class="container mx-auto max-w-7xl px-8 flex items-center justify-between">
+    <div class="text-base">
+      by <a href="https://anirudha.dev" target="_blank" rel="noopener noreferrer">Ani</a>
+    </div>
+
+    <div class="flex items-center gap-4">
+      <a href="https://github.com/anistark" target="_blank" rel="noopener noreferrer" class="footer-icon" aria-label="GitHub">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="currentColor" viewBox="0 0 24 24">
+          <path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/>
+        </svg>
+      </a>
+      <a href="https://x.com/kranirudha" target="_blank" rel="noopener noreferrer" class="footer-icon" aria-label="X">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="currentColor" viewBox="0 0 24 24">
+          <path d="M14.234 10.162 22.977 0h-2.072l-7.591 8.824L7.251 0H.258l9.168 13.343L.258 24H2.33l8.016-9.318L16.749 24h6.993zm-2.837 3.299-.929-1.329L3.076 1.56h3.182l5.965 8.532.929 1.329 7.754 11.09h-3.182z"/>
+        </svg>
+      </a>
+      <a href="https://fosstodon.org/@ani" target="_blank" rel="noopener noreferrer" class="footer-icon" aria-label="Mastodon">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="currentColor" viewBox="0 0 24 24">
+          <path d="M23.268 5.313c-.35-2.578-2.617-4.61-5.304-5.004C17.51.242 15.792 0 11.813 0h-.03c-3.98 0-4.835.242-5.288.309C3.882.692 1.496 2.518.917 5.127.64 6.412.61 7.837.661 9.143c.074 1.874.088 3.745.26 5.611.118 1.24.325 2.47.62 3.68.55 2.237 2.777 4.098 4.96 4.857 2.336.792 4.849.923 7.256.38.265-.061.527-.132.786-.213.585-.184 1.27-.39 1.774-.753a.057.057 0 0 0 .023-.043v-1.809a.052.052 0 0 0-.02-.041.053.053 0 0 0-.046-.01 20.282 20.282 0 0 1-4.709.545c-2.73 0-3.463-1.284-3.674-1.818a5.593 5.593 0 0 1-.319-1.433.053.053 0 0 1 .066-.054c1.517.363 3.072.546 4.632.546.376 0 .75 0 1.125-.01 1.57-.044 3.224-.124 4.768-.422.038-.008.077-.015.11-.024 2.435-.464 4.753-1.92 4.989-5.604.008-.145.03-1.52.03-1.67.002-.512.167-3.63-.024-5.545zm-3.748 9.195h-2.561V8.29c0-1.309-.55-1.976-1.67-1.976-1.23 0-1.846.79-1.846 2.35v3.403h-2.546V8.663c0-1.56-.617-2.35-1.848-2.35-1.112 0-1.668.668-1.67 1.977v6.218H4.822V8.102c0-1.31.337-2.35 1.011-3.12.696-.77 1.608-1.164 2.74-1.164 1.311 0 2.302.5 2.962 1.498l.638 1.06.638-1.06c.66-.999 1.65-1.498 2.96-1.498 1.13 0 2.043.395 2.74 1.164.675.77 1.012 1.81 1.012 3.12z"/>
+        </svg>
+      </a>
+      <a href="https://linkedin.com/in/kranirudha" target="_blank" rel="noopener noreferrer" class="footer-icon" aria-label="LinkedIn">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="currentColor" viewBox="0 0 24 24">
+          <path d="M4.98 3.5c0 1.381-1.11 2.5-2.48 2.5s-2.48-1.119-2.48-2.5c0-1.38 1.11-2.5 2.48-2.5s2.48 1.12 2.48 2.5zm.02 4.5h-5v16h5v-16zm7.982 0h-4.968v16h4.969v-8.399c0-4.67 6.029-5.052 6.029 0v8.399h4.988v-10.131c0-7.88-8.922-7.593-11.018-3.714v-2.155z"/>
+        </svg>
+      </a>
+      <a href="/feed/feed.xml" class="footer-icon" aria-label="RSS feed">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="currentColor" viewBox="0 0 24 24">
+          <path d="M6.18 15.64a2.18 2.18 0 0 1 2.18 2.18C8.36 19 7.38 20 6.18 20C5 20 4 19 4 17.82a2.18 2.18 0 0 1 2.18-2.18M4 4.44A15.56 15.56 0 0 1 19.56 20h-2.83A12.73 12.73 0 0 0 4 7.27V4.44m0 5.66a9.9 9.9 0 0 1 9.9 9.9h-2.83A7.07 7.07 0 0 0 4 12.93V10.1Z"/>
+        </svg>
+      </a>
+    </div>
+  </div>
+</footer>
+
+    
+    <script src="https://unpkg.com/clipboard@2/dist/clipboard.min.js"></script>
+    <script src="/assets/main.bundle.js"></script>
+    <script type="module">
+      import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs';
+      mermaid.initialize({
+        startOnLoad: true,
+        theme: ['reading', 'beach'].includes(document.documentElement.getAttribute('data-theme')) ? 'default' : 'dark',
+        themeVariables: {
+          fontSize: '14px',
+        }
+      });
+    </script>
+  </body>
+</html>

@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    
+    <meta itemprop="name" content="Feluda | AniLog">
+    <meta itemprop="description" content="Imagine you’re deep into building something exciting. A groundbreaking app, a sleek dev tool, or even just a weekend side project that scratches a creative itch.">
+
+    
+    <meta name="twitter:title" content="Feluda | AniLog">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:description" content="Imagine you’re deep into building something exciting. A groundbreaking app, a sleek dev tool, or even just a weekend side project that scratches a creative itch.">
+    <meta name="twitter:site" content="@kranirudha">
+    <meta name="twitter:creator" content="@kranirudha">
+    <meta name="twitter:image:src" content="https://blog.anirudha.dev/images/posts/1db4d619-341b-4e26-878c-235755eba025.png">
+
+    
+    <meta name="og:title" content="Feluda | AniLog">
+    <meta name="og:description" content="Imagine you’re deep into building something exciting. A groundbreaking app, a sleek dev tool, or even just a weekend side project that scratches a creative itch.">
+    <meta name="og:image" content="https://blog.anirudha.dev/images/posts/1db4d619-341b-4e26-878c-235755eba025.png">
+    <meta name="og:url" content="https://blog.anirudha.dev/">
+    <meta name="og:site_name" content="AniLog">
+    <meta name="og:locale" content="en_GB">
+    <meta name="og:type" content="website">
+
+    <link rel="icon" type="image/png" href="/me.png" />
+    <link rel="alternate" type="application/atom+xml" title="AniLog" href="https://blog.anirudha.dev/feed/feed.xml" />
+
+    <title>Feluda | AniLog</title>
+
+    <link rel="stylesheet" href="/assets/main.bundle.css">
+
+    <script>
+      // Set theme before page renders to prevent flash
+      (function() {
+        const theme = localStorage.getItem('theme') || 'night';
+        if (theme !== 'night') {
+          document.documentElement.setAttribute('data-theme', theme);
+        }
+      })();
+    </script>
+
+    
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-YGZHVY9TD7"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-YGZHVY9TD7');
+    </script>
+    
+
+    
+  </head>
+  <body class="flex flex-col min-h-screen">
+    <canvas id="ambience-canvas"></canvas>
+    <header class="sticky top-0 z-50 glass-header">
+  <nav class="container mx-auto max-w-7xl px-8 py-3 flex flex-wrap items-center justify-between">
+    <div class="flex items-center gap-3">
+      <a href="/" class="flex items-center gap-3">
+        <img src="/ani.png" alt="AniLog logo" class="w-10 h-10 object-cover">
+        <h1 class="text-2xl leading-none m-0">AniLog</h1>
+      </a>
+    </div>
+
+    <div class="flex items-center gap-6">
+      <div class="theme-switcher">
+        <button id="theme-switcher-btn" class="theme-switcher-btn" aria-label="Switch theme" aria-expanded="false">
+          <span id="theme-active-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.985 12.486a9 9 0 1 1-9.473-9.472c.405-.022.617.46.402.803a6 6 0 0 0 8.268 8.268c.344-.215.825-.004.803.401"/></svg>
+          </span>
+        </button>
+        <div id="theme-dropdown" class="theme-dropdown">
+          <button class="theme-option" data-theme-value="night">
+            <span class="theme-icon"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.985 12.486a9 9 0 1 1-9.473-9.472c.405-.022.617.46.402.803a6 6 0 0 0 8.268 8.268c.344-.215.825-.004.803.401"/></svg></span>
+            <span>Night</span>
+          </button>
+          <button class="theme-option" data-theme-value="reading">
+            <span class="theme-icon"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 7v14"/><path d="M3 18a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h5a4 4 0 0 1 4 4 4 4 0 0 1 4-4h5a1 1 0 0 1 1 1v13a1 1 0 0 1-1 1h-6a3 3 0 0 0-3 3 3 3 0 0 0-3-3z"/></svg></span>
+            <span>Reading</span>
+          </button>
+          <button class="theme-option" data-theme-value="forest">
+            <span class="theme-icon"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m17 14 3 3.3a1 1 0 0 1-.7 1.7H4.7a1 1 0 0 1-.7-1.7L7 14h-.3a1 1 0 0 1-.7-1.7L9 9h-.2A1 1 0 0 1 8 7.3L12 3l4 4.3a1 1 0 0 1-.8 1.7H15l3 3.3a1 1 0 0 1-.7 1.7H17Z"/><path d="M12 22v-3"/></svg></span>
+            <span>Forest</span>
+          </button>
+          <button class="theme-option" data-theme-value="beach">
+            <span class="theme-icon"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 8c0-2.76-2.46-5-5.5-5S2 5.24 2 8h2l1-1 1 1h4"/><path d="M13 7.14A5.82 5.82 0 0 1 16.5 6c3.04 0 5.5 2.24 5.5 5h-3l-1-1-1 1h-3"/><path d="M5.89 9.71c-2.15 2.15-2.3 5.47-.35 7.43l4.24-4.25.7-.7.71-.71 2.12-2.12c-1.95-1.96-5.27-1.8-7.42.35"/><path d="M11 15.5c.5 2.5-.17 4.5-1 6.5h4c2-5.5-.5-12-1-14"/></svg></span>
+            <span>Beach</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </nav>
+</header>
+
+    <main class="container mx-auto max-w-6xl p-8 grow">
+      
+    <p></p>
+
+    
+        <div class="post-cover-image" style="background-image: url('/images/posts/1db4d619-341b-4e26-878c-235755eba025.png');"></div>
+    
+
+    <div>
+        <div class="post-title-row">
+            <h2>Feluda</h2>
+            
+        </div>
+
+        
+            <div class="mt-4 mb-2">
+                <a class="tag go" href="/tag/go">go</a><a class="tag python" href="/tag/python">python</a><a class="tag nodejs" href="/tag/nodejs">nodejs</a><a class="tag cli" href="/tag/cli">cli</a><a class="tag rust" href="/tag/rust">rust</a><a class="tag license" href="/tag/license">license</a><a class="tag dependency-management" href="/tag/dependency-management">dependency-management</a><a class="tag feluda" href="/tag/feluda">feluda</a>
+            </div>
+        
+
+        
+            
+                <p class="text-sm italic">Published on
+                    <span datetime="Wed Feb 26 2025 00:00:00 GMT+0000 (Coordinated Universal Time)">February 26, 2025</span>.
+                    <span class="reading-time"> · 5 min read</span></p>
+            
+        
+
+        <div class="content post">
+            <p>Imagine you’re deep into building something exciting. A groundbreaking app, a sleek dev tool, or even just a weekend side project that scratches a creative itch. You’re focused, in the zone, writing code and adding dependencies to move faster. After all, why reinvent the wheel when you can leverage existing libraries?</p>
+<p>But, here’s where things get tricky. Every package you install comes with a license, and those licenses aren’t always as straightforward as you’d hope. Some are as chill as a summer breeze, letting you do whatever you want. Others, however, sneak in clauses like:</p>
+<ul>
+<li>
+<p><strong>“No commercial use!”</strong> – meaning you can’t monetize your project without legal consequences.</p>
+</li>
+<li>
+<p><strong>“Your whole project must be open-source!”</strong> – suddenly, your proprietary work isn’t so proprietary anymore.</p>
+</li>
+<li>
+<p><strong>“You need to give attribution in a specific way!”</strong> – and failing to do so could cause legal trouble down the line.</p>
+</li>
+</ul>
+<p>Most of us don’t read licenses in detail. Who has the time? But ignoring them can lead to a nasty surprise, like a cease-and-desist letter, a forced code rewrite, or even legal trouble.</p>
+<p>That’s why we created <a href="https://github.com/anistark/feluda"><strong>Feluda</strong></a>, your personal detective for project dependencies.</p>
+<p><img src="/images/posts/f0c146aa-e85f-4486-a596-23c6a5003646.png" alt=""></p>
+<p>Feluda is a command-line tool that scans your project’s dependencies, analyzes their licenses, and flags any restrictive or risky ones before they become a problem. Instead of spending hours manually digging through legal jargon, Feluda does the detective work for you.</p>
+<p>Here’s how it helps:</p>
+<p>✅ <strong>Instant License Check</strong> – Get a clear breakdown of what each dependency allows and restricts.<br>
+✅ <strong>Early Warnings</strong> – Catch licensing issues <em>before</em> they turn into serious problems.<br>
+✅ <strong>Automated Reports</strong> – Get an easy-to-read summary without manually searching license terms.<br>
+✅ <strong>Dependency Transparency</strong> – Understand what you’re using and where it’s coming from.</p>
+<p>All of this happens with a simple CLI command. Run Feluda, and it will analyze your <code>cargo.toml</code>, <code>package.json</code>, <code>go.mod</code>, or other dependency files. Within seconds, you get a comprehensive report on whether your dependencies are safe to use commercially or if you need to make adjustments. In the lastest release, Feluda even supports python, weather its via <code>pyproject.toml</code> or <code>requirements.txt</code>.</p>
+<p>In modern development, package managers make it easier than ever to install third-party libraries. But with great convenience comes great complexity. A single package might depend on ten others, which in turn depend on fifty more. Before you realize it, your project has <strong>hundreds of hidden dependencies</strong>, each with its own license terms. A small oversight could mean that your app is suddenly violating multiple agreements. Large companies have legal teams to handle this, but indie developers, startups, and open-source maintainers often don’t have that luxury. That’s where Feluda steps in, making sure that whether you’re an individual dev or part of a team, you stay informed and legally safe.</p>
+<h2 id="features" tabindex="-1">Features <a class="header-anchor" href="#features" aria-hidden="true">#</a></h2>
+<p>Feluda is designed to make license compliance easy and transparent for developers. We’re constantly evolving and taking in requests to go to the next level, making it easier and smoother and more accurate to provide licensing guidelines for your convenience.</p>
+<h3 id="%F0%9F%94%8E-multi-language-support" tabindex="-1">🔎 <strong>Multi-Language Support</strong> <a class="header-anchor" href="#%F0%9F%94%8E-multi-language-support" aria-hidden="true">#</a></h3>
+<p>Feluda can analyze dependencies across multiple programming languages, including:</p>
+<ul>
+<li>
+<p><strong>Rust</strong> (<code>Cargo.toml</code>)</p>
+</li>
+<li>
+<p><strong>Node.js</strong> (<code>package.json</code>)</p>
+</li>
+<li>
+<p><strong>Go</strong> (<code>go.mod</code>)</p>
+</li>
+<li>
+<p><strong>Python</strong> (<code>requirements.txt</code>, <code>pyproject.toml</code>)</p>
+</li>
+</ul>
+<p>You can also filter the analysis to a specific language using the <code>--language</code> flag.</p>
+<terminal-block>feluda --language rust</terminal-block><h3 id="%F0%9F%9A%A6-license-classification-%26-restriction-flagging" tabindex="-1">🚦 <strong>License Classification &amp; Restriction Flagging</strong> <a class="header-anchor" href="#%F0%9F%9A%A6-license-classification-%26-restriction-flagging" aria-hidden="true">#</a></h3>
+<p>Feluda automatically identifies and classifies licenses into:</p>
+<ul>
+<li>
+<p><strong>Permissive</strong> – Free to use with minimal restrictions (e.g., MIT, Apache-2.0, BSD).</p>
+</li>
+<li>
+<p><strong>Restrictive</strong> – Might impose conditions like open-sourcing your code (e.g., GPL-3.0, AGPL-3.0).</p>
+</li>
+<li>
+<p><strong>Unknown</strong> – Not recognized or missing a standard license identifier.</p>
+</li>
+</ul>
+<p>It flags dependencies that <strong>might restrict personal or commercial use</strong>, so you can address them early. Some of it is still open as an issue, and we’re working on it. Hopefully, by the time you’re reading this article, we might have tackled them already! :)</p>
+<h3 id="%F0%9F%93%8A-multiple-output-formats" tabindex="-1">📊 <strong>Multiple Output Formats</strong> <a class="header-anchor" href="#%F0%9F%93%8A-multiple-output-formats" aria-hidden="true">#</a></h3>
+<p>Feluda provides output in different formats to suit various needs:</p>
+<ul>
+<li>
+<p><strong>Plain text</strong> (default) – Readable report summary in the terminal.</p>
+</li>
+<li>
+<p><strong>JSON</strong> (<code>--json</code>) – For programmatic use or automation.</p>
+</li>
+<li>
+<p><strong>TUI (Graphical Mode)</strong> (<code>--gui</code>) – Browse dependencies in a visual, interactive interface.</p>
+</li>
+<li>
+<p><strong>Strict Mode</strong> (<code>--strict</code>) – Outputs only dependencies with restrictive licenses.</p>
+</li>
+<li>
+<p><strong>Gist Format</strong> – Available in strict mode to output a single-line summary.</p>
+</li>
+</ul>
+<h3 id="%F0%9F%93%8D-customizable-license-policies" tabindex="-1">📍 <strong>Customizable License Policies</strong> <a class="header-anchor" href="#%F0%9F%93%8D-customizable-license-policies" aria-hidden="true">#</a></h3>
+<p>Define your own restrictive licenses through:</p>
+<ul>
+<li>
+<p><code>.feluda.toml</code> configuration file</p>
+</li>
+<li>
+<p>Environment variables <code>export FELUDA_LICENSES_RESTRICTIVE='[&quot;GPL-3.0&quot;,&quot;AGPL-3.0&quot;,&quot;Custom-1.0&quot;]'</code></p>
+</li>
+<li>
+<p>Default restrictive licenses list</p>
+</li>
+</ul>
+<p>This ensures flexibility, allowing you to tailor Feluda to your project’s compliance needs.</p>
+<h3 id="%F0%9F%9A%80-fast-%26-lightweight" tabindex="-1">🚀 <strong>Fast &amp; Lightweight</strong> <a class="header-anchor" href="#%F0%9F%9A%80-fast-%26-lightweight" aria-hidden="true">#</a></h3>
+<p>Feluda is built in Rust, ensuring a <strong>blazing-fast</strong> execution with minimal resource usage. It can scan and classify hundreds of dependencies in seconds. We are working on improving performance to make everything run more smoothly and quickly while using fewer resources.</p>
+<h3 id="%F0%9F%94%84-ci%2Fcd-integration-(planned)" tabindex="-1">🔄 <strong>CI/CD Integration</strong> (Planned) <a class="header-anchor" href="#%F0%9F%94%84-ci%2Fcd-integration-(planned)" aria-hidden="true">#</a></h3>
+<p>Future versions will support integration into CI/CD pipelines, helping teams automate license checks before deployment.</p>
+<p>With these features, Feluda simplifies dependency management and lets you build with confidence. 🚀 As an open-source tool, Feluda is a community-driven project. We welcome contributions, feedback, and ideas to make it even better.</p>
+<p>If you’re a developer, and interested in contributing, checkout the repository, open issues and discussions. We’d be more than happy to work together in building a better tool for licensing while keeping it performant compliant. Currently, Farhaan and myself are the only maintainers, but seeing the rise in contribution from the open source community, I can only hope for more amazing folks to get involved. 🙌</p>
+<p><a href="https://github.com/anistark/feluda">View Feluda on GitHub</a></p>
+<p>Latest version at the time of writing this article is <a href="https://crates.io/crates/feluda">v1.5.0</a>. 🥂</p>
+<p>At the end of the day, Feluda isn’t just about compliance, it’s about peace of mind. When you use Feluda, you can focus on what really matters: <strong>building something awesome</strong> without worrying about hidden legal traps.</p>
+<p><em>So go ahead, write code, ship products, and let Feluda handle the detective work.</em></p>
+
+        </div>
+
+        <div class="article-end">
+            <span>✦</span>
+            <span>✦</span>
+            <span>✦</span>
+        </div>
+
+        <div class="post-navigation">
+            <div class="post-nav-item post-nav-previous">
+                    <a href="/decentralised-profile-standard/">
+                        <span class="nav-arrow">←</span>
+                        <div class="nav-content">
+                            <p class="nav-label">Previous</p>
+                            <p class="nav-title">The Future of Digital Profiles and Avatars</p>
+                        </div>
+                    </a>
+                
+            </div>
+
+            <div class="post-nav-item post-nav-next">
+                    <a href="/rwa/">
+                        <div class="nav-content">
+                            <p class="nav-label">Next</p>
+                            <p class="nav-title">Real World Assets</p>
+                        </div>
+                        <span class="nav-arrow">→</span>
+                    </a>
+                
+            </div>
+        </div>
+    </div>
+
+    </main>
+    <footer class="sticky bottom-0 z-50 glass-footer py-4">
+  <div class="container mx-auto max-w-7xl px-8 flex items-center justify-between">
+    <div class="text-base">
+      by <a href="https://anirudha.dev" target="_blank" rel="noopener noreferrer">Ani</a>
+    </div>
+
+    <div class="flex items-center gap-4">
+      <a href="https://github.com/anistark" target="_blank" rel="noopener noreferrer" class="footer-icon" aria-label="GitHub">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="currentColor" viewBox="0 0 24 24">
+          <path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/>
+        </svg>
+      </a>
+      <a href="https://x.com/kranirudha" target="_blank" rel="noopener noreferrer" class="footer-icon" aria-label="X">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="currentColor" viewBox="0 0 24 24">
+          <path d="M14.234 10.162 22.977 0h-2.072l-7.591 8.824L7.251 0H.258l9.168 13.343L.258 24H2.33l8.016-9.318L16.749 24h6.993zm-2.837 3.299-.929-1.329L3.076 1.56h3.182l5.965 8.532.929 1.329 7.754 11.09h-3.182z"/>
+        </svg>
+      </a>
+      <a href="https://fosstodon.org/@ani" target="_blank" rel="noopener noreferrer" class="footer-icon" aria-label="Mastodon">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="currentColor" viewBox="0 0 24 24">
+          <path d="M23.268 5.313c-.35-2.578-2.617-4.61-5.304-5.004C17.51.242 15.792 0 11.813 0h-.03c-3.98 0-4.835.242-5.288.309C3.882.692 1.496 2.518.917 5.127.64 6.412.61 7.837.661 9.143c.074 1.874.088 3.745.26 5.611.118 1.24.325 2.47.62 3.68.55 2.237 2.777 4.098 4.96 4.857 2.336.792 4.849.923 7.256.38.265-.061.527-.132.786-.213.585-.184 1.27-.39 1.774-.753a.057.057 0 0 0 .023-.043v-1.809a.052.052 0 0 0-.02-.041.053.053 0 0 0-.046-.01 20.282 20.282 0 0 1-4.709.545c-2.73 0-3.463-1.284-3.674-1.818a5.593 5.593 0 0 1-.319-1.433.053.053 0 0 1 .066-.054c1.517.363 3.072.546 4.632.546.376 0 .75 0 1.125-.01 1.57-.044 3.224-.124 4.768-.422.038-.008.077-.015.11-.024 2.435-.464 4.753-1.92 4.989-5.604.008-.145.03-1.52.03-1.67.002-.512.167-3.63-.024-5.545zm-3.748 9.195h-2.561V8.29c0-1.309-.55-1.976-1.67-1.976-1.23 0-1.846.79-1.846 2.35v3.403h-2.546V8.663c0-1.56-.617-2.35-1.848-2.35-1.112 0-1.668.668-1.67 1.977v6.218H4.822V8.102c0-1.31.337-2.35 1.011-3.12.696-.77 1.608-1.164 2.74-1.164 1.311 0 2.302.5 2.962 1.498l.638 1.06.638-1.06c.66-.999 1.65-1.498 2.96-1.498 1.13 0 2.043.395 2.74 1.164.675.77 1.012 1.81 1.012 3.12z"/>
+        </svg>
+      </a>
+      <a href="https://linkedin.com/in/kranirudha" target="_blank" rel="noopener noreferrer" class="footer-icon" aria-label="LinkedIn">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="currentColor" viewBox="0 0 24 24">
+          <path d="M4.98 3.5c0 1.381-1.11 2.5-2.48 2.5s-2.48-1.119-2.48-2.5c0-1.38 1.11-2.5 2.48-2.5s2.48 1.12 2.48 2.5zm.02 4.5h-5v16h5v-16zm7.982 0h-4.968v16h4.969v-8.399c0-4.67 6.029-5.052 6.029 0v8.399h4.988v-10.131c0-7.88-8.922-7.593-11.018-3.714v-2.155z"/>
+        </svg>
+      </a>
+      <a href="/feed/feed.xml" class="footer-icon" aria-label="RSS feed">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="currentColor" viewBox="0 0 24 24">
+          <path d="M6.18 15.64a2.18 2.18 0 0 1 2.18 2.18C8.36 19 7.38 20 6.18 20C5 20 4 19 4 17.82a2.18 2.18 0 0 1 2.18-2.18M4 4.44A15.56 15.56 0 0 1 19.56 20h-2.83A12.73 12.73 0 0 0 4 7.27V4.44m0 5.66a9.9 9.9 0 0 1 9.9 9.9h-2.83A7.07 7.07 0 0 0 4 12.93V10.1Z"/>
+        </svg>
+      </a>
+    </div>
+  </div>
+</footer>
+
+    
+    <script src="https://unpkg.com/clipboard@2/dist/clipboard.min.js"></script>
+    <script src="/assets/main.bundle.js"></script>
+    <script type="module">
+      import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs';
+      mermaid.initialize({
+        startOnLoad: true,
+        theme: ['reading', 'beach'].includes(document.documentElement.getAttribute('data-theme')) ? 'default' : 'dark',
+        themeVariables: {
+          fontSize: '14px',
+        }
+      });
+    </script>
+  </body>
+</html>

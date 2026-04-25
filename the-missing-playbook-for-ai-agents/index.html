@@ -1,0 +1,549 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    
+    <meta itemprop="name" content="The Missing Playbook for AI Agents | AniLog">
+    <meta itemprop="description" content="Most people are building agents the way they wrote their first prompts. But we already know how to build complex systems. We just need to map &quot;how we build apps&quot; to &quot;how we build agents.&quot;">
+
+    
+    <meta name="twitter:title" content="The Missing Playbook for AI Agents | AniLog">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:description" content="Most people are building agents the way they wrote their first prompts. But we already know how to build complex systems. We just need to map &quot;how we build apps&quot; to &quot;how we build agents.&quot;">
+    <meta name="twitter:site" content="@kranirudha">
+    <meta name="twitter:creator" content="@kranirudha">
+    <meta name="twitter:image:src" content="https://blog.anirudha.dev/images/posts/agent-playbook.png">
+
+    
+    <meta name="og:title" content="The Missing Playbook for AI Agents | AniLog">
+    <meta name="og:description" content="Most people are building agents the way they wrote their first prompts. But we already know how to build complex systems. We just need to map &quot;how we build apps&quot; to &quot;how we build agents.&quot;">
+    <meta name="og:image" content="https://blog.anirudha.dev/images/posts/agent-playbook.png">
+    <meta name="og:url" content="https://blog.anirudha.dev/">
+    <meta name="og:site_name" content="AniLog">
+    <meta name="og:locale" content="en_GB">
+    <meta name="og:type" content="website">
+
+    <link rel="icon" type="image/png" href="/me.png" />
+    <link rel="alternate" type="application/atom+xml" title="AniLog" href="https://blog.anirudha.dev/feed/feed.xml" />
+
+    <title>The Missing Playbook for AI Agents | AniLog</title>
+
+    <link rel="stylesheet" href="/assets/main.bundle.css">
+
+    <script>
+      // Set theme before page renders to prevent flash
+      (function() {
+        const theme = localStorage.getItem('theme') || 'night';
+        if (theme !== 'night') {
+          document.documentElement.setAttribute('data-theme', theme);
+        }
+      })();
+    </script>
+
+    
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-YGZHVY9TD7"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-YGZHVY9TD7');
+    </script>
+    
+
+    
+  </head>
+  <body class="flex flex-col min-h-screen">
+    <canvas id="ambience-canvas"></canvas>
+    <header class="sticky top-0 z-50 glass-header">
+  <nav class="container mx-auto max-w-7xl px-8 py-3 flex flex-wrap items-center justify-between">
+    <div class="flex items-center gap-3">
+      <a href="/" class="flex items-center gap-3">
+        <img src="/ani.png" alt="AniLog logo" class="w-10 h-10 object-cover">
+        <h1 class="text-2xl leading-none m-0">AniLog</h1>
+      </a>
+    </div>
+
+    <div class="flex items-center gap-6">
+      <div class="theme-switcher">
+        <button id="theme-switcher-btn" class="theme-switcher-btn" aria-label="Switch theme" aria-expanded="false">
+          <span id="theme-active-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.985 12.486a9 9 0 1 1-9.473-9.472c.405-.022.617.46.402.803a6 6 0 0 0 8.268 8.268c.344-.215.825-.004.803.401"/></svg>
+          </span>
+        </button>
+        <div id="theme-dropdown" class="theme-dropdown">
+          <button class="theme-option" data-theme-value="night">
+            <span class="theme-icon"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.985 12.486a9 9 0 1 1-9.473-9.472c.405-.022.617.46.402.803a6 6 0 0 0 8.268 8.268c.344-.215.825-.004.803.401"/></svg></span>
+            <span>Night</span>
+          </button>
+          <button class="theme-option" data-theme-value="reading">
+            <span class="theme-icon"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 7v14"/><path d="M3 18a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h5a4 4 0 0 1 4 4 4 4 0 0 1 4-4h5a1 1 0 0 1 1 1v13a1 1 0 0 1-1 1h-6a3 3 0 0 0-3 3 3 3 0 0 0-3-3z"/></svg></span>
+            <span>Reading</span>
+          </button>
+          <button class="theme-option" data-theme-value="forest">
+            <span class="theme-icon"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m17 14 3 3.3a1 1 0 0 1-.7 1.7H4.7a1 1 0 0 1-.7-1.7L7 14h-.3a1 1 0 0 1-.7-1.7L9 9h-.2A1 1 0 0 1 8 7.3L12 3l4 4.3a1 1 0 0 1-.8 1.7H15l3 3.3a1 1 0 0 1-.7 1.7H17Z"/><path d="M12 22v-3"/></svg></span>
+            <span>Forest</span>
+          </button>
+          <button class="theme-option" data-theme-value="beach">
+            <span class="theme-icon"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 8c0-2.76-2.46-5-5.5-5S2 5.24 2 8h2l1-1 1 1h4"/><path d="M13 7.14A5.82 5.82 0 0 1 16.5 6c3.04 0 5.5 2.24 5.5 5h-3l-1-1-1 1h-3"/><path d="M5.89 9.71c-2.15 2.15-2.3 5.47-.35 7.43l4.24-4.25.7-.7.71-.71 2.12-2.12c-1.95-1.96-5.27-1.8-7.42.35"/><path d="M11 15.5c.5 2.5-.17 4.5-1 6.5h4c2-5.5-.5-12-1-14"/></svg></span>
+            <span>Beach</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </nav>
+</header>
+
+    <main class="container mx-auto max-w-6xl p-8 grow">
+      
+    <p></p>
+
+    
+        <div class="post-cover-image" style="background-image: url('/images/posts/agent-playbook.png');"></div>
+    
+
+    <div>
+        <div class="post-title-row">
+            <h2>The Missing Playbook for AI Agents</h2>
+            
+        </div>
+
+        
+            <div class="mt-4 mb-2">
+                <a class="tag ai" href="/tag/ai">ai</a><a class="tag llm" href="/tag/llm">llm</a><a class="tag agentic-ai" href="/tag/agentic-ai">agentic-ai</a><a class="tag agents" href="/tag/agents">agents</a><a class="tag evals" href="/tag/evals">evals</a><a class="tag cyberspace" href="/tag/cyberspace">cyberspace</a>
+            </div>
+        
+
+        
+            
+              <p class="text-sm italic">Last updated on
+                    <span datetime="Tue Mar 17 2026 00:00:00 GMT+0000 (Coordinated Universal Time)">March 19, 2026</span>. Published on
+                    <span datetime="Tue Mar 17 2026 00:00:00 GMT+0000 (Coordinated Universal Time)">March 17, 2026</span>.
+                    <span class="reading-time"> · 20 min read</span></p>
+            
+        
+
+        <div class="content post">
+            <p>Recently I went to an AI conference and saw dozens of people demo their agents. Agents that could search the web, summarize documents, write code, book meetings, deploy to staging, you name it. The demos were impressive. But every time someone in the audience pushed back with a slightly unexpected question or asked the agent to chain two tasks together, things fell apart. Hallucinated tools. Made-up API arguments. Confident reports of success when nothing had actually happened.</p>
+<p>These weren’t hobbyists. These were solid engineers, people who know how to build reliable backend systems, design clean APIs, write thorough tests, and deploy with confidence. But the moment they started building agents, all of that discipline vanished. It was back to trial and error, vibes, and “let me tweak this prompt one more time.”</p>
+<p>Walking out of that conference, something crystallized for me:</p>
+<blockquote>
+<p>We don’t have a tooling problem with agents. We have a <strong>methodology</strong> problem.</p>
+</blockquote>
+<p>Because an agent is not magic. It’s just an app where the control flow is partially owned by an LLM. And we already know how to build apps.</p>
+<h2 id="the-core-parallel" tabindex="-1">The Core Parallel <a class="header-anchor" href="#the-core-parallel" aria-hidden="true">#</a></h2>
+<p>If you’ve built backend systems, you already understand agents. You just don’t realize it yet.</p>
+<table>
+<thead>
+<tr>
+<th>Building Apps</th>
+<th>Building Agents</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Frontend / UI</td>
+<td>User Input / Chat Interface</td>
+</tr>
+<tr>
+<td>Backend Logic</td>
+<td>LLM Reasoning</td>
+</tr>
+<tr>
+<td>REST/GraphQL APIs</td>
+<td>Tools (functions the LLM can call)</td>
+</tr>
+<tr>
+<td>Database</td>
+<td>Memory (short-term and long-term)</td>
+</tr>
+<tr>
+<td>Event Loop / Request Lifecycle</td>
+<td>Agent Loop</td>
+</tr>
+<tr>
+<td>Logs &amp; Monitoring</td>
+<td>Traces &amp; Evals</td>
+</tr>
+<tr>
+<td>Error Handling &amp; Retries</td>
+<td>Guardrails &amp; Fallbacks</td>
+</tr>
+</tbody>
+</table>
+<p>The mapping might not be perfect, but it’s close enough to be useful. Every hard-won lesson from building distributed systems (separation of concerns, graceful degradation, observability, testing) applies directly to agents.</p>
+<p>The problem is that most people treat agent-building as a fundamentally new discipline. It isn’t. It’s systems engineering with a non-deterministic component in the middle.</p>
+<h2 id="designing-an-agent-%3D-designing-a-system" tabindex="-1">Designing an Agent = Designing a System <a class="header-anchor" href="#designing-an-agent-%3D-designing-a-system" aria-hidden="true">#</a></h2>
+<p>When you start a new backend service, you don’t jump straight into code. You ask:</p>
+<ul>
+<li>What’s the user goal?</li>
+<li>What are the flows?</li>
+<li>What APIs do we need?</li>
+<li>What can go wrong?</li>
+</ul>
+<p>Same exact process applies here. You might have your own process and own set of questions depending on what and how you want to build, for whom, so on. But there’ll be some design decisions that you need to take before you start building.</p>
+<h3 id="1.-goal-clarity%3A-single-shot-vs-multi-step" tabindex="-1">1. Goal clarity: single-shot vs multi-step <a class="header-anchor" href="#1.-goal-clarity%3A-single-shot-vs-multi-step" aria-hidden="true">#</a></h3>
+<p>A single-shot agent takes a request and returns a response. Think: “Summarize this document.” A multi-step agent plans, executes, observes, and iterates. Think: “Research this topic, find relevant papers, compare their findings, and write a report.”</p>
+<p>Most people jump straight to multi-step because it feels more impressive. But single-shot agents are easier to test, cheaper to run, and more predictable. Start there. Upgrade when you have evidence that you need more.</p>
+<h3 id="2.-control-style%3A-how-much-autonomy-does-the-llm-get%3F" tabindex="-1">2. Control style: how much autonomy does the LLM get? <a class="header-anchor" href="#2.-control-style%3A-how-much-autonomy-does-the-llm-get%3F" aria-hidden="true">#</a></h3>
+<p>This is the architectural decision most people skip, and it’s the one that matters most.</p>
+<ul>
+<li><strong>Reactive (ReAct)</strong>: The LLM decides what to do at each step based on what it observes. Flexible, but hard to predict. Think of it like giving someone directions one turn at a time.</li>
+<li><strong>Plan-then-execute</strong>: The LLM creates a plan upfront, then executes it step by step. More predictable, but brittle when the plan hits reality. Like writing out all the directions before the trip.</li>
+<li><strong>Hybrid</strong>: Plan first, but allow re-planning when observations don’t match expectations. This is where most production agents end up.</li>
+</ul>
+<p>The <a href="https://arxiv.org/abs/2210.03629">ReAct paper</a> by Yao and others formalized the reasoning + acting loop that most agent frameworks now implement. Worth reading if you want to understand the foundations.</p>
+<h3 id="3.-tool-surface-area%3A-narrow-vs-wide" tabindex="-1">3. Tool surface area: narrow vs wide <a class="header-anchor" href="#3.-tool-surface-area%3A-narrow-vs-wide" aria-hidden="true">#</a></h3>
+<p>Every tool you give an agent is a degree of freedom. More tools means more capability, but also more ways to fail. A tool is essentially an API the LLM can call, and just like with microservices, the question isn’t “can we add another endpoint?” but “should we?”</p>
+<p>Start with 2-3 tools. Add more only when you can demonstrate the agent needs them. This isn’t minimalism for aesthetics, it’s minimalism for reliability.</p>
+<h2 id="the-architecture-shift" tabindex="-1">The Architecture Shift <a class="header-anchor" href="#the-architecture-shift" aria-hidden="true">#</a></h2>
+<p>In a traditional app:</p>
+<p><img src="/images/posts/app-architecture.png" alt="Traditional App Architecture"></p>
+<p>You control every step. The flow is deterministic. If something breaks, you can trace exactly where.</p>
+<p>In an agent system:</p>
+<p><img src="/images/posts/agent-architecture.png" alt="Agent Architecture"></p>
+<p>The key shift you’d notice by now is that in apps, you control the flow. In agents, you design the <strong>boundaries</strong> of control. You decide which tools exist, what they can do, how much context the LLM sees, and when to stop. The LLM decides everything else within those boundaries.</p>
+<p>This is why agent design is closer to API design than to prompt engineering. You’re defining an interface and a contract, not writing instructions.</p>
+<h2 id="building-the-agent" tabindex="-1">Building the Agent <a class="header-anchor" href="#building-the-agent" aria-hidden="true">#</a></h2>
+<p>In app development, the implementation phase is: pick your stack, wire your APIs, implement your logic. In agents, it’s: pick your model, define your tools, define your loop.</p>
+<h3 id="the-minimal-agent-loop" tabindex="-1">The Minimal Agent Loop <a class="header-anchor" href="#the-minimal-agent-loop" aria-hidden="true">#</a></h3>
+<p>Every agent, regardless of framework, follows this pattern:</p>
+<pre class="mermaid">flowchart TD
+    A[User Input] --> B[LLM Planner]
+    B --> C{Need a Tool?}
+    C -- Yes --> D[Tool Call]
+    D --> E[Tool Result]
+    E --> B
+    C -- No --> F[Final Answer]
+</pre><p>Here’s what that looks like in practice with a simple Python implementation:</p>
+<code-block lang="python"><pre class="language-python"><code class="language-python"><span class="token keyword">import</span> anthropic<br><br>client <span class="token operator">=</span> anthropic<span class="token punctuation">.</span>Anthropic<span class="token punctuation">(</span><span class="token punctuation">)</span><br>tools <span class="token operator">=</span> <span class="token punctuation">[</span><br>    <span class="token punctuation">{</span><br>        <span class="token string">"name"</span><span class="token punctuation">:</span> <span class="token string">"search_docs"</span><span class="token punctuation">,</span><br>        <span class="token string">"description"</span><span class="token punctuation">:</span> <span class="token string">"Search internal documentation for relevant information"</span><span class="token punctuation">,</span><br>        <span class="token string">"input_schema"</span><span class="token punctuation">:</span> <span class="token punctuation">{</span><br>            <span class="token string">"type"</span><span class="token punctuation">:</span> <span class="token string">"object"</span><span class="token punctuation">,</span><br>            <span class="token string">"properties"</span><span class="token punctuation">:</span> <span class="token punctuation">{</span><br>                <span class="token string">"query"</span><span class="token punctuation">:</span> <span class="token punctuation">{</span><span class="token string">"type"</span><span class="token punctuation">:</span> <span class="token string">"string"</span><span class="token punctuation">,</span> <span class="token string">"description"</span><span class="token punctuation">:</span> <span class="token string">"Search query"</span><span class="token punctuation">}</span><br>            <span class="token punctuation">}</span><span class="token punctuation">,</span><br>            <span class="token string">"required"</span><span class="token punctuation">:</span> <span class="token punctuation">[</span><span class="token string">"query"</span><span class="token punctuation">]</span><br>        <span class="token punctuation">}</span><br>    <span class="token punctuation">}</span><br><span class="token punctuation">]</span><br><br><span class="token keyword">def</span> <span class="token function">run_agent</span><span class="token punctuation">(</span>user_message<span class="token punctuation">:</span> <span class="token builtin">str</span><span class="token punctuation">,</span> max_steps<span class="token punctuation">:</span> <span class="token builtin">int</span> <span class="token operator">=</span> <span class="token number">10</span><span class="token punctuation">)</span><span class="token punctuation">:</span><br>    messages <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">{</span><span class="token string">"role"</span><span class="token punctuation">:</span> <span class="token string">"user"</span><span class="token punctuation">,</span> <span class="token string">"content"</span><span class="token punctuation">:</span> user_message<span class="token punctuation">}</span><span class="token punctuation">]</span><br><br>    <span class="token keyword">for</span> step <span class="token keyword">in</span> <span class="token builtin">range</span><span class="token punctuation">(</span>max_steps<span class="token punctuation">)</span><span class="token punctuation">:</span><br>        response <span class="token operator">=</span> client<span class="token punctuation">.</span>messages<span class="token punctuation">.</span>create<span class="token punctuation">(</span><br>            model<span class="token operator">=</span><span class="token string">"claude-sonnet-4-6"</span><span class="token punctuation">,</span><br>            max_tokens<span class="token operator">=</span><span class="token number">1024</span><span class="token punctuation">,</span><br>            tools<span class="token operator">=</span>tools<span class="token punctuation">,</span><br>            messages<span class="token operator">=</span>messages<br>        <span class="token punctuation">)</span><br><br>        <span class="token comment"># If the model wants to use a tool</span><br>        <span class="token keyword">if</span> response<span class="token punctuation">.</span>stop_reason <span class="token operator">==</span> <span class="token string">"tool_use"</span><span class="token punctuation">:</span><br>            tool_block <span class="token operator">=</span> <span class="token builtin">next</span><span class="token punctuation">(</span>b <span class="token keyword">for</span> b <span class="token keyword">in</span> response<span class="token punctuation">.</span>content <span class="token keyword">if</span> b<span class="token punctuation">.</span><span class="token builtin">type</span> <span class="token operator">==</span> <span class="token string">"tool_use"</span><span class="token punctuation">)</span><br>            tool_result <span class="token operator">=</span> execute_tool<span class="token punctuation">(</span>tool_block<span class="token punctuation">.</span>name<span class="token punctuation">,</span> tool_block<span class="token punctuation">.</span><span class="token builtin">input</span><span class="token punctuation">)</span><br><br>            messages<span class="token punctuation">.</span>append<span class="token punctuation">(</span><span class="token punctuation">{</span><span class="token string">"role"</span><span class="token punctuation">:</span> <span class="token string">"assistant"</span><span class="token punctuation">,</span> <span class="token string">"content"</span><span class="token punctuation">:</span> response<span class="token punctuation">.</span>content<span class="token punctuation">}</span><span class="token punctuation">)</span><br>            messages<span class="token punctuation">.</span>append<span class="token punctuation">(</span><span class="token punctuation">{</span><br>                <span class="token string">"role"</span><span class="token punctuation">:</span> <span class="token string">"user"</span><span class="token punctuation">,</span><br>                <span class="token string">"content"</span><span class="token punctuation">:</span> <span class="token punctuation">[</span><span class="token punctuation">{</span><br>                    <span class="token string">"type"</span><span class="token punctuation">:</span> <span class="token string">"tool_result"</span><span class="token punctuation">,</span><br>                    <span class="token string">"tool_use_id"</span><span class="token punctuation">:</span> tool_block<span class="token punctuation">.</span><span class="token builtin">id</span><span class="token punctuation">,</span><br>                    <span class="token string">"content"</span><span class="token punctuation">:</span> tool_result<br>                <span class="token punctuation">}</span><span class="token punctuation">]</span><br>            <span class="token punctuation">}</span><span class="token punctuation">)</span><br>        <span class="token keyword">else</span><span class="token punctuation">:</span><br>            <span class="token comment"># Model is done, return the final response</span><br>            <span class="token keyword">return</span> response<span class="token punctuation">.</span>content<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">.</span>text<br><br>    <span class="token keyword">return</span> <span class="token string">"Agent reached maximum steps without completing."</span></code></pre>
+</code-block><p>That’s it. That’s a working agent. No framework, no abstractions. Just a loop that lets an LLM call tools and reason about results.</p>
+<h3 id="start-small%2C-then-expand" tabindex="-1">Start Small, Then Expand <a class="header-anchor" href="#start-small%2C-then-expand" aria-hidden="true">#</a></h3>
+<blockquote>
+<p>Most people overbuild agents.</p>
+</blockquote>
+<p>I’ve seen teams start with 15 tools, a vector database for memory, a planning module, a reflection step, and a custom evaluation pipeline, all before they’ve validated that the agent can reliably do the one thing it’s supposed to do.</p>
+<p>Start with:</p>
+<ul>
+<li>1 model</li>
+<li>2-3 tools</li>
+<li>No memory</li>
+</ul>
+<p>Get that working reliably. Then add complexity one piece at a time, measuring the impact of each addition. This is the same advice we give for microservices: start with a monolith, extract services when you have a reason to.</p>
+<h3 id="skills%3A-the-building-blocks" tabindex="-1">Skills: The Building Blocks <a class="header-anchor" href="#skills%3A-the-building-blocks" aria-hidden="true">#</a></h3>
+<p>As your agent grows beyond a few tools, you’ll notice something. The interesting behavior isn’t in the agent loop itself, it’s in the capabilities the agent calls. Searching, summarizing, classifying, extracting, judging. These are <strong>skills</strong>, the smallest units of intelligence that actually produce outcomes.</p>
+<p>Most teams embed skills directly into prompts or tool wrappers, tightly coupled to a specific agent. That works early on, but it doesn’t scale. When a skill is buried inside a prompt, you can’t test it in isolation, you can’t reuse it across agents, and you can’t improve it without risking regressions elsewhere.</p>
+<p>The better approach is to treat skills as first-class artifacts. A skill has a clear interface, it can run independently, and its behavior can be measured. Think of it like the difference between inline code and a well-defined function with a contract. The agent decides <em>what</em> to do. The skill defines <em>how</em> it gets done.</p>
+<p>This separation pays off quickly. Agents become simpler because they’re just orchestration. Debugging gets easier because you can isolate which skill misbehaved. And reuse becomes real, not just theoretical. A summarization skill that works for your research agent can plug into your customer support agent without rewriting anything.</p>
+<p><a href="https://www.anthropic.com/engineering/equipping-agents-for-the-real-world-with-agent-skills">Anthropic’s agent skills framework</a> formalizes this idea, treating skills as discoverable, composable units rather than implicit prompt logic. I’ve been building on this with <a href="https://github.com/anistark/sutras">Sutras</a>, a CLI that handles the lifecycle around skills: authoring, validation, evaluation, versioning, and distribution. Because having a spec for what a skill is doesn’t help much if you can’t test it, version it, or share it. <a href="/skills-agents-and-sutras/">Here’s</a> a detailed article on Skills and Sutras.</p>
+<p>If you’re building agents that need to do more than one or two things well, start thinking in skills early. It’ll save you from the “giant prompt that does everything” trap.</p>
+<h3 id="frameworks-and-when-to-use-them" tabindex="-1">Frameworks and When to Use Them <a class="header-anchor" href="#frameworks-and-when-to-use-them" aria-hidden="true">#</a></h3>
+<p>If you’re building something simple, you probably don’t need a framework. The code above is ~30 lines. But as complexity grows, frameworks help with orchestration, state management, and tool registration.</p>
+<p>Some worth knowing:</p>
+<ul>
+<li><a href="https://github.com/langchain-ai/langgraph">LangGraph</a>: Graph-based agent orchestration from LangChain. Good for complex multi-step workflows where you need explicit control over the execution graph.</li>
+<li><a href="https://github.com/crewAIInc/crewAI">CrewAI</a>: Multi-agent collaboration framework. Useful when your problem naturally decomposes into roles (researcher, writer, reviewer).</li>
+<li><a href="https://github.com/anthropics/anthropic-sdk-python">Anthropic’s Agent SDK</a>: Lightweight, close-to-the-metal. Good when you want control without too much abstraction.</li>
+<li><a href="https://github.com/microsoft/autogen">Autogen</a>: Microsoft’s multi-agent framework. Strong on conversation patterns between agents.</li>
+</ul>
+<p>The right choice depends on your use case, not on what’s trending on Linkedin or X(Twitter). A single-agent tool-use loop doesn’t need LangGraph. A multi-agent research pipeline probably does.</p>
+<h2 id="testing-agents%3A-the-missing-discipline" tabindex="-1">Testing Agents: The Missing Discipline <a class="header-anchor" href="#testing-agents%3A-the-missing-discipline" aria-hidden="true">#</a></h2>
+<p>This is where the gap between “app thinking” and “agent thinking” is widest.</p>
+<p>In app development, we have decades of established practice: unit tests, integration tests, end-to-end tests, staging environments, CI/CD pipelines. In the agent world? Mostly vibes. Someone runs the agent a few times, eyeballs the output, and calls it good.</p>
+<p>That’s not engineering. That’s a demo.</p>
+<h3 id="the-agent-testing-stack" tabindex="-1">The Agent Testing Stack <a class="header-anchor" href="#the-agent-testing-stack" aria-hidden="true">#</a></h3>
+<table>
+<thead>
+<tr>
+<th>Agent Testing</th>
+<th>App Equivalent</th>
+<th>What It Catches</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Tool unit tests</td>
+<td>Unit tests</td>
+<td>Broken tools, bad schemas</td>
+</tr>
+<tr>
+<td>Single-step evals</td>
+<td>Function tests</td>
+<td>Wrong tool selection, bad arguments</td>
+</tr>
+<tr>
+<td>Multi-step trajectory evals</td>
+<td>Integration tests</td>
+<td>Planning failures, loops, dead ends</td>
+</tr>
+<tr>
+<td>Prompt injection tests</td>
+<td>Security testing</td>
+<td>Adversarial manipulation</td>
+</tr>
+<tr>
+<td>Eval datasets with scoring</td>
+<td>Regression testing</td>
+<td>Quality degradation over time</td>
+</tr>
+</tbody>
+</table>
+<p>I’ve written about <a href="/ai-evals/">evals</a> and <a href="/building-ai-tools-you-can-trust/">building trustworthy AI tools</a> before, and everything in those posts applies here. But agents add a new dimension: you’re not just evaluating a single output, you’re evaluating a <strong>trajectory</strong>, the sequence of decisions the agent made to get there.</p>
+<h3 id="evaluating-trajectories%2C-not-just-outputs" tabindex="-1">Evaluating Trajectories, Not Just Outputs <a class="header-anchor" href="#evaluating-trajectories%2C-not-just-outputs" aria-hidden="true">#</a></h3>
+<p>A wrong answer that came from a reasonable chain of reasoning is very different from a right answer that came from lucky hallucination. You need to evaluate both.</p>
+<code-block lang="python"><pre class="language-python"><code class="language-python"><span class="token keyword">from</span> ragas<span class="token punctuation">.</span>metrics<span class="token punctuation">.</span>collections <span class="token keyword">import</span> Faithfulness<br><span class="token keyword">from</span> ragas<span class="token punctuation">.</span>llms <span class="token keyword">import</span> llm_factory<br><br><span class="token comment"># Works with any supported model: gpt-4o-mini, claude-sonnet, gemini-pro, etc.</span><br>llm <span class="token operator">=</span> llm_factory<span class="token punctuation">(</span><span class="token string">"gpt-4o-mini"</span><span class="token punctuation">)</span><br>faithfulness <span class="token operator">=</span> Faithfulness<span class="token punctuation">(</span>llm<span class="token operator">=</span>llm<span class="token punctuation">)</span><br><br><span class="token comment"># Evaluate whether the agent's final answer is grounded in what its tools returned</span><br>result <span class="token operator">=</span> <span class="token keyword">await</span> faithfulness<span class="token punctuation">.</span>ascore<span class="token punctuation">(</span><br>    user_input<span class="token operator">=</span><span class="token string">"What were our Q4 sales?"</span><span class="token punctuation">,</span><br>    response<span class="token operator">=</span>agent_final_answer<span class="token punctuation">,</span><br>    retrieved_contexts<span class="token operator">=</span>tool_results_from_agent_run<br><span class="token punctuation">)</span><br><span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string-interpolation"><span class="token string">f"Score: </span><span class="token interpolation"><span class="token punctuation">{</span>result<span class="token punctuation">.</span>value<span class="token punctuation">}</span></span><span class="token string">"</span></span><span class="token punctuation">)</span>   <span class="token comment"># e.g. 0.85</span><br><span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string-interpolation"><span class="token string">f"Reason: </span><span class="token interpolation"><span class="token punctuation">{</span>result<span class="token punctuation">.</span>reason<span class="token punctuation">}</span></span><span class="token string">"</span></span><span class="token punctuation">)</span> <span class="token comment"># explanation of the score</span></code></pre>
+</code-block><p>The <code>MetricResult</code> object gives you both a score and a reason, so you know not just <em>how faithful</em> the answer is but <em>why</em> it scored that way. This tells you whether the agent’s answer is grounded in the information it actually retrieved, not whether it sounds plausible.</p>
+<h3 id="the-eval-mindset" tabindex="-1">The Eval Mindset <a class="header-anchor" href="#the-eval-mindset" aria-hidden="true">#</a></h3>
+<pre class="mermaid">flowchart TD
+    A[Test Dataset] --> B[Agent Runs]
+    B --> C[Outputs + Trajectories]
+    C --> D[Scoring: Correctness, Faithfulness, Tool Use]
+    D --> E[Pass/Fail + Metrics Dashboard]
+    E --> F{Regression?}
+    F -- Yes --> G[Investigate & Fix]
+    F -- No --> H[Ship It]
+</pre><blockquote>
+<p>If you’re not running evals, you don’t have an agent. You have a demo.</p>
+</blockquote>
+<p>I keep coming back to this because it’s the single biggest gap I see. Teams spend weeks building agent capabilities and zero hours building agent evals. Then they’re surprised when the agent breaks in production.</p>
+<p>If you need help getting started with evals, <a href="https://ragas.io/">Ragas</a> is a solid starting point. For more on the philosophy, the <a href="https://docs.anthropic.com/en/docs/build-with-claude/develop-tests">Anthropic guide to evaluations</a> is excellent.</p>
+<h2 id="running-agents" tabindex="-1">Running Agents <a class="header-anchor" href="#running-agents" aria-hidden="true">#</a></h2>
+<p>Traditional apps follow a clean request/response cycle. A request comes in, business logic runs, a response goes out. Stateless, predictable, well-understood.</p>
+<p>Agents break this model in several ways:</p>
+<ul>
+<li><em>They loop.</em> An agent might make 3 tool calls or 30, depending on the task.</li>
+<li><em>They’re stateful.</em> Context accumulates across steps within a single run.</li>
+<li><em>They’re slow.</em> A multi-step agent might take 30 seconds or 3 minutes to complete.</li>
+<li><em>They’re expensive.</em> Each step consumes tokens, and tokens cost money.</li>
+</ul>
+<h3 id="runtime-patterns" tabindex="-1">Runtime Patterns <a class="header-anchor" href="#runtime-patterns" aria-hidden="true">#</a></h3>
+<p><strong>Short-lived agents</strong>: Synchronous, request/response. The user waits. Good for simple tool-use (under 10 seconds). This is your starting point.</p>
+<p><strong>Long-running agents</strong>: Async, queue-based. The user submits a task and checks back later. Necessary when the agent might run for minutes. Think: research tasks, code generation with testing, data analysis pipelines.</p>
+<p><strong>Streaming agents</strong>: Partial outputs as the agent works. The user sees progress. Good for chat interfaces where you want to show the agent’s reasoning in real-time. Most modern APIs (Claude, GPT, Gemini, Mistral, GLM) support streaming natively.</p>
+<h3 id="failure-modes-you-must-handle" tabindex="-1">Failure Modes You Must Handle <a class="header-anchor" href="#failure-modes-you-must-handle" aria-hidden="true">#</a></h3>
+<p>This is where agent systems diverge sharply from traditional apps. In a normal API, if a request fails, you return a 500 and the client retries. In an agent, failures are more insidious:</p>
+<ul>
+<li><strong>Tool failures</strong>: An API is down, a database query times out. The agent needs to know how to handle this gracefully: retry, skip, or ask the user.</li>
+<li><strong>Hallucinated tool arguments</strong>: The LLM invents parameters that don’t exist or passes the wrong types. This is the agent equivalent of a type error, except your type system is a prompt.</li>
+<li><strong>Infinite loops</strong>: The agent keeps calling the same tool with the same arguments, expecting different results. Without a step limit, you burn through tokens and patience.</li>
+<li><strong>Context window overflow</strong>: In long-running agents, the conversation history grows until it exceeds the model’s context window. You need a strategy for summarizing or truncating.</li>
+</ul>
+<p>Handling these isn’t optional. It’s the difference between a demo and a product.</p>
+<code-block lang="python"><pre class="language-python"><code class="language-python"><span class="token keyword">def</span> <span class="token function">run_agent_with_guardrails</span><span class="token punctuation">(</span>user_message<span class="token punctuation">:</span> <span class="token builtin">str</span><span class="token punctuation">)</span><span class="token punctuation">:</span><br>    max_steps <span class="token operator">=</span> <span class="token number">15</span><br>    max_consecutive_errors <span class="token operator">=</span> <span class="token number">3</span><br>    error_count <span class="token operator">=</span> <span class="token number">0</span><br><br>    messages <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">{</span><span class="token string">"role"</span><span class="token punctuation">:</span> <span class="token string">"user"</span><span class="token punctuation">,</span> <span class="token string">"content"</span><span class="token punctuation">:</span> user_message<span class="token punctuation">}</span><span class="token punctuation">]</span><br><br>    <span class="token keyword">for</span> step <span class="token keyword">in</span> <span class="token builtin">range</span><span class="token punctuation">(</span>max_steps<span class="token punctuation">)</span><span class="token punctuation">:</span><br>        <span class="token keyword">try</span><span class="token punctuation">:</span><br>            response <span class="token operator">=</span> client<span class="token punctuation">.</span>messages<span class="token punctuation">.</span>create<span class="token punctuation">(</span><br>                model<span class="token operator">=</span><span class="token string">"claude-sonnet-4-6"</span><span class="token punctuation">,</span><br>                max_tokens<span class="token operator">=</span><span class="token number">1024</span><span class="token punctuation">,</span><br>                tools<span class="token operator">=</span>tools<span class="token punctuation">,</span><br>                messages<span class="token operator">=</span>messages<br>            <span class="token punctuation">)</span><br>            error_count <span class="token operator">=</span> <span class="token number">0</span>  <span class="token comment"># Reset on success</span><br><br>            <span class="token keyword">if</span> response<span class="token punctuation">.</span>stop_reason <span class="token operator">==</span> <span class="token string">"tool_use"</span><span class="token punctuation">:</span><br>                tool_block <span class="token operator">=</span> <span class="token builtin">next</span><span class="token punctuation">(</span>b <span class="token keyword">for</span> b <span class="token keyword">in</span> response<span class="token punctuation">.</span>content <span class="token keyword">if</span> b<span class="token punctuation">.</span><span class="token builtin">type</span> <span class="token operator">==</span> <span class="token string">"tool_use"</span><span class="token punctuation">)</span><br>                <span class="token keyword">try</span><span class="token punctuation">:</span><br>                    result <span class="token operator">=</span> execute_tool<span class="token punctuation">(</span>tool_block<span class="token punctuation">.</span>name<span class="token punctuation">,</span> tool_block<span class="token punctuation">.</span><span class="token builtin">input</span><span class="token punctuation">)</span><br>                <span class="token keyword">except</span> ToolExecutionError <span class="token keyword">as</span> e<span class="token punctuation">:</span><br>                    result <span class="token operator">=</span> <span class="token string-interpolation"><span class="token string">f"Tool error: </span><span class="token interpolation"><span class="token punctuation">{</span>e<span class="token punctuation">}</span></span><span class="token string">. Try a different approach."</span></span><br><br>                messages<span class="token punctuation">.</span>append<span class="token punctuation">(</span><span class="token punctuation">{</span><span class="token string">"role"</span><span class="token punctuation">:</span> <span class="token string">"assistant"</span><span class="token punctuation">,</span> <span class="token string">"content"</span><span class="token punctuation">:</span> response<span class="token punctuation">.</span>content<span class="token punctuation">}</span><span class="token punctuation">)</span><br>                messages<span class="token punctuation">.</span>append<span class="token punctuation">(</span><span class="token punctuation">{</span><br>                    <span class="token string">"role"</span><span class="token punctuation">:</span> <span class="token string">"user"</span><span class="token punctuation">,</span><br>                    <span class="token string">"content"</span><span class="token punctuation">:</span> <span class="token punctuation">[</span><span class="token punctuation">{</span><span class="token string">"type"</span><span class="token punctuation">:</span> <span class="token string">"tool_result"</span><span class="token punctuation">,</span> <span class="token string">"tool_use_id"</span><span class="token punctuation">:</span> tool_block<span class="token punctuation">.</span><span class="token builtin">id</span><span class="token punctuation">,</span> <span class="token string">"content"</span><span class="token punctuation">:</span> result<span class="token punctuation">}</span><span class="token punctuation">]</span><br>                <span class="token punctuation">}</span><span class="token punctuation">)</span><br>            <span class="token keyword">else</span><span class="token punctuation">:</span><br>                <span class="token keyword">return</span> response<span class="token punctuation">.</span>content<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">.</span>text<br><br>        <span class="token keyword">except</span> Exception <span class="token keyword">as</span> e<span class="token punctuation">:</span><br>            error_count <span class="token operator">+=</span> <span class="token number">1</span><br>            <span class="token keyword">if</span> error_count <span class="token operator">>=</span> max_consecutive_errors<span class="token punctuation">:</span><br>                <span class="token keyword">return</span> <span class="token string-interpolation"><span class="token string">f"Agent stopped after </span><span class="token interpolation"><span class="token punctuation">{</span>max_consecutive_errors<span class="token punctuation">}</span></span><span class="token string"> consecutive errors: </span><span class="token interpolation"><span class="token punctuation">{</span>e<span class="token punctuation">}</span></span><span class="token string">"</span></span><br><br>    <span class="token keyword">return</span> <span class="token string">"Agent reached step limit. Partial progress may be available."</span></code></pre>
+</code-block><h2 id="making-it-real" tabindex="-1">Making It Real <a class="header-anchor" href="#making-it-real" aria-hidden="true">#</a></h2>
+<p>Deploying an agent is deploying a backend service, plus extra concerns unique to LLM-based systems.</p>
+<h3 id="cost" tabindex="-1">Cost <a class="header-anchor" href="#cost" aria-hidden="true">#</a></h3>
+<p>Every agent step is an API call. Every API call costs tokens. A multi-step agent that makes 10 tool calls per request can easily cost 10-50x more than a single LLM call. You need to budget for this.</p>
+<p>Practical strategies:</p>
+<ul>
+<li>Use cheaper models (Claude Haiku, GPT-4o-mini, Gemini Flash, Qwen-turbo) for simple steps, expensive models (Claude Opus, GPT-4, Gemini Pro, Mistral Large) for complex reasoning.</li>
+<li>Cache tool results aggressively. If two users ask about the same data, don’t re-fetch.</li>
+<li>Set hard token budgets per agent run.</li>
+</ul>
+<h3 id="latency" tabindex="-1">Latency <a class="header-anchor" href="#latency" aria-hidden="true">#</a></h3>
+<p>Multi-step agents are inherently slow. Each step requires a round-trip to the model API. A 5-step agent with 2-second API latency takes at minimum 10 seconds.</p>
+<p>Strategies:</p>
+<ul>
+<li>Parallelize independent tool calls where possible.</li>
+<li>Stream partial outputs so the user sees progress.</li>
+<li>Set user expectations. A loading spinner that says “Researching…” is better than a blank screen for 30 seconds.</li>
+</ul>
+<h3 id="observability" tabindex="-1">Observability <a class="header-anchor" href="#observability" aria-hidden="true">#</a></h3>
+<p>This is where <a href="https://docs.anthropic.com/en/docs/build-with-claude/prompt-caching">traces</a> become critical. Logs tell you <em>what</em> happened. Traces tell you <em>why</em>.</p>
+<p>For every agent run, you want to capture:</p>
+<ul>
+<li>The user’s original request</li>
+<li>Each LLM call (input, output, model, latency, token usage)</li>
+<li>Each tool call (name, arguments, result, duration)</li>
+<li>The final output</li>
+<li>Total cost and duration</li>
+</ul>
+<pre class="mermaid">flowchart TD
+    A[User Query] --> B[Agent Run]
+    B --> C[Tool Calls]
+    B --> D[LLM Reasoning Steps]
+    C --> E[Structured Logs]
+    D --> E
+    E --> F[Tracing Dashboard]
+    F --> G[Cost Tracking]
+    F --> H[Latency Analysis]
+    F --> I[Error Patterns]
+</pre><p>Tools like <a href="https://langfuse.com/">Langfuse</a>, <a href="https://braintrustdata.com/">Braintrust</a>, and <a href="https://phoenix.arize.com/">Arize Phoenix</a> are purpose-built for this. If you’re already using Datadog or Grafana, you can pipe agent traces there too.</p>
+<h2 id="memory%3A-the-state-management-problem" tabindex="-1">Memory: The State Management Problem <a class="header-anchor" href="#memory%3A-the-state-management-problem" aria-hidden="true">#</a></h2>
+<p>Memory in agents maps directly to state management in apps. And just like in apps, getting it wrong leads to subtle, hard-to-debug issues.</p>
+<p><strong>Short-term memory</strong> is the conversation history within a single agent run. This is your working context. Every message, tool call, and result accumulates here. The challenge is context window management, since you can’t keep everything forever.</p>
+<p><strong>Long-term memory</strong> is persistent state across runs. User preferences, past interactions, learned facts. This is your database. The challenge is retrieval: how does the agent know what’s relevant from thousands of past interactions?</p>
+<p>Most agents don’t need long-term memory at first. Start without it. Add it when users complain that the agent “forgets” important context.</p>
+<p>If you do need memory, vector databases (Pinecone, Weaviate, Qdrant) are the standard approach for semantic retrieval. But don’t underestimate simpler approaches. A SQLite database with structured metadata can go surprisingly far.</p>
+<h3 id="context-management" tabindex="-1">Context Management <a class="header-anchor" href="#context-management" aria-hidden="true">#</a></h3>
+<p>Context is the single most important resource an agent has. Every decision the LLM makes is based on what’s in its context window. Feed it too little and it makes uninformed choices. Feed it too much and it drowns in noise, misses key details, or hits token limits mid-run. For a multi-step agent that accumulates tool calls and results over 10-15 steps, context bloat isn’t a theoretical risk, it’s the default outcome.</p>
+<p>This matters more for agents than for simple chat applications. In a chatbot, a bad context window means a slightly off response. In an agent, it means the wrong tool gets called, the wrong arguments get passed, and the entire trajectory goes sideways. The LLM’s ability to plan and reason degrades as context fills up with irrelevant information.</p>
+<h4 id="sliding-window" tabindex="-1">Sliding window <a class="header-anchor" href="#sliding-window" aria-hidden="true">#</a></h4>
+<p>Keep only the last N messages or tokens. Simple and predictable, but you lose early context that might still be relevant. Works well for short-lived agents where early steps don’t inform later ones.</p>
+<h4 id="summarization" tabindex="-1">Summarization <a class="header-anchor" href="#summarization" aria-hidden="true">#</a></h4>
+<p>Periodically compress older messages into a summary and replace them. The agent retains the gist without carrying the full weight. This is the most common pattern for long-running agents. The tradeoff is that summarization itself costs tokens and can lose nuance.</p>
+<h4 id="selective-injection" tabindex="-1">Selective injection <a class="header-anchor" href="#selective-injection" aria-hidden="true">#</a></h4>
+<p>Don’t carry everything forward. Instead, store tool results and past reasoning externally, then use RAG to pull in only what’s relevant for the current step. This is the most scalable approach but adds retrieval latency and complexity.</p>
+<h4 id="structured-context" tabindex="-1">Structured context <a class="header-anchor" href="#structured-context" aria-hidden="true">#</a></h4>
+<p>Instead of dumping raw tool outputs into the conversation, format them into concise structured summaries before adding them to context. A 500-line API response becomes a 10-line summary of the fields that matter. This is cheap to implement and often the highest-impact optimization.</p>
+<p>As your agent handles longer tasks or serves more users concurrently, context management becomes a scaling bottleneck. Each agent run holds its own context in memory. Longer contexts mean more tokens per API call, which means higher cost and latency. At scale, the practical strategies are: keep individual agent runs short and focused, break complex tasks into sub-agents with their own scoped context, and invest in good summarization so context stays lean. The agents that scale well aren’t the ones with the biggest context windows, they’re the ones that are smartest about what goes into the window in the first place.</p>
+<h2 id="distribution" tabindex="-1">Distribution <a class="header-anchor" href="#distribution" aria-hidden="true">#</a></h2>
+<p>This is where agents and traditional apps truly diverge.</p>
+<p>Apps distribute through well-understood channels: App Store, web, desktop. Agents have more options, and the right distribution model fundamentally shapes how you build.</p>
+<ul>
+<li><strong>API-first agents</strong>: Your agent is a service that other developers integrate. Think: a code review agent that plugs into GitHub via webhooks.</li>
+<li><strong>Chat/UI agents</strong>: Embedded in a conversational interface. The most common pattern today.</li>
+<li><strong>CLI agents</strong>: For developer tools and power users. <a href="https://docs.anthropic.com/en/docs/claude-code/overview">Claude Code</a> is a good example, a full agent that lives in the terminal.</li>
+<li><strong>Embedded agents</strong>: Inside existing products, triggered by user actions. Not a standalone “AI feature” but intelligence woven into the product flow.</li>
+</ul>
+<p>And then there’s composability. With protocols like <a href="https://modelcontextprotocol.io/">Model Context Protocol (MCP)</a>, agents can discover and use tools dynamically. This shifts distribution from “ship a complete agent” to “ship capabilities that any agent can use.” I’ve been <a href="/skills-agents-and-sutras/">building skills as composable units</a> for exactly this reason. The future isn’t monolithic agents, it’s an ecosystem of interoperable capabilities.</p>
+<blockquote>
+<p>The best agent doesn’t win. The most <strong>accessible</strong> agent does.</p>
+</blockquote>
+<p>This is true for apps and doubly true for agents. An agent that’s 80% as capable but available inside the tool your users already live in will beat a 100% capable agent that requires switching contexts.</p>
+<h2 id="putting-it-all-together" tabindex="-1">Putting It All Together <a class="header-anchor" href="#putting-it-all-together" aria-hidden="true">#</a></h2>
+<p>Let’s trace through a real example. Say you’re building an agent that helps developers understand unfamiliar codebases. Given a GitHub repo URL, it parses the structure, identifies key patterns, and produces a visual summary.</p>
+<h3 id="design-phase" tabindex="-1">Design Phase <a class="header-anchor" href="#design-phase" aria-hidden="true">#</a></h3>
+<ul>
+<li><strong>Goal</strong>: Single repo → structured explanation with visual</li>
+<li><strong>Control style</strong>: Plan-then-execute (the steps are predictable)</li>
+<li><strong>Tools</strong>: repo cloner, file reader, code summarizer, diagram generator</li>
+<li><strong>Memory</strong>: None needed (each request is independent)</li>
+</ul>
+<h3 id="implementation" tabindex="-1">Implementation <a class="header-anchor" href="#implementation" aria-hidden="true">#</a></h3>
+<pre class="mermaid">flowchart TD
+    A[GitHub Repo URL] --> B[Clone & Parse Structure]
+    B --> C[Identify Key Files & Patterns]
+    C --> D[LLM: Summarize Architecture]
+    D --> E[Generate Visual Diagram]
+    E --> F[Return Summary + Diagram]
+</pre><h3 id="testing" tabindex="-1">Testing <a class="header-anchor" href="#testing" aria-hidden="true">#</a></h3>
+<ul>
+<li><strong>Tool tests</strong>: Does the repo cloner handle private repos? Large repos? Monorepos?</li>
+<li><strong>Single-step evals</strong>: Given a known repo, does the summarizer identify the right architectural patterns?</li>
+<li><strong>End-to-end evals</strong>: For 50 popular open-source repos, are the summaries accurate and the diagrams useful?</li>
+<li><strong>Prompt injection</strong>: What if the repo’s README contains instructions to the LLM?</li>
+</ul>
+<h3 id="where-people-mess-up" tabindex="-1">Where People Mess Up <a class="header-anchor" href="#where-people-mess-up" aria-hidden="true">#</a></h3>
+<ul>
+<li><strong>No evals</strong> → inconsistent outputs that they don’t notice until users complain</li>
+<li><strong>Too many tools</strong> → the LLM gets confused about which to use, or invents parameters</li>
+<li><strong>No constraints</strong> → the agent tries to read every file in a 10,000-file monorepo</li>
+<li><strong>No cost limits</strong> → a single request triggers hundreds of LLM calls parsing files</li>
+</ul>
+<p>Every one of these is preventable with the same engineering discipline we apply to regular apps.</p>
+<h2 id="takeaways" tabindex="-1">Takeaways <a class="header-anchor" href="#takeaways" aria-hidden="true">#</a></h2>
+<p>If you take one thing from this post, let it be this: <strong>agents are not a new paradigm. They’re a new runtime for the same engineering principles we’ve always used.</strong></p>
+<ul>
+<li>Design agents like systems, not like prompts</li>
+<li>Most agent failures are design failures, not model failures</li>
+<li>Testing and evals are the biggest missing piece. <a href="/ai-evals/">Invest in them early</a>.</li>
+<li>Start simple: 1 model, 2-3 tools, no memory. Expand with evidence.</li>
+<li>Observability isn’t optional. You need to know what your agent did and why.</li>
+<li>Distribution and accessibility will decide winners, not raw capability</li>
+</ul>
+<blockquote>
+<p>We don’t need better prompts. We need better <strong>systems thinking</strong> for agents.</p>
+</blockquote>
+<p><em>The playbook already exists. We just need to open it.</em></p>
+<h2 id="references-%26-further-reading" tabindex="-1">References &amp; Further Reading <a class="header-anchor" href="#references-%26-further-reading" aria-hidden="true">#</a></h2>
+<ul>
+<li><a href="https://arxiv.org/abs/2210.03629">ReAct: Synergizing Reasoning and Acting in Language Models</a>, the foundational paper on the reason-then-act loop</li>
+<li><a href="https://www.anthropic.com/engineering/building-effective-agents">Anthropic: Building Effective Agents</a>, practical patterns from Anthropic’s research</li>
+<li><a href="https://docs.anthropic.com/en/docs/build-with-claude/develop-tests">Anthropic: Guide to Evaluations</a>, how to test LLM-based systems properly</li>
+<li><a href="https://modelcontextprotocol.io/">Model Context Protocol</a>, open standard for connecting LLMs to tools and data</li>
+<li><a href="https://langchain-ai.github.io/langgraph/">LangGraph Documentation</a>, graph-based agent orchestration</li>
+<li><a href="https://ragas.io/">Ragas</a>, evaluation framework for LLM applications</li>
+<li><a href="https://langfuse.com/">Langfuse</a>, open-source observability for LLM apps</li>
+<li><a href="https://lilianweng.github.io/posts/2023-06-23-agent/">Lilian Weng: LLM Powered Autonomous Agents</a>, one of the best technical overviews of agent architectures</li>
+<li><a href="https://arxiv.org/abs/2409.02977">The Landscape of Emerging AI Agent Architectures</a>, survey of agent design patterns</li>
+</ul>
+
+        </div>
+
+        <div class="article-end">
+            <span>✦</span>
+            <span>✦</span>
+            <span>✦</span>
+        </div>
+
+        <div class="post-navigation">
+            <div class="post-nav-item post-nav-previous">
+                    <a href="/skills-agents-and-sutras/">
+                        <span class="nav-arrow">←</span>
+                        <div class="nav-content">
+                            <p class="nav-label">Previous</p>
+                            <p class="nav-title">Skills, Agents, and the Missing Middle</p>
+                        </div>
+                    </a>
+                
+            </div>
+
+            <div class="post-nav-item post-nav-next">
+                    <a href="/software-without-pause/">
+                        <div class="nav-content">
+                            <p class="nav-label">Next</p>
+                            <p class="nav-title">Software Without Pause</p>
+                        </div>
+                        <span class="nav-arrow">→</span>
+                    </a>
+                
+            </div>
+        </div>
+    </div>
+
+    </main>
+    <footer class="sticky bottom-0 z-50 glass-footer py-4">
+  <div class="container mx-auto max-w-7xl px-8 flex items-center justify-between">
+    <div class="text-base">
+      by <a href="https://anirudha.dev" target="_blank" rel="noopener noreferrer">Ani</a>
+    </div>
+
+    <div class="flex items-center gap-4">
+      <a href="https://github.com/anistark" target="_blank" rel="noopener noreferrer" class="footer-icon" aria-label="GitHub">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="currentColor" viewBox="0 0 24 24">
+          <path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/>
+        </svg>
+      </a>
+      <a href="https://x.com/kranirudha" target="_blank" rel="noopener noreferrer" class="footer-icon" aria-label="X">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="currentColor" viewBox="0 0 24 24">
+          <path d="M14.234 10.162 22.977 0h-2.072l-7.591 8.824L7.251 0H.258l9.168 13.343L.258 24H2.33l8.016-9.318L16.749 24h6.993zm-2.837 3.299-.929-1.329L3.076 1.56h3.182l5.965 8.532.929 1.329 7.754 11.09h-3.182z"/>
+        </svg>
+      </a>
+      <a href="https://fosstodon.org/@ani" target="_blank" rel="noopener noreferrer" class="footer-icon" aria-label="Mastodon">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="currentColor" viewBox="0 0 24 24">
+          <path d="M23.268 5.313c-.35-2.578-2.617-4.61-5.304-5.004C17.51.242 15.792 0 11.813 0h-.03c-3.98 0-4.835.242-5.288.309C3.882.692 1.496 2.518.917 5.127.64 6.412.61 7.837.661 9.143c.074 1.874.088 3.745.26 5.611.118 1.24.325 2.47.62 3.68.55 2.237 2.777 4.098 4.96 4.857 2.336.792 4.849.923 7.256.38.265-.061.527-.132.786-.213.585-.184 1.27-.39 1.774-.753a.057.057 0 0 0 .023-.043v-1.809a.052.052 0 0 0-.02-.041.053.053 0 0 0-.046-.01 20.282 20.282 0 0 1-4.709.545c-2.73 0-3.463-1.284-3.674-1.818a5.593 5.593 0 0 1-.319-1.433.053.053 0 0 1 .066-.054c1.517.363 3.072.546 4.632.546.376 0 .75 0 1.125-.01 1.57-.044 3.224-.124 4.768-.422.038-.008.077-.015.11-.024 2.435-.464 4.753-1.92 4.989-5.604.008-.145.03-1.52.03-1.67.002-.512.167-3.63-.024-5.545zm-3.748 9.195h-2.561V8.29c0-1.309-.55-1.976-1.67-1.976-1.23 0-1.846.79-1.846 2.35v3.403h-2.546V8.663c0-1.56-.617-2.35-1.848-2.35-1.112 0-1.668.668-1.67 1.977v6.218H4.822V8.102c0-1.31.337-2.35 1.011-3.12.696-.77 1.608-1.164 2.74-1.164 1.311 0 2.302.5 2.962 1.498l.638 1.06.638-1.06c.66-.999 1.65-1.498 2.96-1.498 1.13 0 2.043.395 2.74 1.164.675.77 1.012 1.81 1.012 3.12z"/>
+        </svg>
+      </a>
+      <a href="https://linkedin.com/in/kranirudha" target="_blank" rel="noopener noreferrer" class="footer-icon" aria-label="LinkedIn">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="currentColor" viewBox="0 0 24 24">
+          <path d="M4.98 3.5c0 1.381-1.11 2.5-2.48 2.5s-2.48-1.119-2.48-2.5c0-1.38 1.11-2.5 2.48-2.5s2.48 1.12 2.48 2.5zm.02 4.5h-5v16h5v-16zm7.982 0h-4.968v16h4.969v-8.399c0-4.67 6.029-5.052 6.029 0v8.399h4.988v-10.131c0-7.88-8.922-7.593-11.018-3.714v-2.155z"/>
+        </svg>
+      </a>
+      <a href="/feed/feed.xml" class="footer-icon" aria-label="RSS feed">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="currentColor" viewBox="0 0 24 24">
+          <path d="M6.18 15.64a2.18 2.18 0 0 1 2.18 2.18C8.36 19 7.38 20 6.18 20C5 20 4 19 4 17.82a2.18 2.18 0 0 1 2.18-2.18M4 4.44A15.56 15.56 0 0 1 19.56 20h-2.83A12.73 12.73 0 0 0 4 7.27V4.44m0 5.66a9.9 9.9 0 0 1 9.9 9.9h-2.83A7.07 7.07 0 0 0 4 12.93V10.1Z"/>
+        </svg>
+      </a>
+    </div>
+  </div>
+</footer>
+
+    
+    <script src="https://unpkg.com/clipboard@2/dist/clipboard.min.js"></script>
+    <script src="/assets/main.bundle.js"></script>
+    <script type="module">
+      import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs';
+      mermaid.initialize({
+        startOnLoad: true,
+        theme: ['reading', 'beach'].includes(document.documentElement.getAttribute('data-theme')) ? 'default' : 'dark',
+        themeVariables: {
+          fontSize: '14px',
+        }
+      });
+    </script>
+  </body>
+</html>

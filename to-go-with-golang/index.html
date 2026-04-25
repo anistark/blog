@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    
+    <meta itemprop="name" content="To Go with Golang | AniLog">
+    <meta itemprop="description" content="At least that&#39;s how the website describes itself.">
+
+    
+    <meta name="twitter:title" content="To Go with Golang | AniLog">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:description" content="At least that&#39;s how the website describes itself.">
+    <meta name="twitter:site" content="@kranirudha">
+    <meta name="twitter:creator" content="@kranirudha">
+    <meta name="twitter:image:src" content="https://blog.anirudha.dev/images/posts/VC5kdoK_s.jpeg">
+
+    
+    <meta name="og:title" content="To Go with Golang | AniLog">
+    <meta name="og:description" content="At least that&#39;s how the website describes itself.">
+    <meta name="og:image" content="https://blog.anirudha.dev/images/posts/VC5kdoK_s.jpeg">
+    <meta name="og:url" content="https://blog.anirudha.dev/">
+    <meta name="og:site_name" content="AniLog">
+    <meta name="og:locale" content="en_GB">
+    <meta name="og:type" content="website">
+
+    <link rel="icon" type="image/png" href="/me.png" />
+    <link rel="alternate" type="application/atom+xml" title="AniLog" href="https://blog.anirudha.dev/feed/feed.xml" />
+
+    <title>To Go with Golang | AniLog</title>
+
+    <link rel="stylesheet" href="/assets/main.bundle.css">
+
+    <script>
+      // Set theme before page renders to prevent flash
+      (function() {
+        const theme = localStorage.getItem('theme') || 'night';
+        if (theme !== 'night') {
+          document.documentElement.setAttribute('data-theme', theme);
+        }
+      })();
+    </script>
+
+    
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-YGZHVY9TD7"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-YGZHVY9TD7');
+    </script>
+    
+
+    
+  </head>
+  <body class="flex flex-col min-h-screen">
+    <canvas id="ambience-canvas"></canvas>
+    <header class="sticky top-0 z-50 glass-header">
+  <nav class="container mx-auto max-w-7xl px-8 py-3 flex flex-wrap items-center justify-between">
+    <div class="flex items-center gap-3">
+      <a href="/" class="flex items-center gap-3">
+        <img src="/ani.png" alt="AniLog logo" class="w-10 h-10 object-cover">
+        <h1 class="text-2xl leading-none m-0">AniLog</h1>
+      </a>
+    </div>
+
+    <div class="flex items-center gap-6">
+      <div class="theme-switcher">
+        <button id="theme-switcher-btn" class="theme-switcher-btn" aria-label="Switch theme" aria-expanded="false">
+          <span id="theme-active-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.985 12.486a9 9 0 1 1-9.473-9.472c.405-.022.617.46.402.803a6 6 0 0 0 8.268 8.268c.344-.215.825-.004.803.401"/></svg>
+          </span>
+        </button>
+        <div id="theme-dropdown" class="theme-dropdown">
+          <button class="theme-option" data-theme-value="night">
+            <span class="theme-icon"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.985 12.486a9 9 0 1 1-9.473-9.472c.405-.022.617.46.402.803a6 6 0 0 0 8.268 8.268c.344-.215.825-.004.803.401"/></svg></span>
+            <span>Night</span>
+          </button>
+          <button class="theme-option" data-theme-value="reading">
+            <span class="theme-icon"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 7v14"/><path d="M3 18a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h5a4 4 0 0 1 4 4 4 4 0 0 1 4-4h5a1 1 0 0 1 1 1v13a1 1 0 0 1-1 1h-6a3 3 0 0 0-3 3 3 3 0 0 0-3-3z"/></svg></span>
+            <span>Reading</span>
+          </button>
+          <button class="theme-option" data-theme-value="forest">
+            <span class="theme-icon"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m17 14 3 3.3a1 1 0 0 1-.7 1.7H4.7a1 1 0 0 1-.7-1.7L7 14h-.3a1 1 0 0 1-.7-1.7L9 9h-.2A1 1 0 0 1 8 7.3L12 3l4 4.3a1 1 0 0 1-.8 1.7H15l3 3.3a1 1 0 0 1-.7 1.7H17Z"/><path d="M12 22v-3"/></svg></span>
+            <span>Forest</span>
+          </button>
+          <button class="theme-option" data-theme-value="beach">
+            <span class="theme-icon"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 8c0-2.76-2.46-5-5.5-5S2 5.24 2 8h2l1-1 1 1h4"/><path d="M13 7.14A5.82 5.82 0 0 1 16.5 6c3.04 0 5.5 2.24 5.5 5h-3l-1-1-1 1h-3"/><path d="M5.89 9.71c-2.15 2.15-2.3 5.47-.35 7.43l4.24-4.25.7-.7.71-.71 2.12-2.12c-1.95-1.96-5.27-1.8-7.42.35"/><path d="M11 15.5c.5 2.5-.17 4.5-1 6.5h4c2-5.5-.5-12-1-14"/></svg></span>
+            <span>Beach</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </nav>
+</header>
+
+    <main class="container mx-auto max-w-6xl p-8 grow">
+      
+    <p></p>
+
+    
+        <div class="post-cover-image" style="background-image: url('/images/posts/VC5kdoK_s.jpeg');"></div>
+    
+
+    <div>
+        <div class="post-title-row">
+            <h2>To Go with Golang</h2>
+            
+        </div>
+
+        
+            <div class="mt-4 mb-2">
+                <a class="tag introduction" href="/tag/introduction">introduction</a><a class="tag go" href="/tag/go">go</a><a class="tag webdev" href="/tag/webdev">webdev</a><a class="tag programming-languages" href="/tag/programming-languages">programming-languages</a>
+            </div>
+        
+
+        
+            
+                <p class="text-sm italic">Published on
+                    <span datetime="Tue Jan 26 2021 00:00:00 GMT+0000 (Coordinated Universal Time)">January 26, 2021</span>.
+                    <span class="reading-time"> · 7 min read</span></p>
+            
+        
+
+        <div class="content post">
+            <blockquote>
+<p>Go is an open source programming language that makes it easy to build simple, reliable, and efficient software.</p>
+</blockquote>
+<p>At least that’s how the website describes itself.
+The first time I tried golang was about 3 years ago as a hobby project. However lack of an implementation need and a busy work schedule made my side project obsolete. Of course, you would know what that feels like. Familiar territory. So, when the opportunity rose to write a new service in golang, I absolutely jumped at it.</p>
+<p>I’m supposed to build a small web service accepting http connection and storing some data on mongodb. Returns a certain set of result, and so on. Basic CRUD stuff. If you’re not interested in #webdev, I believe this is your stop. If you’re interested however, read on to know about what I used and why. The entire dev cycle from dev to deploy phase.</p>
+<p>First of all, why I opted for golang anyway? The service I’m supposed to write needs a highly concurrent persistent api service. It needs to be fast and also easily scalable. We could have gone with python fastapi, but at this stage I just wanted to learn golang.</p>
+<h3 id="setting-up-golang" tabindex="-1">Setting up Golang <a class="header-anchor" href="#setting-up-golang" aria-hidden="true">#</a></h3>
+<p>If you’ve finally decided to go ahead with this, let’s do this.
+Easiest way probably is to just <a href="https://golang.org/doc/install">download from the official website</a> and get going.
+<a href="https://medium.com/golang-learn/quick-go-setup-guide-on-mac-os-x-956b327222b8">Here</a>’s another article which very nicely explains the setup process. This is ideally for mac OS. In case you’re looking for other OSes, please follow respective guides.</p>
+<p>Be sure to setup your GOPATH very properly as this will remain as your common ground for any defined packages installed in your system.</p>
+<p>Once done, make sure your console recognises the GOPATH.
+<code>echo $GOPATH</code></p>
+<h3 id="http-service" tabindex="-1">HTTP Service <a class="header-anchor" href="#http-service" aria-hidden="true">#</a></h3>
+<p>I went with <a href="https://github.com/valyala/fasthttp">fasthttp</a>, which provides high performance, zero memory allocations in hot paths and Up to 10x faster than net/http for a large throughput service. Go provides out of the box http support but for a beginner, it felt much easier to go with a framework, thereby ended up using fiber.</p>
+<h3 id="api" tabindex="-1">API <a class="header-anchor" href="#api" aria-hidden="true">#</a></h3>
+<p><a href="https://github.com/gofiber/fiber">Fiber</a> is an Express inspired web framework built on top of Fasthttp, the fastest HTTP engine for Go.
+Make sure to use Fiber v2. Fiber V2 has a lot of breaking changes to Fiber v1. I had to spend an extra hour just upgrading these <a href="https://github.com/gofiber/fiber/issues/736">breaking changes</a> cause I started with v1.</p>
+<p>A simple fiber service can be started using just this:</p>
+<code-block lang="go"><pre class="language-go"><code class="language-go"><span class="token keyword">package</span> main<br><br><span class="token keyword">import</span> <span class="token string">"github.com/gofiber/fiber/v2"</span><br><br><span class="token keyword">func</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span><br>    app <span class="token operator">:=</span> fiber<span class="token punctuation">.</span><span class="token function">New</span><span class="token punctuation">(</span><span class="token punctuation">)</span><br><br>    app<span class="token punctuation">.</span><span class="token function">Get</span><span class="token punctuation">(</span><span class="token string">"/"</span><span class="token punctuation">,</span> <span class="token keyword">func</span><span class="token punctuation">(</span>c <span class="token operator">*</span>fiber<span class="token punctuation">.</span>Ctx<span class="token punctuation">)</span> <span class="token builtin">error</span> <span class="token punctuation">{</span><br>        <span class="token keyword">return</span> c<span class="token punctuation">.</span><span class="token function">SendString</span><span class="token punctuation">(</span><span class="token string">"Hello, World 👋!"</span><span class="token punctuation">)</span><br>    <span class="token punctuation">}</span><span class="token punctuation">)</span><br><br>    app<span class="token punctuation">.</span><span class="token function">Listen</span><span class="token punctuation">(</span><span class="token string">":3000"</span><span class="token punctuation">)</span><br><span class="token punctuation">}</span></code></pre>
+</code-block><p>You now have a live server running at your <a href="http://localhost:3000">http://localhost:3000</a>.</p>
+<h3 id="connect-to-a-database" tabindex="-1">Connect to a DataBase <a class="header-anchor" href="#connect-to-a-database" aria-hidden="true">#</a></h3>
+<p>Next, we need our web service to talk to our web-service. There are quite a few ODM(Object Document Mapper) out there. But given my initial requirement was pretty straightforward, I went the default <a href="https://github.com/mongodb/mongo-go-driver">mongodb golang driver</a>.
+It’s pretty straightforward to connect an mongodb client:</p>
+<code-block lang="go"><pre class="language-go"><code class="language-go">client<span class="token punctuation">,</span> err <span class="token operator">:=</span> mongo<span class="token punctuation">.</span><span class="token function">Connect</span><span class="token punctuation">(</span>ctx<span class="token punctuation">,</span> options<span class="token punctuation">.</span><span class="token function">Client</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">ApplyURI</span><span class="token punctuation">(</span><span class="token string">"mongodb://localhost:27017"</span><span class="token punctuation">)</span><span class="token punctuation">)</span></code></pre>
+</code-block><p>So, now we got an active db connection going.
+Ideally, that’s all we would need to create the smallest possible POC(Proof Of Concept) of any web-service you can think of.
+Obviously, do go through the proper documentation as there are many pitfalls at every stage. Might as well address a few of those on a separate post.</p>
+<p>However, to make a production level POC, we need a few more stuff. So, let’s discover a few add-ons to our service:</p>
+<h3 id="logging" tabindex="-1">Logging <a class="header-anchor" href="#logging" aria-hidden="true">#</a></h3>
+<p>Logging is one of the most important aspects in any programming. To see what’s working and where has been the crux of any development really. We sometimes debug using our logs. Specially in production.
+The easiest and in-built way of printing/logging can be done using <a href="https://golang.org/pkg/fmt/">fmt</a> or <a href="https://golang.org/pkg/log/">log</a> packages.
+A small example:</p>
+<code-block lang="go"><pre class="language-go"><code class="language-go">fmt<span class="token punctuation">.</span><span class="token function">Print</span><span class="token punctuation">(</span><span class="token string">"Printing with fmt"</span><span class="token punctuation">)</span><br><br>buf    bytes<span class="token punctuation">.</span>Buffer<br>logger <span class="token operator">=</span> log<span class="token punctuation">.</span><span class="token function">New</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>buf<span class="token punctuation">,</span> <span class="token string">"logger: "</span><span class="token punctuation">,</span> log<span class="token punctuation">.</span>Lshortfile<span class="token punctuation">)</span><br>logger<span class="token punctuation">.</span><span class="token function">Printf</span><span class="token punctuation">(</span><span class="token string">"Logging with log"</span><span class="token punctuation">)</span></code></pre>
+</code-block><p>The use log is highly encouraged as compared to fmt. Log is thread safe where as fmt is not. A Logger can be used simultaneously from multiple goroutines; it guarantees to serialize access to the Writer.</p>
+<code-block lang="go"><pre class="language-go"><code class="language-go">log<span class="token punctuation">.</span><span class="token function">Fatalf</span><span class="token punctuation">(</span><span class="token string">"Fatal err happened:"</span><span class="token punctuation">,</span> err<span class="token punctuation">)</span></code></pre>
+</code-block><p>You can also add fatal logs if in case you would want to flag certain types of logs which might be critical to the application.</p>
+<p>Some added advantages of using Fiber is it’s logging module. If you’re on v1, you would need to install the <a href="https://github.com/gofiber/logger">logger package</a> separately, but in v2 it has been made available within v2 itself: <code>&quot;github.com/gofiber/fiber/v2/middleware/logger&quot;</code>.</p>
+<p>If you need to log each request as and when it comes in, you can add something like this:</p>
+<code-block lang="go"><pre class="language-go"><code class="language-go">app<span class="token punctuation">.</span><span class="token function">Use</span><span class="token punctuation">(</span>requestid<span class="token punctuation">.</span><span class="token function">New</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><br><br>​app​<span class="token punctuation">.</span>​Use​<span class="token punctuation">(</span>​logger​<span class="token punctuation">.</span>​New​<span class="token punctuation">(</span>logger<span class="token punctuation">.</span>​Config​<span class="token punctuation">{</span><br>	<span class="token comment">// For more options, see the Config section</span><br>  Format​<span class="token punctuation">:</span> <span class="token string">"${pid} ${locals:requestid} ${status} - ${method} ${path}​\n​"</span>​<span class="token punctuation">,</span><br><span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">)</span></code></pre>
+</code-block><p>Now, each route visited will come up on your console.</p>
+<h3 id="hot-reloading" tabindex="-1">Hot Reloading <a class="header-anchor" href="#hot-reloading" aria-hidden="true">#</a></h3>
+<p>Golang is a compiled language, which means unlike Python or NodeJS which are interpreted languages, we need to build it everytime we would want to run it.
+Ideally we build the project as such: <code>go build .</code>
+And then we run it like: <code>./app-name</code>.</p>
+<p>However, we can still run the dev version as: <code>go run main.go</code>
+Or if there’s more than one file: <code>go run *.go</code></p>
+<p>But while development process, we often make changes and would want to check the output without having to restart the go server manually.
+You can obviously write your own small shell script to detect any file changes on the entire directory and restart <code>go run</code> everytime.
+If you’re using docker, you can also write the entire <code>go build .</code> and <code>./app-name</code> process inside the container.</p>
+<p>Needed a more robust way, which is provided by this package called fresh.
+<a href="https://github.com/gravityblast/fresh">Fresh</a> is a command line tool that builds and (re)starts your web application everytime you save a Go or template file.
+You can also customise the log color that comes with the default fresh setup. It requires a default <code>runner.conf</code> file. If you want to go with the default options, you don’t even need this file on your project root.</p>
+<terminal-block>root:              .
+tmp_path:          ./tmp
+build_name:        runner-build
+build_log:         runner-build-errors.log
+valid_ext:         .go, .tpl, .tmpl, .html
+no_rebuild_ext:    .tpl, .tmpl, .html
+ignored:           assets, tmp
+build_delay:       600
+colors:            1
+log_color_main:    cyan
+log_color_build:   yellow
+log_color_runner:  green
+log_color_watcher: magenta
+log_color_app:     blue</terminal-block><p>Now we’ve a complete dev setup done and dusted.</p>
+<h3 id="routing" tabindex="-1">Routing <a class="header-anchor" href="#routing" aria-hidden="true">#</a></h3>
+<p>I’m obsessed with structured code. Everything can be written in a single file and ran but a structured codebase, makes it all the more easier to document, read and later manage it.
+Thereby, routing is a crucial part of adopting a new framework.
+Fiber comes with inbuilt route grouping</p>
+<code-block lang="go"><pre class="language-go"><code class="language-go"><span class="token keyword">func</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span><br>    app <span class="token operator">:=</span> fiber<span class="token punctuation">.</span><span class="token function">New</span><span class="token punctuation">(</span><span class="token punctuation">)</span><br><br>    api <span class="token operator">:=</span> app<span class="token punctuation">.</span><span class="token function">Group</span><span class="token punctuation">(</span><span class="token string">"/api"</span><span class="token punctuation">,</span> middleware<span class="token punctuation">)</span> <span class="token comment">// /api</span><br><br>    v1 <span class="token operator">:=</span> api<span class="token punctuation">.</span><span class="token function">Group</span><span class="token punctuation">(</span><span class="token string">"/v1"</span><span class="token punctuation">,</span> middleware<span class="token punctuation">)</span>   <span class="token comment">// /api/v1</span><br>    v1<span class="token punctuation">.</span><span class="token function">Get</span><span class="token punctuation">(</span><span class="token string">"/list"</span><span class="token punctuation">,</span> handler<span class="token punctuation">)</span>             <span class="token comment">// /api/v1/list</span><br>    v1<span class="token punctuation">.</span><span class="token function">Get</span><span class="token punctuation">(</span><span class="token string">"/user"</span><span class="token punctuation">,</span> handler<span class="token punctuation">)</span>             <span class="token comment">// /api/v1/user</span><br><br>    v2 <span class="token operator">:=</span> api<span class="token punctuation">.</span><span class="token function">Group</span><span class="token punctuation">(</span><span class="token string">"/v2"</span><span class="token punctuation">,</span> middleware<span class="token punctuation">)</span>   <span class="token comment">// /api/v2</span><br>    v2<span class="token punctuation">.</span><span class="token function">Get</span><span class="token punctuation">(</span><span class="token string">"/list"</span><span class="token punctuation">,</span> handler<span class="token punctuation">)</span>             <span class="token comment">// /api/v2/list</span><br>    v2<span class="token punctuation">.</span><span class="token function">Get</span><span class="token punctuation">(</span><span class="token string">"/user"</span><span class="token punctuation">,</span> handler<span class="token punctuation">)</span>             <span class="token comment">// /api/v2/user</span><br><br>    app<span class="token punctuation">.</span><span class="token function">Listen</span><span class="token punctuation">(</span><span class="token string">":3000"</span><span class="token punctuation">)</span><br><span class="token punctuation">}</span></code></pre>
+</code-block><p>This can help you in writing a more structured app as such you might need to authenticate only a particular group or log a particular route and so on.</p>
+<h3 id="deployment" tabindex="-1">Deployment <a class="header-anchor" href="#deployment" aria-hidden="true">#</a></h3>
+<p>Probably best to go with a containerised deployment. We have deployed on <a href="https://cloud.google.com/kubernetes-engine">Kubernetes - Google Kubernetes Engine (GKE)</a> which only needs an additional <code>Dockerfile</code>.</p>
+<p>It’s better to go with a multi-stage docker setup:</p>
+<code-block lang="dockerfile"><pre class="language-dockerfile"><code class="language-dockerfile"><span class="token instruction"><span class="token keyword">FROM</span> golang:1.12-alpine <span class="token keyword">AS</span> build_base</span><br><br><span class="token instruction"><span class="token keyword">RUN</span> apk add --no-cache git</span><br><br><span class="token comment"># Set the Current Working Directory inside the container</span><br><span class="token instruction"><span class="token keyword">WORKDIR</span> /tmp/go-sample-app</span><br><br><span class="token comment"># We want to populate the module cache based on the go.{mod,sum} files.</span><br><span class="token instruction"><span class="token keyword">COPY</span> go.mod .</span><br><span class="token instruction"><span class="token keyword">COPY</span> go.sum .</span><br><br><span class="token instruction"><span class="token keyword">RUN</span> go mod download</span><br><br><span class="token instruction"><span class="token keyword">COPY</span> . .</span><br><br><span class="token comment"># Unit tests</span><br><span class="token instruction"><span class="token keyword">RUN</span> CGO_ENABLED=0 go test -v</span><br><br><span class="token comment"># Build the Go app</span><br><span class="token instruction"><span class="token keyword">RUN</span> go build -o ./out/go-sample-app .</span><br><br><span class="token comment"># Start fresh from a smaller image</span><br><span class="token instruction"><span class="token keyword">FROM</span> alpine:3.9</span><br><span class="token instruction"><span class="token keyword">RUN</span> apk add ca-certificates</span><br><br><span class="token instruction"><span class="token keyword">COPY</span> <span class="token options"><span class="token property">--from</span><span class="token punctuation">=</span><span class="token string">build_base</span></span> /tmp/go-sample-app/out/go-sample-app /app/go-sample-app</span><br><br><span class="token comment"># This container exposes port 8080 to the outside world</span><br><span class="token instruction"><span class="token keyword">EXPOSE</span> 8080</span><br><br><span class="token comment"># Run the binary program produced by `go install`</span><br><span class="token instruction"><span class="token keyword">CMD</span> [<span class="token string">"/app/go-sample-app"</span>]</span></code></pre>
+</code-block><p>A complete guide on dockerising your golang app can be found <a href="https://codefresh.io/docs/docs/learn-by-example/golang/golang-hello-world/">here</a> and <a href="https://www.docker.com/blog/containerize-your-go-developer-environment-part-1/">here</a>.</p>
+<p>With this we’ve now a deployed version of our golang app. Connect that gke ip to your preferred DNS provider and share the link. Feel free to leave a link of you first golang app in the comments. Would love to see what everyone is working on.</p>
+<p>If you have a different view on some of the stack used or talked here, feel free to add your thoughts. We’re all learning and would love to see the more popular frameworks and best practices in use.</p>
+<p>Cheers and until next time…</p>
+
+        </div>
+
+        <div class="article-end">
+            <span>✦</span>
+            <span>✦</span>
+            <span>✦</span>
+        </div>
+
+        <div class="post-navigation">
+            <div class="post-nav-item post-nav-previous">
+                    <a href="/the-code-of-libraries/">
+                        <span class="nav-arrow">←</span>
+                        <div class="nav-content">
+                            <p class="nav-label">Previous</p>
+                            <p class="nav-title">The Code of Libraries</p>
+                        </div>
+                    </a>
+                
+            </div>
+
+            <div class="post-nav-item post-nav-next">
+                    <a href="/what-is-nft/">
+                        <div class="nav-content">
+                            <p class="nav-label">Next</p>
+                            <p class="nav-title">What is NFT?</p>
+                        </div>
+                        <span class="nav-arrow">→</span>
+                    </a>
+                
+            </div>
+        </div>
+    </div>
+
+    </main>
+    <footer class="sticky bottom-0 z-50 glass-footer py-4">
+  <div class="container mx-auto max-w-7xl px-8 flex items-center justify-between">
+    <div class="text-base">
+      by <a href="https://anirudha.dev" target="_blank" rel="noopener noreferrer">Ani</a>
+    </div>
+
+    <div class="flex items-center gap-4">
+      <a href="https://github.com/anistark" target="_blank" rel="noopener noreferrer" class="footer-icon" aria-label="GitHub">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="currentColor" viewBox="0 0 24 24">
+          <path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/>
+        </svg>
+      </a>
+      <a href="https://x.com/kranirudha" target="_blank" rel="noopener noreferrer" class="footer-icon" aria-label="X">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="currentColor" viewBox="0 0 24 24">
+          <path d="M14.234 10.162 22.977 0h-2.072l-7.591 8.824L7.251 0H.258l9.168 13.343L.258 24H2.33l8.016-9.318L16.749 24h6.993zm-2.837 3.299-.929-1.329L3.076 1.56h3.182l5.965 8.532.929 1.329 7.754 11.09h-3.182z"/>
+        </svg>
+      </a>
+      <a href="https://fosstodon.org/@ani" target="_blank" rel="noopener noreferrer" class="footer-icon" aria-label="Mastodon">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="currentColor" viewBox="0 0 24 24">
+          <path d="M23.268 5.313c-.35-2.578-2.617-4.61-5.304-5.004C17.51.242 15.792 0 11.813 0h-.03c-3.98 0-4.835.242-5.288.309C3.882.692 1.496 2.518.917 5.127.64 6.412.61 7.837.661 9.143c.074 1.874.088 3.745.26 5.611.118 1.24.325 2.47.62 3.68.55 2.237 2.777 4.098 4.96 4.857 2.336.792 4.849.923 7.256.38.265-.061.527-.132.786-.213.585-.184 1.27-.39 1.774-.753a.057.057 0 0 0 .023-.043v-1.809a.052.052 0 0 0-.02-.041.053.053 0 0 0-.046-.01 20.282 20.282 0 0 1-4.709.545c-2.73 0-3.463-1.284-3.674-1.818a5.593 5.593 0 0 1-.319-1.433.053.053 0 0 1 .066-.054c1.517.363 3.072.546 4.632.546.376 0 .75 0 1.125-.01 1.57-.044 3.224-.124 4.768-.422.038-.008.077-.015.11-.024 2.435-.464 4.753-1.92 4.989-5.604.008-.145.03-1.52.03-1.67.002-.512.167-3.63-.024-5.545zm-3.748 9.195h-2.561V8.29c0-1.309-.55-1.976-1.67-1.976-1.23 0-1.846.79-1.846 2.35v3.403h-2.546V8.663c0-1.56-.617-2.35-1.848-2.35-1.112 0-1.668.668-1.67 1.977v6.218H4.822V8.102c0-1.31.337-2.35 1.011-3.12.696-.77 1.608-1.164 2.74-1.164 1.311 0 2.302.5 2.962 1.498l.638 1.06.638-1.06c.66-.999 1.65-1.498 2.96-1.498 1.13 0 2.043.395 2.74 1.164.675.77 1.012 1.81 1.012 3.12z"/>
+        </svg>
+      </a>
+      <a href="https://linkedin.com/in/kranirudha" target="_blank" rel="noopener noreferrer" class="footer-icon" aria-label="LinkedIn">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="currentColor" viewBox="0 0 24 24">
+          <path d="M4.98 3.5c0 1.381-1.11 2.5-2.48 2.5s-2.48-1.119-2.48-2.5c0-1.38 1.11-2.5 2.48-2.5s2.48 1.12 2.48 2.5zm.02 4.5h-5v16h5v-16zm7.982 0h-4.968v16h4.969v-8.399c0-4.67 6.029-5.052 6.029 0v8.399h4.988v-10.131c0-7.88-8.922-7.593-11.018-3.714v-2.155z"/>
+        </svg>
+      </a>
+      <a href="/feed/feed.xml" class="footer-icon" aria-label="RSS feed">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="currentColor" viewBox="0 0 24 24">
+          <path d="M6.18 15.64a2.18 2.18 0 0 1 2.18 2.18C8.36 19 7.38 20 6.18 20C5 20 4 19 4 17.82a2.18 2.18 0 0 1 2.18-2.18M4 4.44A15.56 15.56 0 0 1 19.56 20h-2.83A12.73 12.73 0 0 0 4 7.27V4.44m0 5.66a9.9 9.9 0 0 1 9.9 9.9h-2.83A7.07 7.07 0 0 0 4 12.93V10.1Z"/>
+        </svg>
+      </a>
+    </div>
+  </div>
+</footer>
+
+    
+    <script src="https://unpkg.com/clipboard@2/dist/clipboard.min.js"></script>
+    <script src="/assets/main.bundle.js"></script>
+    <script type="module">
+      import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs';
+      mermaid.initialize({
+        startOnLoad: true,
+        theme: ['reading', 'beach'].includes(document.documentElement.getAttribute('data-theme')) ? 'default' : 'dark',
+        themeVariables: {
+          fontSize: '14px',
+        }
+      });
+    </script>
+  </body>
+</html>

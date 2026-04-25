@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    
+    <meta itemprop="name" content="Decentralising Bridges | AniLog">
+    <meta itemprop="description" content="In simple terms, bridges are tools that allow the transfer of assets, data, or even smart contract instructions between different blockchain networks. Think of them as the highways connecting isolated blockchain cities.">
+
+    
+    <meta name="twitter:title" content="Decentralising Bridges | AniLog">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:description" content="In simple terms, bridges are tools that allow the transfer of assets, data, or even smart contract instructions between different blockchain networks. Think of them as the highways connecting isolated blockchain cities.">
+    <meta name="twitter:site" content="@kranirudha">
+    <meta name="twitter:creator" content="@kranirudha">
+    <meta name="twitter:image:src" content="https://blog.anirudha.dev/images/posts/b3a78eaa-97d4-4795-8250-67a345a421bf.png">
+
+    
+    <meta name="og:title" content="Decentralising Bridges | AniLog">
+    <meta name="og:description" content="In simple terms, bridges are tools that allow the transfer of assets, data, or even smart contract instructions between different blockchain networks. Think of them as the highways connecting isolated blockchain cities.">
+    <meta name="og:image" content="https://blog.anirudha.dev/images/posts/b3a78eaa-97d4-4795-8250-67a345a421bf.png">
+    <meta name="og:url" content="https://blog.anirudha.dev/">
+    <meta name="og:site_name" content="AniLog">
+    <meta name="og:locale" content="en_GB">
+    <meta name="og:type" content="website">
+
+    <link rel="icon" type="image/png" href="/me.png" />
+    <link rel="alternate" type="application/atom+xml" title="AniLog" href="https://blog.anirudha.dev/feed/feed.xml" />
+
+    <title>Decentralising Bridges | AniLog</title>
+
+    <link rel="stylesheet" href="/assets/main.bundle.css">
+
+    <script>
+      // Set theme before page renders to prevent flash
+      (function() {
+        const theme = localStorage.getItem('theme') || 'night';
+        if (theme !== 'night') {
+          document.documentElement.setAttribute('data-theme', theme);
+        }
+      })();
+    </script>
+
+    
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-YGZHVY9TD7"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-YGZHVY9TD7');
+    </script>
+    
+
+    
+  </head>
+  <body class="flex flex-col min-h-screen">
+    <canvas id="ambience-canvas"></canvas>
+    <header class="sticky top-0 z-50 glass-header">
+  <nav class="container mx-auto max-w-7xl px-8 py-3 flex flex-wrap items-center justify-between">
+    <div class="flex items-center gap-3">
+      <a href="/" class="flex items-center gap-3">
+        <img src="/ani.png" alt="AniLog logo" class="w-10 h-10 object-cover">
+        <h1 class="text-2xl leading-none m-0">AniLog</h1>
+      </a>
+    </div>
+
+    <div class="flex items-center gap-6">
+      <div class="theme-switcher">
+        <button id="theme-switcher-btn" class="theme-switcher-btn" aria-label="Switch theme" aria-expanded="false">
+          <span id="theme-active-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.985 12.486a9 9 0 1 1-9.473-9.472c.405-.022.617.46.402.803a6 6 0 0 0 8.268 8.268c.344-.215.825-.004.803.401"/></svg>
+          </span>
+        </button>
+        <div id="theme-dropdown" class="theme-dropdown">
+          <button class="theme-option" data-theme-value="night">
+            <span class="theme-icon"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.985 12.486a9 9 0 1 1-9.473-9.472c.405-.022.617.46.402.803a6 6 0 0 0 8.268 8.268c.344-.215.825-.004.803.401"/></svg></span>
+            <span>Night</span>
+          </button>
+          <button class="theme-option" data-theme-value="reading">
+            <span class="theme-icon"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 7v14"/><path d="M3 18a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h5a4 4 0 0 1 4 4 4 4 0 0 1 4-4h5a1 1 0 0 1 1 1v13a1 1 0 0 1-1 1h-6a3 3 0 0 0-3 3 3 3 0 0 0-3-3z"/></svg></span>
+            <span>Reading</span>
+          </button>
+          <button class="theme-option" data-theme-value="forest">
+            <span class="theme-icon"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m17 14 3 3.3a1 1 0 0 1-.7 1.7H4.7a1 1 0 0 1-.7-1.7L7 14h-.3a1 1 0 0 1-.7-1.7L9 9h-.2A1 1 0 0 1 8 7.3L12 3l4 4.3a1 1 0 0 1-.8 1.7H15l3 3.3a1 1 0 0 1-.7 1.7H17Z"/><path d="M12 22v-3"/></svg></span>
+            <span>Forest</span>
+          </button>
+          <button class="theme-option" data-theme-value="beach">
+            <span class="theme-icon"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 8c0-2.76-2.46-5-5.5-5S2 5.24 2 8h2l1-1 1 1h4"/><path d="M13 7.14A5.82 5.82 0 0 1 16.5 6c3.04 0 5.5 2.24 5.5 5h-3l-1-1-1 1h-3"/><path d="M5.89 9.71c-2.15 2.15-2.3 5.47-.35 7.43l4.24-4.25.7-.7.71-.71 2.12-2.12c-1.95-1.96-5.27-1.8-7.42.35"/><path d="M11 15.5c.5 2.5-.17 4.5-1 6.5h4c2-5.5-.5-12-1-14"/></svg></span>
+            <span>Beach</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </nav>
+</header>
+
+    <main class="container mx-auto max-w-6xl p-8 grow">
+      
+    <p></p>
+
+    
+        <div class="post-cover-image" style="background-image: url('/images/posts/b3a78eaa-97d4-4795-8250-67a345a421bf.png');"></div>
+    
+
+    <div>
+        <div class="post-title-row">
+            <h2>Decentralising Bridges</h2>
+            
+        </div>
+
+        
+            <div class="mt-4 mb-2">
+                <a class="tag abstraction" href="/tag/abstraction">abstraction</a><a class="tag interoperability" href="/tag/interoperability">interoperability</a><a class="tag web3" href="/tag/web3">web3</a><a class="tag decentralised" href="/tag/decentralised">decentralised</a><a class="tag bridges" href="/tag/bridges">bridges</a>
+            </div>
+        
+
+        
+            
+                <p class="text-sm italic">Published on
+                    <span datetime="Tue Jan 07 2025 00:00:00 GMT+0000 (Coordinated Universal Time)">January 7, 2025</span>.
+                    <span class="reading-time"> · 10 min read</span></p>
+            
+        
+
+        <div class="content post">
+            <p>In simple terms, bridges are tools that allow the transfer of assets, data, or even smart contract instructions between different blockchain networks. Think of them as the highways connecting isolated blockchain cities. For example, if you have some Ethereum (ETH) but want to use it on the Binance Smart Chain (BSC), you’d use a bridge to “wrap” your ETH into a token that works on BSC.</p>
+<p>The idea of blockchain bridges emerged as a response to the growing need for interoperability between siloed blockchain ecosystems. In the early days of blockchain, networks like Bitcoin and Ethereum operated in silos, each with its own set of rules, consensus mechanisms, and asset standards. This lack of connectivity limited the potential for innovation and collaboration across ecosystems.</p>
+<p>The first generation of blockchain bridges appeared around 2017–2018 during the ICO boom, as developers began exploring ways to transfer value and data between Ethereum and other nascent chains like EOS and TRON. These early bridges were mostly centralized, operated by single entities or consortiums. While they were functional, they relied heavily on trust, which contradicted the decentralised ethos of blockchain.</p>
+<p>By 2020, with the rise of DeFi (Decentralised Finance) and multi-chain ecosystems, the demand for more robust and decentralised bridges skyrocketed. Protocols like Polkadot and Cosmos introduced native interoperability solutions, while others like Ren and Thorchain developed bridges focused on specific use cases like Bitcoin-to-Ethereum transfers or decentralised swaps.</p>
+<p>Today, blockchain bridges are a critical part of the Web3 infrastructure. They come in various forms, including:</p>
+<ol>
+<li>
+<p><strong>Asset-Specific Bridges</strong>: Focused on transferring specific tokens (e.g., WBTC for Bitcoin on Ethereum).</p>
+</li>
+<li>
+<p><strong>Generic Message Bridges</strong>: Capable of transferring arbitrary data and instructions between chains (e.g., Axelar).</p>
+</li>
+<li>
+<p><strong>Layer 2 Bridges</strong>: Connecting Ethereum to its rollups (e.g., Arbitrum, Optimism).</p>
+</li>
+</ol>
+<p>The ecosystem now includes both centralized and decentralised options, with billions of dollars locked in bridge protocols. Innovations in bridging technology have also introduced concepts like state proofs and zk-rollups to enhance security and scalability. However, challenges like hacks and inefficiencies remain prevalent, making the decentralization and improvement of bridges more important than ever.</p>
+<h2 id="centralised-vs-decentralised-bridges" tabindex="-1">Centralised vs Decentralised Bridges <a class="header-anchor" href="#centralised-vs-decentralised-bridges" aria-hidden="true">#</a></h2>
+<p>In general, centralized applications offer simplicity, speed, and easier regulatory compliance but come with risks related to control, security, and privacy. In contrast, decentralized applications provide enhanced security, transparency, and user autonomy, but may face complexities, performance issues, and governance challenges.</p>
+<table>
+<thead>
+<tr>
+<th>Feature</th>
+<th>Centralized Bridges</th>
+<th>Decentralized Bridges</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Control</strong></td>
+<td>Operated by a single entity or organization.</td>
+<td>Operated by distributed validators or smart contracts.</td>
+</tr>
+<tr>
+<td><strong>Trust Model</strong></td>
+<td>Requires users to trust the central operator to act honestly and securely.</td>
+<td>Trustless. Relies on network consensus and cryptographic security.</td>
+</tr>
+<tr>
+<td><strong>Transparency</strong></td>
+<td>Limited. Users have little visibility into internal operations.</td>
+<td>Fully transparent. Operations are recorded on-chain and governed by open protocols.</td>
+</tr>
+<tr>
+<td><strong>Censorship Resistance</strong></td>
+<td>Vulnerable to censorship. Operators can block or restrict transactions.</td>
+<td>Resistant to censorship. No single entity can manipulate or block transactions.</td>
+</tr>
+<tr>
+<td><strong>Security Risks</strong></td>
+<td>Single point of failure. High risk of hacks or insider fraud.</td>
+<td>Distributed risk. Depending on the robustness of the smart contracts and validator network.</td>
+</tr>
+<tr>
+<td><strong>Scalability</strong></td>
+<td>Often faster, as centralization allows for streamlined operations.</td>
+<td>Can be slower due to the need for network consensus and decentralized verification.</td>
+</tr>
+<tr>
+<td><strong>Examples</strong></td>
+<td>Binance Bridge, Coinbase Wallet</td>
+<td>Wormhole, Polygon Bridge, Axelar, Thorchain</td>
+</tr>
+<tr>
+<td><strong>Innovation Flexibility</strong></td>
+<td>Limited by the capabilities and goals of the operator.</td>
+<td>Open to community-driven improvements and integrations.</td>
+</tr>
+</tbody>
+</table>
+<p><em>There are 70+ bridges available today, distributed across various chains as per they support respectively.</em></p>
+<p><img src="/images/posts/81a87548-88a0-46f7-a18d-9c98ac94aace.png" alt=""></p>
+<p>Let’s explore some interesting projects amongst them to understand how they work further.</p>
+<h2 id="axelar" tabindex="-1">Axelar <a class="header-anchor" href="#axelar" aria-hidden="true">#</a></h2>
+<p>Axelar is a decentralized interoperability network designed to facilitate secure communication and asset transfer across multiple blockchains. It operates using a robust, trustless infrastructure that prioritizes security and scalability. However, The multi-step verification process can lead to slightly longer transaction times compared to centralized solutions. Even so, Axelar stands out today as one of the prime go-to cross messaging layer due to some unique componenets:</p>
+<p><strong>Decentralised Validator Network:</strong> A network of validators runs the Axelar protocol, processing cross-chain transactions and maintaining security. Validators use <strong>Byzantine Fault Tolerant</strong> (BFT) consensus to ensure the system remains operational even if a subset of validators act maliciously.</p>
+<p><strong>Gateway Contracts:</strong> Each blockchain integrated with Axelar runs a gateway smart contract. These contracts act as the entry and exit points for messages and assets.</p>
+<p><strong>Cross-Chain Gateway Protocol (CGP):</strong> The CGP enables seamless communication between blockchains by packaging transactions, signing them, and relaying them securely.</p>
+<p><strong>One-Time Addresses:</strong> For each cross-chain transaction, Axelar generates a one-time deposit address. This mechanism simplifies user experience by eliminating the need to deal with complex multi-signature processes.</p>
+<p><strong>How Axelar Works:</strong></p>
+<ol>
+<li>
+<p>A user initiates a transfer from Blockchain A to Blockchain B using Axelar’s API or SDK.</p>
+</li>
+<li>
+<p>The asset is locked in the gateway contract on Blockchain A.</p>
+</li>
+<li>
+<p>Axelar validators verify the transaction, package it, and relay it to Blockchain B.</p>
+</li>
+<li>
+<p>On Blockchain B, the gateway contract mints or unlocks the equivalent asset, completing the transaction.</p>
+</li>
+</ol>
+<p><img src="https://cdn.prod.website-files.com/65f28017eaba8cd1f912fa9f/661ae6d901628457de4c5f5c_DevelopCrossChainApp_GmpDiagram-1.png" alt=""></p>
+<h2 id="wormhole" tabindex="-1">Wormhole <a class="header-anchor" href="#wormhole" aria-hidden="true">#</a></h2>
+<p>Wormhole is a decentralized bridge designed to connect high-performance blockchains like Solana, Ethereum, Binance Smart Chain, and others. It operates as a message-passing protocol, enabling both asset transfers and other data exchanges between chains. It did however, suffered a $325M exploit in 2022, highlighting the need for ongoing improvements. While decentralized, the relatively small number of Guardians poses a risk of collusion.</p>
+<p><strong>Guardians Network:</strong> A decentralized network of validators known as Guardians monitors multiple chains for events. Guardians verify cross-chain transactions and sign messages to validate them.</p>
+<p><strong>Core Layer:</strong> Handles the core logic for cross-chain messaging and ensures that data integrity is maintained.</p>
+<p><strong>Wrapped Assets:</strong> Tokens transferred via Wormhole are wrapped into equivalent representations on the target chain.</p>
+<p><strong>How Wormhole Works:</strong></p>
+<ol>
+<li>
+<p>A user locks an asset in a smart contract on the source chain (e.g., Ethereum).</p>
+</li>
+<li>
+<p>Guardians detect the lock event and sign a message confirming the transaction.</p>
+</li>
+<li>
+<p>The signed message is relayed to the target chain (e.g., Solana).</p>
+</li>
+<li>
+<p>On the target chain, the Wormhole protocol mints a wrapped version of the locked asset for the user.</p>
+</li>
+</ol>
+<p><img src="/images/posts/213f7dcb-7f61-4e35-885c-af6989bbe323.png" alt=""></p>
+<h2 id="connext" tabindex="-1">Connext <a class="header-anchor" href="#connext" aria-hidden="true">#</a></h2>
+<p><strong>Connext</strong> is a decentralized protocol designed to facilitate fast, secure, and cost-effective cross-chain communication. It achieves this by using <strong>state channels</strong> and a unique <strong>xCall architecture</strong> for transferring value and data across Layer 2 networks and Ethereum. Unlike other bridges, Connext is tailored for fast, low-cost communication between Ethereum rollups and other Layer 2 solutions. By leveraging state channels, Connext minimizes on-chain transactions, significantly reducing gas fees. With xCall, developers can integrate cross-chain functionality into their applications without dealing with complex bridging mechanics. Connext’s router-based liquidity model ensures decentralization and eliminates reliance on a single liquidity provider. However, Connext is primarily designed for Layer 2 scaling solutions and doesn’t yet support all Layer 1 blockchains. The network relies heavily on router liquidity. Insufficient liquidity can delay or increase the cost of transactions.</p>
+<p><strong>State Channels:</strong> Connext builds on state channels, a Layer 2 scalability solution that allows transactions to occur off-chain while retaining the security guarantees of the underlying blockchain. These channels minimize the number of on-chain interactions, reducing latency and gas costs.</p>
+<p><strong>Routers:</strong> Routers are liquidity providers in the Connext network. They facilitate cross-chain transactions by locking liquidity on one chain and unlocking it on the target chain. They earn fees for their service and must collateralize their positions to ensure security.</p>
+<p><strong>xCall:</strong> Connext’s xCall is a generic cross-chain communication primitive. It enables developers to build applications that pass messages or assets across chains without needing to handle complex bridging logic. This mechanism abstracts the bridging process for both developers and users, ensuring simplicity.</p>
+<p><strong>Nomad Integration:</strong> Connext uses Nomad’s optimistic roll-up model to verify and validate cross-chain interactions. This approach reduces trust assumptions and enhances security.</p>
+<h3 id="how-connext-works" tabindex="-1"><strong>How Connext Works</strong> <a class="header-anchor" href="#how-connext-works" aria-hidden="true">#</a></h3>
+<ol>
+<li>
+<p><strong>Transaction Initiation:</strong></p>
+<ul>
+<li>
+<p>A user starts a cross-chain transaction using a Connext-integrated dApp or wallet.</p>
+</li>
+<li>
+<p>For example, a user wants to transfer tokens from Optimism (Layer 2) to Polygon (another Layer 2).</p>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>Liquidity Locking:</strong></p>
+<ul>
+<li>The router locks the required liquidity on the source chain (Optimism) and forwards an off-chain message to the destination chain (Polygon).</li>
+</ul>
+</li>
+<li>
+<p><strong>Off-Chain Message Passing:</strong></p>
+<ul>
+<li>Connext uses the xCall mechanism to relay the message securely and quickly across chains. The message includes transaction details, such as the asset amount and the recipient’s address.</li>
+</ul>
+</li>
+<li>
+<p><strong>Transaction Finalization:</strong></p>
+<ul>
+<li>On the destination chain (Polygon), the router unlocks equivalent liquidity and sends it to the recipient’s wallet. This process is verified by the network, ensuring security and integrity.</li>
+</ul>
+</li>
+</ol>
+<p><img src="https://images.ctfassets.net/gjyjx7gst9lo/920020418/3575f3ea8c4992520e2e95031e48cffd/UnderTheHood.png" alt=""></p>
+<h2 id="bridges-and-the-future-of-digital-assets" tabindex="-1">Bridges and the Future of Digital Assets <a class="header-anchor" href="#bridges-and-the-future-of-digital-assets" aria-hidden="true">#</a></h2>
+<p>Bridges will play a massive role in making digital assets more usable. Imagine a world where users don’t need to know which blockchain their assets reside on, they simply transact. For example:</p>
+<ul>
+<li>
+<p><strong>Abstraction</strong>: The average user shouldn’t need to know technical details about bridging. A good decentralized bridge abstracts complexities like gas fees, token wrapping, and network selection. For instance, a user transferring stablecoins across chains shouldn’t need to worry about manually configuring gas tokens or selecting intermediary networks. All such intricacies should be handled in the background by the bridge’s architecture.</p>
+</li>
+<li>
+<p><strong>Enhanced UX</strong>: With smoother cross-chain swaps and wallet integrations, bridging becomes as simple as a single click. Wallets and dApps will incorporate intuitive interfaces that seamlessly execute bridging processes, allowing users to focus on their goals rather than the mechanisms.</p>
+</li>
+<li>
+<p><strong>Interoperability-Driven Applications</strong>: Applications will harness bridges to become truly chain-agnostic. For example, a DeFi app on Ethereum could directly interact with liquidity on Solana or Avalanche without requiring the user to know or manage the underlying mechanics.</p>
+</li>
+</ul>
+<p>This abstraction is key to mainstream adoption. Users care about outcomes, not mechanisms. By simplifying processes, bridges can drive the mass adoption of digital assets for everyday use cases, including payments</p>
+<h2 id="security-concerns" tabindex="-1">Security Concerns <a class="header-anchor" href="#security-concerns" aria-hidden="true">#</a></h2>
+<p>Decentralized bridges, while offering a trustless alternative, are not without their challenges.</p>
+<ol>
+<li>
+<p><strong>Smart Contract Vulnerabilities</strong>: Bugs or exploits in the smart contract code can lead to massive losses, as seen in various high-profile hacks.</p>
+<ul>
+<li><strong>Mitigation</strong>: Conduct rigorous audits by reputable firms and incentivize white-hat hackers through bug bounty programs.</li>
+</ul>
+</li>
+<li>
+<p><strong>Sybil Attacks</strong>: Malicious actors can attempt to overwhelm the validator network by creating multiple fake identities.</p>
+<ul>
+<li><strong>Mitigation</strong>: Implement robust mechanisms like Proof of Stake (PoS) or Proof of Authority (PoA) to ensure validators have a vested interest in the network’s security.</li>
+</ul>
+</li>
+<li>
+<p><strong>Cross-Chain Attack Surface</strong>: Bridging increases the potential attack vectors since multiple chains and protocols are involved.</p>
+<ul>
+<li><strong>Mitigation</strong>: Use cryptographic techniques like zk-rollups and state proofs to secure interactions between chains.</li>
+</ul>
+</li>
+<li>
+<p><strong>Economic Incentive Exploits</strong>: Attackers might manipulate incentives to destabilize the bridge’s operations.</p>
+<ul>
+<li><strong>Mitigation</strong>: Regularly review and optimize incentive structures to align with security goals.</li>
+</ul>
+</li>
+<li>
+<p><strong>Decentralized Governance Risks</strong>: Poorly designed governance mechanisms can lead to decision-making that compromises security.</p>
+<ul>
+<li><strong>Mitigation</strong>: Ensure governance models are decentralized and resistant to collusion.</li>
+</ul>
+</li>
+</ol>
+<p>Decentralized bridges are set to transform the blockchain ecosystem. Bridges will evolve to provide near-instant, cost-effective transfers, making multi-chain interactions indistinguishable from single-chain experiences. The blockchain industry will likely adopt universal protocols and standards for cross-chain communication, similar to how the internet uses TCP/IP. Advanced cryptographic techniques like zk-proofs and multi-party computation (MPC) will make bridges more secure and scalable. As DeFi and traditional finance converge, bridges will play a crucial role in enabling cross-platform transactions involving both crypto and fiat assets. Projects like Polkadot and Cosmos might pave the way for blockchain ecosystems where bridging is natively integrated, reducing the need for standalone solutions. By abstracting complexities and ensuring security, bridges will drive the mainstream adoption of blockchain technology, empowering users to interact with decentralized applications effortlessly.</p>
+<p>Decentralized bridges are not just a technological innovation, but a necessity for the future of web3. By addressing current challenges and pushing the boundaries of interoperability, they will enable a truly interconnected and user-friendly digital economy.</p>
+
+        </div>
+
+        <div class="article-end">
+            <span>✦</span>
+            <span>✦</span>
+            <span>✦</span>
+        </div>
+
+        <div class="post-navigation">
+            <div class="post-nav-item post-nav-previous">
+                    <a href="/token-sale-models/">
+                        <span class="nav-arrow">←</span>
+                        <div class="nav-content">
+                            <p class="nav-label">Previous</p>
+                            <p class="nav-title">Token Sale Models</p>
+                        </div>
+                    </a>
+                
+            </div>
+
+            <div class="post-nav-item post-nav-next">
+                    <a href="/liquidity-pool/">
+                        <div class="nav-content">
+                            <p class="nav-label">Next</p>
+                            <p class="nav-title">Understanding Liquidity Pools in Web3</p>
+                        </div>
+                        <span class="nav-arrow">→</span>
+                    </a>
+                
+            </div>
+        </div>
+    </div>
+
+    </main>
+    <footer class="sticky bottom-0 z-50 glass-footer py-4">
+  <div class="container mx-auto max-w-7xl px-8 flex items-center justify-between">
+    <div class="text-base">
+      by <a href="https://anirudha.dev" target="_blank" rel="noopener noreferrer">Ani</a>
+    </div>
+
+    <div class="flex items-center gap-4">
+      <a href="https://github.com/anistark" target="_blank" rel="noopener noreferrer" class="footer-icon" aria-label="GitHub">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="currentColor" viewBox="0 0 24 24">
+          <path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/>
+        </svg>
+      </a>
+      <a href="https://x.com/kranirudha" target="_blank" rel="noopener noreferrer" class="footer-icon" aria-label="X">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="currentColor" viewBox="0 0 24 24">
+          <path d="M14.234 10.162 22.977 0h-2.072l-7.591 8.824L7.251 0H.258l9.168 13.343L.258 24H2.33l8.016-9.318L16.749 24h6.993zm-2.837 3.299-.929-1.329L3.076 1.56h3.182l5.965 8.532.929 1.329 7.754 11.09h-3.182z"/>
+        </svg>
+      </a>
+      <a href="https://fosstodon.org/@ani" target="_blank" rel="noopener noreferrer" class="footer-icon" aria-label="Mastodon">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="currentColor" viewBox="0 0 24 24">
+          <path d="M23.268 5.313c-.35-2.578-2.617-4.61-5.304-5.004C17.51.242 15.792 0 11.813 0h-.03c-3.98 0-4.835.242-5.288.309C3.882.692 1.496 2.518.917 5.127.64 6.412.61 7.837.661 9.143c.074 1.874.088 3.745.26 5.611.118 1.24.325 2.47.62 3.68.55 2.237 2.777 4.098 4.96 4.857 2.336.792 4.849.923 7.256.38.265-.061.527-.132.786-.213.585-.184 1.27-.39 1.774-.753a.057.057 0 0 0 .023-.043v-1.809a.052.052 0 0 0-.02-.041.053.053 0 0 0-.046-.01 20.282 20.282 0 0 1-4.709.545c-2.73 0-3.463-1.284-3.674-1.818a5.593 5.593 0 0 1-.319-1.433.053.053 0 0 1 .066-.054c1.517.363 3.072.546 4.632.546.376 0 .75 0 1.125-.01 1.57-.044 3.224-.124 4.768-.422.038-.008.077-.015.11-.024 2.435-.464 4.753-1.92 4.989-5.604.008-.145.03-1.52.03-1.67.002-.512.167-3.63-.024-5.545zm-3.748 9.195h-2.561V8.29c0-1.309-.55-1.976-1.67-1.976-1.23 0-1.846.79-1.846 2.35v3.403h-2.546V8.663c0-1.56-.617-2.35-1.848-2.35-1.112 0-1.668.668-1.67 1.977v6.218H4.822V8.102c0-1.31.337-2.35 1.011-3.12.696-.77 1.608-1.164 2.74-1.164 1.311 0 2.302.5 2.962 1.498l.638 1.06.638-1.06c.66-.999 1.65-1.498 2.96-1.498 1.13 0 2.043.395 2.74 1.164.675.77 1.012 1.81 1.012 3.12z"/>
+        </svg>
+      </a>
+      <a href="https://linkedin.com/in/kranirudha" target="_blank" rel="noopener noreferrer" class="footer-icon" aria-label="LinkedIn">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="currentColor" viewBox="0 0 24 24">
+          <path d="M4.98 3.5c0 1.381-1.11 2.5-2.48 2.5s-2.48-1.119-2.48-2.5c0-1.38 1.11-2.5 2.48-2.5s2.48 1.12 2.48 2.5zm.02 4.5h-5v16h5v-16zm7.982 0h-4.968v16h4.969v-8.399c0-4.67 6.029-5.052 6.029 0v8.399h4.988v-10.131c0-7.88-8.922-7.593-11.018-3.714v-2.155z"/>
+        </svg>
+      </a>
+      <a href="/feed/feed.xml" class="footer-icon" aria-label="RSS feed">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="currentColor" viewBox="0 0 24 24">
+          <path d="M6.18 15.64a2.18 2.18 0 0 1 2.18 2.18C8.36 19 7.38 20 6.18 20C5 20 4 19 4 17.82a2.18 2.18 0 0 1 2.18-2.18M4 4.44A15.56 15.56 0 0 1 19.56 20h-2.83A12.73 12.73 0 0 0 4 7.27V4.44m0 5.66a9.9 9.9 0 0 1 9.9 9.9h-2.83A7.07 7.07 0 0 0 4 12.93V10.1Z"/>
+        </svg>
+      </a>
+    </div>
+  </div>
+</footer>
+
+    
+    <script src="https://unpkg.com/clipboard@2/dist/clipboard.min.js"></script>
+    <script src="/assets/main.bundle.js"></script>
+    <script type="module">
+      import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs';
+      mermaid.initialize({
+        startOnLoad: true,
+        theme: ['reading', 'beach'].includes(document.documentElement.getAttribute('data-theme')) ? 'default' : 'dark',
+        themeVariables: {
+          fontSize: '14px',
+        }
+      });
+    </script>
+  </body>
+</html>

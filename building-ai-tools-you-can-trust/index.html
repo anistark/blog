@@ -1,0 +1,617 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    
+    <meta itemprop="name" content="Building AI Tools You Can Trust | AniLog">
+    <meta itemprop="description" content="You want to build an AI application. Something useful.">
+
+    
+    <meta name="twitter:title" content="Building AI Tools You Can Trust | AniLog">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:description" content="You want to build an AI application. Something useful.">
+    <meta name="twitter:site" content="@kranirudha">
+    <meta name="twitter:creator" content="@kranirudha">
+    <meta name="twitter:image:src" content="https://blog.anirudha.dev/images/posts/d7855b08-4daf-4278-abe2-3bacd8dd8b54.png">
+
+    
+    <meta name="og:title" content="Building AI Tools You Can Trust | AniLog">
+    <meta name="og:description" content="You want to build an AI application. Something useful.">
+    <meta name="og:image" content="https://blog.anirudha.dev/images/posts/d7855b08-4daf-4278-abe2-3bacd8dd8b54.png">
+    <meta name="og:url" content="https://blog.anirudha.dev/">
+    <meta name="og:site_name" content="AniLog">
+    <meta name="og:locale" content="en_GB">
+    <meta name="og:type" content="website">
+
+    <link rel="icon" type="image/png" href="/me.png" />
+    <link rel="alternate" type="application/atom+xml" title="AniLog" href="https://blog.anirudha.dev/feed/feed.xml" />
+
+    <title>Building AI Tools You Can Trust | AniLog</title>
+
+    <link rel="stylesheet" href="/assets/main.bundle.css">
+
+    <script>
+      // Set theme before page renders to prevent flash
+      (function() {
+        const theme = localStorage.getItem('theme') || 'night';
+        if (theme !== 'night') {
+          document.documentElement.setAttribute('data-theme', theme);
+        }
+      })();
+    </script>
+
+    
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-YGZHVY9TD7"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-YGZHVY9TD7');
+    </script>
+    
+
+    
+  </head>
+  <body class="flex flex-col min-h-screen">
+    <canvas id="ambience-canvas"></canvas>
+    <header class="sticky top-0 z-50 glass-header">
+  <nav class="container mx-auto max-w-7xl px-8 py-3 flex flex-wrap items-center justify-between">
+    <div class="flex items-center gap-3">
+      <a href="/" class="flex items-center gap-3">
+        <img src="/ani.png" alt="AniLog logo" class="w-10 h-10 object-cover">
+        <h1 class="text-2xl leading-none m-0">AniLog</h1>
+      </a>
+    </div>
+
+    <div class="flex items-center gap-6">
+      <div class="theme-switcher">
+        <button id="theme-switcher-btn" class="theme-switcher-btn" aria-label="Switch theme" aria-expanded="false">
+          <span id="theme-active-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.985 12.486a9 9 0 1 1-9.473-9.472c.405-.022.617.46.402.803a6 6 0 0 0 8.268 8.268c.344-.215.825-.004.803.401"/></svg>
+          </span>
+        </button>
+        <div id="theme-dropdown" class="theme-dropdown">
+          <button class="theme-option" data-theme-value="night">
+            <span class="theme-icon"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.985 12.486a9 9 0 1 1-9.473-9.472c.405-.022.617.46.402.803a6 6 0 0 0 8.268 8.268c.344-.215.825-.004.803.401"/></svg></span>
+            <span>Night</span>
+          </button>
+          <button class="theme-option" data-theme-value="reading">
+            <span class="theme-icon"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 7v14"/><path d="M3 18a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h5a4 4 0 0 1 4 4 4 4 0 0 1 4-4h5a1 1 0 0 1 1 1v13a1 1 0 0 1-1 1h-6a3 3 0 0 0-3 3 3 3 0 0 0-3-3z"/></svg></span>
+            <span>Reading</span>
+          </button>
+          <button class="theme-option" data-theme-value="forest">
+            <span class="theme-icon"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m17 14 3 3.3a1 1 0 0 1-.7 1.7H4.7a1 1 0 0 1-.7-1.7L7 14h-.3a1 1 0 0 1-.7-1.7L9 9h-.2A1 1 0 0 1 8 7.3L12 3l4 4.3a1 1 0 0 1-.8 1.7H15l3 3.3a1 1 0 0 1-.7 1.7H17Z"/><path d="M12 22v-3"/></svg></span>
+            <span>Forest</span>
+          </button>
+          <button class="theme-option" data-theme-value="beach">
+            <span class="theme-icon"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 8c0-2.76-2.46-5-5.5-5S2 5.24 2 8h2l1-1 1 1h4"/><path d="M13 7.14A5.82 5.82 0 0 1 16.5 6c3.04 0 5.5 2.24 5.5 5h-3l-1-1-1 1h-3"/><path d="M5.89 9.71c-2.15 2.15-2.3 5.47-.35 7.43l4.24-4.25.7-.7.71-.71 2.12-2.12c-1.95-1.96-5.27-1.8-7.42.35"/><path d="M11 15.5c.5 2.5-.17 4.5-1 6.5h4c2-5.5-.5-12-1-14"/></svg></span>
+            <span>Beach</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </nav>
+</header>
+
+    <main class="container mx-auto max-w-6xl p-8 grow">
+      
+    <p></p>
+
+    
+        <div class="post-cover-image" style="background-image: url('/images/posts/d7855b08-4daf-4278-abe2-3bacd8dd8b54.png');"></div>
+    
+
+    <div>
+        <div class="post-title-row">
+            <h2>Building AI Tools You Can Trust</h2>
+            
+        </div>
+
+        
+            <div class="mt-4 mb-2">
+                <a class="tag ai" href="/tag/ai">ai</a><a class="tag build" href="/tag/build">build</a><a class="tag llm" href="/tag/llm">llm</a><a class="tag ragas" href="/tag/ragas">ragas</a><a class="tag evals" href="/tag/evals">evals</a><a class="tag ai-summary-tool" href="/tag/ai-summary-tool">ai-summary-tool</a>
+            </div>
+        
+
+        
+            
+                <p class="text-sm italic">Published on
+                    <span datetime="Sun Nov 16 2025 00:00:00 GMT+0000 (Coordinated Universal Time)">November 16, 2025</span>.
+                    <span class="reading-time"> · 13 min read</span></p>
+            
+        
+
+        <div class="content post">
+            <p>You want to build an AI application. Something useful. Something your users can rely on.</p>
+<p>But here’s the problem: <strong>How do you know it’s actually good?</strong></p>
+<p>You can build an app that generates summaries, answers questions, or writes emails. It works. Your tests pass. But is it <em>reliable</em>? Does it hallucinate? Does it miss important information? Is it actually trustworthy?</p>
+<p>The philosophy is simple:</p>
+<blockquote>
+<p>You can’t improve what you don’t measure.</p>
+</blockquote>
+<p>Let me paint a realistic scenario:</p>
+<p>You’ve built a summarization app. Users love the interface. The summaries look great. But then:</p>
+<ul>
+<li>
+<p>A news outlet tries your app and finds the summary omits a crucial financial number</p>
+</li>
+<li>
+<p>A researcher uses it and discovers the summary makes a claim that’s not in the original paper</p>
+</li>
+<li>
+<p>A student uses it and the summary misrepresents the nuance of the source material</p>
+</li>
+</ul>
+<p>Sound familiar? This happens <strong>all the time</strong> in full-stack AI apps because people build features without measuring quality.</p>
+<p>The difference between a hobby project and a professional tool is this: <strong>Professional tools measure themselves.</strong></p>
+<h2 id="our-journey%3A-building-a-trustworthy-summarization-tool" tabindex="-1">Our Journey: Building a Trustworthy Summarization Tool <a class="header-anchor" href="#our-journey%3A-building-a-trustworthy-summarization-tool" aria-hidden="true">#</a></h2>
+<p>Let’s start 🚀</p>
+<p>If you want to follow along, here the <a href="https://github.com/anistark/ai-summarisation">repo</a>. There’s also a notebook which has everything I’ll be covering in this article.</p>
+<h3 id="run-in-google-colab" tabindex="-1">Run in Google Colab <a class="header-anchor" href="#run-in-google-colab" aria-hidden="true">#</a></h3>
+<p><strong>No installation. No setup. Just click and start:</strong></p>
+<p><a href="https://colab.research.google.com/github/anistark/ai-summarisation/blob/main/summarisation_demo.ipynb"><img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"></a></p>
+<p><strong>Quick start:</strong></p>
+<ol>
+<li>
+<p>Click the button above</p>
+</li>
+<li>
+<p>Run the first cell (installs dependencies)</p>
+</li>
+<li>
+<p>Add your OpenAI API key to Colab Secrets (click 🔑 icon)</p>
+</li>
+<li>
+<p>Run the remaining cells</p>
+</li>
+<li>
+<p>See your evaluation scores</p>
+</li>
+<li>
+<p>Experiment with optimization strategies</p>
+</li>
+</ol>
+<h3 id="%F0%9F%8F%A0-run-locally" tabindex="-1">🏠 Run Locally <a class="header-anchor" href="#%F0%9F%8F%A0-run-locally" aria-hidden="true">#</a></h3>
+<terminal-block>git clone https://github.com/anistark/ai-summarisation.git
+cd ai-summarisation
+uv sync
+jupyter notebook summarisation_demo.ipynb</terminal-block><p>Then follow the cells to:</p>
+<ul>
+<li>
+<p>Generate summaries</p>
+</li>
+<li>
+<p>Run evaluations</p>
+</li>
+<li>
+<p>Compare strategies</p>
+</li>
+<li>
+<p>Understand your metrics</p>
+</li>
+</ul>
+<h3 id="step-1%3A-setting-up" tabindex="-1">Step 1: Setting Up <a class="header-anchor" href="#step-1%3A-setting-up" aria-hidden="true">#</a></h3>
+<p>First, install the dependencies:</p>
+<code-block lang="python"><pre class="language-python"><code class="language-python">pip install ragas<span class="token operator">==</span><span class="token number">0.3</span><span class="token number">.9</span> langchain<span class="token operator">-</span>openai langchain<span class="token operator">-</span>core python<span class="token operator">-</span>dotenv</code></pre>
+</code-block><p>These packages give us:</p>
+<ul>
+<li>
+<p><strong>ragas</strong> - The evaluation framework</p>
+</li>
+<li>
+<p><strong>langchain-openai</strong> - Access to GPT models</p>
+</li>
+<li>
+<p><strong>python-dotenv</strong> - Manage API keys safely</p>
+</li>
+</ul>
+<p>Now let’s initialize everything:</p>
+<code-block lang="python"><pre class="language-python"><code class="language-python"><span class="token keyword">import</span> os<br><span class="token keyword">import</span> asyncio<br><span class="token keyword">from</span> typing <span class="token keyword">import</span> Optional<br><span class="token keyword">from</span> dotenv <span class="token keyword">import</span> load_dotenv<br><br><span class="token comment"># Load environment variables</span><br>load_dotenv<span class="token punctuation">(</span><span class="token punctuation">)</span><br>api_key <span class="token operator">=</span> os<span class="token punctuation">.</span>environ<span class="token punctuation">.</span>get<span class="token punctuation">(</span><span class="token string">"OPENAI_API_KEY"</span><span class="token punctuation">)</span><br>llm_model <span class="token operator">=</span> os<span class="token punctuation">.</span>environ<span class="token punctuation">.</span>get<span class="token punctuation">(</span><span class="token string">"LLM_MODEL"</span><span class="token punctuation">,</span> <span class="token string">"gpt-4o-mini"</span><span class="token punctuation">)</span><br><br><span class="token comment"># Initialize OpenAI client</span><br><span class="token keyword">from</span> openai <span class="token keyword">import</span> AsyncOpenAI<br>client <span class="token operator">=</span> AsyncOpenAI<span class="token punctuation">(</span>api_key<span class="token operator">=</span>api_key<span class="token punctuation">)</span><br><br><span class="token comment"># Setup RAGAS for evaluation</span><br><span class="token keyword">from</span> ragas<span class="token punctuation">.</span>llms <span class="token keyword">import</span> llm_factory<br><span class="token keyword">from</span> ragas<span class="token punctuation">.</span>metrics<span class="token punctuation">.</span>collections <span class="token keyword">import</span> SummaryScore<span class="token punctuation">,</span> Faithfulness<br><br>llm <span class="token operator">=</span> llm_factory<span class="token punctuation">(</span>llm_model<span class="token punctuation">,</span> client<span class="token operator">=</span>client<span class="token punctuation">)</span><br><span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"✅ Setup complete!"</span><span class="token punctuation">)</span></code></pre>
+</code-block><h3 id="step-2%3A-load-an-article" tabindex="-1">Step 2: Load an Article <a class="header-anchor" href="#step-2%3A-load-an-article" aria-hidden="true">#</a></h3>
+<p>Let’s load some content to summarize:</p>
+<code-block lang="python"><pre class="language-python"><code class="language-python">article <span class="token operator">=</span> <span class="token triple-quoted-string string">"""<br>Apple announced on Tuesday that it will invest $1 billion in new AI research centers<br>across the United States over the next five years. The company plans to hire 500 new<br>researchers and engineers specifically for AI development. CEO Tim Cook stated that<br>artificial intelligence is central to the company's future product strategy. The investment<br>will focus on areas like natural language processing, computer vision, and machine learning<br>efficiency. Apple will establish research hubs in San Francisco, Boston, and Seattle.<br>The company already employs over 10,000 AI researchers globally.<br>"""</span><br><br><span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string-interpolation"><span class="token string">f"📰 Article: </span><span class="token interpolation"><span class="token punctuation">{</span><span class="token builtin">len</span><span class="token punctuation">(</span>article<span class="token punctuation">.</span>split<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">}</span></span><span class="token string"> words"</span></span><span class="token punctuation">)</span></code></pre>
+</code-block><h3 id="step-3%3A-generate-a-summary" tabindex="-1">Step 3: Generate a Summary <a class="header-anchor" href="#step-3%3A-generate-a-summary" aria-hidden="true">#</a></h3>
+<p>Now let’s actually summarize it using an LLM:</p>
+<code-block lang="python"><pre class="language-python"><code class="language-python"><span class="token keyword">from</span> langchain_openai <span class="token keyword">import</span> ChatOpenAI<br><span class="token keyword">from</span> langchain_core<span class="token punctuation">.</span>prompts <span class="token keyword">import</span> PromptTemplate<br><br><span class="token comment"># Initialize the summarizer</span><br>summarizer <span class="token operator">=</span> ChatOpenAI<span class="token punctuation">(</span>model<span class="token operator">=</span><span class="token string">"gpt-3.5-turbo"</span><span class="token punctuation">,</span> temperature<span class="token operator">=</span><span class="token number">0.3</span><span class="token punctuation">)</span><br><br><span class="token comment"># Create a prompt</span><br>summarization_prompt <span class="token operator">=</span> PromptTemplate<span class="token punctuation">(</span><br>    input_variables<span class="token operator">=</span><span class="token punctuation">[</span><span class="token string">"text"</span><span class="token punctuation">]</span><span class="token punctuation">,</span><br>    template<span class="token operator">=</span><span class="token triple-quoted-string string">"""Summarize the following text in 2-3 sentences.<br>Focus on the main points and key details.<br><br>Text:<br>{text}<br><br>Summary:"""</span><br><span class="token punctuation">)</span><br><br><span class="token comment"># Generate the summary</span><br>chain <span class="token operator">=</span> summarization_prompt <span class="token operator">|</span> summarizer<br>response <span class="token operator">=</span> chain<span class="token punctuation">.</span>invoke<span class="token punctuation">(</span><span class="token punctuation">{</span><span class="token string">"text"</span><span class="token punctuation">:</span> article<span class="token punctuation">}</span><span class="token punctuation">)</span><br>generated_summary <span class="token operator">=</span> response<span class="token punctuation">.</span>content<span class="token punctuation">.</span>strip<span class="token punctuation">(</span><span class="token punctuation">)</span><br><br><span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"✍️ Generated Summary:"</span><span class="token punctuation">)</span><br><span class="token keyword">print</span><span class="token punctuation">(</span>generated_summary<span class="token punctuation">)</span></code></pre>
+</code-block><p>This gives us something like:</p>
+<blockquote>
+<p><em>“Apple is investing $1 billion in AI research over five years, planning to hire 500 researchers across three US cities. The investment focuses on natural language processing, computer vision, and machine learning efficiency.”</em></p>
+</blockquote>
+<p>Looks good, right? But <strong>is it actually good?</strong> That’s the question.</p>
+<p>This is where things get interesting.</p>
+<p>Instead of relying on intuition, we’re going to measure the summary using objective metrics.</p>
+<h3 id="understanding-metric-%231%3A-summary-score" tabindex="-1">Understanding Metric #1: Summary Score <a class="header-anchor" href="#understanding-metric-%231%3A-summary-score" aria-hidden="true">#</a></h3>
+<p><strong>What it measures:</strong> Does your summary capture the important information from the source?</p>
+<p><strong>How it works:</strong></p>
+<ol>
+<li>
+<p>RAGAS extracts key phrases from the original article</p>
+</li>
+<li>
+<p>It generates questions about those key phrases</p>
+</li>
+<li>
+<p>It checks if your summary answers those questions</p>
+</li>
+<li>
+<p>The score is the percentage of questions answered correctly</p>
+</li>
+</ol>
+<p><strong>Why this matters:</strong> You could have a summary that sounds good but actually misses critical details. If the original article mentions “$1 billion” and your summary skips it, the Summary Score will reflect that loss.</p>
+<p><strong>What the scores mean:</strong></p>
+<ul>
+<li>
+<p><strong>0.8-1.0</strong> ✅ Excellent - You’ve captured essential information</p>
+</li>
+<li>
+<p><strong>0.6-0.8</strong> ✅ Good - Main points are present</p>
+</li>
+<li>
+<p><strong>0.4-0.6</strong> ⚠️ Fair - Missing important details</p>
+</li>
+<li>
+<p><strong>&lt;0.4</strong> ❌ Poor - Significant information loss</p>
+</li>
+</ul>
+<p><strong>Example:</strong></p>
+<terminal-block>Original: &quot;Company investing $1B, hiring 500 people, 3 locations&quot;
+Bad Summary: &quot;Company investing in AI&quot;
+Result: Summary Score drops because numbers are missing</terminal-block><h3 id="understanding-metric-%232%3A-faithfulness" tabindex="-1">Understanding Metric #2: Faithfulness <a class="header-anchor" href="#understanding-metric-%232%3A-faithfulness" aria-hidden="true">#</a></h3>
+<p><strong>What it measures:</strong> Is your summary making stuff up? Is it hallucinating?</p>
+<p><strong>How it works:</strong></p>
+<ol>
+<li>
+<p>RAGAS breaks down the summary into individual claims</p>
+</li>
+<li>
+<p>For each claim, it checks: “Is this claim supported by the source?”</p>
+</li>
+<li>
+<p>It flags claims that don’t appear in the original text</p>
+</li>
+<li>
+<p>The score is the percentage of claims that are grounded in the source</p>
+</li>
+</ol>
+<p><strong>Why this matters:</strong> A hallucinated fact is worse than a missing fact. If your summary invents information, you’re not just losing accuracy, you’re actively spreading misinformation.</p>
+<p><strong>What the scores mean:</strong></p>
+<ul>
+<li>
+<p><strong>0.9-1.0</strong> ✅ Excellent - Fully grounded, no hallucinations</p>
+</li>
+<li>
+<p><strong>0.7-0.9</strong> ✅ Good - Mostly accurate</p>
+</li>
+<li>
+<p><strong>0.5-0.7</strong> ⚠️ Fair - Some ungrounded claims</p>
+</li>
+<li>
+<p><strong>&lt;0.5</strong> ❌ Poor - Contains hallucinations</p>
+</li>
+</ul>
+<p><strong>Example:</strong></p>
+<terminal-block>Original: &quot;Apple invests in AI research&quot;
+Bad Summary: &quot;Apple is developing self-driving cars and robots&quot;
+Result: Faithfulness drops because those claims aren't in the source</terminal-block><h3 id="choosing-your-metrics%3A-not-all-use-cases-are-the-same" tabindex="-1">Choosing Your Metrics: Not All Use Cases Are the Same <a class="header-anchor" href="#choosing-your-metrics%3A-not-all-use-cases-are-the-same" aria-hidden="true">#</a></h3>
+<p>Different applications need different priorities:</p>
+<table>
+<thead>
+<tr>
+<th>Use Case</th>
+<th>Summary Score</th>
+<th>Faithfulness</th>
+<th>Why?</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>News articles</strong></td>
+<td>30% weight</td>
+<td><strong>70% weight</strong></td>
+<td>Accuracy is everything. Missing a detail is okay if what’s there is true.</td>
+</tr>
+<tr>
+<td><strong>Research papers</strong></td>
+<td><strong>70% weight</strong></td>
+<td>30% weight</td>
+<td>Completeness matters. You need the findings. Hallucination is bad but rarer in structured text.</td>
+</tr>
+<tr>
+<td><strong>Financial reports</strong></td>
+<td>40% weight</td>
+<td><strong>60% weight</strong></td>
+<td>One false number can cost millions. Accuracy &gt; completeness.</td>
+</tr>
+<tr>
+<td><strong>Learning materials</strong></td>
+<td><strong>50% weight</strong></td>
+<td>50% weight</td>
+<td>Students need both complete AND accurate summaries.</td>
+</tr>
+<tr>
+<td><strong>Social media</strong></td>
+<td><strong>80% weight</strong></td>
+<td>20% weight</td>
+<td>Engagement and quick takeaway. Perfection isn’t necessary.</td>
+</tr>
+</tbody>
+</table>
+<p>The key: <strong>Decide your priorities before you build.</strong></p>
+<p>Now let’s actually measure our summary:</p>
+<code-block lang="python"><pre class="language-python"><code class="language-python"><span class="token comment"># Initialize the evaluation metrics</span><br>summary_score_metric <span class="token operator">=</span> SummaryScore<span class="token punctuation">(</span>llm<span class="token operator">=</span>llm<span class="token punctuation">)</span><br>faithfulness_metric <span class="token operator">=</span> Faithfulness<span class="token punctuation">(</span>llm<span class="token operator">=</span>llm<span class="token punctuation">)</span><br><br><span class="token keyword">async</span> <span class="token keyword">def</span> <span class="token function">evaluate_summary</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span><br>    <span class="token triple-quoted-string string">"""Evaluate the summary I just created"""</span><br>    <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"🔍 Evaluating summary...\n"</span><span class="token punctuation">)</span><br><br>    <span class="token keyword">try</span><span class="token punctuation">:</span><br>        <span class="token comment"># Metric 1: Summary Score</span><br>        <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"⏳ Computing Summary Score..."</span><span class="token punctuation">)</span><br>        summary_result <span class="token operator">=</span> <span class="token keyword">await</span> summary_score_metric<span class="token punctuation">.</span>ascore<span class="token punctuation">(</span><br>            reference_contexts<span class="token operator">=</span><span class="token punctuation">[</span>article<span class="token punctuation">]</span><span class="token punctuation">,</span>  <span class="token comment"># The original article</span><br>            response<span class="token operator">=</span>generated_summary      <span class="token comment"># Our summary</span><br>        <span class="token punctuation">)</span><br>        summary_score <span class="token operator">=</span> <span class="token builtin">float</span><span class="token punctuation">(</span>summary_result<span class="token punctuation">.</span>value<span class="token punctuation">)</span><br>        <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string-interpolation"><span class="token string">f"   ✅ Summary Score: </span><span class="token interpolation"><span class="token punctuation">{</span>summary_score<span class="token punctuation">:</span><span class="token format-spec">.3f</span><span class="token punctuation">}</span></span><span class="token string">"</span></span><span class="token punctuation">)</span><br>        <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string-interpolation"><span class="token string">f"      Captures </span><span class="token interpolation"><span class="token punctuation">{</span>summary_score<span class="token operator">*</span><span class="token number">100</span><span class="token punctuation">:</span><span class="token format-spec">.0f</span><span class="token punctuation">}</span></span><span class="token string">% of key information\n"</span></span><span class="token punctuation">)</span><br><br>        <span class="token comment"># Metric 2: Faithfulness</span><br>        <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"⏳ Computing Faithfulness..."</span><span class="token punctuation">)</span><br>        faithfulness_result <span class="token operator">=</span> <span class="token keyword">await</span> faithfulness_metric<span class="token punctuation">.</span>ascore<span class="token punctuation">(</span><br>            user_input<span class="token operator">=</span>article<span class="token punctuation">,</span><br>            response<span class="token operator">=</span>generated_summary<span class="token punctuation">,</span><br>            retrieved_contexts<span class="token operator">=</span><span class="token punctuation">[</span>article<span class="token punctuation">]</span><br>        <span class="token punctuation">)</span><br>        faithfulness <span class="token operator">=</span> <span class="token builtin">float</span><span class="token punctuation">(</span>faithfulness_result<span class="token punctuation">.</span>value<span class="token punctuation">)</span><br>        <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string-interpolation"><span class="token string">f"   ✅ Faithfulness: </span><span class="token interpolation"><span class="token punctuation">{</span>faithfulness<span class="token punctuation">:</span><span class="token format-spec">.3f</span><span class="token punctuation">}</span></span><span class="token string">"</span></span><span class="token punctuation">)</span><br>        <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string-interpolation"><span class="token string">f"      </span><span class="token interpolation"><span class="token punctuation">{</span>faithfulness<span class="token operator">*</span><span class="token number">100</span><span class="token punctuation">:</span><span class="token format-spec">.0f</span><span class="token punctuation">}</span></span><span class="token string">% of claims are grounded in source\n"</span></span><span class="token punctuation">)</span><br><br>        <span class="token keyword">return</span> <span class="token punctuation">{</span><br>            <span class="token string">"summary_score"</span><span class="token punctuation">:</span> summary_score<span class="token punctuation">,</span><br>            <span class="token string">"faithfulness"</span><span class="token punctuation">:</span> faithfulness<span class="token punctuation">,</span><br>        <span class="token punctuation">}</span><br><br>    <span class="token keyword">except</span> Exception <span class="token keyword">as</span> e<span class="token punctuation">:</span><br>        <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string-interpolation"><span class="token string">f"❌ Error: </span><span class="token interpolation"><span class="token punctuation">{</span>e<span class="token punctuation">}</span></span><span class="token string">"</span></span><span class="token punctuation">)</span><br>        <span class="token keyword">return</span> <span class="token boolean">None</span><br><br><span class="token comment"># Run the evaluation</span><br>results <span class="token operator">=</span> <span class="token keyword">await</span> evaluate_summary<span class="token punctuation">(</span><span class="token punctuation">)</span></code></pre>
+</code-block><p>Here’s what just happened:</p>
+<ol>
+<li>
+<p>You sent your summary to an LLM evaluator</p>
+</li>
+<li>
+<p>The evaluator analyzed it against the original article</p>
+</li>
+<li>
+<p>You got objective scores that tell you exactly how good your summary is</p>
+</li>
+<li>
+<p>You now have <strong>data</strong> instead of vibes</p>
+</li>
+</ol>
+<p>This is the difference between guessing and knowing.</p>
+<p><img src="/images/posts/bb430dbe-f047-43f7-aa5e-9eeb8e5e9502.png" alt=""></p>
+<p>Here, we got a good score on faithfulness. However summary score says it’s got lots of room for improvement.</p>
+<p>The beauty of having metrics is that you can <strong>test different approaches</strong> and see which works best:</p>
+<h3 id="strategy-1%3A-longer-summaries" tabindex="-1">Strategy 1: Longer Summaries <a class="header-anchor" href="#strategy-1%3A-longer-summaries" aria-hidden="true">#</a></h3>
+<p>Maybe 2-3 sentences isn’t enough. Let’s try 5-7:</p>
+<code-block lang="python"><pre class="language-python"><code class="language-python">longer_prompt <span class="token operator">=</span> PromptTemplate<span class="token punctuation">(</span><br>    input_variables<span class="token operator">=</span><span class="token punctuation">[</span><span class="token string">"text"</span><span class="token punctuation">]</span><span class="token punctuation">,</span><br>    template<span class="token operator">=</span><span class="token triple-quoted-string string">"""Summarize the following text in 5-7 sentences.<br>Capture all key points, numbers, and important details.<br><br>Text:<br>{text}<br><br>Summary:"""</span><br><span class="token punctuation">)</span><br><br>chain <span class="token operator">=</span> longer_prompt <span class="token operator">|</span> summarizer<br>longer_summary <span class="token operator">=</span> chain<span class="token punctuation">.</span>invoke<span class="token punctuation">(</span><span class="token punctuation">{</span><span class="token string">"text"</span><span class="token punctuation">:</span> article<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">.</span>content<span class="token punctuation">.</span>strip<span class="token punctuation">(</span><span class="token punctuation">)</span></code></pre>
+</code-block><p><strong>Trade-off:</strong> Longer summaries usually score higher on Summary Score (more information), but you lose compression and some readers might not read it all.</p>
+<h3 id="strategy-2%3A-structured-prompt" tabindex="-1">Strategy 2: Structured Prompt <a class="header-anchor" href="#strategy-2%3A-structured-prompt" aria-hidden="true">#</a></h3>
+<p>Guide the LLM to focus on specific aspects:</p>
+<code-block lang="python"><pre class="language-python"><code class="language-python">structured_prompt <span class="token operator">=</span> PromptTemplate<span class="token punctuation">(</span><br>    input_variables<span class="token operator">=</span><span class="token punctuation">[</span><span class="token string">"text"</span><span class="token punctuation">]</span><span class="token punctuation">,</span><br>    template<span class="token operator">=</span><span class="token triple-quoted-string string">"""Summarize focusing on:<br>- WHAT (the action/announcement)<br>- WHY (the reason/motivation)<br>- WHERE (locations involved)<br>- HOW MUCH (numbers and scale)<br>- WHO (the organization)<br><br>Text:<br>{text}<br><br>Summary:"""</span><br><span class="token punctuation">)</span><br><br>chain <span class="token operator">=</span> structured_prompt <span class="token operator">|</span> summarizer<br>structured_summary <span class="token operator">=</span> chain<span class="token punctuation">.</span>invoke<span class="token punctuation">(</span><span class="token punctuation">{</span><span class="token string">"text"</span><span class="token punctuation">:</span> article<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">.</span>content<span class="token punctuation">.</span>strip<span class="token punctuation">(</span><span class="token punctuation">)</span></code></pre>
+</code-block><p><strong>Why it works:</strong> By explicitly asking for key details, the LLM is less likely to skip them.</p>
+<h3 id="strategy-3%3A-bullet-points" tabindex="-1">Strategy 3: Bullet Points <a class="header-anchor" href="#strategy-3%3A-bullet-points" aria-hidden="true">#</a></h3>
+<p>Sometimes format matters:</p>
+<code-block lang="python"><pre class="language-python"><code class="language-python">bullet_prompt <span class="token operator">=</span> PromptTemplate<span class="token punctuation">(</span><br>    input_variables<span class="token operator">=</span><span class="token punctuation">[</span><span class="token string">"text"</span><span class="token punctuation">]</span><span class="token punctuation">,</span><br>    template<span class="token operator">=</span><span class="token triple-quoted-string string">"""Summarize as 4-5 bullet points.<br>Each bullet should state ONE key fact.<br><br>Text:<br>{text}<br><br>Summary:"""</span><br><span class="token punctuation">)</span><br><br>chain <span class="token operator">=</span> bullet_prompt <span class="token operator">|</span> summarizer<br>bullet_summary <span class="token operator">=</span> chain<span class="token punctuation">.</span>invoke<span class="token punctuation">(</span><span class="token punctuation">{</span><span class="token string">"text"</span><span class="token punctuation">:</span> article<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">.</span>content<span class="token punctuation">.</span>strip<span class="token punctuation">(</span><span class="token punctuation">)</span></code></pre>
+</code-block><p>Evaluate all three and see which one wins:</p>
+<code-block lang="python"><pre class="language-python"><code class="language-python"><span class="token keyword">async</span> <span class="token keyword">def</span> <span class="token function">compare_strategies</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span><br>    <span class="token triple-quoted-string string">"""Compare different summarization approaches"""</span><br>    strategies <span class="token operator">=</span> <span class="token punctuation">{</span><br>        <span class="token string">'longer'</span><span class="token punctuation">:</span> longer_summary<span class="token punctuation">,</span><br>        <span class="token string">'structured'</span><span class="token punctuation">:</span> structured_summary<span class="token punctuation">,</span><br>        <span class="token string">'bullets'</span><span class="token punctuation">:</span> bullet_summary<br>    <span class="token punctuation">}</span><br><br>    <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"Testing different strategies...\n"</span><span class="token punctuation">)</span><br>    results <span class="token operator">=</span> <span class="token punctuation">{</span><span class="token punctuation">}</span><br><br>    <span class="token keyword">for</span> name<span class="token punctuation">,</span> summary <span class="token keyword">in</span> strategies<span class="token punctuation">.</span>items<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span><br>        <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string-interpolation"><span class="token string">f"Evaluating: </span><span class="token interpolation"><span class="token punctuation">{</span>name<span class="token punctuation">}</span></span><span class="token string">"</span></span><span class="token punctuation">)</span><br><br>        score <span class="token operator">=</span> <span class="token keyword">await</span> summary_score_metric<span class="token punctuation">.</span>ascore<span class="token punctuation">(</span><br>            reference_contexts<span class="token operator">=</span><span class="token punctuation">[</span>article<span class="token punctuation">]</span><span class="token punctuation">,</span><br>            response<span class="token operator">=</span>summary<br>        <span class="token punctuation">)</span><br><br>        faith <span class="token operator">=</span> <span class="token keyword">await</span> faithfulness_metric<span class="token punctuation">.</span>ascore<span class="token punctuation">(</span><br>            user_input<span class="token operator">=</span>article<span class="token punctuation">,</span><br>            response<span class="token operator">=</span>summary<span class="token punctuation">,</span><br>            retrieved_contexts<span class="token operator">=</span><span class="token punctuation">[</span>article<span class="token punctuation">]</span><br>        <span class="token punctuation">)</span><br><br>        results<span class="token punctuation">[</span>name<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token punctuation">{</span><br>            <span class="token string">'summary_score'</span><span class="token punctuation">:</span> <span class="token builtin">float</span><span class="token punctuation">(</span>score<span class="token punctuation">.</span>value<span class="token punctuation">)</span><span class="token punctuation">,</span><br>            <span class="token string">'faithfulness'</span><span class="token punctuation">:</span> <span class="token builtin">float</span><span class="token punctuation">(</span>faith<span class="token punctuation">.</span>value<span class="token punctuation">)</span><span class="token punctuation">,</span><br>            <span class="token string">'combined'</span><span class="token punctuation">:</span> <span class="token builtin">float</span><span class="token punctuation">(</span>score<span class="token punctuation">.</span>value<span class="token punctuation">)</span> <span class="token operator">+</span> <span class="token builtin">float</span><span class="token punctuation">(</span>faith<span class="token punctuation">.</span>value<span class="token punctuation">)</span><br>        <span class="token punctuation">}</span><br><br>        <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string-interpolation"><span class="token string">f"  Summary Score: </span><span class="token interpolation"><span class="token punctuation">{</span>results<span class="token punctuation">[</span>name<span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token string">'summary_score'</span><span class="token punctuation">]</span><span class="token punctuation">:</span><span class="token format-spec">.3f</span><span class="token punctuation">}</span></span><span class="token string">"</span></span><span class="token punctuation">)</span><br>        <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string-interpolation"><span class="token string">f"  Faithfulness: </span><span class="token interpolation"><span class="token punctuation">{</span>results<span class="token punctuation">[</span>name<span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token string">'faithfulness'</span><span class="token punctuation">]</span><span class="token punctuation">:</span><span class="token format-spec">.3f</span><span class="token punctuation">}</span></span><span class="token string">"</span></span><span class="token punctuation">)</span><br>        <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string-interpolation"><span class="token string">f"  Combined: </span><span class="token interpolation"><span class="token punctuation">{</span>results<span class="token punctuation">[</span>name<span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token string">'combined'</span><span class="token punctuation">]</span><span class="token punctuation">:</span><span class="token format-spec">.3f</span><span class="token punctuation">}</span></span><span class="token string">\n"</span></span><span class="token punctuation">)</span><br><br>    <span class="token comment"># Find the winner</span><br>    best <span class="token operator">=</span> <span class="token builtin">max</span><span class="token punctuation">(</span>results<span class="token punctuation">.</span>items<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span> key<span class="token operator">=</span><span class="token keyword">lambda</span> x<span class="token punctuation">:</span> x<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token string">'combined'</span><span class="token punctuation">]</span><span class="token punctuation">)</span><br>    <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string-interpolation"><span class="token string">f"🏆 Winner: </span><span class="token interpolation"><span class="token punctuation">{</span>best<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">.</span>upper<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">}</span></span><span class="token string">"</span></span><span class="token punctuation">)</span><br>    <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string-interpolation"><span class="token string">f"   Combined Score: </span><span class="token interpolation"><span class="token punctuation">{</span>best<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token string">'combined'</span><span class="token punctuation">]</span><span class="token punctuation">:</span><span class="token format-spec">.3f</span><span class="token punctuation">}</span></span><span class="token string">"</span></span><span class="token punctuation">)</span><br><br>    <span class="token keyword">return</span> results<br><br><span class="token comment"># Run it</span><br>comparison_results <span class="token operator">=</span> <span class="token keyword">await</span> compare_strategies<span class="token punctuation">(</span><span class="token punctuation">)</span></code></pre>
+</code-block><p>This is <strong>empirical optimization</strong>. You’re not guessing which approach is best, you’re measuring and letting data decide.</p>
+<p>Here’s what we’ve built so far:</p>
+<p><img src="/images/posts/27330fa0-b0eb-4c70-ab9e-9a11d55e1bfc.png" alt=""></p>
+<p>This workflow is powerful because:</p>
+<ul>
+<li>
+<p><strong>Objective feedback</strong> - No subjective opinions, just scores</p>
+</li>
+<li>
+<p><strong>Continuous improvement</strong> - You can always test new approaches</p>
+</li>
+<li>
+<p><strong>Quality gates</strong> - You can set minimum scores before publishing</p>
+</li>
+<li>
+<p><strong>Learning loop</strong> - Over time, you understand what works for your use case</p>
+</li>
+</ul>
+<p>Now that you understand how evaluation works, here are practical guidelines for building production systems:</p>
+<h3 id="%E2%9C%85-do%E2%80%99s" tabindex="-1">✅ DO’s <a class="header-anchor" href="#%E2%9C%85-do%E2%80%99s" aria-hidden="true">#</a></h3>
+<h4 id="1.-do-set-minimum-score-thresholds" tabindex="-1">1. DO Set Minimum Score Thresholds <a class="header-anchor" href="#1.-do-set-minimum-score-thresholds" aria-hidden="true">#</a></h4>
+<p>Define what “good enough” means before you deploy:</p>
+<code-block lang="python"><pre class="language-python"><code class="language-python">SUMMARY_SCORE_THRESHOLD <span class="token operator">=</span> <span class="token number">0.75</span><br>FAITHFULNESS_THRESHOLD <span class="token operator">=</span> <span class="token number">0.90</span><br><br><span class="token keyword">def</span> <span class="token function">is_summary_publishable</span><span class="token punctuation">(</span>results<span class="token punctuation">)</span><span class="token punctuation">:</span><br>    <span class="token keyword">return</span> <span class="token punctuation">(</span>results<span class="token punctuation">[</span><span class="token string">'summary_score'</span><span class="token punctuation">]</span> <span class="token operator">>=</span> SUMMARY_SCORE_THRESHOLD <span class="token keyword">and</span><br>            results<span class="token punctuation">[</span><span class="token string">'faithfulness'</span><span class="token punctuation">]</span> <span class="token operator">>=</span> FAITHFULNESS_THRESHOLD<span class="token punctuation">)</span><br><br><span class="token keyword">if</span> is_summary_publishable<span class="token punctuation">(</span>results<span class="token punctuation">)</span><span class="token punctuation">:</span><br>    publish_summary<span class="token punctuation">(</span><span class="token punctuation">)</span><br><span class="token keyword">else</span><span class="token punctuation">:</span><br>    flag_for_manual_review<span class="token punctuation">(</span><span class="token punctuation">)</span></code></pre>
+</code-block><p><strong>Different use cases need different thresholds:</strong></p>
+<ul>
+<li>
+<p>News outlets: 0.85+ (accuracy critical)</p>
+</li>
+<li>
+<p>Research papers: 0.80+ (completeness critical)</p>
+</li>
+<li>
+<p>Social media: 0.60+ (engagement over perfection)</p>
+</li>
+<li>
+<p>Learning platforms: 0.75+ (balance needed)</p>
+</li>
+</ul>
+<h4 id="2.-do-test-multiple-models" tabindex="-1">2. DO Test Multiple Models <a class="header-anchor" href="#2.-do-test-multiple-models" aria-hidden="true">#</a></h4>
+<p>Different models produce different quality:</p>
+<code-block lang="python"><pre class="language-python"><code class="language-python">models <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token string">"gpt-3.5-turbo"</span><span class="token punctuation">,</span> <span class="token string">"gpt-4o-mini"</span><span class="token punctuation">,</span> <span class="token string">"gpt-4"</span><span class="token punctuation">]</span><br><br><span class="token keyword">for</span> model <span class="token keyword">in</span> models<span class="token punctuation">:</span><br>    summarizer <span class="token operator">=</span> ChatOpenAI<span class="token punctuation">(</span>model<span class="token operator">=</span>model<span class="token punctuation">)</span><br>    summary <span class="token operator">=</span> generate_summary<span class="token punctuation">(</span>article<span class="token punctuation">,</span> summarizer<span class="token punctuation">)</span><br>    score <span class="token operator">=</span> evaluate_summary<span class="token punctuation">(</span>summary<span class="token punctuation">)</span><br>    <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string-interpolation"><span class="token string">f"</span><span class="token interpolation"><span class="token punctuation">{</span>model<span class="token punctuation">}</span></span><span class="token string">: </span><span class="token interpolation"><span class="token punctuation">{</span>score<span class="token punctuation">:</span><span class="token format-spec">.3f</span><span class="token punctuation">}</span></span><span class="token string">"</span></span><span class="token punctuation">)</span><br><br><span class="token comment"># Pick the best performer</span></code></pre>
+</code-block><p>GPT-3.5 is cheap. GPT-4 is better. GPT-4o-mini is the sweet spot for many use cases. <strong>Let metrics decide.</strong></p>
+<h4 id="3.-do-monitor-evaluation-costs" tabindex="-1">3. DO Monitor Evaluation Costs <a class="header-anchor" href="#3.-do-monitor-evaluation-costs" aria-hidden="true">#</a></h4>
+<p>Evaluations cost money. Budget accordingly:</p>
+<code-block lang="python"><pre class="language-python"><code class="language-python"><span class="token comment"># Track costs</span><br>EVAL_COST_PER_SUMMARY <span class="token operator">=</span> <span class="token number">0.004</span>  <span class="token comment"># Rough estimate</span><br><br><span class="token comment"># Sample evaluation, don't evaluate everything</span><br>sample_size <span class="token operator">=</span> <span class="token builtin">min</span><span class="token punctuation">(</span><span class="token number">100</span><span class="token punctuation">,</span> <span class="token builtin">len</span><span class="token punctuation">(</span>all_summaries<span class="token punctuation">)</span><span class="token punctuation">)</span>  <span class="token comment"># Sample 100 or all</span><br>eval_cost <span class="token operator">=</span> sample_size <span class="token operator">*</span> EVAL_COST_PER_SUMMARY<br><br><span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string-interpolation"><span class="token string">f"Evaluating </span><span class="token interpolation"><span class="token punctuation">{</span>sample_size<span class="token punctuation">}</span></span><span class="token string"> summaries will cost: $</span><span class="token interpolation"><span class="token punctuation">{</span>eval_cost<span class="token punctuation">:</span><span class="token format-spec">.2f</span><span class="token punctuation">}</span></span><span class="token string">"</span></span><span class="token punctuation">)</span></code></pre>
+</code-block><p>For production: sample 10% of summaries. For critical content: evaluate 100%. For bulk operations: sample even less.</p>
+<h4 id="4.-do-create-a-feedback-loop" tabindex="-1">4. DO Create a Feedback Loop <a class="header-anchor" href="#4.-do-create-a-feedback-loop" aria-hidden="true">#</a></h4>
+<p>Use metrics to continuously improve:</p>
+<code-block lang="python"><pre class="language-python"><code class="language-python"><span class="token comment"># Log everything</span><br><span class="token keyword">import</span> json<br><span class="token keyword">from</span> datetime <span class="token keyword">import</span> datetime<br><br>log_entry <span class="token operator">=</span> <span class="token punctuation">{</span><br>    <span class="token string">"timestamp"</span><span class="token punctuation">:</span> datetime<span class="token punctuation">.</span>now<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span>isoformat<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span><br>    <span class="token string">"article_length"</span><span class="token punctuation">:</span> <span class="token builtin">len</span><span class="token punctuation">(</span>article<span class="token punctuation">.</span>split<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">,</span><br>    <span class="token string">"model"</span><span class="token punctuation">:</span> <span class="token string">"gpt-3.5-turbo"</span><span class="token punctuation">,</span><br>    <span class="token string">"summary_score"</span><span class="token punctuation">:</span> <span class="token number">0.82</span><span class="token punctuation">,</span><br>    <span class="token string">"faithfulness"</span><span class="token punctuation">:</span> <span class="token number">0.93</span><span class="token punctuation">,</span><br>    <span class="token string">"strategy"</span><span class="token punctuation">:</span> <span class="token string">"structured_prompt"</span><br><span class="token punctuation">}</span><br><br><span class="token keyword">with</span> <span class="token builtin">open</span><span class="token punctuation">(</span><span class="token string">"evaluation_log.jsonl"</span><span class="token punctuation">,</span> <span class="token string">"a"</span><span class="token punctuation">)</span> <span class="token keyword">as</span> f<span class="token punctuation">:</span><br>    f<span class="token punctuation">.</span>write<span class="token punctuation">(</span>json<span class="token punctuation">.</span>dumps<span class="token punctuation">(</span>log_entry<span class="token punctuation">)</span> <span class="token operator">+</span> <span class="token string">"\n"</span><span class="token punctuation">)</span><br><br><span class="token comment"># Later: analyze patterns</span><br><span class="token comment"># - Which prompts work best?</span><br><span class="token comment"># - Do long articles score lower?</span><br><span class="token comment"># - Is there seasonality?</span></code></pre>
+</code-block><h4 id="5.-do-test-with-real-data" tabindex="-1">5. DO Test With Real Data <a class="header-anchor" href="#5.-do-test-with-real-data" aria-hidden="true">#</a></h4>
+<p>Example articles are for learning. Test with your actual content:</p>
+<code-block lang="python"><pre class="language-python"><code class="language-python"><span class="token comment"># Load your real articles</span><br><span class="token keyword">from</span> pathlib <span class="token keyword">import</span> Path<br><br>your_articles <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span><br><span class="token keyword">for</span> <span class="token builtin">file</span> <span class="token keyword">in</span> Path<span class="token punctuation">(</span><span class="token string">"/path/to/articles"</span><span class="token punctuation">)</span><span class="token punctuation">.</span>glob<span class="token punctuation">(</span><span class="token string">"*.txt"</span><span class="token punctuation">)</span><span class="token punctuation">:</span><br>    <span class="token keyword">with</span> <span class="token builtin">open</span><span class="token punctuation">(</span><span class="token builtin">file</span><span class="token punctuation">)</span> <span class="token keyword">as</span> f<span class="token punctuation">:</span><br>        your_articles<span class="token punctuation">.</span>append<span class="token punctuation">(</span>f<span class="token punctuation">.</span>read<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><br><br><span class="token comment"># Evaluate on real data</span><br><span class="token keyword">for</span> article <span class="token keyword">in</span> your_articles<span class="token punctuation">:</span><br>    summary <span class="token operator">=</span> generate_summary<span class="token punctuation">(</span>article<span class="token punctuation">)</span><br>    results <span class="token operator">=</span> evaluate_summary<span class="token punctuation">(</span>summary<span class="token punctuation">)</span><br><br>    <span class="token comment"># Analyze real-world performance</span><br>    avg_score <span class="token operator">=</span> <span class="token builtin">sum</span><span class="token punctuation">(</span>r<span class="token punctuation">[</span><span class="token string">'summary_score'</span><span class="token punctuation">]</span> <span class="token keyword">for</span> r <span class="token keyword">in</span> results<span class="token punctuation">)</span> <span class="token operator">/</span> <span class="token builtin">len</span><span class="token punctuation">(</span>results<span class="token punctuation">)</span></code></pre>
+</code-block><h4 id="6.-do-document-your-decisions" tabindex="-1">6. DO Document Your Decisions <a class="header-anchor" href="#6.-do-document-your-decisions" aria-hidden="true">#</a></h4>
+<p>Future you will thank present you:</p>
+<code-block lang="python"><pre class="language-python"><code class="language-python"><span class="token triple-quoted-string string">"""<br>Summarization System Configuration<br>===================================<br>Created: 2025-01-15<br>Purpose: Production summarization service<br><br>Decisions:<br>- Model: gpt-4o-mini (cost/quality balance)<br>- Summary Length: 3-5 sentences<br>- Minimum Thresholds:<br>  * Summary Score: 0.75<br>  * Faithfulness: 0.85<br>- Rejection Strategy: Flag for manual review<br><br>Trade-offs:<br>- Not using GPT-4 to save costs<br>- Accepting 78% info preservation for speed<br>- Manual review for edge cases<br><br>Review Date: 2025-02-15<br>"""</span></code></pre>
+</code-block><h4 id="7.-do-handle-errors-gracefully" tabindex="-1">7. DO Handle Errors Gracefully <a class="header-anchor" href="#7.-do-handle-errors-gracefully" aria-hidden="true">#</a></h4>
+<p>APIs fail. Networks go down. Budget runs out:</p>
+<code-block lang="python"><pre class="language-python"><code class="language-python"><span class="token keyword">try</span><span class="token punctuation">:</span><br>    score <span class="token operator">=</span> <span class="token keyword">await</span> summary_metric<span class="token punctuation">.</span>ascore<span class="token punctuation">(</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">)</span><br><span class="token keyword">except</span> RateLimitError<span class="token punctuation">:</span><br>    logger<span class="token punctuation">.</span>warning<span class="token punctuation">(</span><span class="token string">"Rate limited, retrying..."</span><span class="token punctuation">)</span><br>    <span class="token keyword">await</span> asyncio<span class="token punctuation">.</span>sleep<span class="token punctuation">(</span><span class="token number">60</span><span class="token punctuation">)</span><br>    score <span class="token operator">=</span> <span class="token keyword">await</span> summary_metric<span class="token punctuation">.</span>ascore<span class="token punctuation">(</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">)</span><br><span class="token keyword">except</span> APIError <span class="token keyword">as</span> e<span class="token punctuation">:</span><br>    logger<span class="token punctuation">.</span>error<span class="token punctuation">(</span><span class="token string-interpolation"><span class="token string">f"API error: </span><span class="token interpolation"><span class="token punctuation">{</span>e<span class="token punctuation">}</span></span><span class="token string">"</span></span><span class="token punctuation">)</span><br>    flag_for_manual_review<span class="token punctuation">(</span>summary<span class="token punctuation">)</span><br>    score <span class="token operator">=</span> <span class="token boolean">None</span></code></pre>
+</code-block><h3 id="%E2%9D%8C-don%E2%80%99ts" tabindex="-1">❌ DON’Ts <a class="header-anchor" href="#%E2%9D%8C-don%E2%80%99ts" aria-hidden="true">#</a></h3>
+<h4 id="1.-don%E2%80%99t-trust-metrics-blindly" tabindex="-1">1. DON’T Trust Metrics Blindly <a class="header-anchor" href="#1.-don%E2%80%99t-trust-metrics-blindly" aria-hidden="true">#</a></h4>
+<p>Metrics are tools, not oracles. Always have humans review:</p>
+<code-block lang="python"><pre class="language-python"><code class="language-python"><span class="token comment"># BAD: Automate based purely on score</span><br><span class="token keyword">if</span> summary_score <span class="token operator">></span> <span class="token number">0.8</span><span class="token punctuation">:</span><br>    publish_summary<span class="token punctuation">(</span><span class="token punctuation">)</span>  <span class="token comment"># ❌ Wrong!</span><br><br><span class="token comment"># GOOD: Use metrics as a guide</span><br><span class="token keyword">if</span> summary_score <span class="token operator">></span> <span class="token number">0.8</span><span class="token punctuation">:</span><br>    send_to_human_review<span class="token punctuation">(</span><span class="token punctuation">)</span>  <span class="token comment"># Human has final say</span></code></pre>
+</code-block><h4 id="2.-don%E2%80%99t-ignore-faithfulness-for-speed" tabindex="-1">2. DON’T Ignore Faithfulness for Speed <a class="header-anchor" href="#2.-don%E2%80%99t-ignore-faithfulness-for-speed" aria-hidden="true">#</a></h4>
+<p>Don’t optimize only for Summary Score at the expense of Faithfulness:</p>
+<code-block lang="python"><pre class="language-python"><code class="language-python"><span class="token comment"># BAD: Chasing higher Summary Score by any means</span><br>prompt <span class="token operator">=</span> <span class="token string">"Include EVERY DETAIL from the article"</span>  <span class="token comment"># ❌</span><br><span class="token comment"># Result: Longer summaries, higher Summary Score, but hallucinations</span><br><br><span class="token comment"># GOOD: Balance both</span><br>prompt <span class="token operator">=</span> <span class="token string">"Summarize accurately without adding new information"</span></code></pre>
+</code-block><p>Hallucinations destroy trust. One false claim tanks your credibility.</p>
+<h4 id="3.-don%E2%80%99t-hardcode-api-keys" tabindex="-1">3. DON’T Hardcode API Keys <a class="header-anchor" href="#3.-don%E2%80%99t-hardcode-api-keys" aria-hidden="true">#</a></h4>
+<p>Never, ever, ever:</p>
+<code-block lang="python"><pre class="language-python"><code class="language-python"><span class="token comment"># TERRIBLE</span><br>api_key <span class="token operator">=</span> <span class="token string">"sk-proj-abc123xyz..."</span>  <span class="token comment"># ❌❌❌</span><br><br><span class="token comment"># GOOD</span><br>load_dotenv<span class="token punctuation">(</span><span class="token punctuation">)</span><br>api_key <span class="token operator">=</span> os<span class="token punctuation">.</span>environ<span class="token punctuation">.</span>get<span class="token punctuation">(</span><span class="token string">"OPENAI_API_KEY"</span><span class="token punctuation">)</span></code></pre>
+</code-block><p>Add <code>.env</code> to <code>.gitignore</code>. Make this a habit.</p>
+<h4 id="4.-don%E2%80%99t-evaluate-everything" tabindex="-1">4. DON’T Evaluate Everything <a class="header-anchor" href="#4.-don%E2%80%99t-evaluate-everything" aria-hidden="true">#</a></h4>
+<p>Evaluations cost money. Be strategic:</p>
+<code-block lang="python"><pre class="language-python"><code class="language-python"><span class="token comment"># BAD: Evaluate all 10,000 summaries ($40+)</span><br><span class="token keyword">for</span> summary <span class="token keyword">in</span> all_summaries<span class="token punctuation">:</span><br>    evaluate_summary<span class="token punctuation">(</span>summary<span class="token punctuation">)</span>  <span class="token comment"># ❌ Expensive</span><br><br><span class="token comment"># GOOD: Statistical sampling</span><br>sample <span class="token operator">=</span> random<span class="token punctuation">.</span>sample<span class="token punctuation">(</span>all_summaries<span class="token punctuation">,</span> k<span class="token operator">=</span><span class="token number">100</span><span class="token punctuation">)</span>  <span class="token comment"># 1% sample</span><br><span class="token keyword">for</span> summary <span class="token keyword">in</span> sample<span class="token punctuation">:</span><br>    evaluate_summary<span class="token punctuation">(</span>summary<span class="token punctuation">)</span>  <span class="token comment"># ✅ Cheap, representative</span></code></pre>
+</code-block><h4 id="5.-don%E2%80%99t-use-metrics-as-your-only-quality-gate" tabindex="-1">5. DON’T Use Metrics As Your Only Quality Gate <a class="header-anchor" href="#5.-don%E2%80%99t-use-metrics-as-your-only-quality-gate" aria-hidden="true">#</a></h4>
+<p>Metrics are one dimension. Add more layers:</p>
+<code-block lang="python"><pre class="language-python"><code class="language-python"><span class="token comment"># BAD: Only checking metrics</span><br><span class="token keyword">if</span> summary_score <span class="token operator">></span> <span class="token number">0.8</span><span class="token punctuation">:</span><br>    publish_summary<span class="token punctuation">(</span><span class="token punctuation">)</span>  <span class="token comment"># ❌</span><br><br><span class="token comment"># GOOD: Multiple checks</span><br>quality_checks <span class="token operator">=</span> <span class="token punctuation">{</span><br>    <span class="token string">"metrics"</span><span class="token punctuation">:</span> evaluate_summary<span class="token punctuation">(</span>summary<span class="token punctuation">)</span><span class="token punctuation">,</span>       <span class="token comment"># Objective</span><br>    <span class="token string">"human_review"</span><span class="token punctuation">:</span> manual_review<span class="token punctuation">(</span>summary<span class="token punctuation">)</span><span class="token punctuation">,</span>     <span class="token comment"># Subjective</span><br>    <span class="token string">"guidelines"</span><span class="token punctuation">:</span> check_brand_guidelines<span class="token punctuation">(</span>summary<span class="token punctuation">)</span><span class="token punctuation">,</span>  <span class="token comment"># Policy</span><br>    <span class="token string">"safety"</span><span class="token punctuation">:</span> toxicity_check<span class="token punctuation">(</span>summary<span class="token punctuation">)</span>           <span class="token comment"># Safety</span><br><span class="token punctuation">}</span><br><br><span class="token keyword">if</span> <span class="token builtin">all</span><span class="token punctuation">(</span>c<span class="token punctuation">.</span>passed <span class="token keyword">for</span> c <span class="token keyword">in</span> quality_checks<span class="token punctuation">.</span>values<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">:</span><br>    publish_summary<span class="token punctuation">(</span><span class="token punctuation">)</span>  <span class="token comment"># ✅</span></code></pre>
+</code-block><h4 id="6.-don%E2%80%99t-use-the-same-model-for-summarization-and-evaluation" tabindex="-1">6. DON’T Use the Same Model for Summarization and Evaluation <a class="header-anchor" href="#6.-don%E2%80%99t-use-the-same-model-for-summarization-and-evaluation" aria-hidden="true">#</a></h4>
+<p>It’s like asking a student to grade their own homework:</p>
+<code-block lang="python"><pre class="language-python"><code class="language-python"><span class="token comment"># AVOID: Self-grading bias</span><br>summarizer <span class="token operator">=</span> ChatOpenAI<span class="token punctuation">(</span>model<span class="token operator">=</span><span class="token string">"gpt-3.5-turbo"</span><span class="token punctuation">)</span><br>evaluator <span class="token operator">=</span> ChatOpenAI<span class="token punctuation">(</span>model<span class="token operator">=</span><span class="token string">"gpt-3.5-turbo"</span><span class="token punctuation">)</span>  <span class="token comment"># Bias!</span><br><br><span class="token comment"># BETTER: Different models</span><br>summarizer <span class="token operator">=</span> ChatOpenAI<span class="token punctuation">(</span>model<span class="token operator">=</span><span class="token string">"gpt-3.5-turbo"</span><span class="token punctuation">)</span>  <span class="token comment"># Fast, cheap</span><br>evaluator <span class="token operator">=</span> ChatOpenAI<span class="token punctuation">(</span>model<span class="token operator">=</span><span class="token string">"gpt-4"</span><span class="token punctuation">)</span>            <span class="token comment"># Rigorous</span></code></pre>
+</code-block><h4 id="7.-don%E2%80%99t-assume-one-evaluation-equals-truth" tabindex="-1">7. DON’T Assume One Evaluation Equals Truth <a class="header-anchor" href="#7.-don%E2%80%99t-assume-one-evaluation-equals-truth" aria-hidden="true">#</a></h4>
+<p>LLM evaluations have variance. Run multiple times for important decisions:</p>
+<code-block lang="python"><pre class="language-python"><code class="language-python"><span class="token comment"># BAD: Single evaluation</span><br>score <span class="token operator">=</span> <span class="token keyword">await</span> summary_metric<span class="token punctuation">.</span>ascore<span class="token punctuation">(</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">)</span><br><span class="token keyword">if</span> score <span class="token operator">&lt;</span> <span class="token number">0.7</span><span class="token punctuation">:</span><br>    reject_summary<span class="token punctuation">(</span><span class="token punctuation">)</span>  <span class="token comment"># ❌ What if this was an anomaly?</span><br><br><span class="token comment"># GOOD: Multiple runs</span><br>scores <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span><br><span class="token keyword">for</span> _ <span class="token keyword">in</span> <span class="token builtin">range</span><span class="token punctuation">(</span><span class="token number">3</span><span class="token punctuation">)</span><span class="token punctuation">:</span><br>    score <span class="token operator">=</span> <span class="token keyword">await</span> summary_metric<span class="token punctuation">.</span>ascore<span class="token punctuation">(</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">)</span><br>    scores<span class="token punctuation">.</span>append<span class="token punctuation">(</span><span class="token builtin">float</span><span class="token punctuation">(</span>score<span class="token punctuation">.</span>value<span class="token punctuation">)</span><span class="token punctuation">)</span><br><br>avg_score <span class="token operator">=</span> <span class="token builtin">sum</span><span class="token punctuation">(</span>scores<span class="token punctuation">)</span> <span class="token operator">/</span> <span class="token builtin">len</span><span class="token punctuation">(</span>scores<span class="token punctuation">)</span><br><span class="token keyword">if</span> avg_score <span class="token operator">&lt;</span> <span class="token number">0.7</span><span class="token punctuation">:</span><br>    reject_summary<span class="token punctuation">(</span><span class="token punctuation">)</span>  <span class="token comment"># ✅ More reliable</span></code></pre>
+</code-block><h2 id="common-pitfalls-%26-how-to-avoid-them" tabindex="-1">Common Pitfalls &amp; How to Avoid Them <a class="header-anchor" href="#common-pitfalls-%26-how-to-avoid-them" aria-hidden="true">#</a></h2>
+<h3 id="pitfall-%231%3A-the-score-plateau" tabindex="-1">Pitfall #1: The Score Plateau <a class="header-anchor" href="#pitfall-%231%3A-the-score-plateau" aria-hidden="true">#</a></h3>
+<p>Your Summary Score hits 0.75 and won’t improve.</p>
+<p><strong>Why:</strong> You’ve hit the architectural limits of your approach.</p>
+<p><strong>Solution:</strong></p>
+<ul>
+<li>
+<p>Try a completely different prompt (not tweaks, but fundamentally different)</p>
+</li>
+<li>
+<p>Switch to a more capable model (GPT-4 instead of 3.5)</p>
+</li>
+<li>
+<p>Increase summary length (allows more information)</p>
+</li>
+</ul>
+<h3 id="pitfall-%232%3A-the-faithfulness-trap" tabindex="-1">Pitfall #2: The Faithfulness Trap <a class="header-anchor" href="#pitfall-%232%3A-the-faithfulness-trap" aria-hidden="true">#</a></h3>
+<p>Faithfulness is 0.95 but users say summaries are useless.</p>
+<p><strong>Why:</strong> You’re being so cautious you lose nuance. Or metrics don’t match user expectations.</p>
+<p><strong>Solution:</strong></p>
+<ul>
+<li>
+<p>Add human feedback alongside metrics</p>
+</li>
+<li>
+<p>Verify that metrics actually align with user satisfaction</p>
+</li>
+<li>
+<p>Faithfulness ≠ usefulness</p>
+</li>
+</ul>
+<h3 id="pitfall-%233%3A-runaway-costs" tabindex="-1">Pitfall #3: Runaway Costs <a class="header-anchor" href="#pitfall-%233%3A-runaway-costs" aria-hidden="true">#</a></h3>
+<p>Your evaluation budget exploded unexpectedly.</p>
+<p><strong>Why:</strong> Evaluated too much, used expensive models, pricing changed.</p>
+<p><strong>Solution:</strong></p>
+<code-block lang="python"><pre class="language-python"><code class="language-python">BUDGET <span class="token operator">=</span> <span class="token number">100</span>  <span class="token comment"># $100/month</span><br>COST_PER_EVAL <span class="token operator">=</span> <span class="token number">0.004</span><br>MAX_EVALS <span class="token operator">=</span> <span class="token builtin">int</span><span class="token punctuation">(</span>BUDGET <span class="token operator">/</span> COST_PER_EVAL<span class="token punctuation">)</span>  <span class="token comment"># 25,000</span><br><br>eval_count <span class="token operator">=</span> <span class="token number">0</span><br><span class="token keyword">for</span> summary <span class="token keyword">in</span> summaries<span class="token punctuation">:</span><br>    <span class="token keyword">if</span> eval_count <span class="token operator">>=</span> MAX_EVALS<span class="token punctuation">:</span><br>        logger<span class="token punctuation">.</span>warning<span class="token punctuation">(</span><span class="token string">"Budget limit reached"</span><span class="token punctuation">)</span><br>        <span class="token keyword">break</span><br>    evaluate_summary<span class="token punctuation">(</span>summary<span class="token punctuation">)</span><br>    eval_count <span class="token operator">+=</span> <span class="token number">1</span></code></pre>
+</code-block><h3 id="pitfall-%234%3A-model-drift" tabindex="-1">Pitfall #4: Model Drift <a class="header-anchor" href="#pitfall-%234%3A-model-drift" aria-hidden="true">#</a></h3>
+<p>Your system worked for 3 months, then scores dropped mysteriously.</p>
+<p><strong>Why:</strong> OpenAI updated their model, or your data changed.</p>
+<p><strong>Solution:</strong></p>
+<code-block lang="python"><pre class="language-python"><code class="language-python"><span class="token comment"># Set a baseline</span><br>baseline <span class="token operator">=</span> <span class="token punctuation">{</span><br>    <span class="token string">"date"</span><span class="token punctuation">:</span> <span class="token string">"2025-01-15"</span><span class="token punctuation">,</span><br>    <span class="token string">"model"</span><span class="token punctuation">:</span> <span class="token string">"gpt-4o-mini"</span><span class="token punctuation">,</span><br>    <span class="token string">"avg_score"</span><span class="token punctuation">:</span> <span class="token number">0.78</span><br><span class="token punctuation">}</span><br><br><span class="token comment"># Monthly check-in</span><br>current <span class="token operator">=</span> evaluate_sample<span class="token punctuation">(</span><span class="token punctuation">)</span><br><span class="token keyword">if</span> current<span class="token punctuation">[</span><span class="token string">"avg_score"</span><span class="token punctuation">]</span> <span class="token operator">&lt;</span> baseline<span class="token punctuation">[</span><span class="token string">"avg_score"</span><span class="token punctuation">]</span> <span class="token operator">*</span> <span class="token number">0.95</span><span class="token punctuation">:</span><br>    alert<span class="token punctuation">(</span><span class="token string">"Score degradation detected!"</span><span class="token punctuation">)</span></code></pre>
+</code-block><h2 id="learn-more" tabindex="-1">Learn More <a class="header-anchor" href="#learn-more" aria-hidden="true">#</a></h2>
+<p>Want to dive deeper?</p>
+<ul>
+<li>
+<p><a href="https://docs.ragas.io/"><strong>RAGAS Documentation</strong></a> - Official docs with all metrics explained</p>
+</li>
+<li>
+<p><a href="https://docs.ragas.io/en/stable/concepts/metrics/available_metrics/summarization_score"><strong>Summary Score Details</strong></a> - How Summary Score works under the hood</p>
+</li>
+<li>
+<p><a href="https://docs.ragas.io/en/stable/concepts/metrics/available_metrics/faithfulness"><strong>Faithfulness Metric</strong></a> - Deep dive into hallucination detection</p>
+</li>
+<li>
+<p><a href="https://python.langchain.com/"><strong>LangChain Documentation</strong></a> - Building LLM applications</p>
+</li>
+<li>
+<p><a href="https://platform.openai.com/docs/guides/prompt-engineering"><strong>Prompt Engineering Best Practices</strong></a> - OpenAI’s guide to writing better prompts</p>
+</li>
+</ul>
+<p>You can also use more latest gpt-5 series of course or other providers like claude, gemini, etc.</p>
+<p>Building AI applications is easy. Building <strong>trustworthy</strong> AI applications is harder, but not impossibly so.</p>
+<p>The difference is measurement. Metrics. Data.</p>
+<p>Every time someone asks you, “How do you know your AI summaries are accurate?” you can now answer confidently:</p>
+<blockquote>
+<p>“Because I measure it. Every single time. With objective metrics. And I continuously optimize based on those measurements.”</p>
+</blockquote>
+<p>That’s what separates hobby projects from professional tools.</p>
+<p>You now have everything you need to build AI you can trust.</p>
+<p><strong>Questions? Found a bug? Have ideas?</strong></p>
+<p><a href="https://github.com/anistark/ai-summarisation/issues">Open an issue on GitHub</a> and let’s build better AI together.</p>
+<p>Happy building! 🚀</p>
+
+        </div>
+
+        <div class="article-end">
+            <span>✦</span>
+            <span>✦</span>
+            <span>✦</span>
+        </div>
+
+        <div class="post-navigation">
+            <div class="post-nav-item post-nav-previous">
+                    <a href="/llm-as-judge/">
+                        <span class="nav-arrow">←</span>
+                        <div class="nav-content">
+                            <p class="nav-label">Previous</p>
+                            <p class="nav-title">Teaching AI to Grade Other AI</p>
+                        </div>
+                    </a>
+                
+            </div>
+
+            <div class="post-nav-item post-nav-next">
+                    <a href="/skills-agents-and-sutras/">
+                        <div class="nav-content">
+                            <p class="nav-label">Next</p>
+                            <p class="nav-title">Skills, Agents, and the Missing Middle</p>
+                        </div>
+                        <span class="nav-arrow">→</span>
+                    </a>
+                
+            </div>
+        </div>
+    </div>
+
+    </main>
+    <footer class="sticky bottom-0 z-50 glass-footer py-4">
+  <div class="container mx-auto max-w-7xl px-8 flex items-center justify-between">
+    <div class="text-base">
+      by <a href="https://anirudha.dev" target="_blank" rel="noopener noreferrer">Ani</a>
+    </div>
+
+    <div class="flex items-center gap-4">
+      <a href="https://github.com/anistark" target="_blank" rel="noopener noreferrer" class="footer-icon" aria-label="GitHub">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="currentColor" viewBox="0 0 24 24">
+          <path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/>
+        </svg>
+      </a>
+      <a href="https://x.com/kranirudha" target="_blank" rel="noopener noreferrer" class="footer-icon" aria-label="X">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="currentColor" viewBox="0 0 24 24">
+          <path d="M14.234 10.162 22.977 0h-2.072l-7.591 8.824L7.251 0H.258l9.168 13.343L.258 24H2.33l8.016-9.318L16.749 24h6.993zm-2.837 3.299-.929-1.329L3.076 1.56h3.182l5.965 8.532.929 1.329 7.754 11.09h-3.182z"/>
+        </svg>
+      </a>
+      <a href="https://fosstodon.org/@ani" target="_blank" rel="noopener noreferrer" class="footer-icon" aria-label="Mastodon">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="currentColor" viewBox="0 0 24 24">
+          <path d="M23.268 5.313c-.35-2.578-2.617-4.61-5.304-5.004C17.51.242 15.792 0 11.813 0h-.03c-3.98 0-4.835.242-5.288.309C3.882.692 1.496 2.518.917 5.127.64 6.412.61 7.837.661 9.143c.074 1.874.088 3.745.26 5.611.118 1.24.325 2.47.62 3.68.55 2.237 2.777 4.098 4.96 4.857 2.336.792 4.849.923 7.256.38.265-.061.527-.132.786-.213.585-.184 1.27-.39 1.774-.753a.057.057 0 0 0 .023-.043v-1.809a.052.052 0 0 0-.02-.041.053.053 0 0 0-.046-.01 20.282 20.282 0 0 1-4.709.545c-2.73 0-3.463-1.284-3.674-1.818a5.593 5.593 0 0 1-.319-1.433.053.053 0 0 1 .066-.054c1.517.363 3.072.546 4.632.546.376 0 .75 0 1.125-.01 1.57-.044 3.224-.124 4.768-.422.038-.008.077-.015.11-.024 2.435-.464 4.753-1.92 4.989-5.604.008-.145.03-1.52.03-1.67.002-.512.167-3.63-.024-5.545zm-3.748 9.195h-2.561V8.29c0-1.309-.55-1.976-1.67-1.976-1.23 0-1.846.79-1.846 2.35v3.403h-2.546V8.663c0-1.56-.617-2.35-1.848-2.35-1.112 0-1.668.668-1.67 1.977v6.218H4.822V8.102c0-1.31.337-2.35 1.011-3.12.696-.77 1.608-1.164 2.74-1.164 1.311 0 2.302.5 2.962 1.498l.638 1.06.638-1.06c.66-.999 1.65-1.498 2.96-1.498 1.13 0 2.043.395 2.74 1.164.675.77 1.012 1.81 1.012 3.12z"/>
+        </svg>
+      </a>
+      <a href="https://linkedin.com/in/kranirudha" target="_blank" rel="noopener noreferrer" class="footer-icon" aria-label="LinkedIn">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="currentColor" viewBox="0 0 24 24">
+          <path d="M4.98 3.5c0 1.381-1.11 2.5-2.48 2.5s-2.48-1.119-2.48-2.5c0-1.38 1.11-2.5 2.48-2.5s2.48 1.12 2.48 2.5zm.02 4.5h-5v16h5v-16zm7.982 0h-4.968v16h4.969v-8.399c0-4.67 6.029-5.052 6.029 0v8.399h4.988v-10.131c0-7.88-8.922-7.593-11.018-3.714v-2.155z"/>
+        </svg>
+      </a>
+      <a href="/feed/feed.xml" class="footer-icon" aria-label="RSS feed">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="currentColor" viewBox="0 0 24 24">
+          <path d="M6.18 15.64a2.18 2.18 0 0 1 2.18 2.18C8.36 19 7.38 20 6.18 20C5 20 4 19 4 17.82a2.18 2.18 0 0 1 2.18-2.18M4 4.44A15.56 15.56 0 0 1 19.56 20h-2.83A12.73 12.73 0 0 0 4 7.27V4.44m0 5.66a9.9 9.9 0 0 1 9.9 9.9h-2.83A7.07 7.07 0 0 0 4 12.93V10.1Z"/>
+        </svg>
+      </a>
+    </div>
+  </div>
+</footer>
+
+    
+    <script src="https://unpkg.com/clipboard@2/dist/clipboard.min.js"></script>
+    <script src="/assets/main.bundle.js"></script>
+    <script type="module">
+      import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs';
+      mermaid.initialize({
+        startOnLoad: true,
+        theme: ['reading', 'beach'].includes(document.documentElement.getAttribute('data-theme')) ? 'default' : 'dark',
+        themeVariables: {
+          fontSize: '14px',
+        }
+      });
+    </script>
+  </body>
+</html>

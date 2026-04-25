@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    
+    <meta itemprop="name" content="The Code of Libraries | AniLog">
+    <meta itemprop="description" content="How many times have you found yourself in the middle of your project, had to stop and switch to a different library, all because it didn&#39;t support a simple feature. How many of those times you wondered if you knew which library to use to get going.">
+
+    
+    <meta name="twitter:title" content="The Code of Libraries | AniLog">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:description" content="How many times have you found yourself in the middle of your project, had to stop and switch to a different library, all because it didn&#39;t support a simple feature. How many of those times you wondered if you knew which library to use to get going.">
+    <meta name="twitter:site" content="@kranirudha">
+    <meta name="twitter:creator" content="@kranirudha">
+    <meta name="twitter:image:src" content="https://blog.anirudha.dev/images/posts/tgk2nf_Y6.jpeg">
+
+    
+    <meta name="og:title" content="The Code of Libraries | AniLog">
+    <meta name="og:description" content="How many times have you found yourself in the middle of your project, had to stop and switch to a different library, all because it didn&#39;t support a simple feature. How many of those times you wondered if you knew which library to use to get going.">
+    <meta name="og:image" content="https://blog.anirudha.dev/images/posts/tgk2nf_Y6.jpeg">
+    <meta name="og:url" content="https://blog.anirudha.dev/">
+    <meta name="og:site_name" content="AniLog">
+    <meta name="og:locale" content="en_GB">
+    <meta name="og:type" content="website">
+
+    <link rel="icon" type="image/png" href="/me.png" />
+    <link rel="alternate" type="application/atom+xml" title="AniLog" href="https://blog.anirudha.dev/feed/feed.xml" />
+
+    <title>The Code of Libraries | AniLog</title>
+
+    <link rel="stylesheet" href="/assets/main.bundle.css">
+
+    <script>
+      // Set theme before page renders to prevent flash
+      (function() {
+        const theme = localStorage.getItem('theme') || 'night';
+        if (theme !== 'night') {
+          document.documentElement.setAttribute('data-theme', theme);
+        }
+      })();
+    </script>
+
+    
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-YGZHVY9TD7"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-YGZHVY9TD7');
+    </script>
+    
+
+    
+  </head>
+  <body class="flex flex-col min-h-screen">
+    <canvas id="ambience-canvas"></canvas>
+    <header class="sticky top-0 z-50 glass-header">
+  <nav class="container mx-auto max-w-7xl px-8 py-3 flex flex-wrap items-center justify-between">
+    <div class="flex items-center gap-3">
+      <a href="/" class="flex items-center gap-3">
+        <img src="/ani.png" alt="AniLog logo" class="w-10 h-10 object-cover">
+        <h1 class="text-2xl leading-none m-0">AniLog</h1>
+      </a>
+    </div>
+
+    <div class="flex items-center gap-6">
+      <div class="theme-switcher">
+        <button id="theme-switcher-btn" class="theme-switcher-btn" aria-label="Switch theme" aria-expanded="false">
+          <span id="theme-active-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.985 12.486a9 9 0 1 1-9.473-9.472c.405-.022.617.46.402.803a6 6 0 0 0 8.268 8.268c.344-.215.825-.004.803.401"/></svg>
+          </span>
+        </button>
+        <div id="theme-dropdown" class="theme-dropdown">
+          <button class="theme-option" data-theme-value="night">
+            <span class="theme-icon"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.985 12.486a9 9 0 1 1-9.473-9.472c.405-.022.617.46.402.803a6 6 0 0 0 8.268 8.268c.344-.215.825-.004.803.401"/></svg></span>
+            <span>Night</span>
+          </button>
+          <button class="theme-option" data-theme-value="reading">
+            <span class="theme-icon"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 7v14"/><path d="M3 18a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h5a4 4 0 0 1 4 4 4 4 0 0 1 4-4h5a1 1 0 0 1 1 1v13a1 1 0 0 1-1 1h-6a3 3 0 0 0-3 3 3 3 0 0 0-3-3z"/></svg></span>
+            <span>Reading</span>
+          </button>
+          <button class="theme-option" data-theme-value="forest">
+            <span class="theme-icon"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m17 14 3 3.3a1 1 0 0 1-.7 1.7H4.7a1 1 0 0 1-.7-1.7L7 14h-.3a1 1 0 0 1-.7-1.7L9 9h-.2A1 1 0 0 1 8 7.3L12 3l4 4.3a1 1 0 0 1-.8 1.7H15l3 3.3a1 1 0 0 1-.7 1.7H17Z"/><path d="M12 22v-3"/></svg></span>
+            <span>Forest</span>
+          </button>
+          <button class="theme-option" data-theme-value="beach">
+            <span class="theme-icon"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 8c0-2.76-2.46-5-5.5-5S2 5.24 2 8h2l1-1 1 1h4"/><path d="M13 7.14A5.82 5.82 0 0 1 16.5 6c3.04 0 5.5 2.24 5.5 5h-3l-1-1-1 1h-3"/><path d="M5.89 9.71c-2.15 2.15-2.3 5.47-.35 7.43l4.24-4.25.7-.7.71-.71 2.12-2.12c-1.95-1.96-5.27-1.8-7.42.35"/><path d="M11 15.5c.5 2.5-.17 4.5-1 6.5h4c2-5.5-.5-12-1-14"/></svg></span>
+            <span>Beach</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </nav>
+</header>
+
+    <main class="container mx-auto max-w-6xl p-8 grow">
+      
+    <p></p>
+
+    
+        <div class="post-cover-image" style="background-image: url('/images/posts/tgk2nf_Y6.jpeg');"></div>
+    
+
+    <div>
+        <div class="post-title-row">
+            <h2>The Code of Libraries</h2>
+            
+        </div>
+
+        
+            <div class="mt-4 mb-2">
+                <a class="tag guide" href="/tag/guide">guide</a><a class="tag libraries" href="/tag/libraries">libraries</a><a class="tag product" href="/tag/product">product</a>
+            </div>
+        
+
+        
+            
+                <p class="text-sm italic">Published on
+                    <span datetime="Tue Aug 04 2020 00:00:00 GMT+0000 (Coordinated Universal Time)">August 4, 2020</span>.
+                    <span class="reading-time"> · 6 min read</span></p>
+            
+        
+
+        <div class="content post">
+            <p>How many times have you found yourself in the middle of your project, had to stop and switch to a different library, all because it didn’t support a simple feature? How many of those times you wondered if you knew which library to use to get going? You did nothing wrong. You chose the first result that came up on google or your package manager’s recommended website. It obviously showed a very download rate and popular usage. But even so, more times than less, we tend to miss a key factor or two which can lead us to go back and check out a different package. Sometimes it leads you to lose interest in the working project, or find yourself trying to fix the library which might increase your development time.</p>
+<p>It really is frustrating at times, isn’t it? Considering being in a similar situation more times than I would care to admit, I tried to devise a few guidelines to follow while selecting the right library to use, which let’s call as <em>The Code of Libraries</em>.</p>
+<h2 id="source-code" tabindex="-1">Source Code <a class="header-anchor" href="#source-code" aria-hidden="true">#</a></h2>
+<p>This should be pretty obvious. Find that source code of your library and go through the code. No need to get overwhelmed and no need to obviously go through the entire source code. Just enough to make to sure that there’s at least some code written on it. It might just be a fully updated package every few months and has no code whatsoever written inside. Even better if the library has tests written which you can run preferably in interactive or verbose mode to go through the output as it happens.</p>
+<h2 id="stars%2Fforks%2Fwatchers" tabindex="-1">Stars/Forks/Watchers <a class="header-anchor" href="#stars%2Fforks%2Fwatchers" aria-hidden="true">#</a></h2>
+<p><img src="https://i.imgur.com/pgEFiOz.png" alt="Github Watchers, Stars, Forks" title="Github Watchers, Stars, Forks"></p>
+<p>A quick look at the stars any project has got can provide a good idea of the popularity and validation for the project. Forks would showcase of how many people are interested in contributing or working on the project, which would also mean it’ll be that easier to get support for the project.</p>
+<h2 id="version" tabindex="-1">Version <a class="header-anchor" href="#version" aria-hidden="true">#</a></h2>
+<p>Trust in experience. Always take into consideration going for libraries with releases before their own v1.0.0. They’re probably still testing it out themselves. Obviously, they would put up a flag on their readme file as to Under Development or something similar, but they also might not have. So, it’s obviously upto you to cross-check. Make sure to also check previous versions. It might so happen that someone’s first release is starting from v1.0.0. On the other hand check the versions previous to it. A very good possibility that on every spelling fix, the maintainers were pushing a separate release and now the poor library is left with v24.12.142 and really it’s just printing Hello World on the console.</p>
+<h2 id="downloads" tabindex="-1">Downloads <a class="header-anchor" href="#downloads" aria-hidden="true">#</a></h2>
+<p><img src="https://i.imgur.com/OVniMSO.png" alt="Downloads" title="Downloads">
+Pretty obvious when you think about it. Always check the number of downloads the library is getting on a weekly or monthly basis. Often times than more, the libraries get downloaded by thousands of mirroring bots to private data centres for analysis and storage. So, although most of those numbers might be way higher than actual users downloading that particular library. But also the mirroring bots are active more frequent on the more user downloaded libraries.
+<img src="https://i.imgur.com/gge1ydG.png" alt="Download count" title="Download count"></p>
+<h2 id="used-by" tabindex="-1">Used By <a class="header-anchor" href="#used-by" aria-hidden="true">#</a></h2>
+<p><img src="https://i.imgur.com/KPomAcb.png" alt="Used By" title="Used By"></p>
+<p>This is one of the best features Github rolled up recently. Touchdown Github! This particular feature provides a pretty comprehensive list on how many people are using the project. Check out the dependants of python flask project. If the codebase is on GitHub, definitely this adds more credibility to the project than anything else. To be sure, just browse through randomly some of those projects to get an idea what they are being used for and how’s their work going along. It might so happen that the library was popular before and used a lot by a lot of projects but now not so much, due to either a better updated library available or the technology itself being outdated.</p>
+<h2 id="last-updated" tabindex="-1">Last Updated <a class="header-anchor" href="#last-updated" aria-hidden="true">#</a></h2>
+<p>Find the repo link. Check for when the last push to the codebase was. It’s a statistically safe bet if the library had code pushes in anywhere within last 2–4 months. Anything more than 6 months is not to be trusted. Specially for languages like nodejs and gaoling where the language releases are very often within months. For languages which doesn’t have that fast releases like python or ruby, upto 6 months still is okay. We’ve used packages from 3 years ago and still works great. And also packages that went on update last month is still some vulnerable dependencies.
+<img src="https://i.imgur.com/gnrQN7Q.png" alt="Contributions Graph" title="Contributions Graph"></p>
+<h2 id="release-cycle" tabindex="-1">Release Cycle <a class="header-anchor" href="#release-cycle" aria-hidden="true">#</a></h2>
+<p>Alongside last updated, release cycles are very important. You might find this a vague criteria, but for packages which are being released every week, if they suddenly stop releases, it’s either the maintainers have dumped this project or have some issues that they can’t fix yet. An instance might be when last updated date is 3 months ago but it used to have steady releases every week. By their own timeline, they would have missed close to 14 cycles. That never looks good. Trust us.</p>
+<h2 id="issue%2Fbug-list" tabindex="-1">Issue/Bug List <a class="header-anchor" href="#issue%2Fbug-list" aria-hidden="true">#</a></h2>
+<p><img src="https://i.imgur.com/49fKg3S.png" alt="Issue Page" title="Issue Page">
+A very important criteria to meet is to check for open issues on the repo. And if any of those issues are very old pending. Look more closely as to when were last updated in comments as such. Also, if there’s any critical bug pending in open issues. Sometimes this might be a make or break moment. A package might be not maintained as much but the maintainers might still be answering questions on issues raised and closing them or redirecting to another working library. While you’re at it, take a quick peek on closed issues as well to make sure the project maintainers aren’t just closing issues so they won’t stay on the open issues and make themselves look bad.</p>
+<h2 id="dependencies" tabindex="-1">Dependencies <a class="header-anchor" href="#dependencies" aria-hidden="true">#</a></h2>
+<p><img src="https://i.imgur.com/VYboD2e.png" alt="Dependencies" title="Dependencies">
+Check the codebase and go through it thoroughly for all dependency that your desired package is facing up. Even better if the project has integrated code coverage, dependency checker or other such tools. They’re free to use and you should definitely use them to your advantage. Your library might be very well maintained but some dependency that it’s relying on might have been outdated and not-maintained anymore. It’s a big disaster in that case. Switch to some other library immediately.</p>
+<h2 id="community-response" tabindex="-1">Community Response <a class="header-anchor" href="#community-response" aria-hidden="true">#</a></h2>
+<p>Finally, check for the official communitcation channel or q/a forums used by the respective community. It might be on irc, gitter, slack, discord, rocketchat or some equivalent communication channel but this will give a great idea of the typeof discussions happening at the project level and if the project is inherently active.
+<img src="https://i.imgur.com/vcbWuIG.jpg" alt="Community Support" title="Community Support"></p>
+<p>So, there you have it. Now, repeat: <em>I solemly swear to abide by <strong>The Code of Libraries</strong> for my all future projects.</em></p>
+<h2 id="some-popular-tools" tabindex="-1">Some Popular Tools <a class="header-anchor" href="#some-popular-tools" aria-hidden="true">#</a></h2>
+<p>The Ruby community came up with an online tool to compare projects called <a href="https://www.ruby-toolbox.com/">Ruby Toolbox</a>. It’s brilliant and provides a pretty comprehensive comparision to make your job easier.
+<img src="https://i.imgur.com/3cG2Z03.png" alt="Ruby Toolbox" title="Ruby Toolbox"></p>
+<p><a href="https://libraries.io/">Libraries.io</a> helps you find new open source packages, modules and frameworks and keep track of ones you depend upon.
+<img src="https://i.imgur.com/Ssgf2Q1.png" alt="Libraries.io" title="Libraries.io"></p>
+<p>Now, sometimes even after following Polyglot’s Code of the Libraries, you might get stuck into such scenarios where you need to take care of a dependency of a dependency of your project. You might imagine yourself spending too much time fixing up the library. Polyglot is a community of developers driving an open source software agency to help you get out of such a mess. Get in touch with Polyglot Network at <a href="mailto:team@polyglot.network">team@polyglot.network</a> and let them take care of that open source library for you.</p>
+
+        </div>
+
+        <div class="article-end">
+            <span>✦</span>
+            <span>✦</span>
+            <span>✦</span>
+        </div>
+
+        <div class="post-navigation">
+            <div class="post-nav-item post-nav-previous">
+                    <a href="/data-currency-and-technology/">
+                        <span class="nav-arrow">←</span>
+                        <div class="nav-content">
+                            <p class="nav-label">Previous</p>
+                            <p class="nav-title">Data Currency and Technology</p>
+                        </div>
+                    </a>
+                
+            </div>
+
+            <div class="post-nav-item post-nav-next">
+                    <a href="/to-go-with-golang/">
+                        <div class="nav-content">
+                            <p class="nav-label">Next</p>
+                            <p class="nav-title">To Go with Golang</p>
+                        </div>
+                        <span class="nav-arrow">→</span>
+                    </a>
+                
+            </div>
+        </div>
+    </div>
+
+    </main>
+    <footer class="sticky bottom-0 z-50 glass-footer py-4">
+  <div class="container mx-auto max-w-7xl px-8 flex items-center justify-between">
+    <div class="text-base">
+      by <a href="https://anirudha.dev" target="_blank" rel="noopener noreferrer">Ani</a>
+    </div>
+
+    <div class="flex items-center gap-4">
+      <a href="https://github.com/anistark" target="_blank" rel="noopener noreferrer" class="footer-icon" aria-label="GitHub">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="currentColor" viewBox="0 0 24 24">
+          <path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/>
+        </svg>
+      </a>
+      <a href="https://x.com/kranirudha" target="_blank" rel="noopener noreferrer" class="footer-icon" aria-label="X">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="currentColor" viewBox="0 0 24 24">
+          <path d="M14.234 10.162 22.977 0h-2.072l-7.591 8.824L7.251 0H.258l9.168 13.343L.258 24H2.33l8.016-9.318L16.749 24h6.993zm-2.837 3.299-.929-1.329L3.076 1.56h3.182l5.965 8.532.929 1.329 7.754 11.09h-3.182z"/>
+        </svg>
+      </a>
+      <a href="https://fosstodon.org/@ani" target="_blank" rel="noopener noreferrer" class="footer-icon" aria-label="Mastodon">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="currentColor" viewBox="0 0 24 24">
+          <path d="M23.268 5.313c-.35-2.578-2.617-4.61-5.304-5.004C17.51.242 15.792 0 11.813 0h-.03c-3.98 0-4.835.242-5.288.309C3.882.692 1.496 2.518.917 5.127.64 6.412.61 7.837.661 9.143c.074 1.874.088 3.745.26 5.611.118 1.24.325 2.47.62 3.68.55 2.237 2.777 4.098 4.96 4.857 2.336.792 4.849.923 7.256.38.265-.061.527-.132.786-.213.585-.184 1.27-.39 1.774-.753a.057.057 0 0 0 .023-.043v-1.809a.052.052 0 0 0-.02-.041.053.053 0 0 0-.046-.01 20.282 20.282 0 0 1-4.709.545c-2.73 0-3.463-1.284-3.674-1.818a5.593 5.593 0 0 1-.319-1.433.053.053 0 0 1 .066-.054c1.517.363 3.072.546 4.632.546.376 0 .75 0 1.125-.01 1.57-.044 3.224-.124 4.768-.422.038-.008.077-.015.11-.024 2.435-.464 4.753-1.92 4.989-5.604.008-.145.03-1.52.03-1.67.002-.512.167-3.63-.024-5.545zm-3.748 9.195h-2.561V8.29c0-1.309-.55-1.976-1.67-1.976-1.23 0-1.846.79-1.846 2.35v3.403h-2.546V8.663c0-1.56-.617-2.35-1.848-2.35-1.112 0-1.668.668-1.67 1.977v6.218H4.822V8.102c0-1.31.337-2.35 1.011-3.12.696-.77 1.608-1.164 2.74-1.164 1.311 0 2.302.5 2.962 1.498l.638 1.06.638-1.06c.66-.999 1.65-1.498 2.96-1.498 1.13 0 2.043.395 2.74 1.164.675.77 1.012 1.81 1.012 3.12z"/>
+        </svg>
+      </a>
+      <a href="https://linkedin.com/in/kranirudha" target="_blank" rel="noopener noreferrer" class="footer-icon" aria-label="LinkedIn">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="currentColor" viewBox="0 0 24 24">
+          <path d="M4.98 3.5c0 1.381-1.11 2.5-2.48 2.5s-2.48-1.119-2.48-2.5c0-1.38 1.11-2.5 2.48-2.5s2.48 1.12 2.48 2.5zm.02 4.5h-5v16h5v-16zm7.982 0h-4.968v16h4.969v-8.399c0-4.67 6.029-5.052 6.029 0v8.399h4.988v-10.131c0-7.88-8.922-7.593-11.018-3.714v-2.155z"/>
+        </svg>
+      </a>
+      <a href="/feed/feed.xml" class="footer-icon" aria-label="RSS feed">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="currentColor" viewBox="0 0 24 24">
+          <path d="M6.18 15.64a2.18 2.18 0 0 1 2.18 2.18C8.36 19 7.38 20 6.18 20C5 20 4 19 4 17.82a2.18 2.18 0 0 1 2.18-2.18M4 4.44A15.56 15.56 0 0 1 19.56 20h-2.83A12.73 12.73 0 0 0 4 7.27V4.44m0 5.66a9.9 9.9 0 0 1 9.9 9.9h-2.83A7.07 7.07 0 0 0 4 12.93V10.1Z"/>
+        </svg>
+      </a>
+    </div>
+  </div>
+</footer>
+
+    
+    <script src="https://unpkg.com/clipboard@2/dist/clipboard.min.js"></script>
+    <script src="/assets/main.bundle.js"></script>
+    <script type="module">
+      import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs';
+      mermaid.initialize({
+        startOnLoad: true,
+        theme: ['reading', 'beach'].includes(document.documentElement.getAttribute('data-theme')) ? 'default' : 'dark',
+        themeVariables: {
+          fontSize: '14px',
+        }
+      });
+    </script>
+  </body>
+</html>

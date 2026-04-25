@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    
+    <meta itemprop="name" content="Building a Rust Plugin System | AniLog">
+    <meta itemprop="description" content="Plugin systems are one of those architectural decisions that seem straightforward until you start implementing them. In the Rust ecosystem, plugin architectures present unique challenges compared to interpreted languages where you can dynamically load and execute code relatively easily.">
+
+    
+    <meta name="twitter:title" content="Building a Rust Plugin System | AniLog">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:description" content="Plugin systems are one of those architectural decisions that seem straightforward until you start implementing them. In the Rust ecosystem, plugin architectures present unique challenges compared to interpreted languages where you can dynamically load and execute code relatively easily.">
+    <meta name="twitter:site" content="@kranirudha">
+    <meta name="twitter:creator" content="@kranirudha">
+    <meta name="twitter:image:src" content="https://blog.anirudha.dev/images/posts/48bfbcee-4024-44d6-8149-afb60d0db3a9.png">
+
+    
+    <meta name="og:title" content="Building a Rust Plugin System | AniLog">
+    <meta name="og:description" content="Plugin systems are one of those architectural decisions that seem straightforward until you start implementing them. In the Rust ecosystem, plugin architectures present unique challenges compared to interpreted languages where you can dynamically load and execute code relatively easily.">
+    <meta name="og:image" content="https://blog.anirudha.dev/images/posts/48bfbcee-4024-44d6-8149-afb60d0db3a9.png">
+    <meta name="og:url" content="https://blog.anirudha.dev/">
+    <meta name="og:site_name" content="AniLog">
+    <meta name="og:locale" content="en_GB">
+    <meta name="og:type" content="website">
+
+    <link rel="icon" type="image/png" href="/me.png" />
+    <link rel="alternate" type="application/atom+xml" title="AniLog" href="https://blog.anirudha.dev/feed/feed.xml" />
+
+    <title>Building a Rust Plugin System | AniLog</title>
+
+    <link rel="stylesheet" href="/assets/main.bundle.css">
+
+    <script>
+      // Set theme before page renders to prevent flash
+      (function() {
+        const theme = localStorage.getItem('theme') || 'night';
+        if (theme !== 'night') {
+          document.documentElement.setAttribute('data-theme', theme);
+        }
+      })();
+    </script>
+
+    
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-YGZHVY9TD7"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-YGZHVY9TD7');
+    </script>
+    
+
+    
+  </head>
+  <body class="flex flex-col min-h-screen">
+    <canvas id="ambience-canvas"></canvas>
+    <header class="sticky top-0 z-50 glass-header">
+  <nav class="container mx-auto max-w-7xl px-8 py-3 flex flex-wrap items-center justify-between">
+    <div class="flex items-center gap-3">
+      <a href="/" class="flex items-center gap-3">
+        <img src="/ani.png" alt="AniLog logo" class="w-10 h-10 object-cover">
+        <h1 class="text-2xl leading-none m-0">AniLog</h1>
+      </a>
+    </div>
+
+    <div class="flex items-center gap-6">
+      <div class="theme-switcher">
+        <button id="theme-switcher-btn" class="theme-switcher-btn" aria-label="Switch theme" aria-expanded="false">
+          <span id="theme-active-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.985 12.486a9 9 0 1 1-9.473-9.472c.405-.022.617.46.402.803a6 6 0 0 0 8.268 8.268c.344-.215.825-.004.803.401"/></svg>
+          </span>
+        </button>
+        <div id="theme-dropdown" class="theme-dropdown">
+          <button class="theme-option" data-theme-value="night">
+            <span class="theme-icon"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.985 12.486a9 9 0 1 1-9.473-9.472c.405-.022.617.46.402.803a6 6 0 0 0 8.268 8.268c.344-.215.825-.004.803.401"/></svg></span>
+            <span>Night</span>
+          </button>
+          <button class="theme-option" data-theme-value="reading">
+            <span class="theme-icon"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 7v14"/><path d="M3 18a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h5a4 4 0 0 1 4 4 4 4 0 0 1 4-4h5a1 1 0 0 1 1 1v13a1 1 0 0 1-1 1h-6a3 3 0 0 0-3 3 3 3 0 0 0-3-3z"/></svg></span>
+            <span>Reading</span>
+          </button>
+          <button class="theme-option" data-theme-value="forest">
+            <span class="theme-icon"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m17 14 3 3.3a1 1 0 0 1-.7 1.7H4.7a1 1 0 0 1-.7-1.7L7 14h-.3a1 1 0 0 1-.7-1.7L9 9h-.2A1 1 0 0 1 8 7.3L12 3l4 4.3a1 1 0 0 1-.8 1.7H15l3 3.3a1 1 0 0 1-.7 1.7H17Z"/><path d="M12 22v-3"/></svg></span>
+            <span>Forest</span>
+          </button>
+          <button class="theme-option" data-theme-value="beach">
+            <span class="theme-icon"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 8c0-2.76-2.46-5-5.5-5S2 5.24 2 8h2l1-1 1 1h4"/><path d="M13 7.14A5.82 5.82 0 0 1 16.5 6c3.04 0 5.5 2.24 5.5 5h-3l-1-1-1 1h-3"/><path d="M5.89 9.71c-2.15 2.15-2.3 5.47-.35 7.43l4.24-4.25.7-.7.71-.71 2.12-2.12c-1.95-1.96-5.27-1.8-7.42.35"/><path d="M11 15.5c.5 2.5-.17 4.5-1 6.5h4c2-5.5-.5-12-1-14"/></svg></span>
+            <span>Beach</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </nav>
+</header>
+
+    <main class="container mx-auto max-w-6xl p-8 grow">
+      
+    <p></p>
+
+    
+        <div class="post-cover-image" style="background-image: url('/images/posts/48bfbcee-4024-44d6-8149-afb60d0db3a9.png');"></div>
+    
+
+    <div>
+        <div class="post-title-row">
+            <h2>Building a Rust Plugin System</h2>
+            
+        </div>
+
+        
+            <div class="mt-4 mb-2">
+                <a class="tag plugins" href="/tag/plugins">plugins</a><a class="tag rust" href="/tag/rust">rust</a><a class="tag wasm" href="/tag/wasm">wasm</a><a class="tag modular" href="/tag/modular">modular</a><a class="tag ffi" href="/tag/ffi">ffi</a>
+            </div>
+        
+
+        
+            
+                <p class="text-sm italic">Published on
+                    <span datetime="Sun Aug 31 2025 00:00:00 GMT+0000 (Coordinated Universal Time)">August 31, 2025</span>.
+                    <span class="reading-time"> · 5 min read</span></p>
+            
+        
+
+        <div class="content post">
+            <p>Plugin systems are one of those architectural decisions that seem straightforward until you start implementing them. In the Rust ecosystem, plugin architectures present unique challenges compared to interpreted languages where you can dynamically load and execute code relatively easily.</p>
+<h2 id="the-plugin-system-challenge-in-rust" tabindex="-1">The Plugin System Challenge in Rust <a class="header-anchor" href="#the-plugin-system-challenge-in-rust" aria-hidden="true">#</a></h2>
+<p>Compiled languages like Rust require more careful consideration around:</p>
+<ul>
+<li>
+<p><strong>Binary compatibility</strong> across different compiler versions</p>
+</li>
+<li>
+<p><strong>Memory safety</strong> when loading external code</p>
+</li>
+<li>
+<p><strong>Performance overhead</strong> of plugin boundaries</p>
+</li>
+<li>
+<p><strong>Distribution and versioning</strong> of plugin components</p>
+</li>
+<li>
+<p><strong>Developer experience</strong> for both plugin authors and users</p>
+</li>
+</ul>
+<h2 id="architectural-approaches-in-rust" tabindex="-1">Architectural Approaches in Rust <a class="header-anchor" href="#architectural-approaches-in-rust" aria-hidden="true">#</a></h2>
+<p>Let’s examine the main approaches to plugin systems in Rust and their trade-offs:</p>
+<h3 id="subprocess-based-plugins" tabindex="-1">Subprocess-Based Plugins <a class="header-anchor" href="#subprocess-based-plugins" aria-hidden="true">#</a></h3>
+<p>The simplest approach - plugins as separate executables:</p>
+<code-block lang="rust"><pre class="language-rust"><code class="language-rust"><span class="token comment">// Execute plugin as subprocess</span><br><span class="token keyword">let</span> output <span class="token operator">=</span> <span class="token class-name">Command</span><span class="token punctuation">::</span><span class="token function">new</span><span class="token punctuation">(</span><span class="token string">"wasmrun-rust-plugin"</span><span class="token punctuation">)</span><br>    <span class="token punctuation">.</span><span class="token function">args</span><span class="token punctuation">(</span><span class="token operator">&amp;</span><span class="token punctuation">[</span><span class="token string">"build"</span><span class="token punctuation">,</span> project_path<span class="token punctuation">]</span><span class="token punctuation">)</span><br>    <span class="token punctuation">.</span><span class="token function">output</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">?</span><span class="token punctuation">;</span></code></pre>
+</code-block><p><strong>Pros:</strong></p>
+<ul>
+<li>
+<p>Language agnostic - plugins can be written in any language</p>
+</li>
+<li>
+<p>Strong isolation - plugins can’t crash the main process</p>
+</li>
+<li>
+<p>Simple distribution - just ship executables</p>
+</li>
+</ul>
+<p><strong>Cons:</strong></p>
+<ul>
+<li>
+<p>Performance overhead of process spawning</p>
+</li>
+<li>
+<p>Complex data exchange (serialization/pipes)</p>
+</li>
+<li>
+<p>Harder to maintain shared state</p>
+</li>
+</ul>
+<h3 id="webassembly-plugins" tabindex="-1">WebAssembly Plugins <a class="header-anchor" href="#webassembly-plugins" aria-hidden="true">#</a></h3>
+<p>Using WASM as the plugin format:</p>
+<code-block lang="rust"><pre class="language-rust"><code class="language-rust"><span class="token keyword">let</span> engine <span class="token operator">=</span> <span class="token namespace">wasmtime<span class="token punctuation">::</span></span><span class="token class-name">Engine</span><span class="token punctuation">::</span><span class="token function">default</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span><br><span class="token keyword">let</span> module <span class="token operator">=</span> <span class="token class-name">Module</span><span class="token punctuation">::</span><span class="token function">from_file</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>engine<span class="token punctuation">,</span> <span class="token string">"plugin.wasm"</span><span class="token punctuation">)</span><span class="token operator">?</span><span class="token punctuation">;</span><br><span class="token keyword">let</span> instance <span class="token operator">=</span> <span class="token class-name">Instance</span><span class="token punctuation">::</span><span class="token function">new</span><span class="token punctuation">(</span><span class="token operator">&amp;</span><span class="token keyword">mut</span> store<span class="token punctuation">,</span> <span class="token operator">&amp;</span>module<span class="token punctuation">,</span> <span class="token operator">&amp;</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token operator">?</span><span class="token punctuation">;</span></code></pre>
+</code-block><p><strong>Pros:</strong></p>
+<ul>
+<li>
+<p>Sandboxed execution</p>
+</li>
+<li>
+<p>Cross-platform compatibility</p>
+</li>
+<li>
+<p>Same runtime environment</p>
+</li>
+</ul>
+<p><strong>Cons:</strong></p>
+<ul>
+<li>
+<p>Performance limitations</p>
+</li>
+<li>
+<p>Limited system access</p>
+</li>
+<li>
+<p>Additional complexity for system-level operations</p>
+</li>
+<li>
+<p>Highly experimental</p>
+</li>
+</ul>
+<h3 id="dynamic-library-loading-(ffi)" tabindex="-1">Dynamic Library Loading (FFI) <a class="header-anchor" href="#dynamic-library-loading-(ffi)" aria-hidden="true">#</a></h3>
+<p>Loading plugins as shared libraries:</p>
+<code-block lang="rust"><pre class="language-rust"><code class="language-rust"><span class="token keyword">let</span> lib <span class="token operator">=</span> <span class="token keyword">unsafe</span> <span class="token punctuation">{</span> <span class="token class-name">Library</span><span class="token punctuation">::</span><span class="token function">new</span><span class="token punctuation">(</span><span class="token string">"plugin.so"</span><span class="token punctuation">)</span><span class="token operator">?</span> <span class="token punctuation">}</span><span class="token punctuation">;</span><br><span class="token keyword">let</span> func<span class="token punctuation">:</span> <span class="token class-name">Symbol</span><span class="token operator">&lt;</span><span class="token keyword">fn</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">></span> <span class="token operator">=</span> <span class="token keyword">unsafe</span> <span class="token punctuation">{</span> lib<span class="token punctuation">.</span><span class="token function">get</span><span class="token punctuation">(</span><span class="token string">b"plugin_init"</span><span class="token punctuation">)</span><span class="token operator">?</span> <span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre>
+</code-block><p><strong>Pros:</strong></p>
+<ul>
+<li>
+<p>Native performance</p>
+</li>
+<li>
+<p>Rich API capabilities</p>
+</li>
+<li>
+<p>Shared memory space</p>
+</li>
+</ul>
+<p><strong>Cons:</strong></p>
+<ul>
+<li>
+<p>Platform-specific binaries</p>
+</li>
+<li>
+<p>Safety concerns with unsafe code</p>
+</li>
+<li>
+<p>ABI stability challenges</p>
+</li>
+</ul>
+<h3 id="trait-objects-%2B-dynamic-dispatch" tabindex="-1">Trait Objects + Dynamic Dispatch <a class="header-anchor" href="#trait-objects-%2B-dynamic-dispatch" aria-hidden="true">#</a></h3>
+<p>Compile-time plugin registration:</p>
+<code-block lang="rust"><pre class="language-rust"><code class="language-rust"><span class="token keyword">trait</span> <span class="token type-definition class-name">Plugin</span><span class="token punctuation">:</span> <span class="token class-name">Send</span> <span class="token operator">+</span> <span class="token class-name">Sync</span> <span class="token punctuation">{</span><br>    <span class="token keyword">fn</span> <span class="token function-definition function">handle</span><span class="token punctuation">(</span><span class="token operator">&amp;</span><span class="token keyword">self</span><span class="token punctuation">,</span> input<span class="token punctuation">:</span> <span class="token operator">&amp;</span><span class="token keyword">str</span><span class="token punctuation">)</span> <span class="token punctuation">-></span> <span class="token class-name">String</span><span class="token punctuation">;</span><br><span class="token punctuation">}</span><br><br><span class="token keyword">static</span> <span class="token constant">PLUGINS</span><span class="token punctuation">:</span> <span class="token operator">&amp;</span><span class="token punctuation">[</span><span class="token operator">&amp;</span><span class="token keyword">dyn</span> <span class="token class-name">Plugin</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token operator">&amp;</span><span class="token punctuation">[</span><span class="token operator">&amp;</span><span class="token class-name">RustPlugin</span><span class="token punctuation">,</span> <span class="token operator">&amp;</span><span class="token class-name">GoPlugin</span><span class="token punctuation">]</span><span class="token punctuation">;</span></code></pre>
+</code-block><p><strong>Pros:</strong></p>
+<ul>
+<li>
+<p>Type safety at compile time</p>
+</li>
+<li>
+<p>Zero runtime overhead</p>
+</li>
+<li>
+<p>Simple implementation</p>
+</li>
+</ul>
+<p><strong>Cons:</strong></p>
+<ul>
+<li>
+<p>All plugins must be known at compile time</p>
+</li>
+<li>
+<p>Monolithic binary</p>
+</li>
+<li>
+<p>No runtime extensibility</p>
+</li>
+</ul>
+<h2 id="alternative-approaches-to-consider" tabindex="-1">Alternative Approaches to Consider <a class="header-anchor" href="#alternative-approaches-to-consider" aria-hidden="true">#</a></h2>
+<h3 id="wasi-based-plugin-system" tabindex="-1">WASI-Based Plugin System <a class="header-anchor" href="#wasi-based-plugin-system" aria-hidden="true">#</a></h3>
+<p>Using WebAssembly System Interface for plugins could provide better sandboxing:</p>
+<code-block lang="rust"><pre class="language-rust"><code class="language-rust"><span class="token comment">// Hypothetical WASI plugin loader</span><br><span class="token keyword">let</span> engine <span class="token operator">=</span> <span class="token namespace">wasmtime<span class="token punctuation">::</span></span><span class="token class-name">Engine</span><span class="token punctuation">::</span><span class="token function">default</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span><br><span class="token keyword">let</span> <span class="token keyword">mut</span> linker <span class="token operator">=</span> <span class="token namespace">wasmtime<span class="token punctuation">::</span></span><span class="token class-name">Linker</span><span class="token punctuation">::</span><span class="token function">new</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>engine<span class="token punctuation">)</span><span class="token punctuation">;</span><br><span class="token namespace">wasmtime_wasi<span class="token punctuation">::</span></span><span class="token function">add_to_linker</span><span class="token punctuation">(</span><span class="token operator">&amp;</span><span class="token keyword">mut</span> linker<span class="token punctuation">,</span> <span class="token closure-params"><span class="token closure-punctuation punctuation">|</span>s<span class="token closure-punctuation punctuation">|</span></span> s<span class="token punctuation">)</span><span class="token operator">?</span><span class="token punctuation">;</span><br><br><span class="token keyword">let</span> wasi <span class="token operator">=</span> <span class="token class-name">WasiCtxBuilder</span><span class="token punctuation">::</span><span class="token function">new</span><span class="token punctuation">(</span><span class="token punctuation">)</span><br>    <span class="token punctuation">.</span><span class="token function">inherit_stdio</span><span class="token punctuation">(</span><span class="token punctuation">)</span><br>    <span class="token punctuation">.</span><span class="token function">inherit_args</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">?</span><br>    <span class="token punctuation">.</span><span class="token function">build</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span><br><br><span class="token keyword">let</span> plugin <span class="token operator">=</span> <span class="token class-name">WasiPlugin</span><span class="token punctuation">::</span><span class="token function">load</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>engine<span class="token punctuation">,</span> <span class="token operator">&amp;</span>linker<span class="token punctuation">,</span> <span class="token string">"plugin.wasm"</span><span class="token punctuation">)</span><span class="token operator">?</span><span class="token punctuation">;</span></code></pre>
+</code-block><p><strong>Benefits:</strong></p>
+<ul>
+<li>
+<p>Language agnostic (plugins could be written in any language that compiles to WASM)</p>
+</li>
+<li>
+<p>Better security through WASI’s capability-based security model</p>
+</li>
+<li>
+<p>Consistent cross-platform behavior</p>
+</li>
+</ul>
+<p><strong>Trade-offs:</strong></p>
+<ul>
+<li>
+<p>Performance overhead</p>
+</li>
+<li>
+<p>Limited access to system APIs</p>
+</li>
+<li>
+<p>More complex toolchain for plugin authors</p>
+</li>
+</ul>
+<h3 id="grpc-based-plugin-architecture" tabindex="-1">gRPC-Based Plugin Architecture <a class="header-anchor" href="#grpc-based-plugin-architecture" aria-hidden="true">#</a></h3>
+<p>Taking inspiration from tools like Terraform:</p>
+<code-block lang="rust"><pre class="language-rust"><code class="language-rust"><span class="token comment">// Plugin communication via gRPC</span><br><span class="token keyword">use</span> <span class="token namespace">tonic<span class="token punctuation">::</span></span><span class="token punctuation">{</span><span class="token namespace">transport<span class="token punctuation">::</span></span><span class="token class-name">Server</span><span class="token punctuation">,</span> <span class="token class-name">Request</span><span class="token punctuation">,</span> <span class="token class-name">Response</span><span class="token punctuation">,</span> <span class="token class-name">Status</span><span class="token punctuation">}</span><span class="token punctuation">;</span><br><br><span class="token keyword">pub</span> <span class="token keyword">trait</span> <span class="token type-definition class-name">PluginService</span> <span class="token punctuation">{</span><br>    <span class="token keyword">async</span> <span class="token keyword">fn</span> <span class="token function-definition function">can_handle_project</span><span class="token punctuation">(</span><span class="token operator">&amp;</span><span class="token keyword">self</span><span class="token punctuation">,</span> request<span class="token punctuation">:</span> <span class="token class-name">Request</span><span class="token operator">&lt;</span><span class="token class-name">ProjectPath</span><span class="token operator">></span><span class="token punctuation">)</span> <br>        <span class="token punctuation">-></span> <span class="token class-name">Result</span><span class="token operator">&lt;</span><span class="token class-name">Response</span><span class="token operator">&lt;</span><span class="token class-name">CanHandleResponse</span><span class="token operator">></span><span class="token punctuation">,</span> <span class="token class-name">Status</span><span class="token operator">></span><span class="token punctuation">;</span><br>    <br>    <span class="token keyword">async</span> <span class="token keyword">fn</span> <span class="token function-definition function">build_project</span><span class="token punctuation">(</span><span class="token operator">&amp;</span><span class="token keyword">self</span><span class="token punctuation">,</span> request<span class="token punctuation">:</span> <span class="token class-name">Request</span><span class="token operator">&lt;</span><span class="token class-name">BuildRequest</span><span class="token operator">></span><span class="token punctuation">)</span> <br>        <span class="token punctuation">-></span> <span class="token class-name">Result</span><span class="token operator">&lt;</span><span class="token class-name">Response</span><span class="token operator">&lt;</span><span class="token class-name">BuildResponse</span><span class="token operator">></span><span class="token punctuation">,</span> <span class="token class-name">Status</span><span class="token operator">></span><span class="token punctuation">;</span><br><span class="token punctuation">}</span></code></pre>
+</code-block><p><strong>Benefits:</strong></p>
+<ul>
+<li>
+<p>Language agnostic</p>
+</li>
+<li>
+<p>Network transparency (plugins could run remotely)</p>
+</li>
+<li>
+<p>Structured communication protocol</p>
+</li>
+<li>
+<p>Easy to version and extend</p>
+</li>
+</ul>
+<p><strong>Trade-offs:</strong></p>
+<ul>
+<li>
+<p>Network serialization overhead</p>
+</li>
+<li>
+<p>More complex deployment (need to manage plugin processes)</p>
+</li>
+<li>
+<p>Requires protobuf toolchain</p>
+</li>
+</ul>
+<h3 id="lua%2Fjavascript-embedded-scripting" tabindex="-1">Lua/JavaScript Embedded Scripting <a class="header-anchor" href="#lua%2Fjavascript-embedded-scripting" aria-hidden="true">#</a></h3>
+<p>Embed a scripting language for simple plugins:</p>
+<code-block lang="rust"><pre class="language-rust"><code class="language-rust"><span class="token keyword">use</span> <span class="token namespace">mlua<span class="token punctuation">::</span></span><span class="token punctuation">{</span><span class="token class-name">Lua</span><span class="token punctuation">,</span> <span class="token class-name">Function</span><span class="token punctuation">,</span> <span class="token class-name">Result</span><span class="token punctuation">}</span><span class="token punctuation">;</span><br><br><span class="token keyword">let</span> lua <span class="token operator">=</span> <span class="token class-name">Lua</span><span class="token punctuation">::</span><span class="token function">new</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span><br>lua<span class="token punctuation">.</span><span class="token function">load</span><span class="token punctuation">(</span><span class="token string">r#"<br>    function can_handle_project(path)<br>        return string.match(path, "%.mylang$") ~= nil<br>    end<br>    <br>    function build_project(project_path, output_path)<br>        os.execute("mylang-compiler " .. project_path .. " -o " .. output_path)<br>        return output_path .. "/output.wasm"<br>    end<br>"#</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">exec</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">?</span><span class="token punctuation">;</span></code></pre>
+</code-block><p><strong>Benefits:</strong></p>
+<ul>
+<li>
+<p>Very low barrier to entry for plugin authors</p>
+</li>
+<li>
+<p>No compilation step required</p>
+</li>
+<li>
+<p>Dynamic reconfiguration possible</p>
+</li>
+</ul>
+<p><strong>Trade-offs:</strong></p>
+<ul>
+<li>
+<p>Limited to what the scripting language can do</p>
+</li>
+<li>
+<p>Performance implications</p>
+</li>
+<li>
+<p>Another language for developers to learn</p>
+</li>
+</ul>
+<h3 id="ebpf-style-jit-compilation" tabindex="-1">eBPF-Style JIT Compilation <a class="header-anchor" href="#ebpf-style-jit-compilation" aria-hidden="true">#</a></h3>
+<p>For ultimate performance with safety:</p>
+<code-block lang="rust"><pre class="language-rust"><code class="language-rust"><span class="token comment">// Hypothetical plugin JIT system</span><br><span class="token keyword">let</span> plugin_bytecode <span class="token operator">=</span> <span class="token function">load_plugin_bytecode</span><span class="token punctuation">(</span><span class="token string">"rust-plugin.bc"</span><span class="token punctuation">)</span><span class="token operator">?</span><span class="token punctuation">;</span><br><span class="token keyword">let</span> jit_compiler <span class="token operator">=</span> <span class="token class-name">PluginJIT</span><span class="token punctuation">::</span><span class="token function">new</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span><br><span class="token keyword">let</span> compiled_plugin <span class="token operator">=</span> jit_compiler<span class="token punctuation">.</span><span class="token function">compile</span><span class="token punctuation">(</span>plugin_bytecode<span class="token punctuation">)</span><span class="token operator">?</span><span class="token punctuation">;</span></code></pre>
+</code-block><p><strong>Benefits:</strong></p>
+<ul>
+<li>
+<p>Near-native performance</p>
+</li>
+<li>
+<p>Safety through bytecode verification</p>
+</li>
+<li>
+<p>Platform optimization opportunities</p>
+</li>
+</ul>
+<p><strong>Trade-offs:</strong></p>
+<ul>
+<li>
+<p>Extremely complex to implement</p>
+</li>
+<li>
+<p>Limited ecosystem and tooling</p>
+</li>
+<li>
+<p>High development cost</p>
+</li>
+</ul>
+<p>These are most of the ways, but even so gives us a glimpse into what’s possible and borderline best practice. However, it still doesn’t answer all the questions we’ve. Your decision to which plugin system works for you can be very personal at the same time very divided. Perhaps a combination of these work for you.</p>
+<h2 id="open-questions-and-considerations" tabindex="-1">Open Questions and Considerations <a class="header-anchor" href="#open-questions-and-considerations" aria-hidden="true">#</a></h2>
+<p>Building plugin systems in Rust raises several interesting questions:</p>
+<h3 id="performance-vs.-safety-trade-offs" tabindex="-1">Performance vs. Safety Trade-offs <a class="header-anchor" href="#performance-vs.-safety-trade-offs" aria-hidden="true">#</a></h3>
+<p>FFI approaches prioritize performance over safety. We’re essentially trusting plugin authors not to cause memory safety issues. Alternative approaches like WASI or subprocess isolation provide better safety guarantees but at a performance cost.</p>
+<p><strong>Question</strong>: In systems like build tools where performance matters, how much safety are you willing to trade for speed?</p>
+<h3 id="api-evolution-and-compatibility" tabindex="-1">API Evolution and Compatibility <a class="header-anchor" href="#api-evolution-and-compatibility" aria-hidden="true">#</a></h3>
+<p>Plugin APIs need to evolve, but external plugins create compatibility challenges.</p>
+<p><strong>Question</strong>: How do you handle API breaking changes when external plugins may not update immediately? Should there be a plugin API versioning system?</p>
+<h3 id="distribution-and-discovery" tabindex="-1">Distribution and Discovery <a class="header-anchor" href="#distribution-and-discovery" aria-hidden="true">#</a></h3>
+<p>Using existing package systems like <a href="http://crates.io">crates.io</a> has limitations - no way to mark crates as tool-specific plugins, no plugin-specific metadata, etc.</p>
+<p><strong>Question</strong>: Should specialized tools have their own plugin registries, or is it better to piggyback on existing package systems?</p>
+<h3 id="testing-and-quality-assurance" tabindex="-1">Testing and Quality Assurance <a class="header-anchor" href="#testing-and-quality-assurance" aria-hidden="true">#</a></h3>
+<p>External plugins can break in ways that are hard to test. A plugin might work fine until it encounters a specific project structure or environment.</p>
+<p><strong>Question</strong>: What’s the right balance between trusting plugin authors and providing safety rails? Should there be automated testing requirements for plugins?</p>
+<h3 id="plugin-composition-and-dependencies" tabindex="-1">Plugin Composition and Dependencies <a class="header-anchor" href="#plugin-composition-and-dependencies" aria-hidden="true">#</a></h3>
+<p>Currently, most plugin systems have isolated plugins. But what if plugins could build on each other?</p>
+<p><strong>Question</strong>: How complex should plugin systems be? Is composition worth the added complexity?</p>
+<p><img src="https://nullderef.com/img/CoM36VEtZL-600.jpeg" alt=""></p>
+<blockquote>
+<p>Here’s also a nice <a href="https://nullderef.com/series/rust-plugins/">series</a> you can follow.</p>
+</blockquote>
+<p>There’s no “right” answer for plugin systems in Rust - only trade-offs that align with your specific needs. Different use cases call for different approaches:</p>
+<ul>
+<li>
+<p>A text editor might prioritize safety and choose WASI plugins</p>
+</li>
+<li>
+<p>A data processing pipeline might choose gRPC for language flexibility</p>
+</li>
+<li>
+<p>A performance-critical system might go with JIT compilation despite the complexity</p>
+</li>
+<li>
+<p>A build tool might accept FFI trade-offs for performance and simplicity</p>
+</li>
+</ul>
+<p>The key is understanding your constraints and making conscious trade-offs rather than accidentally falling into them.</p>
+
+        </div>
+
+        <div class="article-end">
+            <span>✦</span>
+            <span>✦</span>
+            <span>✦</span>
+        </div>
+
+        <div class="post-navigation">
+            <div class="post-nav-item post-nav-previous">
+                    <a href="/sot-on-uv/">
+                        <span class="nav-arrow">←</span>
+                        <div class="nav-content">
+                            <p class="nav-label">Previous</p>
+                            <p class="nav-title">Why I&#39;m Switching SOT to uv</p>
+                        </div>
+                    </a>
+                
+            </div>
+
+            <div class="post-nav-item post-nav-next">
+                    <a href="/wasmrun-plugin-architecture/">
+                        <div class="nav-content">
+                            <p class="nav-label">Next</p>
+                            <p class="nav-title">Wasmrun Plugin Architecture</p>
+                        </div>
+                        <span class="nav-arrow">→</span>
+                    </a>
+                
+            </div>
+        </div>
+    </div>
+
+    </main>
+    <footer class="sticky bottom-0 z-50 glass-footer py-4">
+  <div class="container mx-auto max-w-7xl px-8 flex items-center justify-between">
+    <div class="text-base">
+      by <a href="https://anirudha.dev" target="_blank" rel="noopener noreferrer">Ani</a>
+    </div>
+
+    <div class="flex items-center gap-4">
+      <a href="https://github.com/anistark" target="_blank" rel="noopener noreferrer" class="footer-icon" aria-label="GitHub">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="currentColor" viewBox="0 0 24 24">
+          <path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/>
+        </svg>
+      </a>
+      <a href="https://x.com/kranirudha" target="_blank" rel="noopener noreferrer" class="footer-icon" aria-label="X">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="currentColor" viewBox="0 0 24 24">
+          <path d="M14.234 10.162 22.977 0h-2.072l-7.591 8.824L7.251 0H.258l9.168 13.343L.258 24H2.33l8.016-9.318L16.749 24h6.993zm-2.837 3.299-.929-1.329L3.076 1.56h3.182l5.965 8.532.929 1.329 7.754 11.09h-3.182z"/>
+        </svg>
+      </a>
+      <a href="https://fosstodon.org/@ani" target="_blank" rel="noopener noreferrer" class="footer-icon" aria-label="Mastodon">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="currentColor" viewBox="0 0 24 24">
+          <path d="M23.268 5.313c-.35-2.578-2.617-4.61-5.304-5.004C17.51.242 15.792 0 11.813 0h-.03c-3.98 0-4.835.242-5.288.309C3.882.692 1.496 2.518.917 5.127.64 6.412.61 7.837.661 9.143c.074 1.874.088 3.745.26 5.611.118 1.24.325 2.47.62 3.68.55 2.237 2.777 4.098 4.96 4.857 2.336.792 4.849.923 7.256.38.265-.061.527-.132.786-.213.585-.184 1.27-.39 1.774-.753a.057.057 0 0 0 .023-.043v-1.809a.052.052 0 0 0-.02-.041.053.053 0 0 0-.046-.01 20.282 20.282 0 0 1-4.709.545c-2.73 0-3.463-1.284-3.674-1.818a5.593 5.593 0 0 1-.319-1.433.053.053 0 0 1 .066-.054c1.517.363 3.072.546 4.632.546.376 0 .75 0 1.125-.01 1.57-.044 3.224-.124 4.768-.422.038-.008.077-.015.11-.024 2.435-.464 4.753-1.92 4.989-5.604.008-.145.03-1.52.03-1.67.002-.512.167-3.63-.024-5.545zm-3.748 9.195h-2.561V8.29c0-1.309-.55-1.976-1.67-1.976-1.23 0-1.846.79-1.846 2.35v3.403h-2.546V8.663c0-1.56-.617-2.35-1.848-2.35-1.112 0-1.668.668-1.67 1.977v6.218H4.822V8.102c0-1.31.337-2.35 1.011-3.12.696-.77 1.608-1.164 2.74-1.164 1.311 0 2.302.5 2.962 1.498l.638 1.06.638-1.06c.66-.999 1.65-1.498 2.96-1.498 1.13 0 2.043.395 2.74 1.164.675.77 1.012 1.81 1.012 3.12z"/>
+        </svg>
+      </a>
+      <a href="https://linkedin.com/in/kranirudha" target="_blank" rel="noopener noreferrer" class="footer-icon" aria-label="LinkedIn">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="currentColor" viewBox="0 0 24 24">
+          <path d="M4.98 3.5c0 1.381-1.11 2.5-2.48 2.5s-2.48-1.119-2.48-2.5c0-1.38 1.11-2.5 2.48-2.5s2.48 1.12 2.48 2.5zm.02 4.5h-5v16h5v-16zm7.982 0h-4.968v16h4.969v-8.399c0-4.67 6.029-5.052 6.029 0v8.399h4.988v-10.131c0-7.88-8.922-7.593-11.018-3.714v-2.155z"/>
+        </svg>
+      </a>
+      <a href="/feed/feed.xml" class="footer-icon" aria-label="RSS feed">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="currentColor" viewBox="0 0 24 24">
+          <path d="M6.18 15.64a2.18 2.18 0 0 1 2.18 2.18C8.36 19 7.38 20 6.18 20C5 20 4 19 4 17.82a2.18 2.18 0 0 1 2.18-2.18M4 4.44A15.56 15.56 0 0 1 19.56 20h-2.83A12.73 12.73 0 0 0 4 7.27V4.44m0 5.66a9.9 9.9 0 0 1 9.9 9.9h-2.83A7.07 7.07 0 0 0 4 12.93V10.1Z"/>
+        </svg>
+      </a>
+    </div>
+  </div>
+</footer>
+
+    
+    <script src="https://unpkg.com/clipboard@2/dist/clipboard.min.js"></script>
+    <script src="/assets/main.bundle.js"></script>
+    <script type="module">
+      import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs';
+      mermaid.initialize({
+        startOnLoad: true,
+        theme: ['reading', 'beach'].includes(document.documentElement.getAttribute('data-theme')) ? 'default' : 'dark',
+        themeVariables: {
+          fontSize: '14px',
+        }
+      });
+    </script>
+  </body>
+</html>
