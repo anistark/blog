@@ -2,10 +2,10 @@
 layout: post
 title: Controlled Chaos
 excerpt: I've a love hate relationship with rules. They give me a map, but they also draw the walls. This is about the thin, humming strip where structure and chaos learn to dance.
-date: 2026-05-01
-updatedDate: 2026-05-01
+date: 2026-04-26
+updatedDate: 2026-04-26
 featuredImage: /images/posts/controlled-chaos.png
-draft: true
+draft: false
 tags:
   - post
   - life
