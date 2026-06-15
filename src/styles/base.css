@@ -249,6 +249,24 @@ hr {
   min-width: 100px;
 }
 
+.content > figure {
+  margin: 1rem auto 0;
+  max-width: 100%;
+}
+
+.content > figure > video {
+  display: block;
+  margin: 0 auto;
+  max-width: 100%;
+  min-width: 100px;
+}
+
+.content > figure > figcaption {
+  @apply pt-3;
+  font-size: 1.25rem;
+  font-style: italic;
+}
+
 .content > ul {
   list-style-type: disc;
 }
