@@ -1512,7 +1512,14 @@ hr {
 pre.mermaid {
   background: transparent !important;
   border: none !important;
-  text-align: center;
+  display: flex;
+  justify-content: center;
   margin: 1.5rem 0;
   padding: 1rem 0;
+}
+
+pre.mermaid svg {
+  max-width: 100%;
+  height: auto;
+  margin: 0 auto;
 }
