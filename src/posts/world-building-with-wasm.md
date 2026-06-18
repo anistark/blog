@@ -3,7 +3,7 @@ layout: post
 title: World-building with WASM
 excerpt: A walkable browser world needs something to generate it, something to draw it, and something to make it solid. The third one runs on WebAssembly. Here's why, and what it unlocks.
 date: 2026-06-08
-updatedDate: 2026-06-15
+updatedDate: 2026-06-18
 featuredImage: /images/posts/world-building-with-wasm.png
 draft: false
 tags:
@@ -21,8 +21,10 @@ tags:
 I've been building [Runek](https://github.com/nullorder/runek), a source
 registry of procedural 3D components for React Three Fiber. Think "shadcn
 for 3D worlds": you pull a component's source into your project
-(`npx runek add bookshelf`), and it generates its own geometry from props
-and a seed. No models, no textures, no CDN. Its showcase,
+(`npx @runek/cli add bookshelf`) while the small runtime it imports ships
+as the [`@runek/core`](https://www.npmjs.com/package/@runek/core) npm
+package, and each component generates its own geometry from props and a
+seed. No models, no textures, no CDN. Its showcase,
 [Helicon](https://github.com/nullorder/helicon), is a walkable island
 whose entire scene is one JSON file.
 
