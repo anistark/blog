@@ -5,7 +5,7 @@ excerpt: The loop, the context juggling, the per-model prompt formatting, the to
 date: 2026-06-24
 updatedDate: 2026-06-28
 featuredImage: /images/posts/orion-core-hero.png
-draft: true
+draft: false
 tags:
   - post
   - ai
