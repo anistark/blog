@@ -28,6 +28,29 @@
   overflow: hidden;
 }
 
+/* Tag cloud: wraps onto as many rows as needed instead of a fixed column count */
+.tag-cloud {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.tag-cloud .tag {
+  @apply mr-0 mb-0;
+}
+
+@media (max-width: 480px) {
+  .tag {
+    @apply px-3 py-1.5;
+  }
+
+  .tag-cloud {
+    gap: 0.5rem;
+  }
+}
+
 .tag::before {
   content: '#';
   margin-right: 2px;
