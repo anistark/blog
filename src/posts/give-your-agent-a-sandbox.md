@@ -1,9 +1,9 @@
 ---
 layout: post
 title: Give your agent a sandbox
-excerpt: An LLM that writes code is only useful if it can run the code. Handing it your shell is one answer, and a bad one. Here is a small coding agent whose only way to execute anything is a disposable WebAssembly sandbox, and what it looks like when it has to fix a failing test suite through that keyhole.
+excerpt: An LLM that writes code is only useful if it can run the code. Handing it your shell is one answer, and a bad one. Here is a small coding agent whose only way to run anything is a throwaway WebAssembly sandbox, and what it looks like when it has to fix a failing test suite from inside it.
 date: 2026-08-21
-updatedDate: 2026-08-21
+updatedDate: 2026-08-22
 featuredImage: /images/posts/agent-sandbox.svg
 draft: false
 tags:
@@ -25,9 +25,9 @@ An LLM that writes code is only useful if it can run the code. Until it runs, ev
 
 The usual way to close that gap is to give the model your shell. It works, and it is a bad idea in the ordinary way that giving anything your shell is a bad idea. The model does not need your SSH keys, your `~/.aws`, your git remotes, or your ability to reach the internet. It needs a place to put three files and run them.
 
-That is what `wasmrun agent` is: an HTTP server that hands out disposable WebAssembly sandboxes. Each one gets its own filesystem, its own environment, its own resource ceiling, and no network at all. When the client is done, the sandbox and everything in it is gone.
+That is what `wasmrun agent` is: an HTTP server that hands out throwaway WebAssembly sandboxes. Each one gets its own filesystem, its own environment, its own resource limits, and no network at all. When the client is done, the sandbox and everything in it is gone.
 
-This post builds a small coding agent on top of it. We start the server, drive it by hand for ten minutes so the failure modes are recognisable later, then write the agent, then watch it fix a failing test suite it has no other way to see. Everything in the shell blocks below was run against a real `wasmrun agent` **v0.22.0** while writing it. Where an output is illustrative rather than captured, it says so.
+This post builds a small coding agent on top of it. We start the server, drive it by hand for ten minutes so the failures are easy to spot later, then write the agent, then watch it fix a failing test suite it has no other way to see. Everything in the shell blocks below was run against a real `wasmrun agent` **v0.22.0** while writing it. Where an output is an example rather than a real capture, it says so.
 
 ## The shape of the thing
 
@@ -37,17 +37,22 @@ Two conversations, and the agent is the only thing in both of them. It asks Clau
 
 The nice part is the part you do not write. wasmrun publishes its own tool schemas at `GET /api/v1/tools?format=anthropic`, already in the exact shape the Messages API wants. The agent fetches seven of them and passes them straight through. There is not a single hand-written tool definition in the whole file.
 
-**The task we will give it:** write a `parseDuration` function in TypeScript, with tests, and make the tests pass. There is a deliberate hole in the obvious implementation, so the model has to read a failing stack trace and come back.
+**The task we will give it:** write a `parseDuration` function in TypeScript, with tests, and make the tests pass. The obvious version has a hole in it on purpose, so the model has to read a failing stack trace and come back.
 
 ## What you need
 
 ```sh
+git clone https://github.com/anistark/sandbox-agent-demo
 cargo install wasmrun
 pip install anthropic
 export ANTHROPIC_API_KEY=sk-ant-...
 ```
 
 Plus `curl` and `jq` for the next section. Nothing else. There is no Node install, no Docker, no `npm` binary anywhere in this post. The JavaScript runtime is a `.wasm` file that wasmrun fetches once and caches under `~/.wasmrun/runtimes/`. The first execution on a fresh install pays for that fetch. Later ones do not.
+
+`sandbox-agent-demo` is the finished version of this post: `sandbox_agent.py` is the file we write below, `tasks/` holds the two demo tasks, and `smoke_test.py` drives all seven tools without needing an API key. Clone it and follow along, or read on and write the file yourself.
+
+{% githubCard "anistark/sandbox-agent-demo" %}
 
 ## Starting the server and looking around
 
@@ -81,7 +86,7 @@ Two lines in that banner are worth reading rather than skimming.
 
 **`Auth: disabled (open)`.** Fine on your laptop, and only there.
 
-Liveness is unauthenticated, so a probe never needs a credential:
+The health check needs no auth, so a probe never needs a credential:
 
 ```sh
 curl -s http://127.0.0.1:8430/health
@@ -107,11 +112,11 @@ list_sessions  <-
 destroy_session  <- session_id
 ```
 
-Seven tools, each with a full JSON Schema and a description written for a model rather than for a human. `?format=openai` returns the same set in the other wire shape. This endpoint is the whole reason the agent below is short.
+Seven tools, each with a full JSON Schema and a description written for a model rather than for a human. `?format=openai` returns the same set in the other wire format. This endpoint is the whole reason the agent below is short.
 
 ## The sandbox by hand
 
-Before wiring a model to it, drive the API yourself once. It is worth ten minutes, because every failure mode you meet later is easier to recognise if you have seen the happy path bare.
+Before wiring a model to it, drive the API yourself once. It is worth ten minutes, because every failure you hit later is easier to spot once you have seen the happy path on its own.
 
 ### Create a session
 
@@ -124,7 +129,7 @@ echo $SID
 deddb0af6cee8bc64fcb4484790fcdf6
 ```
 
-That allocated a temp directory on the host and a WASI environment pointed at it. Nothing is running yet.
+That created a temp directory on the host and a WASI environment pointed at it. Nothing is running yet.
 
 ### Run something
 
@@ -153,11 +158,11 @@ The work itself is close to free. An empty script and fifty rounds of arithmetic
 
 The shell is instant because it never touches the WASM runtime at all. It is in-process Rust. Anything that reaches for JavaScript pays the three seconds.
 
-Two consequences worth carrying into your own design: batching work into one execution is nearly free, and anything interactive wants that execution started before the user is ready for its answer.
+Two things to keep in mind for your own design: batching work into one execution is nearly free, and anything interactive wants that execution started before the user is ready for its answer.
 
 ### The four input modes
 
-`exec` takes exactly one of four things. Dispatch runs in this order, so if you send more than one, the first wins:
+`exec` takes exactly one of four things. It checks in this order, so if you send more than one, the first wins:
 
 | Mode | Fields | For |
 |---|---|---|
@@ -192,7 +197,7 @@ This is the mode the agent will live in. One request carries the whole project, 
 
 POST that to `/sessions/$SID/exec` and `stdout` comes back as `hi there`.
 
-The `@app/*` alias came from the `tsconfig.json` in the same request. wasmrun reads it, materializes each alias as a small CommonJS shim under `node_modules`, and lets the runtime's own resolver do the rest. No import rewriting, no bundler.
+The `@app/*` alias came from the `tsconfig.json` in the same request. wasmrun reads it, writes each alias out as a small CommonJS shim under `node_modules`, and lets the runtime's own resolver do the rest. No import rewriting, no bundler.
 
 Types are stripped, never checked. A project with type errors still runs. If you want type checking, run `tsc` yourself, outside.
 
@@ -220,13 +225,13 @@ curl -s -X DELETE "http://127.0.0.1:8430/api/v1/sessions/$SID" | jq -r .message
 Session deddb0af6cee8bc64fcb4484790fcdf6 destroyed
 ```
 
-The directory goes with it. If your client dies without calling this, the idle timeout collects the session anyway, and if the whole server dies, the next one to start sweeps the orphaned tree.
+The directory goes with it. If your client dies without calling this, the idle timeout cleans up the session anyway, and if the whole server dies, the next one to start clears out what was left behind.
 
 ## The agent
 
 Now the code. The entire agent is one file. Read it once top to bottom, then we will take the three interesting parts apart.
 
-A runnable copy of everything below lives in [sandbox-agent-demo](https://github.com/anistark/sandbox-agent-demo), along with the two demo tasks it was written against and a smoke test that drives all seven tools without needing an API key.
+This is `sandbox_agent.py` from the [demo repo](https://github.com/anistark/sandbox-agent-demo) above, whole and unedited.
 
 ```python
 #!/usr/bin/env python3
@@ -380,11 +385,11 @@ tools = _request("GET", "/tools", query={"format": "anthropic"})
 response = client.messages.create(model=MODEL, tools=tools, ...)
 ```
 
-That is the whole tool definition step. `?format=anthropic` returns a list of objects with `name`, `description` and `input_schema`, which is precisely what `messages.create` wants. Nothing is transformed, nothing is duplicated in your source, and when a wasmrun release adds a field to `execute_code`, your agent picks it up on the next restart without a diff.
+That is the whole tool definition step. `?format=anthropic` returns a list of objects with `name`, `description` and `input_schema`, which is exactly what `messages.create` wants. Nothing is converted, nothing is copied into your source, and when a wasmrun release adds a field to `execute_code`, your agent picks it up on the next restart without a diff.
 
 If you were talking to a different provider, `?format=openai` gives you `{type: "function", function: {...}}` instead.
 
-I have hand-maintained tool schemas that mirrored a server's API before, and they drift. Every time. The server is the only thing that knows what it accepts, so letting it say so is the version of this that stays correct.
+I have hand-maintained tool schemas that mirrored a server's API before, and they drift. Every time. The server is the only thing that knows what it accepts, so letting it say so is the only version of this that stays right.
 
 ### The dispatcher
 
@@ -400,9 +405,9 @@ I have hand-maintained tool schemas that mirrored a server's API before, and the
 | `read_file` | `GET /sessions/{id}/files?path=...` |
 | `list_files` | `GET /sessions/{id}/files?path=...&list=true` |
 
-Everything except `session_id` is passed through untouched, which is what makes the mapping this short. Two details are deliberate.
+Everything except `session_id` is passed through untouched, which is what makes the mapping this short. Two details are on purpose.
 
-**Errors come back as data, not exceptions.** A 404 for a session the model invented is information the model can act on. Raising would abort the run. The `_http_status` key marks a transport-level failure, which becomes `is_error` on the tool result so the model knows the difference between "the sandbox refused" and "your code failed":
+**Errors come back as data, not exceptions.** A 404 for a session the model made up is something the model can act on. Raising an exception would kill the run. The `_http_status` key marks a failure at the HTTP level, which becomes `is_error` on the tool result so the model knows the difference between "the sandbox refused" and "your code failed":
 
 ```python
 >>> call_tool("read_file", {"session_id": "deadbeef", "path": "x"})
@@ -412,13 +417,13 @@ Everything except `session_id` is passed through untouched, which is what makes 
 {'_http_status': 0, 'error': 'cannot reach http://127.0.0.1:8430: [Errno 61] Connection refused'}
 ```
 
-A failing test suite, by contrast, is a perfectly successful tool call that happens to report `exit_code: 1`. It is not an error and should not be flagged as one. Get that distinction wrong and the model spends its turns trying to repair a sandbox that was never broken.
+A failing test suite, on the other hand, is a perfectly successful tool call that happens to report `exit_code: 1`. It is not an error and should not be flagged as one. Get that wrong and the model spends its turns trying to fix a sandbox that was never broken.
 
-**`stream` is dropped.** The schema advertises it, because the server really does support Server-Sent Events for long runs. This client reads one JSON body, so it removes the flag rather than hanging on a stream it will not parse. If you want progress on a five-minute run, that is where to reach for it.
+**`stream` is dropped.** The schema offers it, because the server really does support Server-Sent Events for long runs. This client reads one JSON body, so it drops the flag rather than hanging on a stream it will not parse. If you want progress on a five-minute run, that is where to reach for it.
 
 ### The system prompt is the documentation
 
-The model gets seven schemas from the server and nothing else about how the sandbox behaves in practice. The system prompt fills that in, and every line of it exists because leaving it out produced a specific wrong behaviour:
+The model gets seven schemas from the server and nothing else about how the sandbox behaves in practice. The system prompt fills that in, and every line of it is there because leaving it out caused a specific problem:
 
 | Line | Without it |
 |---|---|
@@ -428,7 +433,7 @@ The model gets seven schemas from the server and nothing else about how the sand
 | Read `exit_code` | TAP output parsed by eye, with the occasional wrong conclusion |
 | `timeout` of at least 120 on the first run | A 30-second default that expires during the one-off runtime fetch |
 
-This is the part to tune for your own agent. The schemas are fixed and the server owns them. The prompt is yours, and it is where the sandbox's actual personality gets written down.
+This is the part to tune for your own agent. The schemas are fixed and the server owns them. The prompt is yours, and it is where the sandbox's real behaviour gets written down.
 
 ## Running it end to end
 
@@ -436,7 +441,7 @@ This is the part to tune for your own agent. The schemas are fixed and the serve
 python sandbox_agent.py "Write src/duration.ts exporting parseDuration(input: string): number that parses '15m', '2h30m', '500ms' into milliseconds and throws on anything it cannot parse. Write tests/duration.test.ts covering all three cases with node:test. Use a tsconfig with an @app/* alias for src/*. Iterate until the suite passes."
 ```
 
-What comes back, abridged. The model's own sentences are paraphrased here, since they vary run to run. Every tool result is captured from a real run against v0.22.0:
+What comes back, trimmed. The model's own sentences are reworded here, since they change from run to run. Every tool result is captured from a real run against v0.22.0:
 
 ```text
   → create_session
@@ -463,7 +468,7 @@ Four tool calls. One session, created at the start and destroyed at the end. The
 
 ### The failing run
 
-The first `execute_code` sent three files with a first attempt at the module that looks entirely reasonable:
+The first `execute_code` sent three files with a first attempt at the module that looks perfectly fine:
 
 ```ts
 const UNITS: Record<string, number> = {
@@ -504,7 +509,7 @@ test('rejects an unparseable string', () => {
 });
 ```
 
-The response, verbatim:
+The response, exactly as it came back:
 
 ```text
 TAP version 13
@@ -546,11 +551,11 @@ with `"exit_code": 1`.
 
 Four things in that block are doing work for the agent, and none of them are accidents.
 
-**`tests/duration.test.ts:14`.** Line 14 of the TypeScript file the model wrote, which is the `assert.throws` call. Not a line in the JavaScript the transpiler emitted, and not a line in a bundle. Every `.ts` file gets a source map beside its `.js`, and frames are remapped against it before the response is built. An agent that has to guess which emitted line corresponds to which source line wastes turns guessing.
+**`tests/duration.test.ts:14`.** Line 14 of the TypeScript file the model wrote, which is the `assert.throws` call. Not a line in the JavaScript the transpiler emitted, and not a line in a bundle. Every `.ts` file gets a source map beside its `.js`, and frames are remapped against it before the response is built. An agent that has to work out which emitted line matches which source line wastes turns guessing.
 
-**The frames that were left alone.** `/workspace/runtimes/nodejs/main.js:1003` is the runtime's own internals, and there is no map for it, so it keeps its real path rather than being mangled into something plausible. Unmapped means untouched, which matters more than it sounds: a remapper that guesses is worse than one that gives up.
+**The frames that were left alone.** `/workspace/runtimes/nodejs/main.js:1003` is the runtime's own internals, and there is no map for it, so it keeps its real path rather than being rewritten into a line number that only looks right. Unmapped means untouched, which matters more than it sounds: a remapper that guesses is worse than one that gives up.
 
-**`exit_code: 1`.** The reliable signal. `# fail 1` is in the TAP body too, but parsing TAP to find out whether a run succeeded is work the exit code already did. Node's own test runner exits `1` on any failure, and wasmrun reports the real exit code rather than flattening it.
+**`exit_code: 1`.** The reliable signal. `# fail 1` is in the TAP body too, but parsing TAP to find out whether a run succeeded is work the exit code already did. Node's own test runner exits `1` on any failure, and wasmrun passes the real exit code through rather than replacing it with its own.
 
 **The failure is on stdout, not stderr.** `node:test` prints a failing assertion's stack inside its TAP output, which means the one trace an agent running tests actually reads arrives on stdout. Both streams are remapped, so it does not matter which one a given tool writes to.
 
@@ -621,7 +626,7 @@ The five that cost me the most time, with what actually happens.
 
 ### `write_file` on a `.ts` file does nothing you can see
 
-This one is worth demonstrating, because the symptom is "my fix had no effect" and the cause is invisible.
+This one is worth showing, because the symptom is "my fix had no effect" and the cause is invisible.
 
 Write a corrected `src/duration.ts` through the files API, and it reports success:
 
@@ -641,7 +646,7 @@ That `duration.js` is from the **first** run, still the broken one. The `duratio
 
 Only files present in the `files` map are transpiled. `write_file` puts bytes on disk and stops there, so the stale `.js` from the previous run is what `@app/duration` resolves to. **Resend the complete `files` map on every `execute_code`.** The system prompt above says so for exactly this reason.
 
-`write_file` remains the right tool for anything the runtime reads rather than executes: fixtures, JSON, `.env` files, sample input.
+`write_file` is still the right tool for anything the runtime reads rather than executes: fixtures, JSON, `.env` files, sample input.
 
 ### There is no mode for running a file already in the session
 
@@ -652,7 +657,7 @@ Related, and the first thing you reach for once you have hit the above:
 {"error":"Bad request: Entry 'tests/duration.test.ts' not found in 'files' map","code":400}
 ```
 
-The first is what you get for sending `entry` with no `files`. The second is what you get for sending an empty `files` map alongside it. `entry` names a key in `files`, not a path in the session. Both failures are synchronous 400s before anything is spawned, which is at least a fast way to find out.
+The first is what you get for sending `entry` with no `files`. The second is what you get for sending an empty `files` map alongside it. `entry` names a key in `files`, not a path in the session. Both come back as 400s before anything starts running, which is at least a fast way to find out.
 
 ### The sandbox has no network, and the host fetches for you
 
@@ -665,7 +670,7 @@ The first is what you get for sending `entry` with no `files`. The second is wha
 }
 ```
 
-No `npm` binary is involved and lifecycle scripts never run. When the registry is unreachable, you get a bounded, honest failure rather than a hang:
+No `npm` binary is involved and lifecycle scripts never run. When the registry cannot be reached, you get a clear failure with a time limit on it rather than a hang:
 
 ```json
 {
@@ -674,23 +679,23 @@ No `npm` binary is involved and lifecycle scripts never run. When the registry i
 }
 ```
 
-That one is captured from a machine whose IPv6 route to the registry is dead. It is in this post because it is exactly the shape of error your agent will meet, and `error` is the field to hand back to the model.
+That one is captured from a machine whose IPv6 route to the registry is dead. It is in this post because it is exactly the kind of error your agent will run into, and `error` is the field to hand back to the model.
 
 Pure-JS packages only. Anything with an install script, a `binding.gyp` or a prebuilt `.node` is rejected by name.
 
 ### Every JavaScript execution costs about three seconds
 
-Not just the first one. The runtime is instantiated fresh per execution, so the floor is roughly 2.8 seconds whatever your code does, and the work on top of that is usually noise. The measurements are back in [run something](#run-something).
+Not just the first one. The runtime is instantiated fresh per execution, so the floor is roughly 2.8 seconds whatever your code does, and the work on top of that barely registers. The measurements are back in [run something](#run-something).
 
-Two things follow. The default `timeout` is 30 seconds, and on a cold session the one-off runtime *download* happens inside that first execution as well, so pass a generous `timeout` on the first call or it can expire before running a line of your code. And batching matters: fifty rounds of work cost the same as one, so an agent that makes ten small execs is paying thirty seconds for what one exec would have done in three.
+Two things follow. The default `timeout` is 30 seconds, and on a cold session the one-off runtime *download* happens inside that first execution as well, so set a bigger `timeout` on the first call or it can run out before your code even starts. And batching matters: fifty rounds of work cost the same as one, so an agent that makes ten small execs is paying thirty seconds for what one exec would have done in three.
 
-If you are building something interactive, start the execution before the user needs its answer. [`rps.py`](https://github.com/anistark/sandbox-agent-demo/blob/main/rps.py) in the demo repo does exactly that: rock paper scissors against a bot whose predictor lives in the sandbox and gets rewritten by Claude while you play. Speculating on the next execution before the player has moved is the difference between the game feeling instant and feeling broken.
+If you are building something interactive, start the execution before the user needs its answer. [`rps.py`](https://github.com/anistark/sandbox-agent-demo/blob/main/rps.py) in the demo repo does exactly that: rock paper scissors against a bot whose predictor lives in the sandbox and gets rewritten by Claude while you play. Starting the next execution before the player has moved is the difference between the game feeling instant and feeling broken.
 
 ### Sessions do not survive a restart
 
-They live in memory with their files in a temp directory. A restart destroys all of them, deliberately: there is no persistence and no handoff. For a client this collapses to one rule. **Treat 404 on a session you hold as "make a new one".** It covers the restart, the idle timeout and, under `--auth`, a session that belongs to somebody else, without special-casing any of them.
+They live in memory with their files in a temp directory. A restart destroys all of them, on purpose: nothing is saved and nothing is handed over. For a client this comes down to one rule. **Treat 404 on a session you hold as "make a new one".** It covers the restart, the idle timeout and, under `--auth`, a session that belongs to somebody else, without special-casing any of them.
 
-It also fixes the deployment shape. A session is pinned to the process that created it, so behind a load balancer you route by session id or you run a single instance. Round-robin across two replicas looks like sessions vanishing at random, which is a genuinely miserable thing to debug from the client side.
+It also decides the deployment shape. A session is pinned to the process that created it, so behind a load balancer you route by session id or you run a single instance. Round-robin across two replicas looks like sessions vanishing at random, which is a miserable thing to debug from the client side.
 
 ## From demo to deployment
 
@@ -729,7 +734,7 @@ key_sha256 = "4b4090ccee1e713c3d411b96a4226b90bd0f0deb34e02d19475a951316fd04ee"
 wasmrun agent --auth ./auth.toml
 ```
 
-Only the hash goes in the file. Every `/api/v1/*` request now needs `Authorization: Bearer $KEY`, and each session belongs to the tenant that created it. Another tenant asking for it gets a 404, identical to a session that never existed, so existence does not leak.
+Only the hash goes in the file. Every `/api/v1/*` request now needs `Authorization: Bearer $KEY`, and each session belongs to the tenant that created it. Another tenant asking for it gets a 404, the same answer you get for a session that never existed, so nothing leaks about which sessions are real.
 
 The agent above already handles this. It reads `WASMRUN_AGENT_KEY` and sets the header when it is present:
 
@@ -737,7 +742,7 @@ The agent above already handles this. It reads `WASMRUN_AGENT_KEY` and sets the 
 WASMRUN_AGENT_KEY=$KEY python sandbox_agent.py "..."
 ```
 
-The config file is watched and reloaded live, so adding a tenant or tightening a rate limit does not need a restart. A malformed edit is logged and ignored rather than dropping auth.
+The config file is watched and reloaded live, so adding a tenant or tightening a rate limit does not need a restart. A broken edit is logged and ignored rather than turning auth off.
 
 ### Put TLS in front of it
 
@@ -745,9 +750,9 @@ TLS is not terminated in-process. Traffic is plaintext HTTP, API keys included, 
 
 ![A client reaching the wasmrun agent over TLS through nginx or Caddy, with the agent itself still on loopback with auth enabled](/images/posts/agent-sandbox-deployment.svg)
 
-Bind the agent to loopback or a private interface the proxy alone can reach, terminate TLS at the proxy, and keep `--auth` on regardless so a key is needed even if the port is reached directly. `wasmrun agent --host 0.0.0.0` without `--auth` refuses to start and tells you the three ways forward.
+Bind the agent to loopback or a private interface the proxy alone can reach, terminate TLS at the proxy, and keep `--auth` on anyway so a key is needed even if the port is reached directly. `wasmrun agent --host 0.0.0.0` without `--auth` refuses to start and tells you the three ways forward.
 
-Two proxy settings trip people up and are worth setting before you need them: default response buffering silently defeats SSE streaming, and a proxy read timeout shorter than your per-exec `timeout` turns a working long run into a 504.
+Two proxy settings trip people up and are worth setting before you need them: default response buffering quietly breaks SSE streaming, and a proxy read timeout shorter than your per-exec `timeout` turns a working long run into a 504.
 
 ### Size it
 
@@ -757,10 +762,10 @@ Two proxy settings trip people up and are worth setting before you need them: de
 | `--workers` | auto (exec cap + 16) | You need to bound thread memory explicitly |
 | `--max-sessions` | 100 | Sessions are long-lived and disk is tight |
 | `--max-disk` | 100 MB | Per session, and vendored packages count against it |
-| `--max-fuel` | unlimited | You want a hard instruction ceiling on untrusted code |
+| `--max-fuel` | unlimited | You want a hard cap on how many instructions untrusted code can run |
 | `--max-cache-size` | 2048 MB | The shared npm cache is competing for disk |
 
-A request that starts an execution occupies its worker for the whole duration, so a `--workers` value below `--max-concurrent-exec` becomes the real ceiling on concurrency. Watch `wasmrun_agent_workers_live` and `wasmrun_agent_requests_in_flight` to see how much of the pool is in use.
+A request that starts an execution holds its worker for the whole run, so a `--workers` value below `--max-concurrent-exec` becomes the real limit on concurrency. Watch `wasmrun_agent_workers_live` and `wasmrun_agent_requests_in_flight` to see how much of the pool is in use.
 
 `SIGTERM`, `SIGINT` and `SIGHUP` all drain cleanly, in-flight requests get `--shutdown-timeout` seconds, and every session directory is removed. Give the orchestrator's stop timeout more room than `--shutdown-timeout` or it will `SIGKILL` mid-drain.
 
@@ -774,12 +779,8 @@ The two pieces I would carry into any agent like this, whatever the sandbox unde
 
 **Write down what the schemas cannot say.** Every line of that system prompt is a scar. Schemas describe shape. The prompt is where you put behaviour, and it is the only part of this you cannot copy from anyone.
 
-The agent, the interactive counterpart, the two tasks and the smoke test:
-
-{% githubCard "anistark/sandbox-agent-demo" %}
-
-And the sandbox itself. The runnable curl flows in `examples/agent-flows/`, the full `exec` surface in `docs/docs/agent/`, and deployment configs for nginx, Caddy, systemd, Docker and Kubernetes all live in the wasmrun repo:
+The sandbox itself is worth a look past what this post used. The runnable curl flows in `examples/agent-flows/`, the full `exec` surface in `docs/docs/agent/`, and deployment configs for nginx, Caddy, systemd, Docker and Kubernetes all live in the wasmrun repo:
 
 {% githubCard "anistark/wasmrun" %}
 
-One last note on the model side. `sandbox_agent.py` uses `claude-opus-5`, where adaptive thinking is on by default, so no `thinking` parameter is needed. Two things it leaves out for brevity that a production agent should have: a check for `response.stop_reason == "refusal"` before reading `response.content`, and the server-side `fallbacks` parameter that routes a refused turn to another model. Both are worth adding before this runs unattended.
+One last note on the model side. `sandbox_agent.py` uses `claude-opus-5`, where adaptive thinking is on by default, so no `thinking` parameter is needed. It also skips two things a production agent should have: a check for `response.stop_reason == "refusal"` before reading `response.content`, and the server-side `fallbacks` parameter that routes a refused turn to another model. Both are worth adding before this runs unattended.
