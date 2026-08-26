@@ -5,6 +5,7 @@ excerpt: Communication is a key in any ecosystem. Now with more cross-chain comm
 date: 2024-04-26
 updatedDate: 2024-04-26
 featuredImage: /images/posts/1675e0ae-ec2d-4c2f-a0b3-2b9a5684d7cb.webp
+socialImage: /images/posts/1675e0ae-ec2d-4c2f-a0b3-2b9a5684d7cb-og.jpg
 tags:
   - post
   - nft

@@ -5,6 +5,7 @@ excerpt: Let’s talk about chaos. Not the "forgot your wallet, keys, and phone"
 date: 2024-11-26
 updatedDate: 2024-11-26
 featuredImage: /images/posts/02e1bb78-b7ee-4fae-891b-96d8bc288279.webp
+socialImage: /images/posts/02e1bb78-b7ee-4fae-891b-96d8bc288279-og.jpg
 tags:
   - post
   - digital

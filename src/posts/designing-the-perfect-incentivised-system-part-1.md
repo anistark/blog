@@ -5,6 +5,7 @@ excerpt: Incentive systems are frameworks designed to motivate individuals or gr
 date: 2024-10-22
 updatedDate: 2024-10-22
 featuredImage: /images/posts/e85307a5-25d6-4b85-a30c-ce938524e6f2.webp
+socialImage: /images/posts/e85307a5-25d6-4b85-a30c-ce938524e6f2-og.jpg
 tags:
   - post
   - research

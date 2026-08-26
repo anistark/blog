@@ -5,6 +5,7 @@ excerpt: The web, in its earliest form, was envisioned as a decentralized platfo
 date: 2024-11-17
 updatedDate: 2024-11-17
 featuredImage: /images/posts/2af9bc24-2e77-41b9-b56c-2b0ebeef5260.webp
+socialImage: /images/posts/2af9bc24-2e77-41b9-b56c-2b0ebeef5260-og.jpg
 tags:
   - post
   - web3

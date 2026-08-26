@@ -5,26 +5,60 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
 
+    {# Block set captures already-escaped output, so these are piped through safe to avoid escaping twice. #}
+    {% set pageTitle %}{% if metaTitle %}{{ metaTitle }}{{ ' | '}}{% endif %}{% if title %}{{ title }}{{ ' | '}}{% endif %}{% if site.name %}{{ site.name }}{% endif %}{% endset %}
+    {% set pageDescription %}{% if excerpt %}{{ excerpt }}{% else %}{{ site.description }}{% endif %}{% endset %}
+    {% set pageUrl %}{{ page.url | url | absoluteUrl(site.url) }}{% endset %}
+    {% set isArticle = tags and 'post' in tags %}
+    {# Falls back to the site card when a post's featured image is a format
+       scrapers refuse. See filters/social-image.js. #}
+    {% set card = socialImage | socialCard(featuredImage) %}
+
+    <meta name="description" content="{{ pageDescription | safe }}">
+    <meta name="author" content="{{ site.author.name }}">
+    <link rel="canonical" href="{{ pageUrl | safe }}">
+
     {# Google Schema #}
-    <meta itemprop="name" content="{% if metaTitle %}{{ metaTitle }}{{ ' | '}}{% endif %}{% if title %}{{ title }}{{ ' | '}}{% endif %}{% if site.name %}{{ site.name }}{% endif %}">
-    <meta itemprop="description" content="{% if excerpt %}{{ excerpt }}{% else %}{{ site.description }}{% endif %}">
+    <meta itemprop="name" content="{{ pageTitle | safe }}">
+    <meta itemprop="description" content="{{ pageDescription | safe }}">
+    {% if card %}<meta itemprop="image" content="{{ card.url }}">{% endif %}
+
+    {# Open Graph. These have to be property, not name: every scraper that
+       matters looks up og:* by property and ignores the name spelling. #}
+    <meta property="og:title" content="{{ pageTitle | safe }}">
+    <meta property="og:description" content="{{ pageDescription | safe }}">
+    <meta property="og:url" content="{{ pageUrl | safe }}">
+    <meta property="og:site_name" content="{{ site.name }}">
+    <meta property="og:locale" content="en_GB">
+    <meta property="og:type" content="{% if isArticle %}article{% else %}website{% endif %}">
+    {%- if card %}
+    <meta property="og:image" content="{{ card.url }}">
+    <meta property="og:image:type" content="{{ card.type }}">
+    <meta property="og:image:width" content="{{ card.width }}">
+    <meta property="og:image:height" content="{{ card.height }}">
+    <meta property="og:image:alt" content="{% if title %}{{ title }}{% else %}{{ site.name }}{% endif %}">
+    {%- endif %}
+    {%- if isArticle %}
+    <meta property="article:author" content="{{ site.author.name }}">
+    <meta property="article:published_time" content="{{ date | dateToRfc3339 }}">
+    {%- if updatedDate %}
+    <meta property="article:modified_time" content="{{ updatedDate | dateToRfc3339 }}">
+    {%- endif %}
+    {%- for tag in tags %}{% if tag !== "post" %}
+    <meta property="article:tag" content="{{ tag }}">
+    {%- endif %}{% endfor %}
+    {%- endif %}
 
     {# Twitter #}
-    <meta name="twitter:title" content="{% if metaTitle %}{{ metaTitle }}{{ ' | '}}{% endif %}{% if title %}{{ title }}{{ ' | '}}{% endif %}{% if site.name %}{{ site.name }}{% endif %}">
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:description" content="{% if excerpt %}{{ excerpt }}{% else %}{{ site.description }}{% endif %}">
+    <meta name="twitter:title" content="{{ pageTitle | safe }}">
+    <meta name="twitter:description" content="{{ pageDescription | safe }}">
     <meta name="twitter:site" content="{{ site.author.handle }}">
     <meta name="twitter:creator" content="{{ site.author.handle }}">
-    <meta name="twitter:image:src" content="{% if featuredImage %}{{ site.url }}{{ featuredImage }}{% else %}{{ site.url }}{{ site.baseUrl }}{{ site.images.twitter }}{% endif %}">
-
-    {# Open Graph #}
-    <meta name="og:title" content="{% if metaTitle %}{{ metaTitle }}{{ ' | '}}{% endif %}{% if title %}{{ title }}{{ ' | '}}{% endif %}{% if site.name %}{{ site.name }}{% endif %}">
-    <meta name="og:description" content="{% if excerpt %}{{ excerpt }}{% else %}{{ site.description }}{% endif %}">
-    <meta name="og:image" content="{% if featuredImage %}{{ site.url }}{{ featuredImage }}{% else %}{{ site.url }}{{ site.baseUrl }}{{ site.images.og }}{% endif %}">
-    <meta name="og:url" content="{{ site.url }}{{ site.baseUrl }}">
-    <meta name="og:site_name" content="{{ site.name }}">
-    <meta name="og:locale" content="en_GB">
-    <meta name="og:type" content="website">
+    {%- if card %}
+    <meta name="twitter:image" content="{{ card.url }}">
+    <meta name="twitter:image:alt" content="{% if title %}{{ title }}{% else %}{{ site.name }}{% endif %}">
+    {%- endif %}
 
     <link rel="icon" type="image/png" href="{{ site.baseUrl }}me.png" />
     <link rel="alternate" type="application/atom+xml" title="{{ site.name }}" href="{{ site.url }}{{ site.feed.path }}" />

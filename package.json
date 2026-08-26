@@ -10,7 +10,8 @@
     "dev": "npm-run-all clean build:* -p dev:*",
     "dev:11ty": "eleventy --serve --quiet",
     "dev:rollup": "rollup -c -w",
-    "new-post": "node scripts/new-post.js"
+    "new-post": "node scripts/new-post.js",
+    "social-image": "node scripts/social-image.js"
   },
   "devDependencies": {
     "@11ty/eleventy": "^1.0.0",

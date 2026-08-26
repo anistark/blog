@@ -48,6 +48,7 @@ module.exports = (config) => {
 
   config.addFilter('dateDisplay', require('./filters/date-display.js'));
   config.addFilter('readingTime', require('./filters/reading-time.js'));
+  config.addFilter('socialCard', require('./filters/social-image.js'));
 
   const githubCard = require('./filters/github-card.js');
   config.addNunjucksAsyncShortcode('githubCard', githubCard);

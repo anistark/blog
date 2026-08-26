@@ -5,6 +5,7 @@ excerpt: An LLM that writes code is only useful if it can run the code. Handing 
 date: 2026-08-21
 updatedDate: 2026-08-22
 featuredImage: /images/posts/agent-sandbox.svg
+socialImage: /images/posts/agent-sandbox-og.png
 draft: false
 tags:
   - post

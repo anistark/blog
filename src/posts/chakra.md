@@ -5,6 +5,7 @@ excerpt: The modern software landscape is shifting rapidly towards **portability
 date: 2025-05-25
 updatedDate: 2025-05-25
 featuredImage: /images/posts/48b5678c-eca0-46b1-a2d5-27e5dc395e41.png
+socialImage: /images/posts/48b5678c-eca0-46b1-a2d5-27e5dc395e41-og.jpg
 tags:
   - post
   - go

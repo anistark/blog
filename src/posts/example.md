@@ -5,6 +5,7 @@ excerpt: In the labyrinth of modern life, where individuality is often celebrate
 date: 2024-11-21
 updatedDate: 2024-11-21
 featuredImage: /images/posts/e174182b-f347-4e76-9d74-1133fb4ef2a5.webp
+socialImage: /images/posts/e174182b-f347-4e76-9d74-1133fb4ef2a5-og.jpg
 tags:
   - post
   - life

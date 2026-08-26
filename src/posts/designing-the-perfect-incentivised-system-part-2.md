@@ -5,6 +5,7 @@ excerpt: A lot of the recent rise in isekai anime also suggests a favorable wind
 date: 2024-10-24
 updatedDate: 2024-10-24
 featuredImage: /images/posts/0604dc82-1287-4bc8-b752-0fdb797d9921.webp
+socialImage: /images/posts/0604dc82-1287-4bc8-b752-0fdb797d9921-og.jpg
 tags:
   - post
   - designing

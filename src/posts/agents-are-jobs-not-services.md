@@ -5,6 +5,7 @@ excerpt: A resident agent idling at 2GB of RAM is nothing, expensively. Most of 
 date: 2026-07-26
 updatedDate: 2026-07-26
 featuredImage: /images/posts/agents-are-jobs.svg
+socialImage: /images/posts/agents-are-jobs-og.png
 draft: false
 tags:
   - post

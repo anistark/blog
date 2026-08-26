@@ -5,6 +5,7 @@ excerpt: "If you've ever stumbled into the world of Asian graphic novels, you've
 date: 2024-12-15
 updatedDate: 2024-12-15
 featuredImage: /images/posts/f0940aff-10be-4a72-868c-5aefa8545dde.png
+socialImage: /images/posts/f0940aff-10be-4a72-868c-5aefa8545dde-og.jpg
 tags:
   - post
   - comic
