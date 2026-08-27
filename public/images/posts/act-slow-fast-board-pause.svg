@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 340" font-family="system-ui, sans-serif">
+  <rect width="900" height="340" fill="#1a1a19"/>
+  <rect x="40" y="40" width="820" height="260" rx="14" fill="#1e1e1d" stroke="#3a3a38"/>
+
+  <text x="450" y="86" font-size="14" font-weight="700" letter-spacing="3" fill="#c3c2b7" text-anchor="middle">THE BOARD PAUSE</text>
+
+  <text x="118" y="181" font-size="17" fill="#c3c2b7" text-anchor="middle">Noise</text>
+  <path d="M 158 175 L 197 175" stroke="#3987e5" stroke-width="2"/><path d="M 206 175 l -10 -6 v 12 z" fill="#3987e5"/>
+
+  <rect x="212" y="148" width="150" height="54" rx="9" fill="#242423" stroke="#3987e5"/><text x="287" y="181" font-size="17" font-weight="600" fill="#ffffff" text-anchor="middle">Step Back</text>
+  <path d="M 374 175 L 413 175" stroke="#3987e5" stroke-width="2"/><path d="M 422 175 l -10 -6 v 12 z" fill="#3987e5"/>
+
+  <rect x="432" y="148" width="130" height="54" rx="9" fill="#242423" stroke="#3987e5"/><text x="497" y="181" font-size="17" font-weight="600" fill="#ffffff" text-anchor="middle">Assess</text>
+  <path d="M 574 175 L 613 175" stroke="#199e70" stroke-width="2"/><path d="M 622 175 l -10 -6 v 12 z" fill="#199e70"/>
+
+  <text x="712" y="171" font-size="17" font-weight="600" fill="#199e70" text-anchor="middle">Targeted</text>
+  <text x="712" y="195" font-size="17" font-weight="600" fill="#199e70" text-anchor="middle">Execution</text>
+
+  <path d="M 497 208 L 497 235" stroke="#3987e5" stroke-width="2"/><path d="M 497 244 l -6 -10 h 12 z" fill="#3987e5"/>
+  <text x="497" y="270" font-size="17" fill="#3987e5" text-anchor="middle">First Principles</text>
+</svg>
