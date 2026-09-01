@@ -6,7 +6,7 @@ date: 2026-09-03
 updatedDate: 2026-09-03
 featuredImage: /images/posts/act-slow-fast.png
 socialImage: /images/posts/act-slow-fast-og.png
-draft: true
+draft: false
 tags:
   - post
   - thought
