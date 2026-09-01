@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    
+    
+    
+    
+    
+    
+    
+
+    <meta name="description" content="The loop, the context juggling, the per-model prompt formatting, the tool calls. Here is what building the agent harness behind OrionPod taught me, and where I lost the most time putting a real agent on top of models that run on your own machine.">
+    <meta name="author" content="Kumar Anirudha">
+    <link rel="canonical" href="https://blog.anirudha.dev/orion-core/">
+
+    
+    <meta itemprop="name" content="Lessons from building an agent harness for local models | AniLog">
+    <meta itemprop="description" content="The loop, the context juggling, the per-model prompt formatting, the tool calls. Here is what building the agent harness behind OrionPod taught me, and where I lost the most time putting a real agent on top of models that run on your own machine.">
+    <meta itemprop="image" content="https://blog.anirudha.dev/images/posts/orion-core-hero.png">
+
+    
+    <meta property="og:title" content="Lessons from building an agent harness for local models | AniLog">
+    <meta property="og:description" content="The loop, the context juggling, the per-model prompt formatting, the tool calls. Here is what building the agent harness behind OrionPod taught me, and where I lost the most time putting a real agent on top of models that run on your own machine.">
+    <meta property="og:url" content="https://blog.anirudha.dev/orion-core/">
+    <meta property="og:site_name" content="AniLog">
+    <meta property="og:locale" content="en_GB">
+    <meta property="og:type" content="article">
+    <meta property="og:image" content="https://blog.anirudha.dev/images/posts/orion-core-hero.png">
+    <meta property="og:image:type" content="image/png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:image:alt" content="Lessons from building an agent harness for local models">
+    <meta property="article:author" content="Kumar Anirudha">
+    <meta property="article:published_time" content="2026-06-24T00:00:00Z">
+    <meta property="article:modified_time" content="2026-06-28T00:00:00Z">
+    <meta property="article:tag" content="ai">
+    <meta property="article:tag" content="llm">
+    <meta property="article:tag" content="agents">
+    <meta property="article:tag" content="agentic-ai">
+    <meta property="article:tag" content="rust">
+    <meta property="article:tag" content="local-llm">
+    <meta property="article:tag" content="orion">
+    <meta property="article:tag" content="orion-core">
+    <meta property="article:tag" content="orionpod">
+    <meta property="article:tag" content="open-source">
+
+    
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Lessons from building an agent harness for local models | AniLog">
+    <meta name="twitter:description" content="The loop, the context juggling, the per-model prompt formatting, the tool calls. Here is what building the agent harness behind OrionPod taught me, and where I lost the most time putting a real agent on top of models that run on your own machine.">
+    <meta name="twitter:site" content="@kranirudha">
+    <meta name="twitter:creator" content="@kranirudha">
+    <meta name="twitter:image" content="https://blog.anirudha.dev/images/posts/orion-core-hero.png">
+    <meta name="twitter:image:alt" content="Lessons from building an agent harness for local models">
+
+    <link rel="icon" type="image/png" href="/me.png" />
+    <link rel="alternate" type="application/atom+xml" title="AniLog" href="https://blog.anirudha.dev/feed/feed.xml" />
+
+    <title>Lessons from building an agent harness for local models | AniLog</title>
+
+    <link rel="stylesheet" href="/assets/main.bundle.css">
+
+    <script>
+      // Set theme before page renders to prevent flash
+      (function() {
+        const theme = localStorage.getItem('theme') || 'night';
+        if (theme !== 'night') {
+          document.documentElement.setAttribute('data-theme', theme);
+        }
+      })();
+    </script>
+
+    
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-YGZHVY9TD7"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-YGZHVY9TD7');
+    </script>
+    
+
+    
+  </head>
+  <body class="flex flex-col min-h-screen">
+    <canvas id="ambience-canvas"></canvas>
+    <header class="sticky top-0 z-50 glass-header">
+  <nav class="container mx-auto max-w-7xl px-8 py-3 flex flex-wrap items-center justify-between">
+    <div class="flex items-center gap-3">
+      <a href="/" class="flex items-center gap-3">
+        <img src="/ani.png" alt="AniLog logo" class="w-10 h-10 object-cover">
+        <h1 class="text-2xl leading-none m-0">AniLog</h1>
+      </a>
+    </div>
+
+    <div class="flex items-center gap-6">
+      <div class="theme-switcher">
+        <button id="theme-switcher-btn" class="theme-switcher-btn" aria-label="Switch theme" aria-expanded="false">
+          <span id="theme-active-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.985 12.486a9 9 0 1 1-9.473-9.472c.405-.022.617.46.402.803a6 6 0 0 0 8.268 8.268c.344-.215.825-.004.803.401"/></svg>
+          </span>
+        </button>
+        <div id="theme-dropdown" class="theme-dropdown">
+          <button class="theme-option" data-theme-value="night">
+            <span class="theme-icon"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.985 12.486a9 9 0 1 1-9.473-9.472c.405-.022.617.46.402.803a6 6 0 0 0 8.268 8.268c.344-.215.825-.004.803.401"/></svg></span>
+            <span>Night</span>
+          </button>
+          <button class="theme-option" data-theme-value="reading">
+            <span class="theme-icon"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 7v14"/><path d="M3 18a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h5a4 4 0 0 1 4 4 4 4 0 0 1 4-4h5a1 1 0 0 1 1 1v13a1 1 0 0 1-1 1h-6a3 3 0 0 0-3 3 3 3 0 0 0-3-3z"/></svg></span>
+            <span>Reading</span>
+          </button>
+          <button class="theme-option" data-theme-value="forest">
+            <span class="theme-icon"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m17 14 3 3.3a1 1 0 0 1-.7 1.7H4.7a1 1 0 0 1-.7-1.7L7 14h-.3a1 1 0 0 1-.7-1.7L9 9h-.2A1 1 0 0 1 8 7.3L12 3l4 4.3a1 1 0 0 1-.8 1.7H15l3 3.3a1 1 0 0 1-.7 1.7H17Z"/><path d="M12 22v-3"/></svg></span>
+            <span>Forest</span>
+          </button>
+          <button class="theme-option" data-theme-value="beach">
+            <span class="theme-icon"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 8c0-2.76-2.46-5-5.5-5S2 5.24 2 8h2l1-1 1 1h4"/><path d="M13 7.14A5.82 5.82 0 0 1 16.5 6c3.04 0 5.5 2.24 5.5 5h-3l-1-1-1 1h-3"/><path d="M5.89 9.71c-2.15 2.15-2.3 5.47-.35 7.43l4.24-4.25.7-.7.71-.71 2.12-2.12c-1.95-1.96-5.27-1.8-7.42.35"/><path d="M11 15.5c.5 2.5-.17 4.5-1 6.5h4c2-5.5-.5-12-1-14"/></svg></span>
+            <span>Beach</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </nav>
+</header>
+
+    <main class="container mx-auto max-w-6xl p-8 grow">
+      
+    <p></p>
+
+    
+        <div class="post-cover-image" style="background-image: url('/images/posts/orion-core-hero.png');"></div>
+    
+
+    <div>
+        <div class="post-title-row">
+            <h2>Lessons from building an agent harness for local models</h2>
+            
+        </div>
+
+        
+            <div class="mt-4 mb-2">
+                <a class="tag ai" href="/tag/ai">ai</a><a class="tag llm" href="/tag/llm">llm</a><a class="tag agents" href="/tag/agents">agents</a><a class="tag agentic-ai" href="/tag/agentic-ai">agentic-ai</a><a class="tag rust" href="/tag/rust">rust</a><a class="tag local-llm" href="/tag/local-llm">local-llm</a><a class="tag orion" href="/tag/orion">orion</a><a class="tag orion-core" href="/tag/orion-core">orion-core</a><a class="tag orionpod" href="/tag/orionpod">orionpod</a><a class="tag open-source" href="/tag/open-source">open-source</a>
+            </div>
+        
+
+        
+            
+              <p class="text-sm italic">Last updated on
+                    <span datetime="Wed Jun 24 2026 00:00:00 GMT+0000 (Coordinated Universal Time)">June 28, 2026</span>. Published on
+                    <span datetime="Wed Jun 24 2026 00:00:00 GMT+0000 (Coordinated Universal Time)">June 24, 2026</span>.
+                    <span class="reading-time"> · 18 min read</span></p>
+            
+        
+
+        <div class="content post">
+            <p>If you have spent real time with a coding agent like <a href="https://www.anthropic.com/claude-code">Claude Code</a>, <a href="https://github.com/sst/opencode">opencode</a>, or <a href="https://github.com/earendil-works/pi">pi</a>, you have probably noticed something. The model does the visible work, but the thing that makes the whole experience good is not really the model. It is the harness wrapped around it. The loop that keeps the model pointed at the goal, the context that shows up at the right moment, the tools wired in cleanly, the reply streaming back so you can watch it think instead of staring at a spinner. Put a great model behind a sloppy harness and it still feels bad. Put a decent model behind a great harness and it feels sharp.</p>
+<p>pi is what made this click for me. It is a coding agent by Mario who’s now joined <a href="https://github.com/earendil-works">Earendil</a>, and a lot of what makes it pleasant lives in the harness, not the prompt. Their <a href="https://pi.dev/docs/latest">docs</a> lay the design out far better than I could, and the <a href="https://github.com/earendil-works/pi">repo</a> is genuinely worth reading. The same lesson shows up in Claude Code. The model gets the headlines. The harness wins the day to day.</p>
+<p>So I wanted one of those. Not for coding, and not sitting on top of a hosted API. I wanted that quality of harness for models running locally, on your own machine, for ordinary everyday use. That is where Orion started…</p>
+<p><img src="/images/posts/agent-harness.jpeg" alt="Orion"></p>
+<h2 id="what-an-agent-harness-actually-is" tabindex="-1">What an agent harness actually is <a class="header-anchor" href="#what-an-agent-harness-actually-is" aria-hidden="true">#</a></h2>
+<p>It helps to picture the thing first. A model on its own is just a network in a box. Capable, but inert. It reads some tokens and predicts the next ones, and that is the whole of it. The harness is everything wrapped around that box: the environment the model acts inside, the thing prompts and tools flow into and that useful behavior flows back out of. It is what the user actually touches. The model never does directly.</p>
+<p><img src="/images/posts/agent-harness-environment.png" alt="An agent harness as the environment around the model: prompts flowing into the model in its box, with the harness wrapping it"></p>
+<p>Swap the model and the harness stays. Swap the harness and the whole experience changes. That is why so much of the quality you feel lives here rather than in the weights, and why the layer is worth taking seriously at all.</p>
+<p>You do not start at the harness, though. When a model is not doing what you want, you reach for the cheaper levers first, in a rough order.</p>
+<p>The first is <strong>prompt engineering</strong>. Rewrite the system prompt, add a couple of examples, spell out the format you want, fix the tone. It is astonishing how far this gets you, and it is the right first move every time. But it plateaus. Past a point you are just rephrasing the same request and hoping the model reads it more carefully, and it will not.</p>
+<p>The next lever is <strong>context engineering</strong>. The question stops being how you phrase the request and becomes what the model can actually see when it answers: which documents you retrieve, how much history you keep, what order you put it in, what you deliberately leave out. This is where the shape of the window starts to matter, because attention is not uniform across it. There is a smart zone early on, where the model pays close attention, and a dumb zone later as the window fills, where things drift and the middle gets lost. So curating context is not just stuffing in everything relevant. It is compacting the history into a smaller summary, forking a clean branch from a known-good point, or handing off to a fresh session or a sub-agent that carries only what it needs.</p>
+<p><img src="/images/posts/context-zones.png" alt="Managing the context window: a smart zone and a dumb zone, with compact, fork, and handing off to a new session or sub-agent"></p>
+<p>Context engineering is more powerful than prompt engineering, and a lot of real agent quality lives there. But the two share a ceiling. Both assume a single shot: you arrange the input, the model produces its output, and you are done. Plenty of jobs do not fit in one shot. The model needs to call a tool and react to the result, try something and recover when it fails, hold state across many turns, or decide it is not finished and go round again. No amount of prompt wording or context curation expresses that, because none of it is about the input. It is about the loop around the model.</p>
+<p>That is harness engineering, and it is what is left when prompting and context have done all they can. How much of that harness you have to build yourself is exactly what changes when you move from a hosted API to a model running on your own machine.</p>
+<p>Whether you are building a chat app, a <a href="https://en.wikipedia.org/wiki/Retrieval-augmented_generation">RAG</a> pipeline, or a tool-using agent, the model is only the top of the stack. Underneath sits a layer nobody demos but everybody has to write, and every part of it, prompt formatting, context, streaming, tool calls, gets harder the moment you run models locally instead of calling a hosted API. That gap, between “I called a model” and “I have something I would actually ship,” is the whole job. A lot of how I learned to close it came from reading how pi treats its event stream and its context as a pipeline rather than a pile of strings, then rebuilding those ideas with local inference as the target.</p>
+<p><img src="/images/posts/pi-harness.png" alt="pi-harness"></p>
+<p>Alejandro also covers this in much more detail: <a href="https://alejandro-ao.com/pi-architecture/">https://alejandro-ao.com/pi-architecture/</a></p>
+<p><img src="/images/posts/claude-code-architecture.png" alt="claude-code-architecture"></p>
+<h2 id="what-building-it-actually-taught-me" tabindex="-1">What building it actually taught me <a class="header-anchor" href="#what-building-it-actually-taught-me" aria-hidden="true">#</a></h2>
+<p>Most of the design fell out of problems, not plans. These are the lessons that cost me the most time, roughly in the order I would tell them to anyone else writing a harness for local models.</p>
+<h4 id="prompt-formatting-is-invisible%2C-so-it-bites-hardest" tabindex="-1">Prompt formatting is invisible, so it bites hardest <a class="header-anchor" href="#prompt-formatting-is-invisible%2C-so-it-bites-hardest" aria-hidden="true">#</a></h4>
+<p>This is the one I underestimated, and it bit me in the most embarrassing way. For a while the harness really only had one template, ChatML, and the detector quietly fell back to it for every model. A Llama 3 or a Mistral would load fine, stream fine, and just answer a little worse, because it was being handed a ChatML-wrapped prompt instead of its own format. Nothing errored. Nothing logged a warning. The logs looked perfect. That is the whole trap with prompt formatting: get it wrong and you do not get a crash, you get a model that seems slightly dumber than it should be, and no thread to pull on.</p>
+<p>The fix was to actually read the <code>tokenizer.chat_template</code> baked into the GGUF metadata and match it to the right format, with a manual override for the cases where the metadata is missing or wrong. Llama 3 wants its header blocks. Mistral wants <code>[INST]</code> with the system prompt folded into the first user turn. Gemma, Phi-3, DeepSeek, and Command-R each want something slightly different. The harness now carries templates for ChatML, Llama 3, Llama 2, Mistral and Mixtral, Gemma, Phi-3, DeepSeek, Command-R, Alpaca, and Vicuna, and picks one per model. If you take one thing from this section: spend your time here before you start blaming the weights.</p>
+<h4 id="tool-calling%2C-when-the-model-is-small" tabindex="-1">Tool calling, when the model is small <a class="header-anchor" href="#tool-calling%2C-when-the-model-is-small" aria-hidden="true">#</a></h4>
+<p>A frontier model follows a tool-call schema obediently. A 3B or 7B running on a laptop does not, and that gap is where most of my debugging went.</p>
+<p>It would emit a bare JSON object when I asked for a fenced block. It would wrap the call in a <code>json</code> fence instead of a <code>tool_call</code> one. It would write a sentence of explanation around the JSON. It would get the key names almost right. With a strict parser, every one of those means the tool silently never fires, the model assumes it ran, and the conversation quietly comes apart a few turns later. The failure is the worst kind: nothing crashes, the answer is just wrong.</p>
+<p>The fix was to stop being strict. The parser accepts a fenced <code>tool_call</code> block, a plain <code>json</code> block, or even a bare JSON object that is the whole message, as long as it carries a <code>name</code> and <code>arguments</code>. Be liberal in what you accept, because the small model is doing its best. That single change bought more reliability than any amount of prompt wording. Function calling is not a solved checkbox when you leave the frontier models behind. It is a parsing problem, and you should treat it like one.</p>
+<p>A few details that earned their keep. A JSON array in one reply runs several tools in a turn. The loop is bounded, eight iterations by default, so a model that keeps calling tools eventually gets cut off with a warning instead of spinning forever. And if you register no tools at all, parsing is skipped entirely and replies pass through untouched, so plain chat never pays the tax. In OrionPod the whole thing ships behind a toggle that is off by default, with two harmless built-ins, a clock and a calculator, there to prove the path end to end rather than to do anything clever.</p>
+<h4 id="the-loop-is-the-heart%2C-and-it-needs-a-ceiling" tabindex="-1">The loop is the heart, and it needs a ceiling <a class="header-anchor" href="#the-loop-is-the-heart%2C-and-it-needs-a-ceiling" aria-hidden="true">#</a></h4>
+<p>Underneath all of it is one cycle: format the context, ask the model to generate, watch the reply for a tool call, run the matching tool, append the result, and go back to the model, until it returns an answer with no tool call left in it. The only non-obvious part is the ceiling on iterations, so a confused model cannot loop on itself forever.</p>
+<p><img src="/images/posts/orion-core-loop.png" alt="The agent loop: prompt, prune and format, backend generates and streams tokens, check for a tool call, run the tool and append the result, then loop back; otherwise return the final answer"></p>
+<h4 id="context%3A-prune-on-whole-turns%2C-never-on-loose-messages" tabindex="-1">Context: prune on whole turns, never on loose messages <a class="header-anchor" href="#context%3A-prune-on-whole-turns%2C-never-on-loose-messages" aria-hidden="true">#</a></h4>
+<p>When the window fills, the easy thing is to drop the oldest messages. The trap is dropping a tool result while keeping the tool call that produced it, which confuses the model badly. So pruning works on whole turns, not individual messages. You can pin a message so it always survives, or fold the oldest turns into a single summary with one extra model call, so their gist sticks around instead of vanishing. This is the boring, careful work that decides whether a long conversation stays coherent or slowly falls apart.</p>
+<h4 id="stream-events-a-ui-can-render%2C-from-day-one" tabindex="-1">Stream events a UI can render, from day one <a class="header-anchor" href="#stream-events-a-ui-can-render%2C-from-day-one" aria-hidden="true">#</a></h4>
+<p>People expect to watch tokens appear, so a turn cannot hand you one blob at the end. The first version streamed raw token strings over a single channel, which was enough to make text show up and nothing more. Every UI affordance I wanted next, a live token-budget bar, a little card per tool call, a tokens-per-second read, meant teasing state back out of a flat stream of tokens.</p>
+<p>So I tore that out and replaced it with a structured event stream: the turn starts, each token is a delta carrying its own count and speed, a context-budget reading lands after pruning, tools announce their start and end, the turn ends. About a dozen typed events. The UI subscribes and never has to reach inside the harness to work out what is happening. If I were starting over I would design it structured from day one, because retrofitting structure onto a stream of strings is exactly as tedious as it sounds.</p>
+<p><img src="/images/posts/orion-core-events.png" alt="The event stream a turn emits: AgentStart, MessageDelta as tokens stream in, ContextBudget with used and max tokens, ToolExecStart and End when a tool runs, then AgentEnd"></p>
+<h4 id="draw-one-hard-seam-between-the-harness-and-the-engine" tabindex="-1">Draw one hard seam between the harness and the engine <a class="header-anchor" href="#draw-one-hard-seam-between-the-harness-and-the-engine" aria-hidden="true">#</a></h4>
+<p>If I started over, this is the decision I would keep first. There is one clean boundary between the harness and whatever actually generates tokens. On one side, the loop, the context pipeline, the prompt formatting, the tool dispatch. On the other, the model engine, llama.cpp in OrionPod’s case, though it could just as well be MLX, candle, or a hosted API. The harness hands a formatted prompt down and gets tokens back, and never reaches across that line.</p>
+<figure>
+  <img src="/images/posts/orion-core-stack.png" alt="The harness stack: the app on top, then the agent loop and context pipeline, a single seam, and the model engine at the bottom" style="max-height: 700px; width: auto; max-width: 100%; display: block; margin: 0 auto;" />
+</figure>
+<p>That seam is why swapping the inference engine never touches the loop, and why the same harness can drive a local GGUF or a cloud endpoint without caring which.</p>
+<h4 id="the-bugs-that-actually-bit" tabindex="-1">The bugs that actually bit <a class="header-anchor" href="#the-bugs-that-actually-bit" aria-hidden="true">#</a></h4>
+<p>Two of them are worth naming, because they are the kind you do not see coming.</p>
+<p>The first was a deadlock. Inference runs on a blocking thread while the rest of the app is async, and at one point I reached for a blocking lock from inside an async task. It passed every quick test and then wedged the whole app solid under real use, because that blocking lock was parking a thread the async runtime still needed. The fix was a few lines. Finding it was not.</p>
+<p>The second was about speed, and it lived right on the seam. The engine was rebuilding its inference context on every single turn, throwing away the cached state and re-reading the entire conversation from the top each message. Tens of milliseconds of pure waste that grew with the chat. The fix was to keep the context alive between turns and reuse its cache: compare the new prompt against what the cache already holds, keep the shared prefix, and only process the part that changed. The part I like is that it had to cooperate with the harness. Every time pruning rewrites the older messages, the cache notices the divergence, drops everything from that point, and re-reads only the tail. The clean seam between harness and engine is what made that safe to wire up at all.</p>
+<h4 id="bet-on-local%2C-and-own-the-consequences" tabindex="-1">Bet on local, and own the consequences <a class="header-anchor" href="#bet-on-local%2C-and-own-the-consequences" aria-hidden="true">#</a></h4>
+<p>Most agent frameworks worth knowing, <a href="https://github.com/langchain-ai/langgraph">LangGraph</a>, <a href="https://github.com/crewAIInc/crewAI">CrewAI</a>, and friends, assume a hosted model API. That is a fine assumption for most people. This one makes the opposite bet: the engine is something you load yourself, and the whole context and template machinery is built around models running on your own hardware. Every lesson above is sharper because of that bet. A hosted API hides prompt formatting, hides context limits behind huge windows, and parses tool calls for you. Take those three away and they stop being details. They become the job.</p>
+<h2 id="why-building-it-in-rust-paid-off" tabindex="-1">Why building it in Rust paid off <a class="header-anchor" href="#why-building-it-in-rust-paid-off" aria-hidden="true">#</a></h2>
+<p>For a harness that lives right next to local inference, <a href="https://rust-lang.org/">Rust</a> genuinely pulled its weight.</p>
+<ul>
+<li><em>It runs in the same process as the engine.</em> Local inference engines like llama.cpp are native code. The harness is native code too, so it and the model sit in one process with no language boundary, no IPC, and no serialization tax between “format the prompt” and “run the model.” A harness in a managed language has to reach across that boundary on every single turn.</li>
+<li><em>No garbage collector, so the stream stays smooth.</em> Token streaming is a steady drip of tiny events. A GC pause in the middle of that drip is a visible stutter. Rust has no GC, so latency stays predictable while tokens flow.</li>
+<li><em>It is frugal with memory.</em> On a laptop, the model weights already claim most of your RAM. The harness should be a rounding error, not another hungry tenant, and a small native library is exactly that.</li>
+<li><em>Concurrency you can actually trust.</em> A turn runs the engine on a blocking thread while events stream out over a channel and an abort flag can fire at any moment. That is the kind of shared-state concurrency that quietly corrupts data in other languages. Here the compiler simply refuses to let me get it wrong.</li>
+<li><em>It ships as one thing.</em> It compiles into a static library with no runtime to install, and drops into a <a href="https://tauri.app/">Tauri</a> desktop app like OrionPod, a CLI, or a server without dragging a separate runtime along.</li>
+<li><em>The types carry the contract.</em> Errors are explicit values rather than surprises, and <code>#[non_exhaustive]</code> enums let the library grow without breaking callers. The compiler doubles as documentation.</li>
+</ul>
+<p>None of this makes the project special on its own. Plenty of great software is written in other languages. But for the specific job of wrapping a local model in a responsive agent loop, Rust takes a few genuinely nasty problems off the table. Two in particular: data races between the thread generating tokens and the abort flag trying to cancel it mid-stream, and use-after-free or dangling pointers across the FFI boundary into a C++ engine like llama.cpp. Those are the bugs that show up once in a thousand runs, never on your machine, always on someone else’s, and take a weekend to track down. In Rust they are compile errors instead of production incidents. I would rather argue with the borrow checker for an afternoon than chase a heisenbug like that through a shipped desktop app.</p>
+<h2 id="who-this-is-for%2C-and-who-it-is-not" tabindex="-1">Who this is for, and who it is not <a class="header-anchor" href="#who-this-is-for%2C-and-who-it-is-not" aria-hidden="true">#</a></h2>
+<p>Here is a boundary worth drawing clearly. pi, opencode, and Claude Code are coding agents. They live in your terminal, read and edit files, run commands, and reason about whole repositories. They are excellent at that, and Orion is not trying to beat them at it.</p>
+<p>OrionPod is not a coding agent, so Orion is not a coding harness. The aim points the other way: a general-purpose assistant for the everyday person, running on their own machine, private by default. Less “refactor my repo” and more “a capable local mind for whatever an ordinary day throws at you.” Call it an AGI-shaped aspiration if you like, general help for everyone rather than a specialist tool for developers. Coding agents are the sharpest example of what a good harness can do today, so the engineering borrows from them and points it at a broader and, honestly, more ambitious target.</p>
+<p>That choice shows up in the defaults. The harness cares about handling a wide spread of open model families out of the box, about staying light enough to run comfortably on a normal laptop, and about a chat-first, tool-optional loop rather than a code-execution-first one. It is a foundation for general local assistants, not a developer tool wearing a chat coat.</p>
+<h2 id="what-it-does-not-try-to-be" tabindex="-1">What it does not try to be <a class="header-anchor" href="#what-it-does-not-try-to-be" aria-hidden="true">#</a></h2>
+<p>I want to be honest about the edges. Orion is not LangGraph, and it is not trying to be. There is no graph builder, no vector store, no fifty integrations. If you want a big batteries-included framework, this is not that, and that is fine.</p>
+<p>It is also not the only crate in this corner of Rust. <a href="https://github.com/0xPlaygrounds/rig">rig</a> and <a href="https://github.com/floneum/floneum">kalosm</a> are both worth a look and aim at different things. The niche here is narrow and deliberate: a small, local-first harness that brings a well-behaved loop, sane context handling, and the per-model template grunt work already done.</p>
+<p>Small on purpose. That is the whole point.</p>
+<h2 id="how-orionpod-uses-it" tabindex="-1">How OrionPod uses it <a class="header-anchor" href="#how-orionpod-uses-it" aria-hidden="true">#</a></h2>
+<p>OrionPod is the proof that the split is real. The app plugs a llama.cpp engine, with Metal on Apple Silicon, into that single seam, and that is essentially the only harness-specific code in it. Everything else flows from the harness:</p>
+<ul>
+<li>The chat view subscribes to the event stream and renders tokens as they arrive, a little card for each tool call, and a context budget readout.</li>
+<li>The pin button on a message and the “summarize older messages” option in settings are the pinned and summarize strategies, surfaced as UI.</li>
+<li>Switching models switches the chat template under the hood, because the template detection lives in the harness, not in the app.</li>
+</ul>
+<p>When I want to improve the agent behavior, I work on Orion. When I want to improve the desktop experience, I work on OrionPod. Keeping those two jobs apart has made both of them calmer to build.</p>
+<h2 id="where-this-is-going" tabindex="-1">Where this is going <a class="header-anchor" href="#where-this-is-going" aria-hidden="true">#</a></h2>
+<p>A few things I am poking at, framed honestly as ideas rather than promises:</p>
+<ul>
+<li><strong>MCP.</strong> I would like agents to discover tools and resources through the <a href="https://modelcontextprotocol.io/">Model Context Protocol</a> instead of having every tool hardcoded. Register them at runtime and let the loop use them.</li>
+<li><strong>More example engines.</strong> A first-class MLX example for Apple Silicon, maybe a candle one, to keep proving the engine-agnostic claim beyond llama.cpp.</li>
+<li><strong>A local server on the same loop.</strong> An OpenAI-compatible endpoint that reuses the exact same agent, so the thing powering a chat window can also power your scripts.</li>
+<li><strong>Richer tools and composition.</strong> More built-ins, and a cleaner story for letting one agent lean on another.</li>
+</ul>
+<p>None of that is shipped. But the loop, the seam, the events, and the tool framework that all of it needs already exist, which is the boring half of the work.</p>
+<h2 id="it-is-open-source%2C-so-go-build-something" tabindex="-1">It is open source, so go build something <a class="header-anchor" href="#it-is-open-source%2C-so-go-build-something" aria-hidden="true">#</a></h2>
+<p>Orion is the harness behind everything above. It is MIT licensed and ships as the <code>orion-core</code> crate; the code, including a runnable mock backend and a streaming OpenAI-compatible example, is on GitHub. If you are writing your own agent for local models and you are tired of re-solving prompt formatting and tool parsing for the third time, you can build on it directly, or just read how it handles them and borrow the ideas.</p>
+<terminal-block>cargo add orion-core</terminal-block><p>The <a href="https://docs.rs/orion-core">docs are on docs.rs</a> and the <a href="https://crates.io/crates/orion-core">crate is on crates.io</a>.</p>
+<div class="github-card-wrapper"><a href="https://github.com/anistark/orion-core" target="_blank" rel="noopener noreferrer" class="github-card"><div class="github-card-top"><div class="github-card-primary"><h3 class="github-card-heading"><span class="github-card-owner">anistark</span><span class="github-card-slash">/</span><span class="github-card-name">orion-core</span></h3><div class="github-card-pills"><span class="github-card-pill">MIT</span></div><p class="github-card-desc">Open source agent harness for local LLM inference</p><div class="github-card-topics"><span class="github-card-topic">agent</span><span class="github-card-topic">harness</span><span class="github-card-topic">orionpod</span><span class="github-card-topic">rust</span></div></div><div class="github-card-avatar-wrap"><img src="https://avatars.githubusercontent.com/u/5357586?v=4&amp;s=120" alt="anistark" class="github-card-avatar" loading="lazy" width="56" height="56"></div></div><div class="github-card-activity"><svg class="github-card-spark" viewBox="0 0 520 36" preserveAspectRatio="none" aria-hidden="true"><rect x="0.00" y="36.00" width="8.04" height="0.00" rx="0.5"></rect><rect x="10.04" y="36.00" width="8.04" height="0.00" rx="0.5"></rect><rect x="20.08" y="36.00" width="8.04" height="0.00" rx="0.5"></rect><rect x="30.12" y="36.00" width="8.04" height="0.00" rx="0.5"></rect><rect x="40.15" y="36.00" width="8.04" height="0.00" rx="0.5"></rect><rect x="50.19" y="36.00" width="8.04" height="0.00" rx="0.5"></rect><rect x="60.23" y="36.00" width="8.04" height="0.00" rx="0.5"></rect><rect x="70.27" y="36.00" width="8.04" height="0.00" rx="0.5"></rect><rect x="80.31" y="36.00" width="8.04" height="0.00" rx="0.5"></rect><rect x="90.35" y="36.00" width="8.04" height="0.00" rx="0.5"></rect><rect x="100.38" y="36.00" width="8.04" height="0.00" rx="0.5"></rect><rect x="110.42" y="36.00" width="8.04" height="0.00" rx="0.5"></rect><rect x="120.46" y="36.00" width="8.04" height="0.00" rx="0.5"></rect><rect x="130.50" y="36.00" width="8.04" height="0.00" rx="0.5"></rect><rect x="140.54" y="36.00" width="8.04" height="0.00" rx="0.5"></rect><rect x="150.58" y="36.00" width="8.04" height="0.00" rx="0.5"></rect><rect x="160.62" y="36.00" width="8.04" height="0.00" rx="0.5"></rect><rect x="170.65" y="36.00" width="8.04" height="0.00" rx="0.5"></rect><rect x="180.69" y="36.00" width="8.04" height="0.00" rx="0.5"></rect><rect x="190.73" y="36.00" width="8.04" height="0.00" rx="0.5"></rect><rect x="200.77" y="36.00" width="8.04" height="0.00" rx="0.5"></rect><rect x="210.81" y="36.00" width="8.04" height="0.00" rx="0.5"></rect><rect x="220.85" y="36.00" width="8.04" height="0.00" rx="0.5"></rect><rect x="230.88" y="36.00" width="8.04" height="0.00" rx="0.5"></rect><rect x="240.92" y="36.00" width="8.04" height="0.00" rx="0.5"></rect><rect x="250.96" y="36.00" width="8.04" height="0.00" rx="0.5"></rect><rect x="261.00" y="36.00" width="8.04" height="0.00" rx="0.5"></rect><rect x="271.04" y="36.00" width="8.04" height="0.00" rx="0.5"></rect><rect x="281.08" y="36.00" width="8.04" height="0.00" rx="0.5"></rect><rect x="291.12" y="36.00" width="8.04" height="0.00" rx="0.5"></rect><rect x="301.15" y="36.00" width="8.04" height="0.00" rx="0.5"></rect><rect x="311.19" y="36.00" width="8.04" height="0.00" rx="0.5"></rect><rect x="321.23" y="36.00" width="8.04" height="0.00" rx="0.5"></rect><rect x="331.27" y="36.00" width="8.04" height="0.00" rx="0.5"></rect><rect x="341.31" y="36.00" width="8.04" height="0.00" rx="0.5"></rect><rect x="351.35" y="36.00" width="8.04" height="0.00" rx="0.5"></rect><rect x="361.38" y="36.00" width="8.04" height="0.00" rx="0.5"></rect><rect x="371.42" y="36.00" width="8.04" height="0.00" rx="0.5"></rect><rect x="381.46" y="36.00" width="8.04" height="0.00" rx="0.5"></rect><rect x="391.50" y="36.00" width="8.04" height="0.00" rx="0.5"></rect><rect x="401.54" y="0.00" width="8.04" height="36.00" rx="0.5"></rect><rect x="411.58" y="36.00" width="8.04" height="0.00" rx="0.5"></rect><rect x="421.62" y="36.00" width="8.04" height="0.00" rx="0.5"></rect><rect x="431.65" y="36.00" width="8.04" height="0.00" rx="0.5"></rect><rect x="441.69" y="36.00" width="8.04" height="0.00" rx="0.5"></rect><rect x="451.73" y="24.00" width="8.04" height="12.00" rx="0.5"></rect><rect x="461.77" y="36.00" width="8.04" height="0.00" rx="0.5"></rect><rect x="471.81" y="36.00" width="8.04" height="0.00" rx="0.5"></rect><rect x="481.85" y="36.00" width="8.04" height="0.00" rx="0.5"></rect><rect x="491.88" y="36.00" width="8.04" height="0.00" rx="0.5"></rect><rect x="501.92" y="36.00" width="8.04" height="0.00" rx="0.5"></rect><rect x="511.96" y="36.00" width="8.04" height="0.00" rx="0.5"></rect></svg><span class="github-card-spark-label">8 commits in the last year</span></div><div class="github-card-stats"><span class="github-card-stat github-card-lang"><span class="github-card-lang-dot" style="background:#dea584"></span>Rust</span><span class="github-card-stat" aria-label="3 stars"><svg viewBox="0 0 16 16" width="14" height="14" fill="currentColor" aria-hidden="true"><path d="M8 .25a.75.75 0 0 1 .673.418l1.882 3.815 4.21.612a.75.75 0 0 1 .416 1.279l-3.046 2.97.719 4.192a.751.751 0 0 1-1.088.791L8 12.347l-3.766 1.98a.75.75 0 0 1-1.088-.79l.72-4.194L.818 6.374a.75.75 0 0 1 .416-1.28l4.21-.611L7.327.668A.75.75 0 0 1 8 .25Z"></path></svg>3</span><span class="github-card-stat" aria-label="1 forks"><svg viewBox="0 0 16 16" width="14" height="14" fill="currentColor" aria-hidden="true"><path d="M5 5.372v.878c0 .414.336.75.75.75h4.5a.75.75 0 0 0 .75-.75v-.878a2.25 2.25 0 1 1 1.5 0v.878a2.25 2.25 0 0 1-2.25 2.25h-1.5v2.128a2.251 2.251 0 1 1-1.5 0V8.5h-1.5A2.25 2.25 0 0 1 3.5 6.25v-.878a2.25 2.25 0 1 1 1.5 0ZM5 3.25a.75.75 0 1 0-1.5 0 .75.75 0 0 0 1.5 0Zm6.75.75a.75.75 0 1 0 0-1.5.75.75 0 0 0 0 1.5Zm-3 8.75a.75.75 0 1 0-1.5 0 .75.75 0 0 0 1.5 0Z"></path></svg>1</span><span class="github-card-stat" aria-label="0 open issues"><svg viewBox="0 0 16 16" width="14" height="14" fill="currentColor" aria-hidden="true"><path d="M8 9.5a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3Z"></path><path d="M8 0a8 8 0 1 1 0 16A8 8 0 0 1 8 0ZM1.5 8a6.5 6.5 0 1 0 13 0 6.5 6.5 0 0 0-13 0Z"></path></svg>0</span><span class="github-card-updated" title="Last push: 2026-07-23T07:21:49Z">Updated 1 month ago</span></div></a></div>
+<p>And if you would rather just watch it work, <a href="https://orionpod.com">download OrionPod</a> and run a model locally. Everything the agent does in that app is Orion doing its job.</p>
+<p>I am building this mostly in the open and mostly solo right now, so contributions, sharp issues, new engine examples, and template fixes for model families I have not covered yet are all very welcome.</p>
+<p>💬 If you want to talk it through, there is a Discord. The <a href="https://discord.gg/qnnEwNp7te">nullorder Discord</a> is where I hang around and ramble about OrionPod, Orion, and whatever else is half-built that week. Come kick ideas around, ask questions, or just lurk.</p>
+<p>🐦 And for the lighter, more regular updates, follow <a href="https://x.com/orion_pod">OrionPod on X</a>.</p>
+<p><em>Bring your own model. I will handle the loop.</em></p>
+
+        </div>
+
+        <div class="article-end">
+            <span>✦</span>
+            <span>✦</span>
+            <span>✦</span>
+        </div>
+
+        <div class="post-navigation">
+            <div class="post-nav-item post-nav-previous">
+                    <a href="/world-building-with-wasm/">
+                        <span class="nav-arrow">←</span>
+                        <div class="nav-content">
+                            <p class="nav-label">Previous</p>
+                            <p class="nav-title">World-building with WASM</p>
+                        </div>
+                    </a>
+                
+            </div>
+
+            <div class="post-nav-item post-nav-next">
+                    <a href="/agents-are-jobs-not-services/">
+                        <div class="nav-content">
+                            <p class="nav-label">Next</p>
+                            <p class="nav-title">Agents are jobs, not services</p>
+                        </div>
+                        <span class="nav-arrow">→</span>
+                    </a>
+                
+            </div>
+        </div>
+    </div>
+
+    </main>
+    <footer class="sticky bottom-0 z-50 glass-footer py-4">
+  <div class="container mx-auto max-w-7xl px-8 flex items-center justify-between">
+    <div class="text-base">
+      by <a href="https://anirudha.dev" target="_blank" rel="noopener noreferrer">Ani</a>
+    </div>
+
+    <div class="flex items-center gap-4">
+      <a href="https://github.com/anistark" target="_blank" rel="noopener noreferrer" class="footer-icon" aria-label="GitHub">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="currentColor" viewBox="0 0 24 24">
+          <path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/>
+        </svg>
+      </a>
+      <a href="https://x.com/kranirudha" target="_blank" rel="noopener noreferrer" class="footer-icon" aria-label="X">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="currentColor" viewBox="0 0 24 24">
+          <path d="M14.234 10.162 22.977 0h-2.072l-7.591 8.824L7.251 0H.258l9.168 13.343L.258 24H2.33l8.016-9.318L16.749 24h6.993zm-2.837 3.299-.929-1.329L3.076 1.56h3.182l5.965 8.532.929 1.329 7.754 11.09h-3.182z"/>
+        </svg>
+      </a>
+      <a href="https://fosstodon.org/@ani" target="_blank" rel="noopener noreferrer" class="footer-icon" aria-label="Mastodon">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="currentColor" viewBox="0 0 24 24">
+          <path d="M23.268 5.313c-.35-2.578-2.617-4.61-5.304-5.004C17.51.242 15.792 0 11.813 0h-.03c-3.98 0-4.835.242-5.288.309C3.882.692 1.496 2.518.917 5.127.64 6.412.61 7.837.661 9.143c.074 1.874.088 3.745.26 5.611.118 1.24.325 2.47.62 3.68.55 2.237 2.777 4.098 4.96 4.857 2.336.792 4.849.923 7.256.38.265-.061.527-.132.786-.213.585-.184 1.27-.39 1.774-.753a.057.057 0 0 0 .023-.043v-1.809a.052.052 0 0 0-.02-.041.053.053 0 0 0-.046-.01 20.282 20.282 0 0 1-4.709.545c-2.73 0-3.463-1.284-3.674-1.818a5.593 5.593 0 0 1-.319-1.433.053.053 0 0 1 .066-.054c1.517.363 3.072.546 4.632.546.376 0 .75 0 1.125-.01 1.57-.044 3.224-.124 4.768-.422.038-.008.077-.015.11-.024 2.435-.464 4.753-1.92 4.989-5.604.008-.145.03-1.52.03-1.67.002-.512.167-3.63-.024-5.545zm-3.748 9.195h-2.561V8.29c0-1.309-.55-1.976-1.67-1.976-1.23 0-1.846.79-1.846 2.35v3.403h-2.546V8.663c0-1.56-.617-2.35-1.848-2.35-1.112 0-1.668.668-1.67 1.977v6.218H4.822V8.102c0-1.31.337-2.35 1.011-3.12.696-.77 1.608-1.164 2.74-1.164 1.311 0 2.302.5 2.962 1.498l.638 1.06.638-1.06c.66-.999 1.65-1.498 2.96-1.498 1.13 0 2.043.395 2.74 1.164.675.77 1.012 1.81 1.012 3.12z"/>
+        </svg>
+      </a>
+      <a href="https://linkedin.com/in/kranirudha" target="_blank" rel="noopener noreferrer" class="footer-icon" aria-label="LinkedIn">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="currentColor" viewBox="0 0 24 24">
+          <path d="M4.98 3.5c0 1.381-1.11 2.5-2.48 2.5s-2.48-1.119-2.48-2.5c0-1.38 1.11-2.5 2.48-2.5s2.48 1.12 2.48 2.5zm.02 4.5h-5v16h5v-16zm7.982 0h-4.968v16h4.969v-8.399c0-4.67 6.029-5.052 6.029 0v8.399h4.988v-10.131c0-7.88-8.922-7.593-11.018-3.714v-2.155z"/>
+        </svg>
+      </a>
+      <a href="/feed/feed.xml" class="footer-icon" aria-label="RSS feed">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="currentColor" viewBox="0 0 24 24">
+          <path d="M6.18 15.64a2.18 2.18 0 0 1 2.18 2.18C8.36 19 7.38 20 6.18 20C5 20 4 19 4 17.82a2.18 2.18 0 0 1 2.18-2.18M4 4.44A15.56 15.56 0 0 1 19.56 20h-2.83A12.73 12.73 0 0 0 4 7.27V4.44m0 5.66a9.9 9.9 0 0 1 9.9 9.9h-2.83A7.07 7.07 0 0 0 4 12.93V10.1Z"/>
+        </svg>
+      </a>
+    </div>
+  </div>
+</footer>
+
+    
+    <script src="https://unpkg.com/clipboard@2/dist/clipboard.min.js"></script>
+    <script src="/assets/main.bundle.js"></script>
+    <script type="module">
+      import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs';
+      mermaid.initialize({
+        startOnLoad: true,
+        theme: ['reading', 'beach'].includes(document.documentElement.getAttribute('data-theme')) ? 'default' : 'dark',
+        themeVariables: {
+          fontSize: '14px',
+        }
+      });
+    </script>
+  </body>
+</html>

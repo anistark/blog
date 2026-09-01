@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    
+    
+    
+    
+    
+    
+    
+
+    <meta name="description" content="A walkable browser world needs something to generate it, something to draw it, and something to make it solid. The third one runs on WebAssembly. Here&#39;s why, and what it unlocks.">
+    <meta name="author" content="Kumar Anirudha">
+    <link rel="canonical" href="https://blog.anirudha.dev/world-building-with-wasm/">
+
+    
+    <meta itemprop="name" content="World-building with WASM | AniLog">
+    <meta itemprop="description" content="A walkable browser world needs something to generate it, something to draw it, and something to make it solid. The third one runs on WebAssembly. Here&#39;s why, and what it unlocks.">
+    <meta itemprop="image" content="https://blog.anirudha.dev/images/posts/world-building-with-wasm.png">
+
+    
+    <meta property="og:title" content="World-building with WASM | AniLog">
+    <meta property="og:description" content="A walkable browser world needs something to generate it, something to draw it, and something to make it solid. The third one runs on WebAssembly. Here&#39;s why, and what it unlocks.">
+    <meta property="og:url" content="https://blog.anirudha.dev/world-building-with-wasm/">
+    <meta property="og:site_name" content="AniLog">
+    <meta property="og:locale" content="en_GB">
+    <meta property="og:type" content="article">
+    <meta property="og:image" content="https://blog.anirudha.dev/images/posts/world-building-with-wasm.png">
+    <meta property="og:image:type" content="image/png">
+    <meta property="og:image:width" content="1459">
+    <meta property="og:image:height" content="824">
+    <meta property="og:image:alt" content="World-building with WASM">
+    <meta property="article:author" content="Kumar Anirudha">
+    <meta property="article:published_time" content="2026-06-08T00:00:00Z">
+    <meta property="article:modified_time" content="2026-06-18T00:00:00Z">
+    <meta property="article:tag" content="webassembly">
+    <meta property="article:tag" content="wasm">
+    <meta property="article:tag" content="rapier">
+    <meta property="article:tag" content="threejs">
+    <meta property="article:tag" content="procedural-generation">
+    <meta property="article:tag" content="runek">
+
+    
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="World-building with WASM | AniLog">
+    <meta name="twitter:description" content="A walkable browser world needs something to generate it, something to draw it, and something to make it solid. The third one runs on WebAssembly. Here&#39;s why, and what it unlocks.">
+    <meta name="twitter:site" content="@kranirudha">
+    <meta name="twitter:creator" content="@kranirudha">
+    <meta name="twitter:image" content="https://blog.anirudha.dev/images/posts/world-building-with-wasm.png">
+    <meta name="twitter:image:alt" content="World-building with WASM">
+
+    <link rel="icon" type="image/png" href="/me.png" />
+    <link rel="alternate" type="application/atom+xml" title="AniLog" href="https://blog.anirudha.dev/feed/feed.xml" />
+
+    <title>World-building with WASM | AniLog</title>
+
+    <link rel="stylesheet" href="/assets/main.bundle.css">
+
+    <script>
+      // Set theme before page renders to prevent flash
+      (function() {
+        const theme = localStorage.getItem('theme') || 'night';
+        if (theme !== 'night') {
+          document.documentElement.setAttribute('data-theme', theme);
+        }
+      })();
+    </script>
+
+    
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-YGZHVY9TD7"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-YGZHVY9TD7');
+    </script>
+    
+
+    
+  </head>
+  <body class="flex flex-col min-h-screen">
+    <canvas id="ambience-canvas"></canvas>
+    <header class="sticky top-0 z-50 glass-header">
+  <nav class="container mx-auto max-w-7xl px-8 py-3 flex flex-wrap items-center justify-between">
+    <div class="flex items-center gap-3">
+      <a href="/" class="flex items-center gap-3">
+        <img src="/ani.png" alt="AniLog logo" class="w-10 h-10 object-cover">
+        <h1 class="text-2xl leading-none m-0">AniLog</h1>
+      </a>
+    </div>
+
+    <div class="flex items-center gap-6">
+      <div class="theme-switcher">
+        <button id="theme-switcher-btn" class="theme-switcher-btn" aria-label="Switch theme" aria-expanded="false">
+          <span id="theme-active-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.985 12.486a9 9 0 1 1-9.473-9.472c.405-.022.617.46.402.803a6 6 0 0 0 8.268 8.268c.344-.215.825-.004.803.401"/></svg>
+          </span>
+        </button>
+        <div id="theme-dropdown" class="theme-dropdown">
+          <button class="theme-option" data-theme-value="night">
+            <span class="theme-icon"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.985 12.486a9 9 0 1 1-9.473-9.472c.405-.022.617.46.402.803a6 6 0 0 0 8.268 8.268c.344-.215.825-.004.803.401"/></svg></span>
+            <span>Night</span>
+          </button>
+          <button class="theme-option" data-theme-value="reading">
+            <span class="theme-icon"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 7v14"/><path d="M3 18a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h5a4 4 0 0 1 4 4 4 4 0 0 1 4-4h5a1 1 0 0 1 1 1v13a1 1 0 0 1-1 1h-6a3 3 0 0 0-3 3 3 3 0 0 0-3-3z"/></svg></span>
+            <span>Reading</span>
+          </button>
+          <button class="theme-option" data-theme-value="forest">
+            <span class="theme-icon"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m17 14 3 3.3a1 1 0 0 1-.7 1.7H4.7a1 1 0 0 1-.7-1.7L7 14h-.3a1 1 0 0 1-.7-1.7L9 9h-.2A1 1 0 0 1 8 7.3L12 3l4 4.3a1 1 0 0 1-.8 1.7H15l3 3.3a1 1 0 0 1-.7 1.7H17Z"/><path d="M12 22v-3"/></svg></span>
+            <span>Forest</span>
+          </button>
+          <button class="theme-option" data-theme-value="beach">
+            <span class="theme-icon"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 8c0-2.76-2.46-5-5.5-5S2 5.24 2 8h2l1-1 1 1h4"/><path d="M13 7.14A5.82 5.82 0 0 1 16.5 6c3.04 0 5.5 2.24 5.5 5h-3l-1-1-1 1h-3"/><path d="M5.89 9.71c-2.15 2.15-2.3 5.47-.35 7.43l4.24-4.25.7-.7.71-.71 2.12-2.12c-1.95-1.96-5.27-1.8-7.42.35"/><path d="M11 15.5c.5 2.5-.17 4.5-1 6.5h4c2-5.5-.5-12-1-14"/></svg></span>
+            <span>Beach</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </nav>
+</header>
+
+    <main class="container mx-auto max-w-6xl p-8 grow">
+      
+    <p></p>
+
+    
+        <div class="post-cover-image" style="background-image: url('/images/posts/world-building-with-wasm.png');"></div>
+    
+
+    <div>
+        <div class="post-title-row">
+            <h2>World-building with WASM</h2>
+            
+        </div>
+
+        
+            <div class="mt-4 mb-2">
+                <a class="tag webassembly" href="/tag/webassembly">webassembly</a><a class="tag wasm" href="/tag/wasm">wasm</a><a class="tag rapier" href="/tag/rapier">rapier</a><a class="tag threejs" href="/tag/threejs">threejs</a><a class="tag procedural-generation" href="/tag/procedural-generation">procedural-generation</a><a class="tag runek" href="/tag/runek">runek</a>
+            </div>
+        
+
+        
+            
+              <p class="text-sm italic">Last updated on
+                    <span datetime="Mon Jun 08 2026 00:00:00 GMT+0000 (Coordinated Universal Time)">June 18, 2026</span>. Published on
+                    <span datetime="Mon Jun 08 2026 00:00:00 GMT+0000 (Coordinated Universal Time)">June 8, 2026</span>.
+                    <span class="reading-time"> · 7 min read</span></p>
+            
+        
+
+        <div class="content post">
+            <blockquote>
+<p><em>How a Rust physics engine compiled to WebAssembly quietly carries an entire walkable world, and how Runek builds those worlds on top of it.</em></p>
+</blockquote>
+<p>I’ve been building <a href="https://github.com/nullorder/runek">Runek</a>, a source
+registry of procedural 3D components for React Three Fiber. Think “shadcn
+for 3D worlds”: you pull a component’s source into your project
+(<code>npx @runek/cli add bookshelf</code>) while the small runtime it imports ships
+as the <a href="https://www.npmjs.com/package/@runek/core"><code>@runek/core</code></a> npm
+package, and each component generates its own geometry from props and a
+seed. No models, no textures, no CDN. Its showcase,
+<a href="https://github.com/nullorder/helicon">Helicon</a>, is a walkable island
+whose entire scene is one JSON file.</p>
+<p>A walkable browser world needs three things: something to <strong>generate</strong> the
+world, something to <strong>draw</strong> it, and something to make it <strong>solid</strong>.
+Generation is plain TypeScript. Drawing is three.js on WebGL. But the third
+one, the part where you collide with a wall instead of ghosting through
+it, where you climb a staircase and jump off a roof, is the part that runs
+on WebAssembly.</p>
+<h2 id="physics-is-the-worst-possible-workload-for-javascript" tabindex="-1">Physics is the worst possible workload for JavaScript <a class="header-anchor" href="#physics-is-the-worst-possible-workload-for-javascript" aria-hidden="true">#</a></h2>
+<p>Rendering gets all the attention, but the GPU does that heavy lifting.
+Physics runs on the CPU, on the main thread budget, every single frame:</p>
+<ol>
+<li><strong>Broad-phase</strong>: which of the N bodies <em>might</em> be touching?</li>
+<li><strong>Narrow-phase</strong>: exact contact points between candidate pairs.</li>
+<li><strong>Constraint solving</strong>: iterate until contacts, joints, and friction
+agree with each other.</li>
+<li><strong>Integration</strong>: advance every body by the timestep.</li>
+</ol>
+<p>At 60fps you have ~16ms per frame for <em>everything</em> (React, the scene
+graph, draw-call submission), so physics realistically gets a few
+milliseconds. And the workload itself is exactly what JavaScript engines
+struggle to make fast <em>consistently</em>:</p>
+<ul>
+<li><strong>It’s allocation-hungry by nature.</strong> Naïve engines create contact
+manifolds, vectors, and solver scratch data every step. In JS that means
+garbage, and garbage means GC pauses. A 10ms collection in the middle of
+a walk cycle is a visible hitch. Physics stutter is uniquely jarring
+because your brain expects motion to be continuous.</li>
+<li><strong>It’s cache-sensitive.</strong> Solvers want bodies packed in flat, contiguous
+arrays (structure-of-arrays), marched through in order. JS objects are
+pointer-chasing machines; even well-optimized JIT code can’t fully
+control memory layout.</li>
+<li><strong>It’s numerically picky.</strong> A JIT can deopt a hot function mid-frame and
+change your performance profile; the same code can run at different
+speeds minute to minute.</li>
+</ul>
+<p><img src="/images/posts/world-building-wasm-frame-budget.svg" alt="Two frame timelines: JavaScript physics with one frame blown past the 16.6ms budget by a GC pause, versus flat WASM frame times">
+<em>The budget is 16.6ms, every frame, forever. One GC pause is a visible stutter.</em></p>
+<p>The browser ecosystem’s history tells the same story. The classic options
+were <a href="https://github.com/kripken/ammo.js">ammo.js</a>, the Bullet engine
+(C++) machine-translated to JS/WASM via Emscripten (powerful, but with an
+API that feels like manually managing C++ from JavaScript), and
+<a href="https://github.com/pmndrs/cannon-es">cannon-es</a>, a hand-written JS engine
+that’s pleasant but simply can’t compete on solver robustness or scale.</p>
+<h2 id="enter-rapier" tabindex="-1">Enter Rapier <a class="header-anchor" href="#enter-rapier" aria-hidden="true">#</a></h2>
+<p><a href="https://rapier.rs">Rapier</a> (by Dimforge) takes the other path: it’s a
+physics engine written in <strong>Rust</strong>, designed from day one to compile to
+WebAssembly rather than being a port of something else. That buys exactly
+the things JS couldn’t guarantee:</p>
+<ul>
+<li><strong>No GC, no pauses.</strong> Rapier manages its own memory inside WASM linear
+memory. Frame times are flat.</li>
+<li><strong>Layout control.</strong> Rust structs compile to the packed, cache-friendly
+data the solver wants. WASM executes it at near-native speed.</li>
+<li><strong>Reproducibility.</strong> WASM’s float semantics are pinned to IEEE 754: the
+same build of the engine performs the same arithmetic everywhere. Rapier
+even offers an enhanced cross-platform determinism mode. For a project
+whose core promise is <em>same seed, same world</em>, this matters more than
+raw speed: a world should not just look identical on every machine, it
+should <strong>feel</strong> identical.</li>
+</ul>
+<p>The JS↔WASM boundary is the tax you pay, and Rapier’s design minimizes it:
+you don’t call into WASM per object per frame. You describe the world once
+(bodies, colliders, joints), then call <code>world.step()</code>, a single boundary
+crossing, and the entire broad-phase/narrow-phase/solver pipeline runs
+inside WASM. JavaScript only reads back the transforms it needs to render.</p>
+<p>In React land, <a href="https://github.com/pmndrs/react-three-rapier"><code>@react-three/rapier</code></a>
+wraps this declaratively. A physical object is just JSX:</p>
+<code-block lang="tsx"><pre class="language-tsx"><code class="language-tsx"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span><span class="token class-name">RigidBody</span></span> <span class="token attr-name">type</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>fixed<span class="token punctuation">"</span></span> <span class="token attr-name">colliders</span><span class="token script language-javascript"><span class="token script-punctuation punctuation">=</span><span class="token punctuation">{</span><span class="token boolean">false</span><span class="token punctuation">}</span></span> <span class="token attr-name">position</span><span class="token script language-javascript"><span class="token script-punctuation punctuation">=</span><span class="token punctuation">{</span>position<span class="token punctuation">}</span></span> <span class="token attr-name">rotation</span><span class="token script language-javascript"><span class="token script-punctuation punctuation">=</span><span class="token punctuation">{</span>rotation<span class="token punctuation">}</span></span><span class="token punctuation">></span></span><span class="token plain-text"><br>  </span><span class="token punctuation">{</span><span class="token comment">/* one collider for the whole footprint; books stay visual-only */</span><span class="token punctuation">}</span><span class="token plain-text"><br>  </span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span><span class="token class-name">CuboidCollider</span></span> <span class="token attr-name">args</span><span class="token script language-javascript"><span class="token script-punctuation punctuation">=</span><span class="token punctuation">{</span><span class="token punctuation">[</span>w <span class="token operator">/</span> <span class="token number">2</span><span class="token punctuation">,</span> h <span class="token operator">/</span> <span class="token number">2</span><span class="token punctuation">,</span> d <span class="token operator">/</span> <span class="token number">2</span><span class="token punctuation">]</span><span class="token punctuation">}</span></span> <span class="token punctuation">/></span></span><span class="token plain-text"><br>  </span><span class="token punctuation">{</span><span class="token comment">/* …meshes… */</span><span class="token punctuation">}</span><span class="token plain-text"><br></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span><span class="token class-name">RigidBody</span></span><span class="token punctuation">></span></span></code></pre>
+</code-block><p>Even the player is WASM all the way down:
+<a href="https://github.com/pmndrs/ecctrl">ecctrl</a>, the character controller, is
+built on Rapier’s kinematic character controller, so every step, slope,
+and jump in Helicon is resolved by Rust-compiled collision code.</p>
+<figure>
+  <video src="/images/posts/world-building-wasm-walk.mp4" autoplay loop muted playsinline preload="metadata"></video>
+  <figcaption>Walking Helicon. Every step, slope, and contact is resolved by Rapier's kinematic character controller inside WASM, flat at 60fps.</figcaption>
+</figure>
+<h2 id="world-building-on-top%3A-runek" tabindex="-1">World-building on top: Runek <a class="header-anchor" href="#world-building-on-top%3A-runek" aria-hidden="true">#</a></h2>
+<p>With solidity handled, the interesting design space opens up one level
+higher: <em>what is a world made of?</em></p>
+<p>Runek’s answer is a <strong>component contract</strong>. Every component (a bookshelf,
+a lake, a whole house) is a pure, deterministic function of its props:</p>
+<code-block lang="tsx"><pre class="language-tsx"><code class="language-tsx"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span><span class="token class-name">World</span></span><span class="token punctuation">></span></span><span class="token plain-text"><br>  </span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span><span class="token class-name">Terrain</span></span> <span class="token attr-name">size</span><span class="token script language-javascript"><span class="token script-punctuation punctuation">=</span><span class="token punctuation">{</span><span class="token punctuation">[</span><span class="token number">40</span><span class="token punctuation">,</span> <span class="token number">40</span><span class="token punctuation">]</span><span class="token punctuation">}</span></span> <span class="token attr-name">relief</span><span class="token script language-javascript"><span class="token script-punctuation punctuation">=</span><span class="token punctuation">{</span><span class="token number">2</span><span class="token punctuation">}</span></span> <span class="token attr-name">seed</span><span class="token script language-javascript"><span class="token script-punctuation punctuation">=</span><span class="token punctuation">{</span><span class="token number">9</span><span class="token punctuation">}</span></span> <span class="token punctuation">/></span></span><span class="token plain-text"><br>  </span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span><span class="token class-name">Bookshelf</span></span> <span class="token attr-name">position</span><span class="token script language-javascript"><span class="token script-punctuation punctuation">=</span><span class="token punctuation">{</span><span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">}</span></span> <span class="token attr-name">seed</span><span class="token script language-javascript"><span class="token script-punctuation punctuation">=</span><span class="token punctuation">{</span><span class="token number">42</span><span class="token punctuation">}</span></span> <span class="token attr-name">fill</span><span class="token script language-javascript"><span class="token script-punctuation punctuation">=</span><span class="token punctuation">{</span><span class="token number">0.8</span><span class="token punctuation">}</span></span> <span class="token punctuation">/></span></span><span class="token plain-text"><br>  </span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span><span class="token class-name">Player</span></span> <span class="token punctuation">/></span></span><span class="token plain-text"><br></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span><span class="token class-name">World</span></span><span class="token punctuation">></span></span></code></pre>
+</code-block><p>The contract has a few load-bearing rules:</p>
+<ul>
+<li><strong>All randomness flows from <code>seed</code></strong>, through a tiny deterministic RNG.
+<code>seed: 42</code> builds the identical bookshelf on every machine, forever:
+same books, same spines, same lean.</li>
+</ul>
+<p><img src="/images/posts/world-building-wasm-seed-determinism.svg" alt="Four generated bookshelves: three at seed 42 are pixel-identical, one at seed 7 is different">
+<em>seed 42, seed 42, seed 42, seed 7. The seed isn’t a randomizer; it’s an
+address: it names one specific world in the space of possible worlds, and
+the generator can find it again on any machine. (This figure is itself
+generated by the same RNG.)</em></p>
+<ul>
+<li><strong>No assets.</strong> Geometry, materials, and palette come from code. There is
+no <code>.glb</code> to download, no texture CDN, nothing to host but static files.</li>
+<li><strong>Every component owns its colliders</strong>, and collider count is
+proportional to <em>gameplay surface</em>, not visual detail. A bookshelf is one
+WASM-side cuboid, not forty book-shaped bodies; terrain with procedural
+relief registers a trimesh so the collision matches the visuals exactly.
+This rule is what keeps the WASM side fast: the renderer can afford
+thousands of instanced meshes, but the physics world stays lean.</li>
+</ul>
+<p><img src="/images/posts/world-building-wasm-colliders.png" alt="Side-by-side: a rendered bookshelf full of dozens of colorful books, and the same bookshelf with Rapier's debug wireframe showing a single collider box around the whole unit">
+<em>Left: what WebGL draws. Right: what WASM knows about: one cuboid for a
+whole bookshelf.</em></p>
+<p>And because every component is a deterministic function of plain props, a
+whole world collapses into <strong>data</strong>:</p>
+<code-block lang="json"><pre class="language-json"><code class="language-json"><span class="token punctuation">{</span><br>  <span class="token property">"version"</span><span class="token operator">:</span> <span class="token number">1</span><span class="token punctuation">,</span><br>  <span class="token property">"palette"</span><span class="token operator">:</span> <span class="token punctuation">{</span> <span class="token property">"wood"</span><span class="token operator">:</span> <span class="token string">"#75563c"</span><span class="token punctuation">,</span> <span class="token property">"foliage"</span><span class="token operator">:</span> <span class="token string">"#557d3c"</span> <span class="token punctuation">}</span><span class="token punctuation">,</span><br>  <span class="token property">"fog"</span><span class="token operator">:</span> <span class="token punctuation">{</span> <span class="token property">"color"</span><span class="token operator">:</span> <span class="token string">"#dfe9f5"</span><span class="token punctuation">,</span> <span class="token property">"near"</span><span class="token operator">:</span> <span class="token number">35</span><span class="token punctuation">,</span> <span class="token property">"far"</span><span class="token operator">:</span> <span class="token number">110</span> <span class="token punctuation">}</span><span class="token punctuation">,</span><br>  <span class="token property">"nodes"</span><span class="token operator">:</span> <span class="token punctuation">[</span><br>    <span class="token punctuation">{</span> <span class="token property">"type"</span><span class="token operator">:</span> <span class="token string">"Terrain"</span><span class="token punctuation">,</span> <span class="token property">"props"</span><span class="token operator">:</span> <span class="token punctuation">{</span> <span class="token property">"size"</span><span class="token operator">:</span> <span class="token punctuation">[</span><span class="token number">120</span><span class="token punctuation">,</span> <span class="token number">120</span><span class="token punctuation">]</span><span class="token punctuation">,</span> <span class="token property">"relief"</span><span class="token operator">:</span> <span class="token number">3</span><span class="token punctuation">,</span> <span class="token property">"seed"</span><span class="token operator">:</span> <span class="token number">9</span> <span class="token punctuation">}</span> <span class="token punctuation">}</span><span class="token punctuation">,</span><br>    <span class="token punctuation">{</span> <span class="token property">"type"</span><span class="token operator">:</span> <span class="token string">"House"</span><span class="token punctuation">,</span> <span class="token property">"props"</span><span class="token operator">:</span> <span class="token punctuation">{</span> <span class="token property">"position"</span><span class="token operator">:</span> <span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">0.02</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">]</span> <span class="token punctuation">}</span> <span class="token punctuation">}</span><span class="token punctuation">,</span><br>    <span class="token punctuation">{</span> <span class="token property">"type"</span><span class="token operator">:</span> <span class="token string">"Trees"</span><span class="token punctuation">,</span> <span class="token property">"props"</span><span class="token operator">:</span> <span class="token punctuation">{</span> <span class="token property">"position"</span><span class="token operator">:</span> <span class="token punctuation">[</span><span class="token number">-12</span><span class="token punctuation">,</span> <span class="token number">0.02</span><span class="token punctuation">,</span> <span class="token number">-7</span><span class="token punctuation">]</span><span class="token punctuation">,</span> <span class="token property">"seed"</span><span class="token operator">:</span> <span class="token number">4</span> <span class="token punctuation">}</span> <span class="token punctuation">}</span><span class="token punctuation">,</span><br>    <span class="token punctuation">{</span> <span class="token property">"type"</span><span class="token operator">:</span> <span class="token string">"Player"</span><span class="token punctuation">,</span> <span class="token property">"props"</span><span class="token operator">:</span> <span class="token punctuation">{</span> <span class="token property">"position"</span><span class="token operator">:</span> <span class="token punctuation">[</span><span class="token number">-1</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">,</span> <span class="token number">13</span><span class="token punctuation">]</span> <span class="token punctuation">}</span> <span class="token punctuation">}</span><br>  <span class="token punctuation">]</span><br><span class="token punctuation">}</span></code></pre>
+</code-block><p><img src="/images/posts/world-building-wasm-world-data.svg" alt="The world JSON on the left, the rendered world on the right, with lines connecting each node to its object in the scene">
+<em>The JSON isn’t a description of the world. It is the world.</em></p>
+<p>That JSON <em>is</em> Helicon. Diff it, fork it, review it in a pull request. The
+runtime editor reads and writes the same structure: walk the world, flip
+to edit mode, move a house, download the world, commit.</p>
+<p>There’s no autosave and no backend, by design. Edits live in memory as you
+drag; the source of truth stays the JSON file in the repo. When a change is
+worth keeping, you download the world and commit it. The world grows by pull
+request, not by a database write.</p>
+<figure>
+  <video src="/images/posts/world-building-wasm-editing.mp4" autoplay loop muted playsinline preload="metadata"></video>
+  <figcaption>Every gizmo drag is a JSON diff: select an object, move it, tweak its props, and the world updates live. (Editing session, sped up 3×.)</figcaption>
+</figure>
+<p>Here’s where the two halves of this post meet. The pipeline is:</p>
+<blockquote>
+<p><strong>JSON → deterministic JS generation → meshes for WebGL + colliders for
+WASM</strong></p>
+</blockquote>
+<p>JavaScript decides <em>what exists</em>. WebGL decides <em>what you see</em>. WASM
+decides <em>what is real</em>: what stops you, holds you up, pushes back. Each
+layer does the thing it’s actually good at, and the seams are invisible
+when you’re walking around inside the result.</p>
+<h2 id="the-quiet-takeaway" tabindex="-1">The quiet takeaway <a class="header-anchor" href="#the-quiet-takeaway" aria-hidden="true">#</a></h2>
+<p>Nobody playing with Helicon knows WASM is involved, which is exactly the
+point. WebAssembly’s win here isn’t a flashy port of a game engine; it’s
+that a hard, latency-sensitive, allocation-hostile workload runs flat at
+60fps inside a static website, leaving JavaScript free to do the expressive
+part: describing worlds as data and growing them one component at a time.</p>
+<p>A walkable, editable, physically solid world: built from seeds, shipped as
+static files, with a Rust solver humming inside it. Worlds, one rune at a
+time.</p>
+<hr>
+<h4 id="links%3A" tabindex="-1">Links: <a class="header-anchor" href="#links%3A" aria-hidden="true">#</a></h4>
+<ul>
+<li>Runek Repo: <a href="https://github.com/nullorder/runek">github.com/nullorder/runek</a></li>
+<li>Runek Docs: <a href="https://runek.nullorder.org">runek.nullorder.org</a></li>
+<li>Helicon: <a href="https://github.com/nullorder/helicon">github.com/nullorder/helicon</a></li>
+</ul>
+
+        </div>
+
+        <div class="article-end">
+            <span>✦</span>
+            <span>✦</span>
+            <span>✦</span>
+        </div>
+
+        <div class="post-navigation">
+            <div class="post-nav-item post-nav-previous">
+                    <a href="/controlled-chaos/">
+                        <span class="nav-arrow">←</span>
+                        <div class="nav-content">
+                            <p class="nav-label">Previous</p>
+                            <p class="nav-title">Controlled Chaos</p>
+                        </div>
+                    </a>
+                
+            </div>
+
+            <div class="post-nav-item post-nav-next">
+                    <a href="/orion-core/">
+                        <div class="nav-content">
+                            <p class="nav-label">Next</p>
+                            <p class="nav-title">Lessons from building an agent harness for local models</p>
+                        </div>
+                        <span class="nav-arrow">→</span>
+                    </a>
+                
+            </div>
+        </div>
+    </div>
+
+    </main>
+    <footer class="sticky bottom-0 z-50 glass-footer py-4">
+  <div class="container mx-auto max-w-7xl px-8 flex items-center justify-between">
+    <div class="text-base">
+      by <a href="https://anirudha.dev" target="_blank" rel="noopener noreferrer">Ani</a>
+    </div>
+
+    <div class="flex items-center gap-4">
+      <a href="https://github.com/anistark" target="_blank" rel="noopener noreferrer" class="footer-icon" aria-label="GitHub">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="currentColor" viewBox="0 0 24 24">
+          <path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/>
+        </svg>
+      </a>
+      <a href="https://x.com/kranirudha" target="_blank" rel="noopener noreferrer" class="footer-icon" aria-label="X">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="currentColor" viewBox="0 0 24 24">
+          <path d="M14.234 10.162 22.977 0h-2.072l-7.591 8.824L7.251 0H.258l9.168 13.343L.258 24H2.33l8.016-9.318L16.749 24h6.993zm-2.837 3.299-.929-1.329L3.076 1.56h3.182l5.965 8.532.929 1.329 7.754 11.09h-3.182z"/>
+        </svg>
+      </a>
+      <a href="https://fosstodon.org/@ani" target="_blank" rel="noopener noreferrer" class="footer-icon" aria-label="Mastodon">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="currentColor" viewBox="0 0 24 24">
+          <path d="M23.268 5.313c-.35-2.578-2.617-4.61-5.304-5.004C17.51.242 15.792 0 11.813 0h-.03c-3.98 0-4.835.242-5.288.309C3.882.692 1.496 2.518.917 5.127.64 6.412.61 7.837.661 9.143c.074 1.874.088 3.745.26 5.611.118 1.24.325 2.47.62 3.68.55 2.237 2.777 4.098 4.96 4.857 2.336.792 4.849.923 7.256.38.265-.061.527-.132.786-.213.585-.184 1.27-.39 1.774-.753a.057.057 0 0 0 .023-.043v-1.809a.052.052 0 0 0-.02-.041.053.053 0 0 0-.046-.01 20.282 20.282 0 0 1-4.709.545c-2.73 0-3.463-1.284-3.674-1.818a5.593 5.593 0 0 1-.319-1.433.053.053 0 0 1 .066-.054c1.517.363 3.072.546 4.632.546.376 0 .75 0 1.125-.01 1.57-.044 3.224-.124 4.768-.422.038-.008.077-.015.11-.024 2.435-.464 4.753-1.92 4.989-5.604.008-.145.03-1.52.03-1.67.002-.512.167-3.63-.024-5.545zm-3.748 9.195h-2.561V8.29c0-1.309-.55-1.976-1.67-1.976-1.23 0-1.846.79-1.846 2.35v3.403h-2.546V8.663c0-1.56-.617-2.35-1.848-2.35-1.112 0-1.668.668-1.67 1.977v6.218H4.822V8.102c0-1.31.337-2.35 1.011-3.12.696-.77 1.608-1.164 2.74-1.164 1.311 0 2.302.5 2.962 1.498l.638 1.06.638-1.06c.66-.999 1.65-1.498 2.96-1.498 1.13 0 2.043.395 2.74 1.164.675.77 1.012 1.81 1.012 3.12z"/>
+        </svg>
+      </a>
+      <a href="https://linkedin.com/in/kranirudha" target="_blank" rel="noopener noreferrer" class="footer-icon" aria-label="LinkedIn">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="currentColor" viewBox="0 0 24 24">
+          <path d="M4.98 3.5c0 1.381-1.11 2.5-2.48 2.5s-2.48-1.119-2.48-2.5c0-1.38 1.11-2.5 2.48-2.5s2.48 1.12 2.48 2.5zm.02 4.5h-5v16h5v-16zm7.982 0h-4.968v16h4.969v-8.399c0-4.67 6.029-5.052 6.029 0v8.399h4.988v-10.131c0-7.88-8.922-7.593-11.018-3.714v-2.155z"/>
+        </svg>
+      </a>
+      <a href="/feed/feed.xml" class="footer-icon" aria-label="RSS feed">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="currentColor" viewBox="0 0 24 24">
+          <path d="M6.18 15.64a2.18 2.18 0 0 1 2.18 2.18C8.36 19 7.38 20 6.18 20C5 20 4 19 4 17.82a2.18 2.18 0 0 1 2.18-2.18M4 4.44A15.56 15.56 0 0 1 19.56 20h-2.83A12.73 12.73 0 0 0 4 7.27V4.44m0 5.66a9.9 9.9 0 0 1 9.9 9.9h-2.83A7.07 7.07 0 0 0 4 12.93V10.1Z"/>
+        </svg>
+      </a>
+    </div>
+  </div>
+</footer>
+
+    
+    <script src="https://unpkg.com/clipboard@2/dist/clipboard.min.js"></script>
+    <script src="/assets/main.bundle.js"></script>
+    <script type="module">
+      import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs';
+      mermaid.initialize({
+        startOnLoad: true,
+        theme: ['reading', 'beach'].includes(document.documentElement.getAttribute('data-theme')) ? 'default' : 'dark',
+        themeVariables: {
+          fontSize: '14px',
+        }
+      });
+    </script>
+  </body>
+</html>
