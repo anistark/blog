@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 430" font-family="system-ui, sans-serif">
+  <title>SkillsBench change in pass rate versus no skill: curated best setup +25.7, curated average +16.6, curated weakest +4.1, self-generated Claude Code + Opus 4.7 -8.1, self-generated Codex + GPT-5.5 -11.3 percentage points</title>
+  <style>
+    .bar { transform-box: fill-box; animation: grow 1s cubic-bezier(.2,.7,.2,1) both; }
+    .pos { transform-origin: left center; }
+    .neg { transform-origin: right center; }
+    @keyframes grow { from { transform: scaleX(0); } to { transform: scaleX(1); } }
+    @media (prefers-reduced-motion: reduce) { .bar { animation: none; } }
+  </style>
+  <rect width="900" height="430" fill="#1a1a19"/>
+  <text x="60" y="52" font-size="20" font-weight="700" fill="#ffffff">Skills cut both ways</text>
+  <text x="60" y="78" font-size="14" fill="#c3c2b7">change in pass rate versus the same setup with no skill, percentage points</text>
+
+  <line x1="510" y1="108" x2="510" y2="340" stroke="#2c2c2a"/>
+  <text x="510" y="360" font-size="12" fill="#6b6b66" text-anchor="middle">-10</text>
+  <line x1="600" y1="108" x2="600" y2="340" stroke="#5a5a57"/>
+  <text x="600" y="360" font-size="12" fill="#6b6b66" text-anchor="middle">0</text>
+  <line x1="690" y1="108" x2="690" y2="340" stroke="#2c2c2a"/>
+  <text x="690" y="360" font-size="12" fill="#6b6b66" text-anchor="middle">+10</text>
+  <line x1="780" y1="108" x2="780" y2="340" stroke="#2c2c2a"/>
+  <text x="780" y="360" font-size="12" fill="#6b6b66" text-anchor="middle">+20</text>
+  <text x="430" y="136" font-size="14" fill="#c3c2b7" text-anchor="end">Curated, best setup (OpenHands + GLM 5.1)</text>
+  <path class="bar pos" style="animation-delay:0.00s" d="M 600 118 h 227.3 a 4 4 0 0 1 4 4 v 18 a 4 4 0 0 1 -4 4 h -227.3 z" fill="#3987e5"/>
+  <text x="841.3" y="136" font-size="14" font-weight="600" fill="#ffffff">+25.7</text>
+  <text x="430" y="180" font-size="14" fill="#c3c2b7" text-anchor="end">Curated, average of 18 setups</text>
+  <path class="bar pos" style="animation-delay:0.08s" d="M 600 162 h 145.4 a 4 4 0 0 1 4 4 v 18 a 4 4 0 0 1 -4 4 h -145.4 z" fill="#3987e5"/>
+  <text x="759.4" y="180" font-size="14" font-weight="600" fill="#ffffff">+16.6</text>
+  <text x="430" y="224" font-size="14" fill="#c3c2b7" text-anchor="end">Curated, weakest setup</text>
+  <path class="bar pos" style="animation-delay:0.16s" d="M 600 206 h 32.9 a 4 4 0 0 1 4 4 v 18 a 4 4 0 0 1 -4 4 h -32.9 z" fill="#3987e5"/>
+  <text x="646.9" y="224" font-size="14" font-weight="600" fill="#ffffff">+4.1</text>
+  <text x="430" y="268" font-size="14" fill="#c3c2b7" text-anchor="end">Self-generated (Claude Code + Opus 4.7)</text>
+  <path class="bar neg" style="animation-delay:0.24s" d="M 600 250 h -68.9 a 4 4 0 0 0 -4 4 v 18 a 4 4 0 0 0 4 4 h 68.9 z" fill="#e66767"/>
+  <text x="517.1" y="268" font-size="14" font-weight="600" fill="#ffffff" text-anchor="end">-8.1</text>
+  <text x="430" y="312" font-size="14" fill="#c3c2b7" text-anchor="end">Self-generated (Codex + GPT-5.5)</text>
+  <path class="bar neg" style="animation-delay:0.32s" d="M 600 294 h -97.7 a 4 4 0 0 0 -4 4 v 18 a 4 4 0 0 0 4 4 h 97.7 z" fill="#e66767"/>
+  <text x="488.3" y="312" font-size="14" font-weight="600" fill="#ffffff" text-anchor="end">-11.3</text>
+  <text x="60" y="392" font-size="13" fill="#c3c2b7">Even curated skills made 13 of the 87 tasks worse.</text>
+  <text x="60" y="414" font-size="12" fill="#6b6b66">SkillsBench v4 (Li et al., 2026): 87 tasks, 8 domains, 18 model-harness setups, deterministic verifiers.</text>
+</svg>

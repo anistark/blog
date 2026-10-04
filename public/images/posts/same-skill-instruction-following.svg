@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 470" font-family="system-ui, sans-serif">
+  <title>Instruction-following score with a skill loaded: Opus 4.8 88.0, Opus 4.7 87.7, GLM 5.1 85.0, Kimi K2.6 60.1, Nemotron Super 120B 46.8, Nemotron Nano 30B 25.2</title>
+  <style>
+    .bar { transform-box: fill-box; transform-origin: left center; animation: grow 1s cubic-bezier(.2,.7,.2,1) both; }
+    @keyframes grow { from { transform: scaleX(0); } to { transform: scaleX(1); } }
+    @media (prefers-reduced-motion: reduce) { .bar { animation: none; } }
+  </style>
+  <rect width="900" height="470" fill="#1a1a19"/>
+  <text x="60" y="52" font-size="20" font-weight="700" fill="#ffffff">How closely each model follows the same skill</text>
+  <text x="60" y="78" font-size="14" fill="#c3c2b7">instruction-following score with the skill loaded, 0 to 100</text>
+
+  <line x1="310" y1="112" x2="310" y2="388" stroke="#2c2c2a"/>
+  <text x="310" y="408" font-size="12" fill="#6b6b66" text-anchor="middle">0</text>
+  <line x1="435" y1="112" x2="435" y2="388" stroke="#2c2c2a"/>
+  <text x="435" y="408" font-size="12" fill="#6b6b66" text-anchor="middle">25</text>
+  <line x1="560" y1="112" x2="560" y2="388" stroke="#2c2c2a"/>
+  <text x="560" y="408" font-size="12" fill="#6b6b66" text-anchor="middle">50</text>
+  <line x1="685" y1="112" x2="685" y2="388" stroke="#2c2c2a"/>
+  <text x="685" y="408" font-size="12" fill="#6b6b66" text-anchor="middle">75</text>
+  <line x1="810" y1="112" x2="810" y2="388" stroke="#2c2c2a"/>
+  <text x="810" y="408" font-size="12" fill="#6b6b66" text-anchor="middle">100</text>
+  <text x="290" y="142" font-size="14" fill="#c3c2b7" text-anchor="end">Opus 4.8</text>
+  <path class="bar" style="animation-delay:0.00s" d="M 310 124 h 436.0 a 4 4 0 0 1 4 4 v 18 a 4 4 0 0 1 -4 4 h -436.0 z" fill="#3987e5"/>
+  <text x="760.0" y="142" font-size="14" font-weight="600" fill="#ffffff">88.0</text>
+  <text x="290" y="186" font-size="14" fill="#c3c2b7" text-anchor="end">Opus 4.7</text>
+  <path class="bar" style="animation-delay:0.08s" d="M 310 168 h 434.5 a 4 4 0 0 1 4 4 v 18 a 4 4 0 0 1 -4 4 h -434.5 z" fill="#3987e5"/>
+  <text x="758.5" y="186" font-size="14" font-weight="600" fill="#ffffff">87.7</text>
+  <text x="290" y="230" font-size="14" fill="#c3c2b7" text-anchor="end">GLM 5.1</text>
+  <path class="bar" style="animation-delay:0.16s" d="M 310 212 h 421.0 a 4 4 0 0 1 4 4 v 18 a 4 4 0 0 1 -4 4 h -421.0 z" fill="#3987e5"/>
+  <text x="745.0" y="230" font-size="14" font-weight="600" fill="#ffffff">85.0</text>
+  <text x="290" y="274" font-size="14" fill="#c3c2b7" text-anchor="end">Kimi K2.6</text>
+  <path class="bar" style="animation-delay:0.24s" d="M 310 256 h 296.5 a 4 4 0 0 1 4 4 v 18 a 4 4 0 0 1 -4 4 h -296.5 z" fill="#3987e5"/>
+  <text x="620.5" y="274" font-size="14" font-weight="600" fill="#ffffff">60.1</text>
+  <text x="290" y="318" font-size="14" fill="#c3c2b7" text-anchor="end">Nemotron Super 120B</text>
+  <path class="bar" style="animation-delay:0.32s" d="M 310 300 h 230.0 a 4 4 0 0 1 4 4 v 18 a 4 4 0 0 1 -4 4 h -230.0 z" fill="#3987e5"/>
+  <text x="554.0" y="318" font-size="14" font-weight="600" fill="#ffffff">46.8</text>
+  <text x="290" y="362" font-size="14" fill="#c3c2b7" text-anchor="end">Nemotron Nano 30B</text>
+  <path class="bar" style="animation-delay:0.40s" d="M 310 344 h 122.0 a 4 4 0 0 1 4 4 v 18 a 4 4 0 0 1 -4 4 h -122.0 z" fill="#3987e5"/>
+  <text x="446.0" y="362" font-size="14" font-weight="600" fill="#ffffff">25.2</text>
+  <text x="60" y="446" font-size="12" fill="#6b6b66">Six of the 19 agent-model configurations evaluated, the ones quoted in the paper text. Shaposhnikov et al., 2026.</text>
+</svg>
