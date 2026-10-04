@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
 
     {# Block set captures already-escaped output, so these are piped through safe to avoid escaping twice. #}
-    {% set pageTitle %}{% if metaTitle %}{{ metaTitle }}{{ ' | '}}{% endif %}{% if title %}{{ title }}{{ ' | '}}{% endif %}{% if site.name %}{{ site.name }}{% endif %}{% endset %}
+    {% set pageTitle %}{% if metaTitle %}{{ metaTitle | titleCase }}{{ ' | '}}{% endif %}{% if title %}{{ title | titleCase }}{{ ' | '}}{% endif %}{% if site.name %}{{ site.name }}{% endif %}{% endset %}
     {% set pageDescription %}{% if excerpt %}{{ excerpt }}{% else %}{{ site.description }}{% endif %}{% endset %}
     {% set pageUrl %}{{ page.url | url | absoluteUrl(site.url) }}{% endset %}
     {% set isArticle = tags and 'post' in tags %}
@@ -36,7 +36,7 @@
     <meta property="og:image:type" content="{{ card.type }}">
     <meta property="og:image:width" content="{{ card.width }}">
     <meta property="og:image:height" content="{{ card.height }}">
-    <meta property="og:image:alt" content="{% if title %}{{ title }}{% else %}{{ site.name }}{% endif %}">
+    <meta property="og:image:alt" content="{% if title %}{{ title | titleCase }}{% else %}{{ site.name }}{% endif %}">
     {%- endif %}
     {%- if isArticle %}
     <meta property="article:author" content="{{ site.author.name }}">
@@ -57,13 +57,13 @@
     <meta name="twitter:creator" content="{{ site.author.handle }}">
     {%- if card %}
     <meta name="twitter:image" content="{{ card.url }}">
-    <meta name="twitter:image:alt" content="{% if title %}{{ title }}{% else %}{{ site.name }}{% endif %}">
+    <meta name="twitter:image:alt" content="{% if title %}{{ title | titleCase }}{% else %}{{ site.name }}{% endif %}">
     {%- endif %}
 
     <link rel="icon" type="image/png" href="{{ site.baseUrl }}me.png" />
     <link rel="alternate" type="application/atom+xml" title="{{ site.name }}" href="{{ site.url }}{{ site.feed.path }}" />
 
-    <title>{% if metaTitle %}{{ metaTitle }}{% else %}{{ title }}{% endif %}{% if metaTitle or title %} | {% endif %}{{ site.name }}</title>
+    <title>{% if metaTitle %}{{ metaTitle | titleCase }}{% else %}{{ title | titleCase }}{% endif %}{% if metaTitle or title %} | {% endif %}{{ site.name }}</title>
 
     <link rel="stylesheet" href="{{ site.baseUrl }}assets/main.bundle.css">
     {% include "featured-tag-colors.njk" %}

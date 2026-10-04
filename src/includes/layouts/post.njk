@@ -15,7 +15,7 @@ permalink: "{% if path %}{{ path | slug }}{% else %}{{ page.fileSlug }}{% endif 
 
     <div>
         <div class="post-title-row">
-            <h2>{{ title }}</h2>
+            <h2>{{ title | titleCase }}</h2>
             {% if draft %}
                 <div class="draft-badge">
                     <span>⚠️ DRAFT</span>
@@ -66,7 +66,7 @@ permalink: "{% if path %}{{ path | slug }}{% else %}{{ page.fileSlug }}{% endif 
                         <span class="nav-arrow">←</span>
                         <div class="nav-content">
                             <p class="nav-label">Previous</p>
-                            <p class="nav-title">{{ previousPost.data.title }}</p>
+                            <p class="nav-title">{{ previousPost.data.title | titleCase }}</p>
                         </div>
                     </a>
                 {% endif %}
@@ -77,7 +77,7 @@ permalink: "{% if path %}{{ path | slug }}{% else %}{{ page.fileSlug }}{% endif 
                     <a href="{{ nextPost.url | url }}">
                         <div class="nav-content">
                             <p class="nav-label">Next</p>
-                            <p class="nav-title">{{ nextPost.data.title }}</p>
+                            <p class="nav-title">{{ nextPost.data.title | titleCase }}</p>
                         </div>
                         <span class="nav-arrow">→</span>
                     </a>

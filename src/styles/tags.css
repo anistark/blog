@@ -127,6 +127,12 @@
 /* Subtle tag colors - transparent bg with tinted border & text.
    Featured tag colors live in globals/featuredTags.json, see includes/featured-tag-colors.njk. */
 
+.tag.web3 {
+  background: rgba(139, 92, 246, 0.08);
+  border-color: rgba(139, 92, 246, 0.35);
+  color: #c4b5fd;
+}
+
 .tag.llm {
   background: rgba(129, 140, 248, 0.08);
   border-color: rgba(129, 140, 248, 0.35);
@@ -140,6 +146,13 @@
 }
 
 /* Light themes - darker tag text on faint tinted background */
+
+[data-theme='reading'] .tag.web3,
+[data-theme='beach'] .tag.web3 {
+  background: rgba(124, 58, 237, 0.08);
+  border-color: rgba(124, 58, 237, 0.4);
+  color: #6d28d9;
+}
 
 [data-theme='reading'] .tag.llm,
 [data-theme='beach'] .tag.llm {

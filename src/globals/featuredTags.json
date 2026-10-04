@@ -15,9 +15,9 @@
     "light": { "accent": "#c2410c", "text": "#9a3412" }
   },
   {
-    "name": "web3",
-    "dark": { "accent": "#8b5cf6", "text": "#c4b5fd" },
-    "light": { "accent": "#7c3aed", "text": "#6d28d9" }
+    "name": "research",
+    "dark": { "accent": "#06b6d4", "text": "#67e8f9" },
+    "light": { "accent": "#0891b2", "text": "#0e7490" }
   },
   {
     "name": "cyberspace",
