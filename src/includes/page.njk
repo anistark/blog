@@ -66,6 +66,7 @@
     <title>{% if metaTitle %}{{ metaTitle }}{% else %}{{ title }}{% endif %}{% if metaTitle or title %} | {% endif %}{{ site.name }}</title>
 
     <link rel="stylesheet" href="{{ site.baseUrl }}assets/main.bundle.css">
+    {% include "featured-tag-colors.njk" %}
 
     <script>
       // Set theme before page renders to prevent flash

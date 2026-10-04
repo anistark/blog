@@ -1,0 +1,32 @@
+[
+  {
+    "name": "ai",
+    "dark": { "accent": "#10b981", "text": "#6ee7b7" },
+    "light": { "accent": "#059669", "text": "#047857" }
+  },
+  {
+    "name": "wasm",
+    "dark": { "accent": "#3b82f6", "text": "#93c5fd" },
+    "light": { "accent": "#2563eb", "text": "#1d4ed8" }
+  },
+  {
+    "name": "thought",
+    "dark": { "accent": "#fb923c", "text": "#fdba74" },
+    "light": { "accent": "#c2410c", "text": "#9a3412" }
+  },
+  {
+    "name": "web3",
+    "dark": { "accent": "#8b5cf6", "text": "#c4b5fd" },
+    "light": { "accent": "#7c3aed", "text": "#6d28d9" }
+  },
+  {
+    "name": "cyberspace",
+    "dark": { "accent": "#ef4444", "text": "#fca5a5" },
+    "light": { "accent": "#dc2626", "text": "#b91c1c" }
+  },
+  {
+    "name": "build",
+    "dark": { "accent": "#ec4899", "text": "#f9a8d4" },
+    "light": { "accent": "#db2777", "text": "#be185d" }
+  }
+]

@@ -1,0 +1,5 @@
+<div class="featured-tags my-10">
+    {%- for tag in featuredTags %}
+    <a class="tag {{ tag.name }}" href="{{ site.baseUrl }}tag/{{ tag.name }}">{{ tag.name }}</a>
+    {%- endfor %}
+</div>

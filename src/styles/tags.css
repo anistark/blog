@@ -28,8 +28,8 @@
   overflow: hidden;
 }
 
-/* Tag cloud: wraps onto as many rows as needed instead of a fixed column count */
-.tag-cloud {
+/* Featured tags: wraps onto as many rows as needed instead of a fixed column count */
+.featured-tags {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
@@ -37,7 +37,7 @@
   gap: 0.75rem;
 }
 
-.tag-cloud .tag {
+.featured-tags .tag {
   @apply mr-0 mb-0;
 }
 
@@ -46,7 +46,7 @@
     @apply px-3 py-1.5;
   }
 
-  .tag-cloud {
+  .featured-tags {
     gap: 0.5rem;
   }
 }
@@ -124,43 +124,8 @@
   animation: tag-hover-light 500ms both;
 }
 
-
-/* Subtle tag colors - transparent bg with tinted border & text */
-.tag.web3 {
-  background: rgba(139, 92, 246, 0.08);
-  border-color: rgba(139, 92, 246, 0.35);
-  color: #c4b5fd;
-}
-
-.tag.wasm {
-  background: rgba(59, 130, 246, 0.08);
-  border-color: rgba(59, 130, 246, 0.35);
-  color: #93c5fd;
-}
-
-.tag.ai {
-  background: rgba(16, 185, 129, 0.08);
-  border-color: rgba(16, 185, 129, 0.35);
-  color: #6ee7b7;
-}
-
-.tag.thought {
-  background: rgba(251, 146, 60, 0.08);
-  border-color: rgba(251, 146, 60, 0.35);
-  color: #fdba74;
-}
-
-.tag.cyberspace {
-  background: rgba(239, 68, 68, 0.08);
-  border-color: rgba(239, 68, 68, 0.35);
-  color: #fca5a5;
-}
-
-.tag.build {
-  background: rgba(236, 72, 153, 0.08);
-  border-color: rgba(236, 72, 153, 0.35);
-  color: #f9a8d4;
-}
+/* Subtle tag colors - transparent bg with tinted border & text.
+   Featured tag colors live in globals/featuredTags.json, see includes/featured-tag-colors.njk. */
 
 .tag.llm {
   background: rgba(129, 140, 248, 0.08);
@@ -175,47 +140,6 @@
 }
 
 /* Light themes - darker tag text on faint tinted background */
-[data-theme='reading'] .tag.web3,
-[data-theme='beach'] .tag.web3 {
-  background: rgba(124, 58, 237, 0.08);
-  border-color: rgba(124, 58, 237, 0.4);
-  color: #6d28d9;
-}
-
-[data-theme='reading'] .tag.wasm,
-[data-theme='beach'] .tag.wasm {
-  background: rgba(37, 99, 235, 0.08);
-  border-color: rgba(37, 99, 235, 0.4);
-  color: #1d4ed8;
-}
-
-[data-theme='reading'] .tag.ai,
-[data-theme='beach'] .tag.ai {
-  background: rgba(5, 150, 105, 0.08);
-  border-color: rgba(5, 150, 105, 0.4);
-  color: #047857;
-}
-
-[data-theme='reading'] .tag.thought,
-[data-theme='beach'] .tag.thought {
-  background: rgba(194, 65, 12, 0.08);
-  border-color: rgba(194, 65, 12, 0.4);
-  color: #9a3412;
-}
-
-[data-theme='reading'] .tag.cyberspace,
-[data-theme='beach'] .tag.cyberspace {
-  background: rgba(220, 38, 38, 0.08);
-  border-color: rgba(220, 38, 38, 0.4);
-  color: #b91c1c;
-}
-
-[data-theme='reading'] .tag.build,
-[data-theme='beach'] .tag.build {
-  background: rgba(219, 39, 119, 0.08);
-  border-color: rgba(219, 39, 119, 0.4);
-  color: #be185d;
-}
 
 [data-theme='reading'] .tag.llm,
 [data-theme='beach'] .tag.llm {
