@@ -10,15 +10,19 @@ draft: true
 tags:
   - post
   - ai
+  - research
   - llm
   - agents
   - agentic-ai
   - agent-skills
   - sutras
   - evals
-  - research
   - claude-code
 ---
+
+A few months ago, I wrote a few skills which was working flawlessly, until last couple of weeks when I realised they're not quite what I wrote earlier. It might be cause perhaps my taste has changed or perhaps I want to enhance it now that models are more capable and Opus 5.5 consumes less tokens than Fable 5.1 for similar output. So, I set out to check if other skills are also behaving similar.
+
+It's actually crazy that the same skill don't work as good anymore. Ignores instructions, does things by itself, and so on... Tell me if you've faced similar situation before:
 
 You write a skill. You test it on whatever model you happen to be using that week. It loads when it should, it does the thing, you're happy. You publish it.
 
@@ -255,8 +259,6 @@ compatibility:
 ```
 
 That ships with the skill. `sutras info` shows it as "Tested on", the registry index picks it up, and `sutras validate` warns you the moment you edit `SKILL.md` and those results go stale. Because a compatibility claim about a file you've since changed is just a nice-looking lie.
-
-## What I don't know yet
 
 All the numbers in this post come from the papers referenced below, each cited where it appears. None of them are from my own runs. `sutras bench` has only been through dry runs so far, and live cross-model results on real skills are next.
 
