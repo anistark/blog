@@ -268,6 +268,9 @@ If you'd like to help figure it out, whether that's ideas, issues, or PRs, come 
 
 {% githubCard "anistark/sutras" %}
 
+Of course eventually, the models will get so smart that even half uttered nonsense gets parsed into a proper result. Until that time... 👋
+
+
 ## References
 
 1. Sclar, Choi, Tsvetkov, Suhr. _Quantifying Language Models' Sensitivity to Spurious Features in Prompt Design or: How I learned to start worrying about prompt formatting._ ICLR 2024. [arXiv:2310.11324](https://arxiv.org/abs/2310.11324) · [FormatSpread code](https://github.com/msclar/formatspread)
