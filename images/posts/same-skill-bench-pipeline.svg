@@ -1,0 +1,105 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 600" font-family="system-ui, sans-serif">
+  <title>How sutras bench works: discover models, estimate cost, approval gate, a round-robin run matrix of models by cases by runs, grading of trigger, assertions and rubric, then reports, recorded compatibility and the registry index</title>
+  <style>
+    .cell { animation: fill 5.6s ease-in-out infinite both; }
+    @keyframes fill {
+      0% { fill-opacity: .12; }
+      6% { fill-opacity: 1; }
+      82% { fill-opacity: 1; }
+      100% { fill-opacity: .12; }
+    }
+    @media (prefers-reduced-motion: reduce) { .cell { animation: none; } }
+  </style>
+  <rect width="1000" height="600" fill="#1a1a19"/>
+  <text x="60" y="52" font-size="20" font-weight="700" fill="#ffffff">What sutras bench does</text>
+  <text x="60" y="78" font-size="14" fill="#c3c2b7">nothing above the dashed line costs money</text>
+
+  <!-- stage row -->
+  <rect x="60" y="104" width="200" height="66" rx="10" fill="#242423" stroke="#3a3a38"/>
+  <text x="84" y="132" font-size="15" font-weight="600" fill="#ffffff">discover models</text>
+  <text x="84" y="154" font-size="12" fill="#c3c2b7">Models API, else aliases</text>
+
+  <rect x="320" y="104" width="200" height="66" rx="10" fill="#242423" stroke="#3a3a38"/>
+  <text x="344" y="132" font-size="15" font-weight="600" fill="#ffffff">estimate cost</text>
+  <text x="344" y="154" font-size="12" fill="#c3c2b7">history · pilot · heuristic</text>
+
+  <rect x="580" y="104" width="200" height="66" rx="10" fill="#1b2b25" stroke="#199e70" stroke-width="1.5"/>
+  <text x="604" y="132" font-size="15" font-weight="600" fill="#ffffff">approve  [y/N]</text>
+  <text x="604" y="154" font-size="12" fill="#c3c2b7">or --yes with --max-cost</text>
+
+  <g stroke="#3987e5" stroke-width="2" fill="#3987e5">
+    <path d="M 262 137 L 310 137" fill="none"/><path d="M 318 137 l -9 -5 v 10 z" stroke="none"/>
+    <path d="M 522 137 L 570 137" fill="none"/><path d="M 578 137 l -9 -5 v 10 z" stroke="none"/>
+  </g>
+
+  <line x1="60" y1="190" x2="940" y2="190" stroke="#5a5a57" stroke-dasharray="6 6"/>
+  <text x="940" y="184" font-size="12" fill="#6b6b66" text-anchor="end">spending starts here</text>
+
+  <path d="M 680 172 L 680 208 L 300 208 L 300 226" stroke="#199e70" stroke-width="2" fill="none"/>
+  <path d="M 300 234 l -5 -9 h 10 z" fill="#199e70"/>
+
+  <!-- run matrix -->
+  <rect x="60" y="236" width="480" height="224" rx="12" fill="#1e1e1d" stroke="#3a3a38"/>
+  <text x="84" y="266" font-size="15" font-weight="600" fill="#ffffff">run matrix</text>
+  <text x="516" y="266" font-size="12" fill="#c3c2b7" text-anchor="end">models × cases × runs, each in a fresh sandbox</text>
+
+  <text x="235" y="296" font-size="10" fill="#6b6b66" text-anchor="middle">case 1 · run 1</text>
+  <text x="315" y="296" font-size="10" fill="#6b6b66" text-anchor="middle">case 2 · run 1</text>
+  <text x="395" y="296" font-size="10" fill="#6b6b66" text-anchor="middle">case 1 · run 2</text>
+  <text x="475" y="296" font-size="10" fill="#6b6b66" text-anchor="middle">case 2 · run 2</text>
+  <text x="84" y="328" font-size="13" fill="#c3c2b7">opus</text>
+  <rect class="cell" style="animation-delay:0.00s" x="200" y="306" width="70" height="34" rx="6" fill="#3987e5"/>
+  <rect class="cell" style="animation-delay:1.05s" x="280" y="306" width="70" height="34" rx="6" fill="#3987e5"/>
+  <rect class="cell" style="animation-delay:2.10s" x="360" y="306" width="70" height="34" rx="6" fill="#3987e5"/>
+  <rect class="cell" style="animation-delay:3.15s" x="440" y="306" width="70" height="34" rx="6" fill="#3987e5"/>
+  <text x="84" y="372" font-size="13" fill="#c3c2b7">sonnet</text>
+  <rect class="cell" style="animation-delay:0.35s" x="200" y="350" width="70" height="34" rx="6" fill="#3987e5"/>
+  <rect class="cell" style="animation-delay:1.40s" x="280" y="350" width="70" height="34" rx="6" fill="#3987e5"/>
+  <rect class="cell" style="animation-delay:2.45s" x="360" y="350" width="70" height="34" rx="6" fill="#3987e5"/>
+  <rect class="cell" style="animation-delay:3.50s" x="440" y="350" width="70" height="34" rx="6" fill="#3987e5"/>
+  <text x="84" y="416" font-size="13" fill="#c3c2b7">haiku</text>
+  <rect class="cell" style="animation-delay:0.70s" x="200" y="394" width="70" height="34" rx="6" fill="#3987e5"/>
+  <rect class="cell" style="animation-delay:1.75s" x="280" y="394" width="70" height="34" rx="6" fill="#3987e5"/>
+  <rect class="cell" style="animation-delay:2.80s" x="360" y="394" width="70" height="34" rx="6" fill="#3987e5"/>
+  <rect class="cell" style="animation-delay:3.85s" x="440" y="394" width="70" height="34" rx="6" fill="#3987e5"/>
+  <text x="84" y="446" font-size="12" fill="#6b6b66">round-robin: a cap stop leaves every model equal coverage</text>
+
+  <g stroke="#3987e5" stroke-width="2" fill="#3987e5">
+    <path d="M 542 348 L 570 348" fill="none"/><path d="M 578 348 l -9 -5 v 10 z" stroke="none"/>
+  </g>
+
+  <!-- grading -->
+  <rect x="580" y="236" width="360" height="224" rx="12" fill="#1e1e1d" stroke="#3a3a38"/>
+  <text x="604" y="266" font-size="15" font-weight="600" fill="#ffffff">grade every run</text>
+  <g font-size="13">
+    <circle cx="616" cy="304" r="12" fill="#223349" stroke="#3987e5"/><text x="616" y="309" fill="#ffffff" text-anchor="middle" font-weight="600">1</text>
+    <text x="640" y="301" fill="#ffffff" font-weight="600">trigger</text>
+    <text x="640" y="319" fill="#c3c2b7" font-size="12">loaded exactly when it should have</text>
+
+    <circle cx="616" cy="356" r="12" fill="#223349" stroke="#3987e5"/><text x="616" y="361" fill="#ffffff" text-anchor="middle" font-weight="600">2</text>
+    <text x="640" y="353" fill="#ffffff" font-weight="600">assertions</text>
+    <text x="640" y="371" fill="#c3c2b7" font-size="12">files, commands, output, tools called</text>
+
+    <circle cx="616" cy="408" r="12" fill="#223349" stroke="#3987e5"/><text x="616" y="413" fill="#ffffff" text-anchor="middle" font-weight="600">3</text>
+    <text x="640" y="405" fill="#ffffff" font-weight="600">rubric judge</text>
+    <text x="640" y="423" fill="#c3c2b7" font-size="12">fixed model, only if 1 and 2 passed</text>
+  </g>
+
+  <!-- outputs -->
+  <g stroke="#3a3a38" stroke-width="2" fill="none">
+    <path d="M 760 462 L 760 482"/>
+    <path d="M 195 482 L 805 482"/>
+    <path d="M 195 482 L 195 500"/>
+    <path d="M 500 482 L 500 500"/>
+    <path d="M 805 482 L 805 500"/>
+  </g>
+  <rect x="60" y="500" width="270" height="62" rx="10" fill="#242423" stroke="#3a3a38"/>
+  <text x="84" y="527" font-size="15" font-weight="600" fill="#ffffff">report + exit code</text>
+  <text x="84" y="548" font-size="12" fill="#c3c2b7">.sutras/bench/*.json · --report md</text>
+  <rect x="365" y="500" width="270" height="62" rx="10" fill="#242423" stroke="#3a3a38"/>
+  <text x="389" y="527" font-size="15" font-weight="600" fill="#ffffff">--record</text>
+  <text x="389" y="548" font-size="12" fill="#c3c2b7">compatibility summary in sutras.yaml</text>
+  <rect x="670" y="500" width="270" height="62" rx="10" fill="#242423" stroke="#3a3a38"/>
+  <text x="694" y="527" font-size="15" font-weight="600" fill="#ffffff">registry index</text>
+  <text x="694" y="548" font-size="12" fill="#c3c2b7">"Tested on" in sutras info</text>
+</svg>

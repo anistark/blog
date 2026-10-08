@@ -1,0 +1,582 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    
+    
+    
+    
+    
+    
+    
+
+    <meta name="description" content="A skill that works beautifully on Opus can quietly fall apart on Haiku, and the reverse happens too. What two 2026 skill studies and the earlier prompt-sensitivity papers say about why, with numbers, and how to find out where your own skill holds up.">
+    <meta name="author" content="Kumar Anirudha">
+    <link rel="canonical" href="https://blog.anirudha.dev/same-skill-different-model/">
+
+    
+    <meta itemprop="name" content="Same Skill, Different Model | AniLog">
+    <meta itemprop="description" content="A skill that works beautifully on Opus can quietly fall apart on Haiku, and the reverse happens too. What two 2026 skill studies and the earlier prompt-sensitivity papers say about why, with numbers, and how to find out where your own skill holds up.">
+    <meta itemprop="image" content="https://blog.anirudha.dev/images/posts/same-skill-different-model-cover-og.png">
+
+    
+    <meta property="og:title" content="Same Skill, Different Model | AniLog">
+    <meta property="og:description" content="A skill that works beautifully on Opus can quietly fall apart on Haiku, and the reverse happens too. What two 2026 skill studies and the earlier prompt-sensitivity papers say about why, with numbers, and how to find out where your own skill holds up.">
+    <meta property="og:url" content="https://blog.anirudha.dev/same-skill-different-model/">
+    <meta property="og:site_name" content="AniLog">
+    <meta property="og:locale" content="en_GB">
+    <meta property="og:type" content="article">
+    <meta property="og:image" content="https://blog.anirudha.dev/images/posts/same-skill-different-model-cover-og.png">
+    <meta property="og:image:type" content="image/png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:image:alt" content="Same Skill, Different Model">
+    <meta property="article:author" content="Kumar Anirudha">
+    <meta property="article:published_time" content="2026-10-10T00:00:00Z">
+    <meta property="article:modified_time" content="2026-10-10T00:00:00Z">
+    <meta property="article:tag" content="ai">
+    <meta property="article:tag" content="research">
+    <meta property="article:tag" content="llm">
+    <meta property="article:tag" content="agents">
+    <meta property="article:tag" content="agentic-ai">
+    <meta property="article:tag" content="agent-skills">
+    <meta property="article:tag" content="sutras">
+    <meta property="article:tag" content="evals">
+    <meta property="article:tag" content="claude-code">
+
+    
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Same Skill, Different Model | AniLog">
+    <meta name="twitter:description" content="A skill that works beautifully on Opus can quietly fall apart on Haiku, and the reverse happens too. What two 2026 skill studies and the earlier prompt-sensitivity papers say about why, with numbers, and how to find out where your own skill holds up.">
+    <meta name="twitter:site" content="@kranirudha">
+    <meta name="twitter:creator" content="@kranirudha">
+    <meta name="twitter:image" content="https://blog.anirudha.dev/images/posts/same-skill-different-model-cover-og.png">
+    <meta name="twitter:image:alt" content="Same Skill, Different Model">
+
+    <link rel="icon" type="image/png" href="/me.png" />
+    <link rel="alternate" type="application/atom+xml" title="AniLog" href="https://blog.anirudha.dev/feed/feed.xml" />
+
+    <title>Same Skill, Different Model | AniLog</title>
+
+    <link rel="stylesheet" href="/assets/main.bundle.css">
+    
+<style>
+  .tag.ai {
+    background: color-mix(in srgb, #10b981 8%, transparent);
+    border-color: color-mix(in srgb, #10b981 35%, transparent);
+    color: #6ee7b7;
+  }
+  [data-theme='reading'] .tag.ai,
+  [data-theme='beach'] .tag.ai {
+    background: color-mix(in srgb, #059669 8%, transparent);
+    border-color: color-mix(in srgb, #059669 40%, transparent);
+    color: #047857;
+  }
+  .tag.wasm {
+    background: color-mix(in srgb, #3b82f6 8%, transparent);
+    border-color: color-mix(in srgb, #3b82f6 35%, transparent);
+    color: #93c5fd;
+  }
+  [data-theme='reading'] .tag.wasm,
+  [data-theme='beach'] .tag.wasm {
+    background: color-mix(in srgb, #2563eb 8%, transparent);
+    border-color: color-mix(in srgb, #2563eb 40%, transparent);
+    color: #1d4ed8;
+  }
+  .tag.thought {
+    background: color-mix(in srgb, #fb923c 8%, transparent);
+    border-color: color-mix(in srgb, #fb923c 35%, transparent);
+    color: #fdba74;
+  }
+  [data-theme='reading'] .tag.thought,
+  [data-theme='beach'] .tag.thought {
+    background: color-mix(in srgb, #c2410c 8%, transparent);
+    border-color: color-mix(in srgb, #c2410c 40%, transparent);
+    color: #9a3412;
+  }
+  .tag.research {
+    background: color-mix(in srgb, #06b6d4 8%, transparent);
+    border-color: color-mix(in srgb, #06b6d4 35%, transparent);
+    color: #67e8f9;
+  }
+  [data-theme='reading'] .tag.research,
+  [data-theme='beach'] .tag.research {
+    background: color-mix(in srgb, #0891b2 8%, transparent);
+    border-color: color-mix(in srgb, #0891b2 40%, transparent);
+    color: #0e7490;
+  }
+  .tag.cyberspace {
+    background: color-mix(in srgb, #ef4444 8%, transparent);
+    border-color: color-mix(in srgb, #ef4444 35%, transparent);
+    color: #fca5a5;
+  }
+  [data-theme='reading'] .tag.cyberspace,
+  [data-theme='beach'] .tag.cyberspace {
+    background: color-mix(in srgb, #dc2626 8%, transparent);
+    border-color: color-mix(in srgb, #dc2626 40%, transparent);
+    color: #b91c1c;
+  }
+  .tag.build {
+    background: color-mix(in srgb, #ec4899 8%, transparent);
+    border-color: color-mix(in srgb, #ec4899 35%, transparent);
+    color: #f9a8d4;
+  }
+  [data-theme='reading'] .tag.build,
+  [data-theme='beach'] .tag.build {
+    background: color-mix(in srgb, #db2777 8%, transparent);
+    border-color: color-mix(in srgb, #db2777 40%, transparent);
+    color: #be185d;
+  }
+</style>
+
+
+    <script>
+      // Set theme before page renders to prevent flash
+      (function() {
+        const theme = localStorage.getItem('theme') || 'night';
+        if (theme !== 'night') {
+          document.documentElement.setAttribute('data-theme', theme);
+        }
+      })();
+    </script>
+
+    
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-YGZHVY9TD7"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-YGZHVY9TD7');
+    </script>
+    
+
+    
+  </head>
+  <body class="flex flex-col min-h-screen">
+    <canvas id="ambience-canvas"></canvas>
+    <header class="sticky top-0 z-50 glass-header">
+  <nav class="container mx-auto max-w-7xl px-8 py-3 flex flex-wrap items-center justify-between">
+    <div class="flex items-center gap-3">
+      <a href="/" class="flex items-center gap-3">
+        <img src="/ani.png" alt="AniLog logo" class="w-10 h-10 object-cover">
+        <h1 class="text-2xl leading-none m-0">AniLog</h1>
+      </a>
+    </div>
+
+    <div class="flex items-center gap-6">
+      <div class="theme-switcher">
+        <button id="theme-switcher-btn" class="theme-switcher-btn" aria-label="Switch theme" aria-expanded="false">
+          <span id="theme-active-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.985 12.486a9 9 0 1 1-9.473-9.472c.405-.022.617.46.402.803a6 6 0 0 0 8.268 8.268c.344-.215.825-.004.803.401"/></svg>
+          </span>
+        </button>
+        <div id="theme-dropdown" class="theme-dropdown">
+          <button class="theme-option" data-theme-value="night">
+            <span class="theme-icon"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.985 12.486a9 9 0 1 1-9.473-9.472c.405-.022.617.46.402.803a6 6 0 0 0 8.268 8.268c.344-.215.825-.004.803.401"/></svg></span>
+            <span>Night</span>
+          </button>
+          <button class="theme-option" data-theme-value="reading">
+            <span class="theme-icon"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 7v14"/><path d="M3 18a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h5a4 4 0 0 1 4 4 4 4 0 0 1 4-4h5a1 1 0 0 1 1 1v13a1 1 0 0 1-1 1h-6a3 3 0 0 0-3 3 3 3 0 0 0-3-3z"/></svg></span>
+            <span>Reading</span>
+          </button>
+          <button class="theme-option" data-theme-value="forest">
+            <span class="theme-icon"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m17 14 3 3.3a1 1 0 0 1-.7 1.7H4.7a1 1 0 0 1-.7-1.7L7 14h-.3a1 1 0 0 1-.7-1.7L9 9h-.2A1 1 0 0 1 8 7.3L12 3l4 4.3a1 1 0 0 1-.8 1.7H15l3 3.3a1 1 0 0 1-.7 1.7H17Z"/><path d="M12 22v-3"/></svg></span>
+            <span>Forest</span>
+          </button>
+          <button class="theme-option" data-theme-value="beach">
+            <span class="theme-icon"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 8c0-2.76-2.46-5-5.5-5S2 5.24 2 8h2l1-1 1 1h4"/><path d="M13 7.14A5.82 5.82 0 0 1 16.5 6c3.04 0 5.5 2.24 5.5 5h-3l-1-1-1 1h-3"/><path d="M5.89 9.71c-2.15 2.15-2.3 5.47-.35 7.43l4.24-4.25.7-.7.71-.71 2.12-2.12c-1.95-1.96-5.27-1.8-7.42.35"/><path d="M11 15.5c.5 2.5-.17 4.5-1 6.5h4c2-5.5-.5-12-1-14"/></svg></span>
+            <span>Beach</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </nav>
+</header>
+
+    <main class="container mx-auto max-w-6xl p-8 grow">
+      
+    <p></p>
+
+    
+        <div class="post-cover-image" style="background-image: url('/images/posts/same-skill-different-model-cover.svg');"></div>
+    
+
+    <div>
+        <div class="post-title-row">
+            <h2>Same Skill, Different Model</h2>
+            
+                <div class="draft-badge">
+                    <span>⚠️ DRAFT</span>
+                </div>
+            
+        </div>
+
+        
+            <div class="mt-4 mb-2">
+                <a class="tag ai" href="/tag/ai">ai</a><a class="tag research" href="/tag/research">research</a><a class="tag llm" href="/tag/llm">llm</a><a class="tag agents" href="/tag/agents">agents</a><a class="tag agentic-ai" href="/tag/agentic-ai">agentic-ai</a><a class="tag agent-skills" href="/tag/agent-skills">agent-skills</a><a class="tag sutras" href="/tag/sutras">sutras</a><a class="tag evals" href="/tag/evals">evals</a><a class="tag claude-code" href="/tag/claude-code">claude-code</a>
+            </div>
+        
+
+        
+            
+                <p class="text-sm italic">Published on
+                    <span datetime="Sat Oct 10 2026 00:00:00 GMT+0000 (Coordinated Universal Time)">October 10, 2026</span>.
+                    <span class="reading-time"> · 15 min read</span></p>
+            
+        
+
+        <div class="content post">
+            <p>A few months ago, I wrote a few skills which was working flawlessly, until last couple of weeks when I realised they’re not quite what I wrote earlier. It might be cause perhaps my taste has changed or perhaps I want to enhance it now that models are more capable and Opus 5.5 consumes less tokens than Fable 5.1 for similar output. So, I set out to check if other skills are also behaving similar.</p>
+<p>It’s actually crazy that the same skill don’t work as good anymore. Ignores instructions, does things by itself, and so on… Tell me if you’ve faced similar situation before:</p>
+<p>You write a skill. You test it on whatever model you happen to be using that week. It loads when it should, it does the thing, you’re happy. You publish it.</p>
+<p>Then someone runs it on a different model.</p>
+<p>Maybe it never loads. Maybe it loads for every request, including “what’s 2 + 2”. Maybe it loads, reads your carefully written instructions, and then does its own thing anyway. You will never find out, because nobody opens an issue that says <em>“your skill is 30 points worse on my model.”</em> They just stop using it.</p>
+<p><em>“Works on my model” is the new “works on my machine.”</em></p>
+<p>And it isn’t some rare edge case. A skill is a prompt with a filename, and prompts have always been tuned, whether you meant it or not, to the model they were written against. What’s changed is how many models a single skill now meets. Different vendors, different sizes, different effort settings, and a new generation every few months. The model you wrote it for is rarely the only model it runs on.</p>
+<p>So let’s look at why this happens and what has actually been measured: two 2026 studies that tested agent skills directly, and the prompt-sensitivity work that came before them. Then how you can find out where your own skill holds up instead of guessing.</p>
+<p><img src="/images/posts/same-skill-different-model.svg" alt="One SKILL.md flowing into Opus 5.5, Sonnet 5.5 and Haiku 4.5, with a question mark where each outcome should be"></p>
+<h2 id="two-ways-a-skill-breaks" tabindex="-1">Two ways a skill breaks <a class="header-anchor" href="#two-ways-a-skill-breaks" aria-hidden="true">#</a></h2>
+<p>Before reading a single paper, it helps to be precise about what “doesn’t work on another model” even means. A skill can fail in two completely different places.</p>
+<p><img src="/images/posts/same-skill-failure-modes.svg" alt="A decision tree: a request arrives, the skill is relevant or not, it loads or not, and if it loads it is followed or ignored. Five outcomes, three of them failures"></p>
+<p><strong>Triggering.</strong> The model only sees your skill’s name and description up front. From that alone, it decides whether to load the rest. Load it too rarely and your skill is dead weight. Load it too eagerly and it hijacks requests it has no business touching.</p>
+<p><strong>Execution.</strong> Once loaded, does the model actually follow what you wrote? Or does it skim, nod, and fall back to its own defaults?</p>
+<p>Both of these depend on the model. And this isn’t me speculating. Here’s Anthropic, in their own prompting guide:</p>
+<blockquote>
+<p>If your prompts were designed to reduce undertriggering on tools or skills, these models may now overtrigger. The fix is to dial back any aggressive language. Where you might have said “CRITICAL: You MUST use this tool when…”, you can use more normal prompting like “Use this tool when…”.</p>
+</blockquote>
+<p>Read that again. A skill description that was written to shout its way into triggering on one generation of models can trigger too eagerly on the next generation <strong>from the same company</strong>. Now spread that across vendors, sizes and harnesses.</p>
+<h2 id="what%E2%80%99s-actually-been-measured" tabindex="-1">What’s actually been measured <a class="header-anchor" href="#what%E2%80%99s-actually-been-measured" aria-hidden="true">#</a></h2>
+<p>None of this is new. It’s the oldest problem in prompting, wearing a new jacket. What’s new is that this year, papers started measuring it on skills directly. Two of them are the backbone of this post.</p>
+<p>So there are two kinds of evidence here, and it’s worth keeping them apart:</p>
+<ul>
+<li><strong>Measured on skills directly.</strong> <a href="https://arxiv.org/abs/2606.17819">Shaposhnikov et al.</a> ran 500 real skills across 19 agent-model configurations. <a href="https://arxiv.org/abs/2602.12670">SkillsBench</a> ran 87 tasks with and without curated skills across 18 model-harness setups.</li>
+<li><strong>Measured on prompts and agents in general.</strong> <a href="https://arxiv.org/abs/2310.11324">Sclar et al.</a>, <a href="https://arxiv.org/abs/2104.08786">Lu et al.</a>, <a href="https://aclanthology.org/2024.tacl-1.52/">Mizrahi et al.</a>, <a href="https://arxiv.org/abs/2303.03846">Wei et al.</a>, <a href="https://arxiv.org/abs/2306.09479">McKenzie et al.</a> and <a href="https://arxiv.org/abs/2406.12045">Yao et al.</a> studied prompts, few-shot examples and tool-using agents, not skills.</li>
+</ul>
+<p>The second group carries over for a simple reason: everything a model sees of your skill is prompt text. The description that decides whether it loads, and the instructions it follows once it does. When a finding below comes from that second group, I’ll say so, because that link is my inference, not something those authors tested.</p>
+<p>Across these eight papers, five patterns show up.</p>
+<h3 id="1.-prompts-are-tuned-to-a-model%2C-not-to-a-task" tabindex="-1">1. Prompts are tuned to a model, not to a task <a class="header-anchor" href="#1.-prompts-are-tuned-to-a-model%2C-not-to-a-task" aria-hidden="true">#</a></h3>
+<p><em>Evidence: Sclar et al. 2024, Lu et al. 2022, Mizrahi et al. 2024. Measured on prompts in general.</em></p>
+<p>The cleanest result here is from <a href="https://arxiv.org/abs/2310.11324">Sclar et al.</a> (ICLR 2024). They changed nothing about a prompt’s meaning, only its formatting. Separators, casing, spacing. On LLaMA-2-13B, that alone moved accuracy by <strong>up to 76 points</strong>. Bigger models didn’t fix it. More examples didn’t fix it. Instruction tuning didn’t fix it.</p>
+<p>The line that matters for us is further down the abstract:</p>
+<blockquote>
+<p>We also show that format performance only weakly correlates between models.</p>
+</blockquote>
+<p>So the best formatting for one model tells you very little about the best formatting for another.</p>
+<p><a href="https://arxiv.org/abs/2104.08786">Lu et al.</a> (ACL 2022) found the same thing with the <em>order</em> of few-shot examples, which could swing a model between “near state-of-the-art and random guess performance.” And bluntly: <em>“a given good permutation for one model is not transferable to another.”</em></p>
+<p><a href="https://aclanthology.org/2024.tacl-1.52/">Mizrahi et al.</a> (TACL 2024) scaled it up. 6.5 million instances, 20 models, 39 tasks. Their finding: <em>“different instruction templates lead to very different performance, both absolute and relative.”</em> Relative is the scary word there. Rewording a prompt doesn’t just shift scores, it reshuffles which model looks best.</p>
+<p><em>The wording you polished on Opus is polished for Opus.</em></p>
+<h3 id="2.-models-don%E2%80%99t-follow-instructions-equally" tabindex="-1">2. Models don’t follow instructions equally <a class="header-anchor" href="#2.-models-don%E2%80%99t-follow-instructions-equally" aria-hidden="true">#</a></h3>
+<p><em>Evidence: Shaposhnikov et al. 2026, measured on skills directly. Plus OpenAI’s GPT-4.1 guide, which is vendor documentation rather than a study.</em></p>
+<p>This is the first pattern measured on skills specifically. <a href="https://arxiv.org/abs/2606.17819">Shaposhnikov et al.</a> (June 2026) built tasks out of <strong>500 real-world skills</strong>, generated <strong>1,000 tasks</strong> from their content, and ran them across <strong>19 agent-model configurations</strong>. Then they scored how closely each model actually followed the skill.</p>
+<p><img src="/images/posts/same-skill-instruction-following.svg" alt="Horizontal bar chart of instruction-following scores with a skill loaded: Opus 4.8 88.0, Opus 4.7 87.7, GLM 5.1 85.0, Kimi K2.6 60.1, Nemotron Super 120B 46.8, Nemotron Nano 30B 25.2"></p>
+<table>
+<thead>
+<tr>
+<th>Model</th>
+<th>Instruction-following score (skill loaded)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Opus 4.8</td>
+<td>88.0</td>
+</tr>
+<tr>
+<td>Opus 4.7</td>
+<td>87.7</td>
+</tr>
+<tr>
+<td>GLM 5.1</td>
+<td>85.0</td>
+</tr>
+<tr>
+<td>Kimi K2.6</td>
+<td>60.1</td>
+</tr>
+<tr>
+<td>Nemotron Super 120B</td>
+<td>46.8</td>
+</tr>
+<tr>
+<td>Nemotron Nano 30B</td>
+<td>25.2</td>
+</tr>
+</tbody>
+</table>
+<p>That’s a <strong>62.8 point</strong> gap between the top and the bottom, on the same skills. Access to a relevant skill improved every model they tested, with gains of 5.5 to 22 points depending on the model. But not evenly. Kimi K2.6, a recent and capable model, got only a 7.1 point boost. The paper’s read is that it <em>“fails to capitalize on access to the skill.”</em></p>
+<p>And one detail I didn’t expect: <em>“the relative impact of skills is larger for smaller models than for bigger ones,”</em> visible in Haiku and Sonnet versus Opus.</p>
+<p>There’s also the question of how literally a model reads you. OpenAI’s <a href="https://developers.openai.com/cookbook/examples/gpt4-1_prompting_guide">GPT-4.1 prompting guide</a> says it plainly:</p>
+<blockquote>
+<p>GPT-4.1 is trained to follow instructions more closely and more literally than its predecessors, which tended to more liberally infer intent from user and system prompts.</p>
+</blockquote>
+<p>So the same words land differently. Older and looser models infer what you meant. Newer and more literal ones do what you wrote. A skill that relied on the model “getting it” breaks on a literal reader. A skill that shouts breaks on a responsive one. You can’t write one set of words that is perfectly tuned for both, at least not without checking.</p>
+<h3 id="3.-bigger-models-can-be-talked-out-of-their-habits" tabindex="-1">3. Bigger models can be talked out of their habits <a class="header-anchor" href="#3.-bigger-models-can-be-talked-out-of-their-habits" aria-hidden="true">#</a></h3>
+<p><em>Evidence: Wei et al. 2023, McKenzie et al. 2023. Measured on in-context examples and benchmark tasks, not skills. The connection to skills below is my inference.</em></p>
+<p><a href="https://arxiv.org/abs/2303.03846">Wei et al.</a> showed something that maps closely onto what a lot of skills ask for. They gave models in-context examples that deliberately contradicted what the model already knew, like flipped labels. Small models <em>“ignore flipped labels presented in-context and thus rely primarily on semantic priors from pretraining.”</em> Large models <em>“can override semantic priors.”</em></p>
+<p>A lot of good skills are exactly this. “Don’t do it the usual way, do it our way.” Our commit format. Our review checklist. Our weird deploy process. If your skill asks for non-default behaviour, there may be a model size below which it simply doesn’t stick.</p>
+<p>But bigger isn’t automatically safer either. The <a href="https://arxiv.org/abs/2306.09479">Inverse Scaling</a> work found tasks where larger models get <em>worse</em>, and two of their four causes read like skill failure modes: a <em>“preference to repeat memorized sequences over following in-context instructions,”</em> and tasks with <em>“an easy distractor task which LMs could focus on, rather than the harder real task.”</em></p>
+<h3 id="4.-skills-help-on-average%2C-and-hurt-in-specific-places" tabindex="-1">4. Skills help on average, and hurt in specific places <a class="header-anchor" href="#4.-skills-help-on-average%2C-and-hurt-in-specific-places" aria-hidden="true">#</a></h3>
+<p><em>Evidence: SkillsBench v4 (Li et al., 2026). Measured on skills directly.</em></p>
+<p><a href="https://arxiv.org/abs/2602.12670">SkillsBench</a> is the most direct measurement of skills I’ve found. The current version (v4, June 2026) has <strong>87 tasks across 8 domains</strong>, each with curated skills and deterministic verifiers, run with and without skills across <strong>18 model-harness setups</strong>.</p>
+<p>On average, curated skills lifted the pass rate from <strong>33.9% to 50.5%</strong>. That’s +16.6 points. Great headline. Now look at the spread.</p>
+<p><img src="/images/posts/same-skill-skillsbench.svg" alt="Diverging bar chart of change in pass rate versus no skill: curated best setup +25.7, curated average +16.6, curated weakest setup +4.1, self-generated with Claude Code and Opus 4.7 -8.1, self-generated with Codex and GPT-5.5 -11.3 percentage points"></p>
+<ul>
+<li>The best setup (OpenHands + GLM 5.1) gained <strong>+25.7</strong> points. The weakest gained <strong>+4.1</strong>. Same skills, same tasks.</li>
+<li><strong>13 of the 87 tasks got worse</strong> with curated skills. The reasons they give are painfully familiar: <em>“the Skill prescribes an unnecessarily heavyweight pipeline, displaces a stronger default strategy, or points the agent at a solver it cannot debug.”</em></li>
+<li>Skills that the model wrote for itself landed <strong>below the no-skill baseline</strong> on all three setups they tried. −8.1 points on Claude Code + Opus 4.7, −11.3 on Codex + GPT-5.5.</li>
+<li>Focused skills with at most three modules beat larger, exhaustive bundles.</li>
+<li>And, from the abstract: <em>“smaller models with Skills can match larger models without them.”</em></li>
+</ul>
+<p>The gains also depend heavily on the domain:</p>
+<table>
+<thead>
+<tr>
+<th>Domain</th>
+<th>Gain from curated skills</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Natural Science</td>
+<td>+28.8 pp</td>
+</tr>
+<tr>
+<td>Media &amp; Content Production</td>
+<td>+24.1 pp</td>
+</tr>
+<tr>
+<td>Cybersecurity</td>
+<td>+18.9 pp</td>
+</tr>
+<tr>
+<td>Software Engineering</td>
+<td>+11.6 pp</td>
+</tr>
+<tr>
+<td>Mathematics &amp; OR</td>
+<td>+9.7 pp</td>
+</tr>
+</tbody>
+</table>
+<p><em>“Displaces a stronger default strategy”</em> is the whole post in four words. A skill written to prop up a weaker model can actively get in the way of a stronger one.</p>
+<p>The self-generated result deserves a moment too. Writing a skill with a model and calling it done is not a test. On the setups they measured, it was worse than no skill at all.</p>
+<h3 id="5.-one-run-tells-you-nothing" tabindex="-1">5. One run tells you nothing <a class="header-anchor" href="#5.-one-run-tells-you-nothing" aria-hidden="true">#</a></h3>
+<p><em>Evidence: τ-bench (Yao et al., 2024). Measured on tool-using agents rather than skills, but a skill run is exactly that kind of agent run.</em></p>
+<p>Agents are stochastic. <a href="https://arxiv.org/abs/2406.12045">τ-bench</a> made this concrete with <code>pass^k</code>, the chance an agent succeeds on <em>all</em> of k tries at the same task. Their finding was that strong function-calling agents like gpt-4o <em>“succeed on &lt;50% of the tasks, and are quite inconsistent (pass^8 &lt;25% in retail).”</em></p>
+<p>So if you ran your skill once on Haiku and it worked, you know almost nothing. If it failed once, you also know almost nothing.</p>
+<h3 id="all-of-it-in-one-table" tabindex="-1">All of it in one table <a class="header-anchor" href="#all-of-it-in-one-table" aria-hidden="true">#</a></h3>
+<table>
+<thead>
+<tr>
+<th>Pattern</th>
+<th>Source</th>
+<th>Measured on</th>
+<th>Headline number</th>
+<th>What it means for your skill</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Formatting sensitivity doesn’t transfer</td>
+<td>Sclar et al., 2024</td>
+<td>prompts</td>
+<td>up to 76 points from formatting alone</td>
+<td>Wording tuned on one model is tuned for that model</td>
+</tr>
+<tr>
+<td>Good orderings don’t transfer</td>
+<td>Lu et al., 2022</td>
+<td>few-shot prompts</td>
+<td>near SOTA to random guess</td>
+<td>Examples in your skill are model-specific too</td>
+</tr>
+<tr>
+<td>Rankings reshuffle with wording</td>
+<td>Mizrahi et al., 2024</td>
+<td>prompts</td>
+<td>6.5M instances, 20 models, 39 tasks</td>
+<td>Test more than one phrasing of a request</td>
+</tr>
+<tr>
+<td>Instruction following varies a lot</td>
+<td>Shaposhnikov et al., 2026</td>
+<td><strong>skills</strong></td>
+<td>88.0 vs 25.2 on the same skills</td>
+<td>Some models will read your skill and ignore it</td>
+</tr>
+<tr>
+<td>Big models override priors, small ones don’t</td>
+<td>Wei et al., 2023</td>
+<td>in-context examples</td>
+<td>qualitative, flipped labels</td>
+<td>Non-default workflows may need a minimum model size</td>
+</tr>
+<tr>
+<td>Skills can hurt</td>
+<td>SkillsBench v4, 2026</td>
+<td><strong>skills</strong></td>
+<td>13 of 87 tasks worse, self-written skills −8 to −11 pp</td>
+<td>Always compare against a baseline, never assume</td>
+</tr>
+<tr>
+<td>Agents are inconsistent</td>
+<td>Yao et al., 2024</td>
+<td>tool-using agents</td>
+<td>pass^8 &lt; 25% in retail</td>
+<td>Run every case several times</td>
+</tr>
+</tbody>
+</table>
+<h2 id="find-out-where-your-skill-holds-up" tabindex="-1">Find out where your skill holds up <a class="header-anchor" href="#find-out-where-your-skill-holds-up" aria-hidden="true">#</a></h2>
+<p>Reading all of that is one thing. Knowing how <em>your</em> skill behaves on the models people will actually use is another. That’s what <a href="https://github.com/anistark/sutras"><code>sutras bench</code></a> is for. It runs your skill against several models, the same way, several times, and shows you where it holds up, where it stops loading, and where it loads but gets ignored.</p>
+<p>Its design follows from those five patterns. Run the same skill on several models, more than once, separate triggering from execution, grade it against something real, and compare everything to a baseline.</p>
+<p><img src="/images/posts/same-skill-bench-pipeline.svg" alt="The sutras bench pipeline: discover models, estimate cost, an approval gate, a round-robin run matrix of models by cases by runs, grading on trigger, assertions and a rubric judge, then reports, a recorded compatibility summary and the registry index"></p>
+<p>You describe cases in your skill’s <code>sutras.yaml</code>:</p>
+<code-block lang="yaml"><pre class="language-yaml"><code class="language-yaml"><span class="token key atrule">bench</span><span class="token punctuation">:</span><br>  <span class="token key atrule">baseline</span><span class="token punctuation">:</span> claude<span class="token punctuation">-</span>opus<span class="token punctuation">-</span>5<span class="token punctuation">-</span><span class="token number">5</span><br>  <span class="token key atrule">models</span><span class="token punctuation">:</span> <span class="token punctuation">[</span>claude<span class="token punctuation">-</span>opus<span class="token punctuation">-</span>5<span class="token punctuation">-</span><span class="token number">5</span><span class="token punctuation">,</span> claude<span class="token punctuation">-</span>sonnet<span class="token punctuation">-</span>5<span class="token punctuation">-</span><span class="token number">5</span><span class="token punctuation">,</span> claude<span class="token punctuation">-</span>haiku<span class="token punctuation">-</span>4<span class="token punctuation">-</span><span class="token number">5</span><span class="token punctuation">]</span><br>  <span class="token key atrule">runs</span><span class="token punctuation">:</span> <span class="token number">5</span><br>  <span class="token key atrule">max_regression</span><span class="token punctuation">:</span> <span class="token number">0.10</span>      <span class="token comment"># flag models >10 points below the baseline</span><br>  <span class="token key atrule">max_cost</span><span class="token punctuation">:</span> <span class="token number">10.00</span><br>  <span class="token key atrule">cases</span><span class="token punctuation">:</span><br>    <span class="token punctuation">-</span> <span class="token key atrule">name</span><span class="token punctuation">:</span> greet<span class="token punctuation">-</span>alice<br>      <span class="token key atrule">prompt</span><span class="token punctuation">:</span> <span class="token string">"Please greet Alice"</span><br>      <span class="token key atrule">workspace</span><span class="token punctuation">:</span> bench/hello<br>      <span class="token key atrule">assert</span><span class="token punctuation">:</span><br>        <span class="token punctuation">-</span> <span class="token key atrule">type</span><span class="token punctuation">:</span> file_contains<br>          <span class="token key atrule">path</span><span class="token punctuation">:</span> greeting.txt<br>          <span class="token key atrule">text</span><span class="token punctuation">:</span> <span class="token string">"Hello, Alice!"</span><br>      <span class="token key atrule">rubric</span><span class="token punctuation">:</span><br>        <span class="token punctuation">-</span> Does not modify README.md<br><br>    <span class="token punctuation">-</span> <span class="token key atrule">name</span><span class="token punctuation">:</span> unrelated<br>      <span class="token key atrule">prompt</span><span class="token punctuation">:</span> <span class="token string">"What is 2 + 2?"</span><br>      <span class="token key atrule">should_trigger</span><span class="token punctuation">:</span> <span class="token boolean important">false</span>   <span class="token comment"># the skill must stay quiet here</span></code></pre>
+</code-block><p>Then you ask it what it would do. This is a real <code>--dry-run</code> on that sample skill, nothing edited:</p>
+<terminal-block>sutras bench greeter --dry-run</terminal-block><code-block lang="text"><pre class="language-text"><code class="language-text">Bench: greeter<br><br>Runtime:   Claude Code 2.1.289 (headless) · models from Claude Code aliases<br>Models:<br>  [x] claude-opus-5-5     $4 / $20 per MTok   (baseline)<br>  [x] claude-sonnet-5-5   $2 / $10 per MTok<br>  [x] claude-haiku-4-5    $1 / $5 per MTok<br>  [ ] claude-fable-5-1    $10 / $50 per MTok<br>Plan:      2 case(s) × 2 run(s) × 3 model(s) = 12 runs + 6 judge calls (claude-opus-5-5)<br>Estimate:  $1.19 – $10.37   (heuristic: approximate token counts; turns and output assumed)<br>Cap:       $3.00 — no run starts if it could exceed the cap<br>Commands:  run in the sandbox after each session:<br>             test -f greeting.txt<br>Note:      Install 'sutras[bench]' to list the models your API credentials can use<br>           Costs are API-equivalent estimates; on a Claude subscription, runs draw from your plan's usage limits.</code></pre>
+</code-block><p>Each design decision maps back to a specific source:</p>
+<table>
+<thead>
+<tr>
+<th>Finding</th>
+<th>Source</th>
+<th>So <code>sutras bench</code>…</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Skills overtrigger or undertrigger depending on the model</td>
+<td>Anthropic prompting guide</td>
+<td>reports <strong>trigger rate</strong> separately, and supports <code>should_trigger: false</code> cases to catch overtriggering</td>
+</tr>
+<tr>
+<td>Models follow the same skill very differently once loaded</td>
+<td>Shaposhnikov et al.</td>
+<td>reports <strong>pass rate</strong> separately from trigger rate</td>
+</tr>
+<tr>
+<td>Curated skills made 13 of 87 tasks worse</td>
+<td>SkillsBench</td>
+<td>compares every model against a <strong>baseline</strong> and exits non-zero on a regression past <code>max_regression</code></td>
+</tr>
+<tr>
+<td>pass^8 under 25% for a strong agent</td>
+<td>τ-bench</td>
+<td>runs every case <strong>several times</strong> and reports rates, not verdicts</td>
+</tr>
+<tr>
+<td>Gains ranged from +4.1 to +25.7 pp across model-harness setups</td>
+<td>SkillsBench</td>
+<td>holds the harness fixed (Claude Code) so the model is the only variable you change</td>
+</tr>
+<tr>
+<td>The same text gets very different results from different models</td>
+<td>Sclar et al., Mizrahi et al.</td>
+<td>grades rubrics with one <strong>fixed judge model</strong>, since a grader is a model too</td>
+</tr>
+<tr>
+<td>How literally a model reads instructions varies</td>
+<td>OpenAI GPT-4.1 guide</td>
+<td>accepts <code>model@effort</code>, so you can compare settings like <code>opus@low</code> and <code>opus@high</code>, not just models</td>
+</tr>
+</tbody>
+</table>
+<p>Each run gets a throwaway project with the skill installed at project level, and Claude Code is started with <code>--setting-sources project</code> and no MCP servers. Your personal skills, hooks and settings don’t leak in. Otherwise you’d be measuring your laptop, not the skill.</p>
+<p>Runs are also scheduled round-robin across models. If the budget runs out halfway, every model has the same coverage, so the partial results are still comparable. Small thing. Matters a lot when the alternative is “Opus got 20 runs and Haiku got 2.”</p>
+<h3 id="sharing-what-you-found" tabindex="-1">Sharing what you found <a class="header-anchor" href="#sharing-what-you-found" aria-hidden="true">#</a></h3>
+<p>Results get saved per skill, and <code>--report md</code> writes a summary you can paste into a PR. When you’re happy with a run, <code>sutras bench --record</code> writes a small compatibility block into <code>sutras.yaml</code>:</p>
+<code-block lang="yaml"><pre class="language-yaml"><code class="language-yaml"><span class="token key atrule">compatibility</span><span class="token punctuation">:</span><br>  <span class="token key atrule">runtime</span><span class="token punctuation">:</span> claude<span class="token punctuation">-</span>code<br>  <span class="token key atrule">baseline</span><span class="token punctuation">:</span> claude<span class="token punctuation">-</span>opus<span class="token punctuation">-</span>5<span class="token punctuation">-</span><span class="token number">5</span><br>  <span class="token key atrule">results</span><span class="token punctuation">:</span><br>    <span class="token key atrule">claude-opus-5-5</span><span class="token punctuation">:</span>   <span class="token punctuation">{</span><span class="token key atrule">pass_rate</span><span class="token punctuation">:</span> <span class="token punctuation">...</span><span class="token punctuation">,</span> <span class="token key atrule">trigger_rate</span><span class="token punctuation">:</span> <span class="token punctuation">...</span><span class="token punctuation">,</span> <span class="token key atrule">runs</span><span class="token punctuation">:</span> <span class="token number">10</span><span class="token punctuation">}</span><br>    <span class="token key atrule">claude-haiku-4-5</span><span class="token punctuation">:</span>  <span class="token punctuation">{</span><span class="token key atrule">pass_rate</span><span class="token punctuation">:</span> <span class="token punctuation">...</span><span class="token punctuation">,</span> <span class="token key atrule">trigger_rate</span><span class="token punctuation">:</span> <span class="token punctuation">...</span><span class="token punctuation">,</span> <span class="token key atrule">runs</span><span class="token punctuation">:</span> <span class="token number">10</span><span class="token punctuation">,</span> <span class="token key atrule">regression</span><span class="token punctuation">:</span> <span class="token punctuation">...</span><span class="token punctuation">}</span></code></pre>
+</code-block><p>That ships with the skill. <code>sutras info</code> shows it as “Tested on”, the registry index picks it up, and <code>sutras validate</code> warns you the moment you edit <code>SKILL.md</code> and those results go stale. Because a compatibility claim about a file you’ve since changed is just a nice-looking lie.</p>
+<p>All the numbers in this post come from the papers referenced below, each cited where it appears. None of them are from my own runs. <code>sutras bench</code> has only been through dry runs so far, and live cross-model results on real skills are next.</p>
+<p>Right now, I don’t have a way to make a skill properly portable across models. <code>sutras bench</code> can show you where yours breaks, but it can’t fix it for you. I’m working on that part.</p>
+<p>If you’d like to help figure it out, whether that’s ideas, issues, or PRs, come say hi. 🫶</p>
+<div class="github-card-wrapper"><a href="https://github.com/anistark/sutras" target="_blank" rel="noopener noreferrer" class="github-card"><div class="github-card-top"><div class="github-card-primary"><h3 class="github-card-heading"><span class="github-card-owner">anistark</span><span class="github-card-slash">/</span><span class="github-card-name">sutras</span></h3><div class="github-card-pills"><span class="github-card-pill">MIT</span></div><p class="github-card-desc">Everything Agentic Skills</p><div class="github-card-topics"><span class="github-card-topic">agent</span><span class="github-card-topic">ai</span><span class="github-card-topic">ai-agents</span><span class="github-card-topic">anthropic</span><span class="github-card-topic">llm</span></div></div><div class="github-card-avatar-wrap"><img src="https://avatars.githubusercontent.com/u/5357586?v=4&amp;s=120" alt="anistark" class="github-card-avatar" loading="lazy" width="56" height="56"></div></div><div class="github-card-activity"><svg class="github-card-spark" viewBox="0 0 520 36" preserveAspectRatio="none" aria-hidden="true"><rect x="0.00" y="36.00" width="8.04" height="0.00" rx="0.5"></rect><rect x="10.04" y="36.00" width="8.04" height="0.00" rx="0.5"></rect><rect x="20.08" y="36.00" width="8.04" height="0.00" rx="0.5"></rect><rect x="30.12" y="36.00" width="8.04" height="0.00" rx="0.5"></rect><rect x="40.15" y="36.00" width="8.04" height="0.00" rx="0.5"></rect><rect x="50.19" y="36.00" width="8.04" height="0.00" rx="0.5"></rect><rect x="60.23" y="36.00" width="8.04" height="0.00" rx="0.5"></rect><rect x="70.27" y="36.00" width="8.04" height="0.00" rx="0.5"></rect><rect x="80.31" y="36.00" width="8.04" height="0.00" rx="0.5"></rect><rect x="90.35" y="36.00" width="8.04" height="0.00" rx="0.5"></rect><rect x="100.38" y="0.00" width="8.04" height="36.00" rx="0.5"></rect><rect x="110.42" y="15.43" width="8.04" height="20.57" rx="0.5"></rect><rect x="120.46" y="36.00" width="8.04" height="0.00" rx="0.5"></rect><rect x="130.50" y="30.86" width="8.04" height="5.14" rx="0.5"></rect><rect x="140.54" y="20.57" width="8.04" height="15.43" rx="0.5"></rect><rect x="150.58" y="0.00" width="8.04" height="36.00" rx="0.5"></rect><rect x="160.62" y="25.71" width="8.04" height="10.29" rx="0.5"></rect><rect x="170.65" y="30.86" width="8.04" height="5.14" rx="0.5"></rect><rect x="180.69" y="15.43" width="8.04" height="20.57" rx="0.5"></rect><rect x="190.73" y="30.86" width="8.04" height="5.14" rx="0.5"></rect><rect x="200.77" y="25.71" width="8.04" height="10.29" rx="0.5"></rect><rect x="210.81" y="36.00" width="8.04" height="0.00" rx="0.5"></rect><rect x="220.85" y="36.00" width="8.04" height="0.00" rx="0.5"></rect><rect x="230.88" y="36.00" width="8.04" height="0.00" rx="0.5"></rect><rect x="240.92" y="36.00" width="8.04" height="0.00" rx="0.5"></rect><rect x="250.96" y="30.86" width="8.04" height="5.14" rx="0.5"></rect><rect x="261.00" y="10.29" width="8.04" height="25.71" rx="0.5"></rect><rect x="271.04" y="36.00" width="8.04" height="0.00" rx="0.5"></rect><rect x="281.08" y="36.00" width="8.04" height="0.00" rx="0.5"></rect><rect x="291.12" y="36.00" width="8.04" height="0.00" rx="0.5"></rect><rect x="301.15" y="36.00" width="8.04" height="0.00" rx="0.5"></rect><rect x="311.19" y="36.00" width="8.04" height="0.00" rx="0.5"></rect><rect x="321.23" y="36.00" width="8.04" height="0.00" rx="0.5"></rect><rect x="331.27" y="36.00" width="8.04" height="0.00" rx="0.5"></rect><rect x="341.31" y="36.00" width="8.04" height="0.00" rx="0.5"></rect><rect x="351.35" y="36.00" width="8.04" height="0.00" rx="0.5"></rect><rect x="361.38" y="36.00" width="8.04" height="0.00" rx="0.5"></rect><rect x="371.42" y="36.00" width="8.04" height="0.00" rx="0.5"></rect><rect x="381.46" y="36.00" width="8.04" height="0.00" rx="0.5"></rect><rect x="391.50" y="36.00" width="8.04" height="0.00" rx="0.5"></rect><rect x="401.54" y="36.00" width="8.04" height="0.00" rx="0.5"></rect><rect x="411.58" y="36.00" width="8.04" height="0.00" rx="0.5"></rect><rect x="421.62" y="36.00" width="8.04" height="0.00" rx="0.5"></rect><rect x="431.65" y="36.00" width="8.04" height="0.00" rx="0.5"></rect><rect x="441.69" y="36.00" width="8.04" height="0.00" rx="0.5"></rect><rect x="451.73" y="36.00" width="8.04" height="0.00" rx="0.5"></rect><rect x="461.77" y="36.00" width="8.04" height="0.00" rx="0.5"></rect><rect x="471.81" y="36.00" width="8.04" height="0.00" rx="0.5"></rect><rect x="481.85" y="36.00" width="8.04" height="0.00" rx="0.5"></rect><rect x="491.88" y="36.00" width="8.04" height="0.00" rx="0.5"></rect><rect x="501.92" y="30.86" width="8.04" height="5.14" rx="0.5"></rect><rect x="511.96" y="30.86" width="8.04" height="5.14" rx="0.5"></rect></svg><span class="github-card-spark-label">40 commits in the last year</span></div><div class="github-card-stats"><span class="github-card-stat github-card-lang"><span class="github-card-lang-dot" style="background:#3572A5"></span>Python</span><span class="github-card-stat" aria-label="5 stars"><svg viewBox="0 0 16 16" width="14" height="14" fill="currentColor" aria-hidden="true"><path d="M8 .25a.75.75 0 0 1 .673.418l1.882 3.815 4.21.612a.75.75 0 0 1 .416 1.279l-3.046 2.97.719 4.192a.751.751 0 0 1-1.088.791L8 12.347l-3.766 1.98a.75.75 0 0 1-1.088-.79l.72-4.194L.818 6.374a.75.75 0 0 1 .416-1.28l4.21-.611L7.327.668A.75.75 0 0 1 8 .25Z"></path></svg>5</span><span class="github-card-stat" aria-label="0 forks"><svg viewBox="0 0 16 16" width="14" height="14" fill="currentColor" aria-hidden="true"><path d="M5 5.372v.878c0 .414.336.75.75.75h4.5a.75.75 0 0 0 .75-.75v-.878a2.25 2.25 0 1 1 1.5 0v.878a2.25 2.25 0 0 1-2.25 2.25h-1.5v2.128a2.251 2.251 0 1 1-1.5 0V8.5h-1.5A2.25 2.25 0 0 1 3.5 6.25v-.878a2.25 2.25 0 1 1 1.5 0ZM5 3.25a.75.75 0 1 0-1.5 0 .75.75 0 0 0 1.5 0Zm6.75.75a.75.75 0 1 0 0-1.5.75.75 0 0 0 0 1.5Zm-3 8.75a.75.75 0 1 0-1.5 0 .75.75 0 0 0 1.5 0Z"></path></svg>0</span><span class="github-card-stat" aria-label="0 open issues"><svg viewBox="0 0 16 16" width="14" height="14" fill="currentColor" aria-hidden="true"><path d="M8 9.5a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3Z"></path><path d="M8 0a8 8 0 1 1 0 16A8 8 0 0 1 8 0ZM1.5 8a6.5 6.5 0 1 0 13 0 6.5 6.5 0 0 0-13 0Z"></path></svg>0</span><span class="github-card-updated" title="Last push: 2026-10-04T09:45:59Z">Updated 4 days ago</span></div></a></div>
+<p>Of course eventually, the models will get so smart that even half uttered nonsense gets parsed into a proper result. Until that time… 👋</p>
+<h2 id="references" tabindex="-1">References <a class="header-anchor" href="#references" aria-hidden="true">#</a></h2>
+<ol>
+<li>Sclar, Choi, Tsvetkov, Suhr. <em>Quantifying Language Models’ Sensitivity to Spurious Features in Prompt Design or: How I learned to start worrying about prompt formatting.</em> ICLR 2024. <a href="https://arxiv.org/abs/2310.11324">arXiv:2310.11324</a> · <a href="https://github.com/msclar/formatspread">FormatSpread code</a></li>
+<li>Lu, Bartolo, Moore, Riedel, Stenetorp. <em>Fantastically Ordered Prompts and Where to Find Them: Overcoming Few-Shot Prompt Order Sensitivity.</em> ACL 2022. <a href="https://arxiv.org/abs/2104.08786">arXiv:2104.08786</a></li>
+<li>Mizrahi, Kaplan, Malkin, Dror, Shahaf, Stanovsky. <em>State of What Art? A Call for Multi-Prompt LLM Evaluation.</em> TACL 2024. <a href="https://aclanthology.org/2024.tacl-1.52/">ACL Anthology</a> · <a href="https://arxiv.org/abs/2401.00595">arXiv:2401.00595</a></li>
+<li>Shaposhnikov, Fortuin, Stipcich, Gorinova, Heineike, Willoughby. <em>A Framework for Evaluating Agentic Skills at Scale.</em> 2026. <a href="https://arxiv.org/abs/2606.17819">arXiv:2606.17819</a></li>
+<li>Wei et al. <em>Larger language models do in-context learning differently.</em> 2023. <a href="https://arxiv.org/abs/2303.03846">arXiv:2303.03846</a></li>
+<li>McKenzie et al. <em>Inverse Scaling: When Bigger Isn’t Better.</em> 2023. <a href="https://arxiv.org/abs/2306.09479">arXiv:2306.09479</a></li>
+<li>Li et al. <em>SkillsBench: Benchmarking How Well Agent Skills Work Across Diverse Tasks.</em> v4, 2026. <a href="https://arxiv.org/abs/2602.12670">arXiv:2602.12670</a></li>
+<li>Yao, Shinn, Razavi, Narasimhan. <em>τ-bench: A Benchmark for Tool-Agent-User Interaction in Real-World Domains.</em> 2024. <a href="https://arxiv.org/abs/2406.12045">arXiv:2406.12045</a></li>
+<li>Anthropic. <em>Prompting best practices.</em> <a href="https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/claude-prompting-best-practices">platform.claude.com</a></li>
+<li>OpenAI. <em>GPT-4.1 Prompting Guide.</em> <a href="https://developers.openai.com/cookbook/examples/gpt4-1_prompting_guide">developers.openai.com</a></li>
+</ol>
+
+        </div>
+
+        <div class="article-end">
+            <span>✦</span>
+            <span>✦</span>
+            <span>✦</span>
+        </div>
+
+        <div class="post-navigation">
+            <div class="post-nav-item post-nav-previous">
+            </div>
+
+            <div class="post-nav-item post-nav-next">
+            </div>
+        </div>
+    </div>
+
+    </main>
+    <footer class="sticky bottom-0 z-50 glass-footer py-4">
+  <div class="container mx-auto max-w-7xl px-8 flex items-center justify-between">
+    <div class="text-base">
+      by <a href="https://anirudha.dev" target="_blank" rel="noopener noreferrer">Ani</a>
+    </div>
+
+    <div class="flex items-center gap-4">
+      <a href="https://github.com/anistark" target="_blank" rel="noopener noreferrer" class="footer-icon" aria-label="GitHub">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="currentColor" viewBox="0 0 24 24">
+          <path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/>
+        </svg>
+      </a>
+      <a href="https://x.com/kranirudha" target="_blank" rel="noopener noreferrer" class="footer-icon" aria-label="X">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="currentColor" viewBox="0 0 24 24">
+          <path d="M14.234 10.162 22.977 0h-2.072l-7.591 8.824L7.251 0H.258l9.168 13.343L.258 24H2.33l8.016-9.318L16.749 24h6.993zm-2.837 3.299-.929-1.329L3.076 1.56h3.182l5.965 8.532.929 1.329 7.754 11.09h-3.182z"/>
+        </svg>
+      </a>
+      <a href="https://fosstodon.org/@ani" target="_blank" rel="noopener noreferrer" class="footer-icon" aria-label="Mastodon">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="currentColor" viewBox="0 0 24 24">
+          <path d="M23.268 5.313c-.35-2.578-2.617-4.61-5.304-5.004C17.51.242 15.792 0 11.813 0h-.03c-3.98 0-4.835.242-5.288.309C3.882.692 1.496 2.518.917 5.127.64 6.412.61 7.837.661 9.143c.074 1.874.088 3.745.26 5.611.118 1.24.325 2.47.62 3.68.55 2.237 2.777 4.098 4.96 4.857 2.336.792 4.849.923 7.256.38.265-.061.527-.132.786-.213.585-.184 1.27-.39 1.774-.753a.057.057 0 0 0 .023-.043v-1.809a.052.052 0 0 0-.02-.041.053.053 0 0 0-.046-.01 20.282 20.282 0 0 1-4.709.545c-2.73 0-3.463-1.284-3.674-1.818a5.593 5.593 0 0 1-.319-1.433.053.053 0 0 1 .066-.054c1.517.363 3.072.546 4.632.546.376 0 .75 0 1.125-.01 1.57-.044 3.224-.124 4.768-.422.038-.008.077-.015.11-.024 2.435-.464 4.753-1.92 4.989-5.604.008-.145.03-1.52.03-1.67.002-.512.167-3.63-.024-5.545zm-3.748 9.195h-2.561V8.29c0-1.309-.55-1.976-1.67-1.976-1.23 0-1.846.79-1.846 2.35v3.403h-2.546V8.663c0-1.56-.617-2.35-1.848-2.35-1.112 0-1.668.668-1.67 1.977v6.218H4.822V8.102c0-1.31.337-2.35 1.011-3.12.696-.77 1.608-1.164 2.74-1.164 1.311 0 2.302.5 2.962 1.498l.638 1.06.638-1.06c.66-.999 1.65-1.498 2.96-1.498 1.13 0 2.043.395 2.74 1.164.675.77 1.012 1.81 1.012 3.12z"/>
+        </svg>
+      </a>
+      <a href="https://linkedin.com/in/kranirudha" target="_blank" rel="noopener noreferrer" class="footer-icon" aria-label="LinkedIn">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="currentColor" viewBox="0 0 24 24">
+          <path d="M4.98 3.5c0 1.381-1.11 2.5-2.48 2.5s-2.48-1.119-2.48-2.5c0-1.38 1.11-2.5 2.48-2.5s2.48 1.12 2.48 2.5zm.02 4.5h-5v16h5v-16zm7.982 0h-4.968v16h4.969v-8.399c0-4.67 6.029-5.052 6.029 0v8.399h4.988v-10.131c0-7.88-8.922-7.593-11.018-3.714v-2.155z"/>
+        </svg>
+      </a>
+      <a href="/feed/feed.xml" class="footer-icon" aria-label="RSS feed">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="currentColor" viewBox="0 0 24 24">
+          <path d="M6.18 15.64a2.18 2.18 0 0 1 2.18 2.18C8.36 19 7.38 20 6.18 20C5 20 4 19 4 17.82a2.18 2.18 0 0 1 2.18-2.18M4 4.44A15.56 15.56 0 0 1 19.56 20h-2.83A12.73 12.73 0 0 0 4 7.27V4.44m0 5.66a9.9 9.9 0 0 1 9.9 9.9h-2.83A7.07 7.07 0 0 0 4 12.93V10.1Z"/>
+        </svg>
+      </a>
+    </div>
+  </div>
+</footer>
+
+    
+    <script src="https://unpkg.com/clipboard@2/dist/clipboard.min.js"></script>
+    <script src="/assets/main.bundle.js"></script>
+    <script type="module">
+      import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs';
+      mermaid.initialize({
+        startOnLoad: true,
+        theme: ['reading', 'beach'].includes(document.documentElement.getAttribute('data-theme')) ? 'default' : 'dark',
+        themeVariables: {
+          fontSize: '14px',
+        }
+      });
+    </script>
+  </body>
+</html>

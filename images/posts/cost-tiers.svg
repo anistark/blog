@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 300" font-family="system-ui, sans-serif">
+  <rect width="900" height="300" fill="#1a1a19"/>
+
+  <text x="450" y="76" font-size="38" font-weight="700" fill="#ffffff" text-anchor="middle">cost = tokens × tier</text>
+
+  <!-- local tier card -->
+  <rect x="60" y="116" width="370" height="112" rx="10" fill="#242423" stroke="#3a3a38"/>
+  <rect x="60" y="116" width="6" height="112" rx="3" fill="#199e70"/>
+  <text x="88" y="148" font-size="16" font-weight="600" fill="#ffffff">local tier</text>
+  <text x="88" y="174" font-size="13" fill="#c3c2b7">the mechanical volume: reads, extraction, summaries</text>
+  <text x="88" y="196" font-size="13" fill="#c3c2b7">runs on models you already own</text>
+  <text x="88" y="218" font-size="13" font-weight="600" fill="#ffffff">price: about electricity</text>
+
+  <!-- frontier tier card -->
+  <rect x="470" y="116" width="370" height="112" rx="10" fill="#242423" stroke="#3a3a38"/>
+  <rect x="470" y="116" width="6" height="112" rx="3" fill="#3987e5"/>
+  <text x="498" y="148" font-size="16" font-weight="600" fill="#ffffff">frontier tier</text>
+  <text x="498" y="174" font-size="13" fill="#c3c2b7">the scarce judgment: synthesis, decisions, review</text>
+  <text x="498" y="196" font-size="13" fill="#c3c2b7">rented from a cloud API per call</text>
+  <text x="498" y="218" font-size="13" font-weight="600" fill="#ffffff">price: per token</text>
+
+  <text x="450" y="268" font-size="14" fill="#c3c2b7" text-anchor="middle">residency was a third cost, and it bought nothing for background work</text>
+</svg>
