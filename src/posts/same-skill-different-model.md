@@ -6,7 +6,7 @@ date: 2026-10-10
 updatedDate: 2026-10-10
 featuredImage: /images/posts/same-skill-different-model-cover.svg
 socialImage: /images/posts/same-skill-different-model-cover-og.png
-draft: true
+draft: false
 tags:
   - post
   - ai
