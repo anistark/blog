@@ -1,0 +1,56 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 440" font-family="system-ui, sans-serif">
+  <rect width="900" height="440" fill="#1a1a19"/>
+
+  <text x="40" y="48" font-size="20" font-weight="700" fill="#ffffff">A task's life as a job</text>
+  <text x="40" y="74" font-size="14" fill="#c3c2b7">the agent exists only while its task runs</text>
+
+  <!-- stage 1: role file -->
+  <text x="40" y="128" font-size="14" font-weight="600" fill="#ffffff">1. a role is data</text>
+  <rect x="40" y="142" width="170" height="128" rx="10" fill="#242423" stroke="#3987e5"/>
+  <text x="56" y="170" font-size="14" font-weight="600" fill="#ffffff">role file</text>
+  <text x="56" y="194" font-size="13" fill="#c3c2b7">prompt</text>
+  <text x="56" y="212" font-size="13" fill="#c3c2b7">tool scope</text>
+  <text x="56" y="230" font-size="13" fill="#c3c2b7">model, budget</text>
+  <text x="56" y="256" font-size="12" fill="#3987e5">a few KB on disk</text>
+
+  <path d="M 214 206 L 252 206" stroke="#3987e5" stroke-width="2"/>
+  <path d="M 252 206 l -8 -5 v 10 z" fill="#3987e5"/>
+
+  <!-- stage 2: queue -->
+  <text x="260" y="128" font-size="14" font-weight="600" fill="#ffffff">2. tasks queue up</text>
+  <rect x="260" y="142" width="170" height="30" rx="6" fill="#3987e5"/>
+  <text x="345" y="162" font-size="12" fill="#10100f" text-anchor="middle">task, claimed</text>
+  <rect x="260" y="180" width="170" height="30" rx="6" fill="#223349" stroke="#3987e5"/>
+  <text x="345" y="200" font-size="12" fill="#c3c2b7" text-anchor="middle">task, waiting</text>
+  <rect x="260" y="218" width="170" height="30" rx="6" fill="#223349" stroke="#3987e5"/>
+  <text x="345" y="238" font-size="12" fill="#c3c2b7" text-anchor="middle">task, waiting</text>
+  <rect x="260" y="256" width="170" height="30" rx="6" fill="#223349" stroke="#3987e5"/>
+  <text x="345" y="276" font-size="12" fill="#c3c2b7" text-anchor="middle">task, waiting</text>
+
+  <path d="M 434 206 L 472 206" stroke="#3987e5" stroke-width="2"/>
+  <path d="M 472 206 l -8 -5 v 10 z" fill="#3987e5"/>
+
+  <!-- stage 3: worker -->
+  <text x="480" y="128" font-size="14" font-weight="600" fill="#ffffff">3. one worker</text>
+  <rect x="480" y="142" width="170" height="128" rx="10" fill="#3987e5"/>
+  <text x="565" y="184" font-size="15" font-weight="600" fill="#10100f" text-anchor="middle">worker</text>
+  <text x="565" y="212" font-size="13" fill="#10100f" text-anchor="middle">builds the agent fresh</text>
+  <text x="565" y="232" font-size="13" fill="#10100f" text-anchor="middle">runs it to completion</text>
+
+  <path d="M 654 206 L 692 206" stroke="#199e70" stroke-width="2"/>
+  <path d="M 692 206 l -8 -5 v 10 z" fill="#199e70"/>
+
+  <!-- stage 4: record, then discard -->
+  <text x="700" y="128" font-size="14" font-weight="600" fill="#ffffff">4. record, discard</text>
+  <rect x="700" y="142" width="160" height="76" rx="10" fill="#17332a" stroke="#199e70"/>
+  <text x="780" y="174" font-size="14" font-weight="600" fill="#ffffff" text-anchor="middle">record</text>
+  <text x="780" y="198" font-size="13" fill="#c3c2b7" text-anchor="middle">result, tokens, cost</text>
+
+  <path d="M 780 222 L 780 250" stroke="#6e6c66" stroke-width="1.5" stroke-dasharray="4 4"/>
+  <path d="M 780 250 l -5 -8 h 10 z" fill="#6e6c66"/>
+  <rect x="700" y="254" width="160" height="48" rx="10" fill="none" stroke="#6e6c66" stroke-dasharray="6 5"/>
+  <text x="780" y="283" font-size="13" fill="#c3c2b7" text-anchor="middle">agent discarded</text>
+
+  <text x="40" y="368" font-size="14" fill="#c3c2b7">Kill the worker mid-run and the task is simply picked up again on restart.</text>
+  <text x="40" y="390" font-size="14" fill="#c3c2b7">Nothing is lost, because nothing lived in RAM.</text>
+</svg>

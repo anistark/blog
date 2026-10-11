@@ -1,0 +1,55 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 460" font-family="system-ui, sans-serif">
+  <rect width="1200" height="460" fill="#1a1a19"/>
+
+  <!-- title block -->
+  <text x="600" y="84" font-size="48" font-weight="700" fill="#ffffff" text-anchor="middle">Give your agent a sandbox</text>
+  <text x="600" y="118" font-size="20" fill="#c3c2b7" text-anchor="middle">a model that writes code, and one disposable box to run it in</text>
+
+  <!-- panel 1: the model -->
+  <text x="60" y="152" font-size="13" font-weight="700" letter-spacing="2" fill="#c3c2b7">THE MODEL</text>
+  <rect x="60" y="166" width="300" height="228" rx="12" fill="#242423" stroke="#3a3a38"/>
+  <text x="84" y="204" font-size="19" font-weight="700" fill="#ffffff">Claude</text>
+  <line x1="84" y1="220" x2="336" y2="220" stroke="#3a3a38"/>
+  <text x="84" y="250" font-size="15" fill="#c3c2b7">picks the next tool</text>
+  <text x="84" y="276" font-size="15" fill="#c3c2b7">writes the files</text>
+  <text x="84" y="302" font-size="15" fill="#c3c2b7">reads the stack trace</text>
+  <text x="84" y="328" font-size="15" fill="#c3c2b7">tries again</text>
+  <text x="84" y="372" font-size="14" fill="#3987e5">never touches your machine</text>
+
+  <!-- arrows: model <-> agent -->
+  <text x="405" y="250" font-size="12" fill="#c3c2b7" text-anchor="middle">tool_use</text>
+  <path d="M 440 264 L 370 264" stroke="#3987e5" stroke-width="2"/>
+  <path d="M 370 264 l 9 -5 v 10 z" fill="#3987e5"/>
+  <path d="M 370 308 L 440 308" stroke="#199e70" stroke-width="2"/>
+  <path d="M 440 308 l -9 -5 v 10 z" fill="#199e70"/>
+  <text x="405" y="330" font-size="12" fill="#c3c2b7" text-anchor="middle">tool_result</text>
+
+  <!-- panel 2: the agent -->
+  <text x="450" y="152" font-size="13" font-weight="700" letter-spacing="2" fill="#c3c2b7">THE AGENT</text>
+  <rect x="450" y="166" width="300" height="228" rx="12" fill="#242423" stroke="#3987e5"/>
+  <text x="474" y="204" font-size="19" font-weight="700" fill="#ffffff">sandbox_agent.py</text>
+  <line x1="474" y1="220" x2="726" y2="220" stroke="#3a3a38"/>
+  <text x="474" y="250" font-size="15" fill="#c3c2b7">one file</text>
+  <text x="474" y="276" font-size="15" fill="#c3c2b7">one dispatcher</text>
+  <text x="474" y="302" font-size="15" fill="#c3c2b7">seven tools, none of</text>
+  <text x="474" y="324" font-size="15" fill="#c3c2b7">them hand-written</text>
+  <text x="474" y="372" font-size="14" fill="#3987e5">about 140 lines</text>
+
+  <!-- arrow: agent -> sandbox -->
+  <text x="795" y="272" font-size="12" fill="#c3c2b7" text-anchor="middle">HTTP</text>
+  <path d="M 760 286 L 830 286" stroke="#3987e5" stroke-width="2"/>
+  <path d="M 830 286 l -9 -5 v 10 z" fill="#3987e5"/>
+
+  <!-- panel 3: the sandbox -->
+  <text x="840" y="152" font-size="13" font-weight="700" letter-spacing="2" fill="#d95926">THE SANDBOX</text>
+  <rect x="840" y="166" width="300" height="228" rx="12" fill="#242423" stroke="#d95926"/>
+  <text x="864" y="204" font-size="19" font-weight="700" fill="#ffffff">a WASM session</text>
+  <line x1="864" y1="220" x2="1116" y2="220" stroke="#3a3a38"/>
+  <text x="864" y="250" font-size="15" fill="#c3c2b7">its own filesystem</text>
+  <text x="864" y="276" font-size="15" fill="#c3c2b7">its own environment</text>
+  <text x="864" y="302" font-size="15" fill="#c3c2b7">256 MB, capped</text>
+  <text x="864" y="328" font-size="15" fill="#c3c2b7">no network at all</text>
+  <text x="864" y="372" font-size="14" fill="#d95926">destroyed on exit</text>
+
+  <text x="600" y="432" font-size="17" fill="#c3c2b7" text-anchor="middle">the only way the model can run anything is through that third box</text>
+</svg>
