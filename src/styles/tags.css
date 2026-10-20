@@ -17,7 +17,7 @@
   }
 }
 
-.tag {
+.tag:not(.token) {
   @apply inline-block px-4 py-2 mr-2 mb-2 text-xs font-bold rounded-full lowercase text-white;
   border: 1px solid rgba(255, 255, 255, 0.3);
   backdrop-filter: blur(12px);
@@ -37,12 +37,12 @@
   gap: 0.75rem;
 }
 
-.featured-tags .tag {
+.featured-tags .tag:not(.token) {
   @apply mr-0 mb-0;
 }
 
 @media (max-width: 480px) {
-  .tag {
+  .tag:not(.token) {
     @apply px-3 py-1.5;
   }
 
@@ -51,14 +51,14 @@
   }
 }
 
-.tag::before {
+.tag:not(.token)::before {
   content: '#';
   margin-right: 2px;
   position: relative;
   z-index: 2;
 }
 
-.tag::after {
+.tag:not(.token)::after {
   content: '';
   position: absolute;
   top: -50%;
@@ -96,19 +96,19 @@
   }
 }
 
-.tag:hover {
+.tag:not(.token):hover {
   animation: tag-hover 500ms both;
 }
 
-[data-theme='reading'] .tag,
-[data-theme='beach'] .tag {
+[data-theme='reading'] .tag:not(.token),
+[data-theme='beach'] .tag:not(.token) {
   color: #1b0f0a;
   border: 1px solid rgba(93, 64, 55, 0.3);
   box-shadow: 0 4px 12px rgba(93, 64, 55, 0.15), 0 0 0 1px rgba(255, 255, 255, 0.4) inset;
 }
 
-[data-theme='reading'] .tag::after,
-[data-theme='beach'] .tag::after {
+[data-theme='reading'] .tag:not(.token)::after,
+[data-theme='beach'] .tag:not(.token)::after {
   background: linear-gradient(
     135deg,
     rgba(255, 255, 255, 0) 0%,
@@ -119,8 +119,8 @@
   );
 }
 
-[data-theme='reading'] .tag:hover,
-[data-theme='beach'] .tag:hover {
+[data-theme='reading'] .tag:not(.token):hover,
+[data-theme='beach'] .tag:not(.token):hover {
   animation: tag-hover-light 500ms both;
 }
 
