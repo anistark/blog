@@ -3,6 +3,7 @@ import { handlePrivacyPolicyNoticeDismissal } from './privacy-policy.js';
 import { handleThemeToggle } from './theme.js';
 import { handleInfiniteScroll } from './infinite-scroll.js';
 import { initAmbience } from './ambience.js';
+import { handleRelativeDates } from './relative-date.js';
 import './terminal-block.js';
 import './code-block.js';
 
@@ -12,3 +13,4 @@ handlePrivacyPolicyNoticeDismissal();
 handleThemeToggle();
 handleInfiniteScroll();
 initAmbience();
+handleRelativeDates();
