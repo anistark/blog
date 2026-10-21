@@ -19,9 +19,9 @@
 
 .tag:not(.token) {
   @apply inline-block px-4 py-2 mr-2 mb-2 text-xs font-bold rounded-full lowercase text-white;
+  line-height: 1rem;
   border: 1px solid rgba(255, 255, 255, 0.3);
   backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25), 0 0 0 1px rgba(255, 255, 255, 0.05) inset;
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   position: relative;

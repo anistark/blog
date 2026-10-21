@@ -28,7 +28,7 @@ Every field has a rulebook. Physics has laws. Society has norms. Art has forms. 
 
 > *"Learn the rules like a pro, so you can break them like an artist."*
 >
-> \-- Pablo Picasso
+> – Pablo Picasso
 
 Picasso wasn't being glib. He was pointing at a quiet truth, you can't break what you don't understand. A jazz musician who doesn't know the chord changes isn't improvising, they're just confused. Rules are the grammar. Chaos without grammar is just noise.
 
@@ -40,19 +40,19 @@ And yet, every motivational poster, every coach's pep talk, every anime protagon
 
 > *"There is nothing impossible to him who will try."*
 >
-> \-- <a href="https://en.wikipedia.org/wiki/Alexander_the_Great" target="_blank" rel="noopener noreferrer">Alexander the Great</a>
+> – <a href="https://en.wikipedia.org/wiki/Alexander_the_Great" target="_blank" rel="noopener noreferrer">Alexander the Great</a>
 
 > *"The only way to discover the limits of the possible is to go beyond them into the impossible."*
 >
-> \-- <a href="https://en.wikipedia.org/wiki/Arthur_C._Clarke" target="_blank" rel="noopener noreferrer">Arthur C. Clarke</a>
+> – <a href="https://en.wikipedia.org/wiki/Arthur_C._Clarke" target="_blank" rel="noopener noreferrer">Arthur C. Clarke</a>
 
 > *"Plus Ultra."*
 >
-> \-- All Might, *<a href="https://en.wikipedia.org/wiki/My_Hero_Academia" target="_blank" rel="noopener noreferrer">My Hero Academia</a>*
+> – All Might, *<a href="https://en.wikipedia.org/wiki/My_Hero_Academia" target="_blank" rel="noopener noreferrer">My Hero Academia</a>*
 
 > *"One must still have chaos in oneself to be able to give birth to a dancing star."*
 >
-> \-- Friedrich Nietzsche
+> – Friedrich Nietzsche
 
 There's a strange cultural consensus here. We teach rules, then applaud the ones who transcend them. We build the box, then sell posters of people standing on top of it. *We love a rebel, but only after they've proved they knew the rules they were breaking.*
 
@@ -78,7 +78,7 @@ Which means chaos isn't impossible. It's just *under-described*. It's a system w
 
 > *"In the midst of chaos, there is also opportunity."*
 >
-> \-- Sun Tzu
+> – Sun Tzu
 
 This reframing changes everything. If chaos has shape, then entering it isn't a leap into nothing. It's a matter of how you enter.
 
@@ -90,7 +90,7 @@ The right pace is the one that doesn't exhaust you before the system teaches you
 
 > *"Empty your mind. Be formless, shapeless, like water. Water can flow, or it can crash. Be water, my friend."*
 >
-> \-- Bruce Lee
+> – Bruce Lee
 
 *This is the bit I keep relearning.* Every time I've tried to force a creative project on pure discipline, it's come out sterile. Every time I've let it run on pure intuition, it's fallen apart before the finish. The work that actually moves has always come from the narrow band between. A skeleton rigid enough to stand, a skin loose enough to breathe.
 
@@ -104,7 +104,7 @@ It's the jazz soloist who knows the key. The scientist who knows when to trust t
 
 > *"Out of clutter, find simplicity. From discord, find harmony. In the middle of difficulty lies opportunity."*
 >
-> \-- Albert Einstein
+> – Albert Einstein
 
 Rules alone give you a cathedral that never gets built because the drawings are still being revised. Chaos alone gives you a bonfire that warms nobody because nobody knows where to stand. Controlled chaos is the workshop. Loud, half-finished, occasionally on fire, but *making things*.
 

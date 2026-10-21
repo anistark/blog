@@ -1,11 +1,24 @@
-module.exports = (config) => {
-  const markdownIt = new require('markdown-it')({
+import markdownItFactory from 'markdown-it';
+import markdownItAnchor from 'markdown-it-anchor';
+import pluginRss from '@11ty/eleventy-plugin-rss';
+import pluginSyntaxHighlight from '@11ty/eleventy-plugin-syntaxhighlight';
+
+import dateDisplay from './filters/date-display.js';
+import readingTime from './filters/reading-time.js';
+import titleCase from './filters/title-case.js';
+import socialCard from './filters/social-image.js';
+import githubCard from './filters/github-card.js';
+import site from './src/globals/site.json' with { type: 'json' };
+
+export default function (config) {
+  const markdownIt = markdownItFactory({
     typographer: true,
     linkify: true,
     html: true,
   });
+  // markdown-it 15 stopped linking bare domains like example.com, keep them linked.
+  markdownIt.linkify.set({ fuzzyLink: true });
 
-  const markdownItAnchor = require('markdown-it-anchor');
   markdownIt.use(markdownItAnchor, {
     permalink: markdownItAnchor.permalink.ariaHidden({
       placement: 'after',
@@ -38,41 +51,22 @@ module.exports = (config) => {
 
   config.setLibrary('md', markdownIt);
 
-  config.addPlugin(require('eleventy-plugin-nesting-toc'), {
-    tags: ['h2', 'h3'],
-    ul: false,
-  });
+  config.addPlugin(pluginSyntaxHighlight);
+  config.addPlugin(pluginRss);
 
-  config.addPlugin(require('@11ty/eleventy-plugin-syntaxhighlight'));
-  config.addPlugin(require('@11ty/eleventy-plugin-rss'));
+  config.addFilter('dateDisplay', dateDisplay);
+  config.addFilter('readingTime', readingTime);
+  config.addFilter('titleCase', titleCase);
+  config.addFilter('socialCard', socialCard);
 
-  config.addFilter('dateDisplay', require('./filters/date-display.js'));
-  config.addFilter('readingTime', require('./filters/reading-time.js'));
-  config.addFilter('titleCase', require('./filters/title-case.js'));
-  config.addFilter('socialCard', require('./filters/social-image.js'));
-
-  const githubCard = require('./filters/github-card.js');
   config.addNunjucksAsyncShortcode('githubCard', githubCard);
   config.addLiquidShortcode('githubCard', githubCard);
 
   config.addPassthroughCopy({ public: './' });
 
-  config.setBrowserSyncConfig({
-    files: ['dist/**/*'],
-    open: true,
-    callbacks: {
-      ready: function(err, bs) {
-        bs.addMiddleware("*", (req, res) => {
-          const content_404 = require('fs').readFileSync('dist/404.html');
-          res.writeHead(404, { "Content-Type": "text/html; charset=UTF-8" });
-          res.write(content_404);
-          res.end();
-        });
-      }
-    }
-  });
-
-  config.setDataDeepMerge(true);
+  // Rollup writes the bundle into dist/assets on its own, so reload on that too.
+  // The dev server already serves dist/404.html for missing pages.
+  config.setServerOptions({ watch: ['dist/assets/**'] });
 
   config.addCollection('postsWithoutDrafts', (collection) =>
     [...collection.getFilteredByGlob('src/posts/*.md')].filter(
@@ -81,7 +75,7 @@ module.exports = (config) => {
   );
 
   return {
-    pathPrefix: require('./src/globals/site.json').baseUrl,
+    pathPrefix: site.baseUrl,
     dir: {
       input: 'src',
       output: 'dist',
@@ -90,4 +84,4 @@ module.exports = (config) => {
       data: 'globals',
     },
   };
-};
+}

@@ -1,6 +1,6 @@
 import postcss from 'rollup-plugin-postcss';
 import replace from '@rollup/plugin-replace';
-import { terser } from 'rollup-plugin-terser';
+import terser from '@rollup/plugin-terser';
 import path from 'path';
 
 const dev = process.env.NODE_ENV !== 'production';
@@ -15,7 +15,8 @@ export default {
   },
   plugins: [
     replace({
-      DEV_MODE: dev,
+      preventAssignment: true,
+      values: { DEV_MODE: JSON.stringify(dev) },
     }),
     postcss({
       extract: path.resolve('dist/assets/main.bundle.css'),

@@ -45,7 +45,7 @@ The visibility of wealth via social media and global connectivity has turned fin
 
 > *"The more we are surrounded by people who have apparently attained a great deal, the more difficult it becomes to be content with anything less."*
 > 
-> \-- Alain de Botton
+> – Alain de Botton
 
 For someone struggling to make ends meet or simply building their financial foundation, seeing peers—or even strangers—displaying their achievements can foster an insidious paranoia. Questions like *"Am I earning enough?"* or *"Will I ever achieve that level of wealth?"* just rage through on a daily basis. The pressure is magnified in a world where wealth is often equated with worth, and financial setbacks are sometimes perceived as personal failures rather than circumstantial challenges.
 

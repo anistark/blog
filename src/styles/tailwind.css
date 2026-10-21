@@ -1,9 +1,30 @@
-/* purgecss start ignore */
-@import 'tailwindcss/base';
-@import './base.css';
-@import './tags.css';
-/* purgecss end ignore */
+/* Remote stylesheets have to come before everything else. */
+/* Font (see https://fonts.google.com) */
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,500;0,700;1,500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Source+Code+Pro:wght@500;600&display=swap');
 
-@import 'tailwindcss/components';
+/* Prism Code Highlighting Theme (see https://prismjs.com) */
+@import url('https://cdn.jsdelivr.net/npm/prism-themes@1.5.0/themes/prism-dracula.css') layer(base);
 
-@import 'tailwindcss/utilities';
+@import 'tailwindcss';
+@plugin '@tailwindcss/forms';
+
+/* Site styles sit in the base layer so utility classes still win over them. */
+@import './base.css' layer(base);
+@import './tags.css' layer(base);
+
+/* Tailwind 3 defaults that v4 dropped, kept so the site looks the same. */
+@layer base {
+  *,
+  ::after,
+  ::before,
+  ::backdrop,
+  ::file-selector-button {
+    border-color: var(--color-gray-200, currentColor);
+  }
+
+  button:not(:disabled),
+  [role='button']:not(:disabled) {
+    cursor: pointer;
+  }
+}
