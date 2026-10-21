@@ -31,6 +31,6 @@ Create a new post page in draft mode.
 
 ### Icons
 
-- **[Lucide](https://lucide.dev/)** — UI icons (theme switcher: moon, book-open, tree-pine, palmtree)
+- **[Lucide](https://lucide.dev/)** — UI icons (theme switcher: moon, book-open, tree-pine, palmtree, cpu, wand-sparkles)
 - **[Simple Icons](https://simpleicons.org/)** — Brand icons (GitHub, X, Mastodon)
 - LinkedIn icon uses a standard inline SVG (not available in Simple Icons)

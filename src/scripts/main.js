@@ -4,6 +4,7 @@ import { handleThemeToggle } from './theme.js';
 import { handleInfiniteScroll } from './infinite-scroll.js';
 import { initAmbience } from './ambience.js';
 import { handleRelativeDates } from './relative-date.js';
+import { handleRiftMagic } from './rift-magic.js';
 import './terminal-block.js';
 import './code-block.js';
 
@@ -14,3 +15,4 @@ handleThemeToggle();
 handleInfiniteScroll();
 initAmbience();
 handleRelativeDates();
+handleRiftMagic();

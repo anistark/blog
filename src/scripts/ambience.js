@@ -772,9 +772,625 @@ export function initAmbience() {
   })();
 
   // ============================================================
+  //  CYBERPUNK — Night City skyline, moon, terminal-green rain, AVs, glitches
+  // ============================================================
+  const cyberpunk = (() => {
+    const RAIN_COUNT = 140;
+    const NEON = ['#00ff41', '#00f0ff', '#fcee0a'];
+    const WINDOW_COLORS = [
+      'rgba(252,238,10,', // sodium yellow
+      'rgba(0,240,255,',  // cyan
+      'rgba(0,255,65,',   // terminal green
+      'rgba(255,214,170,', // warm white
+    ];
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    let backdrop, rain, signs, beacons, liveWindows, avs, nextAvTime, nextGlitchTime, glitchFrames;
+
+    function pick(list) {
+      return list[Math.floor(Math.random() * list.length)];
+    }
+
+    // The static scene (moon and both rows of buildings) is painted once into
+    // an offscreen canvas; only the lights, rain and traffic redraw per frame.
+    function paintMoon(bctx) {
+      const r = Math.min(width, height) * 0.09;
+      const x = width * 0.8, y = height * 0.2;
+
+      const halo = bctx.createRadialGradient(x, y, r * 0.8, x, y, r * 3.2);
+      halo.addColorStop(0, 'rgba(0,255,65,0.07)');
+      halo.addColorStop(0.5, 'rgba(0,255,65,0.02)');
+      halo.addColorStop(1, 'transparent');
+      bctx.fillStyle = halo;
+      bctx.beginPath(); bctx.arc(x, y, r * 3.2, 0, Math.PI * 2); bctx.fill();
+
+      const face = bctx.createRadialGradient(x - r * 0.3, y - r * 0.3, 0, x, y, r);
+      face.addColorStop(0, 'rgba(238,255,245,0.5)');
+      face.addColorStop(1, 'rgba(195,230,212,0.38)');
+      bctx.fillStyle = face;
+      bctx.beginPath(); bctx.arc(x, y, r, 0, Math.PI * 2); bctx.fill();
+
+      bctx.fillStyle = 'rgba(70,115,95,0.14)';
+      for (const [cx, cy, cr] of [[-0.3, -0.1, 0.22], [0.25, 0.3, 0.15], [0.35, -0.35, 0.1], [-0.1, 0.45, 0.08]]) {
+        bctx.beginPath(); bctx.arc(x + cx * r, y + cy * r, cr * r, 0, Math.PI * 2); bctx.fill();
+      }
+    }
+
+    function paintSkyline(bctx, row) {
+      let x = -10;
+      while (x < width + 10) {
+        const w = row.minW + Math.random() * (row.maxW - row.minW);
+        const h = height * (row.minH + Math.random() * (row.maxH - row.minH));
+        const top = height - h;
+
+        const body = bctx.createLinearGradient(0, top, 0, height);
+        body.addColorStop(0, row.top);
+        body.addColorStop(1, row.bottom);
+        bctx.fillStyle = body;
+        bctx.fillRect(x, top, w, h);
+
+        // stepped crown on some towers
+        if (Math.random() < 0.35) {
+          const cw = w * (0.4 + Math.random() * 0.3);
+          const ch = 8 + Math.random() * 22;
+          bctx.fillRect(x + (w - cw) / 2, top - ch, cw, ch);
+        }
+
+        // antenna with a red beacon on the tall ones
+        if (row.beacons && h > height * row.maxH * 0.75 && Math.random() < 0.6) {
+          const ax = x + w * (0.3 + Math.random() * 0.4);
+          const ah = 14 + Math.random() * 26;
+          bctx.strokeStyle = row.top;
+          bctx.lineWidth = 2;
+          bctx.beginPath(); bctx.moveTo(ax, top); bctx.lineTo(ax, top - ah); bctx.stroke();
+          beacons.push({ x: ax, y: top - ah, period: 1400 + Math.random() * 1600, offset: Math.random() * 3000 });
+        }
+
+        // window grid
+        for (let wy = top + row.cell; wy < height - row.cell; wy += row.cell * 1.6) {
+          for (let wx = x + row.cell * 0.6; wx < x + w - row.cell; wx += row.cell * 1.3) {
+            if (Math.random() > row.lit) continue;
+            const color = pick(WINDOW_COLORS);
+            const alpha = row.windowAlpha * (0.4 + Math.random() * 0.6);
+            if (row.live && Math.random() < 0.04) {
+              liveWindows.push({ x: wx, y: wy, w: row.cell * 0.6, h: row.cell * 0.8, color, alpha, on: true });
+            } else {
+              bctx.fillStyle = color + alpha + ')';
+              bctx.fillRect(wx, wy, row.cell * 0.6, row.cell * 0.8);
+            }
+          }
+        }
+
+        // vertical neon sign hanging off the side of a near tower
+        if (row.signs && w > 40 && Math.random() < 0.3) {
+          const sh = 30 + Math.random() * 60;
+          signs.push({
+            x: x + (Math.random() < 0.5 ? 4 : w - 10),
+            y: top + 20 + Math.random() * Math.max(10, h * 0.4 - sh),
+            w: 6, h: sh,
+            color: pick(NEON),
+            flicker: Math.random() < 0.4,
+          });
+        }
+
+        x += w + Math.random() * row.gap;
+      }
+    }
+
+    function paintBackdrop() {
+      backdrop = document.createElement('canvas');
+      backdrop.width = width;
+      backdrop.height = height;
+      const bctx = backdrop.getContext('2d');
+
+      paintMoon(bctx);
+
+      // haze where the city lights hit the smog
+      const haze = bctx.createLinearGradient(0, height * 0.55, 0, height);
+      haze.addColorStop(0, 'transparent');
+      haze.addColorStop(1, 'rgba(0,255,65,0.06)');
+      bctx.fillStyle = haze;
+      bctx.fillRect(0, height * 0.55, width, height * 0.45);
+
+      paintSkyline(bctx, {
+        minW: 18, maxW: 55, minH: 0.12, maxH: 0.34, gap: 6, cell: 4,
+        top: 'rgba(8,22,16,0.92)', bottom: 'rgba(4,12,8,0.96)',
+        lit: 0.18, windowAlpha: 0.35,
+      });
+      paintSkyline(bctx, {
+        minW: 40, maxW: 110, minH: 0.08, maxH: 0.26, gap: 30, cell: 6,
+        top: 'rgba(2,7,4,0.98)', bottom: 'rgba(0,2,1,1)',
+        lit: 0.22, windowAlpha: 0.5,
+        beacons: true, signs: true, live: true,
+      });
+    }
+
+    function createDrop() {
+      return {
+        x: Math.random() * (width + 200) - 100,
+        y: Math.random() * height,
+        len: 10 + Math.random() * 18,
+        speed: 9 + Math.random() * 8,
+        alpha: 0.08 + Math.random() * 0.18,
+        tint: Math.random() < 0.3 ? '0,255,65' : '160,240,255',
+      };
+    }
+
+    function spawnAv() {
+      const fromLeft = Math.random() > 0.5;
+      return {
+        x: fromLeft ? -40 : width + 40,
+        y: height * (0.12 + Math.random() * 0.35),
+        vx: (fromLeft ? 1 : -1) * (1.6 + Math.random() * 1.8),
+        dir: fromLeft ? 1 : -1,
+        bob: Math.random() * Math.PI * 2,
+      };
+    }
+
+    function drawAv(av, time) {
+      const y = av.y + Math.sin(time * 0.03 + av.bob) * 1.5;
+
+      // light trail
+      const trail = ctx.createLinearGradient(av.x, y, av.x - av.dir * 90, y);
+      trail.addColorStop(0, 'rgba(0,255,65,0.45)');
+      trail.addColorStop(1, 'transparent');
+      ctx.strokeStyle = trail;
+      ctx.lineWidth = 2;
+      ctx.beginPath(); ctx.moveTo(av.x - av.dir * 8, y); ctx.lineTo(av.x - av.dir * 90, y); ctx.stroke();
+
+      // hull
+      ctx.fillStyle = 'rgba(20,14,34,0.95)';
+      ctx.beginPath();
+      ctx.moveTo(av.x - av.dir * 10, y + 2);
+      ctx.lineTo(av.x + av.dir * 12, y + 2);
+      ctx.lineTo(av.x + av.dir * 7, y - 3);
+      ctx.lineTo(av.x - av.dir * 6, y - 3);
+      ctx.closePath();
+      ctx.fill();
+
+      // headlight and taillight
+      ctx.fillStyle = 'rgba(220,250,255,0.95)';
+      ctx.fillRect(av.x + av.dir * 11 - 1, y - 1, 2, 2);
+      ctx.fillStyle = 'rgba(255,40,60,0.95)';
+      ctx.fillRect(av.x - av.dir * 10 - 1, y - 1, 2, 2);
+    }
+
+    function glitch() {
+      const bands = 2 + Math.floor(Math.random() * 3);
+      for (let i = 0; i < bands; i++) {
+        const y = Math.random() * height;
+        const h = 3 + Math.random() * 24;
+        const dx = (Math.random() - 0.5) * 50;
+        ctx.drawImage(canvas, 0, y, width, h, dx, y, width, h);
+        ctx.fillStyle = Math.random() < 0.5 ? 'rgba(0,255,65,0.12)' : 'rgba(0,240,255,0.12)';
+        ctx.fillRect(0, y, width, h);
+      }
+    }
+
+    return {
+      init() {
+        signs = []; beacons = []; liveWindows = []; avs = [];
+        paintBackdrop();
+        rain = Array.from({ length: RAIN_COUNT }, createDrop);
+        nextAvTime = 4000 + Math.random() * 6000;
+        nextGlitchTime = 8000 + Math.random() * 8000;
+        glitchFrames = 0;
+      },
+
+      draw(time, ts) {
+        ctx.drawImage(backdrop, 0, 0);
+
+        // windows that switch on and off as the city lives
+        if (Math.random() < 0.05 && liveWindows.length) {
+          const w = pick(liveWindows);
+          w.on = !w.on;
+        }
+        for (const w of liveWindows) {
+          if (!w.on) continue;
+          ctx.fillStyle = w.color + w.alpha + ')';
+          ctx.fillRect(w.x, w.y, w.w, w.h);
+        }
+
+        // neon signs, some with a dying tube
+        ctx.save();
+        ctx.shadowBlur = 14;
+        for (const s of signs) {
+          const off = s.flicker && Math.sin(time * 0.13 + s.x) > 0.92 && Math.random() < 0.6;
+          if (off) continue;
+          ctx.shadowColor = s.color;
+          ctx.fillStyle = s.color;
+          ctx.globalAlpha = 0.55;
+          ctx.fillRect(s.x, s.y, s.w, s.h);
+        }
+        ctx.restore();
+
+        // red aircraft-warning beacons
+        for (const b of beacons) {
+          const phase = ((ts + b.offset) % b.period) / b.period;
+          if (phase > 0.18) continue;
+          const a = 1 - phase / 0.18;
+          const gr = ctx.createRadialGradient(b.x, b.y, 0, b.x, b.y, 6);
+          gr.addColorStop(0, `rgba(255,40,60,${a})`);
+          gr.addColorStop(1, 'transparent');
+          ctx.fillStyle = gr;
+          ctx.beginPath(); ctx.arc(b.x, b.y, 6, 0, Math.PI * 2); ctx.fill();
+        }
+
+        // AVs crossing the sky
+        if (ts > nextAvTime && avs.length < 2) {
+          avs.push(spawnAv());
+          nextAvTime = ts + 9000 + Math.random() * 14000;
+        }
+        for (let i = avs.length - 1; i >= 0; i--) {
+          const av = avs[i];
+          av.x += av.vx;
+          if (av.x < -140 || av.x > width + 140) { avs.splice(i, 1); continue; }
+          drawAv(av, time);
+        }
+
+        // slanted rain
+        ctx.lineWidth = 1;
+        for (const d of rain) {
+          d.x -= d.speed * 0.18;
+          d.y += d.speed;
+          if (d.y > height) { d.y = -d.len; d.x = Math.random() * (width + 200) - 100; }
+          ctx.strokeStyle = `rgba(${d.tint},${d.alpha})`;
+          ctx.beginPath();
+          ctx.moveTo(d.x, d.y);
+          ctx.lineTo(d.x + d.len * 0.18, d.y - d.len);
+          ctx.stroke();
+        }
+
+        // the odd frame of signal corruption
+        if (!reduceMotion && ts > nextGlitchTime) {
+          glitchFrames = 4 + Math.floor(Math.random() * 6);
+          nextGlitchTime = ts + 10000 + Math.random() * 14000;
+        }
+        if (glitchFrames > 0) {
+          glitchFrames--;
+          glitch();
+        }
+      },
+    };
+  })();
+
+  // ============================================================
+  //  HOGWARTS — the Marauder's Map: inked corridors, wandering footprints
+  // ============================================================
+  const hogwarts = (() => {
+    const CELL = 130;      // grid spacing; corridors run along the grid lines
+    const HALL = 8;        // corridor half-width
+    const INK = '59,38,18';
+    const PRINT_LIFE = 4500;
+    const LABEL_FONT = "italic 13px 'IM Fell English', Georgia, serif";
+    const PLACES = [
+      'The Great Hall', 'Gryffindor Tower', 'Room of Requirement', 'Astronomy Tower',
+      'The Owlery', 'Restricted Section', 'Kitchens', "Prefects' Bathroom", 'Trophy Room',
+      'Dungeons', 'Hospital Wing', 'Divination', 'Potions', 'Greenhouses', 'One-Eyed Witch',
+      "Headmaster's Office", 'Charms', 'Library', 'Clock Tower', 'Common Room',
+    ];
+    const WANDERERS = [
+      { name: 'Harry Potter' }, { name: 'Hermione Granger' }, { name: 'Ron Weasley' },
+      { name: 'Severus Snape' }, { name: 'Albus Dumbledore' }, { name: 'Argus Filch' },
+      { name: 'Mrs Norris', paws: true }, { name: 'Ani' },
+    ];
+    let backdrop, cols, rows, ox, oy, edges, rooms, towers, stairs, walkers;
+
+    const nx = (i) => ox + i * CELL;
+    const ny = (j) => oy + j * CELL;
+
+    function shuffled(list) {
+      const out = [...list];
+      for (let i = out.length - 1; i > 0; i--) {
+        const k = Math.floor(Math.random() * (i + 1));
+        [out[i], out[k]] = [out[k], out[i]];
+      }
+      return out;
+    }
+
+    // Corridors are grid edges: "i,j,h" joins (i,j)-(i+1,j), "i,j,v" joins (i,j)-(i,j+1).
+    function neighbours(i, j) {
+      const out = [];
+      if (edges.has(`${i},${j},h`)) out.push([i + 1, j]);
+      if (edges.has(`${i - 1},${j},h`)) out.push([i - 1, j]);
+      if (edges.has(`${i},${j},v`)) out.push([i, j + 1]);
+      if (edges.has(`${i},${j - 1},v`)) out.push([i, j - 1]);
+      return out;
+    }
+
+    function generate() {
+      cols = Math.ceil(width / CELL) + 1;
+      rows = Math.ceil(height / CELL) + 1;
+      ox = -Math.random() * CELL * 0.5;
+      oy = -Math.random() * CELL * 0.5;
+
+      edges = new Set();
+      for (let i = 0; i <= cols; i++) {
+        for (let j = 0; j <= rows; j++) {
+          if (i < cols && Math.random() < 0.6) edges.add(`${i},${j},h`);
+          if (j < rows && Math.random() < 0.6) edges.add(`${i},${j},v`);
+        }
+      }
+
+      rooms = []; towers = []; stairs = [];
+      const names = shuffled(PLACES);
+      for (let i = 0; i < cols; i++) {
+        for (let j = 0; j < rows; j++) {
+          const x = nx(i), y = ny(j), roll = Math.random();
+          if (roll < 0.42) {
+            const inset = () => HALL + 8 + Math.random() * 16;
+            const l = x + inset(), t = y + inset(), r = x + CELL - inset(), b = y + CELL - inset();
+            // a door wherever a corridor runs past that wall
+            const door = (has) => (has ? 0.3 + Math.random() * 0.4 : null);
+            rooms.push({
+              l, t, r, b,
+              doors: {
+                top: door(edges.has(`${i},${j},h`)),
+                bottom: door(edges.has(`${i},${j + 1},h`)),
+                left: door(edges.has(`${i},${j},v`)),
+                right: door(edges.has(`${i + 1},${j},v`)),
+              },
+              label: Math.random() < 0.45 ? names.pop() : null,
+            });
+          } else if (roll < 0.5) {
+            towers.push({ x: x + CELL / 2, y: y + CELL / 2, r: 18 + Math.random() * 10, label: Math.random() < 0.6 ? names.pop() : null });
+          } else if (roll < 0.6) {
+            stairs.push({ x: x + 22 + Math.random() * (CELL - 80), y: y + 22 + Math.random() * (CELL - 70), w: 30 + Math.random() * 10, h: 18 + Math.random() * 8 });
+          }
+        }
+      }
+    }
+
+    function wallWithDoor(bctx, x1, y1, x2, y2, door) {
+      if (door === null) {
+        bctx.moveTo(x1, y1); bctx.lineTo(x2, y2);
+        return;
+      }
+      const gap = 9 / Math.hypot(x2 - x1, y2 - y1);
+      bctx.moveTo(x1, y1);
+      bctx.lineTo(x1 + (x2 - x1) * (door - gap), y1 + (y2 - y1) * (door - gap));
+      bctx.moveTo(x1 + (x2 - x1) * (door + gap), y1 + (y2 - y1) * (door + gap));
+      bctx.lineTo(x2, y2);
+    }
+
+    function label(bctx, text, x, y, maxW) {
+      const words = text.split(' ');
+      const lines = [];
+      let line = '';
+      for (const word of words) {
+        const next = line ? line + ' ' + word : word;
+        if (line && bctx.measureText(next).width > maxW) { lines.push(line); line = word; }
+        else line = next;
+      }
+      lines.push(line);
+      lines.forEach((l, k) => bctx.fillText(l, x, y + (k - (lines.length - 1) / 2) * 14));
+    }
+
+    // The static map is inked once into an offscreen canvas.
+    function paintBackdrop() {
+      backdrop = document.createElement('canvas');
+      backdrop.width = width;
+      backdrop.height = height;
+      const bctx = backdrop.getContext('2d');
+
+      // corridors: stroke wide, then cut the middle out, so junctions merge cleanly
+      const halls = document.createElement('canvas');
+      halls.width = width;
+      halls.height = height;
+      const hctx = halls.getContext('2d');
+      hctx.beginPath();
+      for (const key of edges) {
+        const [i, j, d] = key.split(',');
+        const x = nx(+i), y = ny(+j);
+        hctx.moveTo(x, y);
+        if (d === 'h') hctx.lineTo(x + CELL, y);
+        else hctx.lineTo(x, y + CELL);
+      }
+      hctx.lineCap = 'square';
+      hctx.strokeStyle = `rgb(${INK})`;
+      hctx.lineWidth = HALL * 2 + 3;
+      hctx.stroke();
+      hctx.globalCompositeOperation = 'destination-out';
+      hctx.lineWidth = HALL * 2;
+      hctx.stroke();
+      bctx.globalAlpha = 0.34;
+      bctx.drawImage(halls, 0, 0);
+      bctx.globalAlpha = 1;
+
+      bctx.strokeStyle = `rgba(${INK},0.34)`;
+      bctx.lineWidth = 1.3;
+      for (const rm of rooms) {
+        bctx.beginPath();
+        wallWithDoor(bctx, rm.l, rm.t, rm.r, rm.t, rm.doors.top);
+        wallWithDoor(bctx, rm.r, rm.t, rm.r, rm.b, rm.doors.right);
+        wallWithDoor(bctx, rm.r, rm.b, rm.l, rm.b, rm.doors.bottom);
+        wallWithDoor(bctx, rm.l, rm.b, rm.l, rm.t, rm.doors.left);
+        bctx.stroke();
+      }
+
+      for (const tw of towers) {
+        bctx.beginPath(); bctx.arc(tw.x, tw.y, tw.r, 0, Math.PI * 2); bctx.stroke();
+        bctx.beginPath(); bctx.arc(tw.x, tw.y, tw.r * 0.65, 0, Math.PI * 2); bctx.stroke();
+        bctx.beginPath();
+        for (let k = 0; k < 8; k++) {
+          const a = (k / 8) * Math.PI * 2;
+          bctx.moveTo(tw.x + Math.cos(a) * tw.r * 0.65, tw.y + Math.sin(a) * tw.r * 0.65);
+          bctx.lineTo(tw.x + Math.cos(a) * tw.r, tw.y + Math.sin(a) * tw.r);
+        }
+        bctx.stroke();
+      }
+
+      // staircases, hatched
+      bctx.lineWidth = 1;
+      for (const st of stairs) {
+        bctx.strokeRect(st.x, st.y, st.w, st.h);
+        bctx.beginPath();
+        for (let x = st.x + 4; x < st.x + st.w; x += 4) { bctx.moveTo(x, st.y); bctx.lineTo(x, st.y + st.h); }
+        bctx.stroke();
+      }
+
+      bctx.font = LABEL_FONT;
+      bctx.textAlign = 'center';
+      bctx.textBaseline = 'middle';
+      bctx.fillStyle = `rgba(${INK},0.55)`;
+      for (const rm of rooms) {
+        if (rm.label) label(bctx, rm.label, (rm.l + rm.r) / 2, (rm.t + rm.b) / 2, rm.r - rm.l - 8);
+      }
+      for (const tw of towers) {
+        if (tw.label) label(bctx, tw.label, tw.x, tw.y + tw.r + 14, CELL - 20);
+      }
+
+      // the makers' credit, tucked into a corner above the footer
+      bctx.textAlign = 'left';
+      bctx.fillStyle = `rgba(${INK},0.5)`;
+      bctx.font = "italic 15px 'IM Fell English', Georgia, serif";
+      bctx.fillText('Messrs Moony, Wormtail, Padfoot & Prongs', 24, height - 104);
+      bctx.font = "italic 13px 'IM Fell English', Georgia, serif";
+      bctx.fillText('are proud to present the Marauder’s Map', 24, height - 86);
+    }
+
+    function spawnWalker(ts) {
+      const busy = new Set(walkers.map((w) => w.name));
+      const who = shuffled(WANDERERS).find((w) => !busy.has(w.name)) || WANDERERS[0];
+      let i, j, tries = 0;
+      do {
+        i = Math.floor(Math.random() * cols);
+        j = Math.floor(Math.random() * rows);
+      } while (!neighbours(i, j).length && ++tries < 50);
+      const w = {
+        name: who.name, paws: !!who.paws,
+        stride: who.paws ? 9 : 15,
+        interval: who.paws ? 230 : 400,
+        i, j, prev: null, dir: null, next: null, t: 0, side: 1,
+        prints: [], stepsLeft: 45 + Math.floor(Math.random() * 60),
+        nextStep: ts + Math.random() * 800,
+      };
+      pickNext(w);
+      walkers.push(w);
+    }
+
+    // Wander the corridors, mostly straight on, never doubling back unless stuck.
+    function pickNext(w) {
+      const options = neighbours(w.i, w.j);
+      if (!options.length) { w.stepsLeft = 0; return; }
+      let choices = options.filter((n) => !(w.prev && n[0] === w.prev[0] && n[1] === w.prev[1]));
+      if (!choices.length) choices = options;
+      let next = null;
+      if (w.dir && Math.random() < 0.55) {
+        next = choices.find((n) => n[0] - w.i === w.dir[0] && n[1] - w.j === w.dir[1]) || null;
+      }
+      next = next || choices[Math.floor(Math.random() * choices.length)];
+      w.dir = [next[0] - w.i, next[1] - w.j];
+      w.prev = [w.i, w.j];
+      w.next = next;
+      w.t = 0;
+    }
+
+    function step(w, ts) {
+      w.t += w.stride;
+      if (w.t >= CELL) {
+        [w.i, w.j] = w.next;
+        pickNext(w);
+        if (!w.stepsLeft) return;
+      }
+      const [dx, dy] = w.dir;
+      w.side = -w.side;
+      const sway = w.side * (w.paws ? 2.5 : 4);
+      w.prints.push({
+        x: nx(w.i) + dx * w.t - dy * sway + (Math.random() - 0.5),
+        y: ny(w.j) + dy * w.t + dx * sway + (Math.random() - 0.5),
+        angle: Math.atan2(dy, dx),
+        born: ts,
+      });
+      w.stepsLeft--;
+    }
+
+    function drawPrint(p, a, paws) {
+      ctx.save();
+      ctx.translate(p.x, p.y);
+      ctx.rotate(p.angle + Math.PI / 2);
+      ctx.scale(1.4, 1.4);
+      ctx.fillStyle = `rgba(${INK},${0.75 * a})`;
+      ctx.beginPath();
+      if (paws) {
+        ctx.ellipse(0, 1.5, 2, 1.6, 0, 0, Math.PI * 2);
+        for (const [tx, ty] of [[-1.9, -1.4], [-0.7, -2.6], [0.7, -2.6], [1.9, -1.4]]) {
+          ctx.moveTo(tx + 0.8, ty);
+          ctx.arc(tx, ty, 0.8, 0, Math.PI * 2);
+        }
+      } else {
+        ctx.ellipse(0, -2.5, 2.4, 3.8, 0, 0, Math.PI * 2);
+        ctx.moveTo(2, 4.2);
+        ctx.ellipse(0, 4.2, 2, 2.2, 0, 0, Math.PI * 2);
+      }
+      ctx.fill();
+      ctx.restore();
+    }
+
+    function drawBanner(w, x, y, a) {
+      ctx.save();
+      ctx.globalAlpha = a;
+      ctx.font = LABEL_FONT;
+      const tw = ctx.measureText(w.name).width;
+      const bx = x + 10, by = y - 24, bw = tw + 12, bh = 18;
+      ctx.fillStyle = 'rgba(243,230,196,0.92)';
+      ctx.strokeStyle = `rgba(${INK},0.6)`;
+      ctx.lineWidth = 1;
+      ctx.beginPath();
+      ctx.moveTo(bx, by); ctx.lineTo(bx + bw, by);
+      ctx.lineTo(bx + bw - 4, by + bh / 2); ctx.lineTo(bx + bw, by + bh);
+      ctx.lineTo(bx, by + bh); ctx.lineTo(bx + 4, by + bh / 2);
+      ctx.closePath();
+      ctx.fill(); ctx.stroke();
+      ctx.fillStyle = `rgba(${INK},0.9)`;
+      ctx.textAlign = 'left';
+      ctx.textBaseline = 'middle';
+      ctx.fillText(w.name, bx + 6, by + bh / 2 + 1);
+      ctx.restore();
+    }
+
+    return {
+      init() {
+        generate();
+        paintBackdrop();
+        walkers = [];
+        // Map labels need the hand-lettered face; re-ink once it has loaded.
+        document.fonts?.load(LABEL_FONT).then(() => {
+          if (currentTheme === 'hogwarts') paintBackdrop();
+        });
+      },
+
+      draw(time, ts) {
+        ctx.drawImage(backdrop, 0, 0);
+
+        while (walkers.length < 3) spawnWalker(ts);
+
+        for (let k = walkers.length - 1; k >= 0; k--) {
+          const w = walkers[k];
+          if (w.stepsLeft > 0 && ts >= w.nextStep) {
+            step(w, ts);
+            w.nextStep = ts + w.interval * (0.85 + Math.random() * 0.3);
+          }
+          w.prints = w.prints.filter((p) => ts - p.born < PRINT_LIFE);
+          for (const p of w.prints) {
+            const age = ts - p.born;
+            drawPrint(p, Math.min(1, age / 150) * (1 - age / PRINT_LIFE), w.paws);
+          }
+          const last = w.prints[w.prints.length - 1];
+          if (last) {
+            const fade = w.stepsLeft > 0 ? 1 : 1 - (ts - last.born) / PRINT_LIFE;
+            drawBanner(w, last.x, last.y, Math.max(0, fade));
+          } else if (w.stepsLeft <= 0) {
+            walkers.splice(k, 1); // mischief managed
+          }
+        }
+      },
+    };
+  })();
+
+  // ============================================================
   //  MAIN LOOP
   // ============================================================
-  const renderers = { night, forest, beach };
+  const renderers = { night, forest, beach, cyberpunk, hogwarts };
 
   function getTheme() {
     return document.documentElement.getAttribute('data-theme') || 'night';

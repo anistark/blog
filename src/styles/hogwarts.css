@@ -1,0 +1,572 @@
+/* Hogwarts theme.
+   The page is the Marauder's Map: aged parchment, inked corridors and
+   footprints wandering about (drawn by ambience.js). Post cards are rifts
+   torn in the map, opening on a starry void with an ember-lit edge, where a
+   wand-light reveals hidden constellations. A post reads as a front page of
+   the Daily Prophet, moving picture and all. The colour variables live with
+   the other themes in base.css. */
+
+[data-theme='hogwarts'] {
+  --hw-ink: #3b2a17;
+  --hw-ink-soft: rgba(59, 42, 23, 0.4);
+  --hw-crimson: #7a1f1f;
+  --hw-gold: #f3d27a;
+  --hw-newsprint: #efe6cf;
+  --hw-serif: 'EB Garamond', Georgia, serif;
+  --hw-fell: 'IM Fell English', Georgia, serif;
+  --hw-fell-sc: 'IM Fell English SC', Georgia, serif;
+  --hw-headline: 'Playfair Display', Georgia, serif;
+  --hw-blackletter: 'UnifrakturMaguntia', 'IM Fell English', serif;
+
+  /* Three torn outlines, so neighbouring rifts never tear the same way. */
+  --hw-rift-1: polygon(
+    0% 2px, 5% 1px, 10% 3px, 15% 14px,
+    20% 13px, 25% 10px, 30% 6px, 35% 11px,
+    40% 7px, 45% 3px, 50% 1px, 55% 3px,
+    60% 10px, 65% 6px, 70% 14px, 75% 3px,
+    80% 1px, 85% 11px, 90% 4px, 95% 5px,
+    calc(100% - 3px) 0%, calc(100% - 5px) 5%, calc(100% - 4px) 10%, calc(100% - 6px) 15%,
+    calc(100% - 3px) 20%, calc(100% - 2px) 25%, calc(100% - 6px) 30%, calc(100% - 13px) 35%,
+    calc(100% - 15px) 40%, calc(100% - 4px) 45%, calc(100% - 3px) 50%, calc(100% - 5px) 55%,
+    calc(100% - 4px) 60%, calc(100% - 7px) 65%, calc(100% - 5px) 70%, calc(100% - 15px) 75%,
+    calc(100% - 7px) 80%, calc(100% - 3px) 85%, calc(100% - 5px) 90%, calc(100% - 13px) 95%,
+    100% calc(100% - 10px), 95% calc(100% - 16px), 90% calc(100% - 11px), 85% calc(100% - 6px),
+    80% calc(100% - 13px), 75% calc(100% - 6px), 70% calc(100% - 6px), 65% calc(100% - 3px),
+    60% calc(100% - 6px), 55% calc(100% - 2px), 50% calc(100% - 11px), 45% calc(100% - 4px),
+    40% calc(100% - 3px), 35% calc(100% - 13px), 30% calc(100% - 4px), 25% calc(100% - 5px),
+    20% calc(100% - 5px), 15% calc(100% - 1px), 10% calc(100% - 6px), 5% calc(100% - 6px),
+    3px 100%, 15px 95%, 10px 90%, 10px 85%,
+    1px 80%, 10px 75%, 12px 70%, 17px 65%,
+    2px 60%, 3px 55%, 2px 50%, 7px 45%,
+    4px 40%, 10px 35%, 3px 30%, 2px 25%,
+    18px 20%, 2px 15%, 1px 10%, 7px 5%
+  );
+  --hw-rift-2: polygon(
+    0% 6px, 5% 4px, 10% 7px, 15% 2px,
+    20% 3px, 25% 3px, 30% 12px, 35% 4px,
+    40% 10px, 45% 14px, 50% 5px, 55% 3px,
+    60% 16px, 65% 3px, 70% 3px, 75% 6px,
+    80% 7px, 85% 4px, 90% 6px, 95% 2px,
+    calc(100% - 2px) 0%, calc(100% - 1px) 5%, calc(100% - 4px) 10%, calc(100% - 13px) 15%,
+    calc(100% - 3px) 20%, calc(100% - 6px) 25%, calc(100% - 2px) 30%, calc(100% - 12px) 35%,
+    calc(100% - 15px) 40%, calc(100% - 2px) 45%, calc(100% - 3px) 50%, calc(100% - 4px) 55%,
+    calc(100% - 5px) 60%, calc(100% - 11px) 65%, calc(100% - 6px) 70%, calc(100% - 10px) 75%,
+    calc(100% - 5px) 80%, calc(100% - 13px) 85%, calc(100% - 2px) 90%, calc(100% - 12px) 95%,
+    100% calc(100% - 2px), 95% calc(100% - 6px), 90% calc(100% - 1px), 85% calc(100% - 5px),
+    80% calc(100% - 12px), 75% calc(100% - 7px), 70% calc(100% - 4px), 65% calc(100% - 7px),
+    60% calc(100% - 14px), 55% calc(100% - 16px), 50% calc(100% - 2px), 45% calc(100% - 14px),
+    40% calc(100% - 2px), 35% calc(100% - 4px), 30% calc(100% - 6px), 25% calc(100% - 7px),
+    20% calc(100% - 5px), 15% calc(100% - 4px), 10% calc(100% - 4px), 5% calc(100% - 17px),
+    13px 100%, 4px 95%, 3px 90%, 3px 85%,
+    3px 80%, 6px 75%, 2px 70%, 4px 65%,
+    1px 60%, 3px 55%, 5px 50%, 3px 45%,
+    7px 40%, 7px 35%, 15px 30%, 5px 25%,
+    6px 20%, 1px 15%, 5px 10%, 5px 5%
+  );
+  --hw-rift-3: polygon(
+    0% 1px, 5% 2px, 10% 5px, 15% 2px,
+    20% 1px, 25% 14px, 30% 11px, 35% 4px,
+    40% 5px, 45% 1px, 50% 5px, 55% 2px,
+    60% 3px, 65% 10px, 70% 5px, 75% 5px,
+    80% 7px, 85% 4px, 90% 5px, 95% 4px,
+    calc(100% - 1px) 0%, calc(100% - 3px) 5%, calc(100% - 11px) 10%, calc(100% - 12px) 15%,
+    calc(100% - 3px) 20%, calc(100% - 2px) 25%, calc(100% - 7px) 30%, calc(100% - 5px) 35%,
+    calc(100% - 16px) 40%, calc(100% - 12px) 45%, calc(100% - 5px) 50%, calc(100% - 5px) 55%,
+    calc(100% - 6px) 60%, calc(100% - 1px) 65%, calc(100% - 3px) 70%, calc(100% - 17px) 75%,
+    calc(100% - 3px) 80%, calc(100% - 3px) 85%, calc(100% - 4px) 90%, calc(100% - 2px) 95%,
+    100% calc(100% - 3px), 95% calc(100% - 6px), 90% calc(100% - 2px), 85% calc(100% - 4px),
+    80% calc(100% - 9px), 75% calc(100% - 15px), 70% calc(100% - 4px), 65% calc(100% - 12px),
+    60% calc(100% - 4px), 55% calc(100% - 6px), 50% calc(100% - 15px), 45% calc(100% - 4px),
+    40% calc(100% - 5px), 35% calc(100% - 13px), 30% calc(100% - 7px), 25% calc(100% - 3px),
+    20% calc(100% - 2px), 15% calc(100% - 6px), 10% calc(100% - 5px), 5% calc(100% - 2px),
+    4px 100%, 4px 95%, 12px 90%, 17px 85%,
+    6px 80%, 1px 75%, 7px 70%, 13px 65%,
+    16px 60%, 2px 55%, 4px 50%, 6px 45%,
+    2px 40%, 5px 35%, 12px 30%, 5px 25%,
+    4px 20%, 11px 15%, 5px 10%, 2px 5%
+  );
+
+  background-color: #e8d4a6;
+  background-image:
+    radial-gradient(ellipse at 18% 22%, rgba(150, 100, 40, 0.16), transparent 40%),
+    radial-gradient(ellipse at 78% 68%, rgba(150, 100, 40, 0.14), transparent 45%),
+    radial-gradient(ellipse at 60% 12%, rgba(255, 245, 215, 0.45), transparent 40%),
+    radial-gradient(ellipse 120% 100% at 50% 50%, transparent 55%, rgba(110, 70, 25, 0.35) 100%);
+  background-attachment: fixed;
+}
+
+/* Behind the page, so the map's ink never sits on top of text. */
+[data-theme='hogwarts'] #ambience-canvas {
+  z-index: -1;
+}
+
+[data-theme='hogwarts'] ::selection {
+  background: rgba(122, 31, 31, 0.85);
+  color: var(--hw-gold);
+}
+
+[data-theme='hogwarts'] body {
+  font-family: var(--hw-serif);
+}
+
+[data-theme='hogwarts'] h1,
+[data-theme='hogwarts'] h2,
+[data-theme='hogwarts'] h3,
+[data-theme='hogwarts'] h4,
+[data-theme='hogwarts'] h5,
+[data-theme='hogwarts'] h6 {
+  font-family: var(--hw-fell);
+  font-weight: 400;
+}
+
+[data-theme='hogwarts'] a {
+  color: var(--hw-crimson);
+}
+
+[data-theme='hogwarts'] a:hover {
+  color: #a0522d;
+}
+
+[data-theme='hogwarts'] h1 > a,
+[data-theme='hogwarts'] h2 > a {
+  color: var(--text-heading);
+}
+
+[data-theme='hogwarts'] hr {
+  border-bottom: 3px double var(--hw-ink-soft);
+}
+
+/* Header and footer: a strip of parchment ruled off in ink. */
+[data-theme='hogwarts'] .glass-header {
+  border-bottom: 3px double var(--hw-ink-soft);
+}
+
+[data-theme='hogwarts'] .glass-footer {
+  border-top: 3px double var(--hw-ink-soft);
+}
+
+[data-theme='hogwarts'] .glass-header h1 {
+  font-family: var(--hw-fell-sc);
+  letter-spacing: 0.04em;
+}
+
+[data-theme='hogwarts'] .theme-switcher-btn,
+[data-theme='hogwarts'] .theme-dropdown,
+[data-theme='hogwarts'] .theme-option {
+  border-radius: 2px;
+}
+
+[data-theme='hogwarts'] .theme-option {
+  font-family: var(--hw-fell-sc);
+  font-size: 1rem;
+  font-weight: 400;
+}
+
+[data-theme='hogwarts'] .theme-option.active {
+  color: var(--hw-crimson);
+}
+
+/* Post cards as rifts torn through the map. The ember glow rides on the
+   grid around them, because the tear's clip would cut off a card's own. */
+[data-theme='hogwarts'] .magazine-top,
+[data-theme='hogwarts'] .magazine-grid {
+  filter:
+    drop-shadow(0 0 1px #ffd27a)
+    drop-shadow(0 0 2px rgba(255, 150, 40, 0.9))
+    drop-shadow(0 0 10px rgba(140, 60, 10, 0.45));
+}
+
+[data-theme='hogwarts'] .post-item {
+  --text-primary: #efe3c4;
+  --text-secondary: #cdb98c;
+  --border-color: rgba(255, 207, 107, 0.25);
+  color: var(--text-primary);
+  border-radius: 0;
+  clip-path: var(--hw-rift-1);
+  box-shadow: none;
+  backdrop-filter: none;
+  background:
+    radial-gradient(circle, rgba(255, 240, 200, 0.85) 0 1px, transparent 1.5px) 0 0 / 53px 47px,
+    radial-gradient(circle, rgba(200, 220, 255, 0.6) 0 1px, transparent 1.5px) 17px 29px / 71px 83px,
+    radial-gradient(ellipse at 25% 15%, rgba(120, 90, 220, 0.38), transparent 60%),
+    radial-gradient(ellipse at 85% 95%, rgba(40, 140, 200, 0.26), transparent 60%),
+    #0d0a24;
+}
+
+[data-theme='hogwarts'] .post-item:nth-child(3n + 2) {
+  clip-path: var(--hw-rift-2);
+}
+
+[data-theme='hogwarts'] .post-item:nth-child(3n) {
+  clip-path: var(--hw-rift-3);
+}
+
+/* Leaning in, the torn edges flare with light seeping through from the other side. */
+[data-theme='hogwarts'] .post-item:hover,
+[data-theme='hogwarts'] .post-item:focus-within {
+  box-shadow: inset 0 0 34px rgba(255, 190, 90, 0.42);
+}
+
+/* A featured image replaces the starfield, so undo its tiling. */
+[data-theme='hogwarts'] .post-item.has-background {
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+[data-theme='hogwarts'] .post-item.has-background::before {
+  border-radius: 0;
+  backdrop-filter: none;
+  background: linear-gradient(135deg, rgba(13, 10, 36, 0.9) 0%, rgba(32, 18, 64, 0.74) 100%);
+}
+
+/* Lumos: a wand-light follows the pointer across the rift (rift-magic.js
+   sets --mx and --my), lighting up constellations hidden in the void. */
+[data-theme='hogwarts'] .post-item::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  background:
+    radial-gradient(circle 150px at var(--mx, 50%) var(--my, 50%), rgba(255, 236, 180, 0.32), rgba(255, 200, 110, 0.1) 45%, transparent 75%),
+    url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='260' height='200'><path d='M20 30 L55 18 L80 40 L70 75 L35 70 Z M80 40 L115 30 M150 120 L175 95 L205 105 L232 80 M175 95 L186 142 M40 152 L70 166 L96 150 L122 176' fill='none' stroke='rgb(255,226,160)' stroke-opacity='0.55' stroke-width='0.8'/><g fill='rgb(255,244,214)'><circle cx='20' cy='30' r='1.6'/><circle cx='55' cy='18' r='1.6'/><circle cx='80' cy='40' r='1.6'/><circle cx='70' cy='75' r='1.6'/><circle cx='35' cy='70' r='1.6'/><circle cx='115' cy='30' r='1.6'/><circle cx='150' cy='120' r='1.6'/><circle cx='175' cy='95' r='1.6'/><circle cx='205' cy='105' r='1.6'/><circle cx='232' cy='80' r='1.6'/><circle cx='186' cy='142' r='1.6'/><circle cx='40' cy='152' r='1.6'/><circle cx='70' cy='166' r='1.6'/><circle cx='96' cy='150' r='1.6'/><circle cx='122' cy='176' r='1.6'/><circle cx='132' cy='60' r='1'/><circle cx='246' cy='170' r='1'/><circle cx='10' cy='110' r='1'/><circle cx='200' cy='30' r='1'/><circle cx='250' cy='20' r='1'/></g></svg>") 0 0 / 260px 200px;
+  mask-image: radial-gradient(circle 170px at var(--mx, 50%) var(--my, 50%), #000 0%, rgba(0, 0, 0, 0.55) 45%, transparent 100%);
+  mix-blend-mode: screen;
+  opacity: 0;
+  transition: opacity 0.5s ease;
+}
+
+[data-theme='hogwarts'] .post-item:hover::after,
+[data-theme='hogwarts'] .post-item:focus-within::after {
+  opacity: 1;
+}
+
+/* Sparks shed by the wand-light, drifting up and out. */
+[data-theme='hogwarts'] .rift-spark {
+  position: absolute;
+  z-index: 3;
+  width: var(--size);
+  height: var(--size);
+  margin: calc(var(--size) / -2) 0 0 calc(var(--size) / -2);
+  pointer-events: none;
+  background: radial-gradient(circle, #fff6d8 0 25%, #ffd27a 55%, #f0a040 80%);
+  clip-path: polygon(50% 0, 60% 40%, 100% 50%, 60% 60%, 50% 100%, 40% 60%, 0 50%, 40% 40%);
+  animation: hw-spark 0.9s ease-out forwards;
+}
+
+@keyframes hw-spark {
+  from { opacity: 1; transform: translate(0, 0) scale(1) rotate(0deg); }
+  to { opacity: 0; transform: translate(var(--dx), var(--dy)) scale(0.3) rotate(120deg); }
+}
+
+[data-theme='hogwarts'] .post-item h2 > a {
+  color: var(--hw-gold);
+  transition: color 0.3s ease, text-shadow 0.3s ease;
+}
+
+[data-theme='hogwarts'] .post-item:hover h2 > a {
+  color: #ffe9b0;
+  text-shadow: 0 0 12px rgba(255, 200, 110, 0.6);
+}
+
+[data-theme='hogwarts'] .featured-label {
+  font-family: var(--hw-fell-sc);
+  font-size: 0.85rem;
+  letter-spacing: 0.08em;
+  color: var(--hw-gold);
+  background: rgba(122, 31, 31, 0.85);
+  border-color: rgba(243, 210, 122, 0.5);
+  border-radius: 2px;
+}
+
+/* Tags: small caps on the parchment, gold thread inside the rifts. */
+[data-theme='hogwarts'] .tag:not(.token) {
+  font-family: var(--hw-fell-sc);
+  font-size: 0.85rem;
+  font-weight: 400;
+}
+
+[data-theme='hogwarts'] .post-item .tag:not(.token) {
+  color: var(--text-primary);
+  border-color: rgba(255, 207, 107, 0.35);
+  background: rgba(255, 207, 107, 0.06);
+  box-shadow: none;
+}
+
+[data-theme='hogwarts'] .post-item .tag:not(.token):hover {
+  animation: tag-hover 500ms both;
+}
+
+/* Post page: a front page of the Daily Prophet. The article becomes a
+   sheet of newsprint, the post title is set as the masthead between its
+   dateline and motto, and flex order lifts all of it above the picture. */
+[data-theme='hogwarts'] .post-article {
+  display: flex;
+  flex-direction: column;
+  max-width: 58rem;
+  margin: 0 auto;
+  padding: 2rem 3rem 1.5rem;
+  color: #231a10;
+  background:
+    radial-gradient(ellipse at 15% 8%, rgba(255, 255, 255, 0.4), transparent 55%),
+    radial-gradient(ellipse at 90% 85%, rgba(120, 90, 40, 0.14), transparent 55%),
+    linear-gradient(90deg, transparent 49.8%, rgba(80, 60, 30, 0.07) 50%, transparent 50.2%),
+    var(--hw-newsprint);
+  box-shadow:
+    0 2px 4px rgba(60, 40, 15, 0.2),
+    0 18px 40px rgba(60, 40, 15, 0.28),
+    inset 0 0 90px rgba(120, 90, 40, 0.2);
+}
+
+[data-theme='hogwarts'] .post-article > div:last-child {
+  display: contents;
+}
+
+[data-theme='hogwarts'] .prophet-masthead {
+  display: contents;
+}
+
+[data-theme='hogwarts'] .prophet-dateline {
+  order: -4;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 0.25rem 1rem;
+  padding: 0.3rem 0;
+  border-top: 1px solid var(--hw-ink-soft);
+  border-bottom: 1px solid var(--hw-ink-soft);
+  font-family: var(--hw-fell-sc);
+  font-size: 0.85rem;
+  letter-spacing: 0.1em;
+}
+
+[data-theme='hogwarts'] .prophet-motto {
+  order: -2;
+  text-align: center;
+  color: #1a120a;
+  padding-bottom: 0.6rem;
+  border-bottom: 4px double rgba(59, 42, 23, 0.6);
+  font-family: var(--hw-fell);
+  font-style: italic;
+}
+
+[data-theme='hogwarts'] .post-article .post-title-row {
+  order: -3;
+  justify-content: center;
+  text-align: center;
+  margin: 0.6rem 0 0.1rem;
+}
+
+[data-theme='hogwarts'] .post-article .post-title-row h2 {
+  font-family: var(--hw-blackletter);
+  font-size: clamp(2.3rem, 7vw, 4.5rem);
+  line-height: 1.12;
+  color: #1a120a;
+}
+
+[data-theme='hogwarts'] .post-article > div:last-child > div.mt-4 {
+  text-align: center;
+}
+
+/* The masthead dateline already carries the dates and reading time. */
+[data-theme='hogwarts'] .post-article > div:last-child > p.text-sm {
+  display: none;
+}
+
+/* A wizarding photograph: sepia, mounted, and never quite still. */
+[data-theme='hogwarts'] .post-cover-frame {
+  order: -1;
+  position: relative;
+  overflow: hidden;
+  margin: 0.75rem 0 1rem;
+  border: 10px solid #f8f1de;
+  outline: 1px solid var(--hw-ink-soft);
+  box-shadow: 0 6px 18px rgba(60, 40, 15, 0.28);
+}
+
+[data-theme='hogwarts'] .post-cover-image {
+  margin-bottom: 0;
+  border-radius: 0;
+  box-shadow: none;
+  filter: sepia(0.75) contrast(1.05) brightness(0.95);
+  animation: hw-moving-picture 18s ease-in-out infinite alternate;
+}
+
+[data-theme='hogwarts'] .post-cover-frame::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  box-shadow: inset 0 0 70px rgba(40, 25, 5, 0.55);
+  animation: hw-film-flicker 5s steps(1, end) infinite;
+}
+
+@keyframes hw-moving-picture {
+  0% { transform: scale(1.03) translate(0, 0); }
+  50% { transform: scale(1.1) translate(-1.5%, 1%); }
+  100% { transform: scale(1.06) translate(1.5%, -1%); }
+}
+
+@keyframes hw-film-flicker {
+  0%, 100% { background: transparent; }
+  40% { background: rgba(255, 240, 200, 0.06); }
+  42% { background: transparent; }
+  71% { background: rgba(40, 25, 5, 0.06); }
+  73% { background: transparent; }
+}
+
+/* Newsprint body copy. */
+[data-theme='hogwarts'] .post-article .content {
+  color: #231a10;
+  text-align: justify;
+  hyphens: auto;
+}
+
+[data-theme='hogwarts'] .post-article .content > p,
+[data-theme='hogwarts'] .post-article .content > ul > li,
+[data-theme='hogwarts'] .post-article .content > ol > li {
+  font-size: 1.3rem;
+  line-height: 1.65;
+}
+
+[data-theme='hogwarts'] .post-article .content > p:first-of-type::first-letter {
+  float: left;
+  padding: 0.06em 0.1em 0 0;
+  font-family: var(--hw-blackletter);
+  font-size: 4.4em;
+  line-height: 0.8;
+  color: var(--hw-crimson);
+}
+
+[data-theme='hogwarts'] .post-article .content > h2 {
+  padding-top: 0.6rem;
+  border-top: 3px double var(--hw-ink-soft);
+  font-family: var(--hw-headline);
+  font-weight: 800;
+  text-align: left;
+}
+
+[data-theme='hogwarts'] .post-article .content > h3,
+[data-theme='hogwarts'] .post-article .content > h4 {
+  font-style: italic;
+  color: var(--hw-crimson);
+}
+
+[data-theme='hogwarts'] .post-article .content > blockquote {
+  margin: 2rem 3rem;
+  padding: 0.75rem 0;
+  border-left: none;
+  border-top: 1px solid var(--hw-ink-soft);
+  border-bottom: 1px solid var(--hw-ink-soft);
+  font-family: var(--hw-fell);
+  font-style: italic;
+  text-align: center;
+}
+
+[data-theme='hogwarts'] .content > table {
+  background: transparent;
+  backdrop-filter: none;
+  border: 1px solid var(--hw-ink-soft);
+  border-radius: 0;
+}
+
+[data-theme='hogwarts'] .content > table thead {
+  background: rgba(122, 31, 31, 0.08);
+  border-bottom: 3px double var(--hw-ink-soft);
+}
+
+[data-theme='hogwarts'] .content > table th {
+  font-family: var(--hw-fell-sc);
+  font-size: 0.95rem;
+  font-weight: 400;
+}
+
+[data-theme='hogwarts'] .content > table td {
+  text-align: left;
+}
+
+[data-theme='hogwarts'] .content > table tbody tr:hover {
+  background: rgba(120, 80, 40, 0.06);
+}
+
+[data-theme='hogwarts'] :not(pre) > code {
+  color: var(--hw-crimson);
+  background: rgba(122, 31, 31, 0.07);
+  border-color: rgba(122, 31, 31, 0.25);
+}
+
+/* Terminal lines style their own code, so hand it back to them. */
+[data-theme='hogwarts'] .terminal-line code {
+  color: inherit;
+  background: transparent;
+  border-color: var(--border-color);
+}
+
+[data-theme='hogwarts'] .code-block,
+[data-theme='hogwarts'] .terminal-block,
+[data-theme='hogwarts'] .github-card,
+[data-theme='hogwarts'] .post-nav-item a {
+  background: rgba(255, 250, 235, 0.55);
+  backdrop-filter: none;
+  border-color: var(--hw-ink-soft);
+  border-radius: 2px;
+  text-align: left;
+}
+
+[data-theme='hogwarts'] .code-block-header,
+[data-theme='hogwarts'] .terminal-header {
+  background: rgba(122, 31, 31, 0.06);
+  border-bottom-color: var(--hw-ink-soft);
+}
+
+[data-theme='hogwarts'] .code-block-lang {
+  font-family: var(--hw-fell-sc);
+  font-size: 0.85rem;
+  color: var(--hw-crimson);
+}
+
+[data-theme='hogwarts'] .terminal-block {
+  --terminal-text: #2f4a1f;
+}
+
+[data-theme='hogwarts'] .terminal-prompt {
+  color: var(--hw-crimson);
+}
+
+[data-theme='hogwarts'] .post-nav-item .nav-label {
+  font-family: var(--hw-fell-sc);
+  font-size: 0.85rem;
+  color: var(--hw-crimson);
+}
+
+[data-theme='hogwarts'] .post-nav-item .nav-title {
+  font-family: var(--hw-headline);
+  font-weight: 800;
+}
+
+[data-theme='hogwarts'] .article-end span {
+  color: var(--hw-crimson);
+}
+
+@media (max-width: 640px) {
+  [data-theme='hogwarts'] .post-article {
+    padding: 1.25rem 1.1rem 1rem;
+  }
+
+  [data-theme='hogwarts'] .post-article .content {
+    text-align: left;
+    hyphens: manual;
+  }
+
+  [data-theme='hogwarts'] .post-article .content > blockquote {
+    margin: 1.5rem 0.5rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  [data-theme='hogwarts'] .post-cover-image,
+  [data-theme='hogwarts'] .post-cover-frame::after {
+    animation: none !important;
+  }
+}

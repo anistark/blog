@@ -1,0 +1,469 @@
+/* Cyberpunk theme, after Cyberpunk: Edgerunners.
+   Neon yellow, terminal green and cyan on a green black, with notched corners
+   in place of the rounded glass the other themes use. The colour variables
+   live with the other themes in base.css, the Night City skyline is drawn
+   by ambience.js. */
+
+[data-theme='cyberpunk'] {
+  --cp-yellow: #fcee0a;
+  --cp-green: #00ff41;
+  --cp-cyan: #00f0ff;
+  --cp-ink: #010402;
+  --cp-display: 'Rajdhani', 'Open Sans', sans-serif;
+  --cp-notch: 18px;
+
+  /* A notch in the top right and bottom left corners. */
+  --cp-cut: polygon(
+    0 0,
+    calc(100% - var(--cp-notch)) 0,
+    100% var(--cp-notch),
+    100% 100%,
+    var(--cp-notch) 100%,
+    0 calc(100% - var(--cp-notch))
+  );
+
+  /* A thin neon line along a notch's diagonal. */
+  --cp-cut-line: linear-gradient(
+    to top right,
+    transparent calc(50% - 1px),
+    var(--cp-cyan) calc(50% - 1px) calc(50% + 0.5px),
+    transparent calc(50% + 0.5px)
+  );
+
+  background-color: var(--cp-ink);
+  background-image:
+    repeating-linear-gradient(0deg, rgba(0, 0, 0, 0.22) 0 1px, transparent 1px 3px),
+    radial-gradient(ellipse 90% 35% at 50% 110%, rgba(0, 255, 65, 0.14), transparent 70%),
+    radial-gradient(ellipse 60% 40% at 90% -10%, rgba(0, 240, 255, 0.04), transparent 70%),
+    linear-gradient(180deg, #010302 0%, #020805 55%, #04100a 100%);
+  background-attachment: fixed;
+  scrollbar-color: var(--cp-yellow) var(--cp-ink);
+}
+
+/* Behind the page rather than over it, so the skyline never sits on top of text. */
+[data-theme='cyberpunk'] #ambience-canvas {
+  z-index: -1;
+}
+
+[data-theme='cyberpunk'] ::selection {
+  background: var(--cp-yellow);
+  color: var(--cp-ink);
+}
+
+[data-theme='cyberpunk'] :focus-visible {
+  outline: 2px solid var(--cp-yellow);
+  outline-offset: 2px;
+}
+
+/* Type */
+[data-theme='cyberpunk'] h1,
+[data-theme='cyberpunk'] h2,
+[data-theme='cyberpunk'] h3,
+[data-theme='cyberpunk'] h4,
+[data-theme='cyberpunk'] h5,
+[data-theme='cyberpunk'] h6 {
+  font-family: var(--cp-display);
+  letter-spacing: 0.02em;
+}
+
+[data-theme='cyberpunk'] h3,
+[data-theme='cyberpunk'] h4,
+[data-theme='cyberpunk'] h5,
+[data-theme='cyberpunk'] h6 {
+  color: var(--cp-cyan);
+}
+
+/* Chromatic aberration on the big headings. */
+[data-theme='cyberpunk'] .post-title-row h2,
+[data-theme='cyberpunk'] .content > h2 {
+  text-shadow: -2px 0 rgba(0, 255, 65, 0.7), 2px 0 rgba(0, 240, 255, 0.55);
+}
+
+[data-theme='cyberpunk'] .content > h2::before {
+  content: '// ';
+  color: var(--cp-green);
+  text-shadow: none;
+}
+
+[data-theme='cyberpunk'] a {
+  color: var(--cp-green);
+}
+
+[data-theme='cyberpunk'] a:hover {
+  color: var(--cp-cyan);
+}
+
+[data-theme='cyberpunk'] h1 > a,
+[data-theme='cyberpunk'] h2 > a {
+  color: var(--cp-yellow);
+}
+
+[data-theme='cyberpunk'] .post-item h2 > a {
+  color: #eef3ff;
+  transition: color 0.2s ease, text-shadow 0.2s ease;
+}
+
+[data-theme='cyberpunk'] .post-item:hover h2 > a {
+  color: var(--cp-yellow);
+  text-shadow: -1.5px 0 rgba(0, 255, 65, 0.75), 1.5px 0 rgba(0, 240, 255, 0.6);
+}
+
+[data-theme='cyberpunk'] hr {
+  border-color: rgba(0, 240, 255, 0.35);
+  border-style: dashed;
+}
+
+[data-theme='cyberpunk'] .content > blockquote {
+  border-left-color: var(--cp-yellow);
+  background: rgba(252, 238, 10, 0.05);
+}
+
+[data-theme='cyberpunk'] :not(pre) > code {
+  color: var(--cp-yellow);
+  background: rgba(252, 238, 10, 0.07);
+  border-color: rgba(252, 238, 10, 0.3);
+  border-radius: 0;
+}
+
+/* Terminal lines style their own code, so hand it back to them. */
+[data-theme='cyberpunk'] .terminal-line code {
+  color: inherit;
+  background: transparent;
+  border-color: var(--border-color);
+}
+
+[data-theme='cyberpunk'] pre {
+  border-radius: 0;
+}
+
+/* Header and footer */
+[data-theme='cyberpunk'] .glass-header {
+  border-bottom: 1px solid;
+  border-image: linear-gradient(90deg, var(--cp-green), var(--cp-yellow) 50%, var(--cp-cyan)) 1;
+  box-shadow: 0 8px 32px rgba(0, 255, 65, 0.18);
+}
+
+[data-theme='cyberpunk'] .glass-footer {
+  border-top: 1px solid;
+  border-image: linear-gradient(90deg, var(--cp-cyan), var(--cp-yellow) 50%, var(--cp-green)) 1;
+  box-shadow: 0 -8px 32px rgba(0, 240, 255, 0.12);
+}
+
+[data-theme='cyberpunk'] .glass-header h1 {
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  text-shadow: -1.5px 0 rgba(0, 255, 65, 0.7), 1.5px 0 rgba(0, 240, 255, 0.55);
+}
+
+[data-theme='cyberpunk'] .glass-header img {
+  filter: drop-shadow(0 0 6px rgba(0, 240, 255, 0.45));
+}
+
+[data-theme='cyberpunk'] .glass-header a:hover h1 {
+  animation: cp-glitch 0.6s steps(2, end) both;
+}
+
+@keyframes cp-glitch {
+  0% { transform: translate(0); text-shadow: -1.5px 0 rgba(0, 255, 65, 0.7), 1.5px 0 rgba(0, 240, 255, 0.55); }
+  20% { transform: translate(-2px, 1px); text-shadow: 3px 0 rgba(0, 255, 65, 0.9), -3px 0 rgba(0, 240, 255, 0.8); clip-path: inset(10% 0 45% 0); }
+  40% { transform: translate(2px, -1px); text-shadow: -3px 0 rgba(0, 255, 65, 0.9), 3px 0 rgba(0, 240, 255, 0.8); clip-path: inset(55% 0 5% 0); }
+  60% { transform: translate(-1px, 0); text-shadow: 2px 0 rgba(0, 255, 65, 0.8), -2px 0 rgba(0, 240, 255, 0.7); clip-path: inset(0); }
+  100% { transform: translate(0); text-shadow: -1.5px 0 rgba(0, 255, 65, 0.7), 1.5px 0 rgba(0, 240, 255, 0.55); }
+}
+
+/* Theme switcher */
+[data-theme='cyberpunk'] .theme-switcher-btn {
+  border-radius: 0;
+  clip-path: polygon(0 0, calc(100% - 8px) 0, 100% 8px, 100% 100%, 8px 100%, 0 calc(100% - 8px));
+  border-color: rgba(252, 238, 10, 0.4);
+  color: var(--cp-yellow);
+}
+
+[data-theme='cyberpunk'] .theme-switcher-btn:hover {
+  border-color: var(--cp-yellow);
+  box-shadow: inset 0 0 12px rgba(252, 238, 10, 0.25);
+}
+
+[data-theme='cyberpunk'] .theme-dropdown {
+  border-radius: 0;
+  border-color: rgba(0, 240, 255, 0.4);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.6), 0 0 24px rgba(0, 240, 255, 0.12);
+}
+
+[data-theme='cyberpunk'] .theme-option {
+  border-radius: 0;
+  font-family: var(--cp-display);
+  font-size: 0.95rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  border-left: 2px solid transparent;
+}
+
+[data-theme='cyberpunk'] .theme-option.active {
+  color: var(--cp-yellow);
+  border-left-color: var(--cp-yellow);
+}
+
+/* Post cards: notched corners, a neon edge and a yellow tab, like a HUD panel. */
+[data-theme='cyberpunk'] .post-item {
+  border-radius: 0;
+  clip-path: var(--cp-cut);
+  box-shadow: inset 0 0 0 1px var(--border-color);
+}
+
+[data-theme='cyberpunk'] .post-item:hover {
+  box-shadow: inset 0 0 0 1px var(--border-color-hover), inset 0 0 40px rgba(0, 255, 65, 0.14);
+}
+
+[data-theme='cyberpunk'] .post-item::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  pointer-events: none;
+  background:
+    var(--cp-cut-line) top right / var(--cp-notch) var(--cp-notch) no-repeat,
+    var(--cp-cut-line) bottom left / var(--cp-notch) var(--cp-notch) no-repeat,
+    linear-gradient(var(--cp-yellow), var(--cp-yellow)) top left / 56px 3px no-repeat,
+    linear-gradient(transparent, rgba(0, 255, 65, 0.16) 60%, rgba(0, 240, 255, 0.35) 95%, transparent) 0 -48px / 100% 48px no-repeat;
+  opacity: 0.55;
+  transition: opacity 0.2s ease;
+}
+
+[data-theme='cyberpunk'] .post-item:hover::after,
+[data-theme='cyberpunk'] .post-item:focus-within::after {
+  opacity: 1;
+}
+
+/* A burst of signal corruption as a card is picked: the contents jitter, the
+   title tears and a scan line sweeps down. It plays once, then settles. */
+[data-theme='cyberpunk'] .post-item:hover::after,
+[data-theme='cyberpunk'] .post-item:focus-within::after {
+  animation: cp-scan 0.55s ease-in both;
+}
+
+[data-theme='cyberpunk'] .post-item:hover .post-content,
+[data-theme='cyberpunk'] .post-item:focus-within .post-content {
+  animation: cp-jitter 0.4s steps(1, end) both;
+}
+
+[data-theme='cyberpunk'] .post-item:hover h2 > a,
+[data-theme='cyberpunk'] .post-item:focus-within h2 > a {
+  animation: cp-glitch 0.5s steps(2, end) both;
+}
+
+@keyframes cp-scan {
+  from { background-position: top right, bottom left, top left, 0 -48px; }
+  to { background-position: top right, bottom left, top left, 0 calc(100% + 48px); }
+}
+
+@keyframes cp-jitter {
+  0% { transform: translate(0); }
+  15% { transform: translate(-4px, 1px) skewX(-3deg); }
+  30% { transform: translate(3px, -1px); }
+  45% { transform: translate(-2px, 0) skewX(2deg); }
+  60% { transform: translate(1px, 0); }
+  75%, 100% { transform: translate(0); }
+}
+
+[data-theme='cyberpunk'] .post-item.has-background::before {
+  border-radius: 0;
+  background: linear-gradient(135deg, rgba(2, 8, 5, 0.92) 0%, rgba(4, 28, 14, 0.78) 100%);
+}
+
+[data-theme='cyberpunk'] .featured-label {
+  font-family: var(--cp-display);
+  font-size: 0.8rem;
+  color: var(--cp-ink);
+  background: var(--cp-yellow);
+  border: none;
+  border-radius: 0;
+  clip-path: polygon(0 0, 100% 0, 100% calc(100% - 6px), calc(100% - 6px) 100%, 0 100%);
+}
+
+/* Cover image as a Night City billboard: a neon tube frame that blooms into
+   the dark and stutters now and then. The glow sits on the frame wrapper,
+   since the notch clip on the image itself would cut a shadow off. */
+[data-theme='cyberpunk'] .post-cover-frame {
+  position: relative;
+  padding: 3px;
+  margin: 0.5rem 0 2.5rem;
+  filter: drop-shadow(0 0 6px rgba(0, 255, 65, 0.55)) drop-shadow(0 0 24px rgba(0, 255, 65, 0.25));
+}
+
+[data-theme='cyberpunk'] .post-cover-frame::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  clip-path: var(--cp-cut);
+  background: linear-gradient(90deg, var(--cp-green), var(--cp-cyan) 50%, var(--cp-green));
+  animation: cp-tube-flicker 7s linear infinite;
+}
+
+[data-theme='cyberpunk'] .post-cover-image {
+  position: relative;
+  margin-bottom: 0;
+  border-radius: 0;
+  box-shadow: inset 0 0 36px rgba(0, 255, 65, 0.3);
+  clip-path: polygon(
+    0 0,
+    calc(100% - 17px) 0,
+    100% 17px,
+    100% 100%,
+    17px 100%,
+    0 calc(100% - 17px)
+  );
+}
+
+/* Faint scanlines so the picture reads as a lit screen. */
+[data-theme='cyberpunk'] .post-cover-image::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(0deg, rgba(0, 0, 0, 0.16) 0 1px, transparent 1px 3px);
+  pointer-events: none;
+}
+
+@keyframes cp-tube-flicker {
+  0%, 90%, 92%, 95%, 100% { opacity: 1; }
+  91% { opacity: 0.35; }
+  93% { opacity: 0.7; }
+  94% { opacity: 0.25; }
+}
+
+/* Tags */
+[data-theme='cyberpunk'] .tag:not(.token) {
+  border-radius: 0;
+  clip-path: polygon(6px 0, 100% 0, 100% calc(100% - 6px), calc(100% - 6px) 100%, 0 100%, 0 6px);
+  font-family: 'Source Code Pro', ui-monospace, monospace;
+  box-shadow: none;
+}
+
+[data-theme='cyberpunk'] .tag:not(.token):hover {
+  animation: cp-tag-hover 250ms both;
+}
+
+@keyframes cp-tag-hover {
+  100% {
+    border: 1px solid var(--cp-yellow);
+    background-color: rgba(252, 238, 10, 0.14);
+    color: var(--cp-yellow);
+    transform: translateY(-2px);
+  }
+}
+
+/* Tables */
+[data-theme='cyberpunk'] .content > table {
+  border-radius: 0;
+}
+
+[data-theme='cyberpunk'] .content > table thead {
+  background: rgba(0, 255, 65, 0.12);
+  border-bottom-color: rgba(0, 255, 65, 0.5);
+}
+
+[data-theme='cyberpunk'] .content > table th {
+  font-family: var(--cp-display);
+  font-size: 0.95rem;
+}
+
+[data-theme='cyberpunk'] .content > table tbody tr:hover {
+  background: rgba(0, 240, 255, 0.06);
+}
+
+/* Code and terminal blocks */
+[data-theme='cyberpunk'] .code-block,
+[data-theme='cyberpunk'] .terminal-block {
+  border-radius: 0;
+  clip-path: polygon(0 0, calc(100% - 12px) 0, 100% 12px, 100% 100%, 0 100%);
+  border-color: rgba(0, 240, 255, 0.28);
+}
+
+[data-theme='cyberpunk'] .code-block-header,
+[data-theme='cyberpunk'] .terminal-header {
+  background: rgba(0, 255, 65, 0.08);
+  border-bottom-color: rgba(0, 255, 65, 0.3);
+}
+
+[data-theme='cyberpunk'] .code-block-lang {
+  color: var(--cp-green);
+}
+
+[data-theme='cyberpunk'] .code-block-copy,
+[data-theme='cyberpunk'] .terminal-copy {
+  border-radius: 0;
+}
+
+[data-theme='cyberpunk'] .terminal-block {
+  --terminal-text: var(--cp-green);
+}
+
+[data-theme='cyberpunk'] .terminal-prompt {
+  color: var(--cp-yellow);
+}
+
+[data-theme='cyberpunk'] .terminal-dot {
+  border-radius: 0;
+}
+
+[data-theme='cyberpunk'] .terminal-dot-red { background: var(--cp-green); }
+[data-theme='cyberpunk'] .terminal-dot-yellow { background: var(--cp-yellow); }
+[data-theme='cyberpunk'] .terminal-dot-green { background: var(--cp-cyan); }
+
+/* Post navigation, GitHub card, draft badge */
+[data-theme='cyberpunk'] .post-nav-item a,
+[data-theme='cyberpunk'] .github-card {
+  border-radius: 0;
+  clip-path: var(--cp-cut);
+}
+
+[data-theme='cyberpunk'] .post-nav-item a:hover {
+  box-shadow: inset 0 0 32px rgba(0, 255, 65, 0.14);
+}
+
+[data-theme='cyberpunk'] .post-nav-item .nav-label {
+  font-family: var(--cp-display);
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--cp-green);
+}
+
+[data-theme='cyberpunk'] .post-nav-item .nav-arrow {
+  color: var(--cp-yellow);
+}
+
+[data-theme='cyberpunk'] .github-card-avatar-wrap,
+[data-theme='cyberpunk'] .github-card-pill,
+[data-theme='cyberpunk'] .draft-badge {
+  border-radius: 0;
+}
+
+/* End of article: three neon sparks instead of soft stars. */
+[data-theme='cyberpunk'] .article-end span {
+  color: var(--cp-green);
+  text-shadow: 0 0 8px currentColor;
+}
+
+[data-theme='cyberpunk'] .article-end span:nth-child(2) {
+  color: var(--cp-yellow);
+}
+
+[data-theme='cyberpunk'] .article-end span:nth-child(3) {
+  color: var(--cp-cyan);
+}
+
+[data-theme='cyberpunk'] .load-more-button:hover {
+  color: var(--cp-yellow);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  [data-theme='cyberpunk'] .glass-header a:hover h1,
+  [data-theme='cyberpunk'] .post-item::after,
+  [data-theme='cyberpunk'] .post-item .post-content,
+  [data-theme='cyberpunk'] .post-item h2 > a,
+  [data-theme='cyberpunk'] .post-cover-frame::before {
+    animation: none !important;
+  }
+}

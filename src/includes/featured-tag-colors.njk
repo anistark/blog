@@ -1,6 +1,7 @@
 {# Featured tag colours, generated from globals/featuredTags.json so they apply
    wherever a featured tag shows up, not just in the featured tags list.
-   The accent tints the background and border, text is the label colour. #}
+   The accent tints the background and border, text is the label colour.
+   Hogwarts is a light theme, but its post cards are dark, so they take the dark pair. #}
 <style>
 {%- for tag in featuredTags %}
   .tag.{{ tag.name }} {
@@ -9,10 +10,16 @@
     color: {{ tag.dark.text }};
   }
   [data-theme='reading'] .tag.{{ tag.name }},
-  [data-theme='beach'] .tag.{{ tag.name }} {
+  [data-theme='beach'] .tag.{{ tag.name }},
+  [data-theme='hogwarts'] .tag.{{ tag.name }} {
     background: color-mix(in srgb, {{ tag.light.accent }} 8%, transparent);
     border-color: color-mix(in srgb, {{ tag.light.accent }} 40%, transparent);
     color: {{ tag.light.text }};
+  }
+  [data-theme='hogwarts'] .post-item .tag.{{ tag.name }} {
+    background: color-mix(in srgb, {{ tag.dark.accent }} 12%, transparent);
+    border-color: color-mix(in srgb, {{ tag.dark.accent }} 45%, transparent);
+    color: {{ tag.dark.text }};
   }
 {%- endfor %}
 </style>

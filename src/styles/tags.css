@@ -101,14 +101,16 @@
 }
 
 [data-theme='reading'] .tag:not(.token),
-[data-theme='beach'] .tag:not(.token) {
+[data-theme='beach'] .tag:not(.token),
+[data-theme='hogwarts'] .tag:not(.token) {
   color: #1b0f0a;
   border: 1px solid rgba(93, 64, 55, 0.3);
   box-shadow: 0 4px 12px rgba(93, 64, 55, 0.15), 0 0 0 1px rgba(255, 255, 255, 0.4) inset;
 }
 
 [data-theme='reading'] .tag:not(.token)::after,
-[data-theme='beach'] .tag:not(.token)::after {
+[data-theme='beach'] .tag:not(.token)::after,
+[data-theme='hogwarts'] .tag:not(.token)::after {
   background: linear-gradient(
     135deg,
     rgba(255, 255, 255, 0) 0%,
@@ -120,7 +122,8 @@
 }
 
 [data-theme='reading'] .tag:not(.token):hover,
-[data-theme='beach'] .tag:not(.token):hover {
+[data-theme='beach'] .tag:not(.token):hover,
+[data-theme='hogwarts'] .tag:not(.token):hover {
   animation: tag-hover-light 500ms both;
 }
 
@@ -148,21 +151,24 @@
 /* Light themes - darker tag text on faint tinted background */
 
 [data-theme='reading'] .tag.web3,
-[data-theme='beach'] .tag.web3 {
+[data-theme='beach'] .tag.web3,
+[data-theme='hogwarts'] .tag.web3 {
   background: rgba(124, 58, 237, 0.08);
   border-color: rgba(124, 58, 237, 0.4);
   color: #6d28d9;
 }
 
 [data-theme='reading'] .tag.llm,
-[data-theme='beach'] .tag.llm {
+[data-theme='beach'] .tag.llm,
+[data-theme='hogwarts'] .tag.llm {
   background: rgba(99, 102, 241, 0.08);
   border-color: rgba(99, 102, 241, 0.4);
   color: #4338ca;
 }
 
 [data-theme='reading'] .tag.post,
-[data-theme='beach'] .tag.post {
+[data-theme='beach'] .tag.post,
+[data-theme='hogwarts'] .tag.post {
   background: rgba(100, 116, 139, 0.08);
   border-color: rgba(100, 116, 139, 0.4);
   color: #475569;

@@ -55,6 +55,32 @@
   --accent-secondary: #01579b;
 }
 
+[data-theme='cyberpunk'] {
+  --bg-primary: rgba(1, 4, 2, 0.5);
+  --bg-secondary: rgba(4, 14, 9, 0.82);
+  --bg-glass: rgba(1, 5, 3, 0.9);
+  --text-primary: #d6eedf;
+  --text-secondary: #7fdca6;
+  --text-heading: #fcee0a;
+  --border-color: rgba(0, 240, 255, 0.18);
+  --border-color-hover: rgba(0, 240, 255, 0.45);
+  --accent-primary: #00f0ff;
+  --accent-secondary: #00ff41;
+}
+
+[data-theme='hogwarts'] {
+  --bg-primary: rgba(236, 219, 178, 0.3);
+  --bg-secondary: rgba(248, 236, 204, 0.78);
+  --bg-glass: rgba(234, 214, 168, 0.93);
+  --text-primary: #3b2a17;
+  --text-secondary: #6b4e2e;
+  --text-heading: #2a1a0b;
+  --border-color: rgba(90, 60, 25, 0.25);
+  --border-color-hover: rgba(90, 60, 25, 0.45);
+  --accent-primary: #7a1f1f;
+  --accent-secondary: #b8860b;
+}
+
 /* Ambience canvas background */
 #ambience-canvas {
   position: fixed;
@@ -443,7 +469,8 @@ hr {
 }
 
 [data-theme='reading'] .post-item,
-[data-theme='beach'] .post-item {
+[data-theme='beach'] .post-item,
+[data-theme='hogwarts'] .post-item {
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
 
@@ -454,7 +481,8 @@ hr {
 }
 
 [data-theme='reading'] .post-item:hover,
-[data-theme='beach'] .post-item:hover {
+[data-theme='beach'] .post-item:hover,
+[data-theme='hogwarts'] .post-item:hover {
   box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
 }
 
@@ -484,7 +512,8 @@ hr {
 }
 
 [data-theme='reading'] .post-item.has-background::before,
-[data-theme='beach'] .post-item.has-background::before {
+[data-theme='beach'] .post-item.has-background::before,
+[data-theme='hogwarts'] .post-item.has-background::before {
   background: linear-gradient(
     135deg,
     rgba(255, 255, 255, 0.95) 0%,
@@ -520,6 +549,11 @@ hr {
   z-index: 2;
 }
 
+/* Newspaper masthead on post pages, only the Hogwarts theme shows it. */
+.prophet-masthead {
+  display: none;
+}
+
 /* Article cover image */
 .post-cover-image {
   width: 100%;
@@ -547,7 +581,8 @@ hr {
 }
 
 [data-theme='reading'] .glass-header,
-[data-theme='beach'] .glass-header {
+[data-theme='beach'] .glass-header,
+[data-theme='hogwarts'] .glass-header {
   box-shadow: 0 2px 8px 0 rgba(0, 0, 0, 0.1);
 }
 
@@ -559,7 +594,8 @@ hr {
 }
 
 [data-theme='reading'] .glass-footer,
-[data-theme='beach'] .glass-footer {
+[data-theme='beach'] .glass-footer,
+[data-theme='hogwarts'] .glass-footer {
   box-shadow: 0 -2px 8px 0 rgba(0, 0, 0, 0.1);
 }
 
@@ -571,7 +607,8 @@ hr {
 }
 
 [data-theme='reading'] .glass-privacy-notice,
-[data-theme='beach'] .glass-privacy-notice {
+[data-theme='beach'] .glass-privacy-notice,
+[data-theme='hogwarts'] .glass-privacy-notice {
   box-shadow: 0 -2px 8px 0 rgba(0, 0, 0, 0.1);
 }
 
@@ -657,7 +694,8 @@ hr {
 }
 
 [data-theme='reading'] .post-nav-item a:hover,
-[data-theme='beach'] .post-nav-item a:hover {
+[data-theme='beach'] .post-nav-item a:hover,
+[data-theme='hogwarts'] .post-nav-item a:hover {
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
 }
 
@@ -835,14 +873,16 @@ hr {
 }
 
 [data-theme='reading'] .draft-badge,
-[data-theme='beach'] .draft-badge {
+[data-theme='beach'] .draft-badge,
+[data-theme='hogwarts'] .draft-badge {
   background: rgba(255, 152, 0, 0.1);
   border-color: rgba(255, 152, 0, 0.4);
   box-shadow: 0 2px 8px rgba(255, 152, 0, 0.15);
 }
 
 [data-theme='reading'] .draft-badge span,
-[data-theme='beach'] .draft-badge span {
+[data-theme='beach'] .draft-badge span,
+[data-theme='hogwarts'] .draft-badge span {
   color: #f57c00;
 }
 
@@ -973,7 +1013,8 @@ hr {
 }
 
 [data-theme='reading'] .github-card-pill-archived,
-[data-theme='beach'] .github-card-pill-archived {
+[data-theme='beach'] .github-card-pill-archived,
+[data-theme='hogwarts'] .github-card-pill-archived {
   color: #8a5500;
   background: rgba(212, 167, 44, 0.2);
 }
@@ -1260,7 +1301,9 @@ hr {
 [data-theme='beach'] .code-block code[class*='language-'],
 [data-theme='beach'] .code-block pre[class*='language-'],
 [data-theme='reading'] .code-block code[class*='language-'],
-[data-theme='reading'] .code-block pre[class*='language-'] {
+[data-theme='reading'] .code-block pre[class*='language-'],
+[data-theme='hogwarts'] .code-block code[class*='language-'],
+[data-theme='hogwarts'] .code-block pre[class*='language-'] {
   color: #2b1d12;
   text-shadow: none;
 }
@@ -1272,12 +1315,17 @@ hr {
 [data-theme='reading'] .code-block .token.comment,
 [data-theme='reading'] .code-block .token.prolog,
 [data-theme='reading'] .code-block .token.doctype,
-[data-theme='reading'] .code-block .token.cdata {
+[data-theme='reading'] .code-block .token.cdata,
+[data-theme='hogwarts'] .code-block .token.comment,
+[data-theme='hogwarts'] .code-block .token.prolog,
+[data-theme='hogwarts'] .code-block .token.doctype,
+[data-theme='hogwarts'] .code-block .token.cdata {
   color: #6d5b3f;
 }
 
 [data-theme='beach'] .code-block .token.punctuation,
-[data-theme='reading'] .code-block .token.punctuation {
+[data-theme='reading'] .code-block .token.punctuation,
+[data-theme='hogwarts'] .code-block .token.punctuation {
   color: #3e2723;
 }
 
@@ -1292,14 +1340,22 @@ hr {
 [data-theme='reading'] .code-block .token.constant,
 [data-theme='reading'] .code-block .token.symbol,
 [data-theme='reading'] .code-block .token.deleted,
-[data-theme='reading'] .code-block .token.keyword {
+[data-theme='reading'] .code-block .token.keyword,
+[data-theme='hogwarts'] .code-block .token.property,
+[data-theme='hogwarts'] .code-block .token.tag,
+[data-theme='hogwarts'] .code-block .token.constant,
+[data-theme='hogwarts'] .code-block .token.symbol,
+[data-theme='hogwarts'] .code-block .token.deleted,
+[data-theme='hogwarts'] .code-block .token.keyword {
   color: #ad1457;
 }
 
 [data-theme='beach'] .code-block .token.boolean,
 [data-theme='beach'] .code-block .token.number,
 [data-theme='reading'] .code-block .token.boolean,
-[data-theme='reading'] .code-block .token.number {
+[data-theme='reading'] .code-block .token.number,
+[data-theme='hogwarts'] .code-block .token.boolean,
+[data-theme='hogwarts'] .code-block .token.number {
   color: #6a1b9a;
 }
 
@@ -1314,7 +1370,13 @@ hr {
 [data-theme='reading'] .code-block .token.string,
 [data-theme='reading'] .code-block .token.char,
 [data-theme='reading'] .code-block .token.builtin,
-[data-theme='reading'] .code-block .token.inserted {
+[data-theme='reading'] .code-block .token.inserted,
+[data-theme='hogwarts'] .code-block .token.selector,
+[data-theme='hogwarts'] .code-block .token.attr-name,
+[data-theme='hogwarts'] .code-block .token.string,
+[data-theme='hogwarts'] .code-block .token.char,
+[data-theme='hogwarts'] .code-block .token.builtin,
+[data-theme='hogwarts'] .code-block .token.inserted {
   color: #2e7d32;
 }
 
@@ -1325,7 +1387,11 @@ hr {
 [data-theme='reading'] .code-block .token.operator,
 [data-theme='reading'] .code-block .token.entity,
 [data-theme='reading'] .code-block .token.url,
-[data-theme='reading'] .code-block .token.variable {
+[data-theme='reading'] .code-block .token.variable,
+[data-theme='hogwarts'] .code-block .token.operator,
+[data-theme='hogwarts'] .code-block .token.entity,
+[data-theme='hogwarts'] .code-block .token.url,
+[data-theme='hogwarts'] .code-block .token.variable {
   color: #3e2723;
 }
 
@@ -1336,14 +1402,20 @@ hr {
 [data-theme='reading'] .code-block .token.atrule,
 [data-theme='reading'] .code-block .token.attr-value,
 [data-theme='reading'] .code-block .token.function,
-[data-theme='reading'] .code-block .token.class-name {
+[data-theme='reading'] .code-block .token.class-name,
+[data-theme='hogwarts'] .code-block .token.atrule,
+[data-theme='hogwarts'] .code-block .token.attr-value,
+[data-theme='hogwarts'] .code-block .token.function,
+[data-theme='hogwarts'] .code-block .token.class-name {
   color: #0d47a1;
 }
 
 [data-theme='beach'] .code-block .token.regex,
 [data-theme='beach'] .code-block .token.important,
 [data-theme='reading'] .code-block .token.regex,
-[data-theme='reading'] .code-block .token.important {
+[data-theme='reading'] .code-block .token.important,
+[data-theme='hogwarts'] .code-block .token.regex,
+[data-theme='hogwarts'] .code-block .token.important {
   color: #bf360c;
 }
 

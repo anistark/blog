@@ -9,80 +9,100 @@ permalink: "{% if path %}{{ path | slug }}{% else %}{{ page.fileSlug }}{% endif 
 {% block body %}
     <p>{{url}}</p>
 
-    {% if featuredImage %}
-        <div class="post-cover-image" style="background-image: url('{{ featuredImage }}');"></div>
-    {% endif %}
-
-    <div>
-        <div class="post-title-row">
-            <h2>{{ title | titleCase }}</h2>
-            {% if draft %}
-                <div class="draft-badge">
-                    <span>⚠️ DRAFT</span>
+    <article class="post-article">
+        {# Only the Hogwarts theme shows this, setting the post title as a newspaper masthead. #}
+        <div class="prophet-masthead">
+            {% if date %}
+                <div class="prophet-dateline">
+                    {% if updatedDate and (date|string) !== (updatedDate|string) %}
+                        <span>Updated <time class="relative-date" datetime="{{ updatedDate.toISOString().slice(0, 10) }}" title="{{ updatedDate | dateDisplay }}">on {{ updatedDate | dateDisplay }}</time></span>
+                    {% else %}
+                        <span>Published <time class="relative-date" datetime="{{ date.toISOString().slice(0, 10) }}" title="{{ date | dateDisplay }}">on {{ date | dateDisplay }}</time></span>
+                    {% endif %}
+                    <span>{{ date | dateDisplay }}</span>
+                    <span>{{ content | readingTime }}</span>
                 </div>
             {% endif %}
+            <div class="prophet-motto" aria-hidden="true">The wizarding world's beguiling broadsheet of choice</div>
         </div>
 
-        {% if tags %}
-            <div class="mt-4 mb-2">
-                {% for tag in tags %}
-                    {%- if tag !== "post" -%}
-                        <a class="tag {{ tag | replace('.', '') }}" href="{{ site.baseUrl }}tag/{{ tag }}">{{ tag }}</a>
-                    {%- endif -%}
-                {% endfor %}
+        {% if featuredImage %}
+            <div class="post-cover-frame">
+                <div class="post-cover-image" style="background-image: url('{{ featuredImage }}');"></div>
             </div>
         {% endif %}
 
-        {% if date %}
-            {% if updatedDate and (date|string) !== (updatedDate|string) %}
-              <p class="text-sm italic">Last updated
-                    <time class="relative-date" datetime="{{ updatedDate.toISOString().slice(0, 10) }}" title="{{ updatedDate | dateDisplay }}">on {{ updatedDate | dateDisplay }}</time>. Published
-                    <time class="relative-date" datetime="{{ date.toISOString().slice(0, 10) }}" title="{{ date | dateDisplay }}">on {{ date | dateDisplay }}</time>.
-                    <span class="reading-time"> · {{ content | readingTime }}</span></p>
-            {% else %}
-                <p class="text-sm italic">Published
-                    <time class="relative-date" datetime="{{ date.toISOString().slice(0, 10) }}" title="{{ date | dateDisplay }}">on {{ date | dateDisplay }}</time>.
-                    <span class="reading-time"> · {{ content | readingTime }}</span></p>
+        <div>
+            <div class="post-title-row">
+                <h2>{{ title | titleCase }}</h2>
+                {% if draft %}
+                    <div class="draft-badge">
+                        <span>⚠️ DRAFT</span>
+                    </div>
+                {% endif %}
+            </div>
+
+            {% if tags %}
+                <div class="mt-4 mb-2">
+                    {% for tag in tags %}
+                        {%- if tag !== "post" -%}
+                            <a class="tag {{ tag | replace('.', '') }}" href="{{ site.baseUrl }}tag/{{ tag }}">{{ tag }}</a>
+                        {%- endif -%}
+                    {% endfor %}
+                </div>
             {% endif %}
-        {% endif %}
 
-        <div class="content post">
-            {{ content | safe }}
-        </div>
-
-        <div class="article-end">
-            <span>✦</span>
-            <span>✦</span>
-            <span>✦</span>
-        </div>
-
-        {%- set nextPost = collections['postsWithoutDrafts'] | getNextCollectionItem(page) %}
-        {%- set previousPost = collections['postsWithoutDrafts'] | getPreviousCollectionItem(page) %}
-
-        <div class="post-navigation">
-            <div class="post-nav-item post-nav-previous">
-                {%- if previousPost %}
-                    <a href="{{ previousPost.url | url }}">
-                        <span class="nav-arrow">←</span>
-                        <div class="nav-content">
-                            <p class="nav-label">Previous</p>
-                            <p class="nav-title">{{ previousPost.data.title | titleCase }}</p>
-                        </div>
-                    </a>
+            {% if date %}
+                {% if updatedDate and (date|string) !== (updatedDate|string) %}
+                  <p class="text-sm italic">Last updated
+                        <time class="relative-date" datetime="{{ updatedDate.toISOString().slice(0, 10) }}" title="{{ updatedDate | dateDisplay }}">on {{ updatedDate | dateDisplay }}</time>. Published
+                        <time class="relative-date" datetime="{{ date.toISOString().slice(0, 10) }}" title="{{ date | dateDisplay }}">on {{ date | dateDisplay }}</time>.
+                        <span class="reading-time"> · {{ content | readingTime }}</span></p>
+                {% else %}
+                    <p class="text-sm italic">Published
+                        <time class="relative-date" datetime="{{ date.toISOString().slice(0, 10) }}" title="{{ date | dateDisplay }}">on {{ date | dateDisplay }}</time>.
+                        <span class="reading-time"> · {{ content | readingTime }}</span></p>
                 {% endif %}
+            {% endif %}
+
+            <div class="content post">
+                {{ content | safe }}
             </div>
 
-            <div class="post-nav-item post-nav-next">
-                {%- if nextPost %}
-                    <a href="{{ nextPost.url | url }}">
-                        <div class="nav-content">
-                            <p class="nav-label">Next</p>
-                            <p class="nav-title">{{ nextPost.data.title | titleCase }}</p>
-                        </div>
-                        <span class="nav-arrow">→</span>
-                    </a>
-                {% endif %}
+            <div class="article-end">
+                <span>✦</span>
+                <span>✦</span>
+                <span>✦</span>
+            </div>
+
+            {%- set nextPost = collections['postsWithoutDrafts'] | getNextCollectionItem(page) %}
+            {%- set previousPost = collections['postsWithoutDrafts'] | getPreviousCollectionItem(page) %}
+
+            <div class="post-navigation">
+                <div class="post-nav-item post-nav-previous">
+                    {%- if previousPost %}
+                        <a href="{{ previousPost.url | url }}">
+                            <span class="nav-arrow">←</span>
+                            <div class="nav-content">
+                                <p class="nav-label">Previous</p>
+                                <p class="nav-title">{{ previousPost.data.title | titleCase }}</p>
+                            </div>
+                        </a>
+                    {% endif %}
+                </div>
+
+                <div class="post-nav-item post-nav-next">
+                    {%- if nextPost %}
+                        <a href="{{ nextPost.url | url }}">
+                            <div class="nav-content">
+                                <p class="nav-label">Next</p>
+                                <p class="nav-title">{{ nextPost.data.title | titleCase }}</p>
+                            </div>
+                            <span class="nav-arrow">→</span>
+                        </a>
+                    {% endif %}
+                </div>
             </div>
         </div>
-    </div>
+    </article>
 {% endblock %}
