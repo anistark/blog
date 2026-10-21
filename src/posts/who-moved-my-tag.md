@@ -203,6 +203,7 @@ The reviewdog advisory says it plainly. Other reviewdog actions that used `revie
 
 Trivy is an even more precise example. Until April 2025, `trivy-action` called `setup-trivy` by tag. [PR #456](https://github.com/aquasecurity/trivy-action/pull/456), merged on 2025-04-09, changed that:
 
+{% raw %}
 ```diff
      - name: Install Trivy
        if: ${{ inputs.skip-setup-trivy == 'false' }}
@@ -213,6 +214,7 @@ Trivy is an even more precise example. Until April 2025, `trivy-action` called `
 +      # be used.
 +      uses: aquasecurity/setup-trivy@ff1b8b060f23b650436d419b5e13f67f5d4c3087 # equivalent to `v0.2.2`
 ```
+{% endraw %}
 
 That's the 2025-04-09 date from the advisory. If you had pinned `trivy-action` by SHA to a commit from _before_ that PR, you got a clean `trivy-action`, which then pulled in a malicious `setup-trivy` by tag. Your pin was correct, and it wasn't enough.
 
