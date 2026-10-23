@@ -1,0 +1,703 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    
+    
+    
+    
+    
+    
+    
+
+    <meta name="description" content="A whole 3D person, face to shoes, with no model file, no textures and no rig to import. It&#39;s a handful of plain JSON props. Here&#39;s how Runek&#39;s Person works, how to dress one up, and how to build a small character creator that saves the look and walks it around your world.">
+    <meta name="author" content="Kumar Anirudha">
+    <link rel="canonical" href="https://blog.anirudha.dev/creating-custom-3d-avatars-with-runek/">
+
+    
+    <meta itemprop="name" content="Creating Custom 3D Avatars with Runek | AniLog">
+    <meta itemprop="description" content="A whole 3D person, face to shoes, with no model file, no textures and no rig to import. It&#39;s a handful of plain JSON props. Here&#39;s how Runek&#39;s Person works, how to dress one up, and how to build a small character creator that saves the look and walks it around your world.">
+    <meta itemprop="image" content="https://blog.anirudha.dev/images/posts/runek-avatars-skins.png">
+
+    
+    <meta property="og:title" content="Creating Custom 3D Avatars with Runek | AniLog">
+    <meta property="og:description" content="A whole 3D person, face to shoes, with no model file, no textures and no rig to import. It&#39;s a handful of plain JSON props. Here&#39;s how Runek&#39;s Person works, how to dress one up, and how to build a small character creator that saves the look and walks it around your world.">
+    <meta property="og:url" content="https://blog.anirudha.dev/creating-custom-3d-avatars-with-runek/">
+    <meta property="og:site_name" content="AniLog">
+    <meta property="og:locale" content="en_GB">
+    <meta property="og:type" content="article">
+    <meta property="og:image" content="https://blog.anirudha.dev/images/posts/runek-avatars-skins.png">
+    <meta property="og:image:type" content="image/png">
+    <meta property="og:image:width" content="1600">
+    <meta property="og:image:height" content="600">
+    <meta property="og:image:alt" content="Creating Custom 3D Avatars with Runek">
+    <meta property="article:author" content="Kumar Anirudha">
+    <meta property="article:published_time" content="2026-10-21T00:00:00Z">
+    <meta property="article:modified_time" content="2026-10-21T00:00:00Z">
+    <meta property="article:tag" content="build">
+    <meta property="article:tag" content="cyberspace">
+    <meta property="article:tag" content="wasm">
+    <meta property="article:tag" content="runek">
+    <meta property="article:tag" content="threejs">
+    <meta property="article:tag" content="react-three-fiber">
+    <meta property="article:tag" content="procedural-generation">
+    <meta property="article:tag" content="avatars">
+    <meta property="article:tag" content="gamedev">
+    <meta property="article:tag" content="tutorial">
+
+    
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Creating Custom 3D Avatars with Runek | AniLog">
+    <meta name="twitter:description" content="A whole 3D person, face to shoes, with no model file, no textures and no rig to import. It&#39;s a handful of plain JSON props. Here&#39;s how Runek&#39;s Person works, how to dress one up, and how to build a small character creator that saves the look and walks it around your world.">
+    <meta name="twitter:site" content="@kranirudha">
+    <meta name="twitter:creator" content="@kranirudha">
+    <meta name="twitter:image" content="https://blog.anirudha.dev/images/posts/runek-avatars-skins.png">
+    <meta name="twitter:image:alt" content="Creating Custom 3D Avatars with Runek">
+
+    <link rel="icon" type="image/png" href="/me.png" />
+    <link rel="alternate" type="application/atom+xml" title="AniLog" href="https://blog.anirudha.dev/feed/feed.xml" />
+
+    <title>Creating Custom 3D Avatars with Runek | AniLog</title>
+
+    <link rel="stylesheet" href="/assets/main.bundle.css">
+    
+<style>
+  .tag.ai {
+    background: color-mix(in srgb, #10b981 8%, transparent);
+    border-color: color-mix(in srgb, #10b981 35%, transparent);
+    color: #6ee7b7;
+  }
+  [data-theme='reading'] .tag.ai,
+  [data-theme='beach'] .tag.ai,
+  [data-theme='hogwarts'] .tag.ai {
+    background: color-mix(in srgb, #059669 8%, transparent);
+    border-color: color-mix(in srgb, #059669 40%, transparent);
+    color: #047857;
+  }
+  [data-theme='hogwarts'] .post-item .tag.ai {
+    background: color-mix(in srgb, #10b981 12%, transparent);
+    border-color: color-mix(in srgb, #10b981 45%, transparent);
+    color: #6ee7b7;
+  }
+  .tag.wasm {
+    background: color-mix(in srgb, #3b82f6 8%, transparent);
+    border-color: color-mix(in srgb, #3b82f6 35%, transparent);
+    color: #93c5fd;
+  }
+  [data-theme='reading'] .tag.wasm,
+  [data-theme='beach'] .tag.wasm,
+  [data-theme='hogwarts'] .tag.wasm {
+    background: color-mix(in srgb, #2563eb 8%, transparent);
+    border-color: color-mix(in srgb, #2563eb 40%, transparent);
+    color: #1d4ed8;
+  }
+  [data-theme='hogwarts'] .post-item .tag.wasm {
+    background: color-mix(in srgb, #3b82f6 12%, transparent);
+    border-color: color-mix(in srgb, #3b82f6 45%, transparent);
+    color: #93c5fd;
+  }
+  .tag.thought {
+    background: color-mix(in srgb, #fb923c 8%, transparent);
+    border-color: color-mix(in srgb, #fb923c 35%, transparent);
+    color: #fdba74;
+  }
+  [data-theme='reading'] .tag.thought,
+  [data-theme='beach'] .tag.thought,
+  [data-theme='hogwarts'] .tag.thought {
+    background: color-mix(in srgb, #c2410c 8%, transparent);
+    border-color: color-mix(in srgb, #c2410c 40%, transparent);
+    color: #9a3412;
+  }
+  [data-theme='hogwarts'] .post-item .tag.thought {
+    background: color-mix(in srgb, #fb923c 12%, transparent);
+    border-color: color-mix(in srgb, #fb923c 45%, transparent);
+    color: #fdba74;
+  }
+  .tag.research {
+    background: color-mix(in srgb, #06b6d4 8%, transparent);
+    border-color: color-mix(in srgb, #06b6d4 35%, transparent);
+    color: #67e8f9;
+  }
+  [data-theme='reading'] .tag.research,
+  [data-theme='beach'] .tag.research,
+  [data-theme='hogwarts'] .tag.research {
+    background: color-mix(in srgb, #0891b2 8%, transparent);
+    border-color: color-mix(in srgb, #0891b2 40%, transparent);
+    color: #0e7490;
+  }
+  [data-theme='hogwarts'] .post-item .tag.research {
+    background: color-mix(in srgb, #06b6d4 12%, transparent);
+    border-color: color-mix(in srgb, #06b6d4 45%, transparent);
+    color: #67e8f9;
+  }
+  .tag.cyberspace {
+    background: color-mix(in srgb, #ef4444 8%, transparent);
+    border-color: color-mix(in srgb, #ef4444 35%, transparent);
+    color: #fca5a5;
+  }
+  [data-theme='reading'] .tag.cyberspace,
+  [data-theme='beach'] .tag.cyberspace,
+  [data-theme='hogwarts'] .tag.cyberspace {
+    background: color-mix(in srgb, #dc2626 8%, transparent);
+    border-color: color-mix(in srgb, #dc2626 40%, transparent);
+    color: #b91c1c;
+  }
+  [data-theme='hogwarts'] .post-item .tag.cyberspace {
+    background: color-mix(in srgb, #ef4444 12%, transparent);
+    border-color: color-mix(in srgb, #ef4444 45%, transparent);
+    color: #fca5a5;
+  }
+  .tag.build {
+    background: color-mix(in srgb, #ec4899 8%, transparent);
+    border-color: color-mix(in srgb, #ec4899 35%, transparent);
+    color: #f9a8d4;
+  }
+  [data-theme='reading'] .tag.build,
+  [data-theme='beach'] .tag.build,
+  [data-theme='hogwarts'] .tag.build {
+    background: color-mix(in srgb, #db2777 8%, transparent);
+    border-color: color-mix(in srgb, #db2777 40%, transparent);
+    color: #be185d;
+  }
+  [data-theme='hogwarts'] .post-item .tag.build {
+    background: color-mix(in srgb, #ec4899 12%, transparent);
+    border-color: color-mix(in srgb, #ec4899 45%, transparent);
+    color: #f9a8d4;
+  }
+</style>
+
+
+    <script>
+      // Set theme before page renders to prevent flash
+      (function() {
+        const theme = localStorage.getItem('theme') || 'night';
+        if (theme !== 'night') {
+          document.documentElement.setAttribute('data-theme', theme);
+        }
+      })();
+    </script>
+
+    
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-YGZHVY9TD7"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-YGZHVY9TD7');
+    </script>
+    
+
+    
+  </head>
+  <body class="flex flex-col min-h-screen">
+    <canvas id="ambience-canvas"></canvas>
+    <header class="sticky top-0 z-50 glass-header">
+  <nav class="container mx-auto max-w-7xl px-8 py-3 flex flex-wrap items-center justify-between">
+    <div class="flex items-center gap-3">
+      <a href="/" class="flex items-center gap-3">
+        <img src="/ani.png" alt="AniLog logo" class="w-10 h-10 object-cover">
+        <h1 class="text-2xl leading-none m-0">AniLog</h1>
+      </a>
+    </div>
+
+    <div class="flex items-center gap-6">
+      <div class="theme-switcher">
+        <button id="theme-switcher-btn" class="theme-switcher-btn" aria-label="Switch theme" aria-expanded="false">
+          <span id="theme-active-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.985 12.486a9 9 0 1 1-9.473-9.472c.405-.022.617.46.402.803a6 6 0 0 0 8.268 8.268c.344-.215.825-.004.803.401"/></svg>
+          </span>
+        </button>
+        <div id="theme-dropdown" class="theme-dropdown">
+          <button class="theme-option" data-theme-value="night">
+            <span class="theme-icon"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.985 12.486a9 9 0 1 1-9.473-9.472c.405-.022.617.46.402.803a6 6 0 0 0 8.268 8.268c.344-.215.825-.004.803.401"/></svg></span>
+            <span>Night</span>
+          </button>
+          <button class="theme-option" data-theme-value="reading">
+            <span class="theme-icon"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 7v14"/><path d="M3 18a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h5a4 4 0 0 1 4 4 4 4 0 0 1 4-4h5a1 1 0 0 1 1 1v13a1 1 0 0 1-1 1h-6a3 3 0 0 0-3 3 3 3 0 0 0-3-3z"/></svg></span>
+            <span>Reading</span>
+          </button>
+          <button class="theme-option" data-theme-value="forest">
+            <span class="theme-icon"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m17 14 3 3.3a1 1 0 0 1-.7 1.7H4.7a1 1 0 0 1-.7-1.7L7 14h-.3a1 1 0 0 1-.7-1.7L9 9h-.2A1 1 0 0 1 8 7.3L12 3l4 4.3a1 1 0 0 1-.8 1.7H15l3 3.3a1 1 0 0 1-.7 1.7H17Z"/><path d="M12 22v-3"/></svg></span>
+            <span>Forest</span>
+          </button>
+          <button class="theme-option" data-theme-value="beach">
+            <span class="theme-icon"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 8c0-2.76-2.46-5-5.5-5S2 5.24 2 8h2l1-1 1 1h4"/><path d="M13 7.14A5.82 5.82 0 0 1 16.5 6c3.04 0 5.5 2.24 5.5 5h-3l-1-1-1 1h-3"/><path d="M5.89 9.71c-2.15 2.15-2.3 5.47-.35 7.43l4.24-4.25.7-.7.71-.71 2.12-2.12c-1.95-1.96-5.27-1.8-7.42.35"/><path d="M11 15.5c.5 2.5-.17 4.5-1 6.5h4c2-5.5-.5-12-1-14"/></svg></span>
+            <span>Beach</span>
+          </button>
+          <button class="theme-option" data-theme-value="cyberpunk">
+            <span class="theme-icon"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20v2"/><path d="M12 2v2"/><path d="M17 20v2"/><path d="M17 2v2"/><path d="M2 12h2"/><path d="M2 17h2"/><path d="M2 7h2"/><path d="M20 12h2"/><path d="M20 17h2"/><path d="M20 7h2"/><path d="M7 20v2"/><path d="M7 2v2"/><rect x="4" y="4" width="16" height="16" rx="2"/><rect x="8" y="8" width="8" height="8" rx="1"/></svg></span>
+            <span>Cyberpunk</span>
+          </button>
+          <button class="theme-option" data-theme-value="hogwarts">
+            <span class="theme-icon"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m21.64 3.64-1.28-1.28a1.21 1.21 0 0 0-1.72 0L2.36 18.64a1.21 1.21 0 0 0 0 1.72l1.28 1.28a1.2 1.2 0 0 0 1.72 0L21.64 5.36a1.2 1.2 0 0 0 0-1.72"/><path d="m14 7 3 3"/><path d="M5 6v4"/><path d="M19 14v4"/><path d="M10 2v2"/><path d="M7 8H3"/><path d="M21 16h-4"/><path d="M11 3H9"/></svg></span>
+            <span>Hogwarts</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </nav>
+</header>
+
+    <main class="container mx-auto max-w-6xl p-8 grow">
+      
+    <p></p>
+
+    <article class="post-article">
+        
+        <div class="prophet-masthead">
+            
+                <div class="prophet-dateline">
+                    
+                        <span>Published <time class="relative-date" datetime="2026-10-21" title="October 21, 2026">on October 21, 2026</time></span>
+                    
+                    <span>October 21, 2026</span>
+                    <span>13 min read</span>
+                </div>
+            
+            <div class="prophet-motto" aria-hidden="true">The wizarding world's beguiling broadsheet of choice</div>
+        </div>
+
+        
+            <div class="post-cover-frame">
+                <div class="post-cover-image" style="background-image: url('/images/posts/runek-avatars-skins.png');"></div>
+            </div>
+        
+
+        <div>
+            <div class="post-title-row">
+                <h2>Creating Custom 3D Avatars with Runek</h2>
+                
+            </div>
+
+            
+                <div class="mt-4 mb-2">
+                    <a class="tag build" href="/tag/build">build</a><a class="tag cyberspace" href="/tag/cyberspace">cyberspace</a><a class="tag wasm" href="/tag/wasm">wasm</a><a class="tag runek" href="/tag/runek">runek</a><a class="tag threejs" href="/tag/threejs">threejs</a><a class="tag react-three-fiber" href="/tag/react-three-fiber">react-three-fiber</a><a class="tag procedural-generation" href="/tag/procedural-generation">procedural-generation</a><a class="tag avatars" href="/tag/avatars">avatars</a><a class="tag gamedev" href="/tag/gamedev">gamedev</a><a class="tag tutorial" href="/tag/tutorial">tutorial</a>
+                </div>
+            
+
+            
+                
+                    <p class="text-sm italic">Published
+                        <time class="relative-date" datetime="2026-10-21" title="October 21, 2026">on October 21, 2026</time>.
+                        <span class="reading-time"> · 13 min read</span></p>
+                
+            
+
+            <div class="content post">
+                <blockquote>
+<p><em>A person is a seed and a few props. No <code>.glb</code>, no textures, no rig to import. Everything else falls out of that.</em></p>
+</blockquote>
+<p>Every game with a character creator ends up with the same pile of stuff. A base mesh, a skeleton, a few hundred blend shapes, a texture atlas per outfit, and a pipeline to keep all of it in sync. Then you ship it, and someone wants a hat.</p>
+<p><a href="https://github.com/nullorder/runek">Runek</a> doesn’t have that pile. If you haven’t seen it before: it’s a source registry of procedural 3D components for React Three Fiber. You pull a component’s source into your project with <code>npx @runek/cli add</code>, and every component builds its geometry from props and a <code>seed</code>. I wrote about the physics side of it in <a href="/world-building-with-wasm/">World-building with WASM</a>.</p>
+<p>The component I’ve spent the most time on is <code>Person</code>. It’s a sculpted, clothed, skinned figure, built in the browser from nothing but props. So the question I kept getting was: <em>can people customise it?</em></p>
+<p>Yes. Every part of it. This post walks through how, from one line of JSX to a character creator that saves the player’s look and walks it around a world. Everything below was rendered from Runek <strong>v0.15.0</strong> while writing it.</p>
+<h2 id="setup" tabindex="-1">Setup <a class="header-anchor" href="#setup" aria-hidden="true">#</a></h2>
+<p>You need a React Three Fiber project. Then:</p>
+<terminal-block>npx @runek/cli init
+npx @runek/cli add person player floor sky</terminal-block><p><code>add</code> copies the source into <code>src/runek/</code> and installs what it needs, including <code>@runek/core</code>, the small runtime that gives you <code>&lt;World&gt;</code>. <code>person</code> also pulls in the two components it depends on (<code>interactable</code> and <code>sign</code>), so you don’t have to track that.</p>
+<h2 id="a-seed-is-a-person" tabindex="-1">A seed is a person <a class="header-anchor" href="#a-seed-is-a-person" aria-hidden="true">#</a></h2>
+<p>The smallest possible avatar:</p>
+<code-block lang="tsx"><pre class="language-tsx"><code class="language-tsx"><span class="token keyword">import</span> <span class="token punctuation">{</span> World <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'@runek/core'</span>
+<span class="token keyword">import</span> <span class="token punctuation">{</span> Floor <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'./runek/Floor'</span>
+<span class="token keyword">import</span> <span class="token punctuation">{</span> Person <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'./runek/Person'</span>
+
+<span class="token keyword">export</span> <span class="token keyword">function</span> <span class="token function">App</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token keyword">return</span> <span class="token punctuation">(</span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span><span class="token class-name">World</span></span><span class="token punctuation">></span></span><span class="token plain-text">
+      </span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span><span class="token class-name">Floor</span></span> <span class="token attr-name">size</span><span class="token script language-javascript"><span class="token script-punctuation punctuation">=</span><span class="token punctuation">{</span><span class="token punctuation">[</span><span class="token number">10</span><span class="token punctuation">,</span> <span class="token number">10</span><span class="token punctuation">]</span><span class="token punctuation">}</span></span> <span class="token punctuation">/></span></span><span class="token plain-text">
+      </span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span><span class="token class-name">Person</span></span> <span class="token attr-name">seed</span><span class="token script language-javascript"><span class="token script-punctuation punctuation">=</span><span class="token punctuation">{</span><span class="token number">41</span><span class="token punctuation">}</span></span> <span class="token punctuation">/></span></span><span class="token plain-text">
+    </span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span><span class="token class-name">World</span></span><span class="token punctuation">></span></span>
+  <span class="token punctuation">)</span>
+<span class="token punctuation">}</span></code></pre>
+</code-block><p>That’s a whole person. Skin tone, hair, build, face, clothes and colours, all rolled from <code>41</code>. Change the number and you get someone else:</p>
+<p><img src="/images/posts/runek-avatars-seeds.png" alt="Six people standing in a row, each rolled from a different seed, with different hair, skin tones and tunic colours">
+<em>Seeds 1 to 6. Nothing else set.</em></p>
+<p>And because the seed is the only source of randomness, <code>41</code> is the same person on every machine, forever. It isn’t a randomiser. It’s an address. Commit the number and you’ve committed the person.</p>
+<p>That’s the whole trick behind customisation too. <strong>Every trait you don’t set comes from the seed. Every trait you do set wins.</strong> So customising a person is never “edit the mesh”. It’s “write a prop”.</p>
+<h2 id="how-a-look-is-decided" tabindex="-1">How a look is decided <a class="header-anchor" href="#how-a-look-is-decided" aria-hidden="true">#</a></h2>
+<p>There are four places a trait can come from, and they stack in a fixed order:</p>
+<ol>
+<li><strong>A prop you set</strong> (<code>topColor</code>, <code>hair</code>, <code>face</code>, …)</li>
+<li><strong>The <code>skin</code></strong>, a cosmetic bundle (more on this below)</li>
+<li><strong>The <code>kind</code></strong>, a role preset like <code>guard</code> or <code>farmer</code></li>
+<li><strong>The seed</strong></li>
+</ol>
+<p>The first one that has an answer wins. You don’t have to guess which one did, either. <code>resolvePerson</code> tells you, trait by trait, without building any geometry:</p>
+<code-block lang="ts"><pre class="language-ts"><code class="language-ts"><span class="token keyword">import</span> <span class="token punctuation">{</span> resolvePerson <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'./runek/Person'</span>
+
+<span class="token function">resolvePerson</span><span class="token punctuation">(</span><span class="token punctuation">{</span> seed<span class="token operator">:</span> <span class="token number">41</span><span class="token punctuation">,</span> kind<span class="token operator">:</span> <span class="token string">'guard'</span><span class="token punctuation">,</span> skin<span class="token operator">:</span> <span class="token string">'winter'</span><span class="token punctuation">,</span> topColor<span class="token operator">:</span> <span class="token string">'#b03a2e'</span> <span class="token punctuation">}</span><span class="token punctuation">)</span>
+<span class="token comment">// kind:        { value: 'guard',   from: 'prop' }</span>
+<span class="token comment">// outfit:      { value: 'coat',    from: 'skin' }</span>
+<span class="token comment">// topColor:    { value: '#b03a2e', from: 'prop' }</span>
+<span class="token comment">// hat:         { value: 'hood',    from: 'skin' }</span>
+<span class="token comment">// hair:        { value: 'ponytail', from: 'seed' }</span>
+<span class="token comment">// accessories: { value: ['scarf', 'belt'], from: 'skin' }</span></code></pre>
+</code-block><p>That <code>from</code> field is going to be useful later, when we build a UI that needs to show what the seed picked.</p>
+<h2 id="the-body-and-the-style" tabindex="-1">The body and the style <a class="header-anchor" href="#the-body-and-the-style" aria-hidden="true">#</a></h2>
+<p><code>style</code> is the biggest single switch. It changes proportions and the face template together:</p>
+<ul>
+<li><code>stylized</code> (the default): an animated-film look. Bigger head and eyes, small features, slender limbs.</li>
+<li><code>realistic</code>: canonical human proportions.</li>
+<li><code>anime</code>: pushes the eyes and legs further and sharpens the chin.</li>
+</ul>
+<p><img src="/images/posts/runek-avatars-styles.png" alt="The same person three times, in stylized, realistic and anime proportions">
+<em>Same seed, same clothes. Only <code>style</code> changes.</em></p>
+<p>The rest of the body lives in one object:</p>
+<code-block lang="tsx"><pre class="language-tsx"><code class="language-tsx"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span><span class="token class-name">Person</span></span>
+  <span class="token attr-name">seed</span><span class="token script language-javascript"><span class="token script-punctuation punctuation">=</span><span class="token punctuation">{</span><span class="token number">41</span><span class="token punctuation">}</span></span>
+  <span class="token special-attr"><span class="token attr-name">style</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span><span class="token value css language-css">realistic</span><span class="token punctuation">"</span></span></span>
+  <span class="token attr-name">gender</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>masculine<span class="token punctuation">"</span></span>
+  <span class="token attr-name">age</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>elder<span class="token punctuation">"</span></span>
+  <span class="token attr-name">body</span><span class="token script language-javascript"><span class="token script-punctuation punctuation">=</span><span class="token punctuation">{</span><span class="token punctuation">{</span> build<span class="token operator">:</span> <span class="token string">'stocky'</span><span class="token punctuation">,</span> tone<span class="token operator">:</span> <span class="token string">'#a9714a'</span><span class="token punctuation">,</span> height<span class="token operator">:</span> <span class="token number">1.72</span> <span class="token punctuation">}</span><span class="token punctuation">}</span></span>
+<span class="token punctuation">/></span></span></code></pre>
+</code-block><p><code>gender</code> is silhouette cues only: shoulder-to-hip ratio, jaw, brow, and which hairstyles the seed leans towards. Every trait it nudges is still yours to override. <code>age</code> changes the head-to-body ratio and stature, and an <code>elder</code> gets a slightly stooped spine.</p>
+<h2 id="the-face%2C-part-by-part" tabindex="-1">The face, part by part <a class="header-anchor" href="#the-face%2C-part-by-part" aria-hidden="true">#</a></h2>
+<p>The face is a part object too. Sizes are multipliers around 1:</p>
+<code-block lang="tsx"><pre class="language-tsx"><code class="language-tsx"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span><span class="token class-name">Person</span></span>
+  <span class="token attr-name">seed</span><span class="token script language-javascript"><span class="token script-punctuation punctuation">=</span><span class="token punctuation">{</span><span class="token number">41</span><span class="token punctuation">}</span></span>
+  <span class="token attr-name">face</span><span class="token script language-javascript"><span class="token script-punctuation punctuation">=</span><span class="token punctuation">{</span><span class="token punctuation">{</span>
+    eyes<span class="token operator">:</span> <span class="token punctuation">{</span> color<span class="token operator">:</span> <span class="token string">'#3b7a57'</span><span class="token punctuation">,</span> size<span class="token operator">:</span> <span class="token number">1.25</span> <span class="token punctuation">}</span><span class="token punctuation">,</span>
+    brows<span class="token operator">:</span> <span class="token punctuation">{</span> weight<span class="token operator">:</span> <span class="token number">1.6</span> <span class="token punctuation">}</span><span class="token punctuation">,</span>
+    nose<span class="token operator">:</span> <span class="token string">'broad'</span><span class="token punctuation">,</span>
+    lips<span class="token operator">:</span> <span class="token punctuation">{</span> fullness<span class="token operator">:</span> <span class="token number">1.3</span> <span class="token punctuation">}</span><span class="token punctuation">,</span>
+    blush<span class="token operator">:</span> <span class="token number">0.6</span><span class="token punctuation">,</span>
+  <span class="token punctuation">}</span><span class="token punctuation">}</span></span>
+<span class="token punctuation">/></span></span></code></pre>
+</code-block><p><img src="/images/posts/runek-avatars-face.png" alt="Three close-ups of the same face: the seeded default, one with green eyes, heavy brows and a broad nose, and one with long pink hair and violet eyes">
+<em>Left: the seed. Middle: the face object above. Right: a different face object with <code>hair={{ style: 'long', color: '#c2577a' }}</code>.</em></p>
+<p>Brow colour follows the hair colour unless you set it. <code>facialHair</code> (<code>none</code>, <code>stubble</code>, <code>moustache</code>, <code>beard</code>) and <code>hair</code> (8 styles, any colour) sit next to it as their own props.</p>
+<h2 id="clothes-are-a-stack" tabindex="-1">Clothes are a stack <a class="header-anchor" href="#clothes-are-a-stack" aria-hidden="true">#</a></h2>
+<p>This is my favourite part. Clothes aren’t a fixed list of outfits. They’re <strong>layers</strong>, listed inner to outer, and the order decides the fit:</p>
+<code-block lang="tsx"><pre class="language-tsx"><code class="language-tsx"><span class="token comment">// Tucked in: the shirt is listed before the jeans</span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span><span class="token class-name">Person</span></span>
+  <span class="token attr-name">seed</span><span class="token script language-javascript"><span class="token script-punctuation punctuation">=</span><span class="token punctuation">{</span><span class="token number">41</span><span class="token punctuation">}</span></span>
+  <span class="token attr-name">clothes</span><span class="token script language-javascript"><span class="token script-punctuation punctuation">=</span><span class="token punctuation">{</span><span class="token punctuation">[</span>
+    <span class="token punctuation">{</span> type<span class="token operator">:</span> <span class="token string">'shirt'</span><span class="token punctuation">,</span> neck<span class="token operator">:</span> <span class="token string">'collar'</span><span class="token punctuation">,</span> sleeves<span class="token operator">:</span> <span class="token string">'long'</span><span class="token punctuation">,</span> color<span class="token operator">:</span> <span class="token string">'#e9edf1'</span> <span class="token punctuation">}</span><span class="token punctuation">,</span>
+    <span class="token punctuation">{</span> type<span class="token operator">:</span> <span class="token string">'jeans'</span><span class="token punctuation">,</span> color<span class="token operator">:</span> <span class="token string">'#45576a'</span> <span class="token punctuation">}</span><span class="token punctuation">,</span>
+    <span class="token punctuation">{</span> type<span class="token operator">:</span> <span class="token string">'belt'</span><span class="token punctuation">,</span> color<span class="token operator">:</span> <span class="token string">'#5a3522'</span> <span class="token punctuation">}</span><span class="token punctuation">,</span>
+    <span class="token punctuation">{</span> type<span class="token operator">:</span> <span class="token string">'shoes'</span><span class="token punctuation">,</span> color<span class="token operator">:</span> <span class="token string">'#9a5236'</span> <span class="token punctuation">}</span><span class="token punctuation">,</span>
+  <span class="token punctuation">]</span><span class="token punctuation">}</span></span>
+<span class="token punctuation">/></span></span></code></pre>
+</code-block><p>Swap the first two lines and the shirt hangs over the jeans instead. Add a blazer at the end and it goes over everything:</p>
+<p><img src="/images/posts/runek-avatars-layers.png" alt="Three people in a white shirt: one tucked into jeans with a belt, one untucked, and one under a dark blazer with dark trousers">
+<em>Same four garments, different order. Then a blazer on top.</em></p>
+<p>There are 20 garment types, from <code>tshirt</code> and <code>hoodie</code> to <code>skirt</code>, <code>boots</code>, <code>scarf</code> and <code>cape</code>. Tops take <code>sleeves</code> and <code>neck</code>, and everything takes a <code>length</code> from 0 to 1 (a hem, a trouser leg, a boot’s drop).</p>
+<p>If you don’t want to think in layers, <code>outfit</code> is the one-word shorthand. <code>outfit=&quot;tunic&quot;</code> expands to trousers, a tunic and shoes, and <code>topColor</code>, <code>bottomColor</code> and <code>shoeColor</code> recolour it.</p>
+<h2 id="skins%3A-a-whole-look-in-one-prop" tabindex="-1">Skins: a whole look in one prop <a class="header-anchor" href="#skins%3A-a-whole-look-in-one-prop" aria-hidden="true">#</a></h2>
+<p>Then there’s <code>skin</code>. It’s a skin in the game sense: a cosmetic loadout. Clothes, colours, headwear and accessories, bundled as one plain JSON object.</p>
+<code-block lang="tsx"><pre class="language-tsx"><code class="language-tsx"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span><span class="token class-name">Person</span></span> <span class="token attr-name">seed</span><span class="token script language-javascript"><span class="token script-punctuation punctuation">=</span><span class="token punctuation">{</span><span class="token number">41</span><span class="token punctuation">}</span></span> <span class="token attr-name">skin</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>winter<span class="token punctuation">"</span></span> <span class="token punctuation">/></span></span></code></pre>
+</code-block><p>Runek ships with a few: <code>casual</code>, <code>office</code>, <code>hoodie</code>, <code>winter</code>, <code>pirate</code>, <code>chef</code>, <code>voyage</code>, <code>festival</code> and more. Or pass your own object, or spread one of the presets from <code>PERSON_SKINS</code> and tweak it.</p>
+<p><img src="/images/posts/runek-avatars-skins.png" alt="The same person six times in different skins: casual, office, hoodie, winter, pirate and chef">
+<em>One seed, six skins. Same face, same hair, every time.</em></p>
+<p>The important detail: <strong>a skin never touches the body</strong>. No skin tone, no build, no hair. So swapping a skin is swapping clothes, not swapping people. Your character stays your character.</p>
+<p>And since it’s one prop, a wardrobe in your game is a single state write. That’s what makes the next part easy.</p>
+<h2 id="or-just-use-the-studio" tabindex="-1">Or just use the studio <a class="header-anchor" href="#or-just-use-the-studio" aria-hidden="true">#</a></h2>
+<p>Before writing any UI, it’s worth knowing there’s already one. The <a href="https://runek.nullorder.org/workshop">Runek workshop</a> has an <strong>avatar studio</strong>: press <code>4</code>, or select a <code>Person</code> and hit <strong>customize</strong>, and it stands on a turntable under good light.</p>
+<p><img src="/images/posts/runek-avatars-studio.png" alt="The workshop's avatar studio: a figure on a lit turntable, a studio panel on the left with view and look file options, and an Avatar panel on the right with kind and skin tiles"></p>
+<p>The Avatar panel has a tab for each part of the figure (Looks, Body, Face, Hair, Clothes, Hat &amp; extras, Pose), and the camera moves to frame whatever you’re editing.</p>
+<p>Not sure which seed you want? The <strong>3 × 3 seed grid</strong> shows the neighbouring seeds side by side. Click one and you’ve picked your base:</p>
+<p><img src="/images/posts/runek-avatars-seed-grid.png" alt="The avatar studio showing a 3 by 3 grid of figures from seed 37 to 45, with seed 41 highlighted"></p>
+<p>Every trait shows where its value came from, the same <code>from</code> that <code>resolvePerson</code> reports: <strong>set</strong>, <strong>skin</strong>, <strong>kind</strong>, <strong>seeded</strong> or <strong>default</strong>. ⟲ clears what you set, so the seed decides again. 📌 pins what the seed chose, so it stays when you change the seed.</p>
+<p><img src="/images/posts/runek-avatars-studio-face.png" alt="The Face tab of the avatar studio: eye colour swatches marked seeded, an eye size slider, brow swatches, nose choices, lip colours, and blush"></p>
+<p>The Clothes tab is where the layer stack lives. Drag to reorder, open a layer for its colour, sleeves, neckline and length. It even tells you which layers are <code>tucked</code>:</p>
+<p><img src="/images/posts/runek-avatars-studio-layers.png" alt="The Clothes tab showing the office skin's layer stack: shirt (tucked), trousers, blazer, belt and shoes"></p>
+<p>When you’re happy, <strong>export .look.json</strong> downloads the look as a <code>Person</code> node: who the figure is and what it wears, not where it stands. It pastes straight into a world file. <strong>use as play avatar</strong> puts the same look on the world’s <code>Player</code>.</p>
+<p>The studio is great for authoring your NPCs. But it lives on the docs site, not in the registry. If you want <em>your players</em> to dress up <em>inside your game</em>, you build that bit yourself. Which, it turns out, is about a hundred lines.</p>
+<h2 id="building-your-own-character-creator" tabindex="-1">Building your own character creator <a class="header-anchor" href="#building-your-own-character-creator" aria-hidden="true">#</a></h2>
+<p>Here’s what we’re making:</p>
+<p><img src="/images/posts/runek-avatars-creator.png" alt="A character creator: a person in a green vest and jeans standing in the middle, and a panel on the right with a new person button, style and outfit dropdowns, hair style and colour, eye colour and top colour"></p>
+<p>A figure, a panel, and the look saved in the browser so it’s still there next time.</p>
+<h3 id="the-look" tabindex="-1">The look <a class="header-anchor" href="#the-look" aria-hidden="true">#</a></h3>
+<p>First, decide what a player is allowed to change. This is just a type, plus loading and saving it:</p>
+<code-block lang="ts"><pre class="language-ts"><code class="language-ts"><span class="token comment">// src/look.ts</span>
+<span class="token keyword">import</span> <span class="token keyword">type</span> <span class="token punctuation">{</span> PersonFaceSpec<span class="token punctuation">,</span> PersonHairSpec<span class="token punctuation">,</span> PersonSkinName<span class="token punctuation">,</span> PersonStyle <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'./runek/Person'</span>
+
+<span class="token keyword">export</span> <span class="token keyword">interface</span> <span class="token class-name">Look</span> <span class="token punctuation">{</span>
+  seed<span class="token operator">:</span> <span class="token builtin">number</span>
+  style<span class="token operator">:</span> PersonStyle
+  skin<span class="token operator">:</span> PersonSkinName
+  hair<span class="token operator">:</span> PersonHairSpec
+  face<span class="token operator">:</span> PersonFaceSpec
+  topColor<span class="token operator">?</span><span class="token operator">:</span> <span class="token builtin">string</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">export</span> <span class="token keyword">const</span> <span class="token constant">DEFAULT_LOOK</span><span class="token operator">:</span> Look <span class="token operator">=</span> <span class="token punctuation">{</span> seed<span class="token operator">:</span> <span class="token number">41</span><span class="token punctuation">,</span> style<span class="token operator">:</span> <span class="token string">'stylized'</span><span class="token punctuation">,</span> skin<span class="token operator">:</span> <span class="token string">'casual'</span><span class="token punctuation">,</span> hair<span class="token operator">:</span> <span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">,</span> face<span class="token operator">:</span> <span class="token punctuation">{</span><span class="token punctuation">}</span> <span class="token punctuation">}</span>
+
+<span class="token keyword">const</span> <span class="token constant">KEY</span> <span class="token operator">=</span> <span class="token string">'my-world:look'</span>
+
+<span class="token keyword">export</span> <span class="token keyword">function</span> <span class="token function">loadLook</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">:</span> Look <span class="token punctuation">{</span>
+  <span class="token keyword">try</span> <span class="token punctuation">{</span>
+    <span class="token keyword">const</span> saved <span class="token operator">=</span> localStorage<span class="token punctuation">.</span><span class="token function">getItem</span><span class="token punctuation">(</span><span class="token constant">KEY</span><span class="token punctuation">)</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>saved<span class="token punctuation">)</span> <span class="token keyword">return</span> <span class="token punctuation">{</span> <span class="token operator">...</span><span class="token constant">DEFAULT_LOOK</span><span class="token punctuation">,</span> <span class="token operator">...</span><span class="token constant">JSON</span><span class="token punctuation">.</span><span class="token function">parse</span><span class="token punctuation">(</span>saved<span class="token punctuation">)</span> <span class="token punctuation">}</span>
+  <span class="token punctuation">}</span> <span class="token keyword">catch</span> <span class="token punctuation">{</span><span class="token punctuation">}</span>
+  <span class="token keyword">return</span> <span class="token constant">DEFAULT_LOOK</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">export</span> <span class="token keyword">function</span> <span class="token function">saveLook</span><span class="token punctuation">(</span>look<span class="token operator">:</span> Look<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token keyword">try</span> <span class="token punctuation">{</span>
+    localStorage<span class="token punctuation">.</span><span class="token function">setItem</span><span class="token punctuation">(</span><span class="token constant">KEY</span><span class="token punctuation">,</span> <span class="token constant">JSON</span><span class="token punctuation">.</span><span class="token function">stringify</span><span class="token punctuation">(</span>look<span class="token punctuation">)</span><span class="token punctuation">)</span>
+  <span class="token punctuation">}</span> <span class="token keyword">catch</span> <span class="token punctuation">{</span><span class="token punctuation">}</span>
+<span class="token punctuation">}</span></code></pre>
+</code-block><p>Notice there’s nothing 3D in here. <strong>A look is plain JSON.</strong> That’s the whole point. It fits in <code>localStorage</code>, a URL, a save file, or a row in your database if you have one. The <code>try</code>/<code>catch</code> is there because storage can throw in private windows. When it does, you get the default look instead of a crash.</p>
+<h3 id="the-creator" tabindex="-1">The creator <a class="header-anchor" href="#the-creator" aria-hidden="true">#</a></h3>
+<code-block lang="tsx"><pre class="language-tsx"><code class="language-tsx"><span class="token comment">// src/AvatarCreator.tsx</span>
+<span class="token keyword">import</span> <span class="token punctuation">{</span> OrbitControls<span class="token punctuation">,</span> PerspectiveCamera <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'@react-three/drei'</span>
+<span class="token keyword">import</span> <span class="token punctuation">{</span> World <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'@runek/core'</span>
+<span class="token keyword">import</span> <span class="token punctuation">{</span> useEffect<span class="token punctuation">,</span> useState <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'react'</span>
+<span class="token keyword">import</span> <span class="token punctuation">{</span> <span class="token keyword">type</span> <span class="token class-name">Look</span><span class="token punctuation">,</span> loadLook<span class="token punctuation">,</span> saveLook <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'./look'</span>
+<span class="token keyword">import</span> <span class="token punctuation">{</span> Floor <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'./runek/Floor'</span>
+<span class="token keyword">import</span> <span class="token punctuation">{</span>
+  <span class="token constant">PERSON_SKINS</span><span class="token punctuation">,</span>
+  Person<span class="token punctuation">,</span>
+  <span class="token keyword">type</span> <span class="token class-name">PersonHair</span><span class="token punctuation">,</span>
+  <span class="token keyword">type</span> <span class="token class-name">PersonSkinName</span><span class="token punctuation">,</span>
+  <span class="token keyword">type</span> <span class="token class-name">PersonStyle</span><span class="token punctuation">,</span>
+  resolvePerson<span class="token punctuation">,</span>
+<span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'./runek/Person'</span>
+<span class="token keyword">import</span> <span class="token punctuation">{</span> Sky <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'./runek/Sky'</span>
+
+<span class="token keyword">const</span> <span class="token constant">STYLES</span><span class="token operator">:</span> PersonStyle<span class="token punctuation">[</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token string">'stylized'</span><span class="token punctuation">,</span> <span class="token string">'realistic'</span><span class="token punctuation">,</span> <span class="token string">'anime'</span><span class="token punctuation">]</span>
+<span class="token keyword">const</span> <span class="token constant">HAIRS</span><span class="token operator">:</span> PersonHair<span class="token punctuation">[</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token string">'short'</span><span class="token punctuation">,</span> <span class="token string">'swept'</span><span class="token punctuation">,</span> <span class="token string">'long'</span><span class="token punctuation">,</span> <span class="token string">'bun'</span><span class="token punctuation">,</span> <span class="token string">'ponytail'</span><span class="token punctuation">,</span> <span class="token string">'braid'</span><span class="token punctuation">,</span> <span class="token string">'cropped'</span><span class="token punctuation">,</span> <span class="token string">'bald'</span><span class="token punctuation">]</span>
+<span class="token keyword">const</span> <span class="token constant">SKINS</span> <span class="token operator">=</span> Object<span class="token punctuation">.</span><span class="token function">keys</span><span class="token punctuation">(</span><span class="token constant">PERSON_SKINS</span><span class="token punctuation">)</span> <span class="token keyword">as</span> PersonSkinName<span class="token punctuation">[</span><span class="token punctuation">]</span>
+
+<span class="token keyword">export</span> <span class="token keyword">function</span> <span class="token function">AvatarCreator</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token keyword">const</span> <span class="token punctuation">[</span>look<span class="token punctuation">,</span> setLook<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token generic-function"><span class="token function">useState</span><span class="token generic class-name"><span class="token operator">&lt;</span>Look<span class="token operator">></span></span></span><span class="token punctuation">(</span>loadLook<span class="token punctuation">)</span>
+  <span class="token function">useEffect</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token function">saveLook</span><span class="token punctuation">(</span>look<span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token punctuation">[</span>look<span class="token punctuation">]</span><span class="token punctuation">)</span>
+
+  <span class="token keyword">const</span> <span class="token function-variable function">edit</span> <span class="token operator">=</span> <span class="token punctuation">(</span>patch<span class="token operator">:</span> Partial<span class="token operator">&lt;</span>Look<span class="token operator">></span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token function">setLook</span><span class="token punctuation">(</span><span class="token punctuation">(</span>l<span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">(</span><span class="token punctuation">{</span> <span class="token operator">...</span>l<span class="token punctuation">,</span> <span class="token operator">...</span>patch <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+  <span class="token keyword">const</span> seen <span class="token operator">=</span> <span class="token function">resolvePerson</span><span class="token punctuation">(</span>look<span class="token punctuation">)</span>
+
+  <span class="token keyword">return</span> <span class="token punctuation">(</span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">className</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>creator<span class="token punctuation">"</span></span><span class="token punctuation">></span></span><span class="token plain-text">
+      </span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span><span class="token class-name">World</span></span> <span class="token attr-name">time</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>10:00<span class="token punctuation">"</span></span><span class="token punctuation">></span></span><span class="token plain-text">
+        </span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span><span class="token class-name">PerspectiveCamera</span></span> <span class="token attr-name">makeDefault</span> <span class="token attr-name">position</span><span class="token script language-javascript"><span class="token script-punctuation punctuation">=</span><span class="token punctuation">{</span><span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">1.2</span><span class="token punctuation">,</span> <span class="token number">3.4</span><span class="token punctuation">]</span><span class="token punctuation">}</span></span> <span class="token attr-name">fov</span><span class="token script language-javascript"><span class="token script-punctuation punctuation">=</span><span class="token punctuation">{</span><span class="token number">35</span><span class="token punctuation">}</span></span> <span class="token punctuation">/></span></span><span class="token plain-text">
+        </span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span><span class="token class-name">OrbitControls</span></span> <span class="token attr-name">target</span><span class="token script language-javascript"><span class="token script-punctuation punctuation">=</span><span class="token punctuation">{</span><span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">0.95</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">}</span></span> <span class="token attr-name">enablePan</span><span class="token script language-javascript"><span class="token script-punctuation punctuation">=</span><span class="token punctuation">{</span><span class="token boolean">false</span><span class="token punctuation">}</span></span> <span class="token punctuation">/></span></span><span class="token plain-text">
+        </span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span><span class="token class-name">Sky</span></span> <span class="token punctuation">/></span></span><span class="token plain-text">
+        </span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span><span class="token class-name">Floor</span></span> <span class="token attr-name">size</span><span class="token script language-javascript"><span class="token script-punctuation punctuation">=</span><span class="token punctuation">{</span><span class="token punctuation">[</span><span class="token number">20</span><span class="token punctuation">,</span> <span class="token number">20</span><span class="token punctuation">]</span><span class="token punctuation">}</span></span> <span class="token punctuation">/></span></span><span class="token plain-text">
+        </span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span><span class="token class-name">Person</span></span> <span class="token spread"><span class="token punctuation">{</span><span class="token operator">...</span>look<span class="token punctuation">}</span></span> <span class="token attr-name">idle</span> <span class="token attr-name">lookAt</span> <span class="token punctuation">/></span></span><span class="token plain-text">
+      </span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span><span class="token class-name">World</span></span><span class="token punctuation">></span></span><span class="token plain-text">
+
+      </span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>aside</span> <span class="token attr-name">className</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>panel<span class="token punctuation">"</span></span><span class="token punctuation">></span></span><span class="token plain-text">
+        </span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>button</span> <span class="token attr-name">type</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>button<span class="token punctuation">"</span></span> <span class="token attr-name">onClick</span><span class="token script language-javascript"><span class="token script-punctuation punctuation">=</span><span class="token punctuation">{</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token function">edit</span><span class="token punctuation">(</span><span class="token punctuation">{</span> seed<span class="token operator">:</span> <span class="token number">1</span> <span class="token operator">+</span> Math<span class="token punctuation">.</span><span class="token function">floor</span><span class="token punctuation">(</span>Math<span class="token punctuation">.</span><span class="token function">random</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">*</span> <span class="token number">9999</span><span class="token punctuation">)</span> <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">}</span></span><span class="token punctuation">></span></span><span class="token plain-text">
+          🎲 new person
+        &lt;/button>
+
+        </span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>label</span><span class="token punctuation">></span></span><span class="token plain-text">
+          style
+          </span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>select</span> <span class="token attr-name">value</span><span class="token script language-javascript"><span class="token script-punctuation punctuation">=</span><span class="token punctuation">{</span>look<span class="token punctuation">.</span>style<span class="token punctuation">}</span></span> <span class="token attr-name">onChange</span><span class="token script language-javascript"><span class="token script-punctuation punctuation">=</span><span class="token punctuation">{</span><span class="token punctuation">(</span>e<span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token function">edit</span><span class="token punctuation">(</span><span class="token punctuation">{</span> style<span class="token operator">:</span> e<span class="token punctuation">.</span>target<span class="token punctuation">.</span>value <span class="token keyword">as</span> PersonStyle <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">}</span></span><span class="token punctuation">></span></span><span class="token plain-text">
+            </span><span class="token punctuation">{</span><span class="token constant">STYLES</span><span class="token punctuation">.</span><span class="token function">map</span><span class="token punctuation">(</span><span class="token punctuation">(</span>s<span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>option</span> <span class="token attr-name">key</span><span class="token script language-javascript"><span class="token script-punctuation punctuation">=</span><span class="token punctuation">{</span>s<span class="token punctuation">}</span></span><span class="token punctuation">></span></span><span class="token punctuation">{</span>s<span class="token punctuation">}</span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>option</span><span class="token punctuation">></span></span><span class="token punctuation">)</span><span class="token punctuation">}</span><span class="token plain-text">
+          </span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>select</span><span class="token punctuation">></span></span><span class="token plain-text">
+        </span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>label</span><span class="token punctuation">></span></span><span class="token plain-text">
+
+        </span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>label</span><span class="token punctuation">></span></span><span class="token plain-text">
+          outfit
+          </span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>select</span>
+            <span class="token attr-name">value</span><span class="token script language-javascript"><span class="token script-punctuation punctuation">=</span><span class="token punctuation">{</span>look<span class="token punctuation">.</span>skin<span class="token punctuation">}</span></span>
+            <span class="token attr-name">onChange</span><span class="token script language-javascript"><span class="token script-punctuation punctuation">=</span><span class="token punctuation">{</span><span class="token punctuation">(</span>e<span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token function">edit</span><span class="token punctuation">(</span><span class="token punctuation">{</span> skin<span class="token operator">:</span> e<span class="token punctuation">.</span>target<span class="token punctuation">.</span>value <span class="token keyword">as</span> PersonSkinName<span class="token punctuation">,</span> topColor<span class="token operator">:</span> <span class="token keyword">undefined</span> <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">}</span></span>
+          <span class="token punctuation">></span></span><span class="token plain-text">
+            </span><span class="token punctuation">{</span><span class="token constant">SKINS</span><span class="token punctuation">.</span><span class="token function">map</span><span class="token punctuation">(</span><span class="token punctuation">(</span>s<span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>option</span> <span class="token attr-name">key</span><span class="token script language-javascript"><span class="token script-punctuation punctuation">=</span><span class="token punctuation">{</span>s<span class="token punctuation">}</span></span><span class="token punctuation">></span></span><span class="token punctuation">{</span>s<span class="token punctuation">}</span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>option</span><span class="token punctuation">></span></span><span class="token punctuation">)</span><span class="token punctuation">}</span><span class="token plain-text">
+          </span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>select</span><span class="token punctuation">></span></span><span class="token plain-text">
+        </span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>label</span><span class="token punctuation">></span></span><span class="token plain-text">
+
+        </span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>label</span><span class="token punctuation">></span></span><span class="token plain-text">
+          hair
+          </span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>select</span>
+            <span class="token attr-name">value</span><span class="token script language-javascript"><span class="token script-punctuation punctuation">=</span><span class="token punctuation">{</span>seen<span class="token punctuation">.</span>hair<span class="token punctuation">.</span>value<span class="token punctuation">}</span></span>
+            <span class="token attr-name">onChange</span><span class="token script language-javascript"><span class="token script-punctuation punctuation">=</span><span class="token punctuation">{</span><span class="token punctuation">(</span>e<span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token function">edit</span><span class="token punctuation">(</span><span class="token punctuation">{</span> hair<span class="token operator">:</span> <span class="token punctuation">{</span> <span class="token operator">...</span>look<span class="token punctuation">.</span>hair<span class="token punctuation">,</span> style<span class="token operator">:</span> e<span class="token punctuation">.</span>target<span class="token punctuation">.</span>value <span class="token keyword">as</span> PersonHair <span class="token punctuation">}</span> <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">}</span></span>
+          <span class="token punctuation">></span></span><span class="token plain-text">
+            </span><span class="token punctuation">{</span><span class="token constant">HAIRS</span><span class="token punctuation">.</span><span class="token function">map</span><span class="token punctuation">(</span><span class="token punctuation">(</span>h<span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>option</span> <span class="token attr-name">key</span><span class="token script language-javascript"><span class="token script-punctuation punctuation">=</span><span class="token punctuation">{</span>h<span class="token punctuation">}</span></span><span class="token punctuation">></span></span><span class="token punctuation">{</span>h<span class="token punctuation">}</span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>option</span><span class="token punctuation">></span></span><span class="token punctuation">)</span><span class="token punctuation">}</span><span class="token plain-text">
+          </span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>select</span><span class="token punctuation">></span></span><span class="token plain-text">
+          </span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>input</span>
+            <span class="token attr-name">type</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>color<span class="token punctuation">"</span></span>
+            <span class="token attr-name">value</span><span class="token script language-javascript"><span class="token script-punctuation punctuation">=</span><span class="token punctuation">{</span>seen<span class="token punctuation">.</span>hairColor<span class="token punctuation">.</span>value<span class="token punctuation">}</span></span>
+            <span class="token attr-name">onChange</span><span class="token script language-javascript"><span class="token script-punctuation punctuation">=</span><span class="token punctuation">{</span><span class="token punctuation">(</span>e<span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token function">edit</span><span class="token punctuation">(</span><span class="token punctuation">{</span> hair<span class="token operator">:</span> <span class="token punctuation">{</span> <span class="token operator">...</span>look<span class="token punctuation">.</span>hair<span class="token punctuation">,</span> color<span class="token operator">:</span> e<span class="token punctuation">.</span>target<span class="token punctuation">.</span>value <span class="token punctuation">}</span> <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">}</span></span>
+          <span class="token punctuation">/></span></span><span class="token plain-text">
+        </span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>label</span><span class="token punctuation">></span></span><span class="token plain-text">
+
+        </span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>label</span><span class="token punctuation">></span></span><span class="token plain-text">
+          eyes
+          &lt;input
+            type="color"
+            value=</span><span class="token punctuation">{</span>seen<span class="token punctuation">.</span>eyeColor<span class="token punctuation">.</span>value<span class="token punctuation">}</span><span class="token plain-text">
+            onChange=</span><span class="token punctuation">{</span><span class="token punctuation">(</span>e<span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token function">edit</span><span class="token punctuation">(</span><span class="token punctuation">{</span> face<span class="token operator">:</span> <span class="token punctuation">{</span> <span class="token operator">...</span>look<span class="token punctuation">.</span>face<span class="token punctuation">,</span> eyes<span class="token operator">:</span> <span class="token punctuation">{</span> <span class="token operator">...</span>look<span class="token punctuation">.</span>face<span class="token punctuation">.</span>eyes<span class="token punctuation">,</span> color<span class="token operator">:</span> e<span class="token punctuation">.</span>target<span class="token punctuation">.</span>value <span class="token punctuation">}</span> <span class="token punctuation">}</span> <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">}</span><span class="token plain-text">
+          />
+        </span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>label</span><span class="token punctuation">></span></span><span class="token plain-text">
+
+        </span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>label</span><span class="token punctuation">></span></span><span class="token plain-text">
+          top
+          </span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>input</span> <span class="token attr-name">type</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>color<span class="token punctuation">"</span></span> <span class="token attr-name">value</span><span class="token script language-javascript"><span class="token script-punctuation punctuation">=</span><span class="token punctuation">{</span>seen<span class="token punctuation">.</span>topColor<span class="token punctuation">.</span>value<span class="token punctuation">}</span></span> <span class="token attr-name">onChange</span><span class="token script language-javascript"><span class="token script-punctuation punctuation">=</span><span class="token punctuation">{</span><span class="token punctuation">(</span>e<span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token function">edit</span><span class="token punctuation">(</span><span class="token punctuation">{</span> topColor<span class="token operator">:</span> e<span class="token punctuation">.</span>target<span class="token punctuation">.</span>value <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">}</span></span> <span class="token punctuation">/></span></span><span class="token plain-text">
+        </span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>label</span><span class="token punctuation">></span></span><span class="token plain-text">
+      </span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>aside</span><span class="token punctuation">></span></span><span class="token plain-text">
+    </span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">></span></span><span class="token plain-text">
+  )
+}
+</span></code></pre>
+</code-block><p>Give <code>.creator</code> a full-screen size and float <code>.panel</code> over the corner with whatever CSS you like. A few things worth pointing out:</p>
+<p><strong>Every control is a prop write.</strong> <code>setLook</code> goes in, <code>&lt;Person {...look} /&gt;</code> re-renders. There’s no “apply” step and no mesh to patch. Runek rebuilds the figure from the new props.</p>
+<p><strong><code>resolvePerson</code> fills the controls.</strong> A colour picker needs a value, but most of these traits aren’t set yet. The seed picked them. <code>seen.hairColor.value</code> is whatever the seed rolled, so the picker starts on the colour you’re actually looking at, and the moment you touch it, that becomes a prop.</p>
+<p><strong>The outfit resets <code>topColor</code>.</strong> If a player recoloured their top and then switches skins, they’d expect the new skin’s colours, not their old shirt colour on a new jacket. Props beat skins, so you have to clear it yourself.</p>
+<p><strong><code>lookAt</code> makes it look at you.</strong> With no <code>Player</code> around, the figure’s head and eyes follow the camera. It’s a small thing, but dressing up someone who’s looking back at you feels very different from dressing a mannequin.</p>
+<p><strong><code>World time=&quot;10:00&quot;</code></strong> pins the sky. Without it, <code>Sky</code> follows the real clock, and your character creator turns into a night scene after sunset.</p>
+<h2 id="wearing-it-in-the-world" tabindex="-1">Wearing it in the world <a class="header-anchor" href="#wearing-it-in-the-world" aria-hidden="true">#</a></h2>
+<p>Now the fun part. <code>Player</code> takes a custom body as its child, so the same look goes straight onto the player:</p>
+<code-block lang="tsx"><pre class="language-tsx"><code class="language-tsx"><span class="token keyword">import</span> <span class="token punctuation">{</span> World <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'@runek/core'</span>
+<span class="token keyword">import</span> <span class="token punctuation">{</span> loadLook <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'./look'</span>
+<span class="token keyword">import</span> <span class="token punctuation">{</span> Floor <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'./runek/Floor'</span>
+<span class="token keyword">import</span> <span class="token punctuation">{</span> Person <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'./runek/Person'</span>
+<span class="token keyword">import</span> <span class="token punctuation">{</span> Player <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'./runek/Player'</span>
+<span class="token keyword">import</span> <span class="token punctuation">{</span> Sky <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'./runek/Sky'</span>
+
+<span class="token keyword">export</span> <span class="token keyword">function</span> <span class="token function">Game</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token keyword">const</span> look <span class="token operator">=</span> <span class="token function">loadLook</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+  <span class="token keyword">return</span> <span class="token punctuation">(</span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span><span class="token class-name">World</span></span> <span class="token attr-name">avatar</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>third<span class="token punctuation">"</span></span> <span class="token attr-name">time</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>10:00<span class="token punctuation">"</span></span><span class="token punctuation">></span></span><span class="token plain-text">
+      </span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span><span class="token class-name">Sky</span></span> <span class="token punctuation">/></span></span><span class="token plain-text">
+      </span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span><span class="token class-name">Floor</span></span> <span class="token attr-name">size</span><span class="token script language-javascript"><span class="token script-punctuation punctuation">=</span><span class="token punctuation">{</span><span class="token punctuation">[</span><span class="token number">30</span><span class="token punctuation">,</span> <span class="token number">30</span><span class="token punctuation">]</span><span class="token punctuation">}</span></span> <span class="token punctuation">/></span></span><span class="token plain-text">
+      </span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span><span class="token class-name">Player</span></span> <span class="token attr-name">position</span><span class="token script language-javascript"><span class="token script-punctuation punctuation">=</span><span class="token punctuation">{</span><span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">}</span></span><span class="token punctuation">></span></span><span class="token plain-text">
+        </span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span><span class="token class-name">Person</span></span> <span class="token spread"><span class="token punctuation">{</span><span class="token operator">...</span>look<span class="token punctuation">}</span></span> <span class="token attr-name">physics</span><span class="token script language-javascript"><span class="token script-punctuation punctuation">=</span><span class="token punctuation">{</span><span class="token boolean">false</span><span class="token punctuation">}</span></span> <span class="token attr-name">lookAt</span><span class="token script language-javascript"><span class="token script-punctuation punctuation">=</span><span class="token punctuation">{</span><span class="token boolean">false</span><span class="token punctuation">}</span></span> <span class="token attr-name">height</span><span class="token script language-javascript"><span class="token script-punctuation punctuation">=</span><span class="token punctuation">{</span><span class="token number">1.3</span><span class="token punctuation">}</span></span> <span class="token attr-name">position</span><span class="token script language-javascript"><span class="token script-punctuation punctuation">=</span><span class="token punctuation">{</span><span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">,</span> <span class="token operator">-</span><span class="token number">0.65</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">}</span></span> <span class="token punctuation">/></span></span><span class="token plain-text">
+      </span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span><span class="token class-name">Player</span></span><span class="token punctuation">></span></span><span class="token plain-text">
+      </span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span><span class="token class-name">Person</span></span> <span class="token attr-name">seed</span><span class="token script language-javascript"><span class="token script-punctuation punctuation">=</span><span class="token punctuation">{</span><span class="token number">3</span><span class="token punctuation">}</span></span> <span class="token attr-name">skin</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>harvest<span class="token punctuation">"</span></span> <span class="token attr-name">position</span><span class="token script language-javascript"><span class="token script-punctuation punctuation">=</span><span class="token punctuation">{</span><span class="token punctuation">[</span><span class="token number">1.6</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">,</span> <span class="token operator">-</span><span class="token number">2.4</span><span class="token punctuation">]</span><span class="token punctuation">}</span></span> <span class="token punctuation">/></span></span><span class="token plain-text">
+    </span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span><span class="token class-name">World</span></span><span class="token punctuation">></span></span>
+  <span class="token punctuation">)</span>
+<span class="token punctuation">}</span></code></pre>
+</code-block><p><img src="/images/posts/runek-avatars-play.png" alt="A third-person view from behind the player's avatar in a green vest and jeans, standing on open ground near a person in a straw hat">
+<em>The look from the creator, walking around. WASD moves, <code>avatar=&quot;third&quot;</code> puts the camera behind it.</em></p>
+<p>The extra props on the body matter:</p>
+<ul>
+<li><strong><code>physics={false}</code></strong> renders the person as a bare visual with no <code>RigidBody</code>. The <code>Player</code> already owns the physics. Two bodies fighting over one character is not a fun bug.</li>
+<li><strong><code>lookAt={false}</code></strong> stops your own avatar from turning its head to stare at… you.</li>
+<li><strong><code>height={1.3}</code></strong> fits the figure to the player’s capsule.</li>
+<li><strong><code>position={[0, -0.65, 0]}</code></strong> puts its feet at the bottom of the capsule. The capsule itself floats a little off the ground on a spring (that’s how the controller glides up steps), and <code>Player</code> lowers the body by exactly that much, so the shoes meet the floor. Until this week it didn’t, and the avatar hovered 26 cm up. I only noticed because the shadow wasn’t touching the shoes.</li>
+</ul>
+<p>It walks, too. <code>Person</code> reads the player’s speed, so the walk cycle stays in step with how fast you’re actually moving.</p>
+<p>And because a look is data, the whole thing works as a world file as well:</p>
+<code-block lang="json"><pre class="language-json"><code class="language-json"><span class="token punctuation">{</span>
+  <span class="token property">"type"</span><span class="token operator">:</span> <span class="token string">"Player"</span><span class="token punctuation">,</span>
+  <span class="token property">"props"</span><span class="token operator">:</span> <span class="token punctuation">{</span> <span class="token property">"position"</span><span class="token operator">:</span> <span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">]</span> <span class="token punctuation">}</span><span class="token punctuation">,</span>
+  <span class="token property">"children"</span><span class="token operator">:</span> <span class="token punctuation">[</span>
+    <span class="token punctuation">{</span>
+      <span class="token property">"type"</span><span class="token operator">:</span> <span class="token string">"Person"</span><span class="token punctuation">,</span>
+      <span class="token property">"props"</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+        <span class="token property">"seed"</span><span class="token operator">:</span> <span class="token number">41</span><span class="token punctuation">,</span>
+        <span class="token property">"skin"</span><span class="token operator">:</span> <span class="token string">"preppy"</span><span class="token punctuation">,</span>
+        <span class="token property">"hair"</span><span class="token operator">:</span> <span class="token punctuation">{</span> <span class="token property">"style"</span><span class="token operator">:</span> <span class="token string">"braid"</span><span class="token punctuation">,</span> <span class="token property">"color"</span><span class="token operator">:</span> <span class="token string">"#2b1d14"</span> <span class="token punctuation">}</span><span class="token punctuation">,</span>
+        <span class="token property">"face"</span><span class="token operator">:</span> <span class="token punctuation">{</span> <span class="token property">"eyes"</span><span class="token operator">:</span> <span class="token punctuation">{</span> <span class="token property">"color"</span><span class="token operator">:</span> <span class="token string">"#3b7a57"</span> <span class="token punctuation">}</span> <span class="token punctuation">}</span><span class="token punctuation">,</span>
+        <span class="token property">"physics"</span><span class="token operator">:</span> <span class="token boolean">false</span><span class="token punctuation">,</span>
+        <span class="token property">"lookAt"</span><span class="token operator">:</span> <span class="token boolean">false</span><span class="token punctuation">,</span>
+        <span class="token property">"height"</span><span class="token operator">:</span> <span class="token number">1.3</span><span class="token punctuation">,</span>
+        <span class="token property">"position"</span><span class="token operator">:</span> <span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">-0.65</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">]</span>
+      <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+  <span class="token punctuation">]</span>
+<span class="token punctuation">}</span></code></pre>
+</code-block><p><code>runek validate</code> checks it, and here’s <a href="https://runek.nullorder.org/workshop#s=dZC7bsMwDEX_5XZlDCnOA9DWpXOAjkYGxWZqIaolSIILNdC_F_JgxENHEoeXPHxihpKEHxfsAPXEzCEaNy3NZL4ZClIoIUDQs046QCGNJgwgTG7gCNU9kbKv5Ocjo9BafljnAgg-OB9reDS_DNW1glpxLS_kxerMG9S7aNJySCdIkrgWQj8aOwSeXldeOEQ3bZYwD1AHSYgPM0HBB_Y-gzBqExYiZVtnb0Gb6tE766rX2_4mB3lAIdx1zxXlzEvoirS3sz6eUQrBjzmaPkLdtY1MsM493tNajmy-xgQlm5a2OjvRnI5VqVxff_CPSbuKjDrMHBM2cbI5kaDdvjkseeUP">that exact world in the workshop</a> if you want to poke at it.</p>
+<h2 id="things-that-bite" tabindex="-1">Things that bite <a class="header-anchor" href="#things-that-bite" aria-hidden="true">#</a></h2>
+<h3 id="the-player-is-a-little-short" tabindex="-1">The player is a little short <a class="header-anchor" href="#the-player-is-a-little-short" aria-hidden="true">#</a></h3>
+<p><code>height={1.3}</code> fits the capsule, but a seeded adult is closer to 1.6 or 1.7. Next to your NPCs, your avatar looks like their younger sibling. That’s the capsule’s size, not something the look can fix. Keep it in mind if your world has doorways and counters built for full-size people.</p>
+<h3 id="skins-don%E2%80%99t-carry-hair" tabindex="-1">Skins don’t carry hair <a class="header-anchor" href="#skins-don%E2%80%99t-carry-hair" aria-hidden="true">#</a></h3>
+<p>This one’s on purpose, but it surprises people. Switch a player from <code>casual</code> to <code>winter</code> and their hair doesn’t change, because skins are wardrobe, not wigs. If you want a “full look” preset that includes hair, keep it in your own <code>Look</code> like the code above does, next to the skin.</p>
+<h2 id="what-this-actually-bought" tabindex="-1">What this actually bought <a class="header-anchor" href="#what-this-actually-bought" aria-hidden="true">#</a></h2>
+<p>About a hundred lines of React and one type, and players can make a person, keep them, and walk around as them. No model files, no texture atlas, nothing to host but your static site.</p>
+<p>The part I’d carry into any character system, Runek or not:</p>
+<p><strong>Make the look data, not geometry.</strong> Once a whole character is a small JSON object, everything else is ordinary web code. Saving it, sharing it, syncing it, undoing it, diffing it in a pull request. None of that needs to know there’s a 3D mesh at the end.</p>
+<p><strong>Let unset mean “the seed decides”.</strong> A creator where every field has to be filled in is a form. A creator where you start from a whole person and only change what you care about is a toy. People play with toys.</p>
+<p>There’s more in <code>Person</code> than this post touched: poses, emotes, speech bubbles, name tags, patrol routes and interactions. That’s for another post. For now, go make someone.</p>
+<hr>
+<h4 id="links%3A" tabindex="-1">Links: <a class="header-anchor" href="#links%3A" aria-hidden="true">#</a></h4>
+<ul>
+<li>Runek Repo: <a href="https://github.com/nullorder/runek">github.com/nullorder/runek</a></li>
+<li>Runek Docs: <a href="https://runek.nullorder.org">runek.nullorder.org</a></li>
+<li>The Workshop and avatar studio: <a href="https://runek.nullorder.org/workshop">runek.nullorder.org/workshop</a></li>
+<li><code>Person</code> reference: <a href="https://runek.nullorder.org/docs/components/person">runek.nullorder.org/docs/components/person</a></li>
+</ul>
+<div class="github-card-wrapper"><a href="https://github.com/nullorder/runek" target="_blank" rel="noopener noreferrer" class="github-card"><div class="github-card-top"><div class="github-card-primary"><h3 class="github-card-heading"><span class="github-card-owner">nullorder</span><span class="github-card-slash">/</span><span class="github-card-name">runek</span></h3><div class="github-card-pills"><span class="github-card-pill github-card-pill-version">v0.15.0</span><span class="github-card-pill">MIT</span></div><p class="github-card-desc">Procedural 3D components for the web. Compose walkable worlds from code.</p><div class="github-card-topics"><span class="github-card-topic">3d</span><span class="github-card-topic">javascript</span><span class="github-card-topic">runek</span><span class="github-card-topic">three-js</span><span class="github-card-topic">typescript</span></div></div><div class="github-card-avatar-wrap"><img src="https://avatars.githubusercontent.com/u/30635184?v=4&amp;s=120" alt="nullorder" class="github-card-avatar" loading="lazy" width="56" height="56"></div></div><div class="github-card-activity"><svg class="github-card-spark" viewBox="0 0 520 36" preserveAspectRatio="none" aria-hidden="true"><rect x="0.00" y="36.00" width="8.04" height="0.00" rx="0.5"></rect><rect x="10.04" y="36.00" width="8.04" height="0.00" rx="0.5"></rect><rect x="20.08" y="36.00" width="8.04" height="0.00" rx="0.5"></rect><rect x="30.12" y="36.00" width="8.04" height="0.00" rx="0.5"></rect><rect x="40.15" y="36.00" width="8.04" height="0.00" rx="0.5"></rect><rect x="50.19" y="36.00" width="8.04" height="0.00" rx="0.5"></rect><rect x="60.23" y="36.00" width="8.04" height="0.00" rx="0.5"></rect><rect x="70.27" y="36.00" width="8.04" height="0.00" rx="0.5"></rect><rect x="80.31" y="36.00" width="8.04" height="0.00" rx="0.5"></rect><rect x="90.35" y="36.00" width="8.04" height="0.00" rx="0.5"></rect><rect x="100.38" y="36.00" width="8.04" height="0.00" rx="0.5"></rect><rect x="110.42" y="36.00" width="8.04" height="0.00" rx="0.5"></rect><rect x="120.46" y="36.00" width="8.04" height="0.00" rx="0.5"></rect><rect x="130.50" y="36.00" width="8.04" height="0.00" rx="0.5"></rect><rect x="140.54" y="36.00" width="8.04" height="0.00" rx="0.5"></rect><rect x="150.58" y="36.00" width="8.04" height="0.00" rx="0.5"></rect><rect x="160.62" y="36.00" width="8.04" height="0.00" rx="0.5"></rect><rect x="170.65" y="36.00" width="8.04" height="0.00" rx="0.5"></rect><rect x="180.69" y="36.00" width="8.04" height="0.00" rx="0.5"></rect><rect x="190.73" y="36.00" width="8.04" height="0.00" rx="0.5"></rect><rect x="200.77" y="36.00" width="8.04" height="0.00" rx="0.5"></rect><rect x="210.81" y="36.00" width="8.04" height="0.00" rx="0.5"></rect><rect x="220.85" y="36.00" width="8.04" height="0.00" rx="0.5"></rect><rect x="230.88" y="36.00" width="8.04" height="0.00" rx="0.5"></rect><rect x="240.92" y="36.00" width="8.04" height="0.00" rx="0.5"></rect><rect x="250.96" y="36.00" width="8.04" height="0.00" rx="0.5"></rect><rect x="261.00" y="36.00" width="8.04" height="0.00" rx="0.5"></rect><rect x="271.04" y="36.00" width="8.04" height="0.00" rx="0.5"></rect><rect x="281.08" y="36.00" width="8.04" height="0.00" rx="0.5"></rect><rect x="291.12" y="36.00" width="8.04" height="0.00" rx="0.5"></rect><rect x="301.15" y="36.00" width="8.04" height="0.00" rx="0.5"></rect><rect x="311.19" y="3.60" width="8.04" height="32.40" rx="0.5"></rect><rect x="321.23" y="10.80" width="8.04" height="25.20" rx="0.5"></rect><rect x="331.27" y="14.40" width="8.04" height="21.60" rx="0.5"></rect><rect x="341.31" y="3.60" width="8.04" height="32.40" rx="0.5"></rect><rect x="351.35" y="21.60" width="8.04" height="14.40" rx="0.5"></rect><rect x="361.38" y="7.20" width="8.04" height="28.80" rx="0.5"></rect><rect x="371.42" y="18.00" width="8.04" height="18.00" rx="0.5"></rect><rect x="381.46" y="28.80" width="8.04" height="7.20" rx="0.5"></rect><rect x="391.50" y="36.00" width="8.04" height="0.00" rx="0.5"></rect><rect x="401.54" y="36.00" width="8.04" height="0.00" rx="0.5"></rect><rect x="411.58" y="36.00" width="8.04" height="0.00" rx="0.5"></rect><rect x="421.62" y="36.00" width="8.04" height="0.00" rx="0.5"></rect><rect x="431.65" y="32.40" width="8.04" height="3.60" rx="0.5"></rect><rect x="441.69" y="32.40" width="8.04" height="3.60" rx="0.5"></rect><rect x="451.73" y="36.00" width="8.04" height="0.00" rx="0.5"></rect><rect x="461.77" y="32.40" width="8.04" height="3.60" rx="0.5"></rect><rect x="471.81" y="36.00" width="8.04" height="0.00" rx="0.5"></rect><rect x="481.85" y="18.00" width="8.04" height="18.00" rx="0.5"></rect><rect x="491.88" y="21.60" width="8.04" height="14.40" rx="0.5"></rect><rect x="501.92" y="25.20" width="8.04" height="10.80" rx="0.5"></rect><rect x="511.96" y="0.00" width="8.04" height="36.00" rx="0.5"></rect></svg><span class="github-card-spark-label">75 commits in the last year</span></div><div class="github-card-stats"><span class="github-card-stat github-card-lang"><span class="github-card-lang-dot" style="background:#3178c6"></span>TypeScript</span><span class="github-card-stat" aria-label="7 stars"><svg viewBox="0 0 16 16" width="14" height="14" fill="currentColor" aria-hidden="true"><path d="M8 .25a.75.75 0 0 1 .673.418l1.882 3.815 4.21.612a.75.75 0 0 1 .416 1.279l-3.046 2.97.719 4.192a.751.751 0 0 1-1.088.791L8 12.347l-3.766 1.98a.75.75 0 0 1-1.088-.79l.72-4.194L.818 6.374a.75.75 0 0 1 .416-1.28l4.21-.611L7.327.668A.75.75 0 0 1 8 .25Z"></path></svg>7</span><span class="github-card-stat" aria-label="1 forks"><svg viewBox="0 0 16 16" width="14" height="14" fill="currentColor" aria-hidden="true"><path d="M5 5.372v.878c0 .414.336.75.75.75h4.5a.75.75 0 0 0 .75-.75v-.878a2.25 2.25 0 1 1 1.5 0v.878a2.25 2.25 0 0 1-2.25 2.25h-1.5v2.128a2.251 2.251 0 1 1-1.5 0V8.5h-1.5A2.25 2.25 0 0 1 3.5 6.25v-.878a2.25 2.25 0 1 1 1.5 0ZM5 3.25a.75.75 0 1 0-1.5 0 .75.75 0 0 0 1.5 0Zm6.75.75a.75.75 0 1 0 0-1.5.75.75 0 0 0 0 1.5Zm-3 8.75a.75.75 0 1 0-1.5 0 .75.75 0 0 0 1.5 0Z"></path></svg>1</span><span class="github-card-stat" aria-label="1 open issues"><svg viewBox="0 0 16 16" width="14" height="14" fill="currentColor" aria-hidden="true"><path d="M8 9.5a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3Z"></path><path d="M8 0a8 8 0 1 1 0 16A8 8 0 0 1 8 0ZM1.5 8a6.5 6.5 0 1 0 13 0 6.5 6.5 0 0 0-13 0Z"></path></svg>1</span><span class="github-card-updated" title="Last push: 2026-10-23T04:59:00Z">Updated today</span></div></a></div>
+
+            </div>
+
+            <div class="article-end">
+                <span>✦</span>
+                <span>✦</span>
+                <span>✦</span>
+            </div>
+
+            <div class="post-navigation">
+                <div class="post-nav-item post-nav-previous">
+                        <a href="/same-skill-different-model/">
+                            <span class="nav-arrow">←</span>
+                            <div class="nav-content">
+                                <p class="nav-label">Previous</p>
+                                <p class="nav-title">Same Skill, Different Model</p>
+                            </div>
+                        </a>
+                    
+                </div>
+
+                <div class="post-nav-item post-nav-next">
+                        <a href="/who-moved-my-tag/">
+                            <div class="nav-content">
+                                <p class="nav-label">Next</p>
+                                <p class="nav-title">Who Moved My Tag?</p>
+                            </div>
+                            <span class="nav-arrow">→</span>
+                        </a>
+                    
+                </div>
+            </div>
+        </div>
+    </article>
+
+    </main>
+    <footer class="sticky bottom-0 z-50 glass-footer py-4">
+  <div class="container mx-auto max-w-7xl px-8 flex items-center justify-between">
+    <div class="text-base">
+      by <a href="https://anirudha.dev" target="_blank" rel="noopener noreferrer">Ani</a>
+    </div>
+
+    <div class="flex items-center gap-4">
+      <a href="https://github.com/anistark" target="_blank" rel="noopener noreferrer" class="footer-icon" aria-label="GitHub">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="currentColor" viewBox="0 0 24 24">
+          <path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/>
+        </svg>
+      </a>
+      <a href="https://x.com/kranirudha" target="_blank" rel="noopener noreferrer" class="footer-icon" aria-label="X">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="currentColor" viewBox="0 0 24 24">
+          <path d="M14.234 10.162 22.977 0h-2.072l-7.591 8.824L7.251 0H.258l9.168 13.343L.258 24H2.33l8.016-9.318L16.749 24h6.993zm-2.837 3.299-.929-1.329L3.076 1.56h3.182l5.965 8.532.929 1.329 7.754 11.09h-3.182z"/>
+        </svg>
+      </a>
+      <a href="https://fosstodon.org/@ani" target="_blank" rel="noopener noreferrer" class="footer-icon" aria-label="Mastodon">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="currentColor" viewBox="0 0 24 24">
+          <path d="M23.268 5.313c-.35-2.578-2.617-4.61-5.304-5.004C17.51.242 15.792 0 11.813 0h-.03c-3.98 0-4.835.242-5.288.309C3.882.692 1.496 2.518.917 5.127.64 6.412.61 7.837.661 9.143c.074 1.874.088 3.745.26 5.611.118 1.24.325 2.47.62 3.68.55 2.237 2.777 4.098 4.96 4.857 2.336.792 4.849.923 7.256.38.265-.061.527-.132.786-.213.585-.184 1.27-.39 1.774-.753a.057.057 0 0 0 .023-.043v-1.809a.052.052 0 0 0-.02-.041.053.053 0 0 0-.046-.01 20.282 20.282 0 0 1-4.709.545c-2.73 0-3.463-1.284-3.674-1.818a5.593 5.593 0 0 1-.319-1.433.053.053 0 0 1 .066-.054c1.517.363 3.072.546 4.632.546.376 0 .75 0 1.125-.01 1.57-.044 3.224-.124 4.768-.422.038-.008.077-.015.11-.024 2.435-.464 4.753-1.92 4.989-5.604.008-.145.03-1.52.03-1.67.002-.512.167-3.63-.024-5.545zm-3.748 9.195h-2.561V8.29c0-1.309-.55-1.976-1.67-1.976-1.23 0-1.846.79-1.846 2.35v3.403h-2.546V8.663c0-1.56-.617-2.35-1.848-2.35-1.112 0-1.668.668-1.67 1.977v6.218H4.822V8.102c0-1.31.337-2.35 1.011-3.12.696-.77 1.608-1.164 2.74-1.164 1.311 0 2.302.5 2.962 1.498l.638 1.06.638-1.06c.66-.999 1.65-1.498 2.96-1.498 1.13 0 2.043.395 2.74 1.164.675.77 1.012 1.81 1.012 3.12z"/>
+        </svg>
+      </a>
+      <a href="https://linkedin.com/in/kranirudha" target="_blank" rel="noopener noreferrer" class="footer-icon" aria-label="LinkedIn">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="currentColor" viewBox="0 0 24 24">
+          <path d="M4.98 3.5c0 1.381-1.11 2.5-2.48 2.5s-2.48-1.119-2.48-2.5c0-1.38 1.11-2.5 2.48-2.5s2.48 1.12 2.48 2.5zm.02 4.5h-5v16h5v-16zm7.982 0h-4.968v16h4.969v-8.399c0-4.67 6.029-5.052 6.029 0v8.399h4.988v-10.131c0-7.88-8.922-7.593-11.018-3.714v-2.155z"/>
+        </svg>
+      </a>
+      <a href="/feed/feed.xml" class="footer-icon" aria-label="RSS feed">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="currentColor" viewBox="0 0 24 24">
+          <path d="M6.18 15.64a2.18 2.18 0 0 1 2.18 2.18C8.36 19 7.38 20 6.18 20C5 20 4 19 4 17.82a2.18 2.18 0 0 1 2.18-2.18M4 4.44A15.56 15.56 0 0 1 19.56 20h-2.83A12.73 12.73 0 0 0 4 7.27V4.44m0 5.66a9.9 9.9 0 0 1 9.9 9.9h-2.83A7.07 7.07 0 0 0 4 12.93V10.1Z"/>
+        </svg>
+      </a>
+    </div>
+  </div>
+</footer>
+
+    
+    <script src="/assets/main.bundle.js"></script>
+    <script type="module">
+      import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs';
+      mermaid.initialize({
+        startOnLoad: true,
+        theme: ['reading', 'beach', 'hogwarts'].includes(document.documentElement.getAttribute('data-theme')) ? 'default' : 'dark',
+        themeVariables: {
+          fontSize: '14px',
+        }
+      });
+    </script>
+  </body>
+</html>

