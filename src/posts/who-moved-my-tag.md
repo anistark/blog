@@ -6,7 +6,7 @@ date: 2026-10-24
 updatedDate: 2026-10-24
 featuredImage: /images/posts/who-moved-my-tag-cover.svg
 socialImage: /images/posts/who-moved-my-tag-cover-og.png
-draft: true
+draft: false
 tags:
   - post
   - security
