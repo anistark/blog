@@ -1,0 +1,88 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 560" font-family="system-ui, sans-serif">
+  <title>The v1 tag moves from commit dc9459c to a new malicious commit 0223158. A workflow using @v1 now runs the attacker's code, while a workflow pinned to dc9459c still runs the original code</title>
+  <style>
+    .tag { transform: translate(300px, 90px); animation: slide 8s ease-in-out infinite; }
+    .evil { animation: appear 8s ease-in-out infinite; }
+    .was { opacity: 0; animation: was 8s ease-in-out infinite; }
+    .now { animation: now 8s ease-in-out infinite; }
+    @keyframes slide {
+      0%, 38% { transform: translate(0, 0); }
+      50%, 92% { transform: translate(300px, 90px); }
+      100% { transform: translate(0, 0); }
+    }
+    @keyframes appear {
+      0%, 18% { opacity: 0; }
+      26%, 94% { opacity: 1; }
+      100% { opacity: 0; }
+    }
+    @keyframes was {
+      0%, 44% { opacity: 1; }
+      50%, 92% { opacity: 0; }
+      100% { opacity: 1; }
+    }
+    @keyframes now {
+      0%, 44% { opacity: 0; }
+      50%, 92% { opacity: 1; }
+      100% { opacity: 0; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .tag, .evil, .was, .now { animation: none; }
+    }
+  </style>
+  <rect width="1000" height="560" fill="#1a1a19"/>
+
+  <text x="60" y="58" font-size="22" font-weight="700" fill="#ffffff">Same name, different commit</text>
+  <text x="60" y="86" font-size="15" fill="#c3c2b7">someone with push access repoints <tspan font-family="ui-monospace, SFMono-Regular, Menlo, monospace">v1</tspan>. The SHA pin can't be repointed.</text>
+
+  <!-- history -->
+  <g fill="none" stroke-width="2">
+    <line x1="90" y1="230" x2="342" y2="230" stroke="#3a3a38" stroke-dasharray="3 6"/>
+    <line x1="378" y1="230" x2="560" y2="230" stroke="#3a3a38"/>
+  </g>
+  <text x="575" y="235" font-size="14" fill="#6b6b66" font-family="ui-monospace, SFMono-Regular, Menlo, monospace">main</text>
+
+  <!-- original commit -->
+  <circle cx="360" cy="230" r="16" fill="#1b2b25" stroke="#199e70" stroke-width="2"/>
+  <text x="360" y="275" font-size="15" font-weight="600" fill="#ffffff" text-anchor="middle" font-family="ui-monospace, SFMono-Regular, Menlo, monospace">dc9459c</text>
+  <text x="360" y="295" font-size="12" fill="#c3c2b7" text-anchor="middle">echo "linting files"</text>
+
+  <!-- attacker commit -->
+  <g class="evil">
+    <path d="M 374 240 C 470 300, 560 320, 642 320" fill="none" stroke="#e66767" stroke-width="2" stroke-dasharray="5 4"/>
+    <circle cx="660" cy="320" r="16" fill="#2a1f1f" stroke="#e66767" stroke-width="2"/>
+    <text x="700" y="317" font-size="15" font-weight="600" fill="#ffffff" font-family="ui-monospace, SFMono-Regular, Menlo, monospace">0223158</text>
+    <text x="700" y="337" font-size="12" fill="#e66767">curl … | sh, on no branch</text>
+  </g>
+
+  <!-- the SHA pin, which stays -->
+  <g>
+    <line x1="360" y1="134" x2="360" y2="213" stroke="#3987e5" stroke-width="2" stroke-dasharray="2 3"/>
+    <rect x="270" y="108" width="180" height="26" rx="6" fill="#223349" stroke="#3987e5" stroke-width="1.5"/>
+    <text x="360" y="126" font-size="13" font-weight="700" fill="#3987e5" text-anchor="middle" font-family="ui-monospace, SFMono-Regular, Menlo, monospace">pinned @dc9459c…</text>
+  </g>
+
+  <!-- the moving tag, drawn above dc9459c -->
+  <g class="tag">
+    <line x1="360" y1="186" x2="360" y2="212" stroke="#e66767" stroke-width="2"/>
+    <path d="M 316 160 L 404 160 Q 410 160 410 166 L 410 180 Q 410 186 404 186 L 316 186 Q 310 186 310 180 L 310 166 Q 310 160 316 160 Z" fill="#2a1f1f" stroke="#e66767" stroke-width="1.5"/>
+    <text x="360" y="178" font-size="14" font-weight="700" fill="#e66767" text-anchor="middle" font-family="ui-monospace, SFMono-Regular, Menlo, monospace">tag v1</text>
+  </g>
+
+  <!-- consumers -->
+  <g font-family="ui-monospace, SFMono-Regular, Menlo, monospace">
+    <rect x="60" y="400" width="420" height="110" rx="12" fill="#242423" stroke="#3a3a38"/>
+    <text x="84" y="436" font-size="15" fill="#6b6b66">uses: <tspan fill="#ffffff">lint@v1</tspan></text>
+    <line x1="84" y1="452" x2="456" y2="452" stroke="#3a3a38"/>
+    <g class="was">
+      <text x="84" y="484" font-size="14" fill="#199e70">✓ runs dc9459c, clean</text>
+    </g>
+    <g class="now">
+      <text x="84" y="484" font-size="14" fill="#e66767">✗ runs 0223158, attacker code</text>
+    </g>
+
+    <rect x="520" y="400" width="420" height="110" rx="12" fill="#242423" stroke="#3987e5" stroke-opacity="0.6"/>
+    <text x="544" y="436" font-size="15" fill="#6b6b66">uses: <tspan fill="#ffffff">lint@dc9459c7795073ee…</tspan></text>
+    <line x1="544" y1="452" x2="916" y2="452" stroke="#3a3a38"/>
+    <text x="544" y="484" font-size="14" fill="#199e70">✓ runs dc9459c, clean</text>
+  </g>
+</svg>

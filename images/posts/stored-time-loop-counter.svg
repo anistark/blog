@@ -1,0 +1,129 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 500" font-family="'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, monospace">
+  <title>A circular arrow with a loop counter in the middle that ticks up from 1 to 160. Beside it, a map fills in lap by lap: where the enemy lands, where a weapon jams, and finally a complete safe route to the objective</title>
+  <style id="jbm-font">@font-face{font-family:'JetBrains Mono';font-style:normal;font-weight:400;src:url(data:font/woff2;base64,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) format('woff2')}@font-face{font-family:'JetBrains Mono';font-style:normal;font-weight:700;src:url(data:font/woff2;base64,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) format('woff2')}</style>
+  <style>
+    .spin { transform-box: view-box; transform-origin: 250px 268px; animation: spin 12s cubic-bezier(0.25, 0.6, 0.3, 1) infinite; }
+    @keyframes spin { 0% { transform: rotate(0deg); } 52%, 100% { transform: rotate(1440deg); } }
+    .n { opacity: 0; }
+    .n160 { opacity: 1; }
+    .n1 { animation: n1 12s linear infinite; }
+    .n2 { animation: n2 12s linear infinite; }
+    .n3 { animation: n3 12s linear infinite; }
+    .n12 { animation: n12 12s linear infinite; }
+    .n47 { animation: n47 12s linear infinite; }
+    .n98 { animation: n98 12s linear infinite; }
+    .n131 { animation: n131 12s linear infinite; }
+    .n160 { animation: n160 12s linear infinite; }
+    @keyframes n1 { 0%, 5% { opacity: 1; } 5.4%, 99.5% { opacity: 0; } 100% { opacity: 1; } }
+    @keyframes n2 { 0%, 5% { opacity: 0; } 5.4%, 10% { opacity: 1; } 10.4%, 100% { opacity: 0; } }
+    @keyframes n3 { 0%, 10% { opacity: 0; } 10.4%, 16% { opacity: 1; } 16.4%, 100% { opacity: 0; } }
+    @keyframes n12 { 0%, 16% { opacity: 0; } 16.4%, 24% { opacity: 1; } 24.4%, 100% { opacity: 0; } }
+    @keyframes n47 { 0%, 24% { opacity: 0; } 24.4%, 34% { opacity: 1; } 34.4%, 100% { opacity: 0; } }
+    @keyframes n98 { 0%, 34% { opacity: 0; } 34.4%, 44% { opacity: 1; } 44.4%, 100% { opacity: 0; } }
+    @keyframes n131 { 0%, 44% { opacity: 0; } 44.4%, 52% { opacity: 1; } 52.4%, 100% { opacity: 0; } }
+    @keyframes n160 { 0%, 52% { opacity: 0; } 52.4%, 95% { opacity: 1; } 99%, 100% { opacity: 0; } }
+    .m { transform-box: fill-box; transform-origin: 50% 50%; }
+    .m1 { animation: m1 12s ease-out infinite; }
+    .m2 { animation: m2 12s ease-out infinite; }
+    .m3 { animation: m3 12s ease-out infinite; }
+    .m4 { animation: m4 12s ease-out infinite; }
+    @keyframes m1 { 0%, 16% { opacity: 0; transform: scale(0.7); } 18.5%, 95% { opacity: 1; transform: scale(1); } 99%, 100% { opacity: 0; } }
+    @keyframes m2 { 0%, 24% { opacity: 0; transform: scale(0.7); } 26.5%, 95% { opacity: 1; transform: scale(1); } 99%, 100% { opacity: 0; } }
+    @keyframes m3 { 0%, 34% { opacity: 0; transform: scale(0.7); } 36.5%, 95% { opacity: 1; transform: scale(1); } 99%, 100% { opacity: 0; } }
+    @keyframes m4 { 0%, 52% { opacity: 0; transform: scale(0.7); } 55%, 95% { opacity: 1; transform: scale(1); } 99%, 100% { opacity: 0; } }
+    .reveal { stroke-dashoffset: 0; animation: reveal 12s ease-in-out infinite; }
+    @keyframes reveal { 0%, 34% { stroke-dashoffset: 1; } 52%, 100% { stroke-dashoffset: 0; } }
+    .route { animation: route 12s linear infinite; }
+    @keyframes route { 0%, 95% { opacity: 1; } 99%, 100% { opacity: 0; } }
+    @media (prefers-reduced-motion: reduce) { * { animation: none !important; } }
+  </style>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#12151c"/><stop offset="1" stop-color="#0a0c10"/></linearGradient>
+    <radialGradient id="sheen" cx="0.5" cy="0" r="0.85"><stop offset="0" stop-color="#ffffff" stop-opacity="0.06"/><stop offset="1" stop-color="#ffffff" stop-opacity="0"/></radialGradient>
+    <filter id="glow" x="-60%" y="-60%" width="220%" height="220%"><feGaussianBlur stdDeviation="6" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+    <radialGradient id="warm" cx="250" cy="268" r="190" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#f5b544" stop-opacity="0.08"/><stop offset="1" stop-color="#f5b544" stop-opacity="0"/></radialGradient>
+    <linearGradient id="panel" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ffffff" stop-opacity="0.045"/><stop offset="1" stop-color="#ffffff" stop-opacity="0.015"/></linearGradient>
+    <marker id="head" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse"><path d="M1 1 L9 5 L1 9 Z" fill="#f5b544"/></marker>
+    <clipPath id="map-clip"><rect x="480" y="84" width="472" height="368" rx="14"/></clipPath>
+    <mask id="route-mask" maskUnits="userSpaceOnUse" x="480" y="84" width="472" height="368">
+      <path class="reveal" d="M532 408 C580 392 566 338 612 318 S704 318 704 268 S768 214 812 214 S878 172 900 132" fill="none" stroke="#ffffff" stroke-width="14" stroke-linecap="round" pathLength="1" stroke-dasharray="1 1"/>
+    </mask>
+  </defs>
+
+  <rect width="1000" height="500" rx="20" fill="url(#bg)"/>
+  <rect width="1000" height="500" rx="20" fill="url(#sheen)"/>
+  <rect width="1000" height="500" rx="20" fill="url(#warm)"/>
+  <rect x="0.5" y="0.5" width="999" height="499" rx="19.5" fill="none" stroke="#ffffff" stroke-opacity="0.08"/>
+
+  <circle cx="52" cy="44" r="3.5" fill="#f5b544"/>
+  <text x="66" y="48" font-size="12" letter-spacing="2.4" fill="#7d8597">LOOP COUNTER</text>
+
+  <!-- the loop -->
+  <circle cx="250" cy="268" r="130" fill="none" stroke="#232834" stroke-width="1.5"/>
+  <g class="spin">
+    <path d="M272.6 140 A130 130 0 1 1 205.5 145.8" fill="none" stroke="#f5b544" stroke-width="3" stroke-linecap="round" marker-end="url(#head)" filter="url(#glow)"/>
+  </g>
+  <text x="250" y="236" text-anchor="middle" font-size="12" letter-spacing="2.4" fill="#7d8597">LOOP</text>
+  <g font-size="60" font-weight="700" fill="#eef1f6" text-anchor="middle">
+    <text class="n n1" x="250" y="298">1</text>
+    <text class="n n2" x="250" y="298">2</text>
+    <text class="n n3" x="250" y="298">3</text>
+    <text class="n n12" x="250" y="298">12</text>
+    <text class="n n47" x="250" y="298">47</text>
+    <text class="n n98" x="250" y="298">98</text>
+    <text class="n n131" x="250" y="298">131</text>
+    <text class="n n160" x="250" y="298">160</text>
+  </g>
+  <text x="250" y="330" text-anchor="middle" font-size="12" fill="#7d8597">die · wake · retry</text>
+
+  <!-- the map -->
+  <rect x="480" y="84" width="472" height="368" rx="14" fill="url(#panel)" stroke="#ffffff" stroke-opacity="0.08"/>
+  <g clip-path="url(#map-clip)">
+    <g stroke="#ffffff" stroke-opacity="0.035">
+      <line x1="512" y1="84" x2="512" y2="452"/><line x1="560" y1="84" x2="560" y2="452"/><line x1="608" y1="84" x2="608" y2="452"/><line x1="656" y1="84" x2="656" y2="452"/>
+      <line x1="704" y1="84" x2="704" y2="452"/><line x1="752" y1="84" x2="752" y2="452"/><line x1="800" y1="84" x2="800" y2="452"/><line x1="848" y1="84" x2="848" y2="452"/>
+      <line x1="896" y1="84" x2="896" y2="452"/><line x1="944" y1="84" x2="944" y2="452"/>
+      <line x1="480" y1="116" x2="952" y2="116"/><line x1="480" y1="164" x2="952" y2="164"/><line x1="480" y1="212" x2="952" y2="212"/><line x1="480" y1="260" x2="952" y2="260"/>
+      <line x1="480" y1="308" x2="952" y2="308"/><line x1="480" y1="356" x2="952" y2="356"/><line x1="480" y1="404" x2="952" y2="404"/>
+    </g>
+    <g fill="none" stroke="#2c3240" stroke-width="1.2">
+      <path d="M560 180 C600 140 680 150 690 190 S640 250 590 240 S530 210 560 180 Z"/>
+      <path d="M580 186 C606 166 650 170 656 192 S626 226 598 222 S566 202 580 186 Z"/>
+      <path d="M770 340 C820 300 920 320 930 370 S880 440 820 430 S730 380 770 340 Z"/>
+      <path d="M800 350 C830 330 890 342 896 372 S862 414 828 408 S778 376 800 350 Z"/>
+      <path d="M846 362 C858 356 874 362 874 374 S858 392 846 388 S836 368 846 362 Z"/>
+      <path d="M760 84 C780 120 840 120 870 96"/>
+    </g>
+  </g>
+
+  <!-- start and objective -->
+  <circle cx="532" cy="408" r="6" fill="#12151c" stroke="#c5cad6" stroke-width="2"/>
+  <text x="546" y="430" font-size="12" fill="#7d8597">start</text>
+
+  <!-- lap marks -->
+  <g class="m m1">
+    <path d="M638 366 l12 12 M650 366 l-12 12" stroke="#f2676b" stroke-width="2.5" stroke-linecap="round"/>
+    <text x="660" y="376" font-size="12" fill="#c5cad6"><tspan fill="#7d8597">loop 12 ·</tspan> enemy lands here</text>
+  </g>
+  <g class="m m2">
+    <circle cx="534" cy="290" r="11" fill="#12151c" stroke="#c5cad6" stroke-width="1.5"/>
+    <path d="M534 284 v7 M534 295 v0.5" stroke="#eef1f6" stroke-width="2" stroke-linecap="round"/>
+    <text x="510" y="266" font-size="12" fill="#c5cad6"><tspan fill="#7d8597">loop 47 ·</tspan> weapon jams</text>
+  </g>
+  <g class="m m3">
+    <path d="M866 262 l12 12 M878 262 l-12 12" stroke="#f2676b" stroke-width="2.5" stroke-linecap="round"/>
+    <path d="M786 274 l12 12 M798 274 l-12 12" stroke="#f2676b" stroke-width="2.5" stroke-linecap="round"/>
+    <text x="728" y="308" font-size="12" fill="#c5cad6"><tspan fill="#7d8597">loop 98 ·</tspan> more landings</text>
+  </g>
+
+  <!-- the route, revealed lap by lap -->
+  <g class="route" mask="url(#route-mask)">
+    <path d="M532 408 C580 392 566 338 612 318 S704 318 704 268 S768 214 812 214 S878 172 900 132" fill="none" stroke="#f5b544" stroke-width="2.5" stroke-dasharray="7 6" stroke-linecap="round"/>
+  </g>
+  <g class="m m4">
+    <g filter="url(#glow)">
+      <path d="M900 120 l12 12 l-12 12 l-12 -12 Z" fill="#f5b544"/>
+    </g>
+    <text x="928" y="126" font-size="12" text-anchor="end" fill="#eef1f6" transform="translate(-4 -20)"><tspan fill="#7d8597">loop 160 ·</tspan> route complete</text>
+  </g>
+</svg>

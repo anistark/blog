@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 340" font-family="system-ui, sans-serif">
+  <rect width="960" height="340" fill="#1a1a19"/>
+
+  <text x="60" y="48" font-size="20" font-weight="700" fill="#ffffff">Past loopback, it goes behind a proxy</text>
+  <text x="60" y="74" font-size="14" fill="#c3c2b7">TLS is not terminated in the agent process, API keys included</text>
+
+  <rect x="60" y="118" width="180" height="90" rx="10" fill="#242423" stroke="#3a3a38"/>
+  <text x="150" y="158" font-size="15" font-weight="600" fill="#ffffff" text-anchor="middle">client</text>
+  <text x="150" y="182" font-size="12" fill="#c3c2b7" text-anchor="middle">Bearer $KEY</text>
+
+  <path d="M 252 163 L 338 163" stroke="#199e70" stroke-width="2"/>
+  <path d="M 338 163 l -9 -5 v 10 z" fill="#199e70"/>
+  <text x="295" y="152" font-size="12" fill="#199e70" text-anchor="middle">TLS</text>
+
+  <rect x="350" y="118" width="220" height="90" rx="10" fill="#242423" stroke="#199e70"/>
+  <text x="460" y="158" font-size="15" font-weight="600" fill="#ffffff" text-anchor="middle">nginx / Caddy</text>
+  <text x="460" y="182" font-size="12" fill="#c3c2b7" text-anchor="middle">terminates TLS, buffering off</text>
+
+  <path d="M 582 163 L 668 163" stroke="#d95926" stroke-width="2"/>
+  <path d="M 668 163 l -9 -5 v 10 z" fill="#d95926"/>
+  <text x="625" y="152" font-size="12" fill="#d95926" text-anchor="middle">plaintext</text>
+
+  <rect x="680" y="118" width="220" height="90" rx="10" fill="#242423" stroke="#3987e5"/>
+  <text x="790" y="158" font-size="15" font-weight="600" fill="#ffffff" text-anchor="middle">wasmrun agent</text>
+  <text x="790" y="182" font-size="12" fill="#c3c2b7" text-anchor="middle">127.0.0.1:8430, --auth on</text>
+
+  <path d="M 460 210 L 460 236" stroke="#3a3a38" stroke-width="2"/>
+  <text x="460" y="256" font-size="12" fill="#c3c2b7" text-anchor="middle">liveness /health &#183; readiness /ready</text>
+
+  <text x="60" y="308" font-size="14" fill="#c3c2b7">keep --auth on regardless, so a key is still needed if the port is reached directly</text>
+</svg>

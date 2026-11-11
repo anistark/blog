@@ -1,0 +1,91 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 400" font-family="'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, monospace">
+  <title>Four ways to store time, left to right: an hourglass for more hours (Time-Turner), a stone bowl for an archive (Pensieve), a plug for know-how (The Matrix), and a loop arrow for what the hours taught (Edge of Tomorrow, Groundhog Day). The first three fade to grey; only the loop arrow is lit</title>
+  <style id="jbm-font">@font-face{font-family:'JetBrains Mono';font-style:normal;font-weight:400;src:url(data:font/woff2;base64,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) format('woff2')}@font-face{font-family:'JetBrains Mono';font-style:normal;font-weight:700;src:url(data:font/woff2;base64,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) format('woff2')}</style>
+  <style>
+    .c1, .c2, .c3 { color: #5a6273; }
+    .c1 { animation: c1 10s ease-in-out infinite; }
+    .c2 { animation: c2 10s ease-in-out infinite; }
+    .c3 { animation: c3 10s ease-in-out infinite; }
+    @keyframes c1 { 0%, 12% { color: #c5cad6; } 20%, 94% { color: #5a6273; } 100% { color: #c5cad6; } }
+    @keyframes c2 { 0%, 26% { color: #c5cad6; } 34%, 94% { color: #5a6273; } 100% { color: #c5cad6; } }
+    @keyframes c3 { 0%, 40% { color: #c5cad6; } 48%, 94% { color: #5a6273; } 100% { color: #c5cad6; } }
+    .spin { transform-box: view-box; transform-origin: 846.5px 182px; animation: spin 10s linear infinite; }
+    @keyframes spin { 0%, 50% { transform: rotate(0deg); } 100% { transform: rotate(720deg); } }
+    .lit { animation: lit 10s ease-in-out infinite; }
+    @keyframes lit { 0%, 46% { opacity: 0.35; } 54%, 100% { opacity: 1; } }
+    @media (prefers-reduced-motion: reduce) { * { animation: none !important; } }
+  </style>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#12151c"/><stop offset="1" stop-color="#0a0c10"/></linearGradient>
+    <radialGradient id="sheen" cx="0.5" cy="0" r="0.85"><stop offset="0" stop-color="#ffffff" stop-opacity="0.06"/><stop offset="1" stop-color="#ffffff" stop-opacity="0"/></radialGradient>
+    <filter id="glow" x="-60%" y="-60%" width="220%" height="220%"><feGaussianBlur stdDeviation="6" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+    <linearGradient id="panel" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ffffff" stop-opacity="0.045"/><stop offset="1" stop-color="#ffffff" stop-opacity="0.012"/></linearGradient>
+    <linearGradient id="panel-lit" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#f5b544" stop-opacity="0.10"/><stop offset="1" stop-color="#f5b544" stop-opacity="0.02"/></linearGradient>
+    <marker id="head" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="4.5" markerHeight="4.5" orient="auto-start-reverse"><path d="M1 1 L9 5 L1 9 Z" fill="#f5b544"/></marker>
+  </defs>
+
+  <rect width="1000" height="400" rx="20" fill="url(#bg)"/>
+  <rect width="1000" height="400" rx="20" fill="url(#sheen)"/>
+  <rect x="0.5" y="0.5" width="999" height="399" rx="19.5" fill="none" stroke="#ffffff" stroke-opacity="0.08"/>
+
+  <circle cx="52" cy="44" r="3.5" fill="#f5b544"/>
+  <text x="66" y="48" font-size="12" letter-spacing="2.4" fill="#7d8597">FOUR WAYS TO STORE TIME</text>
+
+  <!-- cards -->
+  <g stroke="#ffffff" stroke-opacity="0.08">
+    <rect x="48" y="76" width="211" height="290" rx="14" fill="url(#panel)"/>
+    <rect x="279" y="76" width="211" height="290" rx="14" fill="url(#panel)"/>
+    <rect x="510" y="76" width="211" height="290" rx="14" fill="url(#panel)"/>
+  </g>
+  <rect x="741" y="76" width="211" height="290" rx="14" fill="url(#panel)" stroke="#ffffff" stroke-opacity="0.08"/>
+  <g class="lit">
+    <rect x="741" y="76" width="211" height="290" rx="14" fill="url(#panel-lit)" stroke="#f5b544" stroke-opacity="0.45"/>
+  </g>
+
+  <!-- 1. hourglass: more hours -->
+  <g class="c1">
+    <g transform="translate(153.5 182)" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <rect x="-30" y="-50" width="60" height="7" rx="3.5"/>
+      <rect x="-30" y="43" width="60" height="7" rx="3.5"/>
+      <path d="M-22 -43 C-22 -14 -4 -8 -2 0 C-4 8 -22 14 -22 43 H22 C22 14 4 8 2 0 C4 -8 22 -14 22 -43 Z"/>
+      <path d="M-15 -27 C-13 -15 -3 -8 -1 -3 H1 C3 -8 13 -15 15 -27 Z" fill="currentColor" fill-opacity="0.35" stroke="none"/>
+      <path d="M-18 39 C-12 27 -4 25 0 24 C4 25 12 27 18 39 Z" fill="currentColor" fill-opacity="0.35" stroke="none"/>
+    </g>
+    <text x="153.5" y="294" text-anchor="middle" font-size="14" font-weight="700" fill="currentColor">More hours</text>
+    <text x="153.5" y="318" text-anchor="middle" font-size="12" fill="currentColor" fill-opacity="0.85">Time-Turner</text>
+  </g>
+
+  <!-- 2. stone bowl: an archive -->
+  <g class="c2">
+    <g transform="translate(384.5 182)" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M-46 14 C-44 38 -22 46 -10 46 H10 C22 46 44 38 46 14" fill="currentColor" fill-opacity="0.12"/>
+      <ellipse cx="0" cy="14" rx="46" ry="10"/>
+      <path d="M-12 46 L-16 54 H16 L12 46"/>
+      <path d="M-14 8 C-20 -8 -6 -18 -14 -36"/>
+      <path d="M2 6 C8 -12 -4 -24 4 -46"/>
+      <path d="M18 8 C14 -6 24 -16 18 -30"/>
+    </g>
+    <text x="384.5" y="294" text-anchor="middle" font-size="14" font-weight="700" fill="currentColor">An archive</text>
+    <text x="384.5" y="318" text-anchor="middle" font-size="12" fill="currentColor" fill-opacity="0.85">Pensieve</text>
+  </g>
+
+  <!-- 3. plug: know-how -->
+  <g class="c3">
+    <g transform="translate(615.5 182)" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <rect x="-12" y="-50" width="7" height="24" rx="2"/>
+      <rect x="5" y="-50" width="7" height="24" rx="2"/>
+      <path d="M-24 -26 H24 V-4 C24 10 12 18 0 18 C-12 18 -24 10 -24 -4 Z" fill="currentColor" fill-opacity="0.12"/>
+      <path d="M0 18 V28 C0 44 -26 36 -26 52"/>
+    </g>
+    <text x="615.5" y="294" text-anchor="middle" font-size="14" font-weight="700" fill="currentColor">Know-how</text>
+    <text x="615.5" y="318" text-anchor="middle" font-size="12" fill="currentColor" fill-opacity="0.85">The Matrix</text>
+  </g>
+
+  <!-- 4. loop arrow: what the hours taught -->
+  <g class="spin" filter="url(#glow)">
+    <path d="M860.2 144.4 A40 40 0 1 1 832.8 144.4" fill="none" stroke="#f5b544" stroke-width="2.5" stroke-linecap="round" marker-end="url(#head)"/>
+  </g>
+  <text x="846.5" y="294" text-anchor="middle" font-size="14" font-weight="700" fill="#f5b544">What the hours taught</text>
+  <text x="846.5" y="318" text-anchor="middle" font-size="12" fill="#c5cad6">Edge of Tomorrow,</text>
+  <text x="846.5" y="336" text-anchor="middle" font-size="12" fill="#c5cad6">Groundhog Day</text>
+</svg>

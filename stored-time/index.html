@@ -1,0 +1,563 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    
+    
+    
+    
+    
+    
+    
+
+    <meta name="description" content="We store food, money, photos and files, but time slips through. Or does it? From Time-Turners and Groundhog Day to fire commanders, chess masters and cricket batsmen, a look at how instinct is time you already stored, why feedback decides what gets written into it, how many failures it really takes, and how to fill the jar on purpose.">
+    <meta name="author" content="Kumar Anirudha">
+    <link rel="canonical" href="https://blog.anirudha.dev/stored-time/">
+
+    
+    <meta itemprop="name" content="Stored Time | AniLog">
+    <meta itemprop="description" content="We store food, money, photos and files, but time slips through. Or does it? From Time-Turners and Groundhog Day to fire commanders, chess masters and cricket batsmen, a look at how instinct is time you already stored, why feedback decides what gets written into it, how many failures it really takes, and how to fill the jar on purpose.">
+    <meta itemprop="image" content="https://blog.anirudha.dev/images/posts/stored-time-cover-og.jpg">
+
+    
+    <meta property="og:title" content="Stored Time | AniLog">
+    <meta property="og:description" content="We store food, money, photos and files, but time slips through. Or does it? From Time-Turners and Groundhog Day to fire commanders, chess masters and cricket batsmen, a look at how instinct is time you already stored, why feedback decides what gets written into it, how many failures it really takes, and how to fill the jar on purpose.">
+    <meta property="og:url" content="https://blog.anirudha.dev/stored-time/">
+    <meta property="og:site_name" content="AniLog">
+    <meta property="og:locale" content="en_GB">
+    <meta property="og:type" content="article">
+    <meta property="og:image" content="https://blog.anirudha.dev/images/posts/stored-time-cover-og.jpg">
+    <meta property="og:image:type" content="image/jpeg">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:image:alt" content="Stored Time">
+    <meta property="article:author" content="Kumar Anirudha">
+    <meta property="article:published_time" content="2026-11-11T00:00:00Z">
+    <meta property="article:modified_time" content="2026-11-11T00:00:00Z">
+    <meta property="article:tag" content="thought">
+    <meta property="article:tag" content="life">
+    <meta property="article:tag" content="research">
+    <meta property="article:tag" content="learning">
+    <meta property="article:tag" content="psychology">
+    <meta property="article:tag" content="intuition">
+    <meta property="article:tag" content="expertise">
+
+    
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Stored Time | AniLog">
+    <meta name="twitter:description" content="We store food, money, photos and files, but time slips through. Or does it? From Time-Turners and Groundhog Day to fire commanders, chess masters and cricket batsmen, a look at how instinct is time you already stored, why feedback decides what gets written into it, how many failures it really takes, and how to fill the jar on purpose.">
+    <meta name="twitter:site" content="@kranirudha">
+    <meta name="twitter:creator" content="@kranirudha">
+    <meta name="twitter:image" content="https://blog.anirudha.dev/images/posts/stored-time-cover-og.jpg">
+    <meta name="twitter:image:alt" content="Stored Time">
+
+    <link rel="icon" type="image/png" href="/me.png" />
+    <link rel="alternate" type="application/atom+xml" title="AniLog" href="https://blog.anirudha.dev/feed/feed.xml" />
+
+    <title>Stored Time | AniLog</title>
+
+    <link rel="stylesheet" href="/assets/main.bundle.css">
+    
+<style>
+  .tag.ai {
+    background: color-mix(in srgb, #10b981 8%, transparent);
+    border-color: color-mix(in srgb, #10b981 35%, transparent);
+    color: #6ee7b7;
+  }
+  [data-theme='reading'] .tag.ai,
+  [data-theme='beach'] .tag.ai,
+  [data-theme='hogwarts'] .tag.ai {
+    background: color-mix(in srgb, #059669 8%, transparent);
+    border-color: color-mix(in srgb, #059669 40%, transparent);
+    color: #047857;
+  }
+  [data-theme='hogwarts'] .post-item .tag.ai {
+    background: color-mix(in srgb, #10b981 12%, transparent);
+    border-color: color-mix(in srgb, #10b981 45%, transparent);
+    color: #6ee7b7;
+  }
+  .tag.wasm {
+    background: color-mix(in srgb, #3b82f6 8%, transparent);
+    border-color: color-mix(in srgb, #3b82f6 35%, transparent);
+    color: #93c5fd;
+  }
+  [data-theme='reading'] .tag.wasm,
+  [data-theme='beach'] .tag.wasm,
+  [data-theme='hogwarts'] .tag.wasm {
+    background: color-mix(in srgb, #2563eb 8%, transparent);
+    border-color: color-mix(in srgb, #2563eb 40%, transparent);
+    color: #1d4ed8;
+  }
+  [data-theme='hogwarts'] .post-item .tag.wasm {
+    background: color-mix(in srgb, #3b82f6 12%, transparent);
+    border-color: color-mix(in srgb, #3b82f6 45%, transparent);
+    color: #93c5fd;
+  }
+  .tag.thought {
+    background: color-mix(in srgb, #fb923c 8%, transparent);
+    border-color: color-mix(in srgb, #fb923c 35%, transparent);
+    color: #fdba74;
+  }
+  [data-theme='reading'] .tag.thought,
+  [data-theme='beach'] .tag.thought,
+  [data-theme='hogwarts'] .tag.thought {
+    background: color-mix(in srgb, #c2410c 8%, transparent);
+    border-color: color-mix(in srgb, #c2410c 40%, transparent);
+    color: #9a3412;
+  }
+  [data-theme='hogwarts'] .post-item .tag.thought {
+    background: color-mix(in srgb, #fb923c 12%, transparent);
+    border-color: color-mix(in srgb, #fb923c 45%, transparent);
+    color: #fdba74;
+  }
+  .tag.research {
+    background: color-mix(in srgb, #06b6d4 8%, transparent);
+    border-color: color-mix(in srgb, #06b6d4 35%, transparent);
+    color: #67e8f9;
+  }
+  [data-theme='reading'] .tag.research,
+  [data-theme='beach'] .tag.research,
+  [data-theme='hogwarts'] .tag.research {
+    background: color-mix(in srgb, #0891b2 8%, transparent);
+    border-color: color-mix(in srgb, #0891b2 40%, transparent);
+    color: #0e7490;
+  }
+  [data-theme='hogwarts'] .post-item .tag.research {
+    background: color-mix(in srgb, #06b6d4 12%, transparent);
+    border-color: color-mix(in srgb, #06b6d4 45%, transparent);
+    color: #67e8f9;
+  }
+  .tag.cyberspace {
+    background: color-mix(in srgb, #ef4444 8%, transparent);
+    border-color: color-mix(in srgb, #ef4444 35%, transparent);
+    color: #fca5a5;
+  }
+  [data-theme='reading'] .tag.cyberspace,
+  [data-theme='beach'] .tag.cyberspace,
+  [data-theme='hogwarts'] .tag.cyberspace {
+    background: color-mix(in srgb, #dc2626 8%, transparent);
+    border-color: color-mix(in srgb, #dc2626 40%, transparent);
+    color: #b91c1c;
+  }
+  [data-theme='hogwarts'] .post-item .tag.cyberspace {
+    background: color-mix(in srgb, #ef4444 12%, transparent);
+    border-color: color-mix(in srgb, #ef4444 45%, transparent);
+    color: #fca5a5;
+  }
+  .tag.build {
+    background: color-mix(in srgb, #ec4899 8%, transparent);
+    border-color: color-mix(in srgb, #ec4899 35%, transparent);
+    color: #f9a8d4;
+  }
+  [data-theme='reading'] .tag.build,
+  [data-theme='beach'] .tag.build,
+  [data-theme='hogwarts'] .tag.build {
+    background: color-mix(in srgb, #db2777 8%, transparent);
+    border-color: color-mix(in srgb, #db2777 40%, transparent);
+    color: #be185d;
+  }
+  [data-theme='hogwarts'] .post-item .tag.build {
+    background: color-mix(in srgb, #ec4899 12%, transparent);
+    border-color: color-mix(in srgb, #ec4899 45%, transparent);
+    color: #f9a8d4;
+  }
+</style>
+
+
+    <script>
+      // Set theme before page renders to prevent flash
+      (function() {
+        const theme = localStorage.getItem('theme') || 'night';
+        if (theme !== 'night') {
+          document.documentElement.setAttribute('data-theme', theme);
+        }
+      })();
+    </script>
+
+    
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-YGZHVY9TD7"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-YGZHVY9TD7');
+    </script>
+    
+
+    
+  </head>
+  <body class="flex flex-col min-h-screen">
+    <canvas id="ambience-canvas"></canvas>
+    <header class="sticky top-0 z-50 glass-header">
+  <nav class="container mx-auto max-w-7xl px-8 py-3 flex flex-wrap items-center justify-between">
+    <div class="flex items-center gap-3">
+      <a href="/" class="flex items-center gap-3">
+        <img src="/ani.png" alt="AniLog logo" class="w-10 h-10 object-cover">
+        <h1 class="text-2xl leading-none m-0">AniLog</h1>
+      </a>
+    </div>
+
+    <div class="flex items-center gap-6">
+      <div class="theme-switcher">
+        <button id="theme-switcher-btn" class="theme-switcher-btn" aria-label="Switch theme" aria-expanded="false">
+          <span id="theme-active-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.985 12.486a9 9 0 1 1-9.473-9.472c.405-.022.617.46.402.803a6 6 0 0 0 8.268 8.268c.344-.215.825-.004.803.401"/></svg>
+          </span>
+        </button>
+        <div id="theme-dropdown" class="theme-dropdown">
+          <button class="theme-option" data-theme-value="night">
+            <span class="theme-icon"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.985 12.486a9 9 0 1 1-9.473-9.472c.405-.022.617.46.402.803a6 6 0 0 0 8.268 8.268c.344-.215.825-.004.803.401"/></svg></span>
+            <span>Night</span>
+          </button>
+          <button class="theme-option" data-theme-value="reading">
+            <span class="theme-icon"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 7v14"/><path d="M3 18a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h5a4 4 0 0 1 4 4 4 4 0 0 1 4-4h5a1 1 0 0 1 1 1v13a1 1 0 0 1-1 1h-6a3 3 0 0 0-3 3 3 3 0 0 0-3-3z"/></svg></span>
+            <span>Reading</span>
+          </button>
+          <button class="theme-option" data-theme-value="forest">
+            <span class="theme-icon"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m17 14 3 3.3a1 1 0 0 1-.7 1.7H4.7a1 1 0 0 1-.7-1.7L7 14h-.3a1 1 0 0 1-.7-1.7L9 9h-.2A1 1 0 0 1 8 7.3L12 3l4 4.3a1 1 0 0 1-.8 1.7H15l3 3.3a1 1 0 0 1-.7 1.7H17Z"/><path d="M12 22v-3"/></svg></span>
+            <span>Forest</span>
+          </button>
+          <button class="theme-option" data-theme-value="beach">
+            <span class="theme-icon"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 8c0-2.76-2.46-5-5.5-5S2 5.24 2 8h2l1-1 1 1h4"/><path d="M13 7.14A5.82 5.82 0 0 1 16.5 6c3.04 0 5.5 2.24 5.5 5h-3l-1-1-1 1h-3"/><path d="M5.89 9.71c-2.15 2.15-2.3 5.47-.35 7.43l4.24-4.25.7-.7.71-.71 2.12-2.12c-1.95-1.96-5.27-1.8-7.42.35"/><path d="M11 15.5c.5 2.5-.17 4.5-1 6.5h4c2-5.5-.5-12-1-14"/></svg></span>
+            <span>Beach</span>
+          </button>
+          <button class="theme-option" data-theme-value="cyberpunk">
+            <span class="theme-icon"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20v2"/><path d="M12 2v2"/><path d="M17 20v2"/><path d="M17 2v2"/><path d="M2 12h2"/><path d="M2 17h2"/><path d="M2 7h2"/><path d="M20 12h2"/><path d="M20 17h2"/><path d="M20 7h2"/><path d="M7 20v2"/><path d="M7 2v2"/><rect x="4" y="4" width="16" height="16" rx="2"/><rect x="8" y="8" width="8" height="8" rx="1"/></svg></span>
+            <span>Cyberpunk</span>
+          </button>
+          <button class="theme-option" data-theme-value="hogwarts">
+            <span class="theme-icon"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m21.64 3.64-1.28-1.28a1.21 1.21 0 0 0-1.72 0L2.36 18.64a1.21 1.21 0 0 0 0 1.72l1.28 1.28a1.2 1.2 0 0 0 1.72 0L21.64 5.36a1.2 1.2 0 0 0 0-1.72"/><path d="m14 7 3 3"/><path d="M5 6v4"/><path d="M19 14v4"/><path d="M10 2v2"/><path d="M7 8H3"/><path d="M21 16h-4"/><path d="M11 3H9"/></svg></span>
+            <span>Hogwarts</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </nav>
+</header>
+
+    <main class="container mx-auto max-w-6xl p-8 grow">
+      
+    <p></p>
+
+    <article class="post-article">
+        
+        <div class="prophet-masthead">
+            
+                <div class="prophet-dateline">
+                    
+                        <span>Published <time class="relative-date" datetime="2026-11-11" title="November 11, 2026">on November 11, 2026</time></span>
+                    
+                    <span>November 11, 2026</span>
+                    <span>29 min read</span>
+                </div>
+            
+            <div class="prophet-motto" aria-hidden="true">The wizarding world's beguiling broadsheet of choice</div>
+        </div>
+
+        
+            <div class="post-cover-frame">
+                <div class="post-cover-image" style="background-image: url('/images/posts/stored-time-cover.svg');"></div>
+            </div>
+        
+
+        <div>
+            <div class="post-title-row">
+                <h2>Stored Time</h2>
+                
+            </div>
+
+            
+                <div class="mt-4 mb-2">
+                    <a class="tag thought" href="/tag/thought">thought</a><a class="tag life" href="/tag/life">life</a><a class="tag research" href="/tag/research">research</a><a class="tag learning" href="/tag/learning">learning</a><a class="tag psychology" href="/tag/psychology">psychology</a><a class="tag intuition" href="/tag/intuition">intuition</a><a class="tag expertise" href="/tag/expertise">expertise</a>
+                </div>
+            
+
+            
+                
+                    <p class="text-sm italic">Published
+                        <time class="relative-date" datetime="2026-11-11" title="November 11, 2026">on November 11, 2026</time>.
+                        <span class="reading-time"> · 29 min read</span></p>
+                
+            
+
+            <div class="content post">
+                <p>Almost everything I know starts and stops. A song ends. A phone battery dies. A startup launches, grows, and one day shuts down. Even the sun has a start date, and someday an end date.</p>
+<p>Time doesn’t. It just keeps going, at the same pace, for everyone. You can’t pause it, speed it up, or put some aside for later.</p>
+<p>That last part has bugged me for a while. We store almost everything else. Food for the lean months. Money for retirement. Photos for nostalgia. Files for some future version of ourselves who will apparently have the time to sort them. But time itself slips through. Every hour you spend is gone the moment you spend it.</p>
+<p>So here’s the question this whole piece is about: <strong>how do we capture time?</strong></p>
+<p>And the follow-up, which sounds obvious until you sit with it: <strong>would that even be wonderful?</strong></p>
+<p>Imagine you could. Picture a jar on your shelf with ten years in it. Not ten years of free time to lie around in. Ten years of practice. Ten years of watching how things play out. Ten years of being wrong and finding out why. You’d open it the moment you needed it, in a meeting, in a pitch, on a cricket field, and spend all ten years in a second.</p>
+<p><img src="/images/posts/stored-time-jar.svg" alt="A glass jar labelled 10 years on a wooden shelf, holding tiny scenes of a chessboard, a clock, a notebook of crossed-out attempts and a cricket ball, while sand pours in from an hourglass and condenses into one small glowing spark at the bottom"></p>
+<p>That would be the most useful thing anyone ever owned.</p>
+<p>Storytellers have been imagining this for a long time. So before the science, let’s look at what they came up with. Almost every version teaches us something about what storing time would really take.</p>
+<p>In <em>Harry Potter and the Prisoner of Azkaban</em>, Hermione gets a Time-Turner, a tiny hourglass that lets her go back and replay hours. She uses it all year to attend classes that run at the same time (<a href="https://en.wikibooks.org/wiki/Muggles%27_Guide_to_Harry_Potter/Books/Prisoner_of_Azkaban/Chapter_21">Muggles’ Guide, chapter 21</a>).</p>
+<p>That’s storing time in the most literal way: extra hours on demand. And it mostly just makes her tired. By the end of the year she gives it back. Extra hours are a bigger bucket, not a better one.</p>
+<p>The same books have a second go at it. Dumbledore’s Pensieve is a stone basin where you can pour out a memory and later step back inside it, watching the past from the corner of the room (<a href="https://www.hp-lexicon.org/?p=6820">HP Lexicon</a>).</p>
+<p>It’s a perfect archive. Nothing fades, nothing gets rewritten. But watching a memory as a ghost in the corner doesn’t make you better at anything. The archive holds what happened. It doesn’t hold what you’d learn from doing it. Keep that split in mind, because it turns out to be real.</p>
+<p><img src="/images/posts/stored-time-hours-vs-memories.svg" alt="An hourglass hanging on a chain, labelled extra hours, beside a shallow stone bowl with silvery strands rising from it, labelled memories, over the caption &quot;A bigger bucket. A perfect archive. Neither one is a skill.&quot;"></p>
+<p>Other stories try something stranger: they make you live the same day again and again. In Hiroshi Sakurazaka’s 2004 novel <em>All You Need Is Kill</em>, later the Tom Cruise film <em>Edge of Tomorrow</em>, a raw recruit dies in his first battle and wakes up the day before. Then again. And again. Each death teaches him something: where the enemy will be, which weapon jams, which move works. In the novel, the battle is finally won on the 160th loop (<a href="https://en.wikipedia.org/wiki/All_You_Need_Is_Kill">All You Need Is Kill, summary</a>).</p>
+<p>This one asks the question I care about most. If failure is tuition, how many failures does it take? Is there a number?</p>
+<p><img src="/images/posts/stored-time-loop-counter.svg" alt="A circular arrow around a loop counter that reads 160, next to a map marked lap by lap with where the enemy lands, where a weapon jams, and a finished safe route to the objective"></p>
+<p>Then there’s the shortcut. In <em>The Matrix</em>, Neo has martial arts programs uploaded straight into his brain (<a href="https://www.looper.com/160020/lines-in-the-matrix-movies-that-mean-more-than-you-realized">Looper</a>). He opens his eyes and says the line everyone remembers: “I know kung fu.” Then Morpheus takes him into a sparring program and beats him anyway.</p>
+<figure>
+  <img src="/images/posts/stored-time-i-know-kung-fu.jpg" alt="Neo lying back right after the upload, eyes open, with the subtitle: I know kung fu." style="display: block; width: 100%; border-radius: 16px;" />
+  <figcaption>Still from <em>The Matrix</em> (1999), Warner Bros.</figcaption>
+</figure>
+<p>Morpheus later tells him there’s a difference between knowing the path and walking the path. I think that’s the deepest line in any of these stories. You can download know-how. You can’t download having lived it.</p>
+<p>I’ve been playing with a version of this about Roger Federer. Say you could copy every one of his skills into a new player. That player would still decide differently from Federer. They wouldn’t have his history of mistakes, his body-specific tuning, or the stakes he lived through. The skill transfers. The experience doesn’t.</p>
+<p><img src="/images/posts/stored-time-knowing-vs-walking.svg" alt="A split panel: on the left a cable plugs into the back of a silhouette's head under a download complete bar at 100%, on the right footprints climb a worn path, stumbling off it and coming back, over the caption &quot;Know-how copies. Experience doesn't.&quot;"></p>
+<p>My favourite loop of all is Groundhog Day. Phil Connors, a grumpy TV weatherman, wakes up on the same February 2nd again and again. First he exploits it. Then he despairs. Then he gets curious. He learns the piano, ice sculpting and French poetry. He memorises the whole town: who drops what, who trips where, which kid falls out of which tree and when.</p>
+<p>Nobody knows how long he’s stuck. The director, Harold Ramis, first said about ten years, then later suggested 30 to 40. One fan estimate, counting how long his skills would take to learn, landed on 33 years and 350 days (<a href="https://www.yahoo.com/entertainment/article/how-long-phil-connors-stuck-in-groundhog-day-101536956.html">Yahoo</a>).</p>
+<p>Here’s what makes Phil’s loop special, and we’ll come back to it: it’s the kindest classroom ever built. The same day, every day. Instant results. Unlimited retries. Nothing changes except him.</p>
+<p>Line them up and a pattern shows. The story that stores <em>hours</em> (the Time-Turner) just gives you a bigger bucket. The one that stores <em>memories</em> (the Pensieve) gives you an archive, not an ability. The one that <em>downloads</em> skill (The Matrix) still has to make you walk the path.</p>
+<p><img src="/images/posts/stored-time-four-ways.svg" alt="Four ways to store time in a row: an hourglass for more hours (Time-Turner), a stone bowl for an archive (Pensieve) and a plug for know-how (The Matrix), all greyed out, and a glowing loop arrow for what the hours taught (Edge of Tomorrow, Groundhog Day)"></p>
+<p>The stories that work are the loops. And notice what Phil and the soldier actually carry forward. Not the hours. They carry what the hours taught them. Phil doesn’t have 30 years in a jar. He has a pianist’s hands and a whole town’s routine in his head.</p>
+<p>That thing, the residue of time spent learning, is real. We all have some. We just call it something else.</p>
+<p>The psychologist Gary Klein spent years interviewing firefighters about how they make decisions. One story stuck with him.</p>
+<p>A lieutenant and his crew went into a house for what looked like a simple kitchen fire. They sprayed water on it. Nothing happened. They sprayed again. Still nothing. And suddenly the lieutenant ordered everyone out. No reason given. Moments after they got out, the floor they had been standing on collapsed. The real fire was in the basement, right under their feet.</p>
+<p>The lieutenant believed he had ESP. It took Klein hours of questions to dig out what he had actually noticed. The water wasn’t working. The living room was far too hot for a small kitchen fire. And the fire was strangely quiet. He hadn’t put any of that together consciously. One of the cues wasn’t even a thing. It was an absence, a noise that should have been there and wasn’t (<a href="https://emberly.fireengineering.com/?p=219433">Klein’s story, via Fire Engineering</a>).</p>
+<p><img src="/images/posts/stored-time-quiet-fire.svg" alt="A cutaway of a house where a small kitchen fire burns on the ground floor while a much bigger fire burns in the basement right under it, with three cues marked: water isn't working, living room too hot, and too quiet; the crew is outside and the floor where they stood has collapsed"></p>
+<p>That’s not ESP. That’s what stored time looks like when you open the jar.</p>
+<p>The economist and psychologist Herbert Simon had the cleanest explanation I’ve found. A situation gives you a cue. The cue opens something stored in memory. And that stored thing is the answer. In his words, intuition is “nothing more and nothing less than recognition” (quoted in <a href="https://pubmed.ncbi.nlm.nih.gov/19739881/">Kahneman &amp; Klein 2009</a>). Klein found his fire commanders worked exactly this way. They rarely compared options. They recognised the situation, took the first option that fit, and quickly played it out in their heads (<a href="https://library.alnap.org/system/files/content/resource/files/main/Klein_2008_HF_NDM.pdf">Klein 2008</a>).</p>
+<p>Chess shows the storage most clearly. In the classic experiments, players looked at a real game position for just a few seconds and then rebuilt it from memory. Masters got about 93% of the pieces right. Novices got about a third. Then the researchers scattered the same pieces randomly, in positions that could never happen in a real game. Now everyone, masters included, recalled only three or four pieces (<a href="https://www.Gwern.net/doc/psychology/chess/1973-simon.pdf">Simon &amp; Chase 1973</a>).</p>
+<p><img src="/images/posts/stored-time-chess-boards.svg" alt="Two chessboards: a real game position, where masters recall about 93% of the pieces and novices about 33%, and the same pieces scattered at random, where both recall only 3 to 4 pieces"></p>
+<p>So masters don’t have better memories. They have a library. Simon and Chase estimated it at around 50,000 familiar patterns, built over something like 10,000 to 50,000 hours of looking at chess. And the library does most of the work. Garry Kasparov’s playing strength barely dropped when he played several strong opponents at once, with almost no time to think about each move (<a href="https://bura.brunel.ac.uk/handle/2438/1338">Gobet &amp; Simon 1996</a>).</p>
+<p>This is the jar from the opening. Every hour of practice left a pattern behind. Years later, one glance pulls up thousands of them at once.</p>
+<p>It also settles something that used to confuse me. Someone who chooses on the spot and someone who studies a choice for years look impossible to compare. But often the quick chooser did study. They just did it years earlier, and they’re spending it now, in a second.</p>
+<p>If instinct is stored time, why does it feel like it came from nowhere?</p>
+<p>There’s a famous patient in neuroscience, known for decades only as H.M. After brain surgery, he could barely form new conscious memories. The researcher Brenda Milner gave him a tricky task: trace a star while looking only at its reflection in a mirror. Over 30 tries across three days, he got much better. Yet every time, he had no memory of ever having done it before (<a href="https://pressbooks.atlanticoer-relatlantique.ca/intropsychneuro/chapter/introduction-to-memory/">Milner’s study, via an intro neuroscience text</a>).</p>
+<p><img src="/images/posts/stored-time-mirror-star.svg" alt="A hand traces a star while watching it only in a small mirror, beside the same star traced on day 1, day 2 and day 3 going from shaky to clean, with a thought bubble over the hand asking &quot;Have I done this before?&quot;"></p>
+<p>H.M. had Phil Connors’ hands without Dumbledore’s Pensieve. The skill was stored. The memory of earning it was not. Our brains keep those two in separate places, which is exactly why a gut feeling shows up without its receipts.</p>
+<p>So how does time actually get into the jar? Not through one neat mechanism. Through several, and most of them work while you aren’t paying attention.</p>
+<p>The first is that you pick up patterns you never meant to learn. In the 1960s, the psychologist Arthur Reber asked people to memorise strings of letters. That’s all they were told to do. What they weren’t told was that the strings followed a hidden grammar. Later, shown brand-new strings, they could tell which ones “fit” better than chance. Ask them for the rules, though, and they had nothing (<a href="https://en.wikipedia.org/wiki/Artificial_grammar_learning">artificial grammar learning, summary</a>). Some researchers think they stored little two- and three-letter fragments rather than real rules. Either way, they learned more than they set out to.</p>
+<p>You do this all the time. It’s how a sentence in your first language can sound wrong before you could name the rule it breaks. You’re banking patterns even when you think you’re just getting through the day.</p>
+<p>The second is that a lot of what you store never turns into words. The philosopher Michael Polanyi put it in one line: “we can know more than we can tell” (<a href="https://en.wikipedia.org/wiki/Polanyi%27s_paradox">Polanyi’s paradox</a>). His example was a face. You can pick a friend out of a crowd of thousands, but try describing exactly how.</p>
+<p>My favourite example is the chick sexer. These are people who sort day-old chicks into male and female, a job that matters to poultry farms and is famously hard. The best ones hit close to 98% accuracy at around a thousand chicks an hour. Ask how they do it and many will tell you they have no idea (<a href="https://gwern.net/doc/psychology/vision/2002-horsey.pdf">Horsey 2002</a>; <a href="https://psmag.com/magazine/the-lucrative-art-of-chicken-sexing/">Pacific Standard</a>). The knowledge is real. It just never passed through words.</p>
+<p>The third is that you start seeing things earlier. This will make sense to anyone who has faced a fast bowler. Researchers showed cricket batsmen of different levels video of bowlers, cutting the clip off at different moments. Everyone used the ball’s flight. But the best batsmen also read the bowler’s hand and arm, <em>before the ball was released</em>. Weaker batsmen simply didn’t pick those cues up (<a href="https://vuir.vu.edu.au/8058">Müller, Abernethy &amp; Farrow 2006</a>).</p>
+<p><img src="/images/posts/stored-time-bowler.svg" alt="A filmstrip of a bowler's delivery from run-up to release, with a highlighted band over the frames before release, on the hand and arm, marking where the best batsmen are already reading, and a later band over the ball in flight marking where everyone reads"></p>
+<p>A review of 42 sport studies found the same thing across games. Experts spot the useful cues, answer faster and more accurately, and look at fewer things for longer (<a href="https://pubmed.ncbi.nlm.nih.gov/17968048/">Mann et al. 2007</a>). Experts don’t really react faster. They start earlier.</p>
+<p>That’s the soldier in <em>Edge of Tomorrow</em>, who knows where the enemy will land before it lands. Stored time, spent as a head start. The expert lives a fraction of a second in the future.</p>
+<p>Some of the storing may even happen while you sleep. In one study, people practised a number task that had a hidden shortcut. More than twice as many found the shortcut after a night’s sleep than after the same hours awake (<a href="https://research.uni-luebeck.de/en/publications/sleep-inspires-insight/">Wagner et al. 2004</a>). Sleep seemed to reorganise what they had practised.</p>
+<p>I have to be honest about the other famous sleep result, though. People got about 20% faster at a finger-tapping sequence after sleeping on it (<a href="https://walkerlab.berkeley.edu/reprints/Walker%20et%20al._Neuron_2002.pdf">Walker et al. 2002</a>). A later review argued most of that boost was a quirk of how it was measured. Sleep may protect a skill more than it improves it (<a href="https://sc-pan.github.io/pdf/RP_PB_2017.pdf">Rickard &amp; Pan 2017</a>).</p>
+<p>And sometimes your body notices before you do. In the Iowa gambling task, people draw cards from four decks. Two decks are quietly rigged to lose money over time. Healthy players’ skin started reacting to the bad decks after about the 10th card. They reported a hunch around the 50th card. They could explain the pattern around the 80th (<a href="https://stanford.edu/~jlmcc/papers/BecharaEtAl05_TiCS.pdf">Bechara et al. 2005</a>). Other researchers found people knew more, earlier, than that account claimed (<a href="https://stanford.edu/~jlmcc/papers/MaiaMcC04.pdf">Maia &amp; McClelland 2004</a>). So maybe the body isn’t revealing what you don’t know. Maybe it’s voicing what you half-know.</p>
+<p><img src="/images/posts/stored-time-body-hunch-words.svg" alt="A strip of 100 playing cards with three markers: around card 10 the skin reacts, around card 50 comes a hunch, and around card 80 players can explain the pattern, with a note that the early marker is disputed"></p>
+<p>Either way, a gut feeling looks like the early voice of a pattern you’re still learning.</p>
+<p>And there’s one ingredient running through all of this. It’s the thing the loop stories got right without saying so.</p>
+<p>Go back to Phil Connors. Why does he get so good at everything? It isn’t only the years. It’s that every single thing he tries gets an answer by the end of the day. Say the wrong thing to Rita, and he knows by dinner. Mistime the catch, and the kid hits the ground. Same day, same people, instant results.</p>
+<p>Daniel Kahneman, the great sceptic of intuition, and Gary Klein, its great champion, once sat down to find where they disagreed. They mostly couldn’t. They agreed intuition can be trusted under two conditions. The world has to be regular enough to predict. And you need a real chance to learn it, through lots of practice with feedback (<a href="https://pubmed.ncbi.nlm.nih.gov/19739881/">Kahneman &amp; Klein 2009</a>).</p>
+<p>The psychologist Robin Hogarth has nice names for the two ends. A <strong>kind</strong> world gives you fast, accurate feedback. A <strong>wicked</strong> world gives it late, or never, or gives you the wrong lesson (<a href="https://pure.mpg.de/pubman/item/item_2225074_9/component/file_3569491/Hogarth_TheTwo_2015_VerlPDF_final_LS.pdf">Hogarth, Lejarraga &amp; Soyer 2015</a>). Phil lives in the kindest world imaginable. Most of us don’t.</p>
+<p>Here’s the part that unsettled me. Without feedback, experience can make you <em>worse</em>.</p>
+<p>One study followed 170 therapists treating 6,591 clients over as long as 18 years. On average, their clients’ results slightly declined as the therapists got more experienced. Some therapists improved. Most didn’t (<a href="https://div12.org/?p=5528">Goldberg et al. 2016</a>). A review of doctors found a similar slide on many measures of care (<a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC549143/">Choudhry et al. 2005</a>). These are smart, caring people putting in real hours. But a therapist rarely learns how a client is doing five years later. The hours pile up. The answers don’t arrive.</p>
+<p>And slow feedback hurts instinct in particular. In one lab study, delaying feedback didn’t stop people learning categories they could describe with a simple rule. But it badly hurt their learning of categories that had to be <em>felt</em> rather than stated. They fell back on clumsy verbal rules instead (<a href="https://labs.psych.ucsb.edu/ashby/gregory/node/249">Maddox, Ashby &amp; Bohil 2003</a>). The part of you that builds instinct is the part slow feedback hurts most.</p>
+<p>So here’s how I’d put it now. <strong>Instinct is roughly the number of cases you’ve lived, multiplied by how honest the feedback was on each one.</strong> Time only matters because it’s where the cases come from. One year with lots of honest answers stores more than ten years with none.</p>
+<p><img src="/images/posts/stored-time-instinct-map.svg" alt="A two by two map with how regular the world is going up and how fast and clear the feedback is going right: kind (chess, fire command, cricket batting, onboarding and copy tests, Phil's February 2nd), learnable if you build feedback (cancer surgery outcomes, therapy long-term outcomes), fast but noisy (forecasting tournaments) and wicked (&quot;Will this market exist in 3 years?&quot;), with a note that placements are judgments, not measurements"></p>
+<p>Phil’s loop sits in the top-right corner, the kindest world there is. Big product bets sit bottom-left. But some slices of product work, like onboarding and copy, can be pulled up and to the right just by testing often.</p>
+<p>The soldier in <em>All You Need Is Kill</em> needed about 160 deaths. Phil needed somewhere between ten and forty years. I wanted a number for real life too. Do you have to fail a certain number of times to succeed the next time? What is that n?</p>
+<p>I looked hard, and the honest answer is that there’s no clean n. But the research does give three useful half-answers.</p>
+<p>The first half-answer is about failure itself. In 2019, a team of researchers worked out the sweet spot for learners that improve by making small corrections after each mistake. Learning was fastest when the learner got about 15.87% of answers wrong. That’s roughly one miss in every six tries. They called it the Eighty Five Percent Rule (<a href="https://escholarship.org/content/qt0v22s4g4/qt0v22s4g4.pdf?t=sdxgqm">Wilson et al. 2019</a>).</p>
+<p><img src="/images/posts/stored-time-one-in-six.svg" alt="Six tiles, five with a green tick and one with a red cross, captioned &quot;The sweet spot: miss about once in six&quot;, between a faded all-ticks row marked too easy and a faded half-crosses row marked too hard"></p>
+<p>The fine print matters. They proved it for simple yes/no judgments, using model learners: a perceptron, a small neural network, a model of how monkeys learn to see. Change the assumptions and the sweet spot moves to somewhere between 75% and 82% correct. So don’t treat it as law for humans. Treat it as a strong hint about difficulty. If you never fail, the task is too easy to teach you much. If you fail half the time, it’s too hard to learn from.</p>
+<p>Other research points the same way. Robert and Elizabeth Bjork call it “desirable difficulties”. Spacing practice out, mixing topics and testing yourself all <em>feel</em> worse than easy repetition, but they make learning last. The catch is that a difficulty only helps if you can actually respond to it (<a href="https://www.unh.edu/teaching-learning-resource-hub/sites/default/files/media/2023-06/itow-introducing-desirable-difficulties-into-practice-and-instruction-bjork-and-bjork.pdf">Bjork &amp; Bjork 2023</a>). Manu Kapur’s work on “productive failure” goes further. Across 53 studies, students who wrestled with a problem <em>before</em> being taught the method understood it more deeply than students taught first (<a href="https://phys.org/news/2021-09-productively-wiser.html">Sinha &amp; Kapur 2021, summary</a>). But those failures were designed. The problems were picked to expose exactly the idea about to be taught.</p>
+<p>The soldier’s loop is actually a decent model. Hard enough that he dies. Not so hard that he learns nothing from dying.</p>
+<p>The second half-answer is that there’s no finish line. The oldest finding about practice is that each extra try helps, but a bit less than the last one (<a href="https://aitopics.org/doc/classics:7D0BECCD">Newell &amp; Rosenbloom 1981</a>). Gains come fast early, then keep shrinking. A big reanalysis of 7,910 individual learning records argued over the exact shape of that curve (<a href="https://scispace.com/pdf/the-power-law-repealed-the-case-for-an-exponential-law-of-3ur3vq1jx1.pdf">Heathcote, Brown &amp; Mewhort 2000</a>). But every version agrees on the part that matters here. There’s no trial where intuition suddenly switches on. “Reliable” is a level you pick, not a line you cross.</p>
+<p><img src="/images/posts/stored-time-no-finish-line.svg" alt="A learning curve of skill against tries that rises steeply, then flattens and keeps creeping up with no finish line, crossed by a dashed line labelled &quot;reliable = a level you choose&quot;"></p>
+<p>The third half-answer comes from the few places where researchers actually counted. In the gambling task, the hunch showed up around card 50. In one small flight study, college students did about 250 quick, instantly scored trials of reading cockpit instruments. In roughly an hour, they matched the accuracy of pilots with 500 to 2,500 flying hours, on that one skill (<a href="https://kellmanlab.psych.ucla.edu/wp-content/uploads/sites/357/2025/09/kellman_kaiser_1994.pdf">Kellman &amp; Kaiser 1994</a>).</p>
+<p>Surgery is slower. Across 7,765 prostate cancer patients and 72 surgeons, the cancer came back in 17.9% of patients whose surgeon had done 10 earlier operations. That fell to 10.7% for surgeons with 250 behind them, and then the curve flattened (<a href="https://www.eurekalert.org/news-releases/607461">Vickers et al. 2007, via EurekAlert</a>).</p>
+<p>At the far end are music and chess. The best young violinists at a Berlin music academy had put in over 10,000 hours of practice by age 20. The least accomplished group had about 5,000 (<a href="https://www.ida.liu.se/~nilda/Anders_Ericsson/Ericsson_delib_pract.pdf">Ericsson 2006</a>). Elite musicians often needed 20 to 30 years to reach the top, which makes Ramis’s later guess about Phil look surprisingly realistic. And chess grandmasters’ practice ranged from 832 hours to 24,284. That’s about a 30-fold spread. Meanwhile 13% of merely intermediate players had practised more than the average grandmaster (<a href="https://www.bps.org.uk/research-digest/exploding-10000-hours-myth-its-no-guarantee-greatness">Hambrick et al. 2014, via BPS</a>).</p>
+<p><img src="/images/posts/stored-time-how-big-is-n.svg" alt="Five rising steps showing how many tries different skills took: about 50 cards in the gambling task, about 250 scored drills in an hour of cockpit instrument reading, about 250 operations in surgery, over 10,000 hours for elite violinists, and 832 to 24,284 hours for chess grandmasters, drawn as a wide bar to show the spread"></p>
+<p>So what sets n? Mostly three things. How many patterns the world holds: the gambling task has four decks, chess has tens of thousands of positions. Who you are: the spread between people is huge. And how well your practice is designed: an hour of focused drills stood in for hundreds of hours in a cockpit.</p>
+<p>One more question I kept coming back to. Do you need lots of different experiences, or lots of experience of the one thing?</p>
+<p>Mostly the second, but with a twist. Training in chess, music or memory games did little for children’s general thinking or school results (<a href="https://eprints.lse.ac.uk/102204">Sala &amp; Gobet 2017</a>). Remember the masters who forgot random boards. Expertise doesn’t leak far outside its home.</p>
+<p>But variety <em>inside</em> the skill helps a lot. Children who practised throwing a beanbag at two different distances ended up more accurate at a third distance than children who’d practised only that one (<a href="https://coachsci.sdsu.edu/csa/vol31/kerr.htm">Kerr &amp; Booth 1978, summary</a>). People learning to recognise 12 painters’ styles did far better when the paintings came mixed together: 61% correct on new paintings, against 35% when each painter’s work came in a block. The funny part is that 78% of them believed the blocked way had worked as well or better (<a href="https://bjorklab.psych.ucla.edu/wp-content/uploads/sites/13/2016/07/Kornell_Bjork_2008_PsychScience.pdf">Kornell &amp; Bjork 2008</a>). And across 51 studies of athletes, the world-class adults had usually played more different sports as kids and progressed more slowly at first. The best juniors showed the opposite pattern (<a href="https://www.psychologicalscience.org/observer/making-champions">Güllich, Macnamara &amp; Hambrick 2022, via APS</a>).</p>
+<p><img src="/images/posts/stored-time-blocked-vs-mixed.svg" alt="Two gallery walls hold the same twelve paintings by three painters: on the left they hang in neat blocks, one painter per row, where a visitor says &quot;This felt easier&quot; and 35% of new paintings were named correctly; on the right the same paintings are shuffled and 61% were correct"></p>
+<p>So the answer is: <strong>many varied cases of the same thing</strong>. Variety teaches you the category, not just the example.</p>
+<p>So, do you have to fail n times before you succeed? Not as a toll you pay. A failure only counts if you find out it was a failure, and why. A failure you never hear about counts as zero. A misleading one counts as less than zero.</p>
+<p>If I had to turn all this into one rule, it’s my own reading of the evidence, not a finding: plan to miss about once in every five to seven tries, near the edge of what you can do, with fast and honest feedback. How many tries you need in total then depends on how big the world is and how clean the feedback is.</p>
+<p>None of us gets Phil’s loop. But we can borrow its features. The same kind of situation, many times. Answers that come back fast. Misses near the edge of what we can do. And a record that doesn’t lie.</p>
+<p>Even a wicked job has kind corners. In product work, whether a new user will finish onboarding is something you learn in days. So is which headline gets more clicks, or what someone will say next in a user interview. Whether a market will exist in three years, you might not learn for years, and the lesson will be muddy when it comes. Train your instinct on the first kind of question. Use slow, careful analysis on the second.</p>
+<p>Real life spreads cases thin. Remember the students who matched pilots after an hour of scored drills? You can make drills too. Replay old user sessions and predict what the person does before you watch. Guess a metric before you open the dashboard. Name the cause of a support ticket before you read its tag. Each one is a tiny Groundhog Day: a case, a call, an answer, all inside a minute.</p>
+<p><img src="/images/posts/stored-time-tiny-groundhog-day.svg" alt="A three-step loop from a case, shown as a user session, to your call, a sticky note with a written guess, to the answer, a tick or a cross, and back to the start, with a tally of five ticks and one cross building up underneath"></p>
+<p>Then tune the difficulty. If you’re right almost every time, make it harder: finer calls, less information, less time. If you’re wrong half the time, step back. You’re aiming for the soldier’s sweet spot, missing about once in six.</p>
+<p>Don’t practise one type of case in a block. Mix them, the way the painting study did, even though blocks will <em>feel</em> more productive.</p>
+<p>Spread your practice out too. In a study of 1,354 people, the best gap between study sessions depended on how long you needed to remember. For a test a week away, it was about 20–40% of that week. For a test a year away, it was 5–10% of the year. Getting the gap right beat cramming by up to 111% (<a href="https://www.evullab.org/pdf/CepedaVulRohrerWixtedPashler-PS-2008.pdf">Cepeda et al. 2008</a>). For instincts you want to keep for years, come back to a type of case every few weeks rather than every day.</p>
+<p>And make your call <em>before</em> you read the expert’s take or the post-mortem. That’s productive failure on a small scale. Then compare. Then sleep on it, which seems to help the lesson settle, even if it doesn’t make you faster.</p>
+<p>If I could keep only one habit from all this, it would be a hunch log.</p>
+<p>It’s simple. When you get a gut feeling about something that will or won’t happen, write it down before you know the answer. Note the date, the call, how confident you are as a percentage, the cue you think you noticed, and when you’ll know. Something like: <em>“This onboarding change will lift day-one completion. 70%. Cue: users kept stalling on the permissions screen. Check in two weeks.”</em></p>
+<p><img src="/images/posts/stored-time-hunch-log.svg" alt="A ruled notebook page titled Hunch log with columns for date, the call, confidence, cue I noticed, check on, what happened and score, where the first row reads Nov 09, this onboarding change will lift day-one completion, 70%, users kept stalling on the permissions screen, check on Nov 23, with the outcome and score still blank and empty rows below"></p>
+<p>When the answer comes in, score it. The simplest score is the Brier score: take your confidence as a number between 0 and 1, subtract what happened (1 if it happened, 0 if not), and square it. Zero is perfect. Saying “50%” about everything earns 0.25, so you want to beat that.</p>
+<p>This isn’t a productivity hack I made up. It’s how the best forecasters train. In a large forecasting tournament, the top 2%, dubbed “superforecasters”, made about 7.8 forecasts per question, updating as news came in. Everyone else averaged fewer than two. A 45-minute training session also improved forecasters’ accuracy, and the gain held for months (<a href="https://escholarship.org/content/qt4rg4n9vr/qt4rg4n9vr_noSplash_4ff67e56b3dac616e0163b75090705e6.pdf">Mellers et al. 2014</a>). Older studies found that people given feedback on their confidence, over 200-question tests, became better calibrated on new questions later (<a href="https://apps.dtic.mil/sti/pdfs/ADA089619.pdf">Lichtenstein &amp; Fischhoff 1980</a>).</p>
+<p>How many entries before the log tells you anything? Here, finally, is a real n, though it’s for the measuring rather than the instinct. Say you make 25 calls at 70% confidence. Pure luck will move your hit rate by about 9 points either way. With 100 calls, about 5. So you need a few dozen calls at each confidence level before the log can tell you whether your 70% really means 70%. That’s just arithmetic, but it’s a useful reality check.</p>
+<p>The log’s other job is mining your misses. For every wrong call, ask three things. What did I notice? What did I ignore? What was missing that should have been there? Remember, the fire lieutenant’s most important cue was a noise that wasn’t there. Naming a cue turns a vague feeling into something you can check, and teach.</p>
+<p>I don’t want to oversell this. Stored time can store the wrong things. And the person holding the jar is the worst judge of what’s in it.</p>
+<p><img src="/images/posts/stored-time-leaking-jar.svg" alt="The 10 years jar from the opening, now with four small red cracks in the glass labelled memory, confidence, edges and first idea, each leaking amber drops onto the shelf"></p>
+<p>The first leak is memory. In 1972, before President Nixon’s trips to China and the Soviet Union, researchers asked people how likely various outcomes were. Afterwards, they asked them to recall their own predictions. People remembered giving higher odds to the things that had actually happened than they really had (<a href="https://en.wikipedia.org/wiki/Hindsight_bias">Fischhoff &amp; Beyth 1975, summary</a>).</p>
+<p>We all do this with hunches. The ones that came true become stories we tell. The ones that didn’t quietly fade. Dumbledore would just check the Pensieve. The rest of us need the hunch log, which is basically a cheap Pensieve for predictions.</p>
+<p>The second leak is confidence. Kahneman’s warning is that confidence shows up whether or not it has earned its place (<a href="https://www.mckinsey.com/capabilities/strategy-and-corporate-finance/our-insights/strategic-decisions-when-can-you-trust-your-gut">McKinsey interview with Kahneman &amp; Klein</a>). In an old study, clinicians were given more and more information about a case. Their confidence climbed. Their accuracy stayed stuck around 26% (<a href="https://web.csulb.edu/~cwallis/382/certainty/chapter19.html">Oskamp 1965, summary</a>). Even our instincts about our own learning can be wrong, as the 78% in the painting study showed.</p>
+<p>The third is that expertise has edges you can’t see. In Kahneman’s words, experts “don’t know exactly where the boundaries of their expertise are”. Think of the chess masters looking at random boards. Their instinct didn’t fade gently. It just stopped working, and nothing inside would have warned them.</p>
+<p>This worries me as a product builder. Taste moves. A pattern I learned about users five years ago might be quietly wrong today, and it would still feel exactly as sure.</p>
+<p>The fourth is that the first good idea can block a better one. In one experiment, strong chess players were shown a position with a familiar five-move checkmate. There was also a shorter, three-move mate on the board. None of them found it. Eye-tracking showed their eyes kept drifting back to the squares of the familiar solution, even while they said they were looking for something better. That one familiar idea dragged their play down to the level of much weaker players (<a href="https://cognition.aau.at/download/Publikationen/Bilalic/Bilalic_etal_2010b.pdf">Bilalić, McLeod &amp; Gobet 2010</a>).</p>
+<p><img src="/images/posts/stored-time-eye-heatmap.svg" alt="A schematic chessboard with an eye-tracking heat map glowing over the squares of the familiar mate, labelled where they looked, while three faint dashed squares elsewhere on the board, never looked at, are labelled where the better answer was"></p>
+<p>Instinct is fast because it grabs the first pattern that fits. Sometimes that’s exactly the problem. Klein’s fix is the premortem: before you commit, imagine the plan has already failed, then list the reasons why (<a href="https://www.mckinsey.com/capabilities/strategy-and-corporate-finance/our-insights/strategic-decisions-when-can-you-trust-your-gut">same McKinsey interview</a>).</p>
+<p>And not every gut feeling is stored time at all. Some of what feels like intuition is just mood, fear, or familiarity. Across more than 40 million car sales, people bought more convertibles and four-wheel drives depending on that day’s weather (<a href="https://ideas.repec.org/a/oup/qjecon/v130y2015i1p371-414.html">Busse et al. 2015</a>). Nobody buying a convertible on a sunny day thinks “the weather made me do it”. It feels like a gut call. It’s just the weather.</p>
+<p>To be fair, the science has its own leaks. Some of the studies I’ve leaned on are small. The flight study had 14 people. The idea that the body knows before the mind in the gambling task is disputed. The sleep boost may be partly an artifact. The one-in-six rule was proved for model learners, not people. Practice itself explains only part of skill: about 26% of the differences between people in games, 18% in sports, and under 1% in professions (<a href="https://pubmed.ncbi.nlm.nih.gov/24986855/">Macnamara, Hambrick &amp; Oswald 2014</a>). And almost every clean number in this piece comes from a kind world, where someone could actually count. The messier worlds most of us work in mostly have no count at all.</p>
+<p>I started with two questions. How do we capture time? And would that even be wonderful?</p>
+<p>So, can it be done? Not the way the stories hoped. You can’t pour hours into a jar. But you can live a moment closely enough that something stays behind.</p>
+<p>Each story grabbed a piece of the answer. Hermione got extra hours, but hours alone don’t stay. The Pensieve kept every memory, but a memory isn’t a skill. Neo got the skill, but still had to walk the path. Only the loops got the whole thing: a situation, a call, an honest answer, and again, and again. Phil Connors didn’t walk out of February 2nd carrying 30 years. He walked out carrying what 30 years had taught him, folded so small it fit into the next second.</p>
+<p>The real world is full of smaller loops. The batsman who reads the bowler’s wrist before the ball leaves the hand. The fire lieutenant who hears a silence and gets his crew out. The chick sexer who is almost never wrong and can’t tell you why. None of them is guessing. Each is spending years in a moment.</p>
+<p>So, would it be wonderful? Yes, with conditions. What you store is only as good as the feedback that wrote it. The jar leaks through memory. It can’t see its own edges. And it can be crowded out by the first familiar idea. But you can fill it on purpose. Find the kind corners of your world. Build small loops. Miss about once in six. And write your hunches down before the world answers them.</p>
+<p>If time could take a shape you could carry around, I think it would look like this. Not a jar or an hourglass. A quiet certainty that turns up before the reasons do, holding years it can’t explain, and asking you to trust it a little, and check it often.</p>
+<p><img src="/images/posts/stored-time-closing.svg" alt="The same jar sits empty on its shelf while a batsman waits at the crease beside it, a warm glow in their chest where the last spark from the jar has settled"></p>
+<p>We were never going to bottle the clock. But we’ve been doing the next best thing all along.</p>
+<p>Instinct is the stored time.</p>
+<h2 id="a-hunch-log-to-copy" tabindex="-1">A hunch log to copy <a class="header-anchor" href="#a-hunch-log-to-copy" aria-hidden="true">#</a></h2>
+<p>One row per hunch, written down before you know the answer. Paste the table into a spreadsheet or Notion, or copy the blank version below into your notes.</p>
+<table>
+<thead>
+<tr>
+<th>Date</th>
+<th>The call</th>
+<th>Confidence</th>
+<th>Cue I noticed</th>
+<th>Check on</th>
+<th>What happened</th>
+<th>Score</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Nov 09</td>
+<td>This onboarding change will lift day-one completion.</td>
+<td>70%</td>
+<td>Users kept stalling on the permissions screen.</td>
+<td>Nov 23</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td> </td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td> </td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<code-block lang="markdown"><pre class="language-markdown"><code class="language-markdown"><span class="token table"><span class="token table-header-row"><span class="token punctuation">|</span><span class="token table-header important"> Date </span><span class="token punctuation">|</span><span class="token table-header important"> The call </span><span class="token punctuation">|</span><span class="token table-header important"> Confidence </span><span class="token punctuation">|</span><span class="token table-header important"> Cue I noticed </span><span class="token punctuation">|</span><span class="token table-header important"> Check on </span><span class="token punctuation">|</span><span class="token table-header important"> What happened </span><span class="token punctuation">|</span><span class="token table-header important"> Score </span><span class="token punctuation">|</span>
+</span><span class="token table-line"><span class="token punctuation">|</span> <span class="token punctuation">----</span> <span class="token punctuation">|</span> <span class="token punctuation">--------</span> <span class="token punctuation">|</span> <span class="token punctuation">----------</span> <span class="token punctuation">|</span> <span class="token punctuation">-------------</span> <span class="token punctuation">|</span> <span class="token punctuation">--------</span> <span class="token punctuation">|</span> <span class="token punctuation">-------------</span> <span class="token punctuation">|</span> <span class="token punctuation">-----</span> <span class="token punctuation">|</span>
+</span><span class="token table-data-rows"><span class="token punctuation">|</span><span class="token table-data">      </span><span class="token punctuation">|</span><span class="token table-data">          </span><span class="token punctuation">|</span><span class="token table-data">            </span><span class="token punctuation">|</span><span class="token table-data">               </span><span class="token punctuation">|</span><span class="token table-data">          </span><span class="token punctuation">|</span><span class="token table-data">               </span><span class="token punctuation">|</span><span class="token table-data">       </span><span class="token punctuation">|</span>
+</span></span></code></pre>
+</code-block><p>To score a row, take your confidence as a number between 0 and 1, subtract what happened (1 if it did, 0 if it didn’t), and square it. Zero is perfect, and 0.25 is what “50%” about everything would earn.</p>
+<h2 id="further-reading" tabindex="-1">Further reading <a class="header-anchor" href="#further-reading" aria-hidden="true">#</a></h2>
+<p>Every source is linked where it’s used in the text. These are the ones worth reading next.</p>
+<p><strong>Intuition as recognition</strong></p>
+<ul>
+<li><strong>Simon &amp; Chase (1973)</strong>, <em>Skill in chess</em>. The real-board and random-board experiments, and the pattern library behind expert intuition. <a href="https://www.Gwern.net/doc/psychology/chess/1973-simon.pdf">Read</a></li>
+<li><strong>Klein (2008)</strong>, <em>Naturalistic decision making</em>. How fire commanders and other experts actually decide: recognise the situation, take the first option that fits, play it out in their heads. <a href="https://library.alnap.org/system/files/content/resource/files/main/Klein_2008_HF_NDM.pdf">Read</a></li>
+<li><strong>Kahneman &amp; Klein (2009)</strong>, <em>Conditions for intuitive expertise: a failure to disagree</em>. Intuition’s great sceptic and its great champion agree on when a gut feeling can be trusted. <a href="https://pubmed.ncbi.nlm.nih.gov/19739881/">Read</a></li>
+<li><strong>McKinsey Quarterly (2010)</strong>, <em>Strategic decisions: when can you trust your gut?</em> The same two in conversation. The easiest way in, and where the premortem comes from. <a href="https://www.mckinsey.com/capabilities/strategy-and-corporate-finance/our-insights/strategic-decisions-when-can-you-trust-your-gut">Read</a></li>
+</ul>
+<p><strong>Feedback and practice</strong></p>
+<ul>
+<li><strong>Hogarth, Lejarraga &amp; Soyer (2015)</strong>, <em>The two settings of kind and wicked learning environments</em>. Why some worlds teach you and others quietly teach you the wrong lesson. <a href="https://pure.mpg.de/pubman/item/item_2225074_9/component/file_3569491/Hogarth_TheTwo_2015_VerlPDF_final_LS.pdf">Read</a></li>
+<li><strong>Ericsson (2006)</strong>, <em>The influence of experience and deliberate practice on the development of superior expert performance</em>. The deliberate practice research, including the Berlin violinists, in its author’s own words. <a href="https://www.ida.liu.se/~nilda/Anders_Ericsson/Ericsson_delib_pract.pdf">Read</a></li>
+<li><strong>Macnamara, Hambrick &amp; Oswald (2014)</strong>, <em>Deliberate practice and performance in music, games, sports, education, and professions</em>. The counterweight: how much of the difference between people practice actually explains, field by field. <a href="https://pubmed.ncbi.nlm.nih.gov/24986855/">Read</a></li>
+<li><strong>Wilson et al. (2019)</strong>, <em>The Eighty Five Percent Rule for optimal learning</em>. Where “miss about once in six” comes from, and the assumptions it rests on. <a href="https://escholarship.org/content/qt0v22s4g4/qt0v22s4g4.pdf?t=sdxgqm">Read</a></li>
+<li><strong>Bjork &amp; Bjork (2023)</strong>, <em>Introducing desirable difficulties into practice and instruction</em>. Spacing, mixing and testing yourself, written for people who want to use them. <a href="https://www.unh.edu/teaching-learning-resource-hub/sites/default/files/media/2023-06/itow-introducing-desirable-difficulties-into-practice-and-instruction-bjork-and-bjork.pdf">Read</a></li>
+</ul>
+<p><strong>Training a hunch</strong></p>
+<ul>
+<li><strong>Mellers et al. (2014)</strong>, <em>Psychological strategies for winning a geopolitical forecasting tournament</em>. What the superforecasters did differently, and how a short training made forecasters more accurate. <a href="https://escholarship.org/content/qt4rg4n9vr/qt4rg4n9vr_noSplash_4ff67e56b3dac616e0163b75090705e6.pdf">Read</a></li>
+</ul>
+
+            </div>
+
+            <div class="article-end">
+                <span>✦</span>
+                <span>✦</span>
+                <span>✦</span>
+            </div>
+
+            <div class="post-navigation">
+                <div class="post-nav-item post-nav-previous">
+                        <a href="/who-moved-my-tag/">
+                            <span class="nav-arrow">←</span>
+                            <div class="nav-content">
+                                <p class="nav-label">Previous</p>
+                                <p class="nav-title">Who Moved My Tag?</p>
+                            </div>
+                        </a>
+                    
+                </div>
+
+                <div class="post-nav-item post-nav-next">
+                </div>
+            </div>
+        </div>
+    </article>
+
+    </main>
+    <footer class="sticky bottom-0 z-50 glass-footer py-4">
+  <div class="container mx-auto max-w-7xl px-8 flex items-center justify-between">
+    <div class="text-base">
+      by <a href="https://anirudha.dev" target="_blank" rel="noopener noreferrer">Ani</a>
+    </div>
+
+    <div class="flex items-center gap-4">
+      <a href="https://github.com/anistark" target="_blank" rel="noopener noreferrer" class="footer-icon" aria-label="GitHub">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="currentColor" viewBox="0 0 24 24">
+          <path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/>
+        </svg>
+      </a>
+      <a href="https://x.com/kranirudha" target="_blank" rel="noopener noreferrer" class="footer-icon" aria-label="X">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="currentColor" viewBox="0 0 24 24">
+          <path d="M14.234 10.162 22.977 0h-2.072l-7.591 8.824L7.251 0H.258l9.168 13.343L.258 24H2.33l8.016-9.318L16.749 24h6.993zm-2.837 3.299-.929-1.329L3.076 1.56h3.182l5.965 8.532.929 1.329 7.754 11.09h-3.182z"/>
+        </svg>
+      </a>
+      <a href="https://fosstodon.org/@ani" target="_blank" rel="noopener noreferrer" class="footer-icon" aria-label="Mastodon">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="currentColor" viewBox="0 0 24 24">
+          <path d="M23.268 5.313c-.35-2.578-2.617-4.61-5.304-5.004C17.51.242 15.792 0 11.813 0h-.03c-3.98 0-4.835.242-5.288.309C3.882.692 1.496 2.518.917 5.127.64 6.412.61 7.837.661 9.143c.074 1.874.088 3.745.26 5.611.118 1.24.325 2.47.62 3.68.55 2.237 2.777 4.098 4.96 4.857 2.336.792 4.849.923 7.256.38.265-.061.527-.132.786-.213.585-.184 1.27-.39 1.774-.753a.057.057 0 0 0 .023-.043v-1.809a.052.052 0 0 0-.02-.041.053.053 0 0 0-.046-.01 20.282 20.282 0 0 1-4.709.545c-2.73 0-3.463-1.284-3.674-1.818a5.593 5.593 0 0 1-.319-1.433.053.053 0 0 1 .066-.054c1.517.363 3.072.546 4.632.546.376 0 .75 0 1.125-.01 1.57-.044 3.224-.124 4.768-.422.038-.008.077-.015.11-.024 2.435-.464 4.753-1.92 4.989-5.604.008-.145.03-1.52.03-1.67.002-.512.167-3.63-.024-5.545zm-3.748 9.195h-2.561V8.29c0-1.309-.55-1.976-1.67-1.976-1.23 0-1.846.79-1.846 2.35v3.403h-2.546V8.663c0-1.56-.617-2.35-1.848-2.35-1.112 0-1.668.668-1.67 1.977v6.218H4.822V8.102c0-1.31.337-2.35 1.011-3.12.696-.77 1.608-1.164 2.74-1.164 1.311 0 2.302.5 2.962 1.498l.638 1.06.638-1.06c.66-.999 1.65-1.498 2.96-1.498 1.13 0 2.043.395 2.74 1.164.675.77 1.012 1.81 1.012 3.12z"/>
+        </svg>
+      </a>
+      <a href="https://linkedin.com/in/kranirudha" target="_blank" rel="noopener noreferrer" class="footer-icon" aria-label="LinkedIn">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="currentColor" viewBox="0 0 24 24">
+          <path d="M4.98 3.5c0 1.381-1.11 2.5-2.48 2.5s-2.48-1.119-2.48-2.5c0-1.38 1.11-2.5 2.48-2.5s2.48 1.12 2.48 2.5zm.02 4.5h-5v16h5v-16zm7.982 0h-4.968v16h4.969v-8.399c0-4.67 6.029-5.052 6.029 0v8.399h4.988v-10.131c0-7.88-8.922-7.593-11.018-3.714v-2.155z"/>
+        </svg>
+      </a>
+      <a href="/feed/feed.xml" class="footer-icon" aria-label="RSS feed">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="currentColor" viewBox="0 0 24 24">
+          <path d="M6.18 15.64a2.18 2.18 0 0 1 2.18 2.18C8.36 19 7.38 20 6.18 20C5 20 4 19 4 17.82a2.18 2.18 0 0 1 2.18-2.18M4 4.44A15.56 15.56 0 0 1 19.56 20h-2.83A12.73 12.73 0 0 0 4 7.27V4.44m0 5.66a9.9 9.9 0 0 1 9.9 9.9h-2.83A7.07 7.07 0 0 0 4 12.93V10.1Z"/>
+        </svg>
+      </a>
+    </div>
+  </div>
+</footer>
+
+    
+    <script src="/assets/main.bundle.js"></script>
+    <script type="module">
+      import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs';
+      mermaid.initialize({
+        startOnLoad: true,
+        theme: ['reading', 'beach', 'hogwarts'].includes(document.documentElement.getAttribute('data-theme')) ? 'default' : 'dark',
+        themeVariables: {
+          fontSize: '14px',
+        }
+      });
+    </script>
+  </body>
+</html>

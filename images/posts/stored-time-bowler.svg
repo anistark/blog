@@ -1,0 +1,160 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 480" font-family="'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, monospace">
+  <title>Six film frames of a bowler: run-up, gather, back foot, front foot, release, then the ball in flight. A highlighted band over the back-foot and front-foot frames, on the bowler's hand and arm, marks where the best batsmen are already reading; a later band over the ball in flight marks where everyone reads</title>
+  <style id="jbm-font">@font-face{font-family:'JetBrains Mono';font-style:normal;font-weight:400;src:url(data:font/woff2;base64,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) format('woff2')}@font-face{font-family:'JetBrains Mono';font-style:normal;font-weight:700;src:url(data:font/woff2;base64,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) format('woff2')}</style>
+  <style>
+    .playhead { opacity: 0; animation: play 11s linear infinite; }
+    @keyframes play { 0% { opacity: 1; transform: translateX(0); } 58% { opacity: 1; transform: translateX(904px); } 60%, 100% { opacity: 0; transform: translateX(904px); } }
+    .f0 { animation: f0 11s linear infinite; }
+    @keyframes f0 { 0%, 0.0% { opacity: 0.22; } 1.5%, 94% { opacity: 1; } 100% { opacity: 0.22; } }
+    .f1 { animation: f1 11s linear infinite; }
+    @keyframes f1 { 0%, 9.8% { opacity: 0.22; } 11.3%, 94% { opacity: 1; } 100% { opacity: 0.22; } }
+    .f2 { animation: f2 11s linear infinite; }
+    @keyframes f2 { 0%, 19.5% { opacity: 0.22; } 21.0%, 94% { opacity: 1; } 100% { opacity: 0.22; } }
+    .f3 { animation: f3 11s linear infinite; }
+    @keyframes f3 { 0%, 29.3% { opacity: 0.22; } 30.8%, 94% { opacity: 1; } 100% { opacity: 0.22; } }
+    .f4 { animation: f4 11s linear infinite; }
+    @keyframes f4 { 0%, 39.0% { opacity: 0.22; } 40.5%, 94% { opacity: 1; } 100% { opacity: 0.22; } }
+    .f5 { animation: f5 11s linear infinite; }
+    @keyframes f5 { 0%, 48.8% { opacity: 0.22; } 50.3%, 94% { opacity: 1; } 100% { opacity: 0.22; } }
+    .expert { animation: expert 11s ease-out infinite; }
+    @keyframes expert { 0%, 19.5% { opacity: 0; } 21.5%, 94% { opacity: 1; } 100% { opacity: 0; } }
+    .everyone { animation: everyone 11s ease-out infinite; }
+    @keyframes everyone { 0%, 48.8% { opacity: 0; } 50.8%, 94% { opacity: 1; } 100% { opacity: 0; } }
+    .b0 { animation: b0 11s linear infinite; }
+    @keyframes b0 { 0%, 49.8% { opacity: 0; } 50.6%, 94% { opacity: 1; } 100% { opacity: 0; } }
+    .b1 { animation: b1 11s linear infinite; }
+    @keyframes b1 { 0%, 51.0% { opacity: 0; } 51.8%, 94% { opacity: 1; } 100% { opacity: 0; } }
+    .b2 { animation: b2 11s linear infinite; }
+    @keyframes b2 { 0%, 52.2% { opacity: 0; } 53.0%, 94% { opacity: 1; } 100% { opacity: 0; } }
+    .b3 { animation: b3 11s linear infinite; }
+    @keyframes b3 { 0%, 53.4% { opacity: 0; } 54.2%, 94% { opacity: 1; } 100% { opacity: 0; } }
+    .b4 { animation: b4 11s linear infinite; }
+    @keyframes b4 { 0%, 54.6% { opacity: 0; } 55.4%, 94% { opacity: 1; } 100% { opacity: 0; } }
+    .b5 { animation: b5 11s linear infinite; }
+    @keyframes b5 { 0%, 55.8% { opacity: 0; } 56.6%, 94% { opacity: 1; } 100% { opacity: 0; } }
+    .b6 { animation: b6 11s linear infinite; }
+    @keyframes b6 { 0%, 57.0% { opacity: 0; } 57.8%, 94% { opacity: 1; } 100% { opacity: 0; } }
+    @media (prefers-reduced-motion: reduce) { * { animation: none !important; } }
+  </style>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#12151c"/><stop offset="1" stop-color="#0a0c10"/></linearGradient>
+    <radialGradient id="sheen" cx="0.5" cy="0" r="0.85"><stop offset="0" stop-color="#ffffff" stop-opacity="0.06"/><stop offset="1" stop-color="#ffffff" stop-opacity="0"/></radialGradient>
+    <filter id="glow" x="-60%" y="-60%" width="220%" height="220%"><feGaussianBlur stdDeviation="6" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+    <linearGradient id="glass" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ffffff" stop-opacity="0.10"/><stop offset="1" stop-color="#ffffff" stop-opacity="0.02"/></linearGradient>
+    <linearGradient id="frame" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#1c212b"/><stop offset="1" stop-color="#13161d"/></linearGradient>
+    <linearGradient id="strip" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#0c0e13"/><stop offset="1" stop-color="#07080b"/></linearGradient>
+    <linearGradient id="beam" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#f5b544" stop-opacity="0"/><stop offset="1" stop-color="#f5b544" stop-opacity="0.35"/></linearGradient>
+  </defs>
+
+  <rect width="1000" height="480" rx="20" fill="url(#bg)"/>
+  <rect width="1000" height="480" rx="20" fill="url(#sheen)"/>
+  <rect x="0.5" y="0.5" width="999" height="479" rx="19.5" fill="none" stroke="#ffffff" stroke-opacity="0.08"/>
+
+  <circle cx="52" cy="44" r="3.5" fill="#f5b544"/>
+  <text x="66" y="48" font-size="12" letter-spacing="2.4" fill="#7d8597">SEEING THE BALL BEFORE IT'S BOWLED</text>
+
+  <rect x="36" y="132" width="928" height="224" rx="10" fill="url(#strip)" stroke="#ffffff" stroke-opacity="0.07"/>
+  <g fill="#ffffff" fill-opacity="0.09"><rect x="46.0" y="140" width="10" height="8" rx="2"/><rect x="46.0" y="340" width="10" height="8" rx="2"/><rect x="70.0" y="140" width="10" height="8" rx="2"/><rect x="70.0" y="340" width="10" height="8" rx="2"/><rect x="94.0" y="140" width="10" height="8" rx="2"/><rect x="94.0" y="340" width="10" height="8" rx="2"/><rect x="118.0" y="140" width="10" height="8" rx="2"/><rect x="118.0" y="340" width="10" height="8" rx="2"/><rect x="142.0" y="140" width="10" height="8" rx="2"/><rect x="142.0" y="340" width="10" height="8" rx="2"/><rect x="166.0" y="140" width="10" height="8" rx="2"/><rect x="166.0" y="340" width="10" height="8" rx="2"/><rect x="190.0" y="140" width="10" height="8" rx="2"/><rect x="190.0" y="340" width="10" height="8" rx="2"/><rect x="214.0" y="140" width="10" height="8" rx="2"/><rect x="214.0" y="340" width="10" height="8" rx="2"/><rect x="238.0" y="140" width="10" height="8" rx="2"/><rect x="238.0" y="340" width="10" height="8" rx="2"/><rect x="262.0" y="140" width="10" height="8" rx="2"/><rect x="262.0" y="340" width="10" height="8" rx="2"/><rect x="286.0" y="140" width="10" height="8" rx="2"/><rect x="286.0" y="340" width="10" height="8" rx="2"/><rect x="310.0" y="140" width="10" height="8" rx="2"/><rect x="310.0" y="340" width="10" height="8" rx="2"/><rect x="334.0" y="140" width="10" height="8" rx="2"/><rect x="334.0" y="340" width="10" height="8" rx="2"/><rect x="358.0" y="140" width="10" height="8" rx="2"/><rect x="358.0" y="340" width="10" height="8" rx="2"/><rect x="382.0" y="140" width="10" height="8" rx="2"/><rect x="382.0" y="340" width="10" height="8" rx="2"/><rect x="406.0" y="140" width="10" height="8" rx="2"/><rect x="406.0" y="340" width="10" height="8" rx="2"/><rect x="430.0" y="140" width="10" height="8" rx="2"/><rect x="430.0" y="340" width="10" height="8" rx="2"/><rect x="454.0" y="140" width="10" height="8" rx="2"/><rect x="454.0" y="340" width="10" height="8" rx="2"/><rect x="478.0" y="140" width="10" height="8" rx="2"/><rect x="478.0" y="340" width="10" height="8" rx="2"/><rect x="502.0" y="140" width="10" height="8" rx="2"/><rect x="502.0" y="340" width="10" height="8" rx="2"/><rect x="526.0" y="140" width="10" height="8" rx="2"/><rect x="526.0" y="340" width="10" height="8" rx="2"/><rect x="550.0" y="140" width="10" height="8" rx="2"/><rect x="550.0" y="340" width="10" height="8" rx="2"/><rect x="574.0" y="140" width="10" height="8" rx="2"/><rect x="574.0" y="340" width="10" height="8" rx="2"/><rect x="598.0" y="140" width="10" height="8" rx="2"/><rect x="598.0" y="340" width="10" height="8" rx="2"/><rect x="622.0" y="140" width="10" height="8" rx="2"/><rect x="622.0" y="340" width="10" height="8" rx="2"/><rect x="646.0" y="140" width="10" height="8" rx="2"/><rect x="646.0" y="340" width="10" height="8" rx="2"/><rect x="670.0" y="140" width="10" height="8" rx="2"/><rect x="670.0" y="340" width="10" height="8" rx="2"/><rect x="694.0" y="140" width="10" height="8" rx="2"/><rect x="694.0" y="340" width="10" height="8" rx="2"/><rect x="718.0" y="140" width="10" height="8" rx="2"/><rect x="718.0" y="340" width="10" height="8" rx="2"/><rect x="742.0" y="140" width="10" height="8" rx="2"/><rect x="742.0" y="340" width="10" height="8" rx="2"/><rect x="766.0" y="140" width="10" height="8" rx="2"/><rect x="766.0" y="340" width="10" height="8" rx="2"/><rect x="790.0" y="140" width="10" height="8" rx="2"/><rect x="790.0" y="340" width="10" height="8" rx="2"/><rect x="814.0" y="140" width="10" height="8" rx="2"/><rect x="814.0" y="340" width="10" height="8" rx="2"/><rect x="838.0" y="140" width="10" height="8" rx="2"/><rect x="838.0" y="340" width="10" height="8" rx="2"/><rect x="862.0" y="140" width="10" height="8" rx="2"/><rect x="862.0" y="340" width="10" height="8" rx="2"/><rect x="886.0" y="140" width="10" height="8" rx="2"/><rect x="886.0" y="340" width="10" height="8" rx="2"/><rect x="910.0" y="140" width="10" height="8" rx="2"/><rect x="910.0" y="340" width="10" height="8" rx="2"/><rect x="934.0" y="140" width="10" height="8" rx="2"/><rect x="934.0" y="340" width="10" height="8" rx="2"/></g>
+  <g class="f0">
+    <rect x="48" y="156" width="144" height="176" rx="4" fill="url(#frame)" stroke="#ffffff" stroke-opacity="0.10"/>
+    <line x1="58" y1="318" x2="182" y2="318" stroke="#3a4152" stroke-width="1.2"/>
+    <g stroke="#c5cad6" stroke-width="7" stroke-linecap="round" stroke-linejoin="round" fill="none">
+      <path d="M112 250 L108 284 L88 312" stroke-opacity="0.6"/>
+      <path d="M120 206 L136 220 L146 208" stroke-opacity="0.6"/>
+      <path d="M120 206 L112 250" stroke-width="9"/>
+      <path d="M112 250 L136 270 L132 298"/>
+      <path d="M120 206 L108 228 L124 232" stroke="#c5cad6"/>
+    </g>
+    <circle cx="124" cy="192" r="9" fill="#c5cad6"/>
+    <circle cx="128" cy="230" r="4.5" fill="#eef1f6"/>
+  </g>
+  <text x="120.0" y="380" text-anchor="middle" font-size="12" fill="#7d8597">run-up</text>
+  <g class="f1">
+    <rect x="200" y="156" width="144" height="176" rx="4" fill="url(#frame)" stroke="#ffffff" stroke-opacity="0.10"/>
+    <line x1="210" y1="318" x2="334" y2="318" stroke="#3a4152" stroke-width="1.2"/>
+    <g stroke="#c5cad6" stroke-width="7" stroke-linecap="round" stroke-linejoin="round" fill="none">
+      <path d="M268 244 L258 268 L244 286" stroke-opacity="0.6"/>
+      <path d="M272 200 L286 194 L296 178" stroke-opacity="0.6"/>
+      <path d="M272 200 L268 244" stroke-width="9"/>
+      <path d="M268 244 L290 260 L288 284"/>
+      <path d="M272 200 L262 216 L278 204" stroke="#c5cad6"/>
+    </g>
+    <circle cx="274" cy="184" r="9" fill="#c5cad6"/>
+    <circle cx="282" cy="202" r="4.5" fill="#eef1f6"/>
+  </g>
+  <text x="272.0" y="380" text-anchor="middle" font-size="12" fill="#7d8597">gather</text>
+  <g class="f2">
+    <rect x="352" y="156" width="144" height="176" rx="4" fill="url(#frame)" stroke="#ffffff" stroke-opacity="0.10"/>
+    <line x1="362" y1="318" x2="486" y2="318" stroke="#3a4152" stroke-width="1.2"/>
+    <g stroke="#c5cad6" stroke-width="7" stroke-linecap="round" stroke-linejoin="round" fill="none">
+      <path d="M416 250 L408 282 L402 316" stroke-opacity="0.6"/>
+      <path d="M418 206 L436 188 L448 172" stroke-opacity="0.6"/>
+      <path d="M418 206 L416 250" stroke-width="9"/>
+      <path d="M416 250 L442 266 L450 288"/>
+      <path d="M418 206 L398 220 L382 234" stroke="#f5b544"/>
+    </g>
+    <circle cx="418" cy="190" r="9" fill="#c5cad6"/>
+    <circle cx="382" cy="234" r="17" fill="#f5b544" fill-opacity="0.16" stroke="#f5b544" stroke-opacity="0.7" stroke-width="1.2"/>
+    <circle cx="377" cy="236" r="4.5" fill="#eef1f6"/>
+  </g>
+  <text x="424.0" y="380" text-anchor="middle" font-size="12" fill="#7d8597">back foot</text>
+  <g class="f3">
+    <rect x="504" y="156" width="144" height="176" rx="4" fill="url(#frame)" stroke="#ffffff" stroke-opacity="0.10"/>
+    <line x1="514" y1="318" x2="638" y2="318" stroke="#3a4152" stroke-width="1.2"/>
+    <g stroke="#c5cad6" stroke-width="7" stroke-linecap="round" stroke-linejoin="round" fill="none">
+      <path d="M572 250 L554 280 L540 306" stroke-opacity="0.6"/>
+      <path d="M576 206 L596 216 L592 236" stroke-opacity="0.6"/>
+      <path d="M576 206 L572 250" stroke-width="9"/>
+      <path d="M572 250 L596 280 L608 316"/>
+      <path d="M576 206 L560 190 L550 172" stroke="#f5b544"/>
+    </g>
+    <circle cx="578" cy="190" r="9" fill="#c5cad6"/>
+    <circle cx="550" cy="172" r="17" fill="#f5b544" fill-opacity="0.16" stroke="#f5b544" stroke-opacity="0.7" stroke-width="1.2"/>
+    <circle cx="546" cy="168" r="4.5" fill="#eef1f6"/>
+  </g>
+  <text x="576.0" y="380" text-anchor="middle" font-size="12" fill="#7d8597">front foot</text>
+  <g class="f4">
+    <rect x="656" y="156" width="144" height="176" rx="4" fill="url(#frame)" stroke="#ffffff" stroke-opacity="0.10"/>
+    <line x1="666" y1="318" x2="790" y2="318" stroke="#3a4152" stroke-width="1.2"/>
+    <g stroke="#c5cad6" stroke-width="7" stroke-linecap="round" stroke-linejoin="round" fill="none">
+      <path d="M726 252 L708 280 L694 302" stroke-opacity="0.6"/>
+      <path d="M734 208 L722 232 L714 250" stroke-opacity="0.6"/>
+      <path d="M734 208 L726 252" stroke-width="9"/>
+      <path d="M726 252 L752 282 L762 316"/>
+      <path d="M734 208 L742 186 L752 170" stroke="#c5cad6"/>
+    </g>
+    <circle cx="736" cy="192" r="9" fill="#c5cad6"/>
+    <circle cx="764" cy="166" r="4.5" fill="#eef1f6"/>
+  </g>
+  <text x="728.0" y="380" text-anchor="middle" font-size="12" fill="#7d8597">release</text>
+  <g class="f5">
+    <rect x="808" y="156" width="144" height="176" rx="4" fill="url(#frame)" stroke="#ffffff" stroke-opacity="0.10"/>
+    <line x1="818" y1="318" x2="942" y2="318" stroke="#3a4152" stroke-width="1.2"/>
+    <polyline points="822.0,178.0 842.0,196.0 862.0,220.0 882.0,252.0 900.0,288.0 912.0,314.0 930.0,290.0" fill="none" stroke="#3a4152" stroke-dasharray="2 5" stroke-width="1.5" stroke-linecap="round"/>
+    <g stroke="#c5cad6" stroke-opacity="0.5" stroke-width="2" stroke-linecap="round"><line x1="934" y1="318" x2="934" y2="278"/><line x1="939" y1="318" x2="939" y2="278"/><line x1="944" y1="318" x2="944" y2="278"/></g>
+  </g>
+  <text x="880.0" y="380" text-anchor="middle" font-size="12" fill="#7d8597">ball in flight</text>
+  <circle class="b0" cx="822.0" cy="178.0" r="4.5" fill="#eef1f6" fill-opacity="0.35"/>
+  <circle class="b1" cx="842.0" cy="196.0" r="4.5" fill="#eef1f6" fill-opacity="0.46"/>
+  <circle class="b2" cx="862.0" cy="220.0" r="4.5" fill="#eef1f6" fill-opacity="0.57"/>
+  <circle class="b3" cx="882.0" cy="252.0" r="4.5" fill="#eef1f6" fill-opacity="0.68"/>
+  <circle class="b4" cx="900.0" cy="288.0" r="4.5" fill="#eef1f6" fill-opacity="0.78"/>
+  <circle class="b5" cx="912.0" cy="314.0" r="4.5" fill="#eef1f6" fill-opacity="0.89"/>
+  <circle class="b6" cx="930.0" cy="290.0" r="4.5" fill="#eef1f6" fill-opacity="1.00"/>
+  <g class="expert">
+    <rect x="348" y="152" width="304" height="184" rx="7" fill="#f5b544" fill-opacity="0.07" stroke="#f5b544" stroke-width="1.5"/>
+    <path d="M348 122 V114 H652 V122" fill="none" stroke="#f5b544" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+    <text x="500.0" y="102" text-anchor="middle" font-size="14" font-weight="700" fill="#f5b544">where the best batsmen are already reading</text>
+  </g>
+  <g class="everyone">
+    <rect x="804" y="152" width="152" height="184" rx="7" fill="#ffffff" fill-opacity="0.04" stroke="#7d8597" stroke-width="1.5" stroke-dasharray="5 4"/>
+    <path d="M804 122 V114 H956 V122" fill="none" stroke="#7d8597" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+    <text x="956" y="102" text-anchor="end" font-size="14" fill="#c5cad6">where everyone reads</text>
+  </g>
+  <line x1="804.0" y1="392" x2="804.0" y2="408" stroke="#c5cad6" stroke-opacity="0.6" stroke-width="1.5"/>
+  <line x1="48" y1="400" x2="952" y2="400" stroke="#232834" stroke-width="1.5"/>
+  <text x="794.0" y="426" text-anchor="end" font-size="12" fill="#c5cad6">ball leaves the hand</text>
+  <path d="M944 395 L952 400 L944 405" fill="none" stroke="#3a4152" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <text x="952" y="426" text-anchor="end" font-size="12" fill="#7d8597">time</text>
+  <g class="playhead"><rect x="20" y="152" width="28" height="184" fill="url(#beam)"/><line x1="48" y1="148" x2="48" y2="340" stroke="#f5b544" stroke-width="2" stroke-linecap="round"/></g>
+</svg>

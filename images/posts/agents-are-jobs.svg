@@ -1,0 +1,73 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" font-family="system-ui, sans-serif">
+  <rect width="1200" height="630" fill="#1a1a19"/>
+
+  <!-- title block -->
+  <text x="60" y="92" font-size="52" font-weight="700" fill="#ffffff">Agents are jobs, not services</text>
+  <text x="60" y="130" font-size="22" fill="#c3c2b7">the economics of resident agents vs queued agents</text>
+
+  <!-- center divider -->
+  <line x1="600" y1="185" x2="600" y2="560" stroke="#3a3a38" stroke-width="2"/>
+  <circle cx="600" cy="370" r="26" fill="#1a1a19" stroke="#3a3a38" stroke-width="2"/>
+  <text x="600" y="376" font-size="17" fill="#c3c2b7" text-anchor="middle">vs</text>
+
+  <!-- LEFT: resident services -->
+  <text x="60" y="205" font-size="16" font-weight="700" letter-spacing="2" fill="#d95926">RESIDENT SERVICES</text>
+  <rect x="60" y="222" width="440" height="280" rx="12" fill="#242423" stroke="#3a3a38"/>
+  <text x="488" y="244" font-size="13" fill="#c3c2b7" text-anchor="end">a 16GB box</text>
+
+  <rect x="80" y="254" width="400" height="34" rx="4" fill="#55534e"/>
+  <text x="280" y="276" font-size="14" fill="#ffffff" text-anchor="middle">OS, 2.5GB</text>
+
+  <rect x="80" y="294" width="400" height="42" rx="4" fill="#d95926"/>
+  <text x="280" y="321" font-size="15" fill="#10100f" text-anchor="middle">agent, idle, about 2GB</text>
+  <rect x="80" y="342" width="400" height="42" rx="4" fill="#d95926"/>
+  <text x="280" y="369" font-size="15" fill="#10100f" text-anchor="middle">agent, idle, about 2GB</text>
+  <rect x="80" y="390" width="400" height="42" rx="4" fill="#d95926"/>
+  <text x="280" y="417" font-size="15" fill="#10100f" text-anchor="middle">agent, idle, about 2GB</text>
+  <rect x="80" y="438" width="400" height="42" rx="4" fill="#d95926"/>
+  <text x="280" y="465" font-size="15" fill="#10100f" text-anchor="middle">agent, idle, about 2GB</text>
+
+  <text x="60" y="538" font-size="16" fill="#c3c2b7">four parked processes hold 8GB while doing nothing</text>
+
+  <!-- RIGHT: queued jobs -->
+  <text x="700" y="205" font-size="16" font-weight="700" letter-spacing="2" fill="#3987e5">QUEUED JOBS</text>
+
+  <!-- role cards (data at rest) -->
+  <rect x="724" y="246" width="150" height="80" rx="8" fill="#242423" stroke="#2c405c"/>
+  <rect x="712" y="236" width="150" height="80" rx="8" fill="#242423" stroke="#2c405c"/>
+  <rect x="700" y="226" width="150" height="80" rx="8" fill="#242423" stroke="#3987e5"/>
+  <text x="712" y="248" font-size="13" font-weight="600" fill="#ffffff">role file</text>
+  <text x="712" y="266" font-size="12" fill="#c3c2b7">prompt, tool scope</text>
+  <text x="712" y="282" font-size="12" fill="#c3c2b7">model, budget</text>
+  <text x="712" y="299" font-size="12" fill="#3987e5">a few KB on disk</text>
+
+  <!-- dashed: constructed fresh per task -->
+  <path d="M 880 260 C 960 260 1010 290 1050 316" fill="none" stroke="#3987e5" stroke-width="1.5" stroke-dasharray="5 4"/>
+  <text x="906" y="250" font-size="12" fill="#c3c2b7">built fresh per task</text>
+
+  <!-- queue rail -->
+  <text x="700" y="352" font-size="13" fill="#c3c2b7">tasks wait here, costing nothing</text>
+  <rect x="700" y="362" width="64" height="32" rx="6" fill="#223349" stroke="#3987e5"/>
+  <text x="732" y="382" font-size="12" fill="#ffffff" text-anchor="middle">task</text>
+  <rect x="772" y="362" width="64" height="32" rx="6" fill="#223349" stroke="#3987e5"/>
+  <text x="804" y="382" font-size="12" fill="#ffffff" text-anchor="middle">task</text>
+  <rect x="844" y="362" width="64" height="32" rx="6" fill="#223349" stroke="#3987e5"/>
+  <text x="876" y="382" font-size="12" fill="#ffffff" text-anchor="middle">task</text>
+
+  <path d="M 916 378 L 990 378" stroke="#3987e5" stroke-width="2"/>
+  <path d="M 990 378 l -8 -5 v 10 z" fill="#3987e5"/>
+
+  <!-- worker -->
+  <rect x="1000" y="340" width="140" height="76" rx="10" fill="#3987e5"/>
+  <text x="1070" y="372" font-size="15" font-weight="600" fill="#10100f" text-anchor="middle">worker</text>
+  <text x="1070" y="392" font-size="12" fill="#10100f" text-anchor="middle">runs one task</text>
+
+  <path d="M 1070 416 L 1070 448" stroke="#199e70" stroke-width="2"/>
+  <path d="M 1070 448 l -5 -8 h 10 z" fill="#199e70"/>
+
+  <!-- record -->
+  <rect x="1000" y="452" width="140" height="44" rx="8" fill="#17332a" stroke="#199e70"/>
+  <text x="1070" y="479" font-size="13" fill="#ffffff" text-anchor="middle">result + cost</text>
+
+  <text x="700" y="538" font-size="16" fill="#c3c2b7">a hundred roles at rest cost zero RAM</text>
+</svg>
