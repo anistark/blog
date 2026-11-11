@@ -1,0 +1,104 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 480" font-family="'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, monospace">
+  <title>A schematic chessboard with an eye-tracking heat map: a warm glow and a scan path cluster over the squares of the familiar mate near the black king, labelled where they looked, while three faint, unvisited squares on the other side of the board are labelled where the better answer was</title>
+  <style id="jbm-font">@font-face{font-family:'JetBrains Mono';font-style:normal;font-weight:400;src:url(data:font/woff2;base64,d09GMgABAAAAAA8cAA4AAAAAHowAAA7HAAJN0gAAAAAAAAAAAAAAAAAAAAAAAAAAGhwbIByKPgZgAIEcEQgKqjSgVQE2AiQDgSILgSIABCAFBgcgGxQYIxHCxgEI+H5lEH91YBtzD/pKtBIaFMS2SNFYjb7sm/ekcDCzHcY+E5+7EZLM/oDb+rcNUZhnN1iJIjE2YpQxJwjOJAyMxKqLSvz6I0J/RHs/Mj2/d81msinNT1IgsAdC4fPtMRqztdvnj0j5EwYJojWdvUsKRhIIVccKAG2Ueh9ddnW1wBKdqP3rf4Bw5JY3WehZNSVrzBAIcH/Xs30DWOebe7WXXsfkgF1BmBuCk3dXOPopYPpTIMjGaU0KbiiBHYH6MEi7sQICNdk3NWNYTig3W0PGN9HmWnfyIFQ9zGXVKcGTm/3WGBAAgS6B6qyB8iGkGnKPAEIJkiAzdJUFAvAAwJUrEQAAkEze7jfq1iCo5fAOQBgxgDR+k5wuBfKmWUsKSOd83EZo16nxzDprVs2iNKWQDXpOtEExlIf6nZ7P/8zR54W8/wJhLahqDbr6gAWgHbZC99PqARAEAMMngNsiRJgI0eIkSZEGAJFdwQwogmKY6T9LjgaH8yRc9I4M/wJJ8YkUBIu0Izcg9yG/3H5RQPtTSbKgTvQ2MdbR3zAeQ7EeMi6+E7sBuw/byF81hLykW/ASfACIAEh+oF4bxRcDU1tnIWDUUZSJwMYcFMK84yKQouZ1ZM481G9VKWpec+bsjwTMSD9ZMyh94kTUK6idQqZx62DqGU23QYgYKVAARZCRKVNIcY2MwaB4cMkDmGg0cMdOoI3pqt2pOQehwasmMc5LCBK6U3xHwzQsPnAiAxq+6kOghrc05BGKkhYGHRsUtNF1exC4YyRwAImaEe1ASA82EB1F7SDGHgRnrJhVE+hhUFA/geJkkTJgY6YpaKJvHYGiOcU7E5yiKEei4p1dQ4WYcVoVflf2ZgSSPEMnnaWzO1NZVi2nXWoWNH0HPrMzDA2jZk8zJVBhbjgAXrIjh8EPoJVTCADm4cLIIZQECYACgWtRhKtpCgB5kWIq/1e/AUDSIo9sAjqYNgpSBJIyADA9wjhMR/DsfjNJQmCCpMgnpWNkZmHTyGOQ14SpUiJIkaeYjp5ZDUkEDr1GjP8oHH3T0DVVkd3nHne7K8TVEIEUxWvIaD7Q8R38CYCAGQCoAtDMYr/paLhtyOjGhmIAVWdnZ0ObojsuF8FkDMaPCTF5eC++ofpao1g1lZyJ1czBG+N6bMo5xDIuHhtF6/EKsq4i1kIsXXVZ67qem8sMM7buymWIMaVkKShJ3eZ2e6EeKQ25aFSX1wrH49rqZsS0dt9YfbKDzR22BEZozBvQIPDOt3hKCUDyL8yMfIzHlo4CMnzDTExhFd4wbGn8q0QTLPveC5zK6lDRlnuWzGQhD/Lmf/FwmtvBZvZxab/ZP+szpaRyvRtDwpYuqb0b/AXp/2vKEnGh2+22JBghS4MYjzI62Zt64RESXR2GMNIBAkDBgxZPVBCoZikrTaq1g80t2Vbil+898I9JD7t/b7+kJCcr33yHp8ATipkhomqiLTuiHK0HQc7NrU1G2ou1b7WdLJik7bC4/hcLXVw268KEl9nfi33sPVvxUfUD+F52Zf+FpTtUduFtY+s+Zm9TeQebahIIbQqe+mBXcrxCCcuba5x76SH/HmUGaQlJCDTGJ5Uk1yd/5ukDREACNNmcyId1ikzfqY0fNC2aWGdoDeRv0p32jKrwl8hwa/XkbbvWB8ETxpAAigCXS6Img1px8Ia8QZSQxv1DbW/MFpqn+qd/sZGPwsuNjM5fF7JZZAjb8mTm1vAykAv4+cslyS8mQtGc4BbnTTula11utC8sTK0a0gcSQLjDWHLxxRdxrXgZWWpoKO0aHiZVePYloXDvC8mz1iIVY6OJI7j/0ZYGPMQbLyzHnltJbsKb30POgHgG965ZyJ29Ku60L8ZutbVmfq3uJsR2460q15V4heePm7X+o7D4IrXg0DXQTr70QQ8Rgk/c8psQHPtCEYJKPGLE6a6nWkeWHsb3rcHiQxcizJD2Lh4VJR9WRY8UoY8HTWy4pLHhFvxWHC1NpEUXt/ymJiHQKzth1esVyD2vhbTO4m8Z3P1XoTipGOChlEerpTRWiV9NtwgxFNSmNbzeZPWWzbZiAscLzbSGt8oQLvCXaF1+w/LmmymW8y/GurSFrsmbihmYfuyPY+etCFmdpB67BQIv03WIN9uQcNPtSOT4cIywajdvKGz3x9FgCEogCPLLd9puvDH65A05Dbg1mrs+3cRdk0IhZD3QT6PdyTXhluPHI2ZV+0SkdXoaNQPTBa14c1+bF7EFAvuhg0i4Sa0VYVtCBH8Mwi2DQNhfaIuST79EC1eScFTLARxmGWE7gWMNe2PD3ufW1x8IdzIIsyL/2bW1+7P1y0OCIfDujVcvlRf36YphXw9DMsCtPiV78ljX6vTM7qtYaFj7BdPn2nIUWlqupA0EhzonRl0d48POMumoVv/Ei1UspHR3jA05OIVOp3jIkv6vUFtzx1oee9Ry6wON/K6BphLH+BAcvjAdENzUGflI5k93cKsg4ryJfIVGJ3vatYMtRtbHO/oHOvKnR5PXvQC6Rybv1hWlu7+4rsB9pzT1keJkql1a7lLT8p5uOV1LMdYPwEanwEcG69sVNc4984oF2QG5Ap1HImtX6WpclBDbr7HLKiUN7UUqsq1IEiplodz9GCXcTtCp0qzdEt2tUg0lkZgMaYWWYsxc3krWmhRKQaK/UnGd4N5YZc2fZDFZPDMLhQL36KDT5Hxyt3EbcnAEqZbL1RRhJtQabiU1hPs4+8M9jl0LtGxw0m+kHAnGfMOAhz1RfoLdWSVA87wlWd9ypfOutvWprusZTx1wG5MfDMXwDCiTcdbmTnh/KBrzJToLuQLn8HBPeY8VTj7AU2FxMHJCTZgIeOUyVY1hheaNbzsnvU5nu6XOI3lzR+S0QUnQevkRuFrnDbzDfh3jXifphOpoLZpKl8H7yMd/ZxpGJamJBnmJQZDKwJcALRsfU44ySYvKZPZ8dpxwHZRMle/aLdXQMrlGJ90NhYKeuUEnp6zWkoRRL8srIB8cSNKG13TSslJbS5GSaI3yK+BKNIREQhElWdf1DCcbwhnYQFX71DBc2T32G/aZ3dC7+W69NL4Io3kRHXSRPt5BzYn+dEQEz7csvtb+7jAlKsbI0FDjTtEiuBJ6+Zn2A7n3vRYd/cl9lLcEPq1QcLz/Cqyu1urSfHNdjuSG3N6xst9DOR45YGl297Q1TDe60RGrrMisrlZVVPvy3HkFT4BZQNQqOhAPt8H5kFnEyyiJekd/23Lr222ouvJfjU/7z3gFqSNOEhIWSgXuiUHnSeebdbd5O1Abl0FJpXJaTZwiaI1cSlWmc6jN2wF4jHX2ty63OfrrCUbpRZBZH7fBeZCOWkVytVQlEMNVWvmP1qf5V67AMe7t2tolX7qDai+VtJBOe5lSR8tKSHE7F6AdZd4yQwKlppVKNU3B23t8rG+UqjMZltllUjb6MfvxHvBhzxVa8kuQRmyoukxudfS2elsd/VZ5dcUQ2tYoru9sbwzJ0A09pQQlnZOClrnPNRHpNMtV9Y4O+wjnIgh1uZTUka3g2OBOec580nWb3wPJnku/9f5u1thgob9fZ2NUaQ0pN7CgENcYUe0WcUbsCuISiCVEjeoqy0rqHwnxv6eumviA+ISDoVnMebQMc6p85vq7vKPd857REbfbGJ757oDFWStXU+RR8vLKZRoY42uDITHnQd1mJdnQ3NlWyBVOjsmVGrIVIv2b3WwVJ+aK80p6s/RkwKnICWWVyuCss+Ux7hpVU4IoO6+gMkOmPxC+L/xwtdvSDC5tXY1ac5G9eI479zH7sSYBjfex8PMDIsfEsO+/IvK9wydvC7jCVKOopmKbyAIhWol2G7f+L0ncEGIRVW4ztYhcxIx8IATmzdQM3I558wXMsVQ/ermw8LJrsr4t9F04V/U9F4q8UenfpKfhGfq4S9qM7Dxt2sGcjAvEvvH3KMid1DfWqfWipKysJJEoMStbN2J7k0o0eJvuMZhl6sY6OBF1WLvfYhyl2xdGKbCyj2+9lRW8cT8LubtT6xKT2NRUNimxDsbmPF+23Pw3c69gy/KIPh4KJo32Wi2dFZ+TtSkS/5+17/041dtOg8larVbb6iBv0txk0ZRI5x6tXnyCt1pMVlerNJzFpMopyswsyskmyauCt+duW7i1hj4oq7p2FHInjU0GWcH513mn0tMkFlJHW0lJWum9vE/PF8g4g1GY+Wti4m+Z4s8k8qeiF3Psqan2nLqQl8pcYk73BAhyyteYNgDgepn7GGBg/7sa+DVBK9p5apQZpea1F47gaG17PpNfKJO9Sk0UbeIvBlVtnDi0L4X5zFc85/UjndafMNZXQNs6nkDeOw5JcJk+yp4jYtJZSzOdONqzdn/exDzMzN2W+8odAbdL6+NC48RISvyI9RAWB3aLhptdYVYm4Oa59CnmqYmAfpsa+DVt7QfxOY123XD/Nz1Pbz7JPPnMJpSEpH8j+iYzNPwX5hd1Yqr/hfhLMYjSIO4ps6Z3pc8w06XTZedOUPFReoKf1hQwt7aD9nzDpil75W3jUqfvbGt32b5lvpma6mdx6ybzMNPoyDTUV4v4VRvlTL3TQfU5nD6Fj7SB9azb4eO5TQ/T/ezmzh99CRv4jq4ypQzUJTa4x/zAS9jJ93/j16KvM8F1OXt2r7wvPrkjRWFVUJZaOmf/3ty+uBRbkl8Y82qKLgPCxFAMEOIPJWgX9GV8KILzBBbAQlgKy6AEClQOKtYEACngyiIMrCXoWBZ04U9GXHyUNhxb/dn0oX0RGS+FtENiDeIAtJfFTmivieNblETsgni15O0hANCF125rfeSDtmDFf0By/goAfPhV5xQAwJfRS9f/rSnzSotpAIAPBQCAgL+oGIBuJ/QXQXf7xZHNtw4cgNdgP04VGs2MxFJzs2vh0Yxj14zRwqBChHQazexsLCrGp23lkEShmcUQq0LlkpU7Zp+TrPUBOOSAnY7bxerkxpC16rJ/3/t7YXGpr/1vdTPw3/v/f/333N8awSRlM9SRbwQMhp8SmBM6ihrFh2XAlY5ECPYZAA==) format('woff2')}@font-face{font-family:'JetBrains Mono';font-style:normal;font-weight:700;src:url(data:font/woff2;base64,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) format('woff2')}</style>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#12151c"/><stop offset="1" stop-color="#0a0c10"/></linearGradient>
+    <radialGradient id="sheen" cx="0.5" cy="0" r="0.85"><stop offset="0" stop-color="#ffffff" stop-opacity="0.06"/><stop offset="1" stop-color="#ffffff" stop-opacity="0"/></radialGradient>
+    <filter id="glow" x="-60%" y="-60%" width="220%" height="220%"><feGaussianBlur stdDeviation="6" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+    <filter id="blur" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="10"/></filter>
+    <radialGradient id="heat"><stop offset="0" stop-color="#f5b544" stop-opacity="0.75"/><stop offset="0.55" stop-color="#f5b544" stop-opacity="0.28"/><stop offset="1" stop-color="#f5b544" stop-opacity="0"/></radialGradient>
+    <radialGradient id="heat-core"><stop offset="0" stop-color="#f2676b" stop-opacity="0.7"/><stop offset="1" stop-color="#f2676b" stop-opacity="0"/></radialGradient>
+    <linearGradient id="board-sheen" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#ffffff" stop-opacity="0.05"/><stop offset="0.5" stop-color="#ffffff" stop-opacity="0"/></linearGradient>
+    <clipPath id="board"><rect x="340" y="96" width="320" height="320" rx="4"/></clipPath>
+  </defs>
+
+  <rect width="1000" height="480" rx="20" fill="url(#bg)"/>
+  <rect width="1000" height="480" rx="20" fill="url(#sheen)"/>
+  <rect x="0.5" y="0.5" width="999" height="479" rx="19.5" fill="none" stroke="#ffffff" stroke-opacity="0.08"/>
+
+  <circle cx="52" cy="44" r="3.5" fill="#f5b544"/>
+  <text x="66" y="48" font-size="12" letter-spacing="2.4" fill="#7d8597">WHERE THE EYES KEPT GOING</text>
+
+  <!-- board -->
+  <rect x="340" y="96" width="320" height="320" rx="4" fill="#ffffff" fill-opacity="0.02"/>
+  <g fill="#ffffff" fill-opacity="0.065" clip-path="url(#board)">
+    <rect x="340" y="96" width="40" height="40"/><rect x="420" y="96" width="40" height="40"/><rect x="500" y="96" width="40" height="40"/><rect x="580" y="96" width="40" height="40"/>
+    <rect x="380" y="136" width="40" height="40"/><rect x="460" y="136" width="40" height="40"/><rect x="540" y="136" width="40" height="40"/><rect x="620" y="136" width="40" height="40"/>
+    <rect x="340" y="176" width="40" height="40"/><rect x="420" y="176" width="40" height="40"/><rect x="500" y="176" width="40" height="40"/><rect x="580" y="176" width="40" height="40"/>
+    <rect x="380" y="216" width="40" height="40"/><rect x="460" y="216" width="40" height="40"/><rect x="540" y="216" width="40" height="40"/><rect x="620" y="216" width="40" height="40"/>
+    <rect x="340" y="256" width="40" height="40"/><rect x="420" y="256" width="40" height="40"/><rect x="500" y="256" width="40" height="40"/><rect x="580" y="256" width="40" height="40"/>
+    <rect x="380" y="296" width="40" height="40"/><rect x="460" y="296" width="40" height="40"/><rect x="540" y="296" width="40" height="40"/><rect x="620" y="296" width="40" height="40"/>
+    <rect x="340" y="336" width="40" height="40"/><rect x="420" y="336" width="40" height="40"/><rect x="500" y="336" width="40" height="40"/><rect x="580" y="336" width="40" height="40"/>
+    <rect x="380" y="376" width="40" height="40"/><rect x="460" y="376" width="40" height="40"/><rect x="540" y="376" width="40" height="40"/><rect x="620" y="376" width="40" height="40"/>
+  </g>
+  <rect x="340" y="96" width="320" height="320" rx="4" fill="url(#board-sheen)"/>
+  <rect x="340" y="96" width="320" height="320" rx="4" fill="none" stroke="#3a4152" stroke-width="1.5"/>
+
+  <!-- coordinates -->
+  <g font-size="12" fill="#7d8597" text-anchor="middle">
+    <text x="360" y="438">a</text><text x="400" y="438">b</text><text x="440" y="438">c</text><text x="480" y="438">d</text>
+    <text x="520" y="438">e</text><text x="560" y="438">f</text><text x="600" y="438">g</text><text x="640" y="438">h</text>
+    <text x="324" y="120">8</text><text x="324" y="160">7</text><text x="324" y="200">6</text><text x="324" y="240">5</text>
+    <text x="324" y="280">4</text><text x="324" y="320">3</text><text x="324" y="360">2</text><text x="324" y="400">1</text>
+  </g>
+
+  <!-- heat map over the familiar mate -->
+  <g clip-path="url(#board)" style="mix-blend-mode: screen">
+    <g filter="url(#blur)">
+      <circle cx="600" cy="156" r="46" fill="url(#heat)"/>
+      <circle cx="636" cy="164" r="40" fill="url(#heat)"/>
+      <circle cx="562" cy="160" r="36" fill="url(#heat)"/>
+      <circle cx="600" cy="118" r="32" fill="url(#heat)"/>
+      <circle cx="636" cy="202" r="30" fill="url(#heat)" opacity="0.8"/>
+      <circle cx="598" cy="204" r="26" fill="url(#heat)" opacity="0.6"/>
+      <circle cx="560" cy="120" r="24" fill="url(#heat)" opacity="0.5"/>
+      <circle cx="604" cy="158" r="22" fill="url(#heat-core)"/>
+      <circle cx="636" cy="164" r="18" fill="url(#heat-core)" opacity="0.8"/>
+    </g>
+  </g>
+
+  <!-- the better answer, never looked at -->
+  <g fill="none" stroke="#c5cad6" stroke-opacity="0.45" stroke-width="1.25" stroke-dasharray="3 4">
+    <rect x="384" y="340" width="32" height="32" rx="3"/>
+    <rect x="424" y="300" width="32" height="32" rx="3"/>
+    <rect x="464" y="260" width="32" height="32" rx="3"/>
+  </g>
+  <g fill="#c5cad6" fill-opacity="0.35"><circle cx="400" cy="356" r="2.5"/><circle cx="440" cy="316" r="2.5"/><circle cx="480" cy="276" r="2.5"/></g>
+
+  <!-- pieces, schematic -->
+  <g font-size="12" font-weight="700" text-anchor="middle">
+    <g stroke="#c5cad6" stroke-width="1.5">
+      <circle cx="640" cy="116" r="12" fill="#0a0c10"/><circle cx="600" cy="116" r="12" fill="#0a0c10"/>
+      <circle cx="600" cy="156" r="10" fill="#0a0c10"/><circle cx="640" cy="156" r="10" fill="#0a0c10"/>
+    </g>
+    <text x="640" y="120" fill="#c5cad6">K</text><text x="600" y="120" fill="#c5cad6">R</text>
+    <text x="600" y="159.5" font-size="10" fill="#c5cad6">P</text><text x="640" y="159.5" font-size="10" fill="#c5cad6">P</text>
+    <g fill="#eef1f6" stroke="#0a0c10" stroke-width="1.5">
+      <circle cx="520" cy="196" r="12"/><circle cx="360" cy="396" r="12"/><circle cx="600" cy="396" r="12"/><circle cx="480" cy="396" r="12"/>
+    </g>
+    <text x="520" y="200" fill="#12151c">N</text><text x="360" y="400" fill="#12151c">Q</text>
+    <text x="600" y="400" fill="#12151c">K</text><text x="480" y="400" fill="#12151c">R</text>
+  </g>
+
+  <!-- scan path: the eyes kept coming back -->
+  <g fill="none" stroke="#eef1f6" stroke-opacity="0.55" stroke-width="1" stroke-dasharray="2 3">
+    <path d="M566 166 L612 132 L646 176 L604 198 L556 150 L632 208 L596 168 L566 126 L618 160"/>
+  </g>
+  <g fill="#eef1f6" fill-opacity="0.12" stroke="#eef1f6" stroke-opacity="0.7" stroke-width="1">
+    <circle cx="566" cy="166" r="5"/><circle cx="612" cy="132" r="7"/><circle cx="646" cy="176" r="4"/>
+    <circle cx="604" cy="198" r="5"/><circle cx="556" cy="150" r="4"/><circle cx="632" cy="208" r="3.5"/>
+    <circle cx="596" cy="168" r="6"/><circle cx="566" cy="126" r="3.5"/><circle cx="618" cy="160" r="8"/>
+  </g>
+
+  <!-- labels -->
+  <line x1="668" y1="160" x2="712" y2="160" stroke="#f5b544" stroke-opacity="0.7" stroke-width="1.25"/>
+  <circle cx="720" cy="160" r="3.5" fill="#f5b544"/>
+  <text x="734" y="165" font-size="15" font-weight="700" fill="#eef1f6">where they looked</text>
+  <text x="734" y="186" font-size="12" fill="#7d8597">the familiar five-move mate</text>
+
+  <line x1="378" y1="356" x2="290" y2="356" stroke="#c5cad6" stroke-opacity="0.45" stroke-width="1.25" stroke-dasharray="3 4"/>
+  <circle cx="282" cy="356" r="3.5" fill="none" stroke="#c5cad6" stroke-opacity="0.7"/>
+  <text x="268" y="361" font-size="15" font-weight="700" fill="#c5cad6" text-anchor="end">where the better</text>
+  <text x="268" y="381" font-size="15" font-weight="700" fill="#c5cad6" text-anchor="end">answer was</text>
+  <text x="268" y="402" font-size="12" fill="#7d8597" text-anchor="end">a shorter, three-move mate</text>
+</svg>

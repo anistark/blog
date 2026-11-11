@@ -1,0 +1,157 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 560" font-family="'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, monospace">
+  <title>A glass jar on a wooden shelf, labelled 10 years. Inside float tiny scenes: a chessboard, a clock face, a notebook of crossed-out attempts and a cricket ball. Sand pours from an hourglass into the jar and condenses into one small glowing spark at the bottom</title>
+  <style id="jbm-font">@font-face{font-family:'JetBrains Mono';font-style:normal;font-weight:400;src:url(data:font/woff2;base64,d09GMgABAAAAAAR0AA4AAAAAB6gAAAQjAAJN0gAAAAAAAAAAAAAAAAAAAAAAAAAAGhYbIBxMBmAAgQwRCAqIUIZxATYCJAMoCygABCAFBgcgG64FCB6FTdldFOGYTF6/5UQEGg/fr/3OfbuIe0nqSbT5dOKv0CEUGqFbyR4pcX0or/pXSY+qhlhijDSg9MDK0t+8wWh8+qjTKv+RAQbOqYumDSc6oSFWPyopUk83P0gkRuqAf8PT8UD40W1XQeyikVESLyBQC0hCrl4IVOu1CVnQmFyIlUNxHQCBaqNKcWGjibcd06NIDAbJbPzPoIJYTqPyPVh5bLkGIUkyefKRc4giPfAKYB3ujlOUhgAkqiz44eDaHBAfGLSQXbkWjImR/FA2jXNfXzIoHgkZWvECMzJ337pbMl61QSXk1HQMHFw69JiyUAAMKg6BJj/h9Z987g2vetlLnvaURzzoVjdELDghCkhCtbhzHLRDLAPxAqhFK9CbCUlQO3GRa+dmsfAsKTGexcbFxycnxcVuYNlx6XsTWWJix4kw4aUIOxlCKgWDnpMRxYbpiaDXIe+J54n0Ajv5HNafZYRFuYiXyRhqzlgL9VBXgHnuDWdeCm5hUQmo5YEkuBWMYzyTUZ5yVWi2HmpESBSTcTGkcDIUwkG3zk9FyvGuIIUpJZ2UJKA6d6dtliIRxohET3y4gUbGK1cTejc3CCx9itJn+W0yejsEtSr1bmbBoJhAZpBGSaPmOQvAkq7UkQIfMdr1CZE8nrcbmsyu3Epv/ZjSEx+ipHb3eA51e1uZ/5Y7Mm66Ky/A+gOE8fMDnP+ivonwpOfkF6fW54OJdGx/XM/sdKfQubF7Dg7IK9o7yxWmep2pQWjQEQ1O1P2Tl7AhLz5v+cyGBBzuvV371sW++xeXjt3rQOnrVwsvfhUoeu07sECe8GzVj9dT3Bs20COv1f15v8P48x7bHpnRgZZPsfrvapEftP1tQ0LVwNxMr6jU6AQB/pXKWDG2d34GLZ8/yTvKK1qaDMaBXy81dp2pWKg8eqxaqamtU6qrj+H6sR1/O949hstx7q5Wc1mB0b6v4tH9QzPl/6eIMmHU1dw92OZZ9Hdzk+7aYqPC3FRlvju/O7/wTcxUdcxO9x3om53ukLeXVbQInb7yBrWmtlTY1S7GqqZsYSM2zCo0DQ0KjRzj4+IA121sEDzNvW1FYtH8TF2DUmhFRkVzt8Mk7hJL8kuH9miF2Jsy5hpMTbpOuzff1m1pCmzYuTe/sGZHrfZ02sm0c+ZuVzMee8IW+pDvkJxT3xQVfdM172xL+QqPK/JzqlMu/ZSmfW1Kjv13en9AL+n9oh6Y0um4rmnv7gIpf/devyxfKtiN1HI0uh0DDW8GnMM9ySCfcD/gieSSH7mvEUibn9/8xcznbUn1/8du5v8E/v7sXQD4z1q7DQWFidvFKwHlEgi+mEDaDyKUTn/lZgT8IhHsEJXq1qJAiypKLuPcKt2I4ziOG0HQYi9eL64cEGHaw9k8ih6UwpcC) format('woff2')}@font-face{font-family:'JetBrains Mono';font-style:normal;font-weight:700;src:url(data:font/woff2;base64,d09GMgABAAAAAAR8AA4AAAAAB7wAAAQpAAJN0gAAAAAAAAAAAAAAAAAAAAAAAAAAGhYbIBxMBmAAgQwRCAqIZIZ2ATYCJAMoCygABCAFBgcgG7MFKB6FccPdXMWA05tiCjp4nuyq96t71LWgjlYG9e555iBmVggOjgqdLS7G3M80EWeiuEvl6GRPYp5I0Mj/MoCha+pH2+PzgU1oxqPotKNV0GiKmVgJmKLz0XBAsNFtN8H84pFRCtkIEMZ0RYVgEoEggEUaGUjHwPB4wGMC1AAAjEAe9VGF1Jk59ZVANUWlXn5nkAQ8nLkwd6h7OyeRCAqFgamGIm/gAOVVQwHoAXrLaNBIWwAFHiZxYWD39gByiCwWGJXVfujcUmYoqAL12pDVIKoqDSAOA9nxJvO/dQpRGFhkUY92+AkmlFjiyaGAOlpqAFnUNcBqP2HNJ8/dd8ctN11y0Wkn7LE9YRIRpAaRcLEwBbRLAOkFIKehaDQOAJClEARsUmeKU13NdMqYiDDt9oSFRUV63Ck6xRNXRtUREeNGg0ExykMh7QsEULbfP9j3QseeW96n7NrPhnhvSfl17buKfUOLNgYihpBMjR5DGkUcTByYRhq8GkzZ5U/TjnDCWEmHjbTShjYtw1LjRoOi7Wfa90Ic2rT92hFPStK7DiMOJyrjOlr+3LJIqiXhWOYgp2h5SOsBWt6HSVZxAGXJIa1cJW5gP8qdEj9hxKl8kKr9/uEkSQNQOzRHfSAozk0UZL2pqfYJTl5rPDgYUWoIB1l7rlkRAqfzB5U41RqUlEkatnI2ee/51BF6alr7iHJM8WYgIzqMfYN9t8/0twK8AftmqadLkd6U097iaZozRR+kmgXO0L3Wb645bdTodFPx2uBxRl0Gw7FYQgUD5+3+uuVbd3L+tmm758G9/OrwlVd24Zl7oEHrhPnS+4cie7PZdMF1hr6+NLvFbtL0pIcWs4l4vaRor2gJf9V2e+2geOZ0L5jaYbho3Oi9sbEENbV7PhGvv3ebrrdmtw8JKj/Y0GDtsuy0nOnpjTYaNDhtOJ3fabfnVc67PY0/z8DszIjoiszswcIB42RqRbPRrT4tr6QuJ6WhtSg/wUoraPJfq51dXJWXL4MyT+civSm3Q28HIh3/XmCnQr0pu11+vMC03KiwtFs7uXNL/MG42Fdim3U0MnaSU9A6Y6F3a2f8qLIcXUdtjU6lsRpjCHCPr0kOb2N9l5TJEVkZNN5wdDt35zhvZFFsriJ9ThyiUzvhVn5t0XRa8s9zO7qHu2dyWHR5Ygmsne/17LFrxbSk4ZSmIuKacUn9+hWbl/SeKFw7eFh1cHVtZSRI5/fMSA4a7TIqORxUh4ULzvO9+Y8KWCoxTqLYh5HIG4OxQIXES1B9YIukyFf1GgFUr5vdx1v8GRPZ8r870/gJ8OHn5AUA8CNx2V4yanqqRkYHQOBEASDwyVjVUBOG3Nrv/FeJGgqpAB2Jg8tQImDQCwXN6UwObnhsoYIKtiBALGUYpKGCGQTx4FRMktWMBhAAAAA=) format('woff2')}</style>
+  <style>
+    .sand-top { transform-box: fill-box; transform-origin: 50% 100%; transform: scaleY(0.45); animation: drain 12s ease-in-out infinite; }
+    .stream { animation: flow 0.7s linear infinite, pour 12s ease-in-out infinite; }
+    .mound { transform-box: fill-box; transform-origin: 50% 100%; transform: scale(0); animation: mound 12s ease-in-out infinite; }
+    .spark { transform-box: fill-box; transform-origin: 50% 50%; animation: spark 12s ease-in-out infinite; }
+    @keyframes drain {
+      0% { transform: scaleY(1); opacity: 1; }
+      50% { transform: scaleY(0.1); opacity: 1; }
+      90% { transform: scaleY(0.1); opacity: 1; }
+      94% { transform: scaleY(0.1); opacity: 0; }
+      96% { transform: scaleY(1); opacity: 0; }
+      100% { transform: scaleY(1); opacity: 1; }
+    }
+    @keyframes flow { to { stroke-dashoffset: -18; } }
+    @keyframes pour {
+      0%, 3% { opacity: 0; }
+      7%, 48% { opacity: 1; }
+      53%, 100% { opacity: 0; }
+    }
+    @keyframes mound {
+      0%, 8% { transform: scale(0); }
+      48% { transform: scale(1); }
+      62%, 100% { transform: scale(0); }
+    }
+    @keyframes spark {
+      0%, 50% { transform: scale(0); opacity: 0; }
+      62% { transform: scale(1.25); opacity: 1; }
+      68%, 90% { transform: scale(1); opacity: 1; }
+      97%, 100% { transform: scale(0); opacity: 0; }
+    }
+    @media (prefers-reduced-motion: reduce) { * { animation: none !important; } }
+  </style>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#12151c"/><stop offset="1" stop-color="#0a0c10"/></linearGradient>
+    <radialGradient id="sheen" cx="0.5" cy="0" r="0.85"><stop offset="0" stop-color="#ffffff" stop-opacity="0.06"/><stop offset="1" stop-color="#ffffff" stop-opacity="0"/></radialGradient>
+    <filter id="glow" x="-60%" y="-60%" width="220%" height="220%"><feGaussianBlur stdDeviation="6" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+    <radialGradient id="warm" cx="500" cy="330" r="320" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#f5b544" stop-opacity="0.10"/><stop offset="1" stop-color="#f5b544" stop-opacity="0"/></radialGradient>
+    <linearGradient id="glass" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#ffffff" stop-opacity="0.13"/><stop offset="0.35" stop-color="#ffffff" stop-opacity="0.03"/><stop offset="0.8" stop-color="#ffffff" stop-opacity="0.04"/><stop offset="1" stop-color="#ffffff" stop-opacity="0.10"/></linearGradient>
+    <linearGradient id="hl" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ffffff" stop-opacity="0.7"/><stop offset="1" stop-color="#ffffff" stop-opacity="0"/></linearGradient>
+    <linearGradient id="wood" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#4b3b2d"/><stop offset="1" stop-color="#2a2119"/></linearGradient>
+    <linearGradient id="wall-shadow" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#000000" stop-opacity="0.45"/><stop offset="1" stop-color="#000000" stop-opacity="0"/></linearGradient>
+    <linearGradient id="metal" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#3a404d"/><stop offset="1" stop-color="#1b1f27"/></linearGradient>
+    <radialGradient id="ball" cx="0.35" cy="0.3" r="0.8"><stop offset="0" stop-color="#ffffff" stop-opacity="0.22"/><stop offset="1" stop-color="#ffffff" stop-opacity="0.03"/></radialGradient>
+    <radialGradient id="spark-halo"><stop offset="0" stop-color="#f5b544" stop-opacity="0.9"/><stop offset="0.4" stop-color="#f5b544" stop-opacity="0.35"/><stop offset="1" stop-color="#f5b544" stop-opacity="0"/></radialGradient>
+  </defs>
+
+  <rect width="1000" height="560" rx="20" fill="url(#bg)"/>
+  <rect width="1000" height="560" rx="20" fill="url(#sheen)"/>
+  <rect width="1000" height="560" rx="20" fill="url(#warm)"/>
+  <rect x="0.5" y="0.5" width="999" height="559" rx="19.5" fill="none" stroke="#ffffff" stroke-opacity="0.08"/>
+
+  <circle cx="52" cy="44" r="3.5" fill="#f5b544"/>
+  <text x="66" y="48" font-size="12" letter-spacing="2.4" fill="#7d8597">THE JAR</text>
+
+  <!-- shelf -->
+  <rect x="110" y="488" width="780" height="34" fill="url(#wall-shadow)"/>
+  <g stroke="#3a4152" stroke-width="4" stroke-linecap="round" fill="none">
+    <path d="M206 490 V538 M206 532 L250 490"/>
+    <path d="M794 490 V538 M794 532 L750 490"/>
+  </g>
+  <rect x="110" y="468" width="780" height="20" rx="2" fill="url(#wood)"/>
+  <g fill="none" stroke="#000000" stroke-opacity="0.28" stroke-width="1">
+    <path d="M120 476 C260 473 380 480 520 476 S760 472 880 477"/>
+    <path d="M140 482 C300 485 420 479 600 483 S800 486 870 481"/>
+  </g>
+  <line x1="110" y1="468.5" x2="890" y2="468.5" stroke="#ffffff" stroke-opacity="0.16"/>
+
+  <!-- lid, set aside on the shelf -->
+  <rect x="664" y="448" width="92" height="20" rx="5" fill="url(#metal)" stroke="#ffffff" stroke-opacity="0.18"/>
+  <g stroke="#ffffff" stroke-opacity="0.10">
+    <line x1="676" y1="452" x2="676" y2="464"/><line x1="688" y1="452" x2="688" y2="464"/><line x1="700" y1="452" x2="700" y2="464"/>
+    <line x1="712" y1="452" x2="712" y2="464"/><line x1="724" y1="452" x2="724" y2="464"/><line x1="736" y1="452" x2="736" y2="464"/>
+    <line x1="748" y1="452" x2="748" y2="464"/>
+  </g>
+  <line x1="670" y1="449" x2="750" y2="449" stroke="#ffffff" stroke-opacity="0.3"/>
+
+  <!-- jar shadow -->
+  <ellipse cx="500" cy="469" rx="138" ry="5" fill="#000000" fill-opacity="0.5"/>
+
+  <!-- hourglass -->
+  <g>
+    <path class="sand-top" d="M481 52 C483 63 495 69 498 74 H502 C505 69 517 63 519 52 Z" fill="#f5b544" fill-opacity="0.85"/>
+    <path d="M474 37 C474 62 494 68 497 75 C494 82 474 88 474 113 H526 C526 88 506 82 503 75 C506 68 526 62 526 37 Z" fill="url(#glass)" stroke="#ffffff" stroke-opacity="0.38" stroke-width="1.5"/>
+    <path d="M479 42 C479 56 486 63 492 68" fill="none" stroke="url(#hl)" stroke-width="1.5" stroke-linecap="round"/>
+    <g stroke="#3a4152" stroke-width="3" stroke-linecap="round"><line x1="468" y1="36" x2="468" y2="114"/><line x1="532" y1="36" x2="532" y2="114"/></g>
+    <rect x="462" y="30" width="76" height="7" rx="3.5" fill="url(#metal)" stroke="#ffffff" stroke-opacity="0.2"/>
+    <rect x="462" y="113" width="76" height="7" rx="3.5" fill="url(#metal)" stroke="#ffffff" stroke-opacity="0.2"/>
+  </g>
+
+  <!-- what's inside: tiny scenes -->
+  <g fill="none" stroke="#c5cad6" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" stroke-opacity="0.8">
+    <!-- chessboard -->
+    <g transform="rotate(-8 422 262)">
+      <g fill="#ffffff" fill-opacity="0.16" stroke="none">
+        <rect x="392" y="232" width="15" height="15"/><rect x="422" y="232" width="15" height="15"/>
+        <rect x="407" y="247" width="15" height="15"/><rect x="437" y="247" width="15" height="15"/>
+        <rect x="392" y="262" width="15" height="15"/><rect x="422" y="262" width="15" height="15"/>
+        <rect x="407" y="277" width="15" height="15"/><rect x="437" y="277" width="15" height="15"/>
+      </g>
+      <rect x="392" y="232" width="60" height="60" rx="1.5"/>
+      <path d="M425.5 273 L427.8 265 H432.2 L434.5 273 Z M423.5 275 H436.5" stroke="#eef1f6" fill="#eef1f6" fill-opacity="0.85"/>
+      <circle cx="430" cy="261" r="3.2" stroke="#eef1f6" fill="#eef1f6" fill-opacity="0.85"/>
+    </g>
+    <!-- clock -->
+    <circle cx="586" cy="258" r="26"/>
+    <g stroke-opacity="0.55">
+      <line x1="586" y1="235" x2="586" y2="239"/><line x1="586" y1="277" x2="586" y2="281"/>
+      <line x1="563" y1="258" x2="567" y2="258"/><line x1="605" y1="258" x2="609" y2="258"/>
+    </g>
+    <path d="M586 258 L573 251 M586 258 L597 245" stroke="#eef1f6" stroke-opacity="1"/>
+    <circle cx="586" cy="258" r="2" fill="#f5b544" stroke="none"/>
+    <!-- notebook of crossed-out attempts -->
+    <g transform="rotate(5 427 334)">
+      <rect x="396" y="304" width="62" height="62" rx="3" fill="#ffffff" fill-opacity="0.05"/>
+      <g stroke-opacity="0.5"><circle cx="406" cy="304" r="2.5"/><circle cx="420" cy="304" r="2.5"/><circle cx="434" cy="304" r="2.5"/><circle cx="448" cy="304" r="2.5"/></g>
+      <g stroke-opacity="0.45" stroke-dasharray="6 3">
+        <line x1="404" y1="318" x2="450" y2="318"/><line x1="404" y1="330" x2="446" y2="330"/>
+        <line x1="404" y1="342" x2="450" y2="342"/><line x1="404" y1="354" x2="440" y2="354"/>
+      </g>
+      <g stroke="#eef1f6" stroke-opacity="0.9">
+        <path d="M401 320 L453 315"/><path d="M401 332 L449 328"/><path d="M401 344 L453 339"/><path d="M401 356 L443 352"/>
+      </g>
+    </g>
+    <!-- cricket ball -->
+    <circle cx="584" cy="334" r="21" fill="url(#ball)"/>
+    <path d="M570 318 C580 326 590 340 596 352" stroke-opacity="0.9"/>
+    <path d="M575 315 C585 323 595 337 601 349" stroke-opacity="0.9"/>
+    <path d="M572.5 316.5 C582.5 324.5 592.5 338.5 598.5 350.5" stroke-opacity="0.5" stroke-dasharray="1.5 3"/>
+  </g>
+
+  <!-- sand pouring in, piling up, condensing into a spark -->
+  <line class="stream" x1="500" y1="78" x2="500" y2="458" stroke="#f5b544" stroke-width="2" stroke-dasharray="2 7" stroke-linecap="round"/>
+  <path class="mound" d="M472 466 Q500 446 528 466 Z" fill="#f5b544" fill-opacity="0.85"/>
+  <g class="spark" filter="url(#glow)">
+    <circle cx="500" cy="450" r="20" fill="url(#spark-halo)"/>
+    <path d="M500 438 V462 M488 450 H512" stroke="#f5b544" stroke-width="1.5" stroke-linecap="round"/>
+    <circle cx="500" cy="450" r="4" fill="#fff4d6"/>
+  </g>
+
+  <!-- glass jar -->
+  <path d="M418 148 V168 C418 190 372 192 372 222 V438 Q372 468 402 468 H598 Q628 468 628 438 V222 C628 192 582 190 582 168 V148" fill="url(#glass)" stroke="#ffffff" stroke-opacity="0.38" stroke-width="2"/>
+  <rect x="410" y="126" width="180" height="22" rx="6" fill="url(#glass)" stroke="#ffffff" stroke-opacity="0.38" stroke-width="2"/>
+  <g stroke="#ffffff" stroke-opacity="0.12"><line x1="416" y1="134" x2="584" y2="134"/><line x1="416" y1="140" x2="584" y2="140"/></g>
+  <path d="M387 232 V424" stroke="url(#hl)" stroke-width="3" stroke-linecap="round"/>
+  <path d="M396 200 C404 195 412 192 418 186" fill="none" stroke="#ffffff" stroke-opacity="0.35" stroke-width="2" stroke-linecap="round"/>
+  <path d="M614 250 V300" stroke="#ffffff" stroke-opacity="0.18" stroke-width="2" stroke-linecap="round"/>
+
+  <!-- label -->
+  <g transform="rotate(-1.5 500 398)">
+    <rect x="436" y="380" width="128" height="38" rx="4" fill="#ece4d2" fill-opacity="0.95"/>
+    <rect x="440" y="384" width="120" height="30" rx="2.5" fill="none" stroke="#1b1d22" stroke-opacity="0.25"/>
+    <text x="500" y="405" text-anchor="middle" font-size="18" font-weight="700" fill="#1b1d22">10 years</text>
+  </g>
+</svg>

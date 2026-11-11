@@ -1,0 +1,108 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 470" font-family="'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, monospace">
+  <title>A tiny Groundhog Day: a three-step loop from a case, a user session, to your call, a sticky note with a written guess, to the answer, a tick or a cross, with an arrow back to the start. Below it a tally of five ticks and one cross builds up as the loop runs</title>
+  <style id="jbm-font">@font-face{font-family:'JetBrains Mono';font-style:normal;font-weight:400;src:url(data:font/woff2;base64,d09GMgABAAAAAApwAA4AAAAAFKAAAAobAAJN0gAAAAAAAAAAAAAAAAAAAAAAAAAAGhwbIByFLAZgAIFMEQgKnBSWKAE2AiQDcAtwAAQgBQYHIBtTEFFUslpBfHVgGysf/EWwRoiQqMGnbMTAs1OXPXG48wcILO4E/w/3q3PfVLT+0VqqEmihJl+LImxcsZ3jcdO/0LkjVbp2sFGjBAtJgCCeBntoQirOzJy5fRf1/39O38tP6d7AGNSOn3B4fAHAmHyb2iEovQnVdjx8jLm3+U9lWheKIuZx1wmRI1QojSTWiWIpbd7/AOHI7dm9ceqBfrfNg2uDjH3v/9ZSO/9+CN2dK6JwgLJOzs7O4gQmF8ZNiaYBUlNAFXmysjJyUtwXVSJXlq2LS42NLD1kK1kajUjMefcVoxAII4FtHNCDmQD23BBUpoC1GC8HA7gBq/8LnGUzl3wEkp2HdfhZPTBKpbGpbx3ZS0DdZDkkic9TKGnboLhkcIP1iKQqcIQO0OiWd3Xt6t7VM7eX75zvmgXq/wJhFBg6vbkuID0y6EW2JQbER2HcfEIqRNJhBKMYw/jTJoxWxS1mgXW8hiH4BPNiaLO+DduAHWm9Dv18k59OcjSfGxwAqBbTbAaqRfaO7+o6fBxMwQFj3YKyytRMNiKAwDI7nKaw3QMP0rzq13tHpdD9wzzCiqrgnBnMzehiGczLNqvuTHqgQIykBw3PXqMe1zum6XflfpXsEs7kNTHlkjGxexmGVa5vcovcyRi27aAMu+4DYCON1RHUJUgAKzRfD5XY9QaA3pSYn/rnv0+ANGBqtpQVJG+J+pMILHKBtBPK5X28tg6V3LLyOuXvuZ6OBcXGxSuAFRbHa5c321zzJ5OEHRzgR25NTpcZ/5Pcu17xkuc96QmPecRDHnS/+9ztphuuueqKy2HWM0UThYBTuBg/A+4agOeC1LDLCU9VBxqyLVceoZQJMzEji+fdaQY4OYM6gRsE6YX55P3MEG89GNBJHOEyuULfIcykV0IZZUMTMqP3g9FXdhaijjlbWzkMpBiyyMy5/JtXYpzqceJ0HUs0ixO2VaZB1XrEViRyPZYsBdHzp5VH14q92hAiJ5FtsRYaSxwrBkTxAcGErlWINRBDVEL6pAbkAR0NLXiYL9m5iYgTD0C5eTjQrhfndEFlWbBwKmaFvtmFZHlohO+5wAZTiICrMPKNjdvZEftys5K1I8+so8xVKCsvWAuUpVkoQYeGLgwcKhNDN1zKqbTrI8O1ZyyUJ11/MjC9DmYKTiFoOP+mBASJuQxXMRO3Bl4EhtPxQ02Z8ad9/eFjt8KYE46hlv5JtTyOe3jdVC8Un52vqadK1FQJLUZrDsftC1GbccpX5um7HDOig13xtEWeHvvmIt4Mh7Vln+30KTRQJkmhEDYkcHK6zDlUCyhMGAmx62hAeeZlYZVa+VN4t35Cv+bOhPpu5Fi/o4QfhdO0j3Fm8uvvxPhmVuUW332oTrNNctlCJ1bS6ARhKZSccmX3XdkJtVq7GCXG04vaLf8HE+wCu3Agg2k4SiRy97USl9FKZa3YF2M/Iir5qGI4HZdQZ/zp3n752a3A0pJAz8/O4+dWMVeo3/T6toF5FsL8PEmA/FqhXGkyHcoYLjeoAn59/Nb2VCoAFWcUgygw7grJWUIswjzIclnFdStO8bIEZBHdBRWhFqmYvuEuY3Y0vA7at5V0O4dSQ/eCxAkx9PTWH9+cG8fWX1aUF1PF5YqxhnqDxSd40ZMgeiw2RdmUXyyfb1gZqEL5dLnyWeW2pvxpwknNc2YJpDCJZtxMabNCA+01Ob1m0gxVJrjI+JN0qEw6RDouIBsK9WieneeRyW43xbDOfbSA//q9anYHd+WueL/WnkQdPycP97nWjpuDnniBw1aD6qZ6b1nZ3mrk5qpTxwZ49rXzdaSbMRr9U1KLw4uZlgY8Q+s1iNPOyJjenjRyUmhSyD9YzKMmQd3zm/PveTOhefBdMFBD79B98P/IsEzm4/6D5P+9jhYtzlvLrbiAz+MQAjna7aLLqcGQA02IM3sFt9D4oovL84ggaaORpggPQVudSloJcRf73W38WQVS/wj/Ckfz/YJfBaF9bXfjbnZNI2FF37XOzYIzzXsvP6GPUxKsOBA9TL2bH19kUh4AVQjTp3c0duwDAc9v1yl80EjQhJuAFqPBAhS+J6T+P6T4Bm3K4va0f7KLyG3Rzm9cuw63Mgaj1Y6vg//Xjf2KfWIdqKKlM8+PQqNMBrvZZLSbpnihoxf+H/n2E9nNqjteGj/+oztaP7V805Hwd4RzaV/9VE9oiva8qnN2w68jUR+yh0uKHZnIgrgomRE21Hhon0XnK6hF9bRHoD7Eub3CHsF/ezEzq1kSRRUUjhsZmthLMFYjTunLkSQ6qxkGByt0p49l+O4mImiehWGLCugt1I41B0zFPtxiJ/YQTSyu/8tWsP4NquDnzGpd0dr87DyVrdemSCHWYLYzhjqyMosG2GYGX/OArE4zZjPNUPD6+gJbmEmF3M5j7DHSMPND9sP1UHhgD2q4qXVYvCjvazCG+c70rDTfHTb6dHlJJl7Z1JKNj6iwje1DBIUvxuHHgeQ/kmMtHqOliW+OzUA5gqAbcdJOpmHRbIRjvr2PnWApi5ScZ8FU8LsktqGVFRNPYLmBlVrCbznOnSj9TSb9tfSkG8+Xyu6EZAG16ywVLEZVLjdrZtuS9pkzRHHX1L6kjaAIASNNkTvIocVosOIU2iFxV1VHiSa+K1OJqYBZLLrX3N/1f1sLtr/0OjJQvyghX0DtEtFjJiPJlowGaebNNpqtZBrG5pIi60WVqFZd11nlIAfsHTvX7LU4hVBUHRT9loRMWa2epq8wODaP3jh6m0/kkpBrhfy09Qh75CA6+CH7oVUmkRZYmBKZ6Xk+jdImC6PDScZ0xB7zcfN3lX7dSiUHI1pa20q0lVrRLYINpX6lO6XMEQuNPSNgyTy1EK49BF99pohf3jTzbY3m7dy8pszIN0F16YiHaIdSUVWlUCrlVdX2GdFXKblzVuI2p8dAx0MQXnt4xRV24Cv3LKiuSkNyBVtayirkIWnVFU+4lrviyDUmkCHhtFRPnrpcPbk6vZl6+dTJ8Priq0uv+JktBu+ZmdC38GKUEkpv8FRX5zOdKCBPfByjTEJno8PVqTUI1kTL7HBfEV2po2i/SlMBt80edFNUf7mm2lGFfpkWFj8tJ2TSWvkYea1UapHDqAJUg3gOhslWSFEWRg4h2CdjNT4ZikZnQRyk/xawEOXAN3qLTIr2RLLiw7cO5gG4QslfQBNfF7Y/AlYtGrjzncZizyfft3HT55Jv2aVJG41XTH7T5dk3ViT/H+gd+YO/yL3vBAO2+FLV63++cDzc9OuA4qIvAPx+0TK/6f4bv+wp9h29SXeRFQCv+44Gf6dC2g5DnmFsmr5+DCVjgABRHxDEYL0JK6iTFJPSbgXoINCl5nLWKYri6GDjpDAFU8BBkM9Po4EUa7SR8Hiz9ewijPgb/TL6XzG+MU7+/dfoHSAw5dDXsX5FqnSR6KksV2rVrO52sgIAAAA=) format('woff2')}@font-face{font-family:'JetBrains Mono';font-style:normal;font-weight:700;src:url(data:font/woff2;base64,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) format('woff2')}</style>
+  <style>
+    .runner { opacity: 0; animation: run 12s linear infinite; }
+    .token { animation: lap 1.5s linear infinite; }
+    .q { opacity: 0; animation: q 12s linear infinite; }
+    .tick { animation: tick 12s linear infinite; }
+    .cross { opacity: 0; animation: cross 12s linear infinite; }
+    .m0 { animation: m0 12s linear infinite; } .m1 { animation: m1 12s linear infinite; } .m2 { animation: m2 12s linear infinite; }
+    .m3 { animation: m3 12s linear infinite; } .m4 { animation: m4 12s linear infinite; } .m5 { animation: m5 12s linear infinite; }
+    @keyframes run { 0%, 74.5% { opacity: 1; } 75%, 100% { opacity: 0; } }
+    @keyframes lap { 0.00% { transform: translate(220.0px, 230.0px); } 43.95% { transform: translate(780.0px, 230.0px); } 48.50% { transform: translate(780.0px, 172.0px); } 49.79% { transform: translate(773.2px, 157.4px); } 51.52% { transform: translate(755.0px, 145.3px); } 53.86% { transform: translate(727.0px, 135.0px); } 56.77% { transform: translate(690.9px, 126.6px); } 60.16% { transform: translate(648.3px, 120.0px); } 63.90% { transform: translate(600.8px, 115.3px); } 67.88% { transform: translate(550.2px, 112.4px); } 71.99% { transform: translate(497.9px, 111.2px); } 75.92% { transform: translate(447.8px, 111.9px); } 79.89% { transform: translate(397.2px, 114.3px); } 83.62% { transform: translate(349.9px, 118.5px); } 86.98% { transform: translate(307.5px, 124.5px); } 89.86% { transform: translate(271.7px, 132.2px); } 92.15% { transform: translate(244.1px, 141.7px); } 93.81% { transform: translate(226.3px, 153.0px); } 94.98% { transform: translate(220.0px, 166.0px); } 100.00% { transform: translate(220.0px, 230.0px); } }
+    @keyframes q { 0% { opacity: 0; } 0.6% { opacity: 1; } 4.893% { opacity: 1; } 5.493% { opacity: 0; } 12.5% { opacity: 0; } 13.1% { opacity: 1; } 17.393% { opacity: 1; } 17.993% { opacity: 0; } 25% { opacity: 0; } 25.6% { opacity: 1; } 29.893% { opacity: 1; } 30.493% { opacity: 0; } 37.5% { opacity: 0; } 38.1% { opacity: 1; } 42.393% { opacity: 1; } 42.993% { opacity: 0; } 50% { opacity: 0; } 50.6% { opacity: 1; } 54.893% { opacity: 1; } 55.493% { opacity: 0; } 62.5% { opacity: 0; } 63.1% { opacity: 1; } 67.393% { opacity: 1; } 67.993% { opacity: 0; } 100% { opacity: 0; } }
+    @keyframes tick { 0% { opacity: 0; } 5.493% { opacity: 0; } 6.093% { opacity: 1; } 11.9% { opacity: 1; } 12.5% { opacity: 0; } 17.993% { opacity: 0; } 18.593% { opacity: 1; } 24.4% { opacity: 1; } 25% { opacity: 0; } 30.493% { opacity: 0; } 31.093% { opacity: 1; } 36.9% { opacity: 1; } 37.5% { opacity: 0; } 55.493% { opacity: 0; } 56.093% { opacity: 1; } 61.9% { opacity: 1; } 62.5% { opacity: 0; } 67.993% { opacity: 0; } 68.593% { opacity: 1; } 100% { opacity: 1; } }
+    @keyframes cross { 0% { opacity: 0; } 42.993% { opacity: 0; } 43.593% { opacity: 1; } 49.4% { opacity: 1; } 50% { opacity: 0; } 100% { opacity: 0; } }
+    @keyframes m0 { 0% { opacity: 0; } 5.493% { opacity: 0; } 6.093% { opacity: 1; } 96.5% { opacity: 1; } 97.1% { opacity: 0; } 100% { opacity: 0; } }
+    @keyframes m1 { 0% { opacity: 0; } 17.993% { opacity: 0; } 18.593% { opacity: 1; } 96.5% { opacity: 1; } 97.1% { opacity: 0; } 100% { opacity: 0; } }
+    @keyframes m2 { 0% { opacity: 0; } 30.493% { opacity: 0; } 31.093% { opacity: 1; } 96.5% { opacity: 1; } 97.1% { opacity: 0; } 100% { opacity: 0; } }
+    @keyframes m3 { 0% { opacity: 0; } 42.993% { opacity: 0; } 43.593% { opacity: 1; } 96.5% { opacity: 1; } 97.1% { opacity: 0; } 100% { opacity: 0; } }
+    @keyframes m4 { 0% { opacity: 0; } 55.493% { opacity: 0; } 56.093% { opacity: 1; } 96.5% { opacity: 1; } 97.1% { opacity: 0; } 100% { opacity: 0; } }
+    @keyframes m5 { 0% { opacity: 0; } 67.993% { opacity: 0; } 68.593% { opacity: 1; } 96.5% { opacity: 1; } 97.1% { opacity: 0; } 100% { opacity: 0; } }
+    @media (prefers-reduced-motion: reduce) { * { animation: none !important; } }
+  </style>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#12151c"/><stop offset="1" stop-color="#0a0c10"/></linearGradient>
+    <radialGradient id="sheen" cx="0.5" cy="0" r="0.85"><stop offset="0" stop-color="#ffffff" stop-opacity="0.06"/><stop offset="1" stop-color="#ffffff" stop-opacity="0"/></radialGradient>
+    <filter id="glow" x="-60%" y="-60%" width="220%" height="220%"><feGaussianBlur stdDeviation="6" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+    <filter id="shadow" x="-30%" y="-30%" width="160%" height="170%"><feGaussianBlur stdDeviation="8"/></filter>
+    <linearGradient id="panel" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#1c212b"/><stop offset="1" stop-color="#14181f"/></linearGradient>
+    <linearGradient id="note" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#ffc964"/><stop offset="1" stop-color="#eaa83a"/></linearGradient>
+  </defs>
+
+  <rect width="1000" height="470" rx="20" fill="url(#bg)"/>
+  <rect width="1000" height="470" rx="20" fill="url(#sheen)"/>
+  <rect x="0.5" y="0.5" width="999" height="469" rx="19.5" fill="none" stroke="#ffffff" stroke-opacity="0.08"/>
+
+  <circle cx="52" cy="44" r="3.5" fill="#f5b544"/>
+  <text x="66" y="48" font-size="12" letter-spacing="2.4" fill="#7d8597">A TINY GROUNDHOG DAY</text>
+
+  <!-- connectors -->
+  <g fill="none" stroke="#3a4152" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+    <line x1="314" y1="230" x2="426" y2="230"/><path d="M419 223 L427 230 L419 237"/>
+    <line x1="574" y1="230" x2="716" y2="230"/><path d="M709 223 L717 230 L709 237"/>
+    <path d="M780 172 C780 92 220 92 220 165"/><path d="M213 158 L220 166 L227 158"/>
+  </g>
+  <text x="500" y="99" font-size="12" fill="#7d8597" text-anchor="middle">and again</text>
+
+  <!-- the token running the loop -->
+  <g class="runner"><circle class="token" r="5" fill="#f5b544" filter="url(#glow)"/></g>
+
+  <!-- 1. a case: a user session -->
+  <g>
+    <rect x="140" y="175" width="160" height="110" rx="10" fill="url(#panel)" stroke="#3a4152" stroke-width="1.5"/>
+    <line x1="140" y1="195" x2="300" y2="195" stroke="#3a4152"/>
+    <g fill="#3a4152"><circle cx="154" cy="185" r="2.5"/><circle cx="164" cy="185" r="2.5"/><circle cx="174" cy="185" r="2.5"/></g>
+    <g stroke="#7d8597" stroke-width="1.5"><line x1="170" y1="215" x2="270" y2="215"/></g>
+    <g stroke="#c5cad6" stroke-width="1.5"><circle cx="170" cy="215" r="5" fill="#c5cad6"/><circle cx="220" cy="215" r="5" fill="#c5cad6"/><circle cx="270" cy="215" r="5" fill="#161a22"/></g>
+    <rect x="156" y="234" width="104" height="7" rx="3.5" fill="#ffffff" fill-opacity="0.10"/>
+    <rect x="156" y="248" width="72" height="7" rx="3.5" fill="#ffffff" fill-opacity="0.06"/>
+    <rect x="232" y="263" width="52" height="13" rx="6.5" fill="none" stroke="#7d8597" stroke-width="1.5"/>
+    <path d="M262 252 L262 270 L267 265 L271 273 L274 271.5 L270 263.5 L276.5 263.5 Z" fill="#eef1f6" stroke="#12151c" stroke-width="1" stroke-linejoin="round"/>
+  </g>
+
+  <!-- 2. your call: a sticky note -->
+  <g transform="rotate(-3 500 230)">
+    <rect x="444" y="180" width="120" height="120" rx="4" fill="#000000" fill-opacity="0.55" filter="url(#shadow)"/>
+    <path d="M440 170 H560 V268 L538 290 H440 Z" fill="url(#note)"/>
+    <path d="M538 290 V274 Q538 268 544 268 H560 Z" fill="#b97f1f"/>
+    <text x="454" y="202" font-size="14" font-weight="700" fill="#1b1d22">drops at</text>
+    <text x="454" y="222" font-size="14" font-weight="700" fill="#1b1d22">step 3</text>
+    <text x="454" y="268" font-size="24" font-weight="700" fill="#1b1d22">70%</text>
+  </g>
+
+  <!-- 3. the answer -->
+  <g>
+    <circle cx="780" cy="230" r="52" fill="url(#panel)" stroke="#3a4152" stroke-width="2"/>
+    <text class="q" x="780" y="241" font-size="30" font-weight="700" fill="#7d8597" text-anchor="middle">?</text>
+    <path class="tick" d="M760 231 L774 245 L801 216" fill="none" stroke="#5ad08a" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+    <path class="cross" d="M764 214 L796 246 M796 214 L764 246" fill="none" stroke="#f2676b" stroke-width="5" stroke-linecap="round"/>
+  </g>
+
+  <!-- labels -->
+  <g text-anchor="middle">
+    <text x="220" y="328" font-size="14" font-weight="700" fill="#eef1f6">a case</text>
+    <text x="220" y="348" font-size="12" fill="#7d8597">a user session</text>
+    <text x="500" y="328" font-size="14" font-weight="700" fill="#eef1f6">your call</text>
+    <text x="500" y="348" font-size="12" fill="#7d8597">written down first</text>
+    <text x="780" y="328" font-size="14" font-weight="700" fill="#eef1f6">the answer</text>
+    <text x="780" y="348" font-size="12" fill="#7d8597">inside a minute</text>
+  </g>
+
+  <!-- tally -->
+  <line x1="48" y1="378" x2="952" y2="378" stroke="#232834"/>
+  <text x="352" y="415" font-size="12" letter-spacing="1.2" fill="#7d8597" text-anchor="end">TALLY</text>
+  <g fill="#ffffff" fill-opacity="0.03" stroke="#232834">
+    <rect x="364" y="394" width="32" height="32" rx="7"/><rect x="412" y="394" width="32" height="32" rx="7"/><rect x="460" y="394" width="32" height="32" rx="7"/>
+    <rect x="508" y="394" width="32" height="32" rx="7"/><rect x="556" y="394" width="32" height="32" rx="7"/><rect x="604" y="394" width="32" height="32" rx="7"/>
+  </g>
+  <g fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+    <path class="m0" d="M373 410 L378 415 L388 404" stroke="#5ad08a"/>
+    <path class="m1" d="M421 410 L426 415 L436 404" stroke="#5ad08a"/>
+    <path class="m2" d="M469 410 L474 415 L484 404" stroke="#5ad08a"/>
+    <path class="m3" d="M518 404 L530 416 M530 404 L518 416" stroke="#f2676b"/>
+    <path class="m4" d="M565 410 L570 415 L580 404" stroke="#5ad08a"/>
+    <path class="m5" d="M613 410 L618 415 L628 404" stroke="#5ad08a"/>
+  </g>
+</svg>

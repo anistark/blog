@@ -342,6 +342,14 @@ hr {
   overflow: hidden;
 }
 
+/* Wide tables scroll sideways on phones instead of being clipped. */
+@media (max-width: 768px) {
+  .content > table {
+    display: block;
+    overflow-x: auto;
+  }
+}
+
 .content > table thead {
   background: rgba(100, 181, 246, 0.1);
   border-bottom: 2px solid var(--border-color-hover);

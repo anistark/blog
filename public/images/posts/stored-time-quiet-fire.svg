@@ -1,0 +1,183 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 600" font-family="'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, monospace">
+  <title>A cutaway of a house. On the ground floor two firefighters spray a small kitchen fire; directly under their feet, in the basement, a much larger fire glows. Three cue labels appear: water isn't working, living room too hot, and too quiet, with a muted speaker. The crew walks out just before the floor gives way</title>
+  <style id="jbm-font">@font-face{font-family:'JetBrains Mono';font-style:normal;font-weight:400;src:url(data:font/woff2;base64,d09GMgABAAAAAAeEAA4AAAAADggAAAcyAAJN0gAAAAAAAAAAAAAAAAAAAAAAAAAAGhwbIByBSgZgAIEUEQgKk1yPKgE2AiQDTAtMAAQgBQYHIBuXClGUTlIb4IsC25g+WFFA8YKWyIv5kBCKpi+0L6KeRA2bZAOUByW5sOxyIXzcVTz8/3799jmj9837Yl6SIKaVNSUMzUqgZEiULJYIGf/596w/SUdimSpNihROfStMsbQ+d5/8K8KeH3PvbX43Me9byOrgiZBp/MoqKrFa/wPM8vzf01JNzFvxaVwOt75s6phWGrf+eA0eHt7SmtpLy4rAAbsaWSlzUKABg0PUL9TkbIUbEKj6oaybnBETanKP4RR16CIJe48QgRokE0Mb1mA2Abs1lUUdsBOMyQlFmvD/f17oePpuhOeu6EcXzYEmzU1ah0jTBT3HrPPJPnKeRnbuDdppl9xgjWnlDiF2ZShT2Zjc1OrPjc+CLisfkI/JuQ0EyEmgQIECq9VXoZPsoqFt5LAwJS/vYPsgn3xFdQA4j0HxCLhBDSXFJTIceu4IIN5btbTxzz/gqSrG9By5jb+VXu1jSFaj5KRLRzDkGbx8URWO2qpBNIaelYtHXFLGXEv7UmgYNHRgh6hzRs7833nh/z/0tqc8bjXodVqNWqXMckHwxH/gl2/BOXLww/wDGt8FiwLMpmlMcYWcz4k9Sf0nme9Q45F5XbcHHo/PF6nwu1tFoc7FXrQi01SyFdFyX5XER5TmYXhyfChf4rk4UF6GGYQbzkPl/qLYDRRo90rtIDmHRswXLbTSBissVNqhXqmalKea1GqYe5QcwHon7w7CNeTEc7eOoSPRdYVS2oXaX6N9EgG3UoP6FHJOcuesms76NV9v+F89U6VvHzzZXsVYbRg22GlLxwiUfuOEwVdMPnP+FHYNIPRGqQfIHLl0xlOpRr46MvivZ3ul+GhKQvHkpwxePN9BJUjVotxQF4FAcH9UzZtgxae1mfWrkgs1TKvKujJ/QN7xSy2DfMO9cqwxdTet0gyHNzgH0K8rUltRhoO6FJts2TBkv6sa60cumLihdyfdgKEOHw/12q4W9kTcIr03jzSlZ/YxlpS0a2uCKS6ccazmsRbzmsRg0frG1eC59sV821VhvBjVbU5y/1ATuncDdBbxdIEcZRoXZtGOUmqsU2VrxItWQcsAm6y06H2vWV+R95cGGLJHko4T2weAnvLUsTThLcXYMY+3UJ7pVZ9vfL1I9Ig0hQepglHgLvflI/fh5JPv3jahy+87H/xfvWprmx7/XwlzyTV+h6ZDeYO5CJs7rvs/V6KGoEHEV8RB2Mn2s0HGTezD7hYzFkYdrsTmz88Ksz4ZI7QZ0ZioTUoqSQMJdVKJAhAOgctP3cjbl59csihGxUw6CYerxHHdoic+/FPK6OUUyeikpkVHUnJOwULww4d0lC8IKgzGzCeHyPgewXLh1m2EipFIVRpiG0yW7Oq5MSQ3qylSr5WMTVAPz+lQ11pSjITnCU7JydCUwC1GXBUpENAkd+hadn6nrtY2xxRZPh/+3/YC+xX7wjYYLancvGgNqpFJNHKZVCOLl4xl50Lu1psOonWKw+TVFTBT2tYoHZyFTF1d3ieXtFq9b86n+6c5VHU1h6KZfvi7uOIhM2/caB8R3BjNLeb/Wo3yqDnOQCIbdq/wJfAFLsmUUWlWiMznxhJjE884X0irLIll0FvoHLYKW2STk47o7PD50MNh88ziv1Xn1H+JRZSGPEKacOCVxNK5sSOxxyTCi5K4B/XRBCFllORRklFJCVrci3CPcCyMluiSRTMbZuDTRekITxCkYl6+XMNIuNRABBWpF9peM0LboZKRy5UMDefOnpx0jnMxH2eemS91RXOhRaHobJfULJqHh30DjlTEV9VHKDRkhjTBhJikidXEV4bAB9SOpYxShSOa9C5AcZJUCglKQ4Ug+gEdzRz/aOZe/kOdmbO/5H6FVWfdTubbx9gmRY+76wYLsm2LHleXD/Q1X8TixQMC0qK44LzY/Vtb66/dlwyEtrVtIwS2UaYYXUyx6Wgnvmhhek1m4YJE4l6TWZPmjIlZpUqaOkCtdVKJikCYDud/DlvFSVh7tiscm8X2edmLvzdLfqRw/6RuUH/CvG2UwRNGOeUOpMKTaHLZYqlcRYWgvhNIsCY0gKbHuLkhLVV0tH6p3KTQxeyeMVvCovC39Q+PTYj7JNrdtTtr95kTzgDET9gtStUZ9sxJdPJD9kNVG956joWREp4/LxpCIZmCEREUIyMPjS6cBz++24ounX/unynqnX0xET4PheV3+y2ijf1OqDohUG9Et79NkICqG/3ijYZgf5xcKZ1TBWvO0yvBde3pDXfZ4lfesjD6otve3sF2d7Md7Xao2YYeMNqBjZwBuJCmLtwEecApdiReSV58qWzPFkm4UvZrUSfnC/j6RWo5AD8azbf/7f5/IdWcYrQlCP6flOQdDY06ts+//Oci7wACfuJKCAvK8LIJ0hFB6qgEeDl5BbhEdZAJcPKYx2USItTJ9W83FwxbRuGm4eXFeKa2hsv/JK5UsA==) format('woff2')}</style>
+  <style>
+    .cue { transform-box: fill-box; transform-origin: 50% 50%; }
+    .cue1 { animation: cue1 14s ease-out infinite; }
+    .cue2 { animation: cue2 14s ease-out infinite; }
+    .cue3 { animation: cue3 14s ease-out infinite; }
+    @keyframes cue1 { 0%, 9% { opacity: 0; transform: translateY(6px); } 13%, 94% { opacity: 1; transform: translateY(0); } 97%, 100% { opacity: 0; } }
+    @keyframes cue2 { 0%, 23% { opacity: 0; transform: translateY(6px); } 27%, 94% { opacity: 1; transform: translateY(0); } 97%, 100% { opacity: 0; } }
+    @keyframes cue3 { 0%, 37% { opacity: 0; transform: translateY(6px); } 41%, 94% { opacity: 1; transform: translateY(0); } 97%, 100% { opacity: 0; } }
+    .below { animation: below 14s ease-in-out infinite; }
+    @keyframes below { 0% { opacity: 0.22; } 55%, 95% { opacity: 1; } 100% { opacity: 0.22; } }
+    .spray { opacity: 0; animation: spray 14s linear infinite, flow 0.6s linear infinite; }
+    @keyframes spray { 0%, 2% { opacity: 0; } 4%, 49% { opacity: 1; } 51%, 100% { opacity: 0; } }
+    @keyframes flow { to { stroke-dashoffset: -14; } }
+    .crew { transform: translate(300px, 0); animation: crew 14s ease-in-out infinite; }
+    @keyframes crew {
+      0%, 51% { transform: translate(0, 0); opacity: 1; }
+      64%, 94% { transform: translate(300px, 0); opacity: 1; }
+      97% { transform: translate(300px, 0); opacity: 0; }
+      98% { transform: translate(0, 0); opacity: 0; }
+      100% { transform: translate(0, 0); opacity: 1; }
+    }
+    .floor { transform-box: view-box; transform-origin: 474px 404px; transform: rotate(24deg); animation: floor 14s cubic-bezier(0.5, 0, 0.75, 0) infinite; }
+    @keyframes floor { 0%, 66% { transform: rotate(0deg); } 72%, 96% { transform: rotate(24deg); } 98%, 100% { transform: rotate(0deg); } }
+    .crack { animation: crack 14s linear infinite; }
+    @keyframes crack { 0%, 66% { opacity: 0; } 68%, 96% { opacity: 1; } 98%, 100% { opacity: 0; } }
+    @media (prefers-reduced-motion: reduce) { * { animation: none !important; } }
+  </style>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#12151c"/><stop offset="1" stop-color="#0a0c10"/></linearGradient>
+    <radialGradient id="sheen" cx="0.5" cy="0" r="0.85"><stop offset="0" stop-color="#ffffff" stop-opacity="0.06"/><stop offset="1" stop-color="#ffffff" stop-opacity="0"/></radialGradient>
+    <filter id="glow" x="-60%" y="-60%" width="220%" height="220%"><feGaussianBlur stdDeviation="6" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+    <filter id="blur" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="10"/></filter>
+    <clipPath id="canvas"><rect width="1000" height="600" rx="20"/></clipPath>
+    <clipPath id="basement-clip"><rect x="310" y="410" width="380" height="140"/></clipPath>
+    <linearGradient id="earth" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#191c23"/><stop offset="1" stop-color="#0c0e12"/></linearGradient>
+    <linearGradient id="roof" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#1d222b"/><stop offset="1" stop-color="#141820"/></linearGradient>
+    <linearGradient id="room" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ffffff" stop-opacity="0.035"/><stop offset="1" stop-color="#ffffff" stop-opacity="0.015"/></linearGradient>
+    <radialGradient id="inferno" cx="550" cy="520" r="220" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#f2676b" stop-opacity="0.75"/><stop offset="0.45" stop-color="#f2676b" stop-opacity="0.22"/><stop offset="1" stop-color="#f2676b" stop-opacity="0"/></radialGradient>
+    <linearGradient id="flame" x1="0" y1="1" x2="0" y2="0"><stop offset="0" stop-color="#ff8a6b"/><stop offset="1" stop-color="#f2676b" stop-opacity="0.75"/></linearGradient>
+    <pattern id="hatch" width="10" height="10" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><line x1="0" y1="0" x2="0" y2="10" stroke="#ffffff" stroke-opacity="0.035" stroke-width="1"/></pattern>
+  </defs>
+
+  <rect width="1000" height="600" rx="20" fill="url(#bg)"/>
+  <rect width="1000" height="600" rx="20" fill="url(#sheen)"/>
+
+  <!-- earth -->
+  <g clip-path="url(#canvas)">
+    <rect x="0" y="400" width="1000" height="200" fill="url(#earth)"/>
+    <rect x="0" y="400" width="1000" height="200" fill="url(#hatch)"/>
+  </g>
+  <line x1="0" y1="400" x2="1000" y2="400" stroke="#3a4152" stroke-width="1.5"/>
+
+  <!-- basement -->
+  <rect x="302" y="404" width="396" height="154" fill="#2a303c"/>
+  <rect x="310" y="410" width="380" height="140" fill="#08090c"/>
+  <g class="below">
+    <g clip-path="url(#basement-clip)">
+      <rect x="310" y="410" width="380" height="140" fill="url(#inferno)"/>
+      <g fill="url(#flame)" filter="url(#glow)">
+      <path class="" d="M470.0 548.0 C444.0 538.7 446.6 510.8 467.4 486.0 C471.3 505.8 489.5 509.6 486.1 529.4 C484.3 541.8 477.8 548.0 470.0 548.0 Z"/>
+      <path class="" d="M505.0 548.0 C466.4 534.2 470.2 492.8 501.1 456.0 C506.9 485.4 534.0 491.0 529.0 520.4 C526.3 538.8 516.6 548.0 505.0 548.0 Z"/>
+      <path class="" d="M540.0 548.0 C493.0 531.2 497.7 480.8 535.3 436.0 C542.4 471.8 575.3 478.6 569.2 514.4 C565.9 536.8 554.1 548.0 540.0 548.0 Z"/>
+      <path class="" d="M578.0 548.0 C537.7 533.6 541.7 490.4 574.0 452.0 C580.0 482.7 608.2 488.5 603.0 519.2 C600.2 538.4 590.1 548.0 578.0 548.0 Z"/>
+      <path class="" d="M612.0 548.0 C582.6 537.5 585.5 506.0 609.1 478.0 C613.5 500.4 634.0 504.6 630.2 527.0 C628.2 541.0 620.8 548.0 612.0 548.0 Z"/>
+      <path class="" d="M640.0 548.0 C619.8 540.8 621.9 519.2 638.0 500.0 C641.0 515.4 655.1 518.2 652.5 533.6 C651.1 543.2 646.0 548.0 640.0 548.0 Z"/>
+      </g>
+      <g fill="#ffd2c2" fill-opacity="0.55">
+      <path class="" d="M505.0 548.0 C484.0 540.5 486.1 518.0 502.9 498.0 C506.1 514.0 520.8 517.0 518.0 533.0 C516.5 543.0 511.3 548.0 505.0 548.0 Z"/>
+      <path class="" d="M540.0 548.0 C512.3 538.1 515.1 508.4 537.2 482.0 C541.4 503.1 560.8 507.1 557.2 528.2 C555.2 541.4 548.3 548.0 540.0 548.0 Z"/>
+      <path class="" d="M578.0 548.0 C556.2 540.2 558.3 516.8 575.8 496.0 C579.1 512.6 594.4 515.8 591.5 532.4 C590.0 542.8 584.6 548.0 578.0 548.0 Z"/>
+      </g>
+    </g>
+    <ellipse cx="550" cy="404" rx="190" ry="26" fill="#f2676b" fill-opacity="0.18" filter="url(#blur)"/>
+  </g>
+  <text x="322" y="430" font-size="12" letter-spacing="1.2" fill="#7d8597">basement</text>
+
+  <!-- house -->
+  <path d="M280 230 L500 116 L720 230 Z" fill="url(#roof)" stroke="#3a4152" stroke-width="2" stroke-linejoin="round"/>
+  <path d="M308 224 L500 126 L692 224" fill="none" stroke="#ffffff" stroke-opacity="0.05" stroke-width="1.5"/>
+  <rect x="604" y="146" width="24" height="44" fill="#1a1e26" stroke="#3a4152" stroke-width="2"/>
+  <rect x="308" y="230" width="384" height="170" fill="url(#room)"/>
+  <rect x="300" y="224" width="400" height="7" fill="#2a303c"/>
+  <rect x="300" y="224" width="8" height="176" fill="#2a303c"/>
+  <rect x="692" y="224" width="8" height="76" fill="#2a303c"/>
+  <rect x="468" y="231" width="6" height="58" fill="#2a303c"/>
+
+  <!-- floor: the middle piece is the one that gives way -->
+  <rect x="300" y="400" width="174" height="8" fill="#3a4152"/>
+  <rect x="640" y="400" width="60" height="8" fill="#3a4152"/>
+  <g class="floor">
+    <rect x="474" y="400" width="166" height="8" fill="#3a4152"/>
+    <line x1="474" y1="400.5" x2="640" y2="400.5" stroke="#ffffff" stroke-opacity="0.12"/>
+  </g>
+  <g class="crack" stroke="#f2676b" stroke-width="1.5" stroke-linecap="round" fill="none" filter="url(#glow)">
+    <path d="M474 400 l5 4 l-4 3 l5 2"/>
+    <path d="M640 400 l-5 3 l4 2 l-4 4"/>
+  </g>
+
+  <!-- kitchen -->
+  <g fill="none" stroke="#c5cad6" stroke-opacity="0.55" stroke-width="1.5" stroke-linejoin="round">
+    <rect x="322" y="248" width="128" height="26" rx="2"/>
+    <line x1="386" y1="248" x2="386" y2="274"/>
+    <rect x="332" y="350" width="64" height="50" rx="2"/>
+    <rect x="340" y="364" width="48" height="28" rx="2"/>
+    <line x1="332" y1="356" x2="396" y2="356"/>
+  </g>
+  <g fill="url(#flame)" filter="url(#glow)">
+    <path class="" d="M352.0 350.0 C343.6 347.0 344.4 338.0 351.2 330.0 C352.4 336.4 358.3 337.6 357.2 344.0 C356.6 348.0 354.5 350.0 352.0 350.0 Z"/>
+      <path class="" d="M364.0 350.0 C352.2 345.8 353.4 333.2 362.8 322.0 C364.6 331.0 372.8 332.6 371.3 341.6 C370.5 347.2 367.5 350.0 364.0 350.0 Z"/>
+      <path class="" d="M377.0 350.0 C369.4 347.3 370.2 339.2 376.2 332.0 C377.4 337.8 382.7 338.8 381.7 344.6 C381.2 348.2 379.3 350.0 377.0 350.0 Z"/>
+  </g>
+  <g fill="none" stroke="#7d8597" stroke-opacity="0.55" stroke-width="1.5" stroke-linecap="round" stroke-dasharray="2 4">
+    <path d="M394 322 q8 8 0 16"/>
+    <path d="M404 314 q14 16 0 32"/>
+    <path d="M414 306 q20 24 0 48"/>
+  </g>
+  <text x="408" y="392" font-size="12" letter-spacing="1.2" fill="#7d8597">kitchen</text>
+
+  <!-- living room: too hot -->
+  <g fill="none" stroke="#f2676b" stroke-opacity="0.45" stroke-width="1.5" stroke-linecap="round">
+    <path d="M612 312 c-6 -8 6 -14 0 -22 s6 -14 0 -22 s6 -14 0 -20"/>
+    <path d="M636 316 c-6 -8 6 -14 0 -22 s6 -14 0 -22 s6 -14 0 -22"/>
+    <path d="M660 312 c-6 -8 6 -14 0 -22 s6 -14 0 -22 s6 -14 0 -20"/>
+  </g>
+  <text x="486" y="250" font-size="12" letter-spacing="1.2" fill="#7d8597">living room</text>
+
+  <!-- hose running out of the door -->
+  <path d="M650 398 H960" stroke="#5a6273" stroke-width="4" stroke-linecap="round" fill="none"/>
+
+  <!-- crew -->
+  <g class="crew">
+    <path class="spray" d="M490 358 Q440 318 380 330 M490 358 Q436 330 378 340 M490 358 Q444 304 386 320" fill="none" stroke="#c5cad6" stroke-opacity="0.75" stroke-width="1.6" stroke-dasharray="3 4" stroke-linecap="round"/>
+    <path d="M492 358 L500 360" stroke="#eef1f6" stroke-width="4" stroke-linecap="round"/>
+    <path d="M500 360 Q524 372 548 364 C560 380 590 398 650 398" fill="none" stroke="#5a6273" stroke-width="4" stroke-linecap="round"/>
+    <g transform="translate(516 400)">
+        <path d="M-5 0 L-3 -26 M6 0 L4 -26" stroke="#c5cad6" stroke-width="3" stroke-linecap="round"/>
+        <rect x="-11" y="-54" width="22" height="30" rx="7" fill="#262b35" stroke="#c5cad6" stroke-width="1.5"/>
+        <line x1="-11" y1="-36" x2="11" y2="-36" stroke="#eef1f6" stroke-opacity="0.55" stroke-width="2"/>
+        <circle cx="0" cy="-62" r="6.5" fill="#12151c" stroke="#c5cad6" stroke-width="1.5"/>
+        <path d="M-9 -64 C-9 -74 7 -77 10 -66 L16 -64 C16 -62 14 -61 12 -61 H-9 Z" fill="#3a4152" stroke="#c5cad6" stroke-width="1.5" stroke-linejoin="round"/>
+        <path d="M-4 -47 L-16 -40" stroke="#c5cad6" stroke-width="3" stroke-linecap="round"/>
+      </g>
+    <g transform="translate(562 400)">
+        <path d="M-5 0 L-3 -26 M6 0 L4 -26" stroke="#c5cad6" stroke-width="3" stroke-linecap="round"/>
+        <rect x="-11" y="-54" width="22" height="30" rx="7" fill="#262b35" stroke="#c5cad6" stroke-width="1.5"/>
+        <line x1="-11" y1="-36" x2="11" y2="-36" stroke="#eef1f6" stroke-opacity="0.55" stroke-width="2"/>
+        <circle cx="0" cy="-62" r="6.5" fill="#12151c" stroke="#c5cad6" stroke-width="1.5"/>
+        <path d="M-9 -64 C-9 -74 7 -77 10 -66 L16 -64 C16 -62 14 -61 12 -61 H-9 Z" fill="#3a4152" stroke="#c5cad6" stroke-width="1.5" stroke-linejoin="round"/>
+        <path d="M-4 -47 L-14 -36" stroke="#c5cad6" stroke-width="3" stroke-linecap="round"/>
+      </g>
+  </g>
+
+  <!-- cues -->
+  <g class="cue cue1">
+    <line x1="244" y1="320" x2="372" y2="333" stroke="#f5b544" stroke-opacity="0.6" stroke-width="1.2"/>
+    <circle cx="376" cy="334" r="3.5" fill="#f5b544"/>
+    <rect x="64" y="306" width="180" height="28" rx="14" fill="#f5b544" fill-opacity="0.12" stroke="#f5b544" stroke-opacity="0.55"/>
+    <text x="154" y="324.5" text-anchor="middle" font-size="13" fill="#f5b544">water isn't working</text>
+  </g>
+  <g class="cue cue2">
+    <line x1="756" y1="260" x2="664" y2="276" stroke="#f5b544" stroke-opacity="0.6" stroke-width="1.2"/>
+    <circle cx="660" cy="277" r="3.5" fill="#f5b544"/>
+    <rect x="756" y="246" width="180" height="28" rx="14" fill="#f5b544" fill-opacity="0.12" stroke="#f5b544" stroke-opacity="0.55"/>
+    <text x="846" y="264.5" text-anchor="middle" font-size="13" fill="#f5b544">living room too hot</text>
+  </g>
+  <g class="cue cue3">
+    <line x1="190" y1="201" x2="420" y2="303" stroke="#f5b544" stroke-opacity="0.6" stroke-width="1.2"/>
+    <circle cx="423" cy="305" r="3.5" fill="#f5b544"/>
+    <rect x="64" y="187" width="126" height="28" rx="14" fill="#f5b544" fill-opacity="0.12" stroke="#f5b544" stroke-opacity="0.55"/>
+    <g fill="none" stroke="#f5b544" stroke-width="1.5" stroke-linejoin="round" stroke-linecap="round">
+      <path d="M80 197 h4 l6 -5 v18 l-6 -5 h-4 Z" fill="#f5b544" fill-opacity="0.25"/>
+      <path d="M78 211 L96 191"/>
+    </g>
+    <text x="104" y="205.5" font-size="13" fill="#f5b544">too quiet</text>
+  </g>
+
+  <circle cx="52" cy="44" r="3.5" fill="#f5b544"/>
+  <text x="66" y="48" font-size="12" letter-spacing="2.4" fill="#7d8597">THE FIRE THAT WAS TOO QUIET</text>
+  <rect x="0.5" y="0.5" width="999" height="599" rx="19.5" fill="none" stroke="#ffffff" stroke-opacity="0.08"/>
+</svg>

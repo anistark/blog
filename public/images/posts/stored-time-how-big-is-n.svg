@@ -1,0 +1,105 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 480" font-family="'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, monospace">
+  <title>Five rising steps showing how many tries different skills took: about 50 cards in the gambling task, about 250 scored drills in an hour of cockpit instrument reading, about 250 operations in surgery, over 10,000 hours for elite violinists, and 832 to 24,284 hours for chess grandmasters, drawn as a wide bar to show the spread</title>
+  <style id="jbm-font">@font-face{font-family:'JetBrains Mono';font-style:normal;font-weight:400;src:url(data:font/woff2;base64,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) format('woff2')}@font-face{font-family:'JetBrains Mono';font-style:normal;font-weight:700;src:url(data:font/woff2;base64,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) format('woff2')}</style>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#12151c"/><stop offset="1" stop-color="#0a0c10"/></linearGradient>
+    <radialGradient id="sheen" cx="0.5" cy="0" r="0.85"><stop offset="0" stop-color="#ffffff" stop-opacity="0.06"/><stop offset="1" stop-color="#ffffff" stop-opacity="0"/></radialGradient>
+    <filter id="glow" x="-60%" y="-60%" width="220%" height="220%"><feGaussianBlur stdDeviation="6" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+    <linearGradient id="step" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ffffff" stop-opacity="0.07"/><stop offset="1" stop-color="#ffffff" stop-opacity="0.01"/></linearGradient>
+    <linearGradient id="step-hot" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#f5b544" stop-opacity="0.12"/><stop offset="1" stop-color="#f5b544" stop-opacity="0.01"/></linearGradient>
+    <linearGradient id="spread" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#f5b544" stop-opacity="0.35"/><stop offset="1" stop-color="#f5b544" stop-opacity="1"/></linearGradient>
+  </defs>
+
+  <rect width="1000" height="480" rx="20" fill="url(#bg)"/>
+  <rect width="1000" height="480" rx="20" fill="url(#sheen)"/>
+  <rect x="0.5" y="0.5" width="999" height="479" rx="19.5" fill="none" stroke="#ffffff" stroke-opacity="0.08"/>
+
+  <circle cx="52" cy="44" r="3.5" fill="#f5b544"/>
+  <text x="66" y="48" font-size="12" letter-spacing="2.4" fill="#7d8597">HOW BIG IS N?</text>
+
+  <!-- staircase -->
+  <rect x="48" y="392" width="150" height="38" fill="url(#step)"/>
+  <rect x="198" y="348" width="150" height="82" fill="url(#step)"/>
+  <rect x="348" y="304" width="150" height="126" fill="url(#step)"/>
+  <rect x="498" y="260" width="150" height="170" fill="url(#step)"/>
+  <rect x="648" y="216" width="304" height="214" fill="url(#step-hot)"/>
+  <path d="M48 430 V392 H198 V348 H348 V304 H498 V260 H648 V216 H952 V430 Z" fill="none" stroke="#232834" stroke-width="1.5" stroke-linejoin="round"/>
+  <g stroke="#232834" stroke-width="1" stroke-dasharray="2 4">
+    <line x1="198" y1="392" x2="198" y2="430"/><line x1="348" y1="348" x2="348" y2="430"/>
+    <line x1="498" y1="304" x2="498" y2="430"/><line x1="648" y1="260" x2="648" y2="430"/>
+  </g>
+  <g stroke="#c5cad6" stroke-width="2" stroke-linecap="round">
+    <line x1="49" y1="392" x2="197" y2="392"/><line x1="199" y1="348" x2="347" y2="348"/>
+    <line x1="349" y1="304" x2="497" y2="304"/><line x1="499" y1="260" x2="647" y2="260"/>
+  </g>
+  <line x1="649" y1="216" x2="951" y2="216" stroke="#f5b544" stroke-width="2" stroke-linecap="round"/>
+
+  <!-- icons -->
+  <g fill="none" stroke="#c5cad6" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+    <!-- cards -->
+    <g transform="translate(78 288)">
+      <rect x="-12" y="-13" width="17" height="24" rx="3" transform="rotate(-12)"/>
+      <rect x="-4" y="-12" width="17" height="24" rx="3" transform="rotate(10)" fill="#141821"/>
+      <path d="M5.5 -5 l3.5 4.5 -3.5 4.5 -3.5 -4.5 z" transform="rotate(10)" stroke="#eef1f6"/>
+    </g>
+    <!-- cockpit gauge -->
+    <g transform="translate(230 244)">
+      <circle r="14"/>
+      <path d="M-9 7 A11.5 11.5 0 1 1 9 7" stroke-opacity="0.5" stroke-dasharray="1.5 3.5"/>
+      <path d="M0 0 L7 -8" stroke="#eef1f6"/>
+      <circle r="2" fill="#c5cad6"/>
+    </g>
+    <!-- scalpel -->
+    <g transform="translate(380 200)">
+      <path d="M-13 12 L-2 1" stroke-width="3.5"/>
+      <path d="M-2 1 L10 -12 C14 -8 9 -1 2 4 Z" fill="#141821" stroke="#eef1f6"/>
+    </g>
+    <!-- violin -->
+    <g transform="translate(530 157)">
+      <path d="M0 -9 C6 -9 7 -4 4 -1 C9 1 10 8 6 12 C3 16 -3 16 -6 12 C-10 8 -9 1 -4 -1 C-7 -4 -6 -9 0 -9 Z" fill="#141821" stroke="#eef1f6"/>
+      <path d="M0 -9 V-17"/><circle cx="0" cy="-18.5" r="1.5"/>
+      <path d="M-2 3 v4 M2 3 v4" stroke-opacity="0.6"/>
+      <path d="M12 15 L17 -15" stroke-opacity="0.55"/>
+    </g>
+    <!-- pawn -->
+    <g transform="translate(680 112)">
+      <circle cy="-8" r="5" stroke="#f5b544"/>
+      <path d="M-5 9 L-3 -2 H3 L5 9 Z" stroke="#f5b544"/>
+      <path d="M-9 12 H9" stroke="#f5b544"/>
+    </g>
+  </g>
+
+  <!-- labels -->
+  <g>
+    <text x="64" y="334" font-size="26" font-weight="700" fill="#eef1f6">~50</text>
+    <text x="64" y="356" font-size="13" fill="#c5cad6">cards</text>
+    <text x="64" y="376" font-size="12" fill="#7d8597">gambling task</text>
+
+    <text x="214" y="290" font-size="26" font-weight="700" fill="#eef1f6">~250</text>
+    <text x="214" y="312" font-size="13" fill="#c5cad6">drills · 1 hour</text>
+    <text x="214" y="332" font-size="12" fill="#7d8597">cockpit gauges</text>
+
+    <text x="364" y="246" font-size="26" font-weight="700" fill="#eef1f6">~250</text>
+    <text x="364" y="268" font-size="13" fill="#c5cad6">operations</text>
+    <text x="364" y="288" font-size="12" fill="#7d8597">prostate surgery</text>
+
+    <text x="514" y="202" font-size="26" font-weight="700" fill="#eef1f6">10,000+</text>
+    <text x="514" y="224" font-size="13" fill="#c5cad6">hours by age 20</text>
+    <text x="514" y="244" font-size="12" fill="#7d8597">elite violinists</text>
+
+    <text x="664" y="158" font-size="26" font-weight="700" fill="#eef1f6">832 to 24,284</text>
+    <text x="664" y="180" font-size="13" fill="#c5cad6">hours</text>
+    <text x="664" y="200" font-size="12" fill="#7d8597">chess grandmasters</text>
+  </g>
+
+  <!-- the spread, as a wide bar -->
+  <line x1="664" y1="252" x2="928" y2="252" stroke="#232834" stroke-width="10" stroke-linecap="round"/>
+  <rect x="673" y="247" width="255" height="10" rx="5" fill="url(#spread)" filter="url(#glow)"/>
+  <g stroke="#7d8597" stroke-width="1.5" stroke-linecap="round"><line x1="673" y1="262" x2="673" y2="268"/><line x1="928" y1="262" x2="928" y2="268"/></g>
+  <text x="667" y="286" font-size="12" fill="#7d8597">832</text>
+  <text x="934" y="286" font-size="12" fill="#7d8597" text-anchor="end">24,284</text>
+  <text x="664" y="330" font-size="20" font-weight="700" fill="#f5b544">≈ 30× spread</text>
+  <text x="664" y="352" font-size="12" fill="#7d8597">between grandmasters</text>
+
+  <text x="48" y="460" font-size="12" fill="#7d8597">units differ, so these are steps, not a scale</text>
+</svg>
